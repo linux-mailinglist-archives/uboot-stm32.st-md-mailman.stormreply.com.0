@@ -2,164 +2,89 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id AB7D5AD56E6
-	for <lists+uboot-stm32@lfdr.de>; Wed, 11 Jun 2025 15:25:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3D541AD5E47
+	for <lists+uboot-stm32@lfdr.de>; Wed, 11 Jun 2025 20:36:01 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 69C2BC32E8E;
-	Wed, 11 Jun 2025 13:25:22 +0000 (UTC)
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazon11010034.outbound.protection.outlook.com [52.101.69.34])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id DFA2BC32E8E;
+	Wed, 11 Jun 2025 18:36:00 +0000 (UTC)
+Received: from mail-ot1-f41.google.com (mail-ot1-f41.google.com
+ [209.85.210.41])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C9E6AC36B13
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 04785C36B13
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 11 Jun 2025 13:25:21 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=XreiGFt9Aw82FWo8Gc37TxSSvDDKc3CrOxgzALugVFcLyNTjat06i3Unqea5tNVc9tazdGvDt90jg7F0zIpejF2Larw+t8nX10HKchtLCgSM5Mpf6MSYb0R0KFDTzHduttIE3Eu5WcVZchIDOHL9T7yD+q/mDVqPo1KuXcR5FoRyBoT1wKxEcVPbXWA7IhbagucYfwXNkolH2z6FKJ9dTqGLibTbnQmY9ueDQar9Fw+DDgPa6SMTxMGKqd04lj1ZuQ2PqZYLOS9h1Fd6QrfHzSGslF3puizFoYvdkyfZLVPm6DwzHSdGd/cpUXoEhCd20Unw3vXOUeA8tSOqh0HjNw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=2SBxJBHPhNAGuLYYfuSKVlOCekXcjqC8MAKiwXSkbeY=;
- b=A7ZOkVnCEdEiHxrV8Ln24uxatf+wde+kluAHzKXJwTjuyiAyZ0vlYEq7HeSQU4yt0a/7Ik4PZNs8HB5TcMwzmU46dVEjABeRpZGF2GGqXZT9OyBFEYQ42I9ueYJ9CoKUMeMfRirYfeCkZVSANcGLLM7nyRyDzrQfEO9ldQndlDBALgieZwLz5blDo7a2EuZfB//5OAlQStW67orkewV7ZQZQ/1agq2sP8eZj4S6HCM5WDOy9TG6nOLivSJGbyhJ0KouZ21CD1M6f7p4DtXs6hYJvBLCMnwC+TaIYaUPm09ze6fx026unfiZGzm/GmHF+6CZNrm8J65GxtFd9ZyTDQg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2SBxJBHPhNAGuLYYfuSKVlOCekXcjqC8MAKiwXSkbeY=;
- b=NE0T266zUSXDAgK1Bo1dlFaJkr++jyJc1wO21Vipp8aSA9B8KDjgcyLRFwYW/WXvr+4TxcmlrT6WOpgkuWLl9hp6bmUqrHoiALJcgfpGIo/IJgWvM/rLGOZKEdnmOvjiRPCYBUMtfqxMA7vR08keOkB3edDZo5KfHurUMpmgYug=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by AM9PR04MB7524.eurprd04.prod.outlook.com (2603:10a6:20b:286::24)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8813.29; Wed, 11 Jun
- 2025 13:25:20 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a%5]) with mapi id 15.20.8835.018; Wed, 11 Jun 2025
- 13:25:19 +0000
-Message-ID: <022e0516-137f-4a2c-8a92-c3da1a705e85@cherry.de>
-Date: Wed, 11 Jun 2025 15:25:18 +0200
-User-Agent: Mozilla Thunderbird
-To: Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>
-References: <20250607093730.2249536-1-dario.binacchi@amarulasolutions.com>
- <dc8bb4a3-c465-4ae0-a61d-bb2f74a42b64@foss.st.com>
- <aEbgxo0WUDPd-S8Z@sumit-X1>
+ Wed, 11 Jun 2025 18:35:59 +0000 (UTC)
+Received: by mail-ot1-f41.google.com with SMTP id
+ 46e09a7af769-7304efb4b3bso110492a34.0
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Wed, 11 Jun 2025 11:35:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1749666959; x=1750271759;
+ darn=st-md-mailman.stormreply.com; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=84VjJxrj7PJF99Dl5mTGNuubhlMOkvq3sshzcr7zGnc=;
+ b=sGGkRNN4efR0zs9wT/HRTwVJ1jZ3FNDGv6AXw/GJfsKhXrbtFHtQVpdQR4uBe1xJvB
+ 51rYpio1N1xTyd0fOs6ieUFZY6aJfLLd4WdbU1CSXud3VEA3MJyZycRym9PuWhY4xI5n
+ H/e9QxsTqlLQF69qEQ+zLli1eImZV02eSNsRU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1749666959; x=1750271759;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=84VjJxrj7PJF99Dl5mTGNuubhlMOkvq3sshzcr7zGnc=;
+ b=CRaNr97UVaG6Hdp2Wmg6L2JxLzdiUxuL5z3TqJ2jZXEFSAR7f7TTJmNMvYoBfl2T6I
+ FQU3KfxrFWiGyNnz64fDHLJFll0MQmPZvBhh2O0SVHFe6DJhUnlVra6XQ8jKDgxnkDQp
+ /eCpeTwzLMM3VdRhcwQEWPc3aW5hnB2ajtP8LJn9vihplxox641c7KljEEOJ+gld6Xvj
+ SnI3RGr33S8w5Zbd7vFVCk5fvjCbCmG/ac9hn7TAW//gnyb4FWZEm452y9s+TAZQwxpo
+ sWUWadntyaL9hQ2+T+PgZwCy0uEUzolq7piqIhkIbvtx+xpzbDvjCqiEhNtUZJWVYJLN
+ hWlw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU/+6r9qVaNoiAbcO6Xj2w2mEGTrNi8DnsES5e4sxNnlsBRyBN79q5PFZ6FfrCpCEyXpR+h2k7LCc/5Ow==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0YzUpawuB78aG/GbsKoXtpWq60vf66DjD0c8mnA8eX6K1W5bCCIv
+ cCD7CT5fmHGKOQfVjxmCxKtHrDshP1KSFK+ssaKXCUBVsDhy5gj4InqZdig09HTG8h0=
+X-Gm-Gg: ASbGncu0djyKg4TiIZF5YdfIRuBxG9u5leyA7B5Nxny0ZcbBnFt2EmBdV10gnUaPIEg
+ ypgcCTn8ms8LkzCNqVKChM3vBJ9I48oaOfRL8aG8nONoKtLvi527ZoPQbpOvid+DzfHewbpkQKg
+ eGclzfNQ5M6y/e1XBNKNuKo/rU6Jor1GWylLQgWjkONb8SUQ9Szclr9sY+fZ5I80DicB9alAO5V
+ fQxdci9wgIm+6pIIMF3SANXjAnJcapZxZzvspu6OGjzqsKp1oZEIRY9QnGEkbmrC70WRqfOJFx4
+ 7FEIPFTNExD3GxMqQ8b//ld3S0d+95eNXri3Avli6hMXhB1htZD7NY53GqL/f1z4uRHvUHldrKf
+ rAKkdAQh4l2iZCP2o84jZ6Fo=
+X-Google-Smtp-Source: AGHT+IENf5BNQ8l7LZOjMBgpsBfws9uVSZoijVRRS+6B9B1GfAGCkmU7F9f5vQjo8iMLkTCNlrElwg==
+X-Received: by 2002:a05:6870:a552:b0:2cc:4516:afc6 with SMTP id
+ 586e51a60fabf-2ea96fe9378mr2788967fac.36.1749666958381; 
+ Wed, 11 Jun 2025 11:35:58 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-610ef675dcbsm238955eaf.5.2025.06.11.11.35.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 11 Jun 2025 11:35:57 -0700 (PDT)
+Date: Wed, 11 Jun 2025 12:35:54 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Message-ID: <20250611183554.GI1382132@bill-the-cat>
+References: <aEbgxo0WUDPd-S8Z@sumit-X1>
  <CABGWkvox-1a1VSGjX8toQ=WsVTma0JcL8su=MGWaAwq4UZFkrQ@mail.gmail.com>
  <aEcAe80kh66cf0_c@sumit-X1> <20250609155019.GR1382132@bill-the-cat>
  <aEcGzCbZXajCthrh@sumit-X1> <20250609162239.GT1382132@bill-the-cat>
  <aEfyYd64P7txX7vS@sumit-X1> <20250610160454.GE1382132@bill-the-cat>
  <aElxoV5qvC-R0t3D@sumit-X1>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <aElxoV5qvC-R0t3D@sumit-X1>
-X-ClientProxiedBy: FR4P281CA0150.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:b8::16) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
+ <022e0516-137f-4a2c-8a92-c3da1a705e85@cherry.de>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|AM9PR04MB7524:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7dc584ec-3f0e-4ca2-1c98-08dda8eb6944
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|7416014|366016|1800799024|13003099007|7053199007; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?QUdTUGhjWnQvY0JCazNjL0pNK2N1azM5MlJuRmx0SjA0UWZsY2JHbFVXUFJ1?=
- =?utf-8?B?bytldGlKSStLb3hqRVQ4bjlheGtFUEw0TmlYOUx5akoyMSt5U1phWmdlQWJz?=
- =?utf-8?B?dmtvUWNMVW1oWmF4ZGRLMXRzTUltdmh2NUNCQjBNK2pmK1o2QVFHVWdQekNQ?=
- =?utf-8?B?S3VVbFBGS3A4VVNOTk5NM3pSRThzdnhKNUtIMWZjSmxFWnVQcFo4bVNIRW11?=
- =?utf-8?B?Vmx1RWwycXBpR0Y0N045ejdqN3N5V2xaVWxPNFhHWDZxeHY4ZGRhNVVLRDVt?=
- =?utf-8?B?Q0VvUVQxYkdlWnZ6MmpGQXREeC9tMWtIMmJURWhvMmVmOWZIQmorOHpNUFJz?=
- =?utf-8?B?cEtVYnQ0enNPdmdicXpiaGVGcFFrZUFveTEyaU5ac3RrNEU5VlU5NzVoTGtW?=
- =?utf-8?B?c3ZUcCs2M3VZVXZsM0tjb0ZQcXBheWVDQVBZc1hzd2tZa016aHlZTGdXOW43?=
- =?utf-8?B?VFROdm81aDdjSG9aRU9MRUFYZlYzTUFXd2JGbEZWZTE1NndLQ0dUbnZKc08z?=
- =?utf-8?B?cTRYMWJhMG9IaS9vNnVmQi9jUkxjYmJRTFF1N2VZSVVkbGE0cDA1MXNPcnBL?=
- =?utf-8?B?ZmtpYXNqQVBJMjRCWkE1QzNWeGdqbDQ2Q2dMSW1OdngrK0IxWDhYMUFWdExv?=
- =?utf-8?B?TER4bG1Ic2ZxRVNsRDBTaEJZZnBlY1ZQRkZUeDZKdGJaY0J1RXMwa09KNVpF?=
- =?utf-8?B?aHlHRE1ad1Iwd0lMTzhJMzZxZEY5dnplZ1ZuS1c2MHNTK2xJL05KSHExZjBT?=
- =?utf-8?B?K1J5MnEyZzVaMVNjY0VxWWpLYUR2U0lBS1VGWnVKWndGblVvV2hDOVBYSjBZ?=
- =?utf-8?B?YmMrb2lISXo1aTVDRGRLOW1KTVBFVERGRnJ6MEZWck80L09aendZRUtzaXJB?=
- =?utf-8?B?UDhSSzFDU0xWeUhQQis4R0ljU1ZxbERnT3JmU05tYnZrUWV2ZTFoZHpTSGgx?=
- =?utf-8?B?TU1CckZtR1lMTXVVdW9LMVh6elNtU0pETk83emZGUlhrM0gvZTFSbWRPUG50?=
- =?utf-8?B?Qld5eGUzbHFNNWFIQWtHWTFycWt1OWRDQVQ4Y3NCUjduaGI3MmFjc1g5Mnpm?=
- =?utf-8?B?WUlvZjVtK2VCUFNRdWZPRW1UVDUySnJyQ2JrWnRwWW84T2tXUENENlpJNGlC?=
- =?utf-8?B?Nk5FeUNUUmtFVlE3bzVBcGRjWmRNTTFUbzVFdkZiMnM0cnptaElpR2V2ckh3?=
- =?utf-8?B?ZVZuU2phWFRLcnpOWGhCcGNXL3VRanhkMURUSXIrdU1EK2xaeXYxRXhRTFJU?=
- =?utf-8?B?cHhPQXBxZTRoOGxXOThvV0NOYXltYnR6ZnF0N2ZtSlZZWVRDbDBTY3VlMVJy?=
- =?utf-8?B?OHkrNndLbmd3RURUR2cybi9Vd2J0emFsWFp0U0ExQk50NkNLc0Ftc2t6RlJt?=
- =?utf-8?B?OHE3MU80TDNkYnFHWmNWbUpoVFRRU3VrbU1OTXlEbU5haHVqT004SGdJTGhZ?=
- =?utf-8?B?NFJlbitEeVNuazZ6aUx0N2lwbld1NXFKb2srU245THArbUlCNnUzRzJqb3lH?=
- =?utf-8?B?WFIxcXBtVXBzYUxiektsQXZmdjFXeXkzbThaWFF1TFgxQkRvTVdHWWlSdTA2?=
- =?utf-8?B?VEZCTDIvaWhlU2lOd3FpbnVILzlvT0orTUlZZEV0SnN2cU1TR2tmbU5GV3Rz?=
- =?utf-8?B?dkpMOXNmcXM5UUdrYjNDZ1dFcE5xbWg1WXNrQlJ3djB1V0NTQXV0ZU9YRGNP?=
- =?utf-8?B?LytWYm1qQ04xVzZaL1lmNC9DSjdJR0RUOWJOdWJ4NGlTeE9PTk9wNnVrRUVu?=
- =?utf-8?B?dkRXS05PRlFRb25lUy9MVkpieFd6dnhXL1lCMmU3T0xuMlZkUE5yL29rMFpl?=
- =?utf-8?Q?R31fjvr4AGCq6toL1ziDRUGEIWzUnhmJX6NdQ=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(7416014)(366016)(1800799024)(13003099007)(7053199007);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?QktrcUwraStVUitVRHVyRTN1clVBbTVwS1FrNkcyWEROekFmL2oyR3RRUlcy?=
- =?utf-8?B?ZHhqa1FXbDdIbFlkZFpzVU5sYnB5cThCL3ZqQUY4dXRKMTBnZTNTYWVjOWtB?=
- =?utf-8?B?WThZaWN3cDJCNDZ4YUxoT0hNNkJ1cE5nZGlqQytwTUl1cnVRdlQzOE5CczMx?=
- =?utf-8?B?RHVvaThUcW5LRGJnaUs2Mjl2bllxV0M0ekttM1ZQZXJjZkVJYnorQlVpVmhk?=
- =?utf-8?B?QzhkdFpIbmdBd0NWNXNEMmFYLzFMZWYveUFjNWg4aWtTVTVZVkY0R2JEdzRW?=
- =?utf-8?B?ZHdXdTBQenY3YUVjZmdBWFppdkdWQVo5aWZzSWNOY2sweFFwYTZzYWR1QytN?=
- =?utf-8?B?Wi9LV0wrMXJhS0Z6VUExWlI0N1ZFaTJJc3RJNzJyWkVpbEUrWmNsY21MaFZm?=
- =?utf-8?B?a21iRDBvNnhZUDNaVmxQaEJQQkd0eUJSTWtJSEF1U1FXYjIxQ2x6VW9EL3lu?=
- =?utf-8?B?U2lCVFJuc0hMQ1BBc0IzbnVOV3lHc2xBK3dOTlJHVlBCRjY0RFV2WENlbW9x?=
- =?utf-8?B?Z2RQbDY5Y0NtUXJMUUlDQnUvVzRBVTlLY3FYaktTMDFKUU11VUxqUXV3UThT?=
- =?utf-8?B?dSs2Z2hJeXNobDN5QzJ1YTJsZ0o0NG44WnJIcUs4a2Z3QkV2UW9WR1k0T0lT?=
- =?utf-8?B?TFlhU0k2NnFpY0gxN1piNFYwZnBhMG5SWjZFVk1XMXBoS0V2UzlibldMdlhJ?=
- =?utf-8?B?MTViaXFBeHJEeFY4UzE1d0FyV1h3OEpkZHdINlNYNXlzYXRZNENrTllBWDd5?=
- =?utf-8?B?dld3OFpwVzVrYlBFQlFxblJuSy9Qb2FlTlZ4dkJETlFaNHdEMXZQMWVtRS9B?=
- =?utf-8?B?YkQ5elVLdTFhNGZHZkFSSEhOb0JtcTRENkJEUnlNRTh0d25DeVdxYlJjTDk5?=
- =?utf-8?B?NVhWN2pIMmRlcXl0d0dHendSd0JoaTFhS1R5cnNweTFEcXpEeE51LzB4UHFr?=
- =?utf-8?B?VVZCelR3Vmx3NUVXL3BWaS8zK28yOWFmc2dFUThBeEdvbjhzaGlWOThnMHgr?=
- =?utf-8?B?dHErK3AvbHpURmt3SXM0Y1BGVW5OYUIxWVRQNXBJcFVoUkc0bUovZzNFeEla?=
- =?utf-8?B?NUVYZ3NCRk9RTnp3UUpLTGwyQm1QVVRaNjZ1dlh3M3UrTWU1N0k1aTdBL0Rn?=
- =?utf-8?B?NXVKUG9oQW5lek1wNEI1ajVkK3kxQUJZSFd3N1pGOWJYeUNBbmk5Wk9HcWVD?=
- =?utf-8?B?ZkF3UG9WbjRSSkVRRWh2d0VaUzkxa09hZzZvK2VIVU9kRnNMUlN0ckg1R3Vn?=
- =?utf-8?B?czBnMmR6TG03a0ZHTVMwcURKZGEzUko1bDM3bk9nSHdBRXNjZ3VabnVDOU1M?=
- =?utf-8?B?VzRTc1VmT0h3WXNjMUhTSjZUVlNsUlR3TCtlZWZmZUNlMk9TcDYwQk5HZ0Y4?=
- =?utf-8?B?T0RLV2E4d21zUHlYaS8yYUR1Z1hpam9NMUlNUnhVTkg4UXYzNFMrdVN5VDF6?=
- =?utf-8?B?NW4yWVVHRkZ0TUlibnp4elNETk5vaXVRVVUzQlBac05lclRJcjFrcXBFUy9T?=
- =?utf-8?B?NHl4am15U0IxMnNXS2lCTTJ4anViWWsyT0MxaFFnc3ZaeGJLTlYzMlorR2hq?=
- =?utf-8?B?YmZFSG5SUWNZeU5jYlVKdE16WmFrRkQySzZlRHBVcGN4OThwK1pscXlRKzVu?=
- =?utf-8?B?MWRGTUtMT09mbm01eEpNeFM1cW5PY0c0cWQxT0IrN1ptRU4wSVhsU0ZSNDRo?=
- =?utf-8?B?SlM0U2VKOFJIK2I1dzBYdUlzMEtWMnhNNWRxbUFLVDJlOXdYZjAxZldXa0gw?=
- =?utf-8?B?dW1YY2gzQlZEZHRNMU1uOFcveFlNQ251NXl1ZTZsMVMzam04TnNQOGxNWG9P?=
- =?utf-8?B?UlZsOFJhZHFnOGNBQldKZXpFd0NRanBZQS9BUXA2ZXI2WVZ2Z05iZUR0SkI3?=
- =?utf-8?B?VlREYnBJakY2OU9KUVBNRy9PZTR3TkdLMHZwWGJSWTE4RWpOaU8rc1JoSDRa?=
- =?utf-8?B?ekpyTytZMjJPV0p6emRpM3ZaT3llQ3JqdnBSbCtIOTJpNmZZQUVUSmpncXRp?=
- =?utf-8?B?SENKYlozODNwQnhYRWZIaVZ3cnJoeW0xNUxyOXhtT2ljZ3BSV0hMb3o1Z1Z2?=
- =?utf-8?B?U2hRNEJIc3NSbUMybVJmNHVZdzZGd09wMFhvZ0NGUFpSQWxQU1pxVkgyODVq?=
- =?utf-8?B?WnNoUXdCSlRFbmdXbjZjVG81UE00aW9PWVd0amJ3NmpWa1RTelFnSXZ4RFNH?=
- =?utf-8?B?Mnc9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7dc584ec-3f0e-4ca2-1c98-08dda8eb6944
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Jun 2025 13:25:19.8522 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: E7vYtWeuqNS25qClYeaexXfSHVCz3pVUUTbGLOS4at+ZVG5eel4uQZvj2sAmbgYXuXg6HBYfaggf7F3apwDys0riAWNlX5wIGRLoVb2RLnY=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB7524
+In-Reply-To: <022e0516-137f-4a2c-8a92-c3da1a705e85@cherry.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 Cc: Jerome Forissier <jerome.forissier@linaro.org>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- linux-amarula@amarulasolutions.com,
+ Dillon Min <dillon.minfei@gmail.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Sean Anderson <seanga2@gmail.com>,
  Alexandre Torgue <alexandre.torgue@foss.st.com>,
  Lukasz Majewski <lukma@denx.de>, u-boot@lists.denx.de,
  Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  uboot-stm32@st-md-mailman.stormreply.com,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Dillon Min <dillon.minfei@gmail.com>
+ linux-amarula@amarulasolutions.com
 Subject: Re: [Uboot-stm32] [PATCH 0/9] Support stm32h747-discovery board
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
@@ -172,224 +97,385 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: multipart/mixed; boundary="===============7871764654410976128=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-SGkgYWxsLAoKT24gNi8xMS8yNSAyOjA4IFBNLCBTdW1pdCBHYXJnIHdyb3RlOgo+IE9uIFR1ZSwg
-SnVuIDEwLCAyMDI1IGF0IDEwOjA0OjU0QU0gLTA2MDAsIFRvbSBSaW5pIHdyb3RlOgo+PiBPbiBU
-dWUsIEp1biAxMCwgMjAyNSBhdCAwMjoyMjo0OVBNICswNTMwLCBTdW1pdCBHYXJnIHdyb3RlOgo+
-Pj4gT24gTW9uLCBKdW4gMDksIDIwMjUgYXQgMTA6MjI6MzlBTSAtMDYwMCwgVG9tIFJpbmkgd3Jv
-dGU6Cj4+Pj4gT24gTW9uLCBKdW4gMDksIDIwMjUgYXQgMDU6MDc6NDBQTSArMDEwMCwgU3VtaXQg
-R2FyZyB3cm90ZToKPj4+Pj4gT24gTW9uLCBKdW4gMDksIDIwMjUgYXQgMDk6NTA6MTlBTSAtMDYw
-MCwgVG9tIFJpbmkgd3JvdGU6Cj4+Pj4+PiBPbiBNb24sIEp1biAwOSwgMjAyNSBhdCAwNDo0MDo0
-M1BNICswMTAwLCBTdW1pdCBHYXJnIHdyb3RlOgo+Pj4+Pj4+IE9uIE1vbiwgSnVuIDA5LCAyMDI1
-IGF0IDAzOjQ2OjI3UE0gKzAyMDAsIERhcmlvIEJpbmFjY2hpIHdyb3RlOgo+Pj4+Pj4+PiBIaSBT
-dW1pdCwKPj4+Pj4+Pj4KPj4+Pj4+Pj4gT24gTW9uLCBKdW4gOSwgMjAyNSBhdCAzOjI14oCvUE0g
-U3VtaXQgR2FyZyA8c3VtaXQuZ2FyZ0BrZXJuZWwub3JnPiB3cm90ZToKPj4+Pj4+Pj4+Cj4+Pj4+
-Pj4+PiBIaSBQYXRyaWNlLAo+Pj4+Pj4+Pj4KPj4+Pj4+Pj4+IE9uIE1vbiwgSnVuIDA5LCAyMDI1
-IGF0IDAzOjE1OjE0UE0gKzAyMDAsIFBhdHJpY2UgQ0hPVEFSRCB3cm90ZToKPj4+Pj4+Pj4+Pgo+
-Pj4+Pj4+Pj4+Cj4+Pj4+Pj4+Pj4gT24gNi83LzI1IDExOjM3LCBEYXJpbyBCaW5hY2NoaSB3cm90
-ZToKPj4+Pj4+Pj4+Pj4gVGhlIHNlcmllcyBhZGRzIHN1cHBvcnQgZm9yIHN0bTMyaDc0Ny1kaXNj
-b3ZlcnkgYm9hcmQuCj4+Pj4+Pj4+Pj4+Cj4+Pj4+Pj4+Pj4+IERldGFpbGVkIGluZm9ybWF0aW9u
-IGNhbiBiZSBmb3VuZCBhdDoKPj4+Pj4+Pj4+Pj4gaHR0cHM6Ly93d3cuc3QuY29tL2VuL2V2YWx1
-YXRpb24tdG9vbHMvc3RtMzJoNzQ3aS1kaXNjby5odG1sCj4+Pj4+Pj4+Pj4+Cj4+Pj4+Pj4+Pj4+
-Cj4+Pj4+Pj4+Pj4+IERhcmlvIEJpbmFjY2hpICg5KToKPj4+Pj4+Pj4+Pj4gICAgQVJNOiBkdHM6
-IHN0bTMyaDctcGluY3RybDogYWRkIF9hIHN1ZmZpeCB0byB1W3NdYXJ0X3BpbnMgcGhhbmRsZXMK
-Pj4+Pj4+Pj4+Pj4gICAgZHQtYmluZGluZ3M6IGFybTogc3RtMzI6IGFkZCBjb21wYXRpYmxlIGZv
-ciBzdG0zMmg3NDdpLWRpc2NvIGJvYXJkCj4+Pj4+Pj4+Pj4+ICAgIGR0LWJpbmRpbmdzOiBjbG9j
-azogc3RtMzJoNzogcmVuYW1lIFVTQVJUezcsOH1fQ0sgdG8gVUFSVHs3LDh9X0NLCj4+Pj4+Pj4+
-Pj4+ICAgIEFSTTogZHRzOiBzdG0zMjogYWRkIHVhcnQ4IG5vZGUgZm9yIHN0bTMyaDc0MyBNQ1UK
-Pj4+Pj4+Pj4+Pj4gICAgQVJNOiBkdHM6IHN0bTMyOiBhZGQgcGluIG1hcCBmb3IgVUFSVDggY29u
-dHJvbGxlciBvbiBzdG0zMmg3NDMKPj4+Pj4+Pj4+Pj4gICAgQVJNOiBkdHM6IHN0bTMyOiBhZGQg
-YW4gZXh0cmEgcGluIG1hcCBmb3IgVVNBUlQxIG9uIHN0bTMyaDc0Mwo+Pj4+Pj4+Pj4+PiAgICBB
-Uk06IGR0czogc3RtMzI6IHN1cHBvcnQgU1RNMzJoNzQ3aS1kaXNjbyBib2FyZAo+Pj4+Pj4+Pj4+
-PiAgICBBUk06IGR0czogc3RtMzI6IGFkZCBzdG0zMmg3NDdpLWRpc2NvLXUtYm9vdCBEVFMgZmls
-ZQo+Pj4+Pj4+Pj4+PiAgICBib2FyZDogc3RtMzI6IGFkZCBzdG0zMmg3NDctZGlzY292ZXJ5IGJv
-YXJkIHN1cHBvcnQKPj4+Pj4+Pj4+Pgo+Pj4+Pj4+Pj4+Cj4+Pj4+Pj4+Pj4gSGkgRGFyaW8KPj4+
-Pj4+Pj4+Pgo+Pj4+Pj4+Pj4+IEZvciB0aGUgd2hvbGUgc2VyaWVzCj4+Pj4+Pj4+Pj4gQXBwbGll
-ZCB0byB1LWJvb3Qtc3RtMzIvbmV4dAo+Pj4+Pj4+Pj4KPj4+Pj4+Pj4+IFBsZWFzZSBnaXZlIHNv
-bWUgdGltZSBmb3Igb3RoZXIgbWFpbnRhaW5lcnMgdG8gcmV2aWV3IHRoaXMgcGF0Y2gtc2V0Lgo+
-Pj4+Pj4+Pj4gVGhlIGR0cy91cHN0cmVhbSBwYXRjaGVzIGluIHRoaXMgc2VyaWVzIGFyZW4ndCBj
-bGVhbiBjaGVycnkgcGljayBmcm9tCj4+Pj4+Pj4+PiB1cHN0cmVhbS4KPj4+Pj4+Pj4KPj4+Pj4+
-Pj4gQWxsIHRoZSBjb21taXRzIGFyZSBhbHJlYWR5IGluIHRoZSBtYWlubGluZSBMaW51eCBrZXJu
-ZWwsIHNwZWNpZmljYWxseQo+Pj4+Pj4+PiBpbiB2Ni4xNi1yYzEuCj4+Pj4+Pj4+IElmIHlvdSdy
-ZSByZWZlcnJpbmcgdG8gdGhlIGZhY3QgdGhhdCB0aGUgcGF0Y2hlcyBjYW4ndCBiZSBhcHBsaWVk
-Cj4+Pj4+Pj4+IGNsZWFubHksIEkgYmVsaWV2ZSBpdCdzCj4+Pj4+Pj4+IGJlY2F1c2UgdGhlIHRh
-cmdldCBwYXRoIGluIHRoZSBMaW51eCBrZXJuZWwgZG9lc24ndCBtYXRjaCB0aGUgb25lIGluIFUt
-Qm9vdC4KPj4+Pj4+Pj4gSW4gZmFjdCwgdGhlIERUUyBmaWxlcyBhcmUgbG9jYXRlZCBpbiB0d28g
-ZGlmZmVyZW50IHJlbGF0aXZlIHBhdGhzLgo+Pj4+Pj4+Cj4+Pj4+Pj4gVGhhdCdzIGV4YWN0bHkg
-d2h5IHdlIGhhdmUgKHJlZmVyIGhlcmUgWzFdKToKPj4+Pj4+Pgo+Pj4+Pj4+IC4vdG9vbHMvdXBk
-YXRlLXN1YnRyZWUuc2ggcGljayBkdHMgPGNvbW1pdC1pZC10by1iZS1waWNrZWQ+Cj4+Pj4+Pj4K
-Pj4+Pj4+PiBZb3Ugc2hvdWxkIGhhdmUgd2FpdGVkIHY2LjE2LXJjMSB0YWcgdG8gYmUgc3luY2Vk
-IGludG8KPj4+Pj4+PiBkZXZpY2V0cmVlLXJlYmFzaW5nIFsyXSBmb3IgdGhlIGNoZXJyeS1waWNr
-cyB0byB3b3JrLiBUaGlzIHdheSBvZgo+Pj4+Pj4+IG1hbnVhbGx5IHBhdGNoaW5nIGR0cy91cHN0
-cmVhbSBpcyBub3QgYWxsb3dlZCBzaW5jZSBpdCBpcyBnb2luZyB0byBicmVhawo+Pj4+Pj4+IERU
-IHN5bmNzIGluIG9uZSB3YXkgb3IgYW5vdGhlci4KPj4+Pj4+Pgo+Pj4+Pj4+IFNvIEkgd291bGQg
-c3VnZ2VzdCB5b3UgdG8gd2FpdCBmb3IgdjYuMTYtcmMxIHRvIGxhbmQgaW4gRFQgcmViYXNpbmcg
-dHJlZQo+Pj4+Pj4+IGFuZCB0aGVuIHNlbmQgdjIgd2l0aCBwcm9wZXIgY2hlcnJ5IHBpY2tlZCBw
-YXRjaGVzLgo+Pj4+Pj4+Cj4+Pj4+Pj4gWzFdIGh0dHBzOi8vZG9jcy51LWJvb3Qub3JnL2VuL2xh
-dGVzdC9kZXZlbG9wL2RldmljZXRyZWUvY29udHJvbC5odG1sI3Jlc3luY2luZy13aXRoLWRldmlj
-ZXRyZWUtcmViYXNpbmcKPj4+Pj4+PiBbMl0gaHR0cHM6Ly9naXQua2VybmVsLm9yZy9wdWIvc2Nt
-L2xpbnV4L2tlcm5lbC9naXQvZGV2aWNldHJlZS9kZXZpY2V0cmVlLXJlYmFzaW5nLmdpdAo+Pj4+
-Pj4KPj4+Pj4+IFRvIGJlIGhvbmVzdCwgSSBkb24ndCB0aGluayB0aGlzIGlzIGEgYmlnIGRlYWwu
-IEdpdCB3aWxsIGJlIG1lcmdpbmcKPj4+Pj4+IGJhc2VkIG9uIGNvbnRlbnQgYW5kIG5vdCBzcGVj
-aWZpYyBoYXNoZXMuIEFuZCBpbiB0aGUgY2FzZSBvZiBjb25mbGljdHMgSQo+Pj4+Pj4ganVzdCBj
-b3B5IHRoZSBmaWxlIGZyb20gdGhlIHRhZyB0byBvdXIgdHJlZS4KPj4+Pj4KPj4+Pj4gVGhlIGVz
-c2VudGlhbCBwcm9ibGVtIGhlcmUgdG8gbWUgaXMgd2UgYXJlIGdvaW5nIHRvIGFsbG93IG1hbnVh
-bAo+Pj4+PiBwYXRjaGluZyBvZiBkdHMvdXBzdHJlYW0gdHJlZSBnaXZlbiB0aGlzIGV4YW1wbGU/
-IEhvdyBkbyB3ZSBrZWVwIHRyYWNrCj4+Pj4+IGlmIGFsbCB0aGF0IG1hbnVhbCBwYXRjaGluZyBs
-YW5kZWQgaW4gTGludXggRFQgbWFpbmxpbmU/IFRoZSBjaGVycnkKPj4+Pj4gcGlja3MgZW5zdXJl
-ZCB0aGF0IHdlIGFsd2F5cyBrZWVwIGluIHN5bmMgd2l0aCBtYWlubGluZS4KPj4+Pj4KPj4+Pj4g
-TGV0cyB0YWtlIGFuIGV4YW1wbGUgd2hhdCBpZiBHaXQgYXV0b21hdGljYWxseSByZXNvbHZlZCBh
-IG1lcmdlIGNvbmZsaWN0Cj4+Pj4+IGZvciB5b3Ugd2l0aCBkdXBsaWNhdGVkIGNvbnRlbnQgb3Ig
-aWYgbWFudWFsbHkgcGF0Y2hpbmcgYSBEVFMgZmlsZQo+Pj4+PiBkaXZlcmdlZCBmcm9tIHVwc3Ry
-ZWFtIGFuZCBnZXQgdW5ub3RpY2VkIGR1cmluZyBEVCBzeW5jcz8KPj4+Pj4KPj4+Pj4gSU1ITywg
-d2Ugc2hvdWxkIHRyeSB0byBhdm9pZCBtYW51YWwgcGF0Y2hpbmcgb2YgRFQgc3VidHJlZSBvdGhl
-cndpc2UgaXQKPj4+Pj4gaXMgaGFyZCB0byBzZXQgYSBwb2xpY3kgYXMgdG8gd2hhdCBsZXZlbCBv
-ZiBtYW51YWwgcGF0Y2hpbmcgaXMgYWxsb3dlZAo+Pj4+PiBvciBub3QuCj4+Pj4KPj4+PiBQYXJ0
-IG9mIHRoZSBwcm9ibGVtIGhlcmUgaXMgdGhhdCBmcm9tIHRoZSBzdGFuZHBvaW50IG9mIGFwcGx5
-aW5nIHBvc3RlZAo+Pj4+IHBhdGNoZXMgdGhlcmUncyBubyBmdW5jdGlvbmFsIGRpZmZlcmVuY2Ug
-YmV0d2VlbiB3aGF0IERhcmlvIGRpZCBoZXJlIGFuZAo+Pj4+IHdoYXQgY291bGQgYmUgZG9uZSBv
-bmNlIHY2LjE2LXJjMS1kdHMgaXMgdGFnZ2VkIChpZiBpdCdzIG5vdCBhbHJlYWR5KS4KPj4+PiBJ
-dCdzIGVzc2VudGlhbGx5IGEgIm1hbnVhbCBwYXRjaCIgZWl0aGVyIHdheS4KPj4+Cj4+PiBOb3Bl
-LCB0aGVyZSBpcyBhIGRpZmZlcmVuY2UgaGVyZS4gVGhlIGNoZXJyeS1waWNrIGZyb20gRFQgcmVi
-YXNpbmcKPj4+IGFsbG93cyB0aGUgY3VzdG9kaWFuIHRvIHJhdGhlciBqdXN0IGNoZXJyeSBwaWNr
-IGNvcnJlc3BvbmRpbmcgRFQgcGF0Y2hlcwo+Pj4gcmF0aGVyIHRoYW4gYXBwbHlpbmcgcGF0Y2hl
-cyBwb3N0ZWQgb24gbWFpbGluZyBsaXN0LiBJIHVzdWFsbHkgZG8gdGhhdAo+Pj4gd2hlbiByZXZp
-ZXdpbmcgZHRzL3Vwc3RyZWFtIHBhdGNoZXMgaWYgdGhleSBjYW4gYmUgY2hlcnJ5LXBpY2tlZCBj
-bGVhbmx5Cj4+PiBvciBub3QuIFNvIHRoZXJlIHdvbid0IGJlIG1hbnVhbCBwYXRjaGluZyBpbiB0
-aGF0IHByb2Nlc3MuCj4+Pgo+Pj4gLi90b29scy91cGRhdGUtc3VidHJlZS5zaCBwaWNrIGR0cyA8
-Y29tbWl0LWlkLXRvLWJlLXBpY2tlZD4KPj4KPj4gQWxyaWdodC4gSSBoYWRuJ3QgZm9yZXNlZW4g
-YW55b25lIGRvaW5nIHRoYXQgcmF0aGVyIHRoYW4gImI0IHthbSxzaGF6YW19Cj4+IG1zZy1pZCIg
-dG8gZ3JhYiB0aGUgc2VyaWVzLgo+IAo+IE1heWJlIHdlIG5lZWQgdG8gaGF2ZSBzb21lIGN1c3Rv
-ZGlhbiBzcGVjaWZpYyBkb2NzIGxpc3RpbmcgYmVzdAo+IHByYWN0aWNlcy4KPiAKCk9yIGV4dGVu
-ZAoKaHR0cHM6Ly9kb2NzLnUtYm9vdC5vcmcvZW4vbGF0ZXN0L2RldmVsb3AvZGV2aWNldHJlZS9j
-b250cm9sLmh0bWwjd2hlcmUtZG8taS1nZXQtYS1kZXZpY2V0cmVlLWZpbGUtZm9yLW15LWJvYXJk
-Cmh0dHBzOi8vZG9jcy51LWJvb3Qub3JnL2VuL2xhdGVzdC9kZXZlbG9wL2RldmljZXRyZWUvY29u
-dHJvbC5odG1sI3Jlc3luY2luZy13aXRoLWRldmljZXRyZWUtcmViYXNpbmcKCj8KCj4+Cj4+Pj4g
-V2UgbWFrZSBpdCBjbGVhciB0aGF0Cj4+Pj4gZHRzL3Vwc3RyZWFtLyAqb25seSogZ2V0cyBjaGFu
-Z2VzIHRoYXQgYXJlIGluIExpbnVzJyB0cmVlLiBJZiBzb21lb25lCj4+Pj4gdHJpZXMgdG8gYmUg
-c25lYWt5IGFuZCBwdXNoIHNvbWV0aGluZyBpbiB0aGF0J3Mgbm90IHF1aXRlIHdoYXQncwo+Pj4+
-IHVwc3RyZWFtLCBpdCB3aWxsIGdldCBzdG9tcGVkIG9uIGxhdGVyIGFuZCB0aGVyZSdzIG5vdCBn
-b2luZyB0byBiZSBhbnkKPj4+PiBzeW1wYXRoeSBmb3IgdGhlIG5vdyBicm9rZW4gcGxhdGZvcm0u
-Cj4+Pgo+Pj4gRm9yIHVzIHRoZSB1cHN0cmVhbSBzeW5jIHBhdGggaXMgdmlhIERUIHJlYmFzaW5n
-IHRyZWUgb25seS4gSXQgdXN1YWxseQo+Pj4gbGFncyBiZWhpbmQgTGludXMnIHRyZWUgYnkgbWF4
-aW11bSAxIHdlZWsgY2FuZGVuY2Ugd2hhdCBJIGhhdmUgbm90aWNlZC4KPj4+Cj4+Pj4KPj4+PiBZ
-ZXMsIHdlIGRvY3VtZW50IHNheWluZyB0byB1c2UgdGhlIGNoZXJyeS1waWNrIHNjcmlwdCwgYW5k
-IHRoYXQncyB3aGF0Cj4+Pj4gcGVvcGxlIHNob3VsZCBkbyBpbiBnZW5lcmFsLiBCdXQgSSBkb24n
-dCB0aGluayB0aGVyZSdzIHZhbHVlIGluIGFkZGluZyBhCj4+Pj4gZnVydGhlciBkZWxheSBiZXR3
-ZWVuICJpbiBMaW51cycgdHJlZSIgYW5kICJpbiBkZXZpY2V0cmVlLXJlYmFzaW5nIi4gSW4KPj4+
-PiB0aGUgbGludXgga2VybmVsLCB0aGVyZSdzIHRob3VzYW5kcyBvZiBwZW9wbGUgd29ya2luZyBv
-biB0aGluZ3MgYW5kIHNvCj4+Pj4gc3RyaWN0IHJ1bGVzIGNhbiBiZSB1bmRlcnN0YW5kYWJsZSAo
-c29tZW9uZSB3aWxsIGJlIHJ1bm5pbmcgYSBib3QgdG8KPj4+PiBsb29rIGZvciAiKGNoZXJyeSBw
-aWNrIGZyb20gY29tbWl0ICRoYXNoKSIgYW5kIGZhaWwgdGhpbmdzIHdoZXJlICRoYXNoCj4+Pj4g
-ZG9lc24ndCBleGlzdCwgbWFrZXMgc2Vuc2UpLiBIZXJlIGlmIHRoZSBTVCBjdXN0b2RpYW5zIGFy
-ZSBoYXBweSBqdXN0Cj4+Pj4gdmVyaWZ5aW5nIHRoZSBrZXJuZWwgY29tbWl0LCBPSywgdGhhdCdz
-IGZpbmUuIE9yIGlmIHRoZXkgd2FudCB0byB3YWl0LAo+Pj4+IHRoYXQncyBmaW5lIHRvby4gV2Ug
-Y2FuIGJlIGEgbGl0dGxlIHJlbGF4ZWQgYW5kIGxldCBjdXN0b2RpYW5zIGRvIHdoYXQKPj4+PiB0
-aGV5IHNlZSBhcyBiZXN0Lgo+Pj4KPj4+IFRoZSByZWFzb24gd2UgYWRvcHRlZCBPRl9VUFNUUkVB
-TSB3YXMganVzdCB0byBnZXQgcmlkIG9mIHRoZSBtYW51YWwgRFQKPj4+IHBhdGNoaW5nIGFuZCB0
-aGUgc3luY3MuIFNvIGlzIGl0IHJlYWxseSB0aGF0IGZldyBkYXlzIGxhZyBvZiBEVCByZWJhc2lu
-Zwo+Pj4gdHJlZSB3aGljaCBpcyBhZ2FpbiBwdXNoaW5nIHVzIHRvd2FyZHMgbWFudWFsIERUIHBh
-dGNoaW5nPyBJIGFtIGp1c3QKPj4+IHRyeWluZyB0byB1bmRlcnN0YW5kIHRoZSBzaG9ydGNvbWlu
-Z3MgdGhhdCBEVCByZWJhc2luZyB0cmVlIHB1dHMgaW4KPj4+IGZyb250IG9mIHVzLgo+Pgo+PiBJ
-dCdzIG1haW5seSB0aGF0IEkgd2FudCB0byBiZSBmbGV4aWJsZS4gU28gbG9uZyBhcyB3ZSBkb24n
-dCB2aW9sYXRlIHRoZQo+PiBjb250ZW50IHJ1bGVzIChMaW51cycgdHJlZSAqb25seSopIEkgZG9u
-J3Qgd2FudCB0byBoaW5kZXIgdGhlIHBlb3BsZQo+PiBlYWdlciB0byBub3cgdXBzdHJlYW0gVS1C
-b290IHN1cHBvcnQgZm9yIHB1cmVseSBwcm9jZXNzIHJlYXNvbnMKPiAKPiBUaGlzIGZsZXhpYmls
-aXR5IGhhcyBhIGNvc3QgYXNzb2NpYXRlZCB0byBpdCB3aGljaCBJIGhvcGVmdWxseSB3YXMgYWJs
-ZQo+IHRvIGNsYXJpZnkgYWJvdmUuIEJ1dCBmaW5hbGx5IGl0J3MgeW91ciBkZWNpc2lvbiB3aGlj
-aCBwcmV2YWlscy4KPiAKPiBCVFcsIERUIHJlYmFzaW5nIGhhcyBhbHJlYWR5IGdvdCB0aGUgdjYu
-MTYtcmMxIHRhZywgc28gaXQgd2FzIHJlYWxseQo+IGp1c3QgMyBkYXlzIGdhcC4gUXVlbnRpbiAo
-Q0NlZCkgaGFzIGFscmVhZHkgZG9uZSBzb21lIHByb3BlciBjaGVycnkKPiBwaWNraW5nIGZyb20g
-dGhlcmUgWzFdLgo+IAoKTm90IHN1cmUgd2h5IEkgd2FzIHN1bW1vbmVkIGhlcmUgYnV0IEkgY2Fu
-IGdpdmUgbXkgKG1heWJlIHVuZGVzaXJlZCkgMiAKY2VudHMgOikKCkkgKGEgY29udHJpYnV0b3Ip
-ICoqcmVhbGx5KiogZG8gbm90IHdhbnQgdG8gaGF2ZSBoYW5kLWNyYWZ0ZWQgcGF0Y2hlcyBpbiAK
-ZHRzL3Vwc3RyZWFtLiBVc2UgdG9vbHMvdXBkYXRlLXN1YnRyZWUuc2ggZm9yIHBhdGNoZXMgaW4g
-dGhhdCB0cmVlLiBPbmx5IApUb20gaXMgYWxsb3dlZCB0byB1c2UgcHVsbCBiZWNhdXNlIGl0J3Mg
-YSBtZXNzIHRvIHNlbmQgYSBwYXRjaCBmb3IgaXQgCmFuZCBoZSB1c3VhbGx5IGFubm91bmNlcyBo
-ZSdzIGRvaW5nIGl0IGFuZCB0aGVuIHB1c2hlcyB0byB0aGUgbmV4dCAKYnJhbmNoIGRpcmVjdGx5
-LCBjb250cmlidXRvcnMgY2FuIHVzZSBwaWNrIGluc3RlYWQuIElmIGEgcGljayBmYWlscywgCmJh
-Y2twb3J0IGV2ZXJ5dGhpbmcgbmVlZGVkIGZvciBpdCB0byBhcHBseSBjbGVhbmx5LiBZZXMsIHRo
-aXMgbWF5IGJlIAp0ZWRpb3VzLiBNYWtlIHN1cmUgeW91IGRvIG5vdCBicmVhayBhbnkgb3RoZXIg
-Ym9hcmQgYXMgd2VsbC4KCkkgd2FzIGFscmVhZHkgc3VycHJpc2VkIHdlIGhhdmUgVS1Cb290IHNw
-ZWNpZmljIGZpbGVzIGluIGR0cy91cHN0cmVhbSAKKGUuZy4gTWFrZWZpbGVzIDopICkuCgoxKSBE
-b2luZyBpdCBtYW51YWxseSBkb2Vzbid0IGVuZm9yY2UgdGhlIGFkZGl0aW9uIG9mIHRoZSBjb21t
-aXQgaGFzaCAKdXNlZCBmb3IgdGhlIGJhY2twb3J0L2NoZXJyeS1waWNrIGluIHRoZSBjb21taXQg
-bG9nLCB3aGljaCBtYXkgYmUgCnByb2JsZW1hdGljIChob3cgdG8gcXVpY2tseSBjaGVjayB0aGF0
-IHRoZSBwYXRjaCBjb250YWlucyB3aGF0IGl0IHNob3VsZCAKY29udGFpbiBhbmQgbm90IG1vcmUs
-IG9yIGxlc3M/KS4gSG93IHRvIHZlcmlmeSBpdCBhY3R1YWxseSB3YXMgbWVyZ2VkPyAKSW4gdGhh
-dCBzdGF0ZSBhbmQgbm90IGFmdGVyIG90aGVyIGNoYW5nZXM/IExldCdzIGltYWdpbmUgYW4gdXBz
-dHJlYW0gCnBhdGNoIHRoYXQgY2hhbmdlcyB0aGUgU29DLmR0c2kgYW5kIGFzc29jaWF0ZWQgYm9h
-cmRzIGR0cywgaWYgCmJhY2twb3J0aW5nIG1hbnVhbGx5IG9uZSBjb3VsZCBiZSB0ZW1wdGVkIHRv
-IHNraXAgYSBjb25mbGljdGluZyBib2FyZCAKZHRzIChiZWNhdXNlIGFub3RoZXIgY29tbWl0IG5l
-ZWRzIHRvIGJlIHBpY2tlZCBiZWZvcmUgZm9yIGl0IHRvIGFwcGx5IApjbGVhbmx5KS4gQWxzbywg
-dW50aWwgaXQncyBtZXJnZWQgaW4gbWFzdGVyICh3aGljaCBjYW4gdGFrZSBhIGxvbmcgdGltZSAK
-ZGVwZW5kaW5nIHdoZXJlIHlvdSBhcmUgaW4gdGhlIHJlbGVhc2UgY3ljbGUpIHRoZXJlJ3Mgbm8g
-Z3VhcmFudGVlIHRoZSAKcGF0Y2ggaXMgYWN0dWFsbHkgZ29pbmcgdG8gbWFrZSBpdCBhcyBpcyB0
-byB0aGUgdHJlZSAoaXQgaXNuJ3QgdW5oZWFyZCAKb2YgdG8gaGF2ZSByZXZlcnRzIG9yIGV2ZW4g
-cmViYXNlcyBpbiBtYWludGFpbmVyIHRyZWVzIGJlZm9yZSBzZW5kaW5nIGEgCm1lcmdlIHJlcXVl
-c3QgdG8gTGludXMpLgoKMikgSWYgdGhlcmUgYXJlIG1hbnVhbCBjaGFuZ2VzIG1hZGUgdG8gdGhl
-IHBhdGNoIHRoYXQgYXJlbid0IHVwc3RyZWFtZWQgCmluIHRoZSBrZXJuZWwgKG9yIGRlcGVuZGVu
-Y2llcyAoZ2l0IGNvbnRleHQpIGFyZSBtaXNzaW5nKSwgaWYgd2UgZGl2ZXJnZSAKdG9vIG11Y2gg
-ZnJvbSB1cHN0cmVhbSwgVG9tIHdpbGwgaGF2ZSBnaXQgY29uZmxpY3RzIHdoZW4gcHVsbGluZyBu
-ZXcgCnZlcnNpb25zLiBIb3cgdG8gcmVzb2x2ZSB0aG9zZSBjb25mbGljdHMgd2lsbCBiZSBpbnRl
-cmVzdGluZy4KCjMpIFdvcnNlLCBpZiB0aGVyZSBhcmUgbm9uLXVwc3RyZWFtZWQgY2hhbmdlcyB0
-aGF0IGFyZW4ndCBpbmR1Y2luZyBhbnkgCmdpdCBjb25mbGljdCAodmlhIGdpdCBjb250ZXh0IGZv
-ciBleGFtcGxlKSwgdGhlbiB0aGUgbWVyZ2UvcHVsbCBtYXkgbm90IApzYXkgYW55dGhpbmcgYWJv
-dXQgaXQgYW5kIHdlJ2xsIGNhcnJ5IG5vbi11cHN0cmVhbSBwYXRjaGVzIGluIGR0cy91cHN0cmVh
-bS4KCk1heWJlIHdlIHNob3VsZCBub3QgZXZlbiBkbyBhIHN1YnRyZWUgcHVsbC9tZXJnZSBidXQg
-ZXJhc2UgZXZlcnl0aGluZyAKYW5kIHJlaW1wb3J0IGV2ZXJ5dGhpbmcgZXZlcnkgdGltZSB3ZSBi
-dW1wLCB0byBtYWtlIHN1cmUgMiBvciAzKSBjYW5ub3QgCmhhcHBlbj8KCkZvciB3aGF0IGl0J3Mg
-d29ydGgsIEkndmUgY2F1Z2h0IHNvbWUgKFJvY2tjaGlwKSBjb250cmlidXRvcnMgc2VuZGluZyAK
-cGF0Y2hlcyB0byBkdHMvdXBzdHJlYW0gdGhhdCB3ZXJlbid0IGV2ZW4gc2VudCB0byB0aGUga2Vy
-bmVsIG1haWxpbmcgCmxpc3QuIFRoYXQgd2Fzbid0IGRvbmUgb24gcHVycG9zZSBidXQgdGhlcmUg
-YXJlIHByb2JhYmx5IGEgZmV3IHBhdGNoZXMgCmFscmVhZHkgdGhhdCB3ZW50IHRocm91Z2ggdGhl
-IGNyYWNrcy4gSSBhbSBub3Qgc3VyZSBob3cgd2UgY291bGQgZW5mb3JjZSAKdGhhdCAod2hpY2gg
-bmVlZHMgdG8gYmUgZG9uZSB3aXRoIG1haW50YWluZXIgdG9vbHMgYXMgdGhlcmUgYXJlIGFscmVh
-ZHkgCnRvbyBtYW55IHdheXMgdG8gY29udHJpYnV0ZSB0byBVLWJvb3QgKHBhdG1hbiwgZ2l0LXNl
-bmQtZW1haWwsIGI0LCAKZXRjLi4uKSkgb3IgZXZlbiBpZiB3ZSB3YW50IHRvLiBCdXQgbWFraW5n
-IGR0cy91cHN0cmVhbSB0aGUgbmV3IAphcmNoL2FybS9kdHMvIChmb3IgQVJNKSBkaXJlY3Rvcnkg
-ZG9lc24ndCBtYWtlIG11Y2ggc2Vuc2UgdG8gbWUuCgpJZiB5b3UgY2Fubm90IHdhaXQgZm9yIGRl
-dmljZXRyZWUtcmViYXNpbmcgdG8gcmVjZWl2ZSB0aGUgbmV3IHRhZywgZG8gCnRoZSBjaGFuZ2Vz
-IGluIC11LWJvb3QuZHRzaSBhbmQgcmV2ZXJ0IHRoZSBjaGFuZ2VzIG9uY2Ugd2UgdXBkYXRlIApk
-dHMvdXBzdHJlYW0gdG8gYSBuZXdlciB0YWcgKG9yIGNoZXJyeS1waWNrIG9uY2UgYXZhaWxhYmxl
-KT8KCnY2LjE2LXJjMSB0b29rIGEgYml0IGxvbmdlciB0aGlzIHRpbWUgdG8gcmVhY2ggZGV2aWNl
-dHJlZS1yZWJhc2luZyBJIAp0aGluaywgYnV0IGl0IGxhbmRlZCB0aGlzIG1vcm5pbmcgKFVUQykg
-c28gaXQgaXNuJ3QgVEhBVCBsb25nIGNvbXBhcmVkIAp0byB0aGUgcHVzaCBpbiBtYXN0ZXIuIFdl
-IGNvdWxkIGFzayBkZXZpY2V0cmVlLXJlYmFzaW5nIHBlb3BsZSB0byBwdXNoIAp0aGUgbWFzdGVy
-IGJyYW5jaCBtb3JlIG9mdGVuIHRvIGF2b2lkIHRoZSB1cC10byAyLXdlZWsgZGVsYXkgYmV0d2Vl
-biAKdjYuMTUgYW5kIHY2LjE2LXJjMSBmb3IgZXhhbXBsZS4KCkkgaGF2ZSByZWFkIG5vdGhpbmcg
-aW4gdGhpcyB0aHJlYWQgc28gdGhpcyBpcyBhYnNvbHV0ZWx5IG5vdCBhIGphYiBhdCAKc29tZSBj
-b250cmlidXRvciBvciBtYWludGFpbmVyIGluIHRoaXMgc2VyaWVzLgoKT24gYSBzaWRlLW5vdGUs
-IEkgdGhpbmsgd2Ugc2hvdWxkIGFkZCAtcyB0byB0b29scy91cGRhdGUtc3VidHJlZS5zaCdzIApn
-aXQgY2hlcnJ5LXBpY2sgY2FsbCB0byBrbm93IHdobyBjb250cmlidXRlZCB0aGUgY2hhbmdlIHRv
-IFUtQm9vdCAoYXMgCnRoZSBjb21taXQgYXV0aG9yIHdpbGwgYmUgdGhlIHNhbWUgYXMgaW4gdGhl
-IGtlcm5lbCBhcyBmYXIgYXMgSSByZW1lbWJlcikuCgpUbyBiZSBmYWlyLCB0aGUgd2hvbGUgcHJv
-Y2VzcyBpcyBhIGJpdCBjb25zdHJhaW5pbmcsIGVzcGVjaWFsbHkgZm9yIG5ldyAKYm9hcmRzLiBZ
-b3UgbWF5IGhhdmUgdG8gd2FpdCB1cCB0byB+MiBtb250aHMgKGEgZnVsbCBrZXJuZWwgcmVsZWFz
-ZSAKY3ljbGUpIHRvIHNlZSBhIHRhZyB3aXRoIHRoZSBkZXZpY2UgdHJlZSBmb3IgeW91ciBib2Fy
-ZCwgYW5kIG9ubHkgdGhlbiAKY2FuIHlvdSBzdXBwb3J0IHRoZSBib2FyZCBpbiBVLUJvb3Qgd2l0
-aCBPRl9VUFNUUkVBTS4gSW4gUm9ja2NoaXAgd2UgCnR5cGljYWxseSBmb3JjZSBPRl9VUFNUUkVB
-TSBmb3IgbmV3IGJvYXJkcywgYnV0IHdlIGFsc28gdHlwaWNhbGx5IGRvIG5vdCAKYWNjZXB0IGhh
-bmQtY3JhZnRlZCBnaXQgY29tbWl0cyB0byBkdHMvdXBzdHJlYW0uIEkgZG9uJ3Qga25vdyBpZiBp
-dCdzIApkZXRlcnJpbmcgY29udHJpYnV0b3JzIGJ1dCB3ZSBhcmUgc3RpbGwgZ2V0dGluZyBzb21l
-IGNvbnRyaWJ1dGlvbnMgaGVyZSAKYW5kIHRoZXJlLiBOb3Qgc3VyZSBob3cgd2Ugc2hvdWxkIGJl
-IGhhbmRsaW5nIHRoYXQgOi8KCj4gWzFdIGh0dHBzOi8vcGF0Y2h3b3JrLm96bGFicy5vcmcvcHJv
-amVjdC91Ym9vdC9saXN0Lz9zZXJpZXM9NDYwNDUwCj4gCj4+ICh3aGljaAo+PiBoYXBwZW5zLCBF
-IFNoYXR0b3cgb24gSVJDIHdhcyBhc2tpbmcgaG93IHRvIGF0IGxlYXN0IGxvY2FsbHkgcG9pbnQK
-Pj4gZHRzL3Vwc3RyZWFtIGF0IHNvbWV0aGluZyBlbHNlLCBhdCBsZWFzdCBmb3IgbG9jYWwgdGVz
-dGluZykuCj4+Cj4gCj4gSSB3b3VsZCBsb3ZlIHRvIGhlYXIgcHJvYmxlbXMgZnJvbSBwZW9wbGUg
-aWYgdGhhdCdzIGZvciBkb3duc3RyZWFtCj4gZGV2ZWxvcG1lbnQgdG9vLgo+IAoKV2UgY2FuIGFk
-ZCB0aGluZ3MgaW4gCmh0dHBzOi8vZG9jcy51LWJvb3Qub3JnL2VuL2xhdGVzdC9kZXZlbG9wL2Rl
-dmljZXRyZWUvY29udHJvbC5odG1sI3doZXJlLWRvLWktZ2V0LWEtZGV2aWNldHJlZS1maWxlLWZv
-ci1teS1ib2FyZCAKYW5kIApodHRwczovL2RvY3MudS1ib290Lm9yZy9lbi9sYXRlc3QvZGV2ZWxv
-cC9kZXZpY2V0cmVlL2NvbnRyb2wuaHRtbCNyZXN5bmNpbmctd2l0aC1kZXZpY2V0cmVlLXJlYmFz
-aW5nIAp0byBiZSBjbGVhcmVyIG9uIHRoZSBsaW1pdGF0aW9ucy4gVGhvdWdoIHRpbCB3ZSBlbmZv
-cmNlIGEgY2hlY2ssIHRoaXMgaXMgCmp1c3QgaW5mb3JtYXRpb24uCgpDaGVlcnMsClF1ZW50aW4K
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVWJvb3Qtc3Rt
-MzIgbWFpbGluZyBsaXN0ClVib290LXN0bTMyQHN0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20K
-aHR0cHM6Ly9zdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tL21haWxtYW4vbGlzdGluZm8vdWJv
-b3Qtc3RtMzIK
+
+--===============7871764654410976128==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="8KmqBFOk/3pc4h8w"
+Content-Disposition: inline
+
+
+--8KmqBFOk/3pc4h8w
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Jun 11, 2025 at 03:25:18PM +0200, Quentin Schulz wrote:
+> Hi all,
+>=20
+> On 6/11/25 2:08 PM, Sumit Garg wrote:
+> > On Tue, Jun 10, 2025 at 10:04:54AM -0600, Tom Rini wrote:
+> > > On Tue, Jun 10, 2025 at 02:22:49PM +0530, Sumit Garg wrote:
+> > > > On Mon, Jun 09, 2025 at 10:22:39AM -0600, Tom Rini wrote:
+> > > > > On Mon, Jun 09, 2025 at 05:07:40PM +0100, Sumit Garg wrote:
+> > > > > > On Mon, Jun 09, 2025 at 09:50:19AM -0600, Tom Rini wrote:
+> > > > > > > On Mon, Jun 09, 2025 at 04:40:43PM +0100, Sumit Garg wrote:
+> > > > > > > > On Mon, Jun 09, 2025 at 03:46:27PM +0200, Dario Binacchi wr=
+ote:
+> > > > > > > > > Hi Sumit,
+> > > > > > > > >=20
+> > > > > > > > > On Mon, Jun 9, 2025 at 3:25=E2=80=AFPM Sumit Garg <sumit.=
+garg@kernel.org> wrote:
+> > > > > > > > > >=20
+> > > > > > > > > > Hi Patrice,
+> > > > > > > > > >=20
+> > > > > > > > > > On Mon, Jun 09, 2025 at 03:15:14PM +0200, Patrice CHOTA=
+RD wrote:
+> > > > > > > > > > >=20
+> > > > > > > > > > >=20
+> > > > > > > > > > > On 6/7/25 11:37, Dario Binacchi wrote:
+> > > > > > > > > > > > The series adds support for stm32h747-discovery boa=
+rd.
+> > > > > > > > > > > >=20
+> > > > > > > > > > > > Detailed information can be found at:
+> > > > > > > > > > > > https://www.st.com/en/evaluation-tools/stm32h747i-d=
+isco.html
+> > > > > > > > > > > >=20
+> > > > > > > > > > > >=20
+> > > > > > > > > > > > Dario Binacchi (9):
+> > > > > > > > > > > >    ARM: dts: stm32h7-pinctrl: add _a suffix to u[s]=
+art_pins phandles
+> > > > > > > > > > > >    dt-bindings: arm: stm32: add compatible for stm3=
+2h747i-disco board
+> > > > > > > > > > > >    dt-bindings: clock: stm32h7: rename USART{7,8}_C=
+K to UART{7,8}_CK
+> > > > > > > > > > > >    ARM: dts: stm32: add uart8 node for stm32h743 MCU
+> > > > > > > > > > > >    ARM: dts: stm32: add pin map for UART8 controlle=
+r on stm32h743
+> > > > > > > > > > > >    ARM: dts: stm32: add an extra pin map for USART1=
+ on stm32h743
+> > > > > > > > > > > >    ARM: dts: stm32: support STM32h747i-disco board
+> > > > > > > > > > > >    ARM: dts: stm32: add stm32h747i-disco-u-boot DTS=
+ file
+> > > > > > > > > > > >    board: stm32: add stm32h747-discovery board supp=
+ort
+> > > > > > > > > > >=20
+> > > > > > > > > > >=20
+> > > > > > > > > > > Hi Dario
+> > > > > > > > > > >=20
+> > > > > > > > > > > For the whole series
+> > > > > > > > > > > Applied to u-boot-stm32/next
+> > > > > > > > > >=20
+> > > > > > > > > > Please give some time for other maintainers to review t=
+his patch-set.
+> > > > > > > > > > The dts/upstream patches in this series aren't clean ch=
+erry pick from
+> > > > > > > > > > upstream.
+> > > > > > > > >=20
+> > > > > > > > > All the commits are already in the mainline Linux kernel,=
+ specifically
+> > > > > > > > > in v6.16-rc1.
+> > > > > > > > > If you're referring to the fact that the patches can't be=
+ applied
+> > > > > > > > > cleanly, I believe it's
+> > > > > > > > > because the target path in the Linux kernel doesn't match=
+ the one in U-Boot.
+> > > > > > > > > In fact, the DTS files are located in two different relat=
+ive paths.
+> > > > > > > >=20
+> > > > > > > > That's exactly why we have (refer here [1]):
+> > > > > > > >=20
+> > > > > > > > ./tools/update-subtree.sh pick dts <commit-id-to-be-picked>
+> > > > > > > >=20
+> > > > > > > > You should have waited v6.16-rc1 tag to be synced into
+> > > > > > > > devicetree-rebasing [2] for the cherry-picks to work. This =
+way of
+> > > > > > > > manually patching dts/upstream is not allowed since it is g=
+oing to break
+> > > > > > > > DT syncs in one way or another.
+> > > > > > > >=20
+> > > > > > > > So I would suggest you to wait for v6.16-rc1 to land in DT =
+rebasing tree
+> > > > > > > > and then send v2 with proper cherry picked patches.
+> > > > > > > >=20
+> > > > > > > > [1] https://docs.u-boot.org/en/latest/develop/devicetree/co=
+ntrol.html#resyncing-with-devicetree-rebasing
+> > > > > > > > [2] https://git.kernel.org/pub/scm/linux/kernel/git/devicet=
+ree/devicetree-rebasing.git
+> > > > > > >=20
+> > > > > > > To be honest, I don't think this is a big deal. Git will be m=
+erging
+> > > > > > > based on content and not specific hashes. And in the case of =
+conflicts I
+> > > > > > > just copy the file from the tag to our tree.
+> > > > > >=20
+> > > > > > The essential problem here to me is we are going to allow manual
+> > > > > > patching of dts/upstream tree given this example? How do we kee=
+p track
+> > > > > > if all that manual patching landed in Linux DT mainline? The ch=
+erry
+> > > > > > picks ensured that we always keep in sync with mainline.
+> > > > > >=20
+> > > > > > Lets take an example what if Git automatically resolved a merge=
+ conflict
+> > > > > > for you with duplicated content or if manually patching a DTS f=
+ile
+> > > > > > diverged from upstream and get unnoticed during DT syncs?
+> > > > > >=20
+> > > > > > IMHO, we should try to avoid manual patching of DT subtree othe=
+rwise it
+> > > > > > is hard to set a policy as to what level of manual patching is =
+allowed
+> > > > > > or not.
+> > > > >=20
+> > > > > Part of the problem here is that from the standpoint of applying =
+posted
+> > > > > patches there's no functional difference between what Dario did h=
+ere and
+> > > > > what could be done once v6.16-rc1-dts is tagged (if it's not alre=
+ady).
+> > > > > It's essentially a "manual patch" either way.
+> > > >=20
+> > > > Nope, there is a difference here. The cherry-pick from DT rebasing
+> > > > allows the custodian to rather just cherry pick corresponding DT pa=
+tches
+> > > > rather than applying patches posted on mailing list. I usually do t=
+hat
+> > > > when reviewing dts/upstream patches if they can be cherry-picked cl=
+eanly
+> > > > or not. So there won't be manual patching in that process.
+> > > >=20
+> > > > ./tools/update-subtree.sh pick dts <commit-id-to-be-picked>
+> > >=20
+> > > Alright. I hadn't foreseen anyone doing that rather than "b4 {am,shaz=
+am}
+> > > msg-id" to grab the series.
+> >=20
+> > Maybe we need to have some custodian specific docs listing best
+> > practices.
+> >=20
+>=20
+> Or extend
+>=20
+> https://docs.u-boot.org/en/latest/develop/devicetree/control.html#where-d=
+o-i-get-a-devicetree-file-for-my-board
+> https://docs.u-boot.org/en/latest/develop/devicetree/control.html#resynci=
+ng-with-devicetree-rebasing
+>=20
+> ?
+>=20
+> > >=20
+> > > > > We make it clear that
+> > > > > dts/upstream/ *only* gets changes that are in Linus' tree. If som=
+eone
+> > > > > tries to be sneaky and push something in that's not quite what's
+> > > > > upstream, it will get stomped on later and there's not going to b=
+e any
+> > > > > sympathy for the now broken platform.
+> > > >=20
+> > > > For us the upstream sync path is via DT rebasing tree only. It usua=
+lly
+> > > > lags behind Linus' tree by maximum 1 week candence what I have noti=
+ced.
+> > > >=20
+> > > > >=20
+> > > > > Yes, we document saying to use the cherry-pick script, and that's=
+ what
+> > > > > people should do in general. But I don't think there's value in a=
+dding a
+> > > > > further delay between "in Linus' tree" and "in devicetree-rebasin=
+g". In
+> > > > > the linux kernel, there's thousands of people working on things a=
+nd so
+> > > > > strict rules can be understandable (someone will be running a bot=
+ to
+> > > > > look for "(cherry pick from commit $hash)" and fail things where =
+$hash
+> > > > > doesn't exist, makes sense). Here if the ST custodians are happy =
+just
+> > > > > verifying the kernel commit, OK, that's fine. Or if they want to =
+wait,
+> > > > > that's fine too. We can be a little relaxed and let custodians do=
+ what
+> > > > > they see as best.
+> > > >=20
+> > > > The reason we adopted OF_UPSTREAM was just to get rid of the manual=
+ DT
+> > > > patching and the syncs. So is it really that few days lag of DT reb=
+asing
+> > > > tree which is again pushing us towards manual DT patching? I am just
+> > > > trying to understand the shortcomings that DT rebasing tree puts in
+> > > > front of us.
+> > >=20
+> > > It's mainly that I want to be flexible. So long as we don't violate t=
+he
+> > > content rules (Linus' tree *only*) I don't want to hinder the people
+> > > eager to now upstream U-Boot support for purely process reasons
+> >=20
+> > This flexibility has a cost associated to it which I hopefully was able
+> > to clarify above. But finally it's your decision which prevails.
+> >=20
+> > BTW, DT rebasing has already got the v6.16-rc1 tag, so it was really
+> > just 3 days gap. Quentin (CCed) has already done some proper cherry
+> > picking from there [1].
+> >=20
+>=20
+> Not sure why I was summoned here but I can give my (maybe undesired) 2 ce=
+nts
+> :)
+>=20
+> I (a contributor) **really** do not want to have hand-crafted patches in
+> dts/upstream. Use tools/update-subtree.sh for patches in that tree. Only =
+Tom
+> is allowed to use pull because it's a mess to send a patch for it and he
+> usually announces he's doing it and then pushes to the next branch direct=
+ly,
+> contributors can use pick instead. If a pick fails, backport everything
+> needed for it to apply cleanly. Yes, this may be tedious. Make sure you do
+> not break any other board as well.
+>=20
+> I was already surprised we have U-Boot specific files in dts/upstream (e.=
+g.
+> Makefiles :) ).
+>=20
+> 1) Doing it manually doesn't enforce the addition of the commit hash used
+> for the backport/cherry-pick in the commit log, which may be problematic
+> (how to quickly check that the patch contains what it should contain and =
+not
+> more, or less?). How to verify it actually was merged? In that state and =
+not
+> after other changes? Let's imagine an upstream patch that changes the
+> SoC.dtsi and associated boards dts, if backporting manually one could be
+> tempted to skip a conflicting board dts (because another commit needs to =
+be
+> picked before for it to apply cleanly). Also, until it's merged in master
+> (which can take a long time depending where you are in the release cycle)
+> there's no guarantee the patch is actually going to make it as is to the
+> tree (it isn't unheard of to have reverts or even rebases in maintainer
+> trees before sending a merge request to Linus).
+>=20
+> 2) If there are manual changes made to the patch that aren't upstreamed in
+> the kernel (or dependencies (git context) are missing), if we diverge too
+> much from upstream, Tom will have git conflicts when pulling new versions.
+> How to resolve those conflicts will be interesting.
+>=20
+> 3) Worse, if there are non-upstreamed changes that aren't inducing any git
+> conflict (via git context for example), then the merge/pull may not say
+> anything about it and we'll carry non-upstream patches in dts/upstream.
+>=20
+> Maybe we should not even do a subtree pull/merge but erase everything and
+> reimport everything every time we bump, to make sure 2 or 3) cannot happe=
+n?
+>=20
+> For what it's worth, I've caught some (Rockchip) contributors sending
+> patches to dts/upstream that weren't even sent to the kernel mailing list.
+> That wasn't done on purpose but there are probably a few patches already
+> that went through the cracks. I am not sure how we could enforce that (wh=
+ich
+> needs to be done with maintainer tools as there are already too many ways=
+ to
+> contribute to U-boot (patman, git-send-email, b4, etc...)) or even if we
+> want to. But making dts/upstream the new arch/arm/dts/ (for ARM) directory
+> doesn't make much sense to me.
+>=20
+> If you cannot wait for devicetree-rebasing to receive the new tag, do the
+> changes in -u-boot.dtsi and revert the changes once we update dts/upstream
+> to a newer tag (or cherry-pick once available)?
+>=20
+> v6.16-rc1 took a bit longer this time to reach devicetree-rebasing I thin=
+k,
+> but it landed this morning (UTC) so it isn't THAT long compared to the pu=
+sh
+> in master. We could ask devicetree-rebasing people to push the master bra=
+nch
+> more often to avoid the up-to 2-week delay between v6.15 and v6.16-rc1 for
+> example.
+>=20
+> I have read nothing in this thread so this is absolutely not a jab at some
+> contributor or maintainer in this series.
+>=20
+> On a side-note, I think we should add -s to tools/update-subtree.sh's git
+> cherry-pick call to know who contributed the change to U-Boot (as the com=
+mit
+> author will be the same as in the kernel as far as I remember).
+>=20
+> To be fair, the whole process is a bit constraining, especially for new
+> boards. You may have to wait up to ~2 months (a full kernel release cycle)
+> to see a tag with the device tree for your board, and only then can you
+> support the board in U-Boot with OF_UPSTREAM. In Rockchip we typically fo=
+rce
+> OF_UPSTREAM for new boards, but we also typically do not accept hand-craf=
+ted
+> git commits to dts/upstream. I don't know if it's deterring contributors =
+but
+> we are still getting some contributions here and there. Not sure how we
+> should be handling that :/
+>=20
+> > [1] https://patchwork.ozlabs.org/project/uboot/list/?series=3D460450
+> >=20
+> > > (which
+> > > happens, E Shattow on IRC was asking how to at least locally point
+> > > dts/upstream at something else, at least for local testing).
+> > >=20
+> >=20
+> > I would love to hear problems from people if that's for downstream
+> > development too.
+> >=20
+>=20
+> We can add things in https://docs.u-boot.org/en/latest/develop/devicetree=
+/control.html#where-do-i-get-a-devicetree-file-for-my-board
+> and https://docs.u-boot.org/en/latest/develop/devicetree/control.html#res=
+yncing-with-devicetree-rebasing
+> to be clearer on the limitations. Though til we enforce a check, this is
+> just information.
+
+Thank you for taking the time to provide your perspective on this
+Quentin. And while I had hoped to be able to look over the history of
+dts/upstream and see that it was just the Makefiles (which I don't think
+we can avoid) being the difference between devicetree-rebasing and us,
+that's not quite the case. So, yes, Sumit's opinion that we must
+cherry-pick seems best. The documentation needs to be updated a bit, and
+some more clear examples perhaps provided too. I've added some local
+scripting that will complain at me about changes that don't have the
+cherry-pick message or that the commit referenced doesn't exist. I may
+spend a little time figuring out how to dump each commit and make sure
+they're the same, but that too much get tricky.
+
+--=20
+Tom
+
+--8KmqBFOk/3pc4h8w
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhJzIYACgkQFHw5/5Y0
+tyzhSgv/fEL+ygCAJQiWdLQ0MbnZFj1fuRfM/NX2xc1r7DIsdLGzjbDSaUSARf/l
+teQWB+E41KXPo/e4Qgpzk6WIDAx6p5uDD5d7VCtMgQvf3H+jTDPCp6jALPzR5vMw
+5UyULMaaT6VoSxxWEcBlAEdEvwk7hqOLfk3Eu7/Gj7ALyrSF9fCl0VydAJgRu4+6
+vBq0H5V/p742toENJlK8E1KyUXhbQXkL/6cbxpJVim3HtG2Ft2owihDP7h2zDpq/
+ViPW6dSow8kxCn2oCdCijEDLjMIDMP/5hFwz5d77lw6mJPp66uq2BWHQ/JbziT90
+u72uqDjyEnVMSlYNRt2vjg16K2f5sAXFDEORuoq4/zJ+hP50WLvhJSAIe9ZiGEMm
+g2oX7Zk/hcUPesJpM+tR0gSbcP5gCYmpFkcDMl9NNWNjion7K8llRDolvYcy0e0m
+a9X2x1Qvf1FFSnvBvq+IlRODvedqMayVlUWov4Ksp+1AVrD3oECa/icyCkuxXIq6
+DAMz1CMC
+=MmES
+-----END PGP SIGNATURE-----
+
+--8KmqBFOk/3pc4h8w--
+
+--===============7871764654410976128==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============7871764654410976128==--

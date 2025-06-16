@@ -2,49 +2,49 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7592EADAE7F
-	for <lists+uboot-stm32@lfdr.de>; Mon, 16 Jun 2025 13:29:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 637C6ADAE78
+	for <lists+uboot-stm32@lfdr.de>; Mon, 16 Jun 2025 13:29:17 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3E2CEC36B17;
-	Mon, 16 Jun 2025 11:29:54 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 17D29C36B17;
+	Mon, 16 Jun 2025 11:29:17 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9DA6DC36B12
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 072B9C36B12
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 16 Jun 2025 11:29:53 +0000 (UTC)
+ Mon, 16 Jun 2025 11:29:15 +0000 (UTC)
 Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 55G8ZTrO015551;
- Mon, 16 Jun 2025 13:29:46 +0200
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 55GBBdxB024543;
+ Mon, 16 Jun 2025 13:29:13 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- PobQGKmGU18V4hIExX1cN0OVDHcxwqpRDpbL2avthhw=; b=2ueE6cWEaQYZFyW8
- dqgNjI5eYTo63NBtAcxQLVizfrqY+fcTT/Ts6JJ4K8wGW8AVQvjwB0YaIGulkcaT
- cMHk/nKn/3eSdNR4yMTRyAMdxozvRH1EftKC6ukK+1hIJ2ZVVTFw8jn53/CXyBE7
- RR2GcLDuQv/sJI3t5PGtvXrGDTY5yjl4i0JyCSbjH0Am44aU4b61KdNsoC3+ASbh
- NH/wr/t92C14eEAiEhPCWpRzsCrphKuNMk4s4OJEUcwtmpzsj/xf1xrfmipniRDj
- H4wchv3091DSO7tWitJUFOtTCoWKvRLNP9IhUrVqPwcNEy30to0zcmOeThhSBbJl
- ypOThg==
+ eTNAD0o0p8VuKcqxv1CmwbtvqaQcZN/sMNQeQzVuNlM=; b=iO8M75BuN1C7K1Wk
+ W62HlPhRhKQ6biLbtxxTiO88R7NKMdyDnpszmhfHJYVjOD/6YWb72/fYlLlotQ8O
+ jojRheWNxndRGziwU8aWDoak4SCq6EDyZPs4/XHclk8OSroEsVuCQMbtK8QzYXnu
+ i0+b3l7TEpOzwBC1/ADwgMmhdJqf6CZ04zJfNwb7j/gdumAZMz+6ahnvI5qFgKrd
+ S4WKduNS7zu6TSIAvz4+Yi/8twCXJKx47VL9Sqt1/FZHVoV7bwkVcHhMTWSARWnH
+ UVZP/bRi3UUPg1jevP+Q6ZXMEaXhyxMAJM3wtcj7i25N0YfCo92kDYSDPScvKXXy
+ WRrYOw==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 47afw1gy49-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 47afw1gy23-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 16 Jun 2025 13:29:46 +0200 (MEST)
+ Mon, 16 Jun 2025 13:29:13 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id DC08040061;
- Mon, 16 Jun 2025 13:28:40 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id C16B940057;
+ Mon, 16 Jun 2025 13:28:23 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 2A138AFAC3E;
- Mon, 16 Jun 2025 13:27:55 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 3996CAFAC2F;
+ Mon, 16 Jun 2025 13:27:56 +0200 (CEST)
 Received: from localhost (10.48.86.182) by SHFDAG1NODE3.st.com (10.75.129.71)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 16 Jun
- 2025 13:27:54 +0200
+ 2025 13:27:55 +0200
 From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Mon, 16 Jun 2025 13:27:47 +0200
-Message-ID: <20250616132553.v4.1.Ie741b1ca358414a1d718dca0667ac44eefc9227b@changeid>
+Date: Mon, 16 Jun 2025 13:27:48 +0200
+Message-ID: <20250616112749.17311-2-patrick.delaunay@foss.st.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250616112749.17311-1-patrick.delaunay@foss.st.com>
 References: <20250616112749.17311-1-patrick.delaunay@foss.st.com>
@@ -56,15 +56,11 @@ X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
  definitions=2025-06-16_05,2025-06-13_01,2025-03-28_01
 Cc: Tom Rini <trini@konsulko.com>, caleb.connolly@linaro.org,
- jerome.forissier@linaro.org, Casey Connolly <casey.connolly@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- ilias.apalodimas@linaro.org,
+ jerome.forissier@linaro.org, ilias.apalodimas@linaro.org,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>
-Subject: [Uboot-stm32] [PATCH v4 1/3] lib/uuid.c: restore support of system
-	partition type for ESP
+Subject: [Uboot-stm32] [PATCH v4 2/3] doc: cmd: gpt: add information on type
+	partition
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -81,402 +77,144 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Add support of optional shortname for parameter 'type' of gpt
-command (limited by UUID_STR_LEN) and a separate 'description'
-for UID format "%pUs" used in 'part list' output.
+Add information on type partition, copied from README.gpt.
 
-When 'description' is absent in list_guid[], the optional
-shortname is used as fallback.
+I also correct issue for gpt_parts variable and add example of
+"gpt read" usage.
 
-Many partition types for EFI have no shortcut yet, but only
-description as they are only used to display information.
-
-This patch also restores the "system" as short name for EFI
-System Partition (ESP).
-
-Fixes: d54e1004b8b1 ("lib/uuid.c: use unique name for PARTITION_SYSTEM_GUID")
-Tested-by: Patrice Chotard <patrice.chotard@foss.st.com>
 Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 ---
 
-Changes in v4:
-- update compilation flag used in the test print_guid for
-  "EFI System Partition" known part type UUID
+(no changes since v1)
 
-Changes in v3:
-- The definition for ESP = "system" partition in list_guid[]
-  is no more under CONFIG_CMD_EFIDEBUG or CONFIG_EFI flags,
-  and restore the initial level (always support for display)
-  as it is done for MBR partition or when U-Boot is a UEFI
-  loader (CONFIG_CMD_BOOTEFI).
+ doc/usage/cmd/gpt.rst | 93 ++++++++++++++++++++++++++++++++++++++-----
+ 1 file changed, 84 insertions(+), 9 deletions(-)
 
-Changes in v2:
-- change 'string' to 'type' in struct for list_guid[]
-- clarify the usage of struct field 'type' and 'description' in
-  comment and in commit message
-- use 'type' for EFI_XXX description as these string have
-  no space and size is lower than 36 characters.
-- update after V1 review
-
- lib/uuid.c          | 162 ++++++++++++++++++++++++--------------------
- test/common/print.c |   3 +-
- 2 files changed, 90 insertions(+), 75 deletions(-)
-
-diff --git a/lib/uuid.c b/lib/uuid.c
-index 6abbcf27b1f3..a1c88b9a6229 100644
---- a/lib/uuid.c
-+++ b/lib/uuid.c
-@@ -62,184 +62,197 @@ int uuid_str_valid(const char *uuid)
- 	return 1;
- }
+diff --git a/doc/usage/cmd/gpt.rst b/doc/usage/cmd/gpt.rst
+index 8534f78cbac0..13e8783be9b8 100644
+--- a/doc/usage/cmd/gpt.rst
++++ b/doc/usage/cmd/gpt.rst
+@@ -54,7 +54,7 @@ partition string
  
-+/*
-+ * Array of string (short and long) for known GUID of GPT partition type
-+ * at least one string must be present, @type or @description
-+ *
-+ * @type        : short name for the parameter 'type' of gpt command (max size UUID_STR_LEN = 36,
-+ *                no space), also used as fallback description when the next field is absent
-+ * @description : long description associated to type GUID, used for %pUs
-+ * @guid        : known type GUID value
-+ */
- static const struct {
--	const char *string;
-+	const char *type;
-+	const char *description;
- 	efi_guid_t guid;
- } list_guid[] = {
- #ifndef USE_HOSTCC
--#if defined(CONFIG_PARTITION_TYPE_GUID) || defined(CONFIG_CMD_EFIDEBUG) || \
--	defined(CONFIG_EFI)
--	{"EFI System Partition", PARTITION_SYSTEM_GUID},
--#endif
--#ifdef CONFIG_PARTITION_TYPE_GUID
--	{"mbr",		LEGACY_MBR_PARTITION_GUID},
--	{"msft",	PARTITION_MSFT_RESERVED_GUID},
--	{"data",	PARTITION_BASIC_DATA_GUID},
--	{"linux",	PARTITION_LINUX_FILE_SYSTEM_DATA_GUID},
--	{"raid",	PARTITION_LINUX_RAID_GUID},
--	{"swap",	PARTITION_LINUX_SWAP_GUID},
--	{"lvm",		PARTITION_LINUX_LVM_GUID},
--	{"u-boot-env",	PARTITION_U_BOOT_ENVIRONMENT},
--	{"cros-kern",	PARTITION_CROS_KERNEL},
--	{"cros-root",	PARTITION_CROS_ROOT},
--	{"cros-fw",	PARTITION_CROS_FIRMWARE},
--	{"cros-rsrv",	PARTITION_CROS_RESERVED},
--#endif
-+#if CONFIG_IS_ENABLED(EFI_PARTITION)
-+	{"mbr",		NULL,	LEGACY_MBR_PARTITION_GUID},
-+	{"msft",	NULL,	PARTITION_MSFT_RESERVED_GUID},
-+	{"data",	NULL,	PARTITION_BASIC_DATA_GUID},
-+	{"linux",	NULL,	PARTITION_LINUX_FILE_SYSTEM_DATA_GUID},
-+	{"raid",	NULL,	PARTITION_LINUX_RAID_GUID},
-+	{"swap",	NULL,	PARTITION_LINUX_SWAP_GUID},
-+	{"lvm",		NULL,	PARTITION_LINUX_LVM_GUID},
-+	{"u-boot-env",	NULL,	PARTITION_U_BOOT_ENVIRONMENT},
-+	{"cros-kern",	NULL,	PARTITION_CROS_KERNEL},
-+	{"cros-root",	NULL,	PARTITION_CROS_ROOT},
-+	{"cros-fw",	NULL,	PARTITION_CROS_FIRMWARE},
-+	{"cros-rsrv",	NULL,	PARTITION_CROS_RESERVED},
-+	{
-+		"system", "EFI System Partition",
-+		PARTITION_SYSTEM_GUID,
-+	},
- #if defined(CONFIG_CMD_EFIDEBUG) || defined(CONFIG_EFI)
- 	{
--		"Device Path",
-+		NULL, "Device Path",
-+		PARTITION_SYSTEM_GUID,
-+	},
-+	{
-+		NULL, "Device Path",
- 		EFI_DEVICE_PATH_PROTOCOL_GUID,
- 	},
- 	{
--		"Device Path To Text",
-+		NULL, "Device Path To Text",
- 		EFI_DEVICE_PATH_TO_TEXT_PROTOCOL_GUID,
- 	},
- 	{
--		"Device Path Utilities",
-+		NULL, "Device Path Utilities",
- 		EFI_DEVICE_PATH_UTILITIES_PROTOCOL_GUID,
- 	},
- 	{
--		"Unicode Collation 2",
-+		NULL, "Unicode Collation 2",
- 		EFI_UNICODE_COLLATION_PROTOCOL2_GUID,
- 	},
- 	{
--		"Driver Binding",
-+		NULL, "Driver Binding",
- 		EFI_DRIVER_BINDING_PROTOCOL_GUID,
- 	},
- 	{
--		"Simple Text Input",
-+		NULL, "Simple Text Input",
- 		EFI_SIMPLE_TEXT_INPUT_PROTOCOL_GUID,
- 	},
- 	{
--		"Simple Text Input Ex",
-+		NULL, "Simple Text Input Ex",
- 		EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL_GUID,
- 	},
- 	{
--		"Simple Text Output",
-+		NULL, "Simple Text Output",
- 		EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL_GUID,
- 	},
- 	{
--		"Block IO",
-+		NULL, "Block IO",
- 		EFI_BLOCK_IO_PROTOCOL_GUID,
- 	},
- 	{
--		"Disk IO",
-+		NULL, "Disk IO",
- 		EFI_DISK_IO_PROTOCOL_GUID,
- 	},
- 	{
--		"Simple File System",
-+		NULL, "Simple File System",
- 		EFI_SIMPLE_FILE_SYSTEM_PROTOCOL_GUID,
- 	},
- 	{
--		"Loaded Image",
-+		NULL, "Loaded Image",
- 		EFI_LOADED_IMAGE_PROTOCOL_GUID,
- 	},
- 	{
--		"Loaded Image Device Path",
-+		NULL, "Loaded Image Device Path",
- 		EFI_LOADED_IMAGE_DEVICE_PATH_PROTOCOL_GUID,
- 	},
- 	{
--		"Graphics Output",
-+		NULL, "Graphics Output",
- 		EFI_GRAPHICS_OUTPUT_PROTOCOL_GUID,
- 	},
- 	{
--		"HII String",
-+		NULL, "HII String",
- 		EFI_HII_STRING_PROTOCOL_GUID,
- 	},
- 	{
--		"HII Database",
-+		NULL, "HII Database",
- 		EFI_HII_DATABASE_PROTOCOL_GUID,
- 	},
- 	{
--		"HII Config Access",
-+		NULL, "HII Config Access",
- 		EFI_HII_CONFIG_ACCESS_PROTOCOL_GUID,
- 	},
- 	{
--		"HII Config Routing",
-+		NULL, "HII Config Routing",
- 		EFI_HII_CONFIG_ROUTING_PROTOCOL_GUID,
- 	},
- 	{
--		"Load File",
-+		NULL, "Load File",
- 		EFI_LOAD_FILE_PROTOCOL_GUID,
- 	},
- 	{
--		"Load File2",
-+		NULL, "Load File2",
- 		EFI_LOAD_FILE2_PROTOCOL_GUID,
- 	},
- 	{
--		"Random Number Generator",
-+		NULL, "Random Number Generator",
- 		EFI_RNG_PROTOCOL_GUID,
- 	},
- 	{
--		"Simple Network",
-+		NULL, "Simple Network",
- 		EFI_SIMPLE_NETWORK_PROTOCOL_GUID,
- 	},
- 	{
--		"PXE Base Code",
-+		NULL, "PXE Base Code",
- 		EFI_PXE_BASE_CODE_PROTOCOL_GUID,
- 	},
- 	{
--		"Device-Tree Fixup",
-+		NULL, "Device-Tree Fixup",
- 		EFI_DT_FIXUP_PROTOCOL_GUID,
- 	},
- 	{
--		"TCG2",
-+		NULL, "TCG2",
- 		EFI_TCG2_PROTOCOL_GUID,
- 	},
- 	{
--		"Firmware Management",
-+		NULL, "Firmware Management",
- 		EFI_FIRMWARE_MANAGEMENT_PROTOCOL_GUID
- 	},
- #if IS_ENABLED(CONFIG_EFI_HTTP_PROTOCOL)
- 	{
--		"HTTP",
-+		NULL, "HTTP",
- 		EFI_HTTP_PROTOCOL_GUID,
- 	},
- 	{
--		"HTTP Service Binding",
-+		NULL, "HTTP Service Binding",
- 		EFI_HTTP_SERVICE_BINDING_PROTOCOL_GUID,
- 	},
- 	{
--		"IPv4 Config2",
-+		NULL, "IPv4 Config2",
- 		EFI_IP4_CONFIG2_PROTOCOL_GUID,
- 	},
- #endif
- 	/* Configuration table GUIDs */
- 	{
--		"ACPI table",
-+		NULL, "ACPI table",
- 		EFI_ACPI_TABLE_GUID,
- 	},
- 	{
--		"EFI System Resource Table",
-+		NULL, "EFI System Resource Table",
- 		EFI_SYSTEM_RESOURCE_TABLE_GUID,
- 	},
- 	{
--		"device tree",
-+		NULL, "device tree",
- 		EFI_FDT_GUID,
- 	},
- 	{
--		"SMBIOS table",
-+		NULL, "SMBIOS table",
- 		SMBIOS_TABLE_GUID,
- 	},
- 	{
--		"SMBIOS3 table",
-+		NULL, "SMBIOS3 table",
- 		SMBIOS3_TABLE_GUID,
- 	},
- 	{
--		"Runtime properties",
-+		NULL, "Runtime properties",
- 		EFI_RT_PROPERTIES_TABLE_GUID,
- 	},
- 	{
--		"TCG2 Final Events Table",
-+		NULL, "TCG2 Final Events Table",
- 		EFI_TCG2_FINAL_EVENTS_TABLE_GUID,
- 	},
- 	{
--		"EFI Conformance Profiles Table",
-+		NULL, "EFI Conformance Profiles Table",
- 		EFI_CONFORMANCE_PROFILES_TABLE_GUID,
- 	},
- #ifdef CONFIG_EFI_RISCV_BOOT_PROTOCOL
- 	{
--		"RISC-V Boot",
-+		NULL, "RISC-V Boot",
- 		RISCV_EFI_BOOT_PROTOCOL_GUID,
- 	},
- #endif
-@@ -247,35 +260,36 @@ static const struct {
- #ifdef CONFIG_CMD_NVEDIT_EFI
- 	/* signature database */
- 	{
--		"EFI_GLOBAL_VARIABLE_GUID",
-+		"EFI_GLOBAL_VARIABLE_GUID", NULL,
- 		EFI_GLOBAL_VARIABLE_GUID,
- 	},
- 	{
--		"EFI_IMAGE_SECURITY_DATABASE_GUID",
-+		"EFI_IMAGE_SECURITY_DATABASE_GUID", NULL,
- 		EFI_IMAGE_SECURITY_DATABASE_GUID,
- 	},
- 	/* certificate types */
- 	{
--		"EFI_CERT_SHA256_GUID",
-+		"EFI_CERT_SHA256_GUID", NULL,
- 		EFI_CERT_SHA256_GUID,
- 	},
- 	{
--		"EFI_CERT_X509_GUID",
-+		"EFI_CERT_X509_GUID", NULL,
- 		EFI_CERT_X509_GUID,
- 	},
- 	{
--		"EFI_CERT_TYPE_PKCS7_GUID",
-+		"EFI_CERT_TYPE_PKCS7_GUID", NULL,
- 		EFI_CERT_TYPE_PKCS7_GUID,
- 	},
- #endif
- #if defined(CONFIG_CMD_EFIDEBUG) || defined(CONFIG_EFI)
--	{ "EFI_LZMA_COMPRESSED", EFI_LZMA_COMPRESSED },
--	{ "EFI_DXE_SERVICES", EFI_DXE_SERVICES },
--	{ "EFI_HOB_LIST", EFI_HOB_LIST },
--	{ "EFI_MEMORY_TYPE", EFI_MEMORY_TYPE },
--	{ "EFI_MEM_STATUS_CODE_REC", EFI_MEM_STATUS_CODE_REC },
--	{ "EFI_GUID_EFI_ACPI1", EFI_GUID_EFI_ACPI1 },
-+	{ "EFI_LZMA_COMPRESSED", NULL, EFI_LZMA_COMPRESSED },
-+	{ "EFI_DXE_SERVICES", NULL, EFI_DXE_SERVICES },
-+	{ "EFI_HOB_LIST", NULL, EFI_HOB_LIST },
-+	{ "EFI_MEMORY_TYPE", NULL, EFI_MEMORY_TYPE },
-+	{ "EFI_MEM_STATUS_CODE_REC", NULL, EFI_MEM_STATUS_CODE_REC },
-+	{ "EFI_GUID_EFI_ACPI1", NULL, EFI_GUID_EFI_ACPI1 },
- #endif
-+#endif /* EFI_PARTITION */
- #endif /* !USE_HOSTCC */
- };
+     * name=<NAME> - The partition name, required
+     * start=<BYTES> - The partition start offset in bytes, required
+-    * size=<BYTES> - The partition size in bytes or "-" to expand it to the whole free area
++    * size=<BYTES> - The partition size in bytes or "-" for the last partition to expand it to the whole free area
+     * bootable - Set the legacy bootable flag
+     * uuid=<UUID> - The partition UUID, optional if CONFIG_RANDOM_UUID=y is enabled
+     * type=<UUID> - The partition type GUID, requires CONFIG_PARTITION_TYPE_GUID=y
+@@ -63,6 +63,23 @@ partition string
+     If 'uuid' is not specified, but CONFIG_RANDOM_UUID is enabled, a random UUID
+     will be generated for the partition
  
-@@ -284,7 +298,8 @@ int uuid_guid_get_bin(const char *guid_str, unsigned char *guid_bin)
- 	int i;
++    If 'type' is not specified or without CONFIG_PARTITION_TYPE_GUID=y,
++    the used partition type GUID is PARTITION_BASIC_DATA_GUID.
++
++    Some strings can be also used at the place of the known partition type GUID:
++	* "mbr" = LEGACY_MBR_PARTITION_GUID (024DEE41-33E7-11D3-9D69-0008C781F39F)
++	* "msft" = PARTITION_MSFT_RESERVED_GUID (E3C9E316-0B5C-4DB8-817D-F92DF00215AE)
++	* "data" = PARTITION_BASIC_DATA_GUID (EBD0A0A2-B9E5-4433-87C0-68B6B72699C7)
++	* "linux" = PARTITION_LINUX_FILE_SYSTEM_DATA_GUID (0FC63DAF-8483-4772-8E79-3D69D8477DE4)
++	* "raid" = PARTITION_LINUX_RAID_GUID (A19D880F-05FC-4D3B-A006-743F0F84911E)
++	* "swap" = PARTITION_LINUX_SWAP_GUID (0657FD6D-A4AB-43C4-84E5-0933C84B4F4F)
++	* "lvm" = PARTITION_LINUX_LVM_GUID (E6D6D379-F507-44C2-A23C-238F2A3DF928)
++	* "u-boot-env" = PARTITION_U_BOOT_ENVIRONMENT(3DE21764-95BD-54BD-A5C3-4ABE786F38A8)
++	* "system" = PARTITION_SYSTEM_GUID (C12A7328-F81F-11D2-BA4B-00A0C93EC93B)
++
++    The GPT partitions layout and associated 'type' are also printed with the
++    :doc:`part command <part>` command by typing "part list".
++
+ gpt enumerate
+ ~~~~~~~~~~~~~
  
- 	for (i = 0; i < ARRAY_SIZE(list_guid); i++) {
--		if (!strcmp(list_guid[i].string, guid_str)) {
-+		if (list_guid[i].type &&
-+		    !strcmp(list_guid[i].type, guid_str)) {
- 			memcpy(guid_bin, &list_guid[i].guid, 16);
- 			return 0;
- 		}
-@@ -298,7 +313,9 @@ const char *uuid_guid_get_str(const unsigned char *guid_bin)
+@@ -162,16 +179,17 @@ Examples
  
- 	for (i = 0; i < ARRAY_SIZE(list_guid); i++) {
- 		if (!memcmp(list_guid[i].guid.b, guid_bin, 16)) {
--			return list_guid[i].string;
-+			if (list_guid[i].description)
-+				return list_guid[i].description;
-+			return list_guid[i].type;
- 		}
- 	}
- 	return NULL;
-@@ -312,10 +329,9 @@ int uuid_str_to_bin(const char *uuid_str, unsigned char *uuid_bin,
- 	uint64_t tmp64;
+ Create 6 partitions on a disk::
  
- 	if (!uuid_str_valid(uuid_str)) {
--#ifdef CONFIG_PARTITION_TYPE_GUID
--		if (!uuid_guid_get_bin(uuid_str, uuid_bin))
-+		if (IS_ENABLED(CONFIG_PARTITION_TYPE_GUID) &&
-+		    !uuid_guid_get_bin(uuid_str, uuid_bin))
- 			return 0;
--#endif
- 		return -EINVAL;
- 	}
+-    => setenv gpt_parts 'uuid_disk=bec9fc2a-86c1-483d-8a0e-0109732277d7;
+-        name=boot,start=4M,size=128M,bootable,type=ebd0a0a2-b9e5-4433-87c0-68b6b72699c7,
+-        name=rootfs,size=3072M,type=0fc63daf-8483-4772-8e79-3d69d8477de4;
+-        name=system-data,size=512M,type=0fc63daf-8483-4772-8e79-3d69d8477de4;
+-        name=[ext],size=-,type=0fc63daf-8483-4772-8e79-3d69d8477de4;
+-        name=user,size=-,type=0fc63daf-8483-4772-8e79-3d69d8477de4;
+-        name=modules,size=100M,type=0fc63daf-8483-4772-8e79-3d69d8477de4;
+-        name=ramdisk,size=8M,type=0fc63daf-8483-4772-8e79-3d69d8477de4
++    => setenv gpt_parts 'uuid_disk=bec9fc2a-86c1-483d-8a0e-0109732277d7;\
++    name=boot,start=4M,size=128M,bootable,type=ebd0a0a2-b9e5-4433-87c0-68b6b72699c7;\
++    name=rootfs,size=3072M,type=0fc63daf-8483-4772-8e79-3d69d8477de4;\
++    name=system-data,size=512M,type=0fc63daf-8483-4772-8e79-3d69d8477de4;\
++    name=user,size=512M,type=0fc63daf-8483-4772-8e79-3d69d8477de4;\
++    name=modules,size=100M,type=0fc63daf-8483-4772-8e79-3d69d8477de4;\
++    name=ramdisk,size=8M,type=0fc63daf-8483-4772-8e79-3d69d8477de4;\
++    name=[ext],size=-,type=0fc63daf-8483-4772-8e79-3d69d8477de4'
+     => gpt write mmc 0 $gpt_parts
  
-diff --git a/test/common/print.c b/test/common/print.c
-index c48efc2783f1..76ee851fe6a0 100644
---- a/test/common/print.c
-+++ b/test/common/print.c
-@@ -45,8 +45,7 @@ static int print_guid(struct unit_test_state *uts)
- 	sprintf(str, "%pUL", guid);
- 	ut_asserteq_str("04030201-0605-0807-090A-0B0C0D0E0F10", str);
- 	sprintf(str, "%pUs", guid_esp);
--	if (IS_ENABLED(CONFIG_PARTITION_TYPE_GUID) ||
--	    IS_ENABLED(CONFIG_CMD_EFIDEBUG) || IS_ENABLED(CONFIG_EFI))
-+	if (IS_ENABLED(CONFIG_EFI_PARTITION))
- 		ut_asserteq_str("EFI System Partition", str);
- 	else
- 		ut_asserteq_str("c12a7328-f81f-11d2-ba4b-00a0c93ec93b", str);
++Last partition "[ext]" with '-' is extended up to the end of the disk
+ 
+ Verify that the device matches the partition layout described in the variable
+ $gpt_parts::
+@@ -228,3 +246,60 @@ Swap the order of the 'boot' and 'rootfs' partition table entries::
+     => gpt setenv mmc 0 boot
+     => echo ${gpt_partition_entry}
+     2
++
++Other example: a disk with known partition types::
++
++    => setenv gpt_parts 'name=u-boot,size=32M,type=data;\
++    name=env,size=1M,type=u-boot-env;
++    name=ESP,size=128M,type=system;
++    name=rootfs,size=3072M,type=linux;
++    name=swap,size=100M,type=swap;
++    name=user,size=-,type=linux'
++    => gpt write mmc 0 $gpt_parts
++
++    => part list mmc 0
++    Partition Map for mmc device 0  --   Partition Type: EFI
++    Part	Start LBA	End LBA		Name
++    	Attributes
++    	Type GUID
++    	Partition GUID
++    1	0x00000022	0x00010021	"u-boot"
++    	attrs:	0x0000000000000000
++    	type:	ebd0a0a2-b9e5-4433-87c0-68b6b72699c7
++    		(data)
++    	guid:	502d48f6-81c0-488f-bdc0-ad602498f3ce
++      2	0x00010022	0x00010821	"env"
++    	attrs:	0x0000000000000000
++    	type:	3de21764-95bd-54bd-a5c3-4abe786f38a8
++    		(u-boot-env)
++    	guid:	9dc62338-459a-485e-bd8f-b3fbf728d9c0
++      3	0x00010822	0x00050821	"ESP"
++    	attrs:	0x0000000000000000
++    	type:	c12a7328-f81f-11d2-ba4b-00a0c93ec93b
++    		(EFI System Partition)
++    	guid:	8a3a1168-6af8-4ba7-a95d-9cd0d14e1b3d
++      4	0x00050822	0x00650821	"rootfs"
++    	attrs:	0x0000000000000000
++    	type:	0fc63daf-8483-4772-8e79-3d69d8477de4
++    		(linux)
++    	guid:	411ffebc-8a19-469d-99a9-0982409a6851
++      5	0x00650822	0x00682821	"swap"
++    	attrs:	0x0000000000000000
++    	type:	0657fd6d-a4ab-43c4-84e5-0933c84b4f4f
++    		(swap)
++    	guid:	f8ec0410-95ec-4e3e-8b98-fb8cf271a201
++      6	0x00682822	0x01dacbde	"user"
++    	attrs:	0x0000000000000000
++    	type:	0fc63daf-8483-4772-8e79-3d69d8477de4
++    		(linux)
++    	guid:	c5543e1c-566d-4502-99ad-20545007e673
++
++Modifying GPT partition layout from U-Boot::
++
++    => gpt read mmc 0 current_partitions
++    => env edit current_partitions
++        edit: uuid_disk=[...];name=part1,start=0x4000,size=0x4000,uuid=[...];
++        name=part2,start=0xc000,size=0xc000,uuid=[...];[ . . . ]
++
++    => gpt write mmc 0 $current_partitions
++    => gpt verify mmc 0 $current_partitions
 -- 
 2.25.1
 

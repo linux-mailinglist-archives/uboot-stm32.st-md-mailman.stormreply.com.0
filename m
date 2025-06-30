@@ -2,56 +2,58 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5A07CAED1E4
-	for <lists+uboot-stm32@lfdr.de>; Mon, 30 Jun 2025 02:11:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6240FAED1E5
+	for <lists+uboot-stm32@lfdr.de>; Mon, 30 Jun 2025 02:11:19 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 02403C3F92E;
-	Mon, 30 Jun 2025 00:11:17 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0C831C3F92F;
+	Mon, 30 Jun 2025 00:11:19 +0000 (UTC)
 Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 643ABC3F92E
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 08649C3F92F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 30 Jun 2025 00:11:15 +0000 (UTC)
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ Mon, 30 Jun 2025 00:11:17 +0000 (UTC)
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4bVmm26d5Mz9sp3;
- Mon, 30 Jun 2025 02:11:14 +0200 (CEST)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4bVmm4523wz9tSK;
+ Mon, 30 Jun 2025 02:11:16 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1751242275;
+ s=mail20150812; t=1751242276;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=m/32zFS5KP7KhnsjXM+zBQ3K+GNPkuC6zOpPSsUbxL0=;
- b=Ad8bfH1YvountpzhSkBQ76nBmrv9xoqf1CrO/Q18Wq6RtKxGf2wkTEla5snkZvME8CmVja
- Rjtgcqytmd5FEDuRsxohB+axIO6CRSLOV8LLXR9TDeL54ag9G40ideD6wCK267E99aHjjH
- K3hv8Y0L9Ms450Q6c5xz6zzw5DsKUFVCaItLoUX4v+V4TzNanfihK09BMKo7Rf3s1Qj80q
- E3SaY11YAh7TgJxMYffaf6EeCz2Hxi9EHOZzhxRxjqU74W4Bg7+gWNc4h/l88/w098b6Ti
- IZzWOad1EgMmNorPLxwr0YijxelnaD0L2p56X8/LBWvJssNOGgiOWLgi9h+snQ==
+ bh=VU5glsh5TaP8rTnOXG/dhn25BQz24IIDSq+T8uBkQkY=;
+ b=wdIz1RsSE8oH4XOI0TMD5O6FVahU0B9pUluiLlKcYI9epIaHI9priZUaXK3SAc8cUXv4BH
+ 0i4DOo5dBP7YlmlMazBg7LM4akUI00Fm2FuAYe6GuptT+hCeR2IUJdUEQKwmezSf/WY2JO
+ 14IXUdlF5ra5Mt0ZKopX5PKtY+ndojs4ZeetlNw3Dtdoigu5pUCpVqtNxGTYbTS6wEO76R
+ LwsOSkG+HhU4oDpxaqoxa8PClKGt354beQ1S+uPtrmjbEesXyuOh5yBUx2cR+pSy4R/IXu
+ +Jp+3F7WlTVqtNI34Gjs9JPlP6a8GbxxnXw+1sEdf9lK9prIy8pGRmnnv8PxaA==
 From: Marek Vasut <marek.vasut@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1751242273;
+ s=mail20150812; t=1751242274;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=m/32zFS5KP7KhnsjXM+zBQ3K+GNPkuC6zOpPSsUbxL0=;
- b=ga6pcjL26yOx8FOM5d0VWZEzw0qWs8MOsHvzYkcRg8+7OFRg/5FiVXGSOtCvpUyDiqBznf
- p43m5eAKmpMk7baItCSWfEcE4GfQNOypEeEWHHNdtaP/dw5FOVpN0Jzixhag/fKJRsbFv4
- XkfuFbQ8COx3A8+kgXzo50E0YyPFa0r4evPxYfgJII05bBm1aCwwBSaB42d9OEZTsmPugi
- fngPLXiDygr8vovLH0+t9fHnpRp8phZ5mnGsd1l2ajb74J7RAiA8pub2X1JPDa1XMPhNjp
- Ql9FN563uuqUuEOOqW66Y0/7nEP0vWoV+oiz3kL8kiH2QGfPTU9vAK8Ue+Wjdg==
+ bh=VU5glsh5TaP8rTnOXG/dhn25BQz24IIDSq+T8uBkQkY=;
+ b=eaUUJkbGdmSl/AbtAMG/oKWkozbcZraa7aUeiaOaN7HJnDZ+fXcOqT61XK42LcmC7RFq6X
+ V/inKUXLg9yu+6z3JvkrAQ/JC4TU5pt9d9MKc6uf1tPezD5ZFlUKFku0x3dc79j+fhDB0F
+ hlfpmSF4NvoRbISVtb1ZyemAP0f6Vf1oB/uMIA13jr3uDlnrH+vg0porupFOlk0CkoeXIj
+ 41u+/0KwUPQW/MY873BwtXBiPt3sKPVtYg5XBvpe7sQ2qMrvT697Yb4NGXIhS7C2O5VB2L
+ 6NAMEdHh+TUWFYF/IpStfMQuAhTSbQE663Ifcd0TOQy+B/gPGKilF8K7RQiITw==
 To: u-boot@lists.denx.de
-Date: Mon, 30 Jun 2025 02:10:31 +0200
-Message-ID: <20250630001053.952342-5-marek.vasut@mailbox.org>
+Date: Mon, 30 Jun 2025 02:10:32 +0200
+Message-ID: <20250630001053.952342-6-marek.vasut@mailbox.org>
 In-Reply-To: <20250630001053.952342-1-marek.vasut@mailbox.org>
 References: <20250630001053.952342-1-marek.vasut@mailbox.org>
 MIME-Version: 1.0
-X-MBO-RS-ID: 2a07c094a6f12c85eda
-X-MBO-RS-META: bx34a7h6k7nb4hspyjixkgxyjk4agmbh
+X-MBO-RS-ID: e6127a5708c873be87a
+X-MBO-RS-META: 317m44tzsxc73p97ybz18ihhimtxdqey
+X-Rspamd-Queue-Id: 4bVmm4523wz9tSK
 Cc: Tom Rini <trini@konsulko.com>,
  Pascal Zimmermann <pzimmermann@dh-electronics.com>, u-boot@dh-electronics.com,
  Marek Vasut <marek.vasut@mailbox.org>,
@@ -62,8 +64,8 @@ Cc: Tom Rini <trini@konsulko.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Simon Glass <sjg@chromium.org>, Lionel Debieve <lionel.debieve@foss.st.com>,
  Gatien Chevallier <gatien.chevallier@foss.st.com>
-Subject: [Uboot-stm32] [PATCH v2 05/10] ARM: stm32: Add STM32MP13xx debug
-	UART initialization
+Subject: [Uboot-stm32] [PATCH v2 06/10] ARM: dts: stm32: Add
+	stm32mp13-ddr.dtsi template
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -80,12 +82,11 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Add default STM32MP13xx debug UART initialization. This is similar
-to STM32MP15xx debug UART initialization, except the RCC registers
-are at different offsets and the UART pinmux pins are different.
+Factor out common parts of STM32MP15xx DRAM controller configuration DT
+description into stm32mp1-ddr.dtsi and introduce stm32mp13-ddr.dtsi which
+describes STM32MP13xx DRAM controller configuration in DT.
 
 Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
 ---
 Cc: Cheick Traore <cheick.traore@foss.st.com>
@@ -102,51 +103,461 @@ Cc: u-boot@dh-electronics.com
 Cc: u-boot@lists.denx.de
 Cc: uboot-stm32@st-md-mailman.stormreply.com
 ---
-V2: Add RB from Patrice and Patrick
+V2: - Add RB from Patrice
+    - Update the copyright year from 2018 to 2018-2025
+    - Fix up SPDX-License-Identifier
 ---
- board/st/stm32mp1/debug_uart.c | 21 ++++++++++++++++++---
- 1 file changed, 18 insertions(+), 3 deletions(-)
+ arch/arm/dts/stm32mp1-ddr.dtsi  | 187 ++++++++++++++++++++++++++++++++
+ arch/arm/dts/stm32mp13-ddr.dtsi |  49 +++++++++
+ arch/arm/dts/stm32mp15-ddr.dtsi | 170 +----------------------------
+ 3 files changed, 237 insertions(+), 169 deletions(-)
+ create mode 100644 arch/arm/dts/stm32mp1-ddr.dtsi
+ create mode 100644 arch/arm/dts/stm32mp13-ddr.dtsi
 
-diff --git a/board/st/stm32mp1/debug_uart.c b/board/st/stm32mp1/debug_uart.c
-index 24e3f9f2201..4c2149e0480 100644
---- a/board/st/stm32mp1/debug_uart.c
-+++ b/board/st/stm32mp1/debug_uart.c
-@@ -9,17 +9,32 @@
- #include <asm/arch/stm32.h>
- #include <linux/bitops.h>
- 
-+#if IS_ENABLED(CONFIG_STM32MP13X)
-+#define RCC_MP_APB1ENSETR (STM32_RCC_BASE + 0x0700)
-+#define RCC_MP_AHB4ENSETR (STM32_RCC_BASE + 0x0768)
-+#elif IS_ENABLED(CONFIG_STM32MP15X)
- #define RCC_MP_APB1ENSETR (STM32_RCC_BASE + 0x0A00)
- #define RCC_MP_AHB4ENSETR (STM32_RCC_BASE + 0x0A28)
-+#endif
- 
-+#define GPIOA_BASE 0x50002000
- #define GPIOG_BASE 0x50008000
- 
- void board_debug_uart_init(void)
- {
--	if (CONFIG_DEBUG_UART_BASE == STM32_UART4_BASE) {
--		/* UART4 clock enable */
--		setbits_le32(RCC_MP_APB1ENSETR, BIT(16));
-+	if (CONFIG_DEBUG_UART_BASE != STM32_UART4_BASE)
-+		return;
- 
-+	/* UART4 clock enable */
-+	setbits_le32(RCC_MP_APB1ENSETR, BIT(16));
+diff --git a/arch/arm/dts/stm32mp1-ddr.dtsi b/arch/arm/dts/stm32mp1-ddr.dtsi
+new file mode 100644
+index 00000000000..748271c546d
+--- /dev/null
++++ b/arch/arm/dts/stm32mp1-ddr.dtsi
+@@ -0,0 +1,187 @@
++// SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
++/*
++ * Copyright : STMicroelectronics 2018-2025
++ */
++#include <linux/stringify.h>
 +
-+	if (IS_ENABLED(CONFIG_STM32MP13X)) {
-+		/* GPIOA clock enable */
-+		writel(BIT(0), RCC_MP_AHB4ENSETR);
-+		/* GPIO configuration for DH boards: Uart4 TX = A9 */
-+		writel(0xfffbffff, GPIOA_BASE + 0x00);
-+		writel(0x00000080, GPIOA_BASE + 0x24);
-+	} else if (IS_ENABLED(CONFIG_STM32MP15X)) {
- 		/* GPIOG clock enable */
- 		writel(BIT(6), RCC_MP_AHB4ENSETR);
- 		/* GPIO configuration for ST boards: Uart4 TX = G11 */
++#ifdef CONFIG_SPL
++&ddr {
++	config-DDR_MEM_COMPATIBLE {
++		bootph-all;
++
++		compatible = __stringify(st,DDR_MEM_COMPATIBLE);
++
++		st,mem-name = DDR_MEM_NAME;
++		st,mem-speed = <DDR_MEM_SPEED>;
++		st,mem-size = <DDR_MEM_SIZE>;
++
++		st,ctl-reg = <
++			DDR_MSTR
++			DDR_MRCTRL0
++			DDR_MRCTRL1
++			DDR_DERATEEN
++			DDR_DERATEINT
++			DDR_PWRCTL
++			DDR_PWRTMG
++			DDR_HWLPCTL
++			DDR_RFSHCTL0
++			DDR_RFSHCTL3
++			DDR_CRCPARCTL0
++			DDR_ZQCTL0
++			DDR_DFITMG0
++			DDR_DFITMG1
++			DDR_DFILPCFG0
++			DDR_DFIUPD0
++			DDR_DFIUPD1
++			DDR_DFIUPD2
++			DDR_DFIPHYMSTR
++			DDR_ODTMAP
++			DDR_DBG0
++			DDR_DBG1
++			DDR_DBGCMD
++			DDR_POISONCFG
++			DDR_PCCFG
++		>;
++
++		st,ctl-timing = <
++			DDR_RFSHTMG
++			DDR_DRAMTMG0
++			DDR_DRAMTMG1
++			DDR_DRAMTMG2
++			DDR_DRAMTMG3
++			DDR_DRAMTMG4
++			DDR_DRAMTMG5
++			DDR_DRAMTMG6
++			DDR_DRAMTMG7
++			DDR_DRAMTMG8
++			DDR_DRAMTMG14
++			DDR_ODTCFG
++		>;
++
++		st,ctl-map = <
++			DDR_ADDRMAP1
++			DDR_ADDRMAP2
++			DDR_ADDRMAP3
++			DDR_ADDRMAP4
++			DDR_ADDRMAP5
++			DDR_ADDRMAP6
++			DDR_ADDRMAP9
++			DDR_ADDRMAP10
++			DDR_ADDRMAP11
++		>;
++
++
++		/*
++		 * Both st,ctl-perf and st,phy-reg differ
++		 * between STM32MP13xx and STM32MP15xx due
++		 * to 16bit and 32bit DRAM bus respectively
++		 * on these SoCs.
++		 */
++
++		st,phy-timing = <
++			DDR_PTR0
++			DDR_PTR1
++			DDR_PTR2
++			DDR_DTPR0
++			DDR_DTPR1
++			DDR_DTPR2
++			DDR_MR0
++			DDR_MR1
++			DDR_MR2
++			DDR_MR3
++		>;
++
++		status = "okay";
++	};
++};
++#endif
++
++#undef DDR_MEM_COMPATIBLE
++#undef DDR_MEM_NAME
++#undef DDR_MEM_SPEED
++#undef DDR_MEM_SIZE
++
++#undef DDR_MSTR
++#undef DDR_MRCTRL0
++#undef DDR_MRCTRL1
++#undef DDR_DERATEEN
++#undef DDR_DERATEINT
++#undef DDR_PWRCTL
++#undef DDR_PWRTMG
++#undef DDR_HWLPCTL
++#undef DDR_RFSHCTL0
++#undef DDR_RFSHCTL3
++#undef DDR_RFSHTMG
++#undef DDR_CRCPARCTL0
++#undef DDR_DRAMTMG0
++#undef DDR_DRAMTMG1
++#undef DDR_DRAMTMG2
++#undef DDR_DRAMTMG3
++#undef DDR_DRAMTMG4
++#undef DDR_DRAMTMG5
++#undef DDR_DRAMTMG6
++#undef DDR_DRAMTMG7
++#undef DDR_DRAMTMG8
++#undef DDR_DRAMTMG14
++#undef DDR_ZQCTL0
++#undef DDR_DFITMG0
++#undef DDR_DFITMG1
++#undef DDR_DFILPCFG0
++#undef DDR_DFIUPD0
++#undef DDR_DFIUPD1
++#undef DDR_DFIUPD2
++#undef DDR_DFIPHYMSTR
++#undef DDR_ADDRMAP1
++#undef DDR_ADDRMAP2
++#undef DDR_ADDRMAP3
++#undef DDR_ADDRMAP4
++#undef DDR_ADDRMAP5
++#undef DDR_ADDRMAP6
++#undef DDR_ADDRMAP9
++#undef DDR_ADDRMAP10
++#undef DDR_ADDRMAP11
++#undef DDR_ODTCFG
++#undef DDR_ODTMAP
++#undef DDR_SCHED
++#undef DDR_SCHED1
++#undef DDR_PERFHPR1
++#undef DDR_PERFLPR1
++#undef DDR_PERFWR1
++#undef DDR_DBG0
++#undef DDR_DBG1
++#undef DDR_DBGCMD
++#undef DDR_POISONCFG
++#undef DDR_PCCFG
++#undef DDR_PCFGR_0
++#undef DDR_PCFGW_0
++#undef DDR_PCFGQOS0_0
++#undef DDR_PCFGQOS1_0
++#undef DDR_PCFGWQOS0_0
++#undef DDR_PCFGWQOS1_0
++#undef DDR_PCFGR_1
++#undef DDR_PCFGW_1
++#undef DDR_PCFGQOS0_1
++#undef DDR_PCFGQOS1_1
++#undef DDR_PCFGWQOS0_1
++#undef DDR_PCFGWQOS1_1
++#undef DDR_PGCR
++#undef DDR_PTR0
++#undef DDR_PTR1
++#undef DDR_PTR2
++#undef DDR_ACIOCR
++#undef DDR_DXCCR
++#undef DDR_DSGCR
++#undef DDR_DCR
++#undef DDR_DTPR0
++#undef DDR_DTPR1
++#undef DDR_DTPR2
++#undef DDR_MR0
++#undef DDR_MR1
++#undef DDR_MR2
++#undef DDR_MR3
++#undef DDR_ODTCR
++#undef DDR_ZQ0CR1
++#undef DDR_DX0GCR
++#undef DDR_DX1GCR
++#undef DDR_DX2GCR
++#undef DDR_DX3GCR
+diff --git a/arch/arm/dts/stm32mp13-ddr.dtsi b/arch/arm/dts/stm32mp13-ddr.dtsi
+new file mode 100644
+index 00000000000..952e45b047f
+--- /dev/null
++++ b/arch/arm/dts/stm32mp13-ddr.dtsi
+@@ -0,0 +1,49 @@
++// SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
++/*
++ * Copyright : STMicroelectronics 2018-2025
++ */
++#ifdef CONFIG_SPL
++&ddr {
++	clocks = <&rcc AXIDCG>,
++		 <&rcc DDRC1>,
++		 <&rcc DDRPHYC>,
++		 <&rcc DDRCAPB>,
++		 <&rcc DDRPHYCAPB>;
++
++	clock-names = "axidcg",
++		      "ddrc1",
++		      "ddrphyc",
++		      "ddrcapb",
++		      "ddrphycapb";
++
++	config-DDR_MEM_COMPATIBLE {
++		st,ctl-perf = <
++			DDR_SCHED
++			DDR_SCHED1
++			DDR_PERFHPR1
++			DDR_PERFLPR1
++			DDR_PERFWR1
++			DDR_PCFGR_0
++			DDR_PCFGW_0
++			DDR_PCFGQOS0_0
++			DDR_PCFGQOS1_0
++			DDR_PCFGWQOS0_0
++			DDR_PCFGWQOS1_0
++		>;
++
++		st,phy-reg = <
++			DDR_PGCR
++			DDR_ACIOCR
++			DDR_DXCCR
++			DDR_DSGCR
++			DDR_DCR
++			DDR_ODTCR
++			DDR_ZQ0CR1
++			DDR_DX0GCR
++			DDR_DX1GCR
++		>;
++	};
++};
++#endif
++
++#include "stm32mp1-ddr.dtsi"
+diff --git a/arch/arm/dts/stm32mp15-ddr.dtsi b/arch/arm/dts/stm32mp15-ddr.dtsi
+index 48b0828828f..f18fdaeab68 100644
+--- a/arch/arm/dts/stm32mp15-ddr.dtsi
++++ b/arch/arm/dts/stm32mp15-ddr.dtsi
+@@ -2,8 +2,6 @@
+ /*
+  * Copyright : STMicroelectronics 2018
+  */
+-#include <linux/stringify.h>
+-
+ #ifdef CONFIG_SPL
+ &ddr {
+ 	clocks = <&rcc AXIDCG>,
+@@ -21,69 +19,6 @@
+ 		      "ddrphycapb";
+ 
+ 	config-DDR_MEM_COMPATIBLE {
+-		bootph-all;
+-
+-		compatible = __stringify(st,DDR_MEM_COMPATIBLE);
+-
+-		st,mem-name = DDR_MEM_NAME;
+-		st,mem-speed = <DDR_MEM_SPEED>;
+-		st,mem-size = <DDR_MEM_SIZE>;
+-
+-		st,ctl-reg = <
+-			DDR_MSTR
+-			DDR_MRCTRL0
+-			DDR_MRCTRL1
+-			DDR_DERATEEN
+-			DDR_DERATEINT
+-			DDR_PWRCTL
+-			DDR_PWRTMG
+-			DDR_HWLPCTL
+-			DDR_RFSHCTL0
+-			DDR_RFSHCTL3
+-			DDR_CRCPARCTL0
+-			DDR_ZQCTL0
+-			DDR_DFITMG0
+-			DDR_DFITMG1
+-			DDR_DFILPCFG0
+-			DDR_DFIUPD0
+-			DDR_DFIUPD1
+-			DDR_DFIUPD2
+-			DDR_DFIPHYMSTR
+-			DDR_ODTMAP
+-			DDR_DBG0
+-			DDR_DBG1
+-			DDR_DBGCMD
+-			DDR_POISONCFG
+-			DDR_PCCFG
+-		>;
+-
+-		st,ctl-timing = <
+-			DDR_RFSHTMG
+-			DDR_DRAMTMG0
+-			DDR_DRAMTMG1
+-			DDR_DRAMTMG2
+-			DDR_DRAMTMG3
+-			DDR_DRAMTMG4
+-			DDR_DRAMTMG5
+-			DDR_DRAMTMG6
+-			DDR_DRAMTMG7
+-			DDR_DRAMTMG8
+-			DDR_DRAMTMG14
+-			DDR_ODTCFG
+-		>;
+-
+-		st,ctl-map = <
+-			DDR_ADDRMAP1
+-			DDR_ADDRMAP2
+-			DDR_ADDRMAP3
+-			DDR_ADDRMAP4
+-			DDR_ADDRMAP5
+-			DDR_ADDRMAP6
+-			DDR_ADDRMAP9
+-			DDR_ADDRMAP10
+-			DDR_ADDRMAP11
+-		>;
+-
+ 		st,ctl-perf = <
+ 			DDR_SCHED
+ 			DDR_SCHED1
+@@ -117,111 +52,8 @@
+ 			DDR_DX2GCR
+ 			DDR_DX3GCR
+ 		>;
+-
+-		st,phy-timing = <
+-			DDR_PTR0
+-			DDR_PTR1
+-			DDR_PTR2
+-			DDR_DTPR0
+-			DDR_DTPR1
+-			DDR_DTPR2
+-			DDR_MR0
+-			DDR_MR1
+-			DDR_MR2
+-			DDR_MR3
+-		>;
+-
+-		status = "okay";
+ 	};
+ };
+ #endif
+ 
+-#undef DDR_MEM_COMPATIBLE
+-#undef DDR_MEM_NAME
+-#undef DDR_MEM_SPEED
+-#undef DDR_MEM_SIZE
+-
+-#undef DDR_MSTR
+-#undef DDR_MRCTRL0
+-#undef DDR_MRCTRL1
+-#undef DDR_DERATEEN
+-#undef DDR_DERATEINT
+-#undef DDR_PWRCTL
+-#undef DDR_PWRTMG
+-#undef DDR_HWLPCTL
+-#undef DDR_RFSHCTL0
+-#undef DDR_RFSHCTL3
+-#undef DDR_RFSHTMG
+-#undef DDR_CRCPARCTL0
+-#undef DDR_DRAMTMG0
+-#undef DDR_DRAMTMG1
+-#undef DDR_DRAMTMG2
+-#undef DDR_DRAMTMG3
+-#undef DDR_DRAMTMG4
+-#undef DDR_DRAMTMG5
+-#undef DDR_DRAMTMG6
+-#undef DDR_DRAMTMG7
+-#undef DDR_DRAMTMG8
+-#undef DDR_DRAMTMG14
+-#undef DDR_ZQCTL0
+-#undef DDR_DFITMG0
+-#undef DDR_DFITMG1
+-#undef DDR_DFILPCFG0
+-#undef DDR_DFIUPD0
+-#undef DDR_DFIUPD1
+-#undef DDR_DFIUPD2
+-#undef DDR_DFIPHYMSTR
+-#undef DDR_ADDRMAP1
+-#undef DDR_ADDRMAP2
+-#undef DDR_ADDRMAP3
+-#undef DDR_ADDRMAP4
+-#undef DDR_ADDRMAP5
+-#undef DDR_ADDRMAP6
+-#undef DDR_ADDRMAP9
+-#undef DDR_ADDRMAP10
+-#undef DDR_ADDRMAP11
+-#undef DDR_ODTCFG
+-#undef DDR_ODTMAP
+-#undef DDR_SCHED
+-#undef DDR_SCHED1
+-#undef DDR_PERFHPR1
+-#undef DDR_PERFLPR1
+-#undef DDR_PERFWR1
+-#undef DDR_DBG0
+-#undef DDR_DBG1
+-#undef DDR_DBGCMD
+-#undef DDR_POISONCFG
+-#undef DDR_PCCFG
+-#undef DDR_PCFGR_0
+-#undef DDR_PCFGW_0
+-#undef DDR_PCFGQOS0_0
+-#undef DDR_PCFGQOS1_0
+-#undef DDR_PCFGWQOS0_0
+-#undef DDR_PCFGWQOS1_0
+-#undef DDR_PCFGR_1
+-#undef DDR_PCFGW_1
+-#undef DDR_PCFGQOS0_1
+-#undef DDR_PCFGQOS1_1
+-#undef DDR_PCFGWQOS0_1
+-#undef DDR_PCFGWQOS1_1
+-#undef DDR_PGCR
+-#undef DDR_PTR0
+-#undef DDR_PTR1
+-#undef DDR_PTR2
+-#undef DDR_ACIOCR
+-#undef DDR_DXCCR
+-#undef DDR_DSGCR
+-#undef DDR_DCR
+-#undef DDR_DTPR0
+-#undef DDR_DTPR1
+-#undef DDR_DTPR2
+-#undef DDR_MR0
+-#undef DDR_MR1
+-#undef DDR_MR2
+-#undef DDR_MR3
+-#undef DDR_ODTCR
+-#undef DDR_ZQ0CR1
+-#undef DDR_DX0GCR
+-#undef DDR_DX1GCR
+-#undef DDR_DX2GCR
+-#undef DDR_DX3GCR
++#include "stm32mp1-ddr.dtsi"
 -- 
 2.47.2
 

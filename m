@@ -2,62 +2,124 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 29B8FB0F69F
-	for <lists+uboot-stm32@lfdr.de>; Wed, 23 Jul 2025 17:11:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E97A7B11325
+	for <lists+uboot-stm32@lfdr.de>; Thu, 24 Jul 2025 23:30:35 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D0198C36B3F;
-	Wed, 23 Jul 2025 15:11:06 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 927E2C36B1F;
+	Thu, 24 Jul 2025 21:30:35 +0000 (UTC)
+Received: from mail-oa1-f47.google.com (mail-oa1-f47.google.com
+ [209.85.160.47])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B5F37C36B3E
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9DA68C36B18
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 23 Jul 2025 15:11:05 +0000 (UTC)
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 56NEpR3l030393;
- Wed, 23 Jul 2025 17:10:52 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:message-id
- :mime-version:subject:to; s=selector1; bh=ic8QA+Ys/gQ+hgRrwJmZfT
- hZF47VCB3MfEMY5pDj+PQ=; b=qyZpLjyV8VrcSqPp+ByW2GatS7mu2FgtMaRDFa
- /1wLAuFNiwweI4ueiFalG2skcU9fkvM0CuNvIS3xTk1Luuc3xmpOacChh+ldX3l3
- kAlVLncwRcICCzSEOOnuZio07KxHoyrBpcpmAteNTVhv4mOZogqoHZpQPk5lb+2V
- SoGaxM5MVI1Y/OvOJErqbMhMNH4/jWhnnhR1kttcthmx8NUZzIEJQyMhEiY7VkT1
- rnA7lGZJzxMkYc7anWoheEyNmJ3vCLJshGNbo7P8/0bL3ouncWbP0lQI/m0hlSY8
- NSrEPNytBWElljuJlpwyJQZef8uPeFHmD4k+Q0N9YD6dCm9g==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4802q2cmqs-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 23 Jul 2025 17:10:52 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 11B674005E;
- Wed, 23 Jul 2025 17:09:48 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id C52E477F14F;
- Wed, 23 Jul 2025 17:09:18 +0200 (CEST)
-Received: from localhost (10.48.86.182) by SHFDAG1NODE3.st.com (10.75.129.71)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 23 Jul
- 2025 17:09:18 +0200
-From: Patrick Delaunay <patrick.delaunay@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Wed, 23 Jul 2025 17:09:16 +0200
-Message-ID: <20250723170913.1.I20e0e3d5851ea2e4a22b20be372800fe059cc2d1@changeid>
-X-Mailer: git-send-email 2.25.1
+ Thu, 24 Jul 2025 21:30:33 +0000 (UTC)
+Received: by mail-oa1-f47.google.com with SMTP id
+ 586e51a60fabf-30063371404so564069fac.1
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Thu, 24 Jul 2025 14:30:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1753392632; x=1753997432;
+ darn=st-md-mailman.stormreply.com; 
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ZPxVMYbbKVbjD1LnqDvMp6mdQbbSwvqoiCWolQ08/gE=;
+ b=seIf2jwaczC8qVRX6UFADO0rmSf5l86RQ5f+V6sSUfYWBDBa7eBYhA2pv8ilnwPVG/
+ +d0DoJEsMmSjjGcUkBzG+y8151xJyJFXEOWM951qeU9+VGoOJlVO7wd5ocl+NxfNPqCf
+ hobleT9i0aMkDB94CqR3k5g+DI04Tw5b4Fqa4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1753392632; x=1753997432;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ZPxVMYbbKVbjD1LnqDvMp6mdQbbSwvqoiCWolQ08/gE=;
+ b=a9Fx/6gKdPAbJwwvpcxCcXfgIsvH4EGbbAgcpO/rjjR3UrqlDEMZrzN+CtceJpyPpc
+ ydG+dZCAB1aDC8P3zFoVZXayUp7CirNBxXyMgu5lTj1iP40bq1iA7LKcd0tkdZ1NVVKG
+ UocJxAulKUnJStYy1xeN8mB5i3gWvog1KwkAO0KET/rkRFBDONlWoCsUVgb+524FOC9q
+ DESi2YP4ZoOOgP2uBVmSjdCYDnS97gSQb5jL0Z5UGxL2LXutwVWAP/XYdj8Mcimu9cAv
+ L0y1nOsX0Nz49exVtmaJ4y7tmgHzmZho+qgJAKrPw9cax+yMUiCQc+gYrkYbe1wI+I0A
+ XKRg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWjEO7Y4u3CA4p79emkmXLabecbIWfUvN3Xafs82aTdysyxUuLw27btKIY6GSYWjheO1tGicLzO6ML5Zg==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0YziV57MaEWv1APcSXVm2stQF8vqv+A57sTy1Q2edAwwOplNJdIA
+ IPweMh8BiTNNHs6/9I225USDDZby50JYFWkvMv3y20n9/zMQuR0V86gxjWUZBbMaa+k=
+X-Gm-Gg: ASbGnctxKGKCCAxat6+E9MqRYWKWysegSHBXwCj/vfaEjGMV3NbIPaBqMVMm1tqPHse
+ AKhQfUZAqbEcFvQxXHHuJbAMD+7zL9fEL583k4iF4U8z+ektOexOojI8Yv0fqWl65tJJCMA2XiL
+ i4/QkfmuXEi/eqQIfTxlW4e52BO59XVz24aR1VxSdEWKy9QWDyaMZ/84knB+wG8q8XxqHC/SPUA
+ 7M3ROEl/Sugb41c9pvAs0CTPFBVTSPoPoQt7CyVnyp86IZVICmdWEjCgj5JDits472xdkc18L/x
+ 39dQZVz0drVwjoS1YEE8A35KQE55PaNQ3gxou3vvhsCaVLV3oIiB1GoP8pfKa8ydhnjbVojJ2UM
+ 5ZefxVmN2Hdez2EB2sPKKU/s3jt6BUivVCFER0UzGFlNnIafbnP90ng0=
+X-Google-Smtp-Source: AGHT+IG0FY2EDvYGbb64jrHdiWUQWKS88Y8wn2wbX8Iy1WYMr5QZ7j5xiKwzKDoUxQj8GpweL8iRng==
+X-Received: by 2002:a05:6870:6f0c:b0:303:5cb:4296 with SMTP id
+ 586e51a60fabf-306c728975emr6224526fac.30.1753392632210; 
+ Thu, 24 Jul 2025 14:30:32 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-306e1f8a7adsm660520fac.42.2025.07.24.14.30.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 24 Jul 2025 14:30:31 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Sam Protsenko <semen.protsenko@linaro.org>
+In-Reply-To: <20250717024426.26953-1-semen.protsenko@linaro.org>
+References: <20250717024426.26953-1-semen.protsenko@linaro.org>
+Message-Id: <175339262777.1899261.14751318047956466864.b4-ty@konsulko.com>
+Date: Thu, 24 Jul 2025 15:30:27 -0600
 MIME-Version: 1.0
-X-Originating-IP: [10.48.86.182]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE3.st.com
- (10.75.129.71)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-07-23_02,2025-07-23_01,2025-03-28_01
-Cc: Marek Vasut <marex@denx.de>, Kongyang Liu <seashell11234455@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Peter Robinson <pbrobinson@gmail.com>, Junhui Liu <junhui.liu@pigmoral.tech>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>
-Subject: [Uboot-stm32] [PATCH] usb: dwc2: fix reset logic in dwc2_core_reset
+X-Mailer: b4 0.14.2
+Cc: Nishanth Menon <nm@ti.com>, Kursad Oney <kursad.oney@broadcom.com>,
+ Peng Fan <peng.fan@nxp.com>, Vignesh Raghavendra <vigneshr@ti.com>,
+ Alice Guo <alice.guo@nxp.com>, Jim Liu <JJLIU0@nuvoton.com>,
+ Linus Walleij <linus.walleij@linaro.org>,
+ Thomas Fitzsimmons <fitzsim@fitzsim.org>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Sean Anderson <seanga2@gmail.com>,
+ Dillon Min <dillon.minfei@gmail.com>, Max Filippov <jcmvbkbc@gmail.com>,
+ liuhao <liuhao@phytium.com.cn>, Jan Kiszka <jan.kiszka@siemens.com>,
+ Garrett Giordano <ggiordano@phytec.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ uboot-stm32@st-md-mailman.stormreply.com,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Fabio Estevam <festevam@gmail.com>, Matteo Lisi <matteo.lisi@engicam.com>,
+ Marek Vasut <marex@denx.de>, weichangzheng <weichangzheng@phytium.com.cn>,
+ Ryder Lee <ryder.lee@mediatek.com>,
+ Nobuhiro Iwamatsu <iwamatsu.nobuhiro@renesas.com>,
+ Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+ u-boot@lists.denx.de, Adam Ford <aford173@gmail.com>,
+ Weijie Gao <weijie.gao@mediatek.com>, Le Jin <le.jin@siemens.com>,
+ Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Hugo Villeneuve <hvilleneuve@dimonoff.com>,
+ Peter Griffin <peter.griffin@linaro.org>,
+ Hugues Kamba Mpiana <hugues.kambampiana@arm.com>,
+ Michal Simek <michal.simek@amd.com>, Ben Horgan <ben.horgan@arm.com>,
+ Sam Shih <sam.shih@mediatek.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Thomas Bonnefille <thomas.bonnefille@bootlin.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, Julien Masson <jmasson@baylibre.com>,
+ Stanley Chu <yschu@nuvoton.com>, Anand Gore <anand.gore@broadcom.com>,
+ William Zhang <william.zhang@broadcom.com>, Eric Nelson <eric@nelint.com>,
+ Paul Barker <paul@pbarker.dev>, u-boot@dh-electronics.com,
+ Sergey Temerkhanov <s.temerkhanov@gmail.com>, lixinde <lixinde@phytium.com.cn>,
+ Huan Zhou <pericycle.cc@gmail.com>, Junhui Liu <junhui.liu@pigmoral.tech>,
+ shuyiqi <shuyiqi@phytium.com.cn>, Apurva Nandan <a-nandan@ti.com>,
+ Robert Nelson <robertcnelson@gmail.com>,
+ Anastasiia Lukianenko <anastasiia_lukianenko@epam.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Jayesh Choudhary <j-choudhary@ti.com>, Wadim Egorov <w.egorov@phytec.de>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Fabien Parent <fparent@baylibre.com>, Vaishnav Achath <vaishnav.a@ti.com>,
+ Simon Glass <sjg@chromium.org>, Gilles Talis <gilles.talis@gmail.com>,
+ u-boot-amlogic@groups.io, Manorit Chawdhry <m-chawdhry@ti.com>,
+ Kamil Lulko <kamil.lulko@gmail.com>, Aaron Williams <awilliams@marvell.com>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Michael Walle <michael@walle.cc>,
+ Mario Six <mario.six@gdsys.cc>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Tianrui Wei <tianrui-wei@outlook.com>, Bin Meng <bmeng.cn@gmail.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Bryan Brattlof <bb@ti.com>, Stefano Babic <sbabic@nabladev.com>
+Subject: Re: [Uboot-stm32] [PATCH] treewide: Remove empty board_init()
+ function from all boards
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,40 +136,25 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Use GUSBCFG_FORCEHOSTMODE to detected the HOST forced mode as it is done
-in the Linux driver drivers/usb/dwc2/core.c:dwc2_core_reset().
+On Wed, 16 Jul 2025 21:44:26 -0500, Sam Protsenko wrote:
 
-The host polling must be executed only if the current mode is host,
-either due to the force HOST mode (which persists after core reset)
-or the connector id pin.
+> Commit 86acdce2ba88 ("common: add config for board_init() call")
+> introduced CONFIG_BOARD_INIT option. This option can be disabled for the
+> boards where board_init() function is not needed. Remove empty
+> board_init() calls for all boards where it's possible, and disable
+> CONFIG_BOARD_INIT in all related defconfigs.
+> 
+> This cleanup was made semi-automatically using these scripts: [1].
+> 
+> [...]
 
-The GUSBCFG_FORCEDEVMODE bits is used to force the device mode (for
-example used on STM32MP1x platform) and when it is activated the DWC2 reset
-failed with the trace:
-"dwc2_core_reset: Waiting for GINTSTS_CURMODE_HOST timeout"
+Applied to u-boot/master, thanks!
 
-Fixes: c5d685b8993c ("usb: dwc2: Unify flush and reset logic with v4.20a support")
-Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
----
-
- drivers/usb/common/dwc2_core.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/drivers/usb/common/dwc2_core.c b/drivers/usb/common/dwc2_core.c
-index 63062d5cc943..37007134e5b3 100644
---- a/drivers/usb/common/dwc2_core.c
-+++ b/drivers/usb/common/dwc2_core.c
-@@ -17,7 +17,7 @@ int dwc2_core_reset(struct dwc2_core_regs *regs)
- 	bool host_mode = false;
- 
- 	if (!(readl(&regs->global_regs.gotgctl) & GOTGCTL_CONID_B) ||
--	    (readl(&regs->global_regs.gusbcfg) & GUSBCFG_FORCEDEVMODE))
-+	    (readl(&regs->global_regs.gusbcfg) & GUSBCFG_FORCEHOSTMODE))
- 		host_mode = true;
- 
- 	/* Core Soft Reset */
+[1/1] treewide: Remove empty board_init() function from all boards
+      commit: 70a4d1fa1ddb2f5f8f9a27442563f182549abbb5
 -- 
-2.25.1
+Tom
+
 
 _______________________________________________
 Uboot-stm32 mailing list

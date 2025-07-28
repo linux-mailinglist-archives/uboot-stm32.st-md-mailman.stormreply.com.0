@@ -2,53 +2,60 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 95666B1489B
-	for <lists+uboot-stm32@lfdr.de>; Tue, 29 Jul 2025 08:49:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CF114B135A5
+	for <lists+uboot-stm32@lfdr.de>; Mon, 28 Jul 2025 09:20:32 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 57051C3F933;
-	Tue, 29 Jul 2025 06:49:52 +0000 (UTC)
-Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
- [136.143.188.15])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8E27CC36B20;
+	Mon, 28 Jul 2025 07:20:32 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6997CC32EA8
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7BA9DC36B1E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 24 Jul 2025 12:54:25 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1753361641; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=gqG2KnFNA/177UTuZVg5/ax9jco/lsPq8DObU12aQn7O5z3bjbQ0IItJ4wpSwJiZ13zqyuvwddvTr6svgQ4mkDotLdOPYqbzURtIImRMVCK83I8O6OGyyWf5CCgq2i4PwP7Gb7l00mijOqnlrfS5k7XDq0rQJnGyP2fb71+p0ng=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1753361641;
- h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=wrTkPoT/oKgGK+rq3Eilxsb8Q5h/dbMvaTNTnNDe1M0=; 
- b=Q/83oaP6eNVdvxjcs8jxtMu0sBNelmKJLq+RBEwsxh5CIZ79h+pjw4n9hQYTpjUXWyGqJFW0JYuhWhEVYTyc2IjoV4zxegWmjBFeFwponbmXWgldHbCu3p9u2DuOeptHJKmPqO0o9TmgxHM8iSQR63bFqwKvNPrbEaHmHtZXtlM=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- dkim=pass  header.i=pigmoral.tech;
- spf=pass  smtp.mailfrom=junhui.liu@pigmoral.tech;
- dmarc=pass header.from=<junhui.liu@pigmoral.tech>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1753361641; 
- s=zmail; d=pigmoral.tech; i=junhui.liu@pigmoral.tech;
- h=MIME-Version:From:From:To:To:In-Reply-To:Cc:Cc:Subject:Subject:Message-ID:Date:Date:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
- bh=wrTkPoT/oKgGK+rq3Eilxsb8Q5h/dbMvaTNTnNDe1M0=;
- b=eTJCman1pD9x1vQN1VbYV7q3qJEPG2bFlhjRDeYnJHGyDOBv6bngdsAZY0eZVt2O
- AE6otT1Bys+w9Hlb3hVPYVs0BFD0GV345xIjd1aJOmvhAotW87MYpDSOZ97tRIEMp0t
- XYpyxkWUUdm2G5KdWyfec+RegD5poioTLSENLrgs=
-Received: by mx.zohomail.com with SMTPS id 1753361638123607.544490869297;
- Thu, 24 Jul 2025 05:53:58 -0700 (PDT)
+ Mon, 28 Jul 2025 07:20:31 +0000 (UTC)
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 56S6oKtd006004;
+ Mon, 28 Jul 2025 09:20:28 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=selector1; bh=izeugnwxpnmp81/yWB2T7T
+ VCVmhpBk3b4uXUNBKf+G4=; b=YXs2BeB8wGIN75Tsk8FdWHu8YNrSPb1CMuYeCd
+ d5IKIQjyieOFVvk9Rl1D6UXpoLHv9x56cw2ddmAlv4DKOShQpf0wEDsFtVeU3cqs
+ GhJ20pJOZEJgIhEN+p3td0mEBruD9dgBEd0ofsZ3Hp2rOl7FjLOgHMT6tS8u24vn
+ 4mjcw6r+Lae53LfL8Zx6PzC88jeShsH+jwK4O3bRDoDt1bbbA1Aq39OuaYkJXFFU
+ 9VUu/ePU8+wJmX1OK6bT9Wua0qKkxoRU17FHgYio8kqNwY8TOcf5FV8oVpL5a4Id
+ h85rRTieSO078CQolDQZmije6DvlhF3USmo6s2W6uqLnu1Vg==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 484pc26ryw-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 28 Jul 2025 09:20:28 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id B17CF40056;
+ Mon, 28 Jul 2025 09:19:48 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id CE1A76C41EE;
+ Mon, 28 Jul 2025 09:19:35 +0200 (CEST)
+Received: from localhost (10.48.87.62) by SHFDAG1NODE1.st.com (10.75.129.69)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 28 Jul
+ 2025 09:19:35 +0200
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+To: <u-boot@lists.denx.de>
+Date: Mon, 28 Jul 2025 09:19:33 +0200
+Message-ID: <20250728091930.1.I9c06b505bca54ae2c983f3bf54112e7f91a00940@changeid>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-From: "Junhui Liu" <junhui.liu@pigmoral.tech>
-To: "Patrick Delaunay" <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
-In-Reply-To: <20250723170913.1.I20e0e3d5851ea2e4a22b20be372800fe059cc2d1@changeid>
-Message-ID: <1855311d6ccd0f78.fc55a2def266a393.a3bb5f06dd850306@Jude-Air.local>
-Date: Thu, 24 Jul 2025 12:53:52 +0000
-X-ZohoMailClient: External
-X-Mailman-Approved-At: Tue, 29 Jul 2025 06:49:34 +0000
-Cc: Marek Vasut <marex@denx.de>, Kongyang Liu <seashell11234455@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH] usb: dwc2: fix reset logic in
-	dwc2_core_reset
+X-Originating-IP: [10.48.87.62]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-07-28_03,2025-07-24_01,2025-03-28_01
+Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [Uboot-stm32] [PATCH] ARM: stm32: fix PRE_CON_BUF_ADDR on STM32MP13
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -65,30 +72,47 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On 23/07/2025 17:09, Patrick Delaunay wrote:
-> Use GUSBCFG_FORCEHOSTMODE to detected the HOST forced mode as it is done
-> in the Linux driver drivers/usb/dwc2/core.c:dwc2_core_reset().
-> 
-> The host polling must be executed only if the current mode is host,
-> either due to the force HOST mode (which persists after core reset)
-> or the connector id pin.
-> 
-> The GUSBCFG_FORCEDEVMODE bits is used to force the device mode (for
-> example used on STM32MP1x platform) and when it is activated the DWC2 reset
-> failed with the trace:
-> "dwc2_core_reset: Waiting for GINTSTS_CURMODE_HOST timeout"
-> 
-> Fixes: c5d685b8993c ("usb: dwc2: Unify flush and reset logic with v4.20a support")
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 
-Thanks for the fix.
+Since SYS_MALLOC_F_LEN increasing to 0x2100000 on STM32MP13, the
+pre-console buffer is overlapped by stack (0xC0400000 + 0x2100000),
+so the this buffer must be moved just before the bootstage to avoid issue.
 
-Reviewed-by: Junhui Liu <junhui.liu@pigmoral.tech>
+After this patch the pre-relocation memory mapping for STM32MP13x is:
 
+C3000000	= Bootstage	CONFIG_BOOTSTAGE_STASH_ADDR
+C2FFF000	= PreConsole	CONFIG_PRE_CON_BUF_ADDR
+           with size CONFIG_PRE_CON_BUF_SZ = 4096
+C0400000	= start for stack	with CONFIG_CUSTOM_SYS_INIT_SP_ADDR
+           including CONFIG_SYS_MALLOC_F_LEN
+C0000000	= Load Address of U-Boot	with CONFIG_TEXT_BASE
+
+Fixes: 93c962c7af7e ("configs: stm32mp13: increase SYS_MALLOC_F_LEN to 0x210000")
+Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+---
+
+ arch/arm/mach-stm32mp/Kconfig.13x | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/arm/mach-stm32mp/Kconfig.13x b/arch/arm/mach-stm32mp/Kconfig.13x
+index bc8b3f8cf77..fe323307e47 100644
+--- a/arch/arm/mach-stm32mp/Kconfig.13x
++++ b/arch/arm/mach-stm32mp/Kconfig.13x
+@@ -23,7 +23,7 @@ config TEXT_BASE
+ 	default 0xC0000000
+ 
+ config PRE_CON_BUF_ADDR
+-	default 0xC0800000
++	default 0xC2FFF000
+ 
+ config PRE_CON_BUF_SZ
+ 	default 4096
 -- 
-Best regards,
-Junhui Liu
+2.25.1
 
+base-commit: 1cd94edf3005c851a6b487be6e35dd6c3205f916
+branch: fix_PRE_CON_ADDR
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

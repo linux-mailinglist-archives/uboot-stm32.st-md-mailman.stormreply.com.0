@@ -2,55 +2,55 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3EFD6B16E64
-	for <lists+uboot-stm32@lfdr.de>; Thu, 31 Jul 2025 11:20:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A691CB16E76
+	for <lists+uboot-stm32@lfdr.de>; Thu, 31 Jul 2025 11:22:05 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id F0A5EC3F933;
-	Thu, 31 Jul 2025 09:20:40 +0000 (UTC)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 65509C3F933;
+	Thu, 31 Jul 2025 09:22:05 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 47C25C36B27
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B0B14C36B27
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 31 Jul 2025 09:20:40 +0000 (UTC)
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 56V91mSI011806;
- Thu, 31 Jul 2025 11:20:24 +0200
+ Thu, 31 Jul 2025 09:22:04 +0000 (UTC)
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 56V89Y1a010749;
+ Thu, 31 Jul 2025 11:20:39 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- rQIv8MswZLs82CQedP/SphtEA543R93UV1N1DKXVRd0=; b=BdoGo0sjCnTmKghD
- zjL9VvBONYH4o507qAyD4sxcWtP7BYlugfQDENg0uLfSYd6N2Gr2tBGE1MzN9xZA
- 0Tpb5xNBBzBSHp+G6YIv/jsUuKXQnHzPlDqarjsYpTr0cRLrmI1e4zFFw8gPvFRf
- PCfL6Jg4UjyYnm5J2vIhWWYSTBr15BAQjKxG5TFyOdsU7V2fFLPcnV56Os1ovye2
- gU0nrhKrjSk4lwMfq0BuRz7OHIFzskomk3Y8rs622vN9ZGv5hBizEP/MWrKB5dBW
- DE1TsTvmbrIv3Odb8TyKOTCvhQb8bNxBGRgxQJDysk0wh+IDA/ENbfHvpfdJD6ik
- o6PlMg==
+ 3afVYuV6f3hTEhO0tRWIG0kUK5hzba9233rJ73qHdws=; b=exSep3N8H3KQcOzL
+ 6cXennJ6wADt7vSXyhzLvRDmMtKH9cbxYRnYppXNABIdv88se9+UP97rEscFURlU
+ VQFyh0ZbKM5jvD2YowxMX7TM9pxFkIQ1QJmg200nlwJFljnsVDdM9WhABuiGPMTb
+ mP5y75qdkXjKMj3mloj3EEtpYZGZu73//8+aczdr8Fmrp1Ezggg1CRm9t/qmHUxo
+ cA1HOLcwsv0cJN9QnOyBqC6svluRYHrlwv3e0Pk8kENJsXYLQSYvsA5IsjOrkDp0
+ voyMg8mGzbzODksn8mdcBz5O+ber1EOtOjLj9dOtVe4a+A0rWmMIlXnmEhDAD3lF
+ wY+ebg==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4859ynu62u-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 484pc2pe29-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 31 Jul 2025 11:20:24 +0200 (MEST)
+ Thu, 31 Jul 2025 11:20:39 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 1FB7440062;
- Thu, 31 Jul 2025 11:19:23 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id B288F4004F;
+ Thu, 31 Jul 2025 11:19:31 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id F0C8A7530B7;
- Thu, 31 Jul 2025 11:18:50 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 0B5846D884F;
+ Thu, 31 Jul 2025 11:18:58 +0200 (CEST)
 Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 31 Jul
- 2025 11:18:50 +0200
-Message-ID: <2e3b5375-f235-442d-b75d-310474e7181a@foss.st.com>
-Date: Thu, 31 Jul 2025 11:18:49 +0200
+ 2025 11:18:57 +0200
+Message-ID: <9071420e-effe-4fe3-bae4-c2cfb4fc40d6@foss.st.com>
+Date: Thu, 31 Jul 2025 11:18:56 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Marek Vasut <marek.vasut@mailbox.org>, <u-boot@lists.denx.de>
 References: <20250630001053.952342-1-marek.vasut@mailbox.org>
- <20250630001053.952342-8-marek.vasut@mailbox.org>
+ <20250630001053.952342-9-marek.vasut@mailbox.org>
 Content-Language: en-US
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20250630001053.952342-8-marek.vasut@mailbox.org>
+In-Reply-To: <20250630001053.952342-9-marek.vasut@mailbox.org>
 X-Originating-IP: [10.48.87.62]
 X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
  (10.75.129.69)
@@ -67,8 +67,8 @@ Cc: Tom Rini <trini@konsulko.com>,
  Lionel Debieve <lionel.debieve@foss.st.com>,
  Pascal Zimmermann <pzimmermann@dh-electronics.com>,
  Simon Glass <sjg@chromium.org>
-Subject: Re: [Uboot-stm32] [PATCH v2 08/10] ARM: dts: stm32: Add STM32MP13x
- SPL specific DT additions
+Subject: Re: [Uboot-stm32] [PATCH v2 09/10] ARM: dts: stm32: Add SPL
+ specifics for DH STM32MP13xx DHCOR DHSBC
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -88,11 +88,13 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
 On 6/30/25 02:10, Marek Vasut wrote:
-> Add DT additions required by U-Boot SPL to bring up the hardware.
-> This includes binman node to generate STM32 Image v2.0 which can be
-> booted by the BootROM, clock entries used by the SPL clock driver
-> during clock tree initialization, and syscon-reboot node so U-Boot
-> can reset the system without having to rely on PSCI call.
+> Add SPL specific DT additions to DH STM32MP13xx DHCOR DHSBC . These
+> include I2C3 configuration which is required to access the PMIC,
+> PMIC regulator and QSPI NOR bootph-all properties to allow SPL to
+> configure PMIC buck regulators and load from QSPI NOR respectively,
+> etzpc bus switch to simple-bus to prevent interference from TFABOOT
+> specific configuration, and RCC configuration to define clock tree
+> configuration used by this platform.
 > 
 > Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
@@ -111,125 +113,201 @@ On 6/30/25 02:10, Marek Vasut wrote:
 > Cc: u-boot@lists.denx.de
 > Cc: uboot-stm32@st-md-mailman.stormreply.com
 > ---
-> V2: Add RB from Patrice
+> V2: - Add RB from Patrice
+>     - Wrap the RCC node in if !TFABOOT
 > ---
->  arch/arm/dts/stm32mp13-u-boot.dtsi | 89 ++++++++++++++++++++++++++++++
->  1 file changed, 89 insertions(+)
+>  arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi | 159 ++++++++++++++++++++-
+>  1 file changed, 158 insertions(+), 1 deletion(-)
 > 
-> diff --git a/arch/arm/dts/stm32mp13-u-boot.dtsi b/arch/arm/dts/stm32mp13-u-boot.dtsi
-> index 1fe6966781c..ad63d5027b2 100644
-> --- a/arch/arm/dts/stm32mp13-u-boot.dtsi
-> +++ b/arch/arm/dts/stm32mp13-u-boot.dtsi
-> @@ -17,6 +17,7 @@
->  		pinctrl0 = &pinctrl;
->  	};
+> diff --git a/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi b/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
+> index 6117da10bbf..f76fe63281b 100644
+> --- a/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
+> +++ b/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
+> @@ -3,6 +3,7 @@
+>   * Copyright (C) 2024 Marek Vasut <marex@denx.de>
+>   */
 >  
-> +#if defined(CONFIG_TFABOOT)
->  	firmware {
->  		optee {
->  			bootph-all;
-> @@ -27,6 +28,86 @@
->  	psci {
->  		bootph-some-ram;
->  	};
-> +#else
-> +	binman: binman {
-> +		multiple-images;
-> +
-> +		spl-stm32 {
-> +			filename = "u-boot-spl.stm32";
-> +			mkimage {
-> +				args = "-T stm32imagev2 -a 0x2ffe0000 -e 0x2ffe0000";
-> +				u-boot-spl {
-> +					no-write-symbols;
-> +				};
-> +			};
-> +		};
-> +	};
-> +
-> +	clocks {
-> +		bootph-all;
-> +
-> +		clk_hse: ck_hse {
-> +			bootph-all;
-> +			#clock-cells = <0>;
-> +			compatible = "fixed-clock";
-> +			clock-frequency = <24000000>;
-> +		};
-> +
-> +		clk_hsi: ck_hsi {
-> +			bootph-all;
-> +			#clock-cells = <0>;
-> +			compatible = "fixed-clock";
-> +			clock-frequency = <64000000>;
-> +		};
-> +
-> +		clk_lse: ck_lse {
-> +			bootph-all;
-> +			#clock-cells = <0>;
-> +			compatible = "fixed-clock";
-> +			clock-frequency = <32768>;
-> +		};
-> +
-> +		clk_lsi: ck_lsi {
-> +			bootph-all;
-> +			#clock-cells = <0>;
-> +			compatible = "fixed-clock";
-> +			clock-frequency = <32000>;
-> +		};
-> +
-> +		clk_csi: ck_csi {
-> +			bootph-all;
-> +			#clock-cells = <0>;
-> +			compatible = "fixed-clock";
-> +			clock-frequency = <4000000>;
-> +		};
-> +	};
-> +
-> +	cpu0_opp_table: cpu0-opp-table {
-> +		compatible = "operating-points-v2";
-> +		opp-shared;
-> +		bootph-pre-ram;
-> +		opp-650000000 {
-> +			bootph-pre-ram;
-> +			opp-hz = /bits/ 64 <650000000>;
-> +			opp-microvolt = <1200000>;
-> +			opp-supported-hw = <0x1>;
-> +		};
-> +		opp-1000000000 {
-> +			bootph-pre-ram;
-> +			opp-hz = /bits/ 64 <1000000000>;
-> +			opp-microvolt = <1350000>;
-> +			opp-supported-hw = <0x2>;
-> +		};
-> +	};
-> +
-> +	reboot {
-> +		bootph-all;
-> +		compatible = "syscon-reboot";
-> +		regmap = <&rcc>;
-> +		offset = <0x114>;
-> +		mask = <0x1>;
-> +	};
-> +#endif
+> +#include <dt-bindings/clock/stm32mp13-clksrc.h>
+>  #include "stm32mp13-u-boot.dtsi"
+>  #include "stm32mp13-ddr3-dhsom-1x2Gb-1066-binG.dtsi"
 >  
->  	soc {
->  		bootph-all;
-> @@ -52,6 +133,14 @@
->  	bootph-all;
+> @@ -19,8 +20,12 @@
+>  	};
 >  };
 >  
+> +&etzpc {
+> +	compatible = "simple-bus";
+> +};
+> +
+>  &flash0 {
+> -	bootph-pre-ram;
+> +	bootph-all;
+>  
+>  	partitions {
+>  		compatible = "fixed-partitions";
+> @@ -49,6 +54,138 @@
+>  	};
+>  };
+>  
+> +&i2c3 {
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&i2c3_pins_a>;
+> +};
+> +
+> +&qspi {
+> +	bootph-all;
+> +};
+> +
+> +&qspi_clk_pins_a {
+> +	bootph-all;
+> +	pins {
+> +		bootph-all;
+> +	};
+> +};
+> +
+> +&qspi_bk1_pins_a {
+> +	bootph-all;
+> +	pins {
+> +		bootph-all;
+> +	};
+> +};
+> +
+> +&qspi_cs1_pins_a {
+> +	bootph-all;
+> +	pins {
+> +		bootph-all;
+> +	};
+> +};
+> +
+> +&pinctrl {
+> +	bootph-all;
+> +	i2c3_pins_a: i2c3-0 {
+> +	        bootph-all;
+> +		pins {
+> +			bootph-all;
+> +			pinmux = <STM32_PINMUX('B', 8, AF5)>, /* I2C3_SCL */
+> +				 <STM32_PINMUX('H', 14, AF4)>; /* I2C3_SDA */
+> +			bias-disable;
+> +			drive-open-drain;
+> +			slew-rate = <0>;
+> +		};
+> +	};
+> +};
+> +
 > +#if !defined(CONFIG_TFABOOT)
-> +&cpu0 {
-> +	nvmem-cells = <&part_number_otp>;
-> +	nvmem-cell-names = "part_number";
-> +	operating-points-v2 = <&cpu0_opp_table>;
+> +&rcc {
+> +	#address-cells = <1>;
+> +	#size-cells = <0>;
+> +	clocks = <&clk_hse>, <&clk_hsi>, <&clk_csi>, <&clk_lse>, <&clk_lsi>;
+> +
+> +	st,clksrc = <
+> +		CLK_MPU_PLL1P
+> +		CLK_AXI_PLL2P
+> +		CLK_MLAHBS_PLL3
+> +		CLK_PLL12_HSE
+> +		CLK_PLL3_HSE
+> +		CLK_PLL4_HSE
+> +		CLK_CKPER_HSE
+> +		CLK_RTC_LSE
+> +		CLK_MCO1_LSI
+> +		CLK_MCO2_HSI
+> +	>;
+> +
+> +	st,clkdiv = <
+> +		0 /*AXI*/
+> +		0 /*MLHAB*/
+> +		1 /*APB1*/
+> +		1 /*APB2*/
+> +		1 /*APB3*/
+> +		1 /*APB4*/
+> +		2 /*APB5*/
+> +		1 /*APB6*/
+> +		0 /*RTC*/
+> +	>;
+> +
+> +	st,pkcs = <
+> +		CLK_I2C12_HSI
+> +		CLK_I2C3_HSI
+> +		CLK_QSPI_PLL3R
+> +		CLK_SAES_AXI
+> +		CLK_SDMMC1_PLL3R
+> +		CLK_SDMMC2_PLL3R
+> +		CLK_STGEN_HSE
+> +		CLK_UART2_HSI
+> +		CLK_UART4_HSI
+> +		CLK_USBO_USBPHY
+> +		CLK_USBPHY_HSE
+> +	>;
+> +
+> +	/*
+> +	 * cfg = < DIVM1 DIVN P Q R PQR(p,q,r) >;
+> +	 * frac = < f >;
+> +	 *
+> +	 * PRQ(p,q,r) ... for p,q,r: 0-output disabled / 1-output enabled
+> +	 * DIVN ... actually multiplier, but RCC_PLL1CFGR1 calls the field DIVN
+> +	 * m ... for PLL1,2: m=2 ; for PLL3,4: m=1
+> +	 * XTAL = 24 MHz
+> +	 *
+> +	 * VCO = ( XTAL / (DIVM1 + 1) ) * m * ( DIVN + 1 + ( f / 8192 ) )
+> +	 *   P = VCO / (P + 1)
+> +	 *   Q = VCO / (Q + 1)
+> +	 *   R = VCO / (R + 1)
+> +	 */
+> +
+> +	/* VCO = 1066.0 MHz => P = 266 (AXI), Q = 266, R = 533 (DDR) */
+> +	pll2: st,pll@1 {
+> +		compatible = "st,stm32mp1-pll";
+> +		reg = <1>;
+> +		cfg = < 2 65 1 1 0 PQR(1,1,1) >;
+> +		frac = < 0x1400 >;
+> +		bootph-all;
+> +	};
+> +
+> +	/* VCO = 600 MHz => P = 200, Q = 150, R = 200 */
+> +	pll3: st,pll@2 {
+> +		compatible = "st,stm32mp1-pll";
+> +		reg = <2>;
+> +		cfg = < 2 74 2 3 2 PQR(1,1,1) >;
+> +		bootph-all;
+> +	};
+> +
+> +	/* VCO = 750.0 MHz => P = 125, Q = 83, R = 75 */
+> +	pll4: st,pll@3 {
+> +		compatible = "st,stm32mp1-pll";
+> +		reg = <3>;
+> +		cfg = < 3 124 5 8 9 PQR(1,1,1) >;
+> +		bootph-all;
+> +	};
 > +};
 > +#endif
 > +
->  &gpioa {
->  	bootph-all;
+>  &sdmmc1 {
+>  	status = "disabled";
 >  };
+> @@ -56,3 +193,23 @@
+>  &usbotg_hs {
+>  	u-boot,force-b-session-valid;
+>  };
+> +
+> +&vddcpu {
+> +	bootph-all;
+> +};
+> +
+> +&vdd_ddr {
+> +	bootph-all;
+> +};
+> +
+> +&vdd {
+> +	bootph-all;
+> +};
+> +
+> +&vddcore {
+> +	bootph-all;
+> +};
+> +
+> +&vref_ddr {
+> +	bootph-all;
+> +};
 Applied to u-boot-stm32/master
 
 Thanks

@@ -2,70 +2,70 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C4DCB1D564
-	for <lists+uboot-stm32@lfdr.de>; Thu,  7 Aug 2025 12:04:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7DD61B1D565
+	for <lists+uboot-stm32@lfdr.de>; Thu,  7 Aug 2025 12:04:09 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 29DACC3F953;
-	Thu,  7 Aug 2025 10:04:08 +0000 (UTC)
-Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com
- [209.85.221.52])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 399DBC3F956;
+	Thu,  7 Aug 2025 10:04:09 +0000 (UTC)
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com
+ [209.85.128.50])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id BCE6BC3F950
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 79AC4C3F954
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu,  7 Aug 2025 10:04:07 +0000 (UTC)
-Received: by mail-wr1-f52.google.com with SMTP id
- ffacd0b85a97d-3b7823559a5so370883f8f.0
+ Thu,  7 Aug 2025 10:04:08 +0000 (UTC)
+Received: by mail-wm1-f50.google.com with SMTP id
+ 5b1f17b1804b1-451d41e1ad1so5096215e9.1
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 07 Aug 2025 03:04:07 -0700 (PDT)
+ Thu, 07 Aug 2025 03:04:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754561047; x=1755165847;
+ d=linaro.org; s=google; t=1754561048; x=1755165848;
  darn=st-md-mailman.stormreply.com; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=EXdeBW/H7RP7k993IVsC1jLetE6W3MyWvtt/jd1yjX0=;
- b=A9ZJ8bHstwuwL/+bPgfArIXYJDzt+eq5yGt4eTDKfWKr2s46pEbGy4IvziaDHbzUqi
- yVkXnjN3FPDf+wg+KYZYnh7yA0itL9hAEVvsn/F9KKCfZJCNfNkNlz44ABgQL5ptXciT
- qekLvyf0IbYvdURxPcZBT9NCMP6LBXzeaKpY4C75vIwqM3ZwrSFfPygCkkkB3ib1gfjD
- jWNDDpUCsots1R8XDP9I1jLa5aD0xH94S66NOFDW90NppFGKLQBTgSlJrwUm2rFa2SCh
- pnvPu2+erCAfnB147duAe8unl4URdUmCNg47hKYI8jFrrFmO7ypMsSMq/8nuNPCAE76Y
- s6hQ==
+ :reply-to; bh=MH3TF5/YN4Hlu7k7zMMLjhGJygDR5pgvQMYQq30nvJI=;
+ b=dDinB5Op2MnF6Acpz1Nad3wXf75YnthYIEr5cNbQK5F2nkut3T0PpuDumNXQ2Z19G5
+ jMbT36iJHr4vInfCrRGLiN5zeJPU6ieY9R8TOeKx9Cf8X/tvapnNdcZjBHKPBObU0ZfD
+ d7+e2bHJ7w96XRC5psbFL7Pl0WeAVbSvFeWQkfea9X+BXlL+bx9d8FsW5cd8DuFknYnZ
+ WOJP99GEd9UjpSThe/ZR67R3w6Xt1aWfw/dCE8DO6mavnrRgS7RQKBonWd6GKAhG/o9R
+ 4EtFOWWEqwvQJLvz0/3MPIfCACI6uw/n6ducN3ZIpTPO6DrUUo1N/LebuFRPI9m+qZMB
+ N5Sw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754561047; x=1755165847;
+ d=1e100.net; s=20230601; t=1754561048; x=1755165848;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=EXdeBW/H7RP7k993IVsC1jLetE6W3MyWvtt/jd1yjX0=;
- b=G77We3bdEOik+ap/9YlR/CYcoQArjmD1KeagcAnQCqP1enkSkrP7sZ3xhv+ABY4Dco
- aasoeojwWRdvNVdLXDHcVe2QVd5sEtDs29UKYBgN0C+6cahWl+5eZtYnIbBorJZrYD9x
- K8zDue3JKicK6wNwHcot/N2DkdtQaI3zGJjFN3gTZxHjM0qz3u0NuEdx/E31/Eia2pyf
- q+fqiGV6M+mJ17OU/9iw4+PBKno+GIahdk/SHPQUueQbs1g6jRJ/oxRMCUbukNr3q2YA
- 0KcFHxIU7fhhGzClKHARQkRhlEFYv3Itpek2wMPoNQf8ugdBVY5sgQgo/OJsgCXW+r/w
- 5cMg==
+ bh=MH3TF5/YN4Hlu7k7zMMLjhGJygDR5pgvQMYQq30nvJI=;
+ b=vWQ8bNbggHUWn1+Mu0ubGlCPJCl1yJjnBrCnUqt5+NNOBtxkGcAKFrmG7k11U81720
+ yXtRo7uOPN+HcnaDe8E51+NuZtp2BspiRP2tW3LxbiVnvaG3kiiDbUiYuEIbbc2Ga28E
+ XlqVRLywr+/3gz4tpgTM0FCikw2rw8KPKfenWZxi5qJAFAZe2QuDXXZQRDsC3Ghs2YfY
+ h2elrJNicYeXiSU+Fc3HxGr07/P/QCI1khzlm+zj11g2PvfZ7PMEp7LXrgbcU1xU9x7o
+ BMlR72KPyN3CgLliTbguSRPu2Ew0RZuSsNFw6J45R0E1UoDmLkp8QBDbhHwGCOf+f2m9
+ 9r3g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWU9z4I7aUaoF15PlCYl4eAo+PYSE1FMt6BQVgJUcG1ocrqLEuj3wWV1Xp0NryfRwqQlkUZcPPEykpEMQ==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0Yw2lo5oEM3Fjtyds2SKEe11rO3gDxEtcJvROe+Menb22TUnVrH4
- /wsf60juXMLl5cSBOVBeAkWSEkieMPqckqkdQoDvPVUVrY61fws+lOgFGJplJXQfzjM=
-X-Gm-Gg: ASbGncsK7xR913ogLY1UYHE9OxjCSOSWvYBySPJ6YppB7N7HnGuJi2iLQAvezG7WNrL
- qSwRHu0mtX/cnfEWqqKlDdVoF3H7Q6L+OFa3snOL4uJxH4eHnWS9NNo+8OChY4cgdtvjmghzkc7
- qS4yUsTw4WI+9ubHvM+ifl+rk002oMsBfFSHVD4Yr7haZLjKuYLrd3ojdrEEtPVGDvNKkmbAL54
- MTTuUc3bUQElGcQJCSf8AdWqs9KZHwWXesmucg/OkBj+4S0PWy0RONAXXmpTEgDr7QlZ26/xuL/
- 9mU7iFwjGFPTFMsC3Re9EbxitKgVss1j2xC9gYoy9j8o7/chrTcC/vIzhO9Cif1CqxiPG73MY2O
- 8tDxNEpU5Q9/eUtTsaoqGbKbj+eHw/+DHI/LcrK5xjzc0lVwY1yU=
-X-Google-Smtp-Source: AGHT+IFKXXaAoEDPifWZi+eU9cqDc8OzlMei8/bghwAY0XucppWGX3Yga/gQYl/jpadw4wrkzk/yNA==
-X-Received: by 2002:a5d:64c4:0:b0:3b8:eb9f:a756 with SMTP id
- ffacd0b85a97d-3b8f9f21213mr1877345f8f.11.1754561047097; 
+ AJvYcCXp3Y1yoPFAHBoKMLU+L5CS902AwndbDm4HDnlpstK7lEdCN7WpQvYyKUH6Mf5rSHW7u7bm8eQGslw/ag==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0Yzvbwriz7/Tq/uUx/e/iWFeH47Z3SaPvqFHRi8Hw7gKd7hIfRcW
+ g1YZcHFoTJzzhI6lKqL+GJuf1RsL1+CEsX4yCks99ANxDwJbmgz0LP4tLQ7jgL8A/vg=
+X-Gm-Gg: ASbGncvP/SE6WFy9G55FXIroKWfwSQgxVN3URAdLsX1KODD8MYLcfu6orxSrVud/Luq
+ MuPUUVoWvonD/Xx4uEBmsTa5x8AniKy6lgnUNU0S1jvjSjqu9+sEKqjdnQTSrwCLX+6eScLLwj/
+ 2/ubXhu9bSAaXeZuO6YF2iUApkS1Weiv59skHaJuRqLMt6v1MrffAK/6/36nza/MholTEyRKziw
+ E4N1MaqdmCFLMz57FFyIvNksRsvjH/oLmgBw7CSvMRqI3DFRbN3WmEpxKQblg4evevvW9j5E4Qy
+ hpzjdDW7VucUpqdXvj7BZgJoUizp0cw2SvVrNAlrTZCS/ov+k2Ey9S3SowHGg38UbLqB6O5ywDJ
+ 9iLjmTs6V8BK06dD395H5bXtc/OlLkrnguwvXS2t0TPw9MLoQnrDd/JSGJOvoRg==
+X-Google-Smtp-Source: AGHT+IExm+su1cnyCFtPZpieI0b+diInV7z0DG6JrkXUwhKyIIwdmRm3Rbp5AzaM60RP8X4UGU5Owg==
+X-Received: by 2002:a05:600c:1d25:b0:456:1904:27f3 with SMTP id
+ 5b1f17b1804b1-459ee85db8bmr22084485e9.18.1754561047925; 
  Thu, 07 Aug 2025 03:04:07 -0700 (PDT)
 Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:f9e:3c01:377e:cf4f:d0ff:80bf])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-458953eaeeesm358481575e9.25.2025.08.07.03.04.06
+ 5b1f17b1804b1-458953eaeeesm358481575e9.25.2025.08.07.03.04.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Aug 2025 03:04:06 -0700 (PDT)
+ Thu, 07 Aug 2025 03:04:07 -0700 (PDT)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Thu, 07 Aug 2025 11:04:02 +0100
+Date: Thu, 07 Aug 2025 11:04:03 +0100
 MIME-Version: 1.0
-Message-Id: <20250807-pinctrl_misc-v1-1-eeb564a1b032@linaro.org>
+Message-Id: <20250807-pinctrl_misc-v1-2-eeb564a1b032@linaro.org>
 References: <20250807-pinctrl_misc-v1-0-eeb564a1b032@linaro.org>
 In-Reply-To: <20250807-pinctrl_misc-v1-0-eeb564a1b032@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -75,7 +75,7 @@ To: Tom Rini <trini@konsulko.com>,
 X-Mailer: b4 0.12.0
 Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de,
  Andrew Goodbody <andrew.goodbody@linaro.org>
-Subject: [Uboot-stm32] [PATCH 1/4] pinctrl: single: Remove unreachable code
+Subject: [Uboot-stm32] [PATCH 2/4] pinctrl: stmfx: Remove duplicated code
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -92,30 +92,29 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-In single_read there is a switch block with a default label. All cases
-in the switch block, including the default, return directly. So any code
-following the switch block is unreachable. Remove the unreachable code.
+In stmfx_read_reg there is duplicated code to detect ret < 0 and return
+ret if so. Remove one version of it.
 
 This issue was found by Smatch.
 
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- drivers/pinctrl/pinctrl-single.c | 2 --
- 1 file changed, 2 deletions(-)
+ drivers/pinctrl/pinctrl-stmfx.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/pinctrl/pinctrl-single.c b/drivers/pinctrl/pinctrl-single.c
-index a3802d22d4f..c96b293aadf 100644
---- a/drivers/pinctrl/pinctrl-single.c
-+++ b/drivers/pinctrl/pinctrl-single.c
-@@ -109,8 +109,6 @@ static unsigned int single_read(struct udevice *dev, void *reg)
- 	default: /* 32 bits */
- 		return readl(reg);
- 	}
--
--	return readb(reg);
+diff --git a/drivers/pinctrl/pinctrl-stmfx.c b/drivers/pinctrl/pinctrl-stmfx.c
+index 61f335c4eb1..0d5778faef9 100644
+--- a/drivers/pinctrl/pinctrl-stmfx.c
++++ b/drivers/pinctrl/pinctrl-stmfx.c
+@@ -87,7 +87,7 @@ static int stmfx_read_reg(struct udevice *dev, u8 reg_base, uint offset)
+ 	if (ret < 0)
+ 		return ret;
+ 
+-	return ret < 0 ? ret : !!(ret & mask);
++	return !!(ret & mask);
  }
  
- static void single_write(struct udevice *dev, unsigned int val, void *reg)
+ static int stmfx_write_reg(struct udevice *dev, u8 reg_base, uint offset,
 
 -- 
 2.39.5

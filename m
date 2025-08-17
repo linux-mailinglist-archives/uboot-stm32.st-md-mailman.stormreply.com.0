@@ -2,70 +2,77 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6C357B26AD9
-	for <lists+uboot-stm32@lfdr.de>; Thu, 14 Aug 2025 17:26:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D04BDB293D1
+	for <lists+uboot-stm32@lfdr.de>; Sun, 17 Aug 2025 17:24:58 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id CEEAAC32EB5;
-	Thu, 14 Aug 2025 15:26:47 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 382B2C3087B;
+	Sun, 17 Aug 2025 15:24:58 +0000 (UTC)
+Received: from mail-oa1-f47.google.com (mail-oa1-f47.google.com
+ [209.85.160.47])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D0D1FC32EB0
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B798EC32EA8
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 14 Aug 2025 15:26:45 +0000 (UTC)
-Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 57EExbG1015908;
- Thu, 14 Aug 2025 17:24:43 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- BcprotUE5u6W/zcJLT34auIs5YpNm7h4Ffut8wYyNgE=; b=boeXjzE3G5btQAtf
- zzjuCvrtmKhVqZyTTnYd9KRi5pc8AtFWkbQSy23cA6nIRqh+DoPEZPgF+wP4tWqs
- FMprhscN8CjWvGQtwdG/+VJmfdLV0fJAQoBplBSxDKpDGDaGfRqV/Vgckhw1fDal
- FiAXSTlrGqKsE9IPBiEGdU5a7uFi3vU9xNqZn9PYBFlpl6LcGFv7h64nrWcP1GoJ
- LTVvkm0Qs/QRR7MrRU9JBvMYh1PlBFRzcjJIlsyHb9slhHSH/vDLD7ItPtPlqiPA
- 32HI5L4Vr4Lt36kiOU3EXOyxAuouIYBgaCPAALs+HCfwwGNECNd1CMo2ffRIMXLp
- e+YXww==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 48efw525wu-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 14 Aug 2025 17:24:43 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id A314340044;
- Thu, 14 Aug 2025 17:23:36 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 50C667370B4;
- Thu, 14 Aug 2025 17:23:06 +0200 (CEST)
-Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 14 Aug
- 2025 17:23:05 +0200
-Message-ID: <626aac73-10f5-4514-a6ea-0b67a7b2d45b@foss.st.com>
-Date: Thu, 14 Aug 2025 17:23:04 +0200
+ Sun, 17 Aug 2025 15:24:56 +0000 (UTC)
+Received: by mail-oa1-f47.google.com with SMTP id
+ 586e51a60fabf-30cce8ec298so2941088fac.1
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Sun, 17 Aug 2025 08:24:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1755444295; x=1756049095;
+ darn=st-md-mailman.stormreply.com; 
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+nJBniU4GtYYUezok1DyGiqPIhuzT4dcno5GCLiMfDI=;
+ b=EJ+ByH8xmQM25zWzYkhyFAqa1sFtbsvBthcSYBjcP1tplAMX+3rjIk2DMKAshNKxRx
+ C1aVsChyhZe7g7vKKge6AXDGEWTrKG+hduc8U29EeET+Ms7vItn79JBYgFlFoNdu8YYM
+ ZONQCoRLMiY1m5U6HsOcaC/0q3U2mnv5zZWC8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1755444295; x=1756049095;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=+nJBniU4GtYYUezok1DyGiqPIhuzT4dcno5GCLiMfDI=;
+ b=B3ITIPKra7W3KOUUlHKlU3ny9JgSjmcFmBEzJdmo8PPKerp3mTd1cTSdk3liEvhdq3
+ 2fonQPAnzjgHS9EAR2l1FYZHx24aq4VW8FGwJiS2MCoYXhpXYFtWhwcmrRtog19ySHQs
+ fQXDBkW49IGdJflCzfO7+/A8X0/Dmy0fzzis9T77FskEKE0qMO7TTMj79JGmFYhpIJMY
+ PEL8GUuKmNh6dGPN5gANpKGv9yD128Y8a+ovhjtJ63OPCgD+wPrR2tdab7wd7BtsuMW9
+ Mrr8MAaJJtT7Qqr/NVGG7b39vgTr3yNJfgSHpJH30LQ0CHUINfnbLskym94Tb/DWB7JR
+ DnPQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVqJNhaMNVpvFF5am4ibOPGZEVGwBUp95TfaNDAcQrlvIZZ/rSX67mWqo4LF64jc6Gc5vVtcL2/GgwDtQ==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0YyCoX+8ITd0z4sCD8a99hc7zUC32hO3jnlc8zW1s6PsZjzk5o7/
+ HUr+ZO2PIC7WSqUqazfaqT19gjGUOUo8LkP7IibVlXEcPWg0vhKfnkqoWgN/bqgchsw=
+X-Gm-Gg: ASbGncvuDo+lPMABhCPShYGXR4qjbUB8iLnaGGnh8J0k83U6fXtCVKXGnnXOsTKCFVR
+ GY9zERdEOwTti3LTzXNyeruC5bhlqqXHAW8zle5ysEy82itUyIHMfugjNP4m+VhYW3B0H9jCIwG
+ NzZ31rUo2BFQn7GIgRf3UR6liQ7a5rSsYgAHGcRQ1i2fOMXzfh1VCfyGn3Xol2Oeo6pJgWUQNYj
+ vlBRx5MJOqD0htOn4FcqUptWamE0Z239bpiXKnFz3/bcDhfLe37kmgjoiFcYno3CtzyOB+wC+Ar
+ qGAkz2jW64acYPgPYn3HmHM8oZjO7WvzwhVooo5LtRV3VxuH32WQm7nNpiQeuWonNoOCFJ4X257
+ 6QdAjDZvO06jUm2QS4CQQp2Ld1bvrVVA8L1Dgv4JhOonfHIAM0mv5AXw=
+X-Google-Smtp-Source: AGHT+IGr1+gEfL2N4IOZ8TLOqzYGjXFVfBGVwyk7yk98QKhWwqu9/80v/80TCzLKNLu3en7qp6WYfA==
+X-Received: by 2002:a05:6870:6b06:b0:30b:be2b:3e2a with SMTP id
+ 586e51a60fabf-310aad24e38mr5978120fac.10.1755444295397; 
+ Sun, 17 Aug 2025 08:24:55 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-310ab878a4esm1998472fac.3.2025.08.17.08.24.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 17 Aug 2025 08:24:54 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Michal Simek <michal.simek@amd.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>
+In-Reply-To: <20250807-pinctrl_misc-v1-0-eeb564a1b032@linaro.org>
+References: <20250807-pinctrl_misc-v1-0-eeb564a1b032@linaro.org>
+Message-Id: <175544429402.372553.2859196032702735983.b4-ty@konsulko.com>
+Date: Sun, 17 Aug 2025 09:24:54 -0600
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Marek Vasut <marek.vasut@mailbox.org>, <u-boot@lists.denx.de>
-References: <20250814120938.1358059-1-patrice.chotard@foss.st.com>
- <a10f97cf-72d8-4f82-870f-cb845e5cb72e@mailbox.org>
-Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <a10f97cf-72d8-4f82-870f-cb845e5cb72e@mailbox.org>
-X-Originating-IP: [10.48.87.62]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-08-13_02,2025-08-14_01,2025-03-28_01
-Cc: Tom Rini <trini@konsulko.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Cheick Traore <cheick.traore@foss.st.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-Subject: Re: [Uboot-stm32] [PATCH v2] configs: stm32mp25: Enable
-	OF_UPSTREAM_BUILD_VENDOR
+X-Mailer: b4 0.14.2
+Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de
+Subject: Re: [Uboot-stm32] (subset) [PATCH 0/4] pinctrl: Address some issues
+ reported by Smatch
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -82,60 +89,23 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+On Thu, 07 Aug 2025 11:04:01 +0100, Andrew Goodbody wrote:
 
-
-On 8/14/25 15:37, Marek Vasut wrote:
-> On 8/14/25 2:09 PM, Patrice Chotard wrote:
->> Initially, only one STM32MP25 based board was available, the
->> stm32mp257f-ev1 board which was set by default in stm32mp25_defconfig.
->>
->> Since commit 79f3e77133bd ("Subtree merge tag 'v6.16-dts' of dts repo [1] into dts/upstream")
->> we inherited of a second MP25 based board which is the stm32mp257f-dk board.
->>
->> Enable OF_UPSTREAM_BUILD_VENDOR and set OF_UPSTREAM_VENDOR to allow all
->> STMicroelectronics DT compilation.
-> If I build stm32mp25_defconfig , I can run the result on both EV1 and DK now ?
+> Smatch reported some issues with pinctrl drivers. This includes
+> unreachable code, duplicated code and uninitialised variables.
+> 
 > 
 
-With this patch yes
+Applied to u-boot/next, thanks!
 
-> It seems only the EV1 DT is built into the binary, so why compile all DTs ?
-
-By default yes, only EV1 DT is built. that's why OF_UPSTREAM_BUILD_VENDOR is needed to 
-allow all other st/*.dtb to be built.
-
-> 
-> $ grep TREE configs/stm32mp25_defconfig
-> CONFIG_DEFAULT_DEVICE_TREE="st/stm32mp257f-ev1"
-> 
-
-Currently if you try to build U-Boot for stm32mp257f-dk board using the following commands:
-
-make stm32mp25_defconfig
-make DEVICE_TREE=st/stm32mp257f-dk
-
-You ended up with the following error:
-
-....
-  CC      lib/rtc-lib.o
-  AR      lib/built-in.a
-  AR      examples/built-in.a
-  LD      u-boot
-  OBJCOPY u-boot.srec
-  OBJCOPY u-boot-nodtb.bin
-  SYM     u-boot.sym
-  RELOC   u-boot-nodtb.bin
-  DTC     dts/upstream/src/arm64/st/stm32mp257f-ev1.dtb
-
-Device Tree Source (dts/upstream/src/arm64/st/stm32mp257f-dk.dtb) is not correctly specified.
-Please define 'CONFIG_DEFAULT_DEVICE_TREE'
-or build with 'DEVICE_TREE=<device_tree>' argument
-
-make[1]: *** [dts/Makefile:50: dts/upstream/src/arm64/st/stm32mp257f-dk.dtb] Error 1
-make: *** [Makefile:1372: dts/dt.dtb] Error 2
+[1/4] pinctrl: single: Remove unreachable code
+      commit: 64204ab107b51c60e490292ed1eda40a9a64d7d9
+[2/4] pinctrl: stmfx: Remove duplicated code
+      commit: 4a2f360bd280b2b5af1c5daffbc189590c83c995
+-- 
+Tom
 
 
-With this patch, the build is successful
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

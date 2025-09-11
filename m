@@ -2,86 +2,86 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id DB40FB5296B
-	for <lists+uboot-stm32@lfdr.de>; Thu, 11 Sep 2025 09:00:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 04F75B52974
+	for <lists+uboot-stm32@lfdr.de>; Thu, 11 Sep 2025 09:00:59 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A02A2C3FAD0;
-	Thu, 11 Sep 2025 07:00:38 +0000 (UTC)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id BAA6CC3FAD4;
+	Thu, 11 Sep 2025 07:00:58 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E1FD5C3F92E
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 52C04C3FAD0
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 11 Sep 2025 07:00:37 +0000 (UTC)
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 58B6sqeD031882;
- Thu, 11 Sep 2025 08:59:57 +0200
+ Thu, 11 Sep 2025 07:00:57 +0000 (UTC)
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 58B6sqdF012270;
+ Thu, 11 Sep 2025 08:59:59 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- divFWGOy4au6RKCbGyMC8QpNMCnkwMI7AsAf370y1Jc=; b=TZE4cxI6+ZrhUN2e
- vgcsUI8Y1hw5ocM5j830+vGGUfTznz7dVR+dP3sLfaiyxA5/t1IAnuXlMXDaAI8z
- atHqkJ4PiIoRshdOvWicFvUMNT+v7qRClrGb5XcYvOrQcK1WVfgIfgfi1XwefoG8
- Y14i8G99j8h1I/V78QRBoZY0rgdjOX2tOMK0+3ALInz2jN/RuOvwtV+56OliG3AQ
- ajSefNFW2TYWlDVXnBscbkGNSHmqGf5e3p0ZtCvp/2EfGA5GhGJXRUEms7AIoktn
- PGIw4TXu3xVbiFaJB6VUWhbRgzCvqgPqCeKhc8/WT/hDCawDLQC+V5WaOtIR3MWc
- nLU0UA==
-Received: from mrwpr03cu001.outbound.protection.outlook.com
- (mail-francesouthazon11011062.outbound.protection.outlook.com
- [40.107.130.62])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 490ywms7th-1
+ qrT2IxsP/hUk4sMGASSsuTUZPziH0janUlCjnkrUYso=; b=tWKMnXkXwgtzgjse
+ qqngqddQFg11SLyN8Z94GTN6NUTHQNKetg6OXNwuiO4Z5TjTQodPfuAbyHvw+qiH
+ iQ+xPB1aiRCnAH0M0BDHuRa7KVfBH1Z3eORn/m7k2BFZnYohEIq2vm1J8Es2CMKS
+ f8ecd4NXj3w9+wc+YM4ZDFYzHf3IbpuYRMp72osYvpS2c4XRBPUK3RDvrpIFkuiM
+ HV4U1vTgazqJ07W7qrrYqU+giDmKlH4X5hAHps4H7oywDnOPdB21x5t9PRyj2k5m
+ zaSyC1BiAtze3IbMJyWcuDAtmWFd/C7okDmMzYSmXTq1CYT/eNu+kTeiroKQMWkg
+ V5sLvw==
+Received: from gvxpr05cu001.outbound.protection.outlook.com
+ (mail-swedencentralazon11013017.outbound.protection.outlook.com
+ [52.101.83.17])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 492fr9hxw1-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 11 Sep 2025 08:59:56 +0200 (MEST)
+ Thu, 11 Sep 2025 08:59:59 +0200 (MEST)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=T1K99TUkcXqgdruuA5VaCNbovRmb67h+LW/rVq1PXX3LnrnUYV1YdMcQehcwffM506wNANqKE98j6zkKQ86FJnnzkbvKRRlA0kYFDvGUhbceSTbYlJ5K65LvXkLTKepNaucGA5eDEh4zLa7of8iEhw5AI9DT5okWMX4FfxbSnzhAhm5XxqNyj9sBpyGGCW2jS1+Vh3kVOsG2ciqqlvTAZnc7QmjeSAEuCWpdMgHKWHgXs8ZlxRgY11RCblaKPTrHxKgywVMbSs4H+vRt1WNRbwQfdecycR1d9BLIStj3azO2oCUhcjS6vqYA8SApbGiQ9nm/5tGDKkcMivmYgjNUCA==
+ b=ybF7PTwWSDemtgNSH5svQoFihhlIQkUn8VG9CeO8iCg81DhLJdPwZovZU62OdQTiEDfEbLtzf0akxLan5FpfacjxhVXEul7ykm2wFkD0lc/9gp24HoUKm3VYOWx91u6fiwuLTMIHGqkgPQAZCRnkxLifRv1URHC3rrLpVpLuHq1hEmAfsjL9PlgEYgfuN8Igb8vCHAzw1eTNavTGWUAlEMgzyCeTZCmnleQWJKKvSlOzte6W/UTM4ewqWlmr4+rZwR8wHdil9c1cmIcWLK48bAao+J992G7rPi8gwmm9WUgqE2hqy2f5Q8+FZSPTcSkAr61J716wVj0IHbtG8wm7qA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=divFWGOy4au6RKCbGyMC8QpNMCnkwMI7AsAf370y1Jc=;
- b=IqUHdn0Zx62DPXn86857QxWTBwRojjbLgUuRsQwIpErGrLM3wr1aach1GJIKXSNeNJwPvqHonNRJCKevAXp5AZCtp/S4IR6HrCzejviI8Vr5YcsjrOMZ0/5j4OsHxNmSZxZVuHA2aJKMZ1t2hzv0PCGnAKOpKtBiTylWCaTx4LCIA/1OgS0jZPYwLWa3iv8Rsc9SuasLfyZRjLbkqT/yNy/9XrPiho9QN4RiLbwX5c8uGikDLEQt87gh1IEvYB11X7uABZa72ERgOw9u38IfqbtOjMHgUCyn7H5r+/UhmdZxco/tGBdhcNaIAOAx9dFBcAvOnng1hFZu8tpkY9z1yQ==
+ bh=qrT2IxsP/hUk4sMGASSsuTUZPziH0janUlCjnkrUYso=;
+ b=xz10T+xP7FORj8RpbODIvsw83cZtQjD6N6hE/m+A1DFv5EeBb15suE0ku2ruCnJB27Gl2FzR+pVum47H0g/CKT6cHF8HsD9PoCPCdAY1223plROv1TOk2qnr3oAI//+B2avrp9moEUSiNfxqmf0sCU6RdnsHxdE/+7aallL4hnY4ktYDKS0tV1lVlyOAIrRtHU7Pv0i5a+iYKwKB+T0HFLBN+pLHjUyOcRJyTaFg7tG/SGwfMragSodTlhlxmLk+OmGPYOtx6VpHsP3wHPHvm21jXJnx1ZgA+nVmbYeJ1JWwthFV3/m6c51SyDeJ7T1AcER68QZagOu63cuS0HKbew==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.43) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=foss.st.com;
+ 164.130.1.44) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=foss.st.com;
  dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=stmicroelectronics.onmicrosoft.com;
  s=selector2-stmicroelectronics-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=divFWGOy4au6RKCbGyMC8QpNMCnkwMI7AsAf370y1Jc=;
- b=Cih54ZVrnNSkJ1g1BepHdRHJohh98cYZQTbAAq9yzjPvAOvhYqpxLe0yHaxJOEt/QHL2KGYv0NoHMsxTulDqwkNKEZPOTKd4HVe8mN/mEyDVX0jNSfGwdtgQDJFTX4f6cELBM2YVk/2AElUKibcbexdux0BHM+mOqJwKSpkZczU=
-Received: from AM8P191CA0020.EURP191.PROD.OUTLOOK.COM (2603:10a6:20b:21a::25)
- by AS4PR10MB5393.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:4bb::22)
- with Microsoft SMTP Server (version=TLS1_2,
+ bh=qrT2IxsP/hUk4sMGASSsuTUZPziH0janUlCjnkrUYso=;
+ b=EwSq7lMjAEP9E0oqhF4QF09hrEx3XELqjl5i5p8HhUvFcloojh10OxXtlADhUO+uyO9AHKfrLca0ZSucu7w92oxDVr/H4bFsTkEmEuBXEaApwdwCOXk1lCzV92UPCLWMtDiWiMNlyDWcARlenqEr85uCI4qWP3A8m+Bi0y2P2tA=
+Received: from DU2PR04CA0087.eurprd04.prod.outlook.com (2603:10a6:10:232::32)
+ by DB3PR10MB6764.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:432::9) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9094.22; Thu, 11 Sep
- 2025 06:59:54 +0000
-Received: from AMS0EPF000001A3.eurprd05.prod.outlook.com
- (2603:10a6:20b:21a:cafe::e3) by AM8P191CA0020.outlook.office365.com
- (2603:10a6:20b:21a::25) with Microsoft SMTP Server (version=TLS1_3,
+ 2025 06:59:55 +0000
+Received: from DU2PEPF00028D0D.eurprd03.prod.outlook.com
+ (2603:10a6:10:232:cafe::58) by DU2PR04CA0087.outlook.office365.com
+ (2603:10a6:10:232::32) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9115.16 via Frontend Transport; Thu,
- 11 Sep 2025 06:59:54 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.43)
+ 11 Sep 2025 06:59:55 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.44)
  smtp.mailfrom=foss.st.com; dkim=none (message not signed)
  header.d=none;dmarc=fail action=none header.from=foss.st.com;
 Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.43 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.43; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.43) by
- AMS0EPF000001A3.mail.protection.outlook.com (10.167.16.228) with Microsoft
+ designate 164.130.1.44 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.44; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.44) by
+ DU2PEPF00028D0D.mail.protection.outlook.com (10.167.242.21) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9115.13 via Frontend Transport; Thu, 11 Sep 2025 06:59:54 +0000
+ 15.20.9115.13 via Frontend Transport; Thu, 11 Sep 2025 06:59:55 +0000
 Received: from SHFDAG1NODE1.st.com (10.75.129.69) by smtpO365.st.com
- (10.250.44.66) with Microsoft SMTP Server (version=TLS1_2,
+ (10.250.44.67) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.57; Thu, 11 Sep
- 2025 08:57:32 +0200
+ 2025 08:52:46 +0200
 Received: from localhost (10.48.87.62) by SHFDAG1NODE1.st.com (10.75.129.69)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.57; Thu, 11 Sep
- 2025 08:59:53 +0200
+ 2025 08:59:54 +0200
 From: Patrice Chotard <patrice.chotard@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Thu, 11 Sep 2025 08:59:41 +0200
-Message-ID: <20250911065944.15020-3-patrice.chotard@foss.st.com>
+Date: Thu, 11 Sep 2025 08:59:42 +0200
+Message-ID: <20250911065944.15020-4-patrice.chotard@foss.st.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250911065944.15020-1-patrice.chotard@foss.st.com>
 References: <20250911065944.15020-1-patrice.chotard@foss.st.com>
@@ -91,93 +91,95 @@ X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
  (10.75.129.69)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AMS0EPF000001A3:EE_|AS4PR10MB5393:EE_
-X-MS-Office365-Filtering-Correlation-Id: ec9da9b8-e253-4d7b-5cab-08ddf100cf9c
+X-MS-TrafficTypeDiagnostic: DU2PEPF00028D0D:EE_|DB3PR10MB6764:EE_
+X-MS-Office365-Filtering-Correlation-Id: cd3528fd-3dd6-4551-d21d-08ddf100d059
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|7416014|82310400026|376014|1800799024|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?QxIFVXyAgqZv9pw3QCHvD1F+Uhw0xFUK3H5D8FcRB32oinJ+ZXfb+B38Jl5s?=
- =?us-ascii?Q?i+Ex1/TR+nnqfy1XyL7++BaKsN0rvs9gLKEkpvL1BW5RhFpt5bZ4ZBVQKb4i?=
- =?us-ascii?Q?6CwTZdRvn9NHMGTxaM0/kT70Jxqzvjo7QFZx85aAo5aZwhLGBHiMOBZXC5y+?=
- =?us-ascii?Q?90worpOWwR2OWRKQ+IOogFlgKKtUAMC5Y3Fc2V7WQG5lEi7oov0LSnxzzcvv?=
- =?us-ascii?Q?bVkXXtTWW8i373VuSPyXRH+TQTUGMu+juQfNGP2BIUPfprR4PZIKUQKf/bjw?=
- =?us-ascii?Q?r43bYy/TbkomYCyVCchNZb/0f412rVysHJ0oh6AZaLuDQCZa/uFNwsEr5ljt?=
- =?us-ascii?Q?rbRL9eI6cc6zkuGZNd7lgE5/GlQ8PtExCbeJPyvjSzsdAM20/1awYrIlpMrw?=
- =?us-ascii?Q?5uvDYLauJSKzh8p08HIoSlZ7wsRL4y6MdyhvxBA35SX5o4r4E27QR7A6lPOJ?=
- =?us-ascii?Q?HSLbpP9zw3notb/rk3isAz2eRNm+sSc5sMLwD+VSzrFE7vR/SD1FTNuPK51+?=
- =?us-ascii?Q?kQF/00NGr6YtJzZAAGshEMR58oYnBpOu7siDhgfScO0Ar8885lH72/PDQj5F?=
- =?us-ascii?Q?u8itZumG9oYn/U50wSorT76qUJAJYIz6k5/T6FaM1TGsWPoYoF+7GytUUvwu?=
- =?us-ascii?Q?Xvy3r1XhMRYlm4rECQ7Z/MDcilYSBISPpFkvI5O2KuZjbyOJSQ0tMS1nOp0g?=
- =?us-ascii?Q?huxFJ5v/x0mMsVwuza6NqQ5r5CnYRSAqh5TTvqd42QESO6mqzgtbXwSbazyL?=
- =?us-ascii?Q?e1Q5O4ydJ9o1QRFzm3iBfXgXgWk8aqP97HkmbLGTZaLbTCec2LOzZ7sgJdOM?=
- =?us-ascii?Q?q/sg9zVmpOj/1eQ4gNtL8+lolYXVUDgyzQhcYXGn3g0X/hKapyWH+GXLXrBI?=
- =?us-ascii?Q?mCoFNai9YbnOOvyGlZACNfuCTHkbDWoNNBopju7nuTjsOrM4hh13tBSo3jto?=
- =?us-ascii?Q?30FCLe08i+ODt4oamguyLilDEeNgaAstSRUtdELCDH6qNk46Ulzucy10++d1?=
- =?us-ascii?Q?N9RM9EWjOMHrydBinRrbKUW6Z8PntcaPoAB/OPVUqI/iMrNINw6pPiQf4efM?=
- =?us-ascii?Q?HD8bjZMSci6GVV2MoUcWmVzmKX5QnERX3ahlGbBX084wU+HnlaxneCrbLdwL?=
- =?us-ascii?Q?rVsza1fYgXcWsA0DNqRxyJR1pro78XQBlcgj0eZYC7kUrbDHR6q02Ul5d06n?=
- =?us-ascii?Q?Ty+mbhVGG4LsrrWD8ReFWsH9ZIAi9bYHrFN0hFtzTUtngONAlzL4tniqCRxj?=
- =?us-ascii?Q?jwQNzzFGuFYtddiWz0xrIduvIQ3FJPuPOkBnWDZ38ZForFspRAoxWZszDMxt?=
- =?us-ascii?Q?6pY70swy/RqXkMaIyY/aBGf1/nL0ohJgNxTMp8rfBXTkJvwoWWszBGqsshVZ?=
- =?us-ascii?Q?qOpPPBv9fK4o/G8GI66X6H+4uhuuJfXPwBpXwWjSiLufIx9ZkKu+Wyidng9Q?=
- =?us-ascii?Q?H37e7ur0/MptbXrGoZ1PYBSC0T33ebDMFkSiGal57/qcz67FWhaE/Nvjn0C0?=
- =?us-ascii?Q?J7Cmyi375zxOpVhOPJe5GjppnhG9hzGkW/hQ?=
-X-Forefront-Antispam-Report: CIP:164.130.1.43; CTRY:IT; LANG:en; SCL:1; SRV:;
+ ARA:13230040|82310400026|1800799024|376014|7416014|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?UVneWbTbSN/lpTjTFJBKDBN+FYU+G+7eUq0uYXxKFa9FNiorrw5cfWkG8G83?=
+ =?us-ascii?Q?w7G7apZ+gOjiGDlfGG2hLp2ewayj6FmL3YSfHfHCGJNGile/gFNrGSH4uo4G?=
+ =?us-ascii?Q?aJd+XoqjtsyGJZb5LSqBaWKMZOjTS4MnO4yBTcN2OXkTBeqao7C9vq6I84j9?=
+ =?us-ascii?Q?r2/bSGC3ItT12zPggytYQDpYTR1jW5cPxtMSnHvUSrnWk1rAarRtTTZf4VLd?=
+ =?us-ascii?Q?xZ0UGLqc6qYQFzXxvCq5WitUJw+didXx+NmOr16/sS8fHTw2PBV4d3yYP4Fs?=
+ =?us-ascii?Q?7ldtBrkDLJy76MX/42lGLJG//Y31HqHgg2ygcX/Hws/FFYq4spcpEEzTpcQA?=
+ =?us-ascii?Q?bIsRMJX3mlbE2kcVsbvgMNlhDm/Qu6Qu9GD+wZ2zXtE51yeqkjLffpFAL9cJ?=
+ =?us-ascii?Q?+pDEftf8EKgsfRYq9JfDkvTvp0p6fM7w6vRJWNbXsUO2MGZA8ML1MSx0pe4J?=
+ =?us-ascii?Q?Od3hJCzDjxttTrwFJzepI0ZvLcQk0TYeM1f82IpTvd0GDpKLZmLX8pW2k/TD?=
+ =?us-ascii?Q?RaMc5OBzWWu4M6w/AHRwjvnPmon6qubsgpefSb+e1OhhLX0XlIU4+j5pVY3Y?=
+ =?us-ascii?Q?8svNaI8ZSz7JmjpCxmPumWDs78IiDwrzZbg4SYE9J71T0B0tUOqKSyWE1M/Z?=
+ =?us-ascii?Q?VTKrb8m4CQjdlEWH8ED3gQgcyKuqTngxeuK5UkLKpUHDq8WKEZpAEfSBu4oj?=
+ =?us-ascii?Q?bFoPgIgflmT3dCMadcMgn/HuoPGqX9mmZMoyqeDg/QbVGH/4AWvlnD56p77G?=
+ =?us-ascii?Q?VpMMIzQ6XgFkMzLTQuQGXbUdsKkp8LQOnEB5LxfkqQrIal2MnYTgpSWa8W/N?=
+ =?us-ascii?Q?D8r9VmkQ4fKBZYljrO8ZbhBcHq1sPA2upXFj4nygS76l5k7J2lgGh7ITvRBb?=
+ =?us-ascii?Q?PIdGA7lpiqm+lN2wJ+gadDdbxW+bYDol+HeeLZh35mnaYIjEbiNBwBdv4dXX?=
+ =?us-ascii?Q?toxzUVeDtg2xUonm+iU8OG4cU/6G7fDEfGoeJVuIXrk4pSFnVi1gnPeVMlXg?=
+ =?us-ascii?Q?y06crlo7rKhfQlBVA96JT37gKZIv0jMMS3jl0JCUqqtry9b+kZsYmEC5sb/I?=
+ =?us-ascii?Q?bbS+oL6BUJFQzxq4ddZCPs3O4n9WZaTk9VuCge3znh+pyvzANoqG8WcYDLKi?=
+ =?us-ascii?Q?DyXfislC41j75pfdXIrpHMc/aQUt4gkX2rIvRMLYya83y9fVUBJt97P6Uri4?=
+ =?us-ascii?Q?j5oQfWVKNDUBMI1Aazp3e6Q+DTDWIrV3cHgllq7H3by4sOlzgctLXH6qfnpR?=
+ =?us-ascii?Q?UY/e5gjF1w2Os5O0keXcV5u5XCro3RBdTTFhDEggrRQtnCI0Y07+82/TmllS?=
+ =?us-ascii?Q?YO7v0VLzZWSkCTgNITJtxlnvwuYyYJ5kzPvI8+SdYBtCK1vVsnk6FJTffnib?=
+ =?us-ascii?Q?nDP6y0wE+OPSLZVmwhMilHp6nBrZoZ5fbe0LX8Q7abDT8ITRYOsqnLEAI38V?=
+ =?us-ascii?Q?YnwI7IKCuDw52y/+VSthgXOeco8AzRJGYkyDMKGwPeROawtk0tYTPCC2gKVe?=
+ =?us-ascii?Q?1s4ixU6yDCbHEJwAiRnAFw2iTv/YQE8BqNXf?=
+X-Forefront-Antispam-Report: CIP:164.130.1.44; CTRY:IT; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(7416014)(82310400026)(376014)(1800799024)(36860700013); DIR:OUT;
+ SFS:(13230040)(82310400026)(1800799024)(376014)(7416014)(36860700013); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Sep 2025 06:59:54.0931 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: ec9da9b8-e253-4d7b-5cab-08ddf100cf9c
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Sep 2025 06:59:55.3092 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: cd3528fd-3dd6-4551-d21d-08ddf100d059
 X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.43];
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.44];
  Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: AMS0EPF000001A3.eurprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: DU2PEPF00028D0D.eurprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4PR10MB5393
-X-Authority-Analysis: v=2.4 cv=OaqYDgTY c=1 sm=1 tr=0 ts=68c2736c cx=c_pps
- a=p/fnoOkEHhSpgVuCFbvG3Q==:117 a=peP7VJn1Wk7OJvVWh4ABVQ==:17
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB3PR10MB6764
+X-Proofpoint-ORIG-GUID: v6SKVykcPqN7gJm9qtLP5SzE1gncgDUa
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwOTA5MDA3MCBTYWx0ZWRfXzL72Nx4mBZ2x
+ VbeLD6D+mxmYokF0Tnp+AbEIor+gR1zZjEE31mJvMkrHWvcfHfV6KNN/QuVGPbkyooRteZyzf0h
+ 4+q/OgUgaDBy9oTr1spTA4DXc2WN+wFiiAj20zQHCdapOxVbFyZKdW21gCmRbwmicKYYvLQrXRN
+ Boshta/opmv5qpEjgEDEXOLBD/RWwT0z5OsjARiRK8PQOFOJhi/ZTOGStsTxh4USE/Rm3aoWgay
+ bdTtSPcAhDHBVBlduKE4eG8zbBIPcnqpj1OsJhzJh7tNoseF2Htm1I75JbPTDeGfM4LU/CHP4ei
+ bUhGrpNOkx0SxAtHaA3NWTZQ1nIY3IEucnfDXW/vbh7gcmwsFuguzNCt1hm85xJNszklv2g2Pun
+ mhgm6zBw
+X-Authority-Analysis: v=2.4 cv=We8Ma1hX c=1 sm=1 tr=0 ts=68c2736f cx=c_pps
+ a=s/vd72jzPs8wYAfPC2zWMQ==:117 a=Tm9wYGWyy1fMlzdxM1lUeQ==:17
  a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=h8e1o3o8w34MuCiiGQrqVE4VwXA=:19
  a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19
  a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=SAHXIHsbQyQA:10 a=yJojWOMRYYMA:10
- a=s63m1ICgrNkA:10 a=FUbXzq8tPBIA:10 a=8b9GpE9nAAAA:8 a=uFTtUn-lN2mdwel1I5oA:9
+ a=s63m1ICgrNkA:10 a=FUbXzq8tPBIA:10 a=8b9GpE9nAAAA:8 a=F4I06iH5sb35JsexnrsA:9
  a=T3LWEMljR5ZiDmsYVIUa:22
-X-Proofpoint-ORIG-GUID: Adlq_hJQP24Xt8nmPktV977Jq_2VZtnB
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwOTA3MDAwNiBTYWx0ZWRfX/0TNN5npMjXA
- 0KmiHApKW6DAJMUkwGOAvgxzUV29q8YFokbEXwLKfHBc81DJAAjyiLWN9uu9si645qM0Ba4cYBt
- J2OZXfdU7an5LtrL80TbLw/gjIDoVD4MvUbbEPp/u4qymy7GfB1kJC33kUS1RPhFf9+pq0OIUm7
- BcjTQW8UaiP4aX2Tlfa0EEK36iMp6YhjQma89OKXZYOz1A4KyMlP/5l10/XV4hrK/RRHaCxZws7
- ZHkrpdgPKIAvlrtgr3D4WC6qLsXk1AIaZoOfGkejT8nyqOw4Wxd0a2+o0gAevpaATRQ/BJOEsNH
- nTVTgbmickCtV3PjkKEp4whI7vXlyleJ+NBP3v88B1nbqlm1UOaDNBgFtunnBKUJaaNGEWanMsC
- Of/aBQkh
-X-Proofpoint-GUID: Adlq_hJQP24Xt8nmPktV977Jq_2VZtnB
+X-Proofpoint-GUID: v6SKVykcPqN7gJm9qtLP5SzE1gncgDUa
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1117,Hydra:6.1.9,FMLib:17.12.80.40
  definitions=2025-09-10_04,2025-09-10_01,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0
- clxscore=1011
- suspectscore=0 bulkscore=0 adultscore=0 priorityscore=1501 malwarescore=0
- spamscore=0 impostorscore=0 classifier=typeunknown authscore=0 authtc=
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 clxscore=1011
+ spamscore=0
+ suspectscore=0 bulkscore=0 adultscore=0 malwarescore=0 priorityscore=1501
+ phishscore=0 impostorscore=0 classifier=typeunknown authscore=0 authtc=
  authcc= route=outbound adjust=0 reason=mlx scancount=1
- engine=8.19.0-2507300000 definitions=main-2509070006
-Cc: Tom Rini <trini@konsulko.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>, Jerome
- Forissier <jerome.forissier@linaro.org>, Greg Malysa <malysagreg@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Stefan Roese <stefan.roese@mailbox.org>, Simon Glass <sjg@chromium.org>,
+ engine=8.19.0-2507300000 definitions=main-2509090070
+Cc: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, Stefan
+ Roese <stefan.roese@mailbox.org>, John Watts <contact@jookia.org>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Tom
+ Rini <trini@konsulko.com>, Marek Vasut <marek.vasut@mailbox.org>,
  Sebastian Reichel <sebastian.reichel@collabora.com>,
  Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Sumit Garg <sumit.garg@kernel.org>,
- Bastien Curutchet <bastien.curutchet@bootlin.com>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>, Yao Zi <ziyao@disroot.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>, Sumit Garg <sumit.garg@kernel.org>,
  =?UTF-8?q?Duje=20Mihanovi=C4=87?= <duje@dujemihanovic.xyz>,
- Yao Zi <ziyao@disroot.org>, Utsav Agarwal <utsav.agarwal@analog.com>
-Subject: [Uboot-stm32] [PATCH v2 2/5] memory: Add STM32 Octo Memory Manager
-	driver
+ Utsav Agarwal <utsav.agarwal@analog.com>, Heiko Schocher <hs@nabladev.com>,
+ Greg Malysa <malysagreg@gmail.com>, Alexander Dahl <ada@thorsis.com>,
+ Simon Glass <sjg@chromium.org>, Christian Marangi <ansuelsmth@gmail.com>,
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+Subject: [Uboot-stm32] [PATCH v2 3/5] spi: Add STM32MP2 Octo-SPI driver
+	support
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -194,19 +196,11 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Octo Memory Manager driver (OMM) manages:
-  - the muxing between 2 OSPI busses and 2 output ports.
-    There are 4 possible muxing configurations:
-      - direct mode (no multiplexing): OSPI1 output is on port 1 and OSPI2
-        output is on port 2
-      - OSPI1 and OSPI2 are multiplexed over the same output port 1
-      - swapped mode (no multiplexing), OSPI1 output is on port 2,
-        OSPI2 output is on port 1
-      - OSPI1 and OSPI2 are multiplexed over the same output port 2
-  - the split of the memory area shared between the 2 OSPI instances.
-  - chip select selection override.
-  - the time between 2 transactions in multiplexed mode.
-  - check firewall access.
+Add STM32 OSPI driver, it supports :
+  - support sNOR / sNAND devices.
+  - Two functional modes: indirect (read/write) and memory-mapped (read).
+  - Single-, dual-, quad-, and octal-SPI communication.
+  - Single data rate (SDR).
 
 Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
@@ -214,493 +208,686 @@ Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 ---
 
 Changes in v2:
-  - Add stm32-omm.c in MAINTAINERS file
+  - Add stm32_ospi.c in MAINTAINERS file
 
- MAINTAINERS                |   1 +
- drivers/memory/Kconfig     |  17 ++
- drivers/memory/Makefile    |   1 +
- drivers/memory/stm32_omm.c | 421 +++++++++++++++++++++++++++++++++++++
- 4 files changed, 440 insertions(+)
- create mode 100644 drivers/memory/stm32_omm.c
+ MAINTAINERS              |   1 +
+ drivers/spi/Kconfig      |   8 +
+ drivers/spi/Makefile     |   1 +
+ drivers/spi/stm32_ospi.c | 623 +++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 633 insertions(+)
+ create mode 100644 drivers/spi/stm32_ospi.c
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 3fb163aa1db..78bce87a6ca 100644
+index 78bce87a6ca..af71fb02846 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -709,6 +709,7 @@ F:	drivers/gpio/stm32_gpio.c
- F:	drivers/hwspinlock/stm32_hwspinlock.c
- F:	drivers/i2c/stm32f7_i2c.c
- F:	drivers/mailbox/stm32-ipcc.c
-+F:	drivers/memory/stm32-omm.c
- F:	drivers/misc/stm32mp_fuse.c
- F:	drivers/misc/stm32_rcc.c
- F:	drivers/mmc/stm32_sdmmc2.c
-diff --git a/drivers/memory/Kconfig b/drivers/memory/Kconfig
-index 7c40f176987..e31c4532279 100644
---- a/drivers/memory/Kconfig
-+++ b/drivers/memory/Kconfig
-@@ -37,6 +37,23 @@ config STM32_FMC2_EBI
- 	  devices (like SRAM, ethernet adapters, FPGAs, LCD displays, ...) on
- 	  SOCs containing the FMC2 External Bus Interface.
+@@ -726,6 +726,7 @@ F:	drivers/rng/optee_rng.c
+ F:	drivers/rng/stm32_rng.c
+ F:	drivers/rtc/stm32_rtc.c
+ F:	drivers/serial/serial_stm32.*
++F:	drivers/spi/stm32_ospi.c
+ F:	drivers/spi/stm32_qspi.c
+ F:	drivers/spi/stm32_spi.c
+ F:	drivers/video/stm32/stm32_ltdc.c
+diff --git a/drivers/spi/Kconfig b/drivers/spi/Kconfig
+index 1ae36b5a348..2960822211a 100644
+--- a/drivers/spi/Kconfig
++++ b/drivers/spi/Kconfig
+@@ -530,6 +530,14 @@ config SPI_SUNXI
  
-+config STM32_OMM
-+	tristate "STM32 Octo Memory Manager"
-+	depends on ARCH_STM32MP
+ 	  Same controller driver can reuse in all Allwinner SoC variants.
+ 
++config STM32_OSPI
++	bool "STM32MP2 OSPI driver"
++	depends on STM32MP25X && STM32_OMM
 +	help
-+	  This driver manages the muxing between the 2 OSPI busses and
-+	  the 2 output ports. There are 4 possible muxing configurations:
-+	  - direct mode (no multiplexing): OSPI1 output is on port 1 and OSPI2
-+	       output is on port 2
-+	  - OSPI1 and OSPI2 are multiplexed over the same output port 1
-+	  - swapped mode (no multiplexing), OSPI1 output is on port 2,
-+	       OSPI2 output is on port 1
-+	  - OSPI1 and OSPI2 are multiplexed over the same output port 2
-+	  It also manages :
-+	    - the split of the memory area shared between the 2 OSPI instances.
-+	    - chip select selection override.
-+	    - the time between 2 transactions in multiplexed mode.
++	  Enable the STM32MP2 Octo-SPI (OSPI) driver. This driver can be
++	  used to access the SPI NOR flash chips on platforms embedding
++	  this ST IP core.
 +
- config TI_AEMIF
- 	tristate "Texas Instruments AEMIF driver"
- 	depends on ARCH_KEYSTONE || ARCH_DAVINCI
-diff --git a/drivers/memory/Makefile b/drivers/memory/Makefile
-index fdc83e4e1c8..77294fac69d 100644
---- a/drivers/memory/Makefile
-+++ b/drivers/memory/Makefile
-@@ -2,6 +2,7 @@
- obj-$(CONFIG_MEMORY) += memory-uclass.o
- obj-$(CONFIG_SANDBOX_MEMORY) += memory-sandbox.o
- obj-$(CONFIG_STM32_FMC2_EBI) += stm32-fmc2-ebi.o
-+obj-$(CONFIG_STM32_OMM) += stm32_omm.o
- obj-$(CONFIG_ATMEL_EBI) += atmel_ebi.o
- obj-$(CONFIG_TI_AEMIF) += ti-aemif.o ti-aemif-cs.o
- obj-$(CONFIG_TI_GPMC) += ti-gpmc.o
-diff --git a/drivers/memory/stm32_omm.c b/drivers/memory/stm32_omm.c
+ config STM32_QSPI
+ 	bool "STM32F7 QSPI driver"
+ 	depends on STM32F4 || STM32F7 || ARCH_STM32MP
+diff --git a/drivers/spi/Makefile b/drivers/spi/Makefile
+index da91b18b6ed..5129d649f84 100644
+--- a/drivers/spi/Makefile
++++ b/drivers/spi/Makefile
+@@ -75,6 +75,7 @@ obj-$(CONFIG_SPI_SIFIVE) += spi-sifive.o
+ obj-$(CONFIG_SPI_SN_F_OSPI) += spi-sn-f-ospi.o
+ obj-$(CONFIG_SPI_SUNXI) += spi-sunxi.o
+ obj-$(CONFIG_SH_QSPI) += sh_qspi.o
++obj-$(CONFIG_STM32_OSPI) += stm32_ospi.o
+ obj-$(CONFIG_STM32_QSPI) += stm32_qspi.o
+ obj-$(CONFIG_STM32_SPI) += stm32_spi.o
+ obj-$(CONFIG_TEGRA114_SPI) += tegra114_spi.o
+diff --git a/drivers/spi/stm32_ospi.c b/drivers/spi/stm32_ospi.c
 new file mode 100644
-index 00000000000..d5a4e1b0683
+index 00000000000..01b8f8e4987
 --- /dev/null
-+++ b/drivers/memory/stm32_omm.c
-@@ -0,0 +1,421 @@
++++ b/drivers/spi/stm32_ospi.c
+@@ -0,0 +1,623 @@
 +// SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
 +/*
 + * Copyright (C) 2025, STMicroelectronics - All Rights Reserved
 + */
 +
-+#define LOG_CATEGORY UCLASS_NOP
++#define LOG_CATEGORY UCLASS_SPI
 +
 +#include <clk.h>
 +#include <dm.h>
-+#include <regmap.h>
++#include <log.h>
 +#include <reset.h>
++#include <spi.h>
++#include <spi-mem.h>
 +#include <syscon.h>
 +#include <asm/io.h>
 +#include <dm/device_compat.h>
-+#include <dm/device-internal.h>
-+#include <dm/lists.h>
-+#include <dm/of_addr.h>
-+#include <dm/of_access.h>
-+#include <linux/bitfield.h>
++#include <linux/bitops.h>
++#include <linux/delay.h>
++#include <linux/iopoll.h>
 +#include <linux/ioport.h>
-+#include <mach/rif.h>
++#include <linux/sizes.h>
 +
 +/* OCTOSPI control register */
-+#define OCTOSPIM_CR		0
-+#define CR_MUXEN		BIT(0)
-+#define CR_MUXENMODE_MASK	GENMASK(1, 0)
-+#define CR_CSSEL_OVR_EN		BIT(4)
-+#define CR_CSSEL_OVR_MASK	GENMASK(6, 5)
-+#define CR_REQ2ACK_MASK		GENMASK(23, 16)
++#define OSPI_CR			0x00
++#define OSPI_CR_EN		BIT(0)
++#define OSPI_CR_ABORT		BIT(1)
++#define OSPI_CR_TCEN		BIT(3)
++#define OSPI_CR_FSEL		BIT(7)
++#define OSPI_CR_FTHRES_MASK	GENMASK(13, 8)
++#define OSPI_CR_FTHRES_SHIFT	8
++#define OSPI_CR_CSSEL		BIT(24)
++#define OSPI_CR_FMODE_SHIFT	28
++#define OSPI_CR_FMODE_MASK	GENMASK(29, 28)
 +
-+#define OMM_CHILD_NB		2
-+#define OMM_CLK_NB		3
-+#define OMM_RESET_NB		3
-+#define NSEC_PER_SEC		1000000000L
++/* OCTOSPI device configuration register */
++#define OSPI_DCR1		0x08
++#define OSPI_DCR1_CKMODE	BIT(0)
++#define OSPI_DCR1_DLYBYP	BIT(3)
++#define OSPI_DCR1_CSHT_SHIFT	8
++#define OSPI_DCR1_CSHT_MASK	GENMASK(13, 8)
++#define OSPI_DCR1_DEVSIZE_MASK	GENMASK(20, 16)
++#define OSPI_DCR1_MTYP_MASK	GENMASK(26, 24)
 +
-+struct stm32_omm_plat {
-+	phys_addr_t regs_base;
-+	struct regmap *syscfg_regmap;
-+	struct clk clk[OMM_CLK_NB];
-+	struct reset_ctl reset_ctl[OMM_RESET_NB];
-+	resource_size_t mm_ospi2_size;
-+	u32 mux;
-+	u32 cssel_ovr;
-+	u32 req2ack;
-+	u32 amcr_base;
-+	u32 amcr_mask;
-+	unsigned long clk_rate_max;
-+	u8 nb_child;
++/* OCTOSPI device configuration register 2 */
++#define OSPI_DCR2		0x0c
++#define OSPI_DCR2_PRESC_SHIFT	0
++#define OSPI_DCR2_PRESC_MASK	GENMASK(7, 0)
++
++/* OCTOSPI status register */
++#define OSPI_SR			0x20
++#define OSPI_SR_TEF		BIT(0)
++#define OSPI_SR_TCF		BIT(1)
++#define OSPI_SR_FTF		BIT(2)
++#define OSPI_SR_BUSY		BIT(5)
++
++/* OCTOSPI flag clear register */
++#define OSPI_FCR		0x24
++#define OSPI_FCR_CTEF		BIT(0)
++#define OSPI_FCR_CTCF		BIT(1)
++
++/* OCTOSPI data length register */
++#define OSPI_DLR		0x40
++
++/* OCTOSPI address register */
++#define OSPI_AR			0x48
++
++/* OCTOSPI data configuration register */
++#define OSPI_DR			0x50
++
++/* OCTOSPI communication configuration register */
++#define OSPI_CCR		0x100
++#define OSPI_CCR_IMODE_SHIFT	0
++#define OSPI_CCR_IMODE_MASK	GENMASK(2, 0)
++#define OSPI_CCR_ADMODE_SHIFT	8
++#define OSPI_CCR_ADMODE_MASK	GENMASK(10, 8)
++#define OSPI_CCR_ADSIZE_SHIFT	12
++#define OSPI_CCR_DMODE_SHIFT	24
++#define OSPI_CCR_DMODE_MASK	GENMASK(26, 24)
++#define OSPI_CCR_IND_WRITE	0
++#define OSPI_CCR_IND_READ	1
++#define OSPI_CCR_MEM_MAP	3
++
++/* OCTOSPI timing configuration register */
++#define OSPI_TCR		0x108
++#define OSPI_TCR_DCYC_SHIFT	0x0
++#define OSPI_TCR_DCYC_MASK	GENMASK(4, 0)
++#define OSPI_TCR_SSHIFT		BIT(30)
++
++/* OCTOSPI instruction register */
++#define OSPI_IR			0x110
++
++#define OSPI_MAX_MMAP_SZ	SZ_256M
++#define OSPI_MAX_CHIP		2
++
++#define OSPI_FIFO_TIMEOUT_US	30000
++#define OSPI_ABT_TIMEOUT_US	100000
++#define OSPI_BUSY_TIMEOUT_US	100000
++#define OSPI_CMD_TIMEOUT_US	1000000
++
++struct stm32_ospi_flash {
++	u32 cr;
++	u32 dcr;
++	u32 dcr2;
++	bool initialized;
 +};
 +
-+static int stm32_omm_set_amcr(struct udevice *dev, bool set)
++struct stm32_ospi_priv {
++	struct stm32_ospi_flash flash[OSPI_MAX_CHIP];
++	int cs_used;
++};
++
++struct stm32_ospi_plat {
++	phys_addr_t regs_base;		/* register base address */
++	phys_addr_t mm_base;		/* memory map base address */
++	resource_size_t mm_size;
++	struct clk clk;
++	struct reset_ctl_bulk rst_ctl;
++	ulong clock_rate;
++};
++
++static int stm32_ospi_mm(struct udevice *dev,
++			 const struct spi_mem_op *op)
 +{
-+	struct stm32_omm_plat *plat = dev_get_plat(dev);
-+	unsigned int amcr, read_amcr;
++	struct stm32_ospi_plat *ospi_plat = dev_get_plat(dev);
 +
-+	amcr = plat->mm_ospi2_size / SZ_64M;
-+
-+	if (set)
-+		regmap_update_bits(plat->syscfg_regmap, plat->amcr_base,
-+				   plat->amcr_mask, amcr);
-+
-+	/* read AMCR and check coherency with memory-map areas defined in DT */
-+	regmap_read(plat->syscfg_regmap, plat->amcr_base, &read_amcr);
-+	read_amcr = read_amcr >> (ffs(plat->amcr_mask) - 1);
-+
-+	if (amcr != read_amcr) {
-+		dev_err(dev, "AMCR value not coherent with DT memory-map areas\n");
-+		return -EINVAL;
-+	}
++	memcpy_fromio(op->data.buf.in,
++		      (void __iomem *)ospi_plat->mm_base + op->addr.val,
++		      op->data.nbytes);
 +
 +	return 0;
 +}
 +
-+static int stm32_omm_toggle_child_clock(struct udevice *dev, bool enable)
++static void stm32_ospi_read_fifo(void *val, phys_addr_t addr, u8 len)
 +{
-+	struct stm32_omm_plat *plat = dev_get_plat(dev);
-+	int i, ret;
-+
-+	for (i = 0; i < plat->nb_child; i++) {
-+		if (enable) {
-+			ret = clk_enable(&plat->clk[i + 1]);
-+			if (ret) {
-+				dev_err(dev, "Can not enable clock\n");
-+				goto clk_error;
-+			}
-+		} else {
-+			clk_disable(&plat->clk[i + 1]);
-+		}
-+	}
-+
-+	return 0;
-+
-+clk_error:
-+	while (i--)
-+		clk_disable(&plat->clk[i + 1]);
-+
-+	return ret;
++	switch (len) {
++	case sizeof(u32):
++		*((u32 *)val) = readl_relaxed(addr);
++		break;
++	case sizeof(u16):
++		*((u16 *)val) = readw_relaxed(addr);
++		break;
++	case sizeof(u8):
++		*((u8 *)val) = readb_relaxed(addr);
++	};
++	schedule();
 +}
 +
-+static int stm32_omm_disable_child(struct udevice *dev)
++static void stm32_ospi_write_fifo(void *val, phys_addr_t addr, u8 len)
 +{
-+	struct stm32_omm_plat *plat = dev_get_plat(dev);
++	switch (len) {
++	case sizeof(u32):
++		writel_relaxed(*((u32 *)val), addr);
++		break;
++	case sizeof(u16):
++		writew_relaxed(*((u16 *)val), addr);
++		break;
++	case sizeof(u8):
++		writeb_relaxed(*((u8 *)val), addr);
++	};
++}
++
++int stm32_ospi_tx_poll(struct udevice *dev, void *buf, u32 len, bool read)
++{
++	struct stm32_ospi_plat *ospi_plat = dev_get_plat(dev);
++	phys_addr_t regs_base = ospi_plat->regs_base;
++	void (*fifo)(void *val, phys_addr_t addr, u8 len);
++	u32 sr;
 +	int ret;
-+	u8 i;
++	u8 step = 1;
 +
-+	ret = stm32_omm_toggle_child_clock(dev, true);
-+	if (ret)
-+		return ret;
++	if (read)
++		fifo = stm32_ospi_read_fifo;
++	else
++		fifo = stm32_ospi_write_fifo;
 +
-+	for (i = 0; i < plat->nb_child; i++) {
-+		/* reset OSPI to ensure CR_EN bit is set to 0 */
-+		reset_assert(&plat->reset_ctl[i + 1]);
-+		udelay(2);
-+		reset_deassert(&plat->reset_ctl[i + 1]);
-+	}
-+
-+	return stm32_omm_toggle_child_clock(dev, false);
-+}
-+
-+static int stm32_omm_configure(struct udevice *dev)
-+{
-+	struct stm32_omm_plat *plat = dev_get_plat(dev);
-+	int ret;
-+	u32 mux = 0;
-+	u32 cssel_ovr = 0;
-+	u32 req2ack = 0;
-+
-+	/* Ensure both OSPI instance are disabled before configuring OMM */
-+	ret = stm32_omm_disable_child(dev);
-+	if (ret)
-+		return ret;
-+
-+	ret = clk_enable(&plat->clk[0]);
-+	if (ret) {
-+		dev_err(dev, "Failed to enable OMM clock (%d)\n", ret);
-+		return ret;
-+	}
-+
-+	reset_assert(&plat->reset_ctl[0]);
-+	udelay(2);
-+	reset_deassert(&plat->reset_ctl[0]);
-+
-+	if (plat->mux & CR_MUXEN) {
-+		if (plat->req2ack) {
-+			req2ack = DIV_ROUND_UP(plat->req2ack,
-+					       NSEC_PER_SEC / plat->clk_rate_max) - 1;
-+			if (req2ack > 256)
-+				req2ack = 256;
-+		}
-+
-+		req2ack = FIELD_PREP(CR_REQ2ACK_MASK, req2ack);
-+		clrsetbits_le32(plat->regs_base + OCTOSPIM_CR, CR_REQ2ACK_MASK,
-+				req2ack);
-+
-+		/*
-+		 * If the mux is enabled, the 2 OSPI clocks have to be
-+		 * always enabled
-+		 */
-+		ret = stm32_omm_toggle_child_clock(dev, true);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	if (plat->cssel_ovr != 0xff) {
-+		cssel_ovr = FIELD_PREP(CR_CSSEL_OVR_MASK, cssel_ovr);
-+		cssel_ovr |= CR_CSSEL_OVR_EN;
-+		clrsetbits_le32(plat->regs_base + OCTOSPIM_CR, CR_CSSEL_OVR_MASK,
-+				cssel_ovr);
-+	}
-+
-+	mux = FIELD_PREP(CR_MUXENMODE_MASK, plat->mux);
-+	clrsetbits_le32(plat->regs_base + OCTOSPIM_CR, CR_MUXENMODE_MASK, mux);
-+	clk_disable(&plat->clk[0]);
-+
-+	return stm32_omm_set_amcr(dev, true);
-+}
-+
-+static void stm32_omm_release_childs(ofnode *child_list, u8 nb_child)
-+{
-+	u8 i;
-+
-+	for (i = 0; i < nb_child; i++)
-+		stm32_rifsc_release_access(child_list[i]);
-+}
-+
-+static int stm32_omm_probe(struct udevice *dev)
-+{
-+	struct stm32_omm_plat *plat = dev_get_plat(dev);
-+	ofnode child_list[OMM_CHILD_NB];
-+	ofnode child;
-+	int ret;
-+	u8 child_access_granted = 0;
-+	bool child_access[OMM_CHILD_NB];
-+
-+	/* check child's access */
-+	for (child = ofnode_first_subnode(dev_ofnode(dev));
-+	     ofnode_valid(child);
-+	     child = ofnode_next_subnode(child)) {
-+		if (plat->nb_child > OMM_CHILD_NB) {
-+			dev_err(dev, "Bad DT, found too much children\n");
-+			return -E2BIG;
-+		}
-+
-+		if (!ofnode_device_is_compatible(child, "st,stm32mp25-ospi"))
-+			return -EINVAL;
-+
-+		ret = stm32_rifsc_grant_access(child);
-+		if (ret < 0 && ret != -EACCES)
-+			return ret;
-+
-+		child_access[plat->nb_child] = false;
-+		if (!ret) {
-+			child_access_granted++;
-+			child_access[plat->nb_child] = true;
-+		}
-+
-+		child_list[plat->nb_child] = child;
-+		plat->nb_child++;
-+	}
-+
-+	if (plat->nb_child != OMM_CHILD_NB)
-+		return -EINVAL;
-+
-+	/* check if OMM's resource access is granted */
-+	ret = stm32_rifsc_grant_access(dev_ofnode(dev));
-+	if (ret < 0 && ret != -EACCES)
-+		goto end;
-+
-+	/* All child's access are granted ? */
-+	if (!ret && child_access_granted == plat->nb_child) {
-+		ret = stm32_omm_configure(dev);
-+		if (ret)
-+			goto end;
-+	} else {
-+		dev_dbg(dev, "Octo Memory Manager resource's access not granted\n");
-+		/*
-+		 * AMCR can't be set, so check if current value is coherent
-+		 * with memory-map areas defined in DT
-+		 */
-+		ret = stm32_omm_set_amcr(dev, false);
-+	}
-+
-+end:
-+	stm32_omm_release_childs(child_list, plat->nb_child);
-+	stm32_rifsc_release_access(dev_ofnode(dev));
-+
-+	return ret;
-+}
-+
-+static int stm32_omm_of_to_plat(struct udevice *dev)
-+{
-+	struct stm32_omm_plat *plat = dev_get_plat(dev);
-+	static const char * const clocks_name[] = {"omm", "ospi1", "ospi2"};
-+	static const char * const mm_name[] = { "ospi1", "ospi2" };
-+	static const char * const resets_name[] = {"omm", "ospi1", "ospi2"};
-+	struct resource res, res1, mm_res;
-+	struct ofnode_phandle_args args;
-+	struct udevice *child;
-+	unsigned long clk_rate;
-+	struct clk child_clk;
-+	int ret, idx;
-+	u8 i;
-+
-+	plat->regs_base = dev_read_addr(dev);
-+	if (plat->regs_base == FDT_ADDR_T_NONE)
-+		return -EINVAL;
-+
-+	ret = dev_read_resource_byname(dev, "memory_map", &mm_res);
-+	if (ret) {
-+		dev_err(dev, "can't get omm_mm mmap resource(ret = %d)!\n", ret);
-+		return ret;
-+	}
-+
-+	for (i = 0; i < OMM_CLK_NB; i++) {
-+		ret = clk_get_by_name(dev, clocks_name[i], &plat->clk[i]);
-+		if (ret < 0) {
-+			dev_err(dev, "Can't find I/O manager clock %s\n", clocks_name[i]);
-+			return ret;
-+		}
-+
-+		ret = reset_get_by_name(dev, resets_name[i], &plat->reset_ctl[i]);
-+		if (ret < 0) {
-+			dev_err(dev, "Can't find I/O manager reset %s\n", resets_name[i]);
-+			return ret;
-+		}
-+	}
-+
-+	/* parse children's clock */
-+	plat->clk_rate_max = 0;
-+	device_foreach_child(child, dev) {
-+		ret = clk_get_by_index(child, 0, &child_clk);
++	while (len) {
++		ret = readl_poll_timeout(regs_base + OSPI_SR, sr,
++					 sr & OSPI_SR_FTF,
++					 OSPI_FIFO_TIMEOUT_US);
 +		if (ret) {
-+			dev_err(dev, "Failed to get clock for %s\n",
-+				dev_read_name(child));
++			dev_err(dev, "fifo timeout (len:%d stat:%#x)\n",
++				len, sr);
 +			return ret;
 +		}
 +
-+		clk_rate = clk_get_rate(&child_clk);
-+		if (!clk_rate) {
-+			dev_err(dev, "Invalid clock rate\n");
-+			return -EINVAL;
++		if (!IS_ALIGNED((uintptr_t)buf, sizeof(u32))) {
++			if (!IS_ALIGNED((uintptr_t)buf, sizeof(u16)))
++				step = sizeof(u8);
++			else
++				step = min((u32)len, (u32)sizeof(u16));
 +		}
++		/* Buf is aligned */
++		else if (len >= sizeof(u32))
++			step = sizeof(u32);
++		else if (len >= sizeof(u16))
++			step = sizeof(u16);
++		else if (len)
++			step = sizeof(u8);
 +
-+		if (clk_rate > plat->clk_rate_max)
-+			plat->clk_rate_max = clk_rate;
++		fifo(buf, regs_base + OSPI_DR, step);
++		len -= step;
++		buf += step;
 +	}
 +
-+	plat->mux = dev_read_u32_default(dev, "st,omm-mux", 0);
-+	plat->req2ack = dev_read_u32_default(dev, "st,omm-req2ack-ns", 0);
-+	plat->cssel_ovr = dev_read_u32_default(dev, "st,omm-cssel-ovr", 0xff);
-+	plat->mm_ospi2_size = 0;
++	return 0;
++}
 +
-+	for (i = 0; i < 2; i++) {
-+		idx = dev_read_stringlist_search(dev, "memory-region-names",
-+						 mm_name[i]);
-+		if (idx < 0)
-+			continue;
++static int stm32_ospi_tx(struct udevice *dev,
++			 const struct spi_mem_op *op,
++			 u8 mode)
++{
++	void *buf;
 +
-+		/* res1 only used on second loop iteration */
-+		res1.start = res.start;
-+		res1.end = res.end;
++	if (!op->data.nbytes)
++		return 0;
 +
-+		dev_read_phandle_with_args(dev, "memory-region", NULL, 0, idx,
-+					   &args);
++	if (mode == OSPI_CCR_MEM_MAP)
++		return stm32_ospi_mm(dev, op);
++
++	if (op->data.dir == SPI_MEM_DATA_IN)
++		buf = op->data.buf.in;
++	else
++		buf = (void *)op->data.buf.out;
++
++	return stm32_ospi_tx_poll(dev, buf, op->data.nbytes,
++				 op->data.dir == SPI_MEM_DATA_IN);
++}
++
++static int stm32_ospi_get_mode(u8 buswidth)
++{
++	if (buswidth == 8)
++		return 4;
++
++	if (buswidth == 4)
++		return 3;
++
++	return buswidth;
++}
++
++int stm32_ospi_wait_for_not_busy(struct udevice *dev)
++{
++	struct stm32_ospi_plat *ospi_plat = dev_get_plat(dev);
++	phys_addr_t regs_base = ospi_plat->regs_base;
++	u32 sr;
++	int ret;
++
++	ret = readl_poll_timeout(regs_base + OSPI_SR, sr, !(sr & OSPI_SR_BUSY),
++				 OSPI_BUSY_TIMEOUT_US);
++	if (ret)
++		dev_err(dev, "busy timeout (stat:%#x)\n", sr);
++
++	return ret;
++}
++
++int stm32_ospi_wait_cmd(struct udevice *dev)
++{
++	struct stm32_ospi_plat *ospi_plat = dev_get_plat(dev);
++	phys_addr_t regs_base = ospi_plat->regs_base;
++	u32 sr;
++	int ret = 0;
++
++	ret = readl_poll_timeout(regs_base + OSPI_SR, sr,
++				 sr & OSPI_SR_TCF,
++				 OSPI_CMD_TIMEOUT_US);
++	if (ret) {
++		dev_err(dev, "cmd timeout (stat:%#x)\n", sr);
++	} else if (readl(regs_base + OSPI_SR) & OSPI_SR_TEF) {
++		dev_err(dev, "transfer error (stat:%#x)\n", sr);
++		ret = -EIO;
++	}
++
++	/* clear flags */
++	writel(OSPI_FCR_CTCF | OSPI_FCR_CTEF, regs_base + OSPI_FCR);
++
++	if (!ret)
++		ret = stm32_ospi_wait_for_not_busy(dev);
++
++	return ret;
++}
++
++static int stm32_ospi_exec_op(struct spi_slave *slave,
++			      const struct spi_mem_op *op)
++{
++	struct stm32_ospi_plat *ospi_plat = dev_get_plat(slave->dev->parent);
++	phys_addr_t regs_base = ospi_plat->regs_base;
++	u32 cr, ccr = 0, addr_max;
++	int timeout, ret;
++	int dmode;
++	u8 mode = OSPI_CCR_IND_WRITE;
++	u8 dcyc = 0;
++
++	dev_dbg(slave->dev, "%s: cmd:%#x mode:%d.%d.%d.%d addr:%#llx len:%#x\n",
++		__func__, op->cmd.opcode, op->cmd.buswidth, op->addr.buswidth,
++		op->dummy.buswidth, op->data.buswidth,
++		op->addr.val, op->data.nbytes);
++
++	addr_max = op->addr.val + op->data.nbytes + 1;
++
++	if (op->data.dir == SPI_MEM_DATA_IN && op->data.nbytes) {
++		if (addr_max < ospi_plat->mm_size && op->addr.buswidth)
++			mode = OSPI_CCR_MEM_MAP;
++		else
++			mode = OSPI_CCR_IND_READ;
++	}
++
++	if (op->data.nbytes)
++		writel(op->data.nbytes - 1, regs_base + OSPI_DLR);
++
++	clrsetbits_le32(regs_base + OSPI_CR, OSPI_CR_FMODE_MASK,
++			mode << OSPI_CR_FMODE_SHIFT);
++
++	ccr |= (stm32_ospi_get_mode(op->cmd.buswidth) << OSPI_CCR_IMODE_SHIFT) &
++		OSPI_CCR_IMODE_MASK;
++
++	if (op->addr.nbytes) {
++		ccr |= ((op->addr.nbytes - 1) << OSPI_CCR_ADSIZE_SHIFT);
++		ccr |= (stm32_ospi_get_mode(op->addr.buswidth)
++			<< OSPI_CCR_ADMODE_SHIFT) & OSPI_CCR_ADMODE_MASK;
++	}
++
++	if (op->dummy.buswidth && op->dummy.nbytes)
++		dcyc = op->dummy.nbytes * 8 / op->dummy.buswidth;
++
++	clrsetbits_le32(regs_base + OSPI_TCR, OSPI_TCR_DCYC_MASK,
++			dcyc << OSPI_TCR_DCYC_SHIFT);
++
++	if (op->data.nbytes) {
++		dmode = stm32_ospi_get_mode(op->data.buswidth);
++		ccr |= (dmode << OSPI_CCR_DMODE_SHIFT) & OSPI_CCR_DMODE_MASK;
++	}
++
++	writel(ccr, regs_base + OSPI_CCR);
++
++	/* set instruction, must be set after ccr register update */
++	writel(op->cmd.opcode, regs_base + OSPI_IR);
++
++	if (op->addr.nbytes && mode != OSPI_CCR_MEM_MAP)
++		writel(op->addr.val, regs_base + OSPI_AR);
++
++	ret = stm32_ospi_tx(slave->dev->parent, op, mode);
++	/*
++	 * Abort in:
++	 * -error case
++	 * -read memory map: prefetching must be stopped if we read the last
++	 *  byte of device (device size - fifo size). like device size is not
++	 *  knows, the prefetching is always stop.
++	 */
++	if (ret || mode == OSPI_CCR_MEM_MAP)
++		goto abort;
++
++	/* Wait end of tx in indirect mode */
++	ret = stm32_ospi_wait_cmd(slave->dev->parent);
++	if (ret)
++		goto abort;
++
++	return 0;
++
++abort:
++	setbits_le32(regs_base + OSPI_CR, OSPI_CR_ABORT);
++
++	/* Wait clear of abort bit by hw */
++	timeout = readl_poll_timeout(regs_base + OSPI_CR, cr,
++				     !(cr & OSPI_CR_ABORT),
++				     OSPI_ABT_TIMEOUT_US);
++
++	writel(OSPI_FCR_CTCF, regs_base + OSPI_FCR);
++
++	if (ret || timeout)
++		dev_err(slave->dev, "%s ret:%d abort timeout:%d\n", __func__,
++			ret, timeout);
++
++	return ret;
++}
++
++static int stm32_ospi_probe(struct udevice *bus)
++{
++	struct stm32_ospi_priv *priv = dev_get_priv(bus);
++	struct stm32_ospi_plat *ospi_plat;
++	phys_addr_t regs_base;
++	int ret;
++
++	ospi_plat = dev_get_plat(bus);
++	regs_base = ospi_plat->regs_base;
++
++	ret = clk_enable(&ospi_plat->clk);
++	if (ret) {
++		dev_err(bus, "failed to enable clock\n");
++		return ret;
++	}
++
++	/* Reset OSPI controller */
++	reset_assert_bulk(&ospi_plat->rst_ctl);
++	udelay(2);
++	reset_deassert_bulk(&ospi_plat->rst_ctl);
++
++	priv->cs_used = -1;
++
++	setbits_le32(regs_base + OSPI_TCR, OSPI_TCR_SSHIFT);
++
++	clrsetbits_le32(regs_base + OSPI_CR, OSPI_CR_FTHRES_MASK,
++			3 << OSPI_CR_FTHRES_SHIFT);
++
++	/* Set dcr devsize to max address */
++	setbits_le32(regs_base + OSPI_DCR1,
++		     OSPI_DCR1_DEVSIZE_MASK | OSPI_DCR1_DLYBYP);
++
++	return 0;
++}
++
++static int stm32_ospi_claim_bus(struct udevice *dev)
++{
++	struct stm32_ospi_priv *priv = dev_get_priv(dev->parent);
++	struct dm_spi_slave_plat *slave_plat = dev_get_parent_plat(dev);
++	struct stm32_ospi_plat *ospi_plat = dev_get_plat(dev->parent);
++	phys_addr_t regs_base = ospi_plat->regs_base;
++	unsigned int slave_cs = slave_plat->cs[0];
++
++	if (slave_cs >= OSPI_MAX_CHIP)
++		return -ENODEV;
++
++	if (priv->cs_used != slave_cs) {
++		struct stm32_ospi_flash *flash = &priv->flash[slave_cs];
++
++		priv->cs_used = slave_cs;
++
++		if (flash->initialized) {
++			/* Set the configuration: speed + cs */
++			writel(flash->cr, regs_base + OSPI_CR);
++			writel(flash->dcr, regs_base + OSPI_DCR1);
++			writel(flash->dcr2, regs_base + OSPI_DCR2);
++		} else {
++			/* Set chip select */
++			clrsetbits_le32(regs_base + OSPI_CR,
++					OSPI_CR_CSSEL,
++					priv->cs_used ? OSPI_CR_CSSEL : 0);
++
++			/* Save the configuration: speed + cs */
++			flash->cr = readl(regs_base + OSPI_CR);
++			flash->dcr = readl(regs_base + OSPI_DCR1);
++			flash->dcr2 = readl(regs_base + OSPI_DCR2);
++			flash->initialized = true;
++		}
++	}
++
++	setbits_le32(regs_base + OSPI_CR, OSPI_CR_EN);
++
++	return 0;
++}
++
++static int stm32_ospi_release_bus(struct udevice *dev)
++{
++	struct stm32_ospi_plat *ospi_plat = dev_get_plat(dev->parent);
++	phys_addr_t regs_base = ospi_plat->regs_base;
++
++	clrbits_le32(regs_base + OSPI_CR, OSPI_CR_EN);
++
++	return 0;
++}
++
++static int stm32_ospi_set_speed(struct udevice *bus, uint speed)
++{
++	struct stm32_ospi_plat *ospi_plat = dev_get_plat(bus);
++	phys_addr_t regs_base = ospi_plat->regs_base;
++	u32 ospi_clk = ospi_plat->clock_rate;
++	u32 prescaler = 255;
++	u32 csht;
++	int ret;
++
++	if (speed > 0) {
++		prescaler = 0;
++		if (ospi_clk) {
++			prescaler = DIV_ROUND_UP(ospi_clk, speed) - 1;
++			if (prescaler > 255)
++				prescaler = 255;
++		}
++	}
++
++	csht = (DIV_ROUND_UP((5 * ospi_clk) / (prescaler + 1), 100000000)) - 1;
++
++	ret = stm32_ospi_wait_for_not_busy(bus);
++	if (ret)
++		return ret;
++
++	clrsetbits_le32(regs_base + OSPI_DCR2, OSPI_DCR2_PRESC_MASK,
++			prescaler << OSPI_DCR2_PRESC_SHIFT);
++
++	clrsetbits_le32(regs_base + OSPI_DCR1, OSPI_DCR1_CSHT_MASK,
++			csht << OSPI_DCR1_CSHT_SHIFT);
++
++	return 0;
++}
++
++static int stm32_ospi_set_mode(struct udevice *bus, uint mode)
++{
++	struct stm32_ospi_plat *ospi_plat = dev_get_plat(bus);
++	phys_addr_t regs_base = ospi_plat->regs_base;
++	const char *str_rx, *str_tx;
++	int ret;
++
++	ret = stm32_ospi_wait_for_not_busy(bus);
++	if (ret)
++		return ret;
++
++	if ((mode & SPI_CPHA) && (mode & SPI_CPOL))
++		setbits_le32(regs_base + OSPI_DCR1, OSPI_DCR1_CKMODE);
++	else if (!(mode & SPI_CPHA) && !(mode & SPI_CPOL))
++		clrbits_le32(regs_base + OSPI_DCR1, OSPI_DCR1_CKMODE);
++	else
++		return -ENODEV;
++
++	if (mode & SPI_CS_HIGH)
++		return -ENODEV;
++
++	if (mode & SPI_RX_OCTAL)
++		str_rx = "octal";
++	else if (mode & SPI_RX_QUAD)
++		str_rx = "quad";
++	else if (mode & SPI_RX_DUAL)
++		str_rx = "dual";
++	else
++		str_rx = "single";
++
++	if (mode & SPI_TX_OCTAL)
++		str_tx = "octal";
++	else if (mode & SPI_TX_QUAD)
++		str_tx = "quad";
++	else if (mode & SPI_TX_DUAL)
++		str_tx = "dual";
++	else
++		str_tx = "single";
++
++	dev_dbg(bus, "mode=%d rx: %s, tx: %s\n", mode, str_rx, str_tx);
++
++	return 0;
++}
++
++static const struct spi_controller_mem_ops stm32_ospi_mem_ops = {
++	.exec_op = stm32_ospi_exec_op,
++};
++
++static const struct dm_spi_ops stm32_ospi_ops = {
++	.claim_bus = stm32_ospi_claim_bus,
++	.release_bus = stm32_ospi_release_bus,
++	.set_speed = stm32_ospi_set_speed,
++	.set_mode = stm32_ospi_set_mode,
++	.mem_ops = &stm32_ospi_mem_ops,
++};
++
++static int stm32_ospi_of_to_plat(struct udevice *dev)
++{
++	struct stm32_ospi_plat *plat = dev_get_plat(dev);
++	struct resource res;
++	struct ofnode_phandle_args args;
++	const fdt32_t *reg;
++	int ret, len;
++
++	reg = dev_read_prop(dev, "reg", &len);
++	if (!reg) {
++		dev_err(dev, "Can't get regs base address\n");
++		return -ENOENT;
++	}
++
++	plat->regs_base = (phys_addr_t)dev_translate_address(dev, reg);
++
++	/* optional */
++	ret = dev_read_phandle_with_args(dev, "memory-region", NULL, 0, 0, &args);
++	if (!ret) {
 +		ret = ofnode_read_resource(args.node, 0, &res);
 +		if (ret) {
-+			dev_err(dev, "unable to resolve memory region\n");
++			dev_err(dev, "Can't get mmap base address(%d)\n", ret);
 +			return ret;
 +		}
 +
-+		/* check that memory region fits inside OMM memory map area */
-+		if (!resource_contains(&mm_res, &res)) {
-+			dev_err(dev, "%s doesn't fit inside OMM memory map area\n",
-+				mm_name[i]);
-+			dev_err(dev, "[0x%llx-0x%llx] doesn't fit inside [0x%llx-0x%llx]\n",
-+				res.start, res.end,
-+				mm_res.start, mm_res.end);
++		plat->mm_base = res.start;
++		plat->mm_size = resource_size(&res);
 +
-+			return -EFAULT;
++		if (plat->mm_size > OSPI_MAX_MMAP_SZ) {
++			dev_err(dev, "Incorrect memory-map size: %lld Bytes\n", plat->mm_size);
++			return -EINVAL;
 +		}
 +
-+		if (i == 1) {
-+			plat->mm_ospi2_size = resource_size(&res);
-+
-+			/* check that OMM memory region 1 doesn't overlap memory region 2 */
-+			if (resource_overlaps(&res, &res1)) {
-+				dev_err(dev, "OMM memory-region %s overlaps memory region %s\n",
-+					mm_name[0], mm_name[1]);
-+				dev_err(dev, "[0x%llx-0x%llx] overlaps [0x%llx-0x%llx]\n",
-+					res1.start, res1.end, res.start, res.end);
-+
-+				return -EFAULT;
-+			}
-+		}
++		dev_dbg(dev, "%s: regs_base=<0x%llx> mm_base=<0x%llx> mm_size=<0x%x>\n",
++			__func__, plat->regs_base, plat->mm_base, (u32)plat->mm_size);
++	} else {
++		plat->mm_base = 0;
++		plat->mm_size = 0;
++		dev_info(dev, "memory-region property not found (%d)\n", ret);
 +	}
 +
-+	plat->syscfg_regmap = syscon_regmap_lookup_by_phandle(dev, "st,syscfg-amcr");
-+	if (IS_ERR(plat->syscfg_regmap)) {
-+		dev_err(dev, "Failed to get st,syscfg-amcr property\n");
-+		ret = PTR_ERR(plat->syscfg_regmap);
++	ret = clk_get_by_index(dev, 0, &plat->clk);
++	if (ret < 0) {
++		dev_err(dev, "Failed to get clock\n");
 +		return ret;
 +	}
 +
-+	ret = dev_read_u32_index(dev, "st,syscfg-amcr", 1, &plat->amcr_base);
-+	if (ret) {
-+		dev_err(dev, "Failed to get st,syscfg-amcr base\n");
++	ret = reset_get_bulk(dev, &plat->rst_ctl);
++	if (ret && ret != -ENOENT) {
++		dev_err(dev, "Failed to get reset\n");
 +		return ret;
 +	}
 +
-+	ret = dev_read_u32_index(dev, "st,syscfg-amcr", 2, &plat->amcr_mask);
-+	if (ret) {
-+		dev_err(dev, "Failed to get st,syscfg-amcr mask\n");
-+		return ret;
-+	}
-+
-+	return 0;
-+};
-+
-+static int stm32_omm_bind(struct udevice *dev)
-+{
-+	int ret = 0, err = 0;
-+	ofnode node;
-+
-+	for (node = ofnode_first_subnode(dev_ofnode(dev));
-+	     ofnode_valid(node);
-+	     node = ofnode_next_subnode(node)) {
-+		const char *node_name = ofnode_get_name(node);
-+
-+		if (!ofnode_is_enabled(node) || stm32_rifsc_grant_access(node)) {
-+			dev_dbg(dev, "%s failed to bind\n", node_name);
-+			continue;
-+		}
-+
-+		err = lists_bind_fdt(dev, node, NULL, NULL,
-+				     gd->flags & GD_FLG_RELOC ? false : true);
-+		if (err && !ret) {
-+			ret = err;
-+			dev_dbg(dev, "%s: ret=%d\n", node_name, ret);
-+		}
-+	}
-+
-+	if (ret)
-+		dev_dbg(dev, "Some drivers failed to bind\n");
++	plat->clock_rate = clk_get_rate(&plat->clk);
++	if (!plat->clock_rate)
++		return -EINVAL;
 +
 +	return ret;
-+}
-+
-+static const struct udevice_id stm32_omm_ids[] = {
-+	{ .compatible = "st,stm32mp25-omm", },
-+	{},
 +};
 +
-+U_BOOT_DRIVER(stm32_omm) = {
-+	.name		= "stm32_omm",
-+	.id		= UCLASS_NOP,
-+	.probe		= stm32_omm_probe,
-+	.of_match	= stm32_omm_ids,
-+	.of_to_plat	= stm32_omm_of_to_plat,
-+	.plat_auto	= sizeof(struct stm32_omm_plat),
-+	.bind		= stm32_omm_bind,
++static const struct udevice_id stm32_ospi_ids[] = {
++	{ .compatible = "st,stm32mp25-ospi" },
++	{ }
++};
++
++U_BOOT_DRIVER(stm32_ospi) = {
++	.name = "stm32_ospi",
++	.id = UCLASS_SPI,
++	.of_match = stm32_ospi_ids,
++	.of_to_plat = stm32_ospi_of_to_plat,
++	.ops = &stm32_ospi_ops,
++	.plat_auto = sizeof(struct stm32_ospi_plat),
++	.priv_auto = sizeof(struct stm32_ospi_priv),
++	.probe = stm32_ospi_probe,
 +};
 -- 
 2.25.1

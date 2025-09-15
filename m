@@ -2,66 +2,58 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id EC2AEB56D23
-	for <lists+uboot-stm32@lfdr.de>; Mon, 15 Sep 2025 02:07:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 53A66B56DA7
+	for <lists+uboot-stm32@lfdr.de>; Mon, 15 Sep 2025 02:49:31 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4374AC3F956;
-	Mon, 15 Sep 2025 00:07:37 +0000 (UTC)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id ED4F8C3F956;
+	Mon, 15 Sep 2025 00:49:30 +0000 (UTC)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B651DC3F93B
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C7297C36B0C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 15 Sep 2025 00:07:35 +0000 (UTC)
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
+ Mon, 15 Sep 2025 00:49:29 +0000 (UTC)
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4cQ52F1SVcz9sq0;
- Mon, 15 Sep 2025 02:07:33 +0200 (CEST)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4cQ5yc72zFz9sWB;
+ Mon, 15 Sep 2025 02:49:28 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1757894853;
+ s=mail20150812; t=1757897369;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=XtmDfC/6/MJ22QaAsiDGpERgOy8599/6kH1Bb//AYWU=;
- b=HsjScWq8lD9v3spF4xAQ0tV5yIJbWo2PPFngtUQHmOTrxTThFJzGxm0NmoseZ90i7nxnBC
- ENhGBK1UnxEdwtgGmkn7AQbK29SH9GLARUFWOJNxAUlVTvYt+yU/TtTryUUBADucfG444L
- 5BU8f9DMKteUpSbBMM/7mQOHZDazowiuAE1TomXaEiKrXZrnxj7bs+o0iCY18a7+MhUFuW
- L/7nT/ncyaV6zl2K/Gu716xzBnX3CJpJrAG5/5vRVBiEBDhTBtivc6I+OvChVnBhDpgLiD
- bTEfDRenR8VZZe1wpcJ2HEqV7ys67pSVWmyfd6LP05f9ROge6zSYLgkagg/6gw==
-Message-ID: <7858181b-5558-4249-b9fb-0d17ea5b348a@mailbox.org>
-Date: Mon, 15 Sep 2025 02:07:28 +0200
-MIME-Version: 1.0
-To: Patrice CHOTARD <patrice.chotard@foss.st.com>, u-boot@lists.denx.de
-References: <20250808151154.472860-1-patrice.chotard@foss.st.com>
- <827b1b5e-ac74-4710-8424-5bf0390441f6@mailbox.org>
- <9c805dc1-fc95-4d01-99cf-306264fd4b2b@foss.st.com>
- <905b7b4b-a216-4bdc-868b-5b38efb61317@mailbox.org>
- <d7d281a2-69c4-4bc3-8392-dd772f889a18@foss.st.com>
-Content-Language: en-US
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=hh2ZU7x7KTOWdTnQPPTp3q4mpPoGNihpOeJ59PkzgbE=;
+ b=WxWGUGIi96fhZDu34dyJGnHvb/boid2ugVznnyjLcUbOvzQEM0Qf8vVrzBdl6ioMKkJyLv
+ nni3ab2DrEY1KbhZ5KtzS9TrtTnh2fevkDXTuk88xrAWQjVRI3VIyM9EOmqU0tN7C1hlT6
+ Rt/BPtb1Mof1Ve90jxxurtEGeFwSHU77JX/wtbL8IfITYWnypCqfuv8s8k3LGKwlkM1mGM
+ V/ekS1VC1IjLmWYmBBjJ+dAVthd65VZ+pLnYj+OVswwQlnZiwFeHUjUWwa9wn1d3teHbmA
+ vdpopCcIzvslDWz/wao6YzkDYHw7K96tPbLo8FZ5LhWkEblSQ40PeDaov2/78A==
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <d7d281a2-69c4-4bc3-8392-dd772f889a18@foss.st.com>
-X-MBO-RS-META: on676m8xno4kusj86m4dcs58zstdmgfq
-X-MBO-RS-ID: f7a98bb78f8a4cdee0c
-Cc: Tom Rini <trini@konsulko.com>, Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Alexander Dahl <ada@thorsis.com>, Cheick Traore <cheick.traore@foss.st.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Utsav Agarwal <utsav.agarwal@analog.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- John Watts <contact@jookia.org>, Jagan Teki <jagan@amarulasolutions.com>,
- Bastien Curutchet <bastien.curutchet@bootlin.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- Simon Glass <sjg@chromium.org>, Stefan Roese <sr@denx.de>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>
-Subject: Re: [Uboot-stm32] [PATCH 0/5] stm32mp2: Add SPI flashes support
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1757897367;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=hh2ZU7x7KTOWdTnQPPTp3q4mpPoGNihpOeJ59PkzgbE=;
+ b=LF5F7w7s3myA2D6XZrbwaxK12vJFmhHAaAldvLBptoYKSe1JWvEk98C6yQ6DPuZfrmeVhr
+ S5CcPLlhwyJHTRxQ/2rxP+5/4On+4pUk6NFv6Hp2rE5Nj714It3DVMW+G7rNYpovHzCa6m
+ bQRh81KVS03AwcE7JZ6rTFR/wpIKAPn0dXD+P9WD7eNRfg57d3NKpTCYYI29LbyX8a2P31
+ cdcOX9oU+napgL5TLaFzPnKB/hd0ii3Boec2mRbsSPUKaeijfwoCDUJmdnfYDjxAcFRXmr
+ 3jwgEIRQlKZoBmU3QHlRi+MefMLGvZuj06HGMolmqiE5uUx1nj0nrxkbTzIeEA==
+To: u-boot@lists.denx.de
+Date: Mon, 15 Sep 2025 02:49:05 +0200
+Message-ID: <20250915004915.222325-1-marek.vasut@mailbox.org>
+MIME-Version: 1.0
+X-MBO-RS-ID: 1a3acfe2df7c67aaa1a
+X-MBO-RS-META: s9dky1i1s57fft7shrkez5ar7o8ns4sy
+Cc: Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com,
+ Marek Vasut <marek.vasut@mailbox.org>, Simon Glass <sjg@chromium.org>,
+ uboot-stm32@st-md-mailman.stormreply.com,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>
+Subject: [Uboot-stm32] [PATCH] ARM: stm32: Perform node compatible check for
+	KS8851 early
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,33 +65,56 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On 8/20/25 3:11 PM, Patrice CHOTARD wrote:
+Check the compatible string of ethernet1 node for KS8851 very early on,
+before calling uclass_get_device_by_of_path() which might initialize
+the device and possibly attempt to configure MAC address into device
+which is not KS8851. Doing the compatibility check early prevent this.
 
-Hi,
+Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
+---
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@dh-electronics.com
+Cc: u-boot@lists.denx.de
+Cc: uboot-stm32@st-md-mailman.stormreply.com
+---
+ board/dhelectronics/dh_stm32mp1/board.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-sorry for the late reply.
+diff --git a/board/dhelectronics/dh_stm32mp1/board.c b/board/dhelectronics/dh_stm32mp1/board.c
+index a15348ad7e7..551094b9489 100644
+--- a/board/dhelectronics/dh_stm32mp1/board.c
++++ b/board/dhelectronics/dh_stm32mp1/board.c
+@@ -85,6 +85,9 @@ static bool dh_stm32_mac_is_in_ks8851(void)
+ 	if (!ofnode_valid(node))
+ 		return false;
+ 
++	if (!ofnode_device_is_compatible(node, "micrel,ks8851-mll"))
++		return false;
++
+ 	ret = ofnode_get_path(node, path, sizeof(path));
+ 	if (ret)
+ 		return false;
+@@ -93,9 +96,6 @@ static bool dh_stm32_mac_is_in_ks8851(void)
+ 	if (ret)
+ 		return false;
+ 
+-	if (!ofnode_device_is_compatible(node, "micrel,ks8851-mll"))
+-		return false;
+-
+ 	/*
+ 	 * KS8851 with EEPROM may use custom MAC from EEPROM, read
+ 	 * out the KS8851 CCR register to determine whether EEPROM
+-- 
+2.51.0
 
-> If you refer to my previous e-mail with the stm32mp257f-ev1 boot log,
-> with the following upstream components:
-> 
-> TF-A: v2.13.0-304-g000fe221b8
-
-It seems this is missing PSCI implementation entirely, right ?
-
-> OP-TEE: 4.7.0-26-g847ee2932
-
-This does not implement SCMI, does it ? Does it need SCPFW or something 
-as an external dependency ?
-
-> U-Boot: v2025.07
-> 
-> I am able to boot a STM32MP257f-EV1 board.
-Were you also able to boot further into Linux with this setup ?
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

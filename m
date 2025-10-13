@@ -2,82 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id CD109BD49AF
-	for <lists+uboot-stm32@lfdr.de>; Mon, 13 Oct 2025 17:55:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D9EBCBD5A15
+	for <lists+uboot-stm32@lfdr.de>; Mon, 13 Oct 2025 20:02:59 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id CE10CC349C5;
-	Mon, 13 Oct 2025 15:55:51 +0000 (UTC)
-Received: from mail-oo1-f46.google.com (mail-oo1-f46.google.com
- [209.85.161.46])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E50ABC349C4
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 82B27C32EB0;
+	Mon, 13 Oct 2025 18:02:59 +0000 (UTC)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 799E3C349C5
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 13 Oct 2025 15:55:50 +0000 (UTC)
-Received: by mail-oo1-f46.google.com with SMTP id
- 006d021491bc7-6500448067dso2410342eaf.3
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 13 Oct 2025 08:55:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1760370949; x=1760975749;
- darn=st-md-mailman.stormreply.com; 
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=K0FeejrPTIOqlT5FEyst2N1ZzZD5C+GH1ElFuyxRfZU=;
- b=aQYUriZUbWGg2c2Qn/xCCbe3o46bBxCQZU6eyiFEeTL3HdZ3cz+jMuf0l51rG0bHLO
- 6p3YOjKa1qB8qYKyWI0C5uhgQgLZL+sWVZON4EEYfNAnspUr+x7ZnRTTc8vsTXMv6A2F
- EbW/bj23udFLedsNX+xrHWC4iVBlUiLUt7zrs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760370949; x=1760975749;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=K0FeejrPTIOqlT5FEyst2N1ZzZD5C+GH1ElFuyxRfZU=;
- b=EaEOOI5IRQzq8tixre/a9HeJtEH/qQxTTxJ7wce5Idxoln2IWjQZuZ6h9BbwxTRa36
- LmrtosVcM2Elh4QJPfMwRC9ZlikWmPAIUHenajTHyS/eCEIdqhR2B6cKGcreSyEkQIhT
- h/GxCjjCaUo1fTqC4Ekoxr0CHAYJNG475Oaoh3vO6MJyVgjAvMZNSHvDy1QQDqVsyMPs
- 6QtbPaPzob/5cv7oZMWh7nV7nhVnyyI9LXcXsO/xHhULU8CzU7yDQHxPzPPgl5L09iPo
- 422gXzMl3/PjuRJ/g/eX6eXVZXnVLFGpkOUcg2CAa9xn84axcNnovg40ZBSR9ihYFoel
- 4NOQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUiGahg7IFux7JQBv0Z9qtZ1odTz94YqSPzBDnHW8EyKUhwnMggNp6Ua8gf+X4Cp5nc7geLNwkf1tDXmw==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0YyTmk9Tu1FxmqZMPpCV7wL3K3sHpF7KpGbes8c8xppIuH0N4dL5
- oUq/TNjjMRevWyHbp6XcD2XYOyD2fIBcXo4ozV3rC9SAxbl/0lQ35XdiYHIZaLclwHM=
-X-Gm-Gg: ASbGncsabadivgI8BXnznW78ZGcloam8QGJNQHXs+mGu6Mz4RZTmbA4EtAPbJRXMsTv
- scNXXr/iegyhiRaQJHle2R+X/4bGbyNXbZkbPOuobQmMV06tXl2TH8fAoXJiCzJUWQ/RNIvmg1W
- z6skcUotn5cAlxnR/HeDBHU5O5N6DOskmIftj7Ul6I1FP8R/mpwbIzgGGBh9+e2q7Y7QWnwK5vx
- FVrcZujRos565kuiwyIp9KCxp7IIDg+hqk4jMlBhaS9vatvbizfh2E+ZzEmGHFCMCT6oWDQK74N
- zQmwZwdbnFU123zVR4EA4RusVh7U1cDJKir/J9I0TotcvPKU09pvHuwe/PxnvRNZXfmtu0F78pG
- fKJeMsHWaN7Eca/S4p4SF/IxFw4NDMx5slpiCtVk70jFzH71llF0TEjfJ7whc1AcJmC7c/K5c9y
- kdGz3ro1Mi20wTIMcFBk8yn1HiiA==
-X-Google-Smtp-Source: AGHT+IGrcCu+wK7pPghmsjxCtUaTA/lYrKgnZIZ5f66iNTjmnUYrVNM8NxTgmMEGOHDPaeEk+c87ww==
-X-Received: by 2002:a05:6820:5053:b0:64d:2b5e:ad11 with SMTP id
- 006d021491bc7-64fffe25dffmr8464114eaf.8.1760370949577; 
- Mon, 13 Oct 2025 08:55:49 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6501812f4aesm2705062eaf.1.2025.10.13.08.55.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Oct 2025 08:55:48 -0700 (PDT)
-Date: Mon, 13 Oct 2025 09:55:46 -0600
-From: Tom Rini <trini@konsulko.com>
-To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Message-ID: <20251013155546.GJ6113@bill-the-cat>
-References: <20251013-imx-rproc-v1-0-fb43a3fafcd0@nxp.com>
- <20251013-imx-rproc-v1-6-fb43a3fafcd0@nxp.com>
+ Mon, 13 Oct 2025 18:02:57 +0000 (UTC)
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59DI2ZgU1400267;
+ Mon, 13 Oct 2025 13:02:35 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1760378555;
+ bh=gNxuHoxRsc7GYkqIxDHrk2jZFbS3La1oF/94kWkw46o=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=vwwU6xTAKSc1dueCSBbeniFNNtcdmnjdgstRvvuLxEhQfTC2pd3b38dAiToI1f3YF
+ MxSi9eAePM1iv+8pCtotXG9VwtyKTfC6CQRJuFi0Bdu2geX03NRjS3VMyTgXB9fUXb
+ V/bgc7mNITIyB05fV22nxILbbseX8raa8QIHEVTw=
+Received: from DLEE213.ent.ti.com (dlee213.ent.ti.com [157.170.170.116])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59DI2YPc3141828
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 13 Oct 2025 13:02:34 -0500
+Received: from DLEE200.ent.ti.com (157.170.170.75) by DLEE213.ent.ti.com
+ (157.170.170.116) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 13 Oct
+ 2025 13:02:34 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE200.ent.ti.com
+ (157.170.170.75) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Mon, 13 Oct 2025 13:02:34 -0500
+Received: from [10.250.148.111] ([10.250.148.111])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59DI2H0e2241867;
+ Mon, 13 Oct 2025 13:02:21 -0500
+Message-ID: <8be42ffa-c2fc-4954-bcee-3baddb50a7d9@ti.com>
+Date: Mon, 13 Oct 2025 23:32:14 +0530
 MIME-Version: 1.0
-In-Reply-To: <20251013-imx-rproc-v1-6-fb43a3fafcd0@nxp.com>
-X-Clacks-Overhead: GNU Terry Pratchett
-Cc: Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>,
- Udit Kumar <u-kumar1@ti.com>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>, Ryan Eatmon <reatmon@ti.com>,
- Andrew Davis <afd@ti.com>, u-boot@lists.denx.de,
+User-Agent: Mozilla Thunderbird
+To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>, <u-boot@lists.denx.de>,
+ <uboot-stm32@st-md-mailman.stormreply.com>, "NXP i.MX U-Boot Team"
+ <uboot-imx@nxp.com>, Fabio Estevam <festevam@gmail.com>, Stefano Babic
+ <sbabic@nabladev.com>
+References: <20251013-imx-rproc-v1-0-fb43a3fafcd0@nxp.com>
+Content-Language: en-US
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <20251013-imx-rproc-v1-0-fb43a3fafcd0@nxp.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
+ Ye Li <ye.li@nxp.com>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>, Andrew Davis <afd@ti.com>,
  Beleswar Padhi <b-padhi@ti.com>, Judith Mendez <jm@ti.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- uboot-stm32@st-md-mailman.stormreply.com, Hari Nagalla <hnagalla@ti.com>,
- Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@nabladev.com>
-Subject: Re: [Uboot-stm32] [PATCH 06/11] arm: dts: imx8m: Add remoteproc node
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Ryan Eatmon <reatmon@ti.com>,
+ Hari Nagalla <hnagalla@ti.com>
+Subject: Re: [Uboot-stm32] [PATCH 00/11] remoteproc: Add support for
+ i.MX8M[M/N/P/Q] and i.MX93
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -89,65 +70,69 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============2500548729373118186=="
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-
---===============2500548729373118186==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="5f4SvGdaKPbGqn2N"
-Content-Disposition: inline
-
-
---5f4SvGdaKPbGqn2N
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, Oct 13, 2025 at 10:49:25AM +0800, Peng Fan (OSS) wrote:
-> From: Peng Fan <peng.fan@nxp.com>
->=20
-> Add CM7/4 nodes for i.MX8MQ/M/N/P.
->=20
-> Reviewed-by: Ye Li <ye.li@nxp.com>
-> Signed-off-by: Peng Fan <peng.fan@nxp.com>
-> ---
->  arch/arm/dts/imx8mm-u-boot.dtsi | 4 ++++
->  arch/arm/dts/imx8mn-u-boot.dtsi | 4 ++++
->  arch/arm/dts/imx8mp-u-boot.dtsi | 4 ++++
->  arch/arm/dts/imx8mq-u-boot.dtsi | 4 ++++
->  4 files changed, 16 insertions(+)
-
-Why is this in the u-boot.dtsi? We have
-dts/upstream/Bindings/remoteproc/fsl,imx-rproc.yaml and so your updates
-here should be compatible with that, yes?
-
---=20
-Tom
-
---5f4SvGdaKPbGqn2N
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaO0g+QAKCRAr4qD1Cr/k
-Csj+AP9VQGMX9cTAjJpR5z15mdtHeuxCCXPtupmLmvDYpwL5qQD7BG9dxl1XMngn
-4Y1nHHlY7NpPNHvVYBQR+FkK9sJ5ngk=
-=weZd
------END PGP SIGNATURE-----
-
---5f4SvGdaKPbGqn2N--
-
---===============2500548729373118186==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============2500548729373118186==--
+Ck9uIDEwLzEzLzIwMjUgODoxOSBBTSwgUGVuZyBGYW4gKE9TUykgd3JvdGU6Cj4gVGhpcyBwYXRj
+aCBzZXJpZXMgaW50cm9kdWNlcyByZW1vdGVwcm9jIHN1cHBvcnQgZm9yIE5YUCBpLk1YOE0gYW5k
+IGkuTVg5Mwo+IHBsYXRmb3Jtcy4gTW9zdCBvZiB0aGUgaS5NWC1zcGVjaWZpYyBsb2dpYyBpcyBw
+b3J0ZWQgZnJvbSB0aGUgTGludXgga2VybmVsIHRvCj4gZW5zdXJlIGNvbXBhdGliaWxpdHkgYW5k
+IG1haW50YWluYWJpbGl0eS4KPgo+IFRoZSBleGlzdGluZyBib290YXV4IGNvbW1hbmQgaW4gVS1C
+b290IG9ubHkgc3VwcG9ydHMgbG9hZGluZyByYXcgYmluYXJ5IGltYWdlcy4KPiBIb3dldmVyLCB0
+aGlzIGFwcHJvYWNoIGZhaWxzIHdoZW4gdGhlIHJlbW90ZSBwcm9jZXNzb3IgZmlybXdhcmUgY29u
+dGFpbnMKPiBzZWN0aW9ucyB0aGF0IG11c3QgYmUgbG9hZGVkIGludG8gYm90aCBUQ00gYW5kIERE
+Ui4gVG8gYWRkcmVzcyB0aGlzIGxpbWl0YXRpb24sCj4gbmVlZCB0byB1c2UgcmVtb3RlcHJvYyBm
+cmFtZXdvcmsgRUxGIGxvYWRlciwgZW5hYmxpbmcgcHJvcGVyIGxvYWRpbmcgb2YKPiBzZWdtZW50
+ZWQgZmlybXdhcmUgaW1hZ2VzLgo+Cj4gUGF0Y2ggU3VtbWFyeToKPgo+IFBhdGNoZXMgMeKAkzI6
+IEltcG9ydCBtZW1jcHlfaW8gYW5kIG1lbXNldF9pbyBmcm9tIHRoZSBMaW51eCBrZXJuZWwgYW5k
+IGVuYWJsZQo+ICAgICAgICAgICAgICAgdGhlbSBpbiB0aGUgcmVtb3RlcHJvYyBzdWJzeXN0ZW0u
+Cgp3aGljaCBDUFUgYXJjaCwgeW91IGFyZSB1c2luZy4gSSBhc3N1bWUgdGhpcyBpcyBBUk0tNjQg
+dGhlbiBJIHNlZSAKYWxyZWFkeSBkZWZpbmVkIGluCgpodHRwczovL2VsaXhpci5ib290bGluLmNv
+bS91LWJvb3QvdjIwMjUuMTAvc291cmNlL2FyY2gvYXJtL2luY2x1ZGUvYXNtL2lvLmgjTDQ3MSAK
+CgoKPiBQYXRjaGVzIDPigJMxMTogQWRkIHBsYXRmb3JtLXNwZWNpZmljIHJlbW90ZXByb2Mgc3Vw
+cG9ydCBmb3IgaS5NWDhNIGFuZCBpLk1YOTMuCj4gUGF0Y2ggNjogVGVtcG9yYXJpbHkgYWRkcyBD
+b3J0ZXgtTSBub2RlcyB0byB4LXUtYm9vdC5kdHNpIHNpbmNlIHRoZXkgYXJlIG5vdAo+ICAgICAg
+ICAgICB5ZXQgYXZhaWxhYmxlIGluIHRoZSB1cHN0cmVhbSBMaW51eCBkZXZpY2UgdHJlZS4gVGhl
+c2Ugbm9kZXMgY2FuIGJlCj4gCSByZW1vdmVkIG9uY2UgdGhleSBhcmUgbWVyZ2VkIHVwc3RyZWFt
+Lgo+Cj4gTlhQIGludGVybmFsIFItYiB0YWdzIGFyZSBrZXB0LCBiZWNhdXNlIHRoZSBwYXRjaGVz
+IGFyZSBkaXJlY3RseQo+IGNoZXJyeS1waWNrZWQgZnJvbSBOWFAgTFRTIHRyZWUuCj4KPiBTaWdu
+ZWQtb2ZmLWJ5OiBQZW5nIEZhbiA8cGVuZy5mYW5AbnhwLmNvbT4KPiAtLS0KPiBQZW5nIEZhbiAo
+MTEpOgo+ICAgICAgICBsaWI6IEltcG9ydCBpb21lbV9jb3B5IGZyb20gTGludXggS2VybmVsCj4g
+ICAgICAgIHJlbW90ZXByb2M6IEV4dGVuZCBkZXZpY2VfdG9fdmlydCB3aXRoIGEgaXNfaW9tZW0g
+cGFyYW1ldGVyCj4gICAgICAgIHJlbW90ZXByb2M6IEFkZCBpbXhfcnByb2MgZHJpdmVyIHRvIHN1
+cHBvcnQgTlhQIGkuTVg4TVAvTgo+ICAgICAgICByZW1vdGVwcm9jOiBpbXhfcnByb2M6IFN1cHBv
+cnQgaS5NWDhNUS9NCj4gICAgICAgIHJlbW90ZXByb2M6IGlteF9ycHJvYzogQWRkIHN1cHBvcnQg
+Zm9yIGkuTVg5MyBDTTMzCj4gICAgICAgIGFybTogZHRzOiBpbXg4bTogQWRkIHJlbW90ZXByb2Mg
+bm9kZQo+ICAgICAgICBpbXg4bXA6IEVuYWJsZSByZW1vdGVwcm9jIGZvciBpLk1YOE1QIEVWSwo+
+ICAgICAgICBpbXg4bW06IEVuYWJsZSByZW1vdGVwcm9jIGZvciBpLk1YOE1NIEVWSwo+ICAgICAg
+ICBpbXg4bW46IEVuYWJsZSByZW1vdGVwcm9jIGZvciBpLk1YOE1OIEVWSwo+ICAgICAgICBpbXg4
+bXE6IEVuYWJsZSByZW1vdGVwcm9jIGZvciBpLk1YOE1RIEVWSwo+ICAgICAgICBpbXg5MzogRW5h
+YmxlIHJlbW90ZXByb2MgZm9yIGkuTVg5My1FVksvUVNCL0ZSRE0KPgo+ICAgTUFJTlRBSU5FUlMg
+ICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgMSArCj4gICBhcmNoL2FybS9kdHMvaW14OG1t
+LXUtYm9vdC5kdHNpICAgICAgIHwgICA0ICsKPiAgIGFyY2gvYXJtL2R0cy9pbXg4bW4tdS1ib290
+LmR0c2kgICAgICAgfCAgIDQgKwo+ICAgYXJjaC9hcm0vZHRzL2lteDhtcC11LWJvb3QuZHRzaSAg
+ICAgICB8ICAgNCArCj4gICBhcmNoL2FybS9kdHMvaW14OG1xLXUtYm9vdC5kdHNpICAgICAgIHwg
+ICA0ICsKPiAgIGFyY2gvYXJtL21hY2gtaW14L2lteDhtL0tjb25maWcgICAgICAgfCAgMjAgKysK
+PiAgIGFyY2gvYXJtL21hY2gtaW14L2lteDkvS2NvbmZpZyAgICAgICAgfCAgMTIgKysKPiAgIGRy
+aXZlcnMvcmVtb3RlcHJvYy9LY29uZmlnICAgICAgICAgICAgfCAgIDcgKwo+ICAgZHJpdmVycy9y
+ZW1vdGVwcm9jL01ha2VmaWxlICAgICAgICAgICB8ICAgMSArCj4gICBkcml2ZXJzL3JlbW90ZXBy
+b2MvaW14X3Jwcm9jLmMgICAgICAgIHwgMzcwICsrKysrKysrKysrKysrKysrKysrKysrKysrKysr
+KysrKysKPiAgIGRyaXZlcnMvcmVtb3RlcHJvYy9pbXhfcnByb2MuaCAgICAgICAgfCAgNTYgKysr
+KysKPiAgIGRyaXZlcnMvcmVtb3RlcHJvYy9yZW5lc2FzX2FwbXUuYyAgICAgfCAgIDMgKy0KPiAg
+IGRyaXZlcnMvcmVtb3RlcHJvYy9ycHJvYy1lbGYtbG9hZGVyLmMgfCAgOTMgKysrKysrLS0tCj4g
+ICBkcml2ZXJzL3JlbW90ZXByb2Mvc2FuZGJveF90ZXN0cHJvYy5jIHwgICAzICstCj4gICBkcml2
+ZXJzL3JlbW90ZXByb2Mvc3RtMzJfY29wcm8uYyAgICAgIHwgICAzICstCj4gICBkcml2ZXJzL3Jl
+bW90ZXByb2MvdGlfazNfZHNwX3Jwcm9jLmMgIHwgICAyICstCj4gICBkcml2ZXJzL3JlbW90ZXBy
+b2MvdGlfazNfcjVmX3Jwcm9jLmMgIHwgICAyICstCj4gICBpbmNsdWRlL2FzbS1nZW5lcmljL2lv
+LmggICAgICAgICAgICAgIHwgIDM3ICsrKysKPiAgIGluY2x1ZGUvcmVtb3RlcHJvYy5oICAgICAg
+ICAgICAgICAgICAgfCAgIDMgKy0KPiAgIGxpYi9NYWtlZmlsZSAgICAgICAgICAgICAgICAgICAg
+ICAgICAgfCAgIDEgKwo+ICAgbGliL2lvbWVtX2NvcHkuYyAgICAgICAgICAgICAgICAgICAgICB8
+IDEzNiArKysrKysrKysrKysrCj4gICAyMSBmaWxlcyBjaGFuZ2VkLCA3MzEgaW5zZXJ0aW9ucygr
+KSwgMzUgZGVsZXRpb25zKC0pCj4gLS0tCj4gYmFzZS1jb21taXQ6IDQ4ZjIxZTY2ZTM2MDU1MmM3
+NWQ3MGE1MDQyMWQwZTBlZDFmNTllOTAKPiBjaGFuZ2UtaWQ6IDIwMjUxMDEyLWlteC1ycHJvYy0z
+ODNkYjc1MmMzZjcKPgo+IEJlc3QgcmVnYXJkcywKX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX18KVWJvb3Qtc3RtMzIgbWFpbGluZyBsaXN0ClVib290LXN0bTMy
+QHN0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20KaHR0cHM6Ly9zdC1tZC1tYWlsbWFuLnN0b3Jt
+cmVwbHkuY29tL21haWxtYW4vbGlzdGluZm8vdWJvb3Qtc3RtMzIK

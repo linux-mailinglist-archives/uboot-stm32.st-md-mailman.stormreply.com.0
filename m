@@ -2,52 +2,49 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id C76E5BD7E4D
+	by mail.lfdr.de (Postfix) with ESMTPS id 9D4A1BD7E4B
 	for <lists+uboot-stm32@lfdr.de>; Tue, 14 Oct 2025 09:30:15 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D9130C3FACB;
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E963FC3FAD2;
 	Tue, 14 Oct 2025 07:30:14 +0000 (UTC)
-Received: from MRWPR03CU001.outbound.protection.outlook.com
- (mail-francesouthazon11011016.outbound.protection.outlook.com
- [40.107.130.16])
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazon11011000.outbound.protection.outlook.com [52.101.70.0])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 528EDC36B31
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 35832C36B31
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 13 Oct 2025 01:37:09 +0000 (UTC)
+ Mon, 13 Oct 2025 01:37:14 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=v7w+BZJtxioZdwvtq65yuhzqoLBTg82MrTQ4cOectfTIW/Sq75OPNmjE5OLw1GHR8faC/9hmdmxPV7dRW2kcs/sTWVYkZxgYQba04UKJp+XtM3ELWlfFQsumN8R+jD8Pz9k/8GLH/hiQ8WmyWmWV5PgLfTUIM52G+8Eqi+GoVuiEpWGoD9gd/118jNlCQD107r9jEiAj9c09i1JDPmya6IiH8qE2sUxstX8mb0hw4lwTbrI0D9HxC9CG1XJyqQlscZYIZkWYTkKS0hPtFFzWreSOUPAGZCK+UWJmWnLYN48qRwnZ9LtS0f+DqYgiucR6rON6i32yF7HjuYVlAr2evw==
+ b=KQ8wwNYIWbNfOzHXkIStWK5bMUXB4Ldxxe8G8jZ9/PETxTpMqECxF29twRSu9z4OLNOKb+AEgrVS6EoD7CRyonqEReTsIJs47tnz965aYSnRnWJJEM94v09309NJ47NMBrqMJKFzc31itvsPpF8YUqk+BaSbpl2pqmQq/4mn6ffEto99rxS1GCcje8Gi7V9MQRKCeZzxB/4j7Oovz7GP7uhdXJPAM873qzsBHaMlx7cA6aSCQF5fWob/vqXmDCXHMVaY4parNMiCKAdaiwc6AxrZ/W1MqvsdGvaz86hJ7KbCMBghyHTtw2i5SQKwq88Rk9TuYhbnM0jRi/ADfYbGLA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=9tn2HHK4pK9tKQgdBPx2LLWWT+skRvCltL7WycX2/ag=;
- b=IOvKOHfOigrFn6cxGuDgajTavWuHzHPjLU2Sk6WTTMiq+zs8wCisVlAL4h5IE1hn1j1YhLqaSq2iEDUOOYZB9Mw1thOx+7Ge1zQWSJKXsDBVc4fkGvEoZxK/0RnsJ7NeykNdWaPNAvPRkbv6enjBeQK8xihQM1pKH00D0iShd2flXm/8/kRwThdAKtcXWM6yQmhW1IsIL/xxZScIKf+Ecwh/qk8ibsB6sYM6dk35EYkMk0qem/6H1V0NEncmvZr1nPtOrC0WxQ5Sf8Rfba+dJnpJZqDAh4xhVHXSiOrBoZEGOAgRwg8oSuWzPh+ZRJioFw4mzs5ufNLA7q+PyFDDjw==
+ bh=f6bVZYC3Y0tOXsqe4AYQ4VOMWzNx+3vP7ePuGdCKCBQ=;
+ b=FQrfIY4PkXkqHsM8DsuOOpZuH2d4z21+FAz1gjVYkXP+5GWEnhbLhP0mGFytrmPsE1MiR/aHrKGSmVeWB9yoDOfkPQ/FR1bkpnj0DIW3FDOToP+jKbqcnSY54HUohz9URjPXsn5hSAmg1Rff7lE+9dWoDZsa3+nQcVhF2wV9Xj/Ho/sBlL1xNv7Inj1bNLOM2vcNwh+/NaElduggAn+RRgL7eMGs+3lJZ7q1mB7QEoq/i/FucVIPLfSENO9yTWDh3mOnoVvnJNV4mXlwvPzQj7Ls4u3ihqAN/Vd55hKA88tsWyLJgjtFdemLq2Aq/RVDdJn0olMzr4cj+SlUhL+RtA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9tn2HHK4pK9tKQgdBPx2LLWWT+skRvCltL7WycX2/ag=;
- b=XnuaafrpegxwTp7cHzbSNJIzZFQ2Q1fT8+gTgCqCARZLqJcW3LF3Weu4eSHK24DZzaSfUJRuuByOl/cq23Fkv4aT4+dFuytuOc2BCxj2rm4h3Ar0OyFNZp5XP50t8ww080Cdn76yO7ONJvBx8d8tqyrMVVGet1aFLL6TpvndlTZgnnb9BPoTJhqZZmQ2M5afZP52YUxRTlYuILm43ZVGhZR4AMcPLqHENuQy48XgL59cgGrMkEZ2aoubiEz2359jcG2SQmJsOGi19PKtWbfO7zjX2tTGRDtkMWRmpDxyP5MgcdotO0vYu/XOh2D26EhY+Gn7ErRU7XtbvZagqiDNjA==
+ bh=f6bVZYC3Y0tOXsqe4AYQ4VOMWzNx+3vP7ePuGdCKCBQ=;
+ b=GJ3DAMiKTdenJme3gfNxOvGaRlsQ+GshGfmZvmvWli8H7emRO/GTOqbEYaPnhuvIsvmhpAjUTzq9V3dQ1fvpYpRy0jGIV23n1tL2cUUPMoAK1Lf9hUE2tdrBIJfRAq7irYYSL+h1dhH9vAlwC0jEE+WnEOffJF/e+ZE8I5G/TZq0YxJE58ZqAGM48muwNG6UpCENyexJms8Jn/H8uuEc6bj2VRBz9VCHbLGo3pt+WO4bBHQT7py0WvB5o2WgcgzhJxMyHu9tG+VsafZd8eV+cqQCfsyXdYoPYr6ibDgrtMp5qcyVAHsy1BH6nk3dkfWb6omTpy2uzcyoE627u6hEbw==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
  by AM7PR04MB7077.eurprd04.prod.outlook.com (2603:10a6:20b:11c::17)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9203.12; Mon, 13 Oct
- 2025 01:37:07 +0000
+ 2025 01:37:12 +0000
 Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
  ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
  ([fe80::165a:30a2:5835:9630%4]) with mapi id 15.20.9203.009; Mon, 13 Oct 2025
- 01:37:07 +0000
+ 01:37:12 +0000
 From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Date: Mon, 13 Oct 2025 10:49:19 +0800
-Message-Id: <20251013-imx-rproc-v1-0-fb43a3fafcd0@nxp.com>
-X-B4-Tracking: v=1; b=H4sIAK9o7GgC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDI1NDA0Mj3czcCt2igqL8ZF1jC+OUJHNTo2TjNHMloPqCotS0zAqwWdGxtbU
- A8AkSrFsAAAA=
-X-Change-ID: 20251012-imx-rproc-383db752c3f7
+Date: Mon, 13 Oct 2025 10:49:20 +0800
+Message-Id: <20251013-imx-rproc-v1-1-fb43a3fafcd0@nxp.com>
+References: <20251013-imx-rproc-v1-0-fb43a3fafcd0@nxp.com>
+In-Reply-To: <20251013-imx-rproc-v1-0-fb43a3fafcd0@nxp.com>
 To: u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com, 
  "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
  Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@nabladev.com>
@@ -59,107 +56,106 @@ MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|AM7PR04MB7077:EE_
-X-MS-Office365-Filtering-Correlation-Id: fd023fcf-d812-426c-3f4e-08de09f9050d
+X-MS-Office365-Filtering-Correlation-Id: 56622a80-36f8-41e5-9d1d-08de09f90854
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|7416014|52116014|1800799024|366016|19092799006|376014|38350700014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?Y0pIMm5ucWdTeUlzb3I4K3JXb3liMDF2bmZhVVQ4aUZSbnJKaEpPb1lBelZP?=
- =?utf-8?B?RDVBdWl5MzRwWGx3Zk9VQ0tSL0F4ZzVPMmtsTWdRaVpZOVZ3NDA0YWsyMVRP?=
- =?utf-8?B?WXZsKzRGR0hGTjU2UnBVQVRTakRUQ0E2N0s2MkoyL3R0TjdpMWJDMDkxZGt6?=
- =?utf-8?B?TWlpWEhWbVRlVEJMVTZHZllrYUZHbU1ja0JVazA1dE01RE5YUXVWMldHZExr?=
- =?utf-8?B?TjJ5RTNrYWpMUG5JVzVzMi9jYWFoUHhYNHdqSENLYWdMenVFTDZGV2dTaUF6?=
- =?utf-8?B?SWptYXpxM0xMR1F2MGt3RXZwWGNRVWdsK3pTa252SjViL3ZMb0Y0UFJtNjRr?=
- =?utf-8?B?YTkrZDIxdW5ZYXdsTjV6bktDWlZlZUNQaHRzWkVBdFRTSmNHOW9vQnc3K09w?=
- =?utf-8?B?a1FmRXhycUtrMDZpZmZJVzY3VkhuNXJTRUlrOWhqRXJsamQ4NWh4QU1HTXo5?=
- =?utf-8?B?T3M3cUNTZUQ1WW15bytZQmNQRDdCdVdmTU1qV0FVRGVpVUt3ajZDS0M4Sm4r?=
- =?utf-8?B?MGk5R2g1Ykdka2xvL29rbzlvVDVpczJ1amV0a20vVUpHSFJHVmhTVkIrenps?=
- =?utf-8?B?ZzVucXBXYmlodGRZaGVja0t2eXQ0UVNzcEVpYUYxY3U3UWtYbHMwZXlzY2hD?=
- =?utf-8?B?ZnJPdVFkdGtGR1d6VjJrdlhpSXBWaFRhN1FpMWg5ZnhtWldmVEhIR3FST1F2?=
- =?utf-8?B?RFdpejBxZUllbkRLdXdiUDAxeklUZkNqY01rL2gxZ0N3eHFYaEl2MWRoa250?=
- =?utf-8?B?QnVKUmlzd3BLTGVEVFFLMkhVWGpkVzFwUEZRbGJXR3hRVmkwQXRSRE5qam1r?=
- =?utf-8?B?MmpYakFLdHJONXN0M0U1NHJpMXRrWXkyOWRhcGZwWHpDdy9WUkV6Q0MrZU1B?=
- =?utf-8?B?TkM4YitVQlAzMHVIbjNFc3Q0M3Y3OHgvQVloRFUvMFNMWXlEcW44eG5zdHlP?=
- =?utf-8?B?Qk9TMVFVWEJkai9VWHBRbG9ldlQ3c2lwSGoxTHZJcmJBU01PSGdJTDVNeDNp?=
- =?utf-8?B?aXRIdWN0NHNaN1JlVEFiYUUwUjVTeVpzNkREdkNrN3FoL1hLVTFMK3B4RHVt?=
- =?utf-8?B?OVNMM0RqTExwSVhNMGN5b2ZveHluYXFVbWVLR0dBcFlCWmZRTUhFZFRZMTdr?=
- =?utf-8?B?d2o4Ym9IcDBtQ2tWNTc5bHRKbDNwRlpSbzQ2MHhYV29Bd0FIajc3VGh3S0g2?=
- =?utf-8?B?aDNFZWNqUE5hdnYzL0R6N0tTWXFNQzhHREVsM0dUTm5PVzdDT2VZdDRON2FE?=
- =?utf-8?B?ckFTM2FHVXBVUlFGUFFzblJCdytCSmM0QWtFZ1ZPdVVxbDdSTmtadzVIS3Nk?=
- =?utf-8?B?Y2lJV2d4emFPczIyUXdiWlRPZlp1ZXhUcWZ3QlRwT2RNL2V1Y2VVbVFlMDNy?=
- =?utf-8?B?cThUaDlyOXhmTm1oQ04vb01MRGl5V3BMZHEreXM1THQvZWlLUHY4YktYMndH?=
- =?utf-8?B?UEhzK2ZTUDdPNUthbGJ0SWJ4RXNvcUUrMTlYcUFYN2dNM2NDaVZVeEVQVTBY?=
- =?utf-8?B?K3A5OFgrS1pReFRtN0hpZkFmYXdZdHNqWGFOczBsYU12NVJKRDdWNmVVN2t2?=
- =?utf-8?B?Z1VFeFBJZlR4MmpHRzdjcU5rS0F2akVzYXIrR2RUMXlvSCtIODNoV2M4M094?=
- =?utf-8?B?cUFUeTVZM2N6dG10T3FmVzhLNjY3RFdrdW81T084bXY4QUJHMkh5YVREMW9h?=
- =?utf-8?B?alV0QlprMTFGYlFrZHhpWHYwRzEvRDBNTmVJNkhYMllLVjNibFlyQk5UcThJ?=
- =?utf-8?B?N0VVQWFIOFRQckNvOXVrZUZRKzBUK1kvWkoyM294U1R6MkY3bFlTY1k2Y3dh?=
- =?utf-8?B?YTUyTHVEaHRMbmZOdm83Z0ltd0lBSUd2b1pLWGlMNHBHMTRCQmdEQm5BODM2?=
- =?utf-8?B?ZjQ5ZlBZSTFKVGY5eUUvTjZVNHNsU1VXdGVFR0dVNjNTTHZmcWE2eFhsSEtW?=
- =?utf-8?B?VHV4U0dQV1FHbTNQMWpERTNqVHh6V3p4bXEyaUdSalZTMzl0MHZMa0FrcXQz?=
- =?utf-8?B?cGFhOXdrQS9TL2ZBS29mM0FUT0NRQXNENEVLZWNpSkVDb2JWeE51U3QrT2d1?=
- =?utf-8?Q?f16SDy?=
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?Njl4Y290dlhTc1ZpeWo0M0pLVFIxL1BCc1JGU1lpSjFiUEF4STBhSG5WVzFT?=
+ =?utf-8?B?WVR0bUVEZkRlbVNaWmtMajNnR1VzMlV4dFY0eU1wMHlIWEZ5WUtjaVFlb0Vo?=
+ =?utf-8?B?N3BkMlRKbmZ5QWRMeTlvbjdPK01tWFVnODFpN0ZWYzg2bmwzamFXMjRwcGVx?=
+ =?utf-8?B?bC8xMXIxQjZSM09PUk1XRlhEbkZsSytTd05iUDYzWjNKd01yZ2NQaExrblVZ?=
+ =?utf-8?B?ZUZtUzNIWWNoenJ6TUEwYzFwOE5VWGdEN05mU0hvZkpBZ1RoMGNoSWhTMmY5?=
+ =?utf-8?B?TXVzMDM0Yk9SZ2kxRXBNbUhKVjRBcUNuRFlzUlFNanV5bHdYOVY4M3A5c0dX?=
+ =?utf-8?B?R293d3B4YUdldVFhelJBNEd6UGh2WTR0Rjk0d2tlQU5jTkNLVkVpczJmMXhk?=
+ =?utf-8?B?UDRGQVRQN1RNZXFEeHVKam1UNFpVS3owMDdCZGJicVUxZTIvSjFjZzZRTzBW?=
+ =?utf-8?B?SGlJZml2aWxRMjR1NFNDelNBbFJvN1F0UDJRdFpRazhrc2hSdm5CeXpvNFNI?=
+ =?utf-8?B?bzgxWHVyaHpNVTBhemJQYUVWbnArVExpUzhWMkluNzFxRHhGWEtJTE1tdzBo?=
+ =?utf-8?B?UnZhK2VjR0FseU00RFQwcXFwT09oNHorNW5KT1FscjduZGw2TkRkTDZNa1ND?=
+ =?utf-8?B?Yjk1aVFDdnVERHc0NnMzWGZRdW42cEhuYjE3b2dXdTZ2KzdqTG1GbVdpa1N0?=
+ =?utf-8?B?ZE5aZzBLRGpIcDIzNjF6andpOFJidURGeWRkMjVzS1RvTVFsRmZOeHRxV0hI?=
+ =?utf-8?B?aFhDR2RmcFBhMVNETzJUNUhhbEtCRmlUdXUxR1dNUXoyelVrTHRZbG9BTm5E?=
+ =?utf-8?B?UWpRVUdha2JoUzYzVElCUk0rcFdaZW9kdmVYZFI3NHFkaVhOSEhLY1hydDFn?=
+ =?utf-8?B?VVR1VEVPZGs0VkpROC85d25nU2o2ZnlqaEFGRzFPMGhNcWUxSWFDN0FqbGw0?=
+ =?utf-8?B?cGhTN2Z6UFRrSjJ0Z0tzNkxheUIrbytXekhEN25vY1ZRWHRxdjRESlowUVVt?=
+ =?utf-8?B?U0EyaXVRR2VzY3FxeVcxTGZxWnpzU0I2aWJ2Wk5NMkpZQjNiZTh0R3ZIRURz?=
+ =?utf-8?B?VUhVVkRocGZnL21ST3hxTTFoK2RzMjlIa1YxcVdhb0xybVVadEtCb2Z2MlJL?=
+ =?utf-8?B?eXozK01mTTlWQm9xaktoOWJJUTJYcFBvblpvNG1tUlBxZ1NWbkNNY1dqT1kv?=
+ =?utf-8?B?UXJlZDRHNU5oS1BZV0tXSkYrVEhSS1pkcG94cGIwcXRhTjhyRW1pempmY3ZP?=
+ =?utf-8?B?MHZ1cUg2cXdrN01qdWMwd1poZzBMZFdmUStkR3JxQkdBZVh1QzJ1Sm81WjU0?=
+ =?utf-8?B?RExyNkQ2SXJVdHhZVVhoSldFaGQxNlB6NEtZa0Y1R2VzbFVpYVFRV2MvWldU?=
+ =?utf-8?B?M1F5Wm5zeHhGL3BxREI3NWdXN0VDWVhYdlhPTVlmeEhwTXBIaDVzNk1GcjIr?=
+ =?utf-8?B?OTlGSjN6R1hYc0laenpvMHZrL081L2dmODlEbWdXSHlsbFRxYmtBQ3RheU93?=
+ =?utf-8?B?K3V2c1ExR3FqSzdmMVNPL04rV0tON1JZd1JhdlpnTVZvdkp5azM4RVFpN1lE?=
+ =?utf-8?B?eCs2RnM5ellHYjNGSHYyNTJXTllLSXpucjREenhNQkQxUmxMeUlxT1dzc2ow?=
+ =?utf-8?B?Z1JQM1pqVnRyeWtoZE9Yakh6UGdjU0pXQ1FjaGI2aDBRS2xaTjBvbXhEbm90?=
+ =?utf-8?B?L2pQK2FEK29QQ200WG4rZjhFVXdHUS9qYmZNRlVQODlOeWhVeVoxYm0xT2Nq?=
+ =?utf-8?B?cmJWT2JoWmJrRmNPZkVKSCsyZisyUzBkK3FmZ3ZPakdyckY2K25FRmZWeFRN?=
+ =?utf-8?B?T3hQc3dNbHZ5dE5KNFg0UzZ0ZnhOVDhMOVlUUnRMSEJSYmVCeGcreGJuelFm?=
+ =?utf-8?B?ZFhUdmFyU3JmNFZwZU9tc2FISWlqN1EwZUp0Z0FTdVNTV1R2YnRrWmQ5K1Fh?=
+ =?utf-8?B?MWtIbisyNFg3MjNqZEV0cHllWHZZL3RxS0lGNXJqZmJRRWNaOEEwanA4QkFn?=
+ =?utf-8?B?RVFTNEw0ZjBBaS9JaVhidFFkcFIxS2lmaVRIdW8xWlE5R25aMVZXZFRjbnVu?=
+ =?utf-8?Q?BONsjK?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(7416014)(52116014)(1800799024)(366016)(19092799006)(376014)(38350700014);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?L1hKQmpQTlAzNzRtS2x5NTNMeVhiajg4UFJRY0IzdGRaazNwSUhaQUh5SnM3?=
- =?utf-8?B?dUNXN0J2VExTanBhd3VYVk5hZzZBYXQxVzZDWHhIS3RBNzJNVGp0Mmp3ejNN?=
- =?utf-8?B?ZXhxZTB3MjV4alVZVnFSWVltYnpUY2ZuamUzYUQ3V1hFNkltRWNLWnI0Z2FC?=
- =?utf-8?B?amtzMklTV1hNZEVrMWRmN00zQTNkd0VITGoxeFRRbzZqekJqMzc4ek9hdXNu?=
- =?utf-8?B?b3craUVvSHF1N1Zwb2syMWRVNTZsQ0NUR0dhT3RtUFlsaGk4b0VWYmI5NmRR?=
- =?utf-8?B?bW9oOVNJRzNHcjB0ZzUvL3JxWnJHWkljbG5WbFZVdnFtWjlqY0hUbkM4c3Ni?=
- =?utf-8?B?eUV1TU1LKzZhUERXcHBKRXRNdGtyang1Ty9CUG91cTJUUkI0MG9wYktuaWg0?=
- =?utf-8?B?dmN3dEJtR01OeDhIYk5FRGRtdDQ0RWdaU0lYUkExRFRPTWdIMEFwM1FpUlF6?=
- =?utf-8?B?ZWpDVGFUTFd6RWpQdTNFd3FmUjNWK0lXeDNORmMxSGFQWVlLQWlSMmJZZkVR?=
- =?utf-8?B?Zk1jOVQ2ZzVudXp2TlFlTG9wTGJIdHFmM2ZWOUhoaWxjbFM5RWNucVZrTGlQ?=
- =?utf-8?B?Q0QyUGdPckhFdGd1SUswRXdaUjBoRlhNNU5vNXB3TDE3eXJvTkFES1NXejBI?=
- =?utf-8?B?Znk3T3BMdnpEUlFaQ295ZHB6WnpZZzMxVTZGU2hROHIyeDNjeTZuazBFODFM?=
- =?utf-8?B?UTVCSmdMRWlSalJBUlhLWUJNVW1oQkxoY2tBc0UxV25qNmh4MHJCVkpCUmNV?=
- =?utf-8?B?VDRaKy9rcDhHcStIdFZPdWJKODkrK3dhWG16dG9zOERjTWhoMHRmeG82UlUv?=
- =?utf-8?B?TDZDN2dJY1BOOFpUQmh3RGMxWDgzV082c3Rxd2pHWmMzQ3RSMjNCaVlVOTdy?=
- =?utf-8?B?ays2bUNlc1N2STJpcFQ0a0FUU0tIVm1TVW1icDNqMHFLTVVzQnUxVlViUndT?=
- =?utf-8?B?aHFHV291dHNiVzVkZlNVVGNRUHNabkVuT0NKeGJOVk9qK3VIdmFvT0lQM1Bi?=
- =?utf-8?B?anFMR0F1RnFSSFlXc0xWdU5LbHdjcWc2Q3ZiR0c0OUxRTHJhUVU3ZEFhOGh2?=
- =?utf-8?B?TExWRzV0NmZxNnlqNkZLUWV5djJaRWVlYnR3UWVJYnhCOUlYVkJVNE5mY1J1?=
- =?utf-8?B?dVJTWVdwbEY3b2dhalF6MWtGbXVYU0JXWkptVmtXVWZid3RpOC8weWw5RnRC?=
- =?utf-8?B?aWIzTzdSQ2t6TnV3VW4reEkyaXp4enJ2QTlBUTRsdi9OcXhmYjZ6dko0Unh1?=
- =?utf-8?B?UWZIeEdZbFNWUW9CMitDeU91TTBBTWM1c1JTSVkvMDBMME5zZVoyanIycjlC?=
- =?utf-8?B?YkNPZ2xwUlVoRGoySXFwS1Bwc05scVpYbmVVeUhRMkx1UVdESjlybUVpcC8y?=
- =?utf-8?B?UzU5YVdob2ZsdGx1MXAwWEk4dk00RXZ4bm9LRjVLODZqb3dJclFiaHB2QVhL?=
- =?utf-8?B?UldhV0xZZVhYMDVBT0ZLcElRYW1ORnk2eTJzRXkzM0YyQkNzYzllMHV3djlu?=
- =?utf-8?B?RE11b0NPbTNwWHVwWDl2YXA5d2U3S0pHM2Zwb0lLeHRHSm5ZcEtNenJERSt5?=
- =?utf-8?B?QVhKTXl1UUU0ZUU5TWZtVFdMYm1xSWo2RWR0VnlJbDdSMEx4VE1CV2w3U3FZ?=
- =?utf-8?B?SVloQWd2OVhwalA0bUx4SDlTZmVFSm1yV2Erb09kTEk3R0Fic1JPT2VRb1RP?=
- =?utf-8?B?aG1Gcm8xMERaZ1FVOU0xSG1XeENpMVlVYmRSaTZxUkJuWWJjczZEOTVZKzR6?=
- =?utf-8?B?cEFJSXBDeitWYTBlZ1BGNmR1WnhHV0ozOGc1TjVsczZCYS9mM2V2V3ZyT2VV?=
- =?utf-8?B?djJkNXpPZW0yZUUrSE1aUlhSNXlUU1NtTUlxcEtBcXlRbnBCaGhyTVc0M01C?=
- =?utf-8?B?OFBqS0x4dVhQQ1N1a1ZTSE9tMEZYQ0h2bktFQVk4TU8yMXRoNWduSzdvdnVJ?=
- =?utf-8?B?VTJFWVcrdU1RUTU1a01tQXRJb0JqUmVBc3lxcEdIQzhXbVgwLzFiTmxTVFZY?=
- =?utf-8?B?azR1L0Ntblg4NncwRkgrM0VTN0xhcGFKZk1hblM4ZCtBUkVMclNyZVBVZk5T?=
- =?utf-8?B?QUVDZEw1VUgxcUs5dkxkY25wM2g4c1dCS0lhbEY2NXFaTjJ1OVBaaEdkRVpB?=
- =?utf-8?Q?03yLxV5Hby2WIf9Qd2yExSKvd?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WkFDTG5Lajg1MVJEYlowaDY5cmZLeEEwMG55ckt4MXpSOEJuYWtVSG9vOXVD?=
+ =?utf-8?B?U1RuUFQvMGhNQ09RUjVYbVQrdWFKY29FSnJtaUdoT0dUd2VDL2s5THVyMlc3?=
+ =?utf-8?B?UzdHcjJtVjlibkxwZlNnL2dLV2lOSjJwU2hHZ2xaK1QyUitBZUNjVEJMVTFr?=
+ =?utf-8?B?a3dPdlR4dmZTRWdWc0kwWlkyeCtzblZrVDZEZWZHZE1ldVd3U2YvRlJacjhH?=
+ =?utf-8?B?QWpid0hXUXc1bGpBQTFsaWNNUDhobTBqaXkxK0RhMmtsOERCall2TUwyZzVM?=
+ =?utf-8?B?bG1sSCtTWGtDU3V5eDNGRmx2R2hVTHpIdlRkYzZxR3M3YmhxWUFwSFB4VkMw?=
+ =?utf-8?B?Q3FGeGZuVlBJaXZYOEtkMEpqSll3VjVyU2FnYXpGYWxoQjRBamZ2dTlWY3FW?=
+ =?utf-8?B?Z3pkMVlmRDJwTXkyRmpjVVVPdWdwVno1cDJRTDh0azNDd2pKYjNLYlpQdDk5?=
+ =?utf-8?B?bnhzUW4xcyswN0tZOEZINVpXaDdFZmxKT3k4c3padlp0MDFzSGQ0czNpQ2lt?=
+ =?utf-8?B?V3piWXhCdXdtVHJoSHBZSDNnek42Y0RwamVXT25NaHJUbjhYWTA5dnh1aUp5?=
+ =?utf-8?B?Ui9CaWhNVVJwdkU0MTR3S2JYWVNrTGtmcTVUWHZNa2FheXJLbkJ6SXpEdTNF?=
+ =?utf-8?B?Z0kvN1lERUQzNWlSeFczdGM5UEpTWE1RWXo4NkEyWjZ4RVVkOWtSVFM4MUhp?=
+ =?utf-8?B?Tk5nR0JCR3g5UlNrL1pyZlRpcW9qOUhTNUkrWWkxVGRmSHR6YlN3aElLWXAz?=
+ =?utf-8?B?UWNnSEdQemFvaXFJa2xSQWJLUXh5Y1diaG1nWkE0czZTeVlWT2cyTE5nRGRl?=
+ =?utf-8?B?QythSVR4YUtZSWZObDNKOWNoanZ6TzJwZFM0RU5LTTFQZXpOY1dRZFlOb29i?=
+ =?utf-8?B?dlhVWnJLL1NwWHh4MUpTelNmcmx4a0RWV1dnTElBSkxDckt4ZUVqS0ZiTUxv?=
+ =?utf-8?B?OEJGbXB1Rlg4OFczSlFENjN2Q2UvVnFpUE5ETVJUcFg4QW1sdXBZZW9BdG1u?=
+ =?utf-8?B?c3BqUDBWdkRLc3V4djdrdklYYWc5c1JQb1BGY2tWbXd3MkFzTlBWY3pKNGN1?=
+ =?utf-8?B?cUtEYU9RbENhNVEvZUtJNEQ2SFZ5cE55VWM0K0JleXd0NG1vRXcxYlNiMXpv?=
+ =?utf-8?B?UEI1Y2VqSTg4UHZVQVIrdVBORkEwdGxPeTZ6K2lEYm4wNzhrRTc0WGxDSmJ3?=
+ =?utf-8?B?WmdVYTNQc1J3VVFwQmdxUnFiMGlyWFk2RXl4SGNyYUNCNGNnNzVhdVRpUkwr?=
+ =?utf-8?B?NjdEeTRSZWdHelBsaFZ0YmhQdFBZZitpdHdEQURXV3FQcDNNa3hxNmxXYzlh?=
+ =?utf-8?B?T2dranorMmtlcmFoU1ZGUEp2cjB2TGptWHlZVTEzM211NFFFOXJWRStLb0g4?=
+ =?utf-8?B?T2Q0REt3NWU0eldseXc0ZnZNaFVLQmd4aXRacXVhVnFIWG85WW8xZTEvWVZV?=
+ =?utf-8?B?Uk5ybGt5L2VaazlrTktWN3B6Y3hmNTRIeGlFbk0yQThycFFueVRONy81b05D?=
+ =?utf-8?B?L0Q0eXBWeUJVd3FadGY4clV5SkJyTWpCVDVOVS9qdTgyZ1BlOHZHVVpHVEZs?=
+ =?utf-8?B?dVVYaHZiaWpVLzgzNitDYnBHNDNiYisyRVFBLzVtWi9ndUVMckZneERMNnlt?=
+ =?utf-8?B?K3N4cnlEOWV5Q2FZQmNuamxweEY2N2k4R29NU254bzVHYklYdVJ6SXZxNlp1?=
+ =?utf-8?B?Qk5OTG9iR1ROOWtZOFJTRkJYa0tGNnJsZ2x3TTlXVnZXMVVVcUxqTUxDd0ZT?=
+ =?utf-8?B?S3k0MlFTeG5lUHhqRm9GenN5TWZiczVlSWN3TGtYZ1pKR0RCQUxKVko3c2Nv?=
+ =?utf-8?B?V28vSjJFVERwZkFoSm1Tb21tMVgrWVAyZzFRK1oweGNqTW1qT01OTnJKMkRl?=
+ =?utf-8?B?WVRNS0taejUxeFlDMUo1MWlsWUV0TDQwa2w0bmZzWUhJZHM4UCsyZzhwclhO?=
+ =?utf-8?B?cVgyZzRjTW1EbUM3aXl2bVpzcm1sV1NSYjE2TUdnbHdlQnRmVjBIcTRMekVS?=
+ =?utf-8?B?YnBvRDB3emIxaVViWFVVYlFqLzZOVWRHWDNiRmlLMlM3b1FNd1dobE1uY2cy?=
+ =?utf-8?B?eW43cUg4d0diZzRkVXl5VkhxaFB5K00xblFQV1p5d2VQb25yZ2Mxc2VXaEFp?=
+ =?utf-8?Q?6w4z+cLOTN1xiRI0tiXYldq5m?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: fd023fcf-d812-426c-3f4e-08de09f9050d
+X-MS-Exchange-CrossTenant-Network-Message-Id: 56622a80-36f8-41e5-9d1d-08de09f90854
 X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Oct 2025 01:37:07.1289 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Oct 2025 01:37:12.6789 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: lasqwAyW+g8QSQZLU5OD0q8JyaHSMdDdedL+wfdCC91FaZEIF6IWL3Ld3h/jRif7212e6XuN3bn2eqPt/YBiBw==
+X-MS-Exchange-CrossTenant-UserPrincipalName: FuDXbVVjFIQiGbfrE8T2UUpS68WT+wgTh7MVxeRXPg1/DRLIwskWWSI77mxWixRTfHloFNXDYvbrceDIKmKm6g==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR04MB7077
-X-Mailman-Approved-At: Tue, 14 Oct 2025 07:30:13 +0000
+X-Mailman-Approved-At: Tue, 14 Oct 2025 07:30:14 +0000
 Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
  Ye Li <ye.li@nxp.com>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Udit Kumar <u-kumar1@ti.com>, Oliver Gaskell <Oliver.Gaskell@analog.com>,
  Andrew Davis <afd@ti.com>, Beleswar Padhi <b-padhi@ti.com>,
  Judith Mendez <jm@ti.com>, Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Ryan Eatmon <reatmon@ti.com>, Hari Nagalla <hnagalla@ti.com>
-Subject: [Uboot-stm32] [PATCH 00/11] remoteproc: Add support for
- i.MX8M[M/N/P/Q] and i.MX93
+Subject: [Uboot-stm32] [PATCH 01/11] lib: Import iomem_copy from Linux Kernel
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -171,63 +167,237 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-VGhpcyBwYXRjaCBzZXJpZXMgaW50cm9kdWNlcyByZW1vdGVwcm9jIHN1cHBvcnQgZm9yIE5YUCBp
-Lk1YOE0gYW5kIGkuTVg5MwpwbGF0Zm9ybXMuIE1vc3Qgb2YgdGhlIGkuTVgtc3BlY2lmaWMgbG9n
-aWMgaXMgcG9ydGVkIGZyb20gdGhlIExpbnV4IGtlcm5lbCB0bwplbnN1cmUgY29tcGF0aWJpbGl0
-eSBhbmQgbWFpbnRhaW5hYmlsaXR5LgoKVGhlIGV4aXN0aW5nIGJvb3RhdXggY29tbWFuZCBpbiBV
-LUJvb3Qgb25seSBzdXBwb3J0cyBsb2FkaW5nIHJhdyBiaW5hcnkgaW1hZ2VzLgpIb3dldmVyLCB0
-aGlzIGFwcHJvYWNoIGZhaWxzIHdoZW4gdGhlIHJlbW90ZSBwcm9jZXNzb3IgZmlybXdhcmUgY29u
-dGFpbnMKc2VjdGlvbnMgdGhhdCBtdXN0IGJlIGxvYWRlZCBpbnRvIGJvdGggVENNIGFuZCBERFIu
-IFRvIGFkZHJlc3MgdGhpcyBsaW1pdGF0aW9uLApuZWVkIHRvIHVzZSByZW1vdGVwcm9jIGZyYW1l
-d29yayBFTEYgbG9hZGVyLCBlbmFibGluZyBwcm9wZXIgbG9hZGluZyBvZgpzZWdtZW50ZWQgZmly
-bXdhcmUgaW1hZ2VzLgoKUGF0Y2ggU3VtbWFyeToKClBhdGNoZXMgMeKAkzI6IEltcG9ydCBtZW1j
-cHlfaW8gYW5kIG1lbXNldF9pbyBmcm9tIHRoZSBMaW51eCBrZXJuZWwgYW5kIGVuYWJsZQogICAg
-ICAgICAgICAgdGhlbSBpbiB0aGUgcmVtb3RlcHJvYyBzdWJzeXN0ZW0uClBhdGNoZXMgM+KAkzEx
-OiBBZGQgcGxhdGZvcm0tc3BlY2lmaWMgcmVtb3RlcHJvYyBzdXBwb3J0IGZvciBpLk1YOE0gYW5k
-IGkuTVg5My4KUGF0Y2ggNjogVGVtcG9yYXJpbHkgYWRkcyBDb3J0ZXgtTSBub2RlcyB0byB4LXUt
-Ym9vdC5kdHNpIHNpbmNlIHRoZXkgYXJlIG5vdAogICAgICAgICB5ZXQgYXZhaWxhYmxlIGluIHRo
-ZSB1cHN0cmVhbSBMaW51eCBkZXZpY2UgdHJlZS4gVGhlc2Ugbm9kZXMgY2FuIGJlCgkgcmVtb3Zl
-ZCBvbmNlIHRoZXkgYXJlIG1lcmdlZCB1cHN0cmVhbS4KCk5YUCBpbnRlcm5hbCBSLWIgdGFncyBh
-cmUga2VwdCwgYmVjYXVzZSB0aGUgcGF0Y2hlcyBhcmUgZGlyZWN0bHkKY2hlcnJ5LXBpY2tlZCBm
-cm9tIE5YUCBMVFMgdHJlZS4KClNpZ25lZC1vZmYtYnk6IFBlbmcgRmFuIDxwZW5nLmZhbkBueHAu
-Y29tPgotLS0KUGVuZyBGYW4gKDExKToKICAgICAgbGliOiBJbXBvcnQgaW9tZW1fY29weSBmcm9t
-IExpbnV4IEtlcm5lbAogICAgICByZW1vdGVwcm9jOiBFeHRlbmQgZGV2aWNlX3RvX3ZpcnQgd2l0
-aCBhIGlzX2lvbWVtIHBhcmFtZXRlcgogICAgICByZW1vdGVwcm9jOiBBZGQgaW14X3Jwcm9jIGRy
-aXZlciB0byBzdXBwb3J0IE5YUCBpLk1YOE1QL04KICAgICAgcmVtb3RlcHJvYzogaW14X3Jwcm9j
-OiBTdXBwb3J0IGkuTVg4TVEvTQogICAgICByZW1vdGVwcm9jOiBpbXhfcnByb2M6IEFkZCBzdXBw
-b3J0IGZvciBpLk1YOTMgQ00zMwogICAgICBhcm06IGR0czogaW14OG06IEFkZCByZW1vdGVwcm9j
-IG5vZGUKICAgICAgaW14OG1wOiBFbmFibGUgcmVtb3RlcHJvYyBmb3IgaS5NWDhNUCBFVksKICAg
-ICAgaW14OG1tOiBFbmFibGUgcmVtb3RlcHJvYyBmb3IgaS5NWDhNTSBFVksKICAgICAgaW14OG1u
-OiBFbmFibGUgcmVtb3RlcHJvYyBmb3IgaS5NWDhNTiBFVksKICAgICAgaW14OG1xOiBFbmFibGUg
-cmVtb3RlcHJvYyBmb3IgaS5NWDhNUSBFVksKICAgICAgaW14OTM6IEVuYWJsZSByZW1vdGVwcm9j
-IGZvciBpLk1YOTMtRVZLL1FTQi9GUkRNCgogTUFJTlRBSU5FUlMgICAgICAgICAgICAgICAgICAg
-ICAgICAgICB8ICAgMSArCiBhcmNoL2FybS9kdHMvaW14OG1tLXUtYm9vdC5kdHNpICAgICAgIHwg
-ICA0ICsKIGFyY2gvYXJtL2R0cy9pbXg4bW4tdS1ib290LmR0c2kgICAgICAgfCAgIDQgKwogYXJj
-aC9hcm0vZHRzL2lteDhtcC11LWJvb3QuZHRzaSAgICAgICB8ICAgNCArCiBhcmNoL2FybS9kdHMv
-aW14OG1xLXUtYm9vdC5kdHNpICAgICAgIHwgICA0ICsKIGFyY2gvYXJtL21hY2gtaW14L2lteDht
-L0tjb25maWcgICAgICAgfCAgMjAgKysKIGFyY2gvYXJtL21hY2gtaW14L2lteDkvS2NvbmZpZyAg
-ICAgICAgfCAgMTIgKysKIGRyaXZlcnMvcmVtb3RlcHJvYy9LY29uZmlnICAgICAgICAgICAgfCAg
-IDcgKwogZHJpdmVycy9yZW1vdGVwcm9jL01ha2VmaWxlICAgICAgICAgICB8ICAgMSArCiBkcml2
-ZXJzL3JlbW90ZXByb2MvaW14X3Jwcm9jLmMgICAgICAgIHwgMzcwICsrKysrKysrKysrKysrKysr
-KysrKysrKysrKysrKysrKysKIGRyaXZlcnMvcmVtb3RlcHJvYy9pbXhfcnByb2MuaCAgICAgICAg
-fCAgNTYgKysrKysKIGRyaXZlcnMvcmVtb3RlcHJvYy9yZW5lc2FzX2FwbXUuYyAgICAgfCAgIDMg
-Ky0KIGRyaXZlcnMvcmVtb3RlcHJvYy9ycHJvYy1lbGYtbG9hZGVyLmMgfCAgOTMgKysrKysrLS0t
-CiBkcml2ZXJzL3JlbW90ZXByb2Mvc2FuZGJveF90ZXN0cHJvYy5jIHwgICAzICstCiBkcml2ZXJz
-L3JlbW90ZXByb2Mvc3RtMzJfY29wcm8uYyAgICAgIHwgICAzICstCiBkcml2ZXJzL3JlbW90ZXBy
-b2MvdGlfazNfZHNwX3Jwcm9jLmMgIHwgICAyICstCiBkcml2ZXJzL3JlbW90ZXByb2MvdGlfazNf
-cjVmX3Jwcm9jLmMgIHwgICAyICstCiBpbmNsdWRlL2FzbS1nZW5lcmljL2lvLmggICAgICAgICAg
-ICAgIHwgIDM3ICsrKysKIGluY2x1ZGUvcmVtb3RlcHJvYy5oICAgICAgICAgICAgICAgICAgfCAg
-IDMgKy0KIGxpYi9NYWtlZmlsZSAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgIDEgKwogbGli
-L2lvbWVtX2NvcHkuYyAgICAgICAgICAgICAgICAgICAgICB8IDEzNiArKysrKysrKysrKysrCiAy
-MSBmaWxlcyBjaGFuZ2VkLCA3MzEgaW5zZXJ0aW9ucygrKSwgMzUgZGVsZXRpb25zKC0pCi0tLQpi
-YXNlLWNvbW1pdDogNDhmMjFlNjZlMzYwNTUyYzc1ZDcwYTUwNDIxZDBlMGVkMWY1OWU5MApjaGFu
-Z2UtaWQ6IDIwMjUxMDEyLWlteC1ycHJvYy0zODNkYjc1MmMzZjcKCkJlc3QgcmVnYXJkcywKLS0g
-ClBlbmcgRmFuIDxwZW5nLmZhbkBueHAuY29tPgoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX18KVWJvb3Qtc3RtMzIgbWFpbGluZyBsaXN0ClVib290LXN0bTMy
-QHN0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20KaHR0cHM6Ly9zdC1tZC1tYWlsbWFuLnN0b3Jt
-cmVwbHkuY29tL21haWxtYW4vbGlzdGluZm8vdWJvb3Qtc3RtMzIK
+From: Peng Fan <peng.fan@nxp.com>
+
+memcpy_{from,to}io and memset_io is needed for i.MX8M to write
+TCM area. So import the APIs from Linux Kernel 6.17.
+
+Reviewed-by: Ye Li <ye.li@nxp.com>
+Signed-off-by: Peng Fan <peng.fan@nxp.com>
+---
+ include/asm-generic/io.h |  37 +++++++++++++
+ lib/Makefile             |   1 +
+ lib/iomem_copy.c         | 136 +++++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 174 insertions(+)
+
+diff --git a/include/asm-generic/io.h b/include/asm-generic/io.h
+index 13d99cfb5973399209c00adee0080ff83414c064..cf981ad3501f935c714b7580536540e7aba249c1 100644
+--- a/include/asm-generic/io.h
++++ b/include/asm-generic/io.h
+@@ -3,6 +3,7 @@
+  * Generic I/O functions.
+  *
+  * Copyright (c) 2016 Imagination Technologies Ltd.
++ * Copyright 2025 NXP
+  */
+ 
+ #ifndef __ASM_GENERIC_IO_H__
+@@ -453,5 +454,41 @@ static inline void iowrite64_rep(volatile void __iomem *addr,
+ #endif
+ #endif /* CONFIG_64BIT */
+ 
++#ifndef memset_io
++/**
++ * memset_io -	Set a range of I/O memory to a constant value
++ * @addr:	The beginning of the I/O-memory range to set
++ * @val:	The value to set the memory to
++ * @count:	The number of bytes to set
++ *
++ * Set a range of I/O memory to a given value.
++ */
++void memset_io(volatile void __iomem *addr, int val, size_t count);
++#endif
++
++#ifndef memcpy_fromio
++/**
++ * memcpy_fromio -	Copy a block of data from I/O memory
++ * @dst:		The (RAM) destination for the copy
++ * @src:		The (I/O memory) source for the data
++ * @count:		The number of bytes to copy
++ *
++ * Copy a block of data from I/O memory.
++ */
++void memcpy_fromio(void *dst, const volatile void __iomem *src, size_t count);
++#endif
++
++#ifndef memcpy_toio
++/**
++ * memcpy_toio -	Copy a block of data into I/O memory
++ * @dst:		The (I/O memory) destination for the copy
++ * @src:		The (RAM) source for the data
++ * @count:		The number of bytes to copy
++ *
++ * Copy a block of data to I/O memory.
++ */
++void memcpy_toio(volatile void __iomem *dst, const void *src, size_t count);
++#endif
++
+ #endif /* !__ASSEMBLY__ */
+ #endif /* __ASM_GENERIC_IO_H__ */
+diff --git a/lib/Makefile b/lib/Makefile
+index a2e6066886495502a47bb1595217e8eb82374763..6e4f59141f3faca156b13e7f78c5d4312af20193 100644
+--- a/lib/Makefile
++++ b/lib/Makefile
+@@ -123,6 +123,7 @@ obj-y += ctype.o
+ obj-y += div64.o
+ obj-$(CONFIG_$(PHASE_)OF_LIBFDT) += fdtdec.o fdtdec_common.o
+ obj-y += hang.o
++obj-y += iomem_copy.o
+ obj-y += linux_compat.o
+ obj-y += linux_string.o
+ obj-$(CONFIG_$(PHASE_)LMB) += lmb.o
+diff --git a/lib/iomem_copy.c b/lib/iomem_copy.c
+new file mode 100644
+index 0000000000000000000000000000000000000000..10661fe216f780b9ebb27828b2618d4306bb07e4
+--- /dev/null
++++ b/lib/iomem_copy.c
+@@ -0,0 +1,136 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ * Copyright 2024 Kalray, Inc.  All Rights Reserved.
++ */
++
++#include <linux/compat.h>
++#include <linux/io.h>
++#include <linux/kernel.h>
++#include <linux/types.h>
++#include <asm-generic/unaligned.h>
++
++#ifndef memset_io
++/**
++ * memset_io() - Set a range of I/O memory to a constant value
++ * @addr: The beginning of the I/O-memory range to set
++ * @val: The value to set the memory to
++ * @count: The number of bytes to set
++ *
++ * Set a range of I/O memory to a given value.
++ */
++void memset_io(volatile void __iomem *addr, int val, size_t count)
++{
++	long qc = (u8)val;
++
++	qc *= ~0UL / 0xff;
++
++	while (count && !IS_ALIGNED((long)addr, sizeof(long))) {
++		__raw_writeb(val, addr);
++		addr++;
++		count--;
++	}
++
++	while (count >= sizeof(long)) {
++#ifdef CONFIG_64BIT
++		__raw_writeq(qc, addr);
++#else
++		__raw_writel(qc, addr);
++#endif
++
++		addr += sizeof(long);
++		count -= sizeof(long);
++	}
++
++	while (count) {
++		__raw_writeb(val, addr);
++		addr++;
++		count--;
++	}
++}
++EXPORT_SYMBOL(memset_io);
++#endif
++
++#ifndef memcpy_fromio
++/**
++ * memcpy_fromio() - Copy a block of data from I/O memory
++ * @dst: The (RAM) destination for the copy
++ * @src: The (I/O memory) source for the data
++ * @count: The number of bytes to copy
++ *
++ * Copy a block of data from I/O memory.
++ */
++void memcpy_fromio(void *dst, const volatile void __iomem *src, size_t count)
++{
++	while (count && !IS_ALIGNED((long)src, sizeof(long))) {
++		*(u8 *)dst = __raw_readb(src);
++		src++;
++		dst++;
++		count--;
++	}
++
++	while (count >= sizeof(long)) {
++#ifdef CONFIG_64BIT
++		long val = __raw_readq(src);
++#else
++		long val = __raw_readl(src);
++#endif
++		put_unaligned(val, (long *)dst);
++
++
++		src += sizeof(long);
++		dst += sizeof(long);
++		count -= sizeof(long);
++	}
++
++	while (count) {
++		*(u8 *)dst = __raw_readb(src);
++		src++;
++		dst++;
++		count--;
++	}
++}
++EXPORT_SYMBOL(memcpy_fromio);
++#endif
++
++#ifndef memcpy_toio
++/**
++ * memcpy_toio() -Copy a block of data into I/O memory
++ * @dst: The (I/O memory) destination for the copy
++ * @src: The (RAM) source for the data
++ * @count: The number of bytes to copy
++ *
++ * Copy a block of data to I/O memory.
++ */
++void memcpy_toio(volatile void __iomem *dst, const void *src, size_t count)
++{
++	while (count && !IS_ALIGNED((long)dst, sizeof(long))) {
++		__raw_writeb(*(u8 *)src, dst);
++		src++;
++		dst++;
++		count--;
++	}
++
++	while (count >= sizeof(long)) {
++		long val = get_unaligned((long *)src);
++#ifdef CONFIG_64BIT
++		__raw_writeq(val, dst);
++#else
++		__raw_writel(val, dst);
++#endif
++
++		src += sizeof(long);
++		dst += sizeof(long);
++		count -= sizeof(long);
++	}
++
++	while (count) {
++		__raw_writeb(*(u8 *)src, dst);
++		src++;
++		dst++;
++		count--;
++	}
++}
++EXPORT_SYMBOL(memcpy_toio);
++#endif
++
++
+
+-- 
+2.35.3
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

@@ -2,47 +2,47 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9D4A1BD7E4B
+	by mail.lfdr.de (Postfix) with ESMTPS id A578DBD7E4C
 	for <lists+uboot-stm32@lfdr.de>; Tue, 14 Oct 2025 09:30:15 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E963FC3FAD2;
-	Tue, 14 Oct 2025 07:30:14 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 03CEEC29099;
+	Tue, 14 Oct 2025 07:30:15 +0000 (UTC)
 Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazon11011000.outbound.protection.outlook.com [52.101.70.0])
+ (mail-westeuropeazon11011042.outbound.protection.outlook.com [52.101.70.42])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 35832C36B31
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B4381C36B31
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 13 Oct 2025 01:37:14 +0000 (UTC)
+ Mon, 13 Oct 2025 01:37:19 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=KQ8wwNYIWbNfOzHXkIStWK5bMUXB4Ldxxe8G8jZ9/PETxTpMqECxF29twRSu9z4OLNOKb+AEgrVS6EoD7CRyonqEReTsIJs47tnz965aYSnRnWJJEM94v09309NJ47NMBrqMJKFzc31itvsPpF8YUqk+BaSbpl2pqmQq/4mn6ffEto99rxS1GCcje8Gi7V9MQRKCeZzxB/4j7Oovz7GP7uhdXJPAM873qzsBHaMlx7cA6aSCQF5fWob/vqXmDCXHMVaY4parNMiCKAdaiwc6AxrZ/W1MqvsdGvaz86hJ7KbCMBghyHTtw2i5SQKwq88Rk9TuYhbnM0jRi/ADfYbGLA==
+ b=S3w5oT/LUZnynqaJRBpIxC/u+OBicHkr6ijJiAkX3+4JPeSNW0yvRq5cxIU4FYig4Bx8kXmJxn2BH069o6oQZtDo/E7H5wCu7T2Z+74473YqJGSm+THrok8/29e/opzKbAqnvnE7NgxL957stREsq5MsCRq4Q25EdBZzTgP2oA58gJRnF4v/cMAjf4Uj2xgsxXmvlAazhWCPkKDs3jtbesKHGpjQ/IZydNXaMnZOy6srCr+1cYTR9gqXUgE7o0teaRN86QPHqmsSo8hH/EwR9I695Mrjgv2oT7XX7hFTcx3H3B4S0BKLF+nMGyeClZAJKd+Rh4SFlPI0JwYvT0b2Zw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=f6bVZYC3Y0tOXsqe4AYQ4VOMWzNx+3vP7ePuGdCKCBQ=;
- b=FQrfIY4PkXkqHsM8DsuOOpZuH2d4z21+FAz1gjVYkXP+5GWEnhbLhP0mGFytrmPsE1MiR/aHrKGSmVeWB9yoDOfkPQ/FR1bkpnj0DIW3FDOToP+jKbqcnSY54HUohz9URjPXsn5hSAmg1Rff7lE+9dWoDZsa3+nQcVhF2wV9Xj/Ho/sBlL1xNv7Inj1bNLOM2vcNwh+/NaElduggAn+RRgL7eMGs+3lJZ7q1mB7QEoq/i/FucVIPLfSENO9yTWDh3mOnoVvnJNV4mXlwvPzQj7Ls4u3ihqAN/Vd55hKA88tsWyLJgjtFdemLq2Aq/RVDdJn0olMzr4cj+SlUhL+RtA==
+ bh=KkKDl0/9+BpgXOAlU3vrDU+wqswG28aHTNBtqlPEGtg=;
+ b=H+AJ1HMC/3Wq1h04EbdhX6HWIZBkWLiGBOOkVEKyvZ1u9wRziWDMLDBTjAjBOxfWUdAs5Vmn4WlZA3koJs6sFomtT98O2YEI016pNSAwEoui0y6c8d5aUrPZRs15QAnanK55dVvpDIEeYr5ZVzfAloioqv8Yt5dBdzbC6pqA6iwcT70q9Lg0QUcyssgAURSyhOK9ilB5e9NyXmDZSGB4G3W8x3Z4EJeMzLa74jyCoKhZ4ySakgWv6aZU/R191TL66ih6P/sOT/Wf+/XaoJZdK2SDQzL84qjcvbf/zQqhBOsEHhQISUf81dlEOsRhJW9jDSisUfC/d+SWxgIi250Q0w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=f6bVZYC3Y0tOXsqe4AYQ4VOMWzNx+3vP7ePuGdCKCBQ=;
- b=GJ3DAMiKTdenJme3gfNxOvGaRlsQ+GshGfmZvmvWli8H7emRO/GTOqbEYaPnhuvIsvmhpAjUTzq9V3dQ1fvpYpRy0jGIV23n1tL2cUUPMoAK1Lf9hUE2tdrBIJfRAq7irYYSL+h1dhH9vAlwC0jEE+WnEOffJF/e+ZE8I5G/TZq0YxJE58ZqAGM48muwNG6UpCENyexJms8Jn/H8uuEc6bj2VRBz9VCHbLGo3pt+WO4bBHQT7py0WvB5o2WgcgzhJxMyHu9tG+VsafZd8eV+cqQCfsyXdYoPYr6ibDgrtMp5qcyVAHsy1BH6nk3dkfWb6omTpy2uzcyoE627u6hEbw==
+ bh=KkKDl0/9+BpgXOAlU3vrDU+wqswG28aHTNBtqlPEGtg=;
+ b=tQ5zWWT++/yoS0mwIZMlNy85wavMPp5XGQnGg6YA8m5dZU73JTk+Am/lk8WwUS6VSNdAimCO75laZAn+Qfvqw9k8syP4HD1dbr635J1oTAal4UvVTkvI869NOCRxB2GxSXli3MWGqXMJR0cGY5+IcCe86+ijCsjBBed7y6aAIkVGX7QlLZ8UCXCTVD4UNKxCif20w969/M4AodbV5/fAK0Ogtx5G82IwN02i4YcuONgDiaYqOqXT+Tv3ws6gRjrcU3SqY3lCApECXEumsL2gdINVlXmhLcs5yX7gAZUfZBRy/oX9DbMDQtO/Jd+MEh4C05hoeeHXjS5qyOPjBNwC8w==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
  by AM7PR04MB7077.eurprd04.prod.outlook.com (2603:10a6:20b:11c::17)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9203.12; Mon, 13 Oct
- 2025 01:37:12 +0000
+ 2025 01:37:18 +0000
 Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
  ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
  ([fe80::165a:30a2:5835:9630%4]) with mapi id 15.20.9203.009; Mon, 13 Oct 2025
- 01:37:12 +0000
+ 01:37:18 +0000
 From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Date: Mon, 13 Oct 2025 10:49:20 +0800
-Message-Id: <20251013-imx-rproc-v1-1-fb43a3fafcd0@nxp.com>
+Date: Mon, 13 Oct 2025 10:49:21 +0800
+Message-Id: <20251013-imx-rproc-v1-2-fb43a3fafcd0@nxp.com>
 References: <20251013-imx-rproc-v1-0-fb43a3fafcd0@nxp.com>
 In-Reply-To: <20251013-imx-rproc-v1-0-fb43a3fafcd0@nxp.com>
 To: u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com, 
@@ -56,97 +56,97 @@ MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|AM7PR04MB7077:EE_
-X-MS-Office365-Filtering-Correlation-Id: 56622a80-36f8-41e5-9d1d-08de09f90854
+X-MS-Office365-Filtering-Correlation-Id: 8a91914c-c82e-405d-1a02-08de09f90b97
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|7416014|52116014|1800799024|366016|19092799006|376014|38350700014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?Njl4Y290dlhTc1ZpeWo0M0pLVFIxL1BCc1JGU1lpSjFiUEF4STBhSG5WVzFT?=
- =?utf-8?B?WVR0bUVEZkRlbVNaWmtMajNnR1VzMlV4dFY0eU1wMHlIWEZ5WUtjaVFlb0Vo?=
- =?utf-8?B?N3BkMlRKbmZ5QWRMeTlvbjdPK01tWFVnODFpN0ZWYzg2bmwzamFXMjRwcGVx?=
- =?utf-8?B?bC8xMXIxQjZSM09PUk1XRlhEbkZsSytTd05iUDYzWjNKd01yZ2NQaExrblVZ?=
- =?utf-8?B?ZUZtUzNIWWNoenJ6TUEwYzFwOE5VWGdEN05mU0hvZkpBZ1RoMGNoSWhTMmY5?=
- =?utf-8?B?TXVzMDM0Yk9SZ2kxRXBNbUhKVjRBcUNuRFlzUlFNanV5bHdYOVY4M3A5c0dX?=
- =?utf-8?B?R293d3B4YUdldVFhelJBNEd6UGh2WTR0Rjk0d2tlQU5jTkNLVkVpczJmMXhk?=
- =?utf-8?B?UDRGQVRQN1RNZXFEeHVKam1UNFpVS3owMDdCZGJicVUxZTIvSjFjZzZRTzBW?=
- =?utf-8?B?SGlJZml2aWxRMjR1NFNDelNBbFJvN1F0UDJRdFpRazhrc2hSdm5CeXpvNFNI?=
- =?utf-8?B?bzgxWHVyaHpNVTBhemJQYUVWbnArVExpUzhWMkluNzFxRHhGWEtJTE1tdzBo?=
- =?utf-8?B?UnZhK2VjR0FseU00RFQwcXFwT09oNHorNW5KT1FscjduZGw2TkRkTDZNa1ND?=
- =?utf-8?B?Yjk1aVFDdnVERHc0NnMzWGZRdW42cEhuYjE3b2dXdTZ2KzdqTG1GbVdpa1N0?=
- =?utf-8?B?ZE5aZzBLRGpIcDIzNjF6andpOFJidURGeWRkMjVzS1RvTVFsRmZOeHRxV0hI?=
- =?utf-8?B?aFhDR2RmcFBhMVNETzJUNUhhbEtCRmlUdXUxR1dNUXoyelVrTHRZbG9BTm5E?=
- =?utf-8?B?UWpRVUdha2JoUzYzVElCUk0rcFdaZW9kdmVYZFI3NHFkaVhOSEhLY1hydDFn?=
- =?utf-8?B?VVR1VEVPZGs0VkpROC85d25nU2o2ZnlqaEFGRzFPMGhNcWUxSWFDN0FqbGw0?=
- =?utf-8?B?cGhTN2Z6UFRrSjJ0Z0tzNkxheUIrbytXekhEN25vY1ZRWHRxdjRESlowUVVt?=
- =?utf-8?B?U0EyaXVRR2VzY3FxeVcxTGZxWnpzU0I2aWJ2Wk5NMkpZQjNiZTh0R3ZIRURz?=
- =?utf-8?B?VUhVVkRocGZnL21ST3hxTTFoK2RzMjlIa1YxcVdhb0xybVVadEtCb2Z2MlJL?=
- =?utf-8?B?eXozK01mTTlWQm9xaktoOWJJUTJYcFBvblpvNG1tUlBxZ1NWbkNNY1dqT1kv?=
- =?utf-8?B?UXJlZDRHNU5oS1BZV0tXSkYrVEhSS1pkcG94cGIwcXRhTjhyRW1pempmY3ZP?=
- =?utf-8?B?MHZ1cUg2cXdrN01qdWMwd1poZzBMZFdmUStkR3JxQkdBZVh1QzJ1Sm81WjU0?=
- =?utf-8?B?RExyNkQ2SXJVdHhZVVhoSldFaGQxNlB6NEtZa0Y1R2VzbFVpYVFRV2MvWldU?=
- =?utf-8?B?M1F5Wm5zeHhGL3BxREI3NWdXN0VDWVhYdlhPTVlmeEhwTXBIaDVzNk1GcjIr?=
- =?utf-8?B?OTlGSjN6R1hYc0laenpvMHZrL081L2dmODlEbWdXSHlsbFRxYmtBQ3RheU93?=
- =?utf-8?B?K3V2c1ExR3FqSzdmMVNPL04rV0tON1JZd1JhdlpnTVZvdkp5azM4RVFpN1lE?=
- =?utf-8?B?eCs2RnM5ellHYjNGSHYyNTJXTllLSXpucjREenhNQkQxUmxMeUlxT1dzc2ow?=
- =?utf-8?B?Z1JQM1pqVnRyeWtoZE9Yakh6UGdjU0pXQ1FjaGI2aDBRS2xaTjBvbXhEbm90?=
- =?utf-8?B?L2pQK2FEK29QQ200WG4rZjhFVXdHUS9qYmZNRlVQODlOeWhVeVoxYm0xT2Nq?=
- =?utf-8?B?cmJWT2JoWmJrRmNPZkVKSCsyZisyUzBkK3FmZ3ZPakdyckY2K25FRmZWeFRN?=
- =?utf-8?B?T3hQc3dNbHZ5dE5KNFg0UzZ0ZnhOVDhMOVlUUnRMSEJSYmVCeGcreGJuelFm?=
- =?utf-8?B?ZFhUdmFyU3JmNFZwZU9tc2FISWlqN1EwZUp0Z0FTdVNTV1R2YnRrWmQ5K1Fh?=
- =?utf-8?B?MWtIbisyNFg3MjNqZEV0cHllWHZZL3RxS0lGNXJqZmJRRWNaOEEwanA4QkFn?=
- =?utf-8?B?RVFTNEw0ZjBBaS9JaVhidFFkcFIxS2lmaVRIdW8xWlE5R25aMVZXZFRjbnVu?=
- =?utf-8?Q?BONsjK?=
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?Ry9ZOXFUN1VJZVcrRG4ybHJJRSt1bVBJWm02RlpQZUk1SVN0UVZobGdLemFo?=
+ =?utf-8?B?U3R5aTFZQVpXd2lrRzd5Y1UxbDJTWVErQXpjLzQrRU93eUVtTzdWOTZYRkVY?=
+ =?utf-8?B?NHlIbzBnVXJzT3p1YkxqUG5ZNDlWZlBQNldLVWhkdXkzRDUrYXMvTFFGSFJw?=
+ =?utf-8?B?Q0FlMVZBYVhTVWNqaGljYUUvcmNMdURGRWV5Nk5qRjB1MnVMMkMvNzZzcTZy?=
+ =?utf-8?B?NG5xWnBMbFZ1Ti90YXZxcEw3U2xPelB5dHN2Y1hNSDRhK1RZMWpPNjJ3V012?=
+ =?utf-8?B?UXROTURSaVdxeldtcXJDRWw5Qjh5MmJWVmszU1J5NGw4NnRnRGlNNTNuTmZH?=
+ =?utf-8?B?Q2RCcmhicWNMVVFSTTZqTUVZUWpRWnFEN2ZUeTJWTVBEcWg5d21SNlZSckVD?=
+ =?utf-8?B?aDMxdXVqVHhoWStYVGFqTnpBeTBDRVJjZTJTamt0NG5sdHBWbFBBbnFJS0hh?=
+ =?utf-8?B?YnB2MUZCSTJqSFR6QUovRVl1YmR4V0ZFWVR5YUNIRC9vS0RNVStFYjRYeW0x?=
+ =?utf-8?B?QmdXVHE0OEQvcnVFWGQ5TFdZdkFzMHEvUlFHa1ZUZnJUVHVjSWR1YkhyVkQ5?=
+ =?utf-8?B?dXorNTJPQk5RNTRSUU9sbEhGS1gzVEtwMVBwM2x2WVU2VmVvWXV6dnZFdHlJ?=
+ =?utf-8?B?S1EwaENleGYrRjNFWHpoNVpuTTY3UDdMZTNaelFBZytpRTNmbFhIT1NyYzcv?=
+ =?utf-8?B?d29jZE9HTTBoeFZuNy9UNGdJbWVFbXJFWXI5RGFZTzZMRUVNT0pkVXV4UnBh?=
+ =?utf-8?B?R2Z3Q3pjWGpBZFF0eWlTZDR6elgzczlqQ1pvejBTR1RGMFk2Smk3Y0loOWFF?=
+ =?utf-8?B?bWlKTlBIVmdsTi95K2xGdmZSM0JwbmYyNVFCR2VLeXNPT2dmVWxCRDZqYUJD?=
+ =?utf-8?B?eFBNV3I3UFo5aFN5UE91MXpzL3pWQjE4MTJ2UHFDL1JjR292akNXWDVpZm1N?=
+ =?utf-8?B?RkpYanlrWDhFaDhrQVc0RnEweUZWUk9UQitVT1BKd3pRdnpTWVVCS1V3eGlE?=
+ =?utf-8?B?Uzl0d293RHAvSzlNaWgwRitTNUZMaXhZWWx5QkdYckxwcEIwZkRjSXY4eUJy?=
+ =?utf-8?B?VVFuZjE5cndKZkZDTjJKZVYzQThLOHlwWDlUeHZ4MzM4QVZWb0tEeDZVRldB?=
+ =?utf-8?B?SnpoVDFjMXBETUF6SkJGbGRndFJpeTlyNlZvakR2R3VSQS9lR0loVm0rNDhX?=
+ =?utf-8?B?TDNNODhtcFhNaE1QNkhFZ1ozU25FU09weDduTzMvcEh3WHFDM2hQaU15YjZ6?=
+ =?utf-8?B?OFFVbkV2OEJiYnd5L3B4U2tkVnJYUkoxZ2s0ZUR1YWgvYkpNRkJMVXdFQk4y?=
+ =?utf-8?B?USt1Um5TV0JLc003enVJRkZUUUNod0JlVHVJK0hJSXFmNDNlVnlVcFVTS2FN?=
+ =?utf-8?B?VXJiem5FTHU1bWh2U21sc0wrRmFvUWoyRE42c3hjUEF4enBvYzRoWXlrQ3ZB?=
+ =?utf-8?B?cGRCRzNlRHBzT2pXZW9Nem5QYWJSM25WSnRmMFJCeERVZ25UVkppSU12eW5Q?=
+ =?utf-8?B?UWFCRXFkU2JzWldzUUU2VWFsSFN2VWNGVXQwQmpJQ1JEdkNSUGY2b0RnQ0Ja?=
+ =?utf-8?B?ZWlWZnZtTVFSWXdheDRLU0JlVGw3b2hobWVmRjRKZWI2akt4Z21wdEZtTWNt?=
+ =?utf-8?B?ZEdXZFlkYm9BNnc1Q01Qc2gxbTlBbi9tdysxOCtBSWk0eTNWQzVTajZ3UlJH?=
+ =?utf-8?B?aXdJVkRicjhnWCsyYVVZTnZpeEkwTDFZbzZ4THdYUUc0bUlZTzFHd1AzZlJ3?=
+ =?utf-8?B?bEdycjhoVUgvQ1VMMnMyN1I2RysxY0N5OW5YVXFSaHVzblJlNXd5WGRTWEx4?=
+ =?utf-8?B?bC9BanozbXBuTEpONW9vRHh6REpCMGYzZkhTVytEbFRzQS94cG5Dc3B5NkVu?=
+ =?utf-8?B?S1Jpc1NlYzE4Rkt1bDNPTmlDR2lrVlBMc0lvT2xORzBIVDhaZ0t2WEd0dkc2?=
+ =?utf-8?B?UHE1MVlCNVp5ektsOVNVNnlBalI2dFRTWjJXbHhjVDJZMGhyU3ZCQzdZcHhw?=
+ =?utf-8?B?MjZPa3NHRkRBVnVLQW1pcWRFQ1l4dnFXVDkyTXgrbVUwUWJ3RGdYeGgzTTR2?=
+ =?utf-8?Q?HTMUTJ?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(7416014)(52116014)(1800799024)(366016)(19092799006)(376014)(38350700014);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WkFDTG5Lajg1MVJEYlowaDY5cmZLeEEwMG55ckt4MXpSOEJuYWtVSG9vOXVD?=
- =?utf-8?B?U1RuUFQvMGhNQ09RUjVYbVQrdWFKY29FSnJtaUdoT0dUd2VDL2s5THVyMlc3?=
- =?utf-8?B?UzdHcjJtVjlibkxwZlNnL2dLV2lOSjJwU2hHZ2xaK1QyUitBZUNjVEJMVTFr?=
- =?utf-8?B?a3dPdlR4dmZTRWdWc0kwWlkyeCtzblZrVDZEZWZHZE1ldVd3U2YvRlJacjhH?=
- =?utf-8?B?QWpid0hXUXc1bGpBQTFsaWNNUDhobTBqaXkxK0RhMmtsOERCall2TUwyZzVM?=
- =?utf-8?B?bG1sSCtTWGtDU3V5eDNGRmx2R2hVTHpIdlRkYzZxR3M3YmhxWUFwSFB4VkMw?=
- =?utf-8?B?Q3FGeGZuVlBJaXZYOEtkMEpqSll3VjVyU2FnYXpGYWxoQjRBamZ2dTlWY3FW?=
- =?utf-8?B?Z3pkMVlmRDJwTXkyRmpjVVVPdWdwVno1cDJRTDh0azNDd2pKYjNLYlpQdDk5?=
- =?utf-8?B?bnhzUW4xcyswN0tZOEZINVpXaDdFZmxKT3k4c3padlp0MDFzSGQ0czNpQ2lt?=
- =?utf-8?B?V3piWXhCdXdtVHJoSHBZSDNnek42Y0RwamVXT25NaHJUbjhYWTA5dnh1aUp5?=
- =?utf-8?B?Ui9CaWhNVVJwdkU0MTR3S2JYWVNrTGtmcTVUWHZNa2FheXJLbkJ6SXpEdTNF?=
- =?utf-8?B?Z0kvN1lERUQzNWlSeFczdGM5UEpTWE1RWXo4NkEyWjZ4RVVkOWtSVFM4MUhp?=
- =?utf-8?B?Tk5nR0JCR3g5UlNrL1pyZlRpcW9qOUhTNUkrWWkxVGRmSHR6YlN3aElLWXAz?=
- =?utf-8?B?UWNnSEdQemFvaXFJa2xSQWJLUXh5Y1diaG1nWkE0czZTeVlWT2cyTE5nRGRl?=
- =?utf-8?B?QythSVR4YUtZSWZObDNKOWNoanZ6TzJwZFM0RU5LTTFQZXpOY1dRZFlOb29i?=
- =?utf-8?B?dlhVWnJLL1NwWHh4MUpTelNmcmx4a0RWV1dnTElBSkxDckt4ZUVqS0ZiTUxv?=
- =?utf-8?B?OEJGbXB1Rlg4OFczSlFENjN2Q2UvVnFpUE5ETVJUcFg4QW1sdXBZZW9BdG1u?=
- =?utf-8?B?c3BqUDBWdkRLc3V4djdrdklYYWc5c1JQb1BGY2tWbXd3MkFzTlBWY3pKNGN1?=
- =?utf-8?B?cUtEYU9RbENhNVEvZUtJNEQ2SFZ5cE55VWM0K0JleXd0NG1vRXcxYlNiMXpv?=
- =?utf-8?B?UEI1Y2VqSTg4UHZVQVIrdVBORkEwdGxPeTZ6K2lEYm4wNzhrRTc0WGxDSmJ3?=
- =?utf-8?B?WmdVYTNQc1J3VVFwQmdxUnFiMGlyWFk2RXl4SGNyYUNCNGNnNzVhdVRpUkwr?=
- =?utf-8?B?NjdEeTRSZWdHelBsaFZ0YmhQdFBZZitpdHdEQURXV3FQcDNNa3hxNmxXYzlh?=
- =?utf-8?B?T2dranorMmtlcmFoU1ZGUEp2cjB2TGptWHlZVTEzM211NFFFOXJWRStLb0g4?=
- =?utf-8?B?T2Q0REt3NWU0eldseXc0ZnZNaFVLQmd4aXRacXVhVnFIWG85WW8xZTEvWVZV?=
- =?utf-8?B?Uk5ybGt5L2VaazlrTktWN3B6Y3hmNTRIeGlFbk0yQThycFFueVRONy81b05D?=
- =?utf-8?B?L0Q0eXBWeUJVd3FadGY4clV5SkJyTWpCVDVOVS9qdTgyZ1BlOHZHVVpHVEZs?=
- =?utf-8?B?dVVYaHZiaWpVLzgzNitDYnBHNDNiYisyRVFBLzVtWi9ndUVMckZneERMNnlt?=
- =?utf-8?B?K3N4cnlEOWV5Q2FZQmNuamxweEY2N2k4R29NU254bzVHYklYdVJ6SXZxNlp1?=
- =?utf-8?B?Qk5OTG9iR1ROOWtZOFJTRkJYa0tGNnJsZ2x3TTlXVnZXMVVVcUxqTUxDd0ZT?=
- =?utf-8?B?S3k0MlFTeG5lUHhqRm9GenN5TWZiczVlSWN3TGtYZ1pKR0RCQUxKVko3c2Nv?=
- =?utf-8?B?V28vSjJFVERwZkFoSm1Tb21tMVgrWVAyZzFRK1oweGNqTW1qT01OTnJKMkRl?=
- =?utf-8?B?WVRNS0taejUxeFlDMUo1MWlsWUV0TDQwa2w0bmZzWUhJZHM4UCsyZzhwclhO?=
- =?utf-8?B?cVgyZzRjTW1EbUM3aXl2bVpzcm1sV1NSYjE2TUdnbHdlQnRmVjBIcTRMekVS?=
- =?utf-8?B?YnBvRDB3emIxaVViWFVVYlFqLzZOVWRHWDNiRmlLMlM3b1FNd1dobE1uY2cy?=
- =?utf-8?B?eW43cUg4d0diZzRkVXl5VkhxaFB5K00xblFQV1p5d2VQb25yZ2Mxc2VXaEFp?=
- =?utf-8?Q?6w4z+cLOTN1xiRI0tiXYldq5m?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?T1RzMUtIU3BBZEV4UzQyT2dHa1IzOE12L21tQ05rU0poa1N2cG1TbEhEb3hx?=
+ =?utf-8?B?MnFEL2M0YTh0QUdzZ0U0K1d5NlViWkJsd2FKbWFCdTdxYnhGZUZVUUpuQWl6?=
+ =?utf-8?B?NnNRejBiSWpCSllGbUpIWW12NzZJMTVCcit0emQra3RHRVpWdGJHSDc1NXV0?=
+ =?utf-8?B?eHdGanFSa3R1SDBJZGdDV2llbHRRMVZQQ1JWdGVicEczbTRvQ05vTzJOVnpz?=
+ =?utf-8?B?dlFPeHNjengybHUyVGJlNVk2QlJ6OGFpUXpBMWhISGNzRnB3QmcvaWVCN0FY?=
+ =?utf-8?B?SjhCMk9MZm1CR3J0K3Q4NmVaVFBrdW43SS83eUp5b3VJUGcrZ3pITDRMb29F?=
+ =?utf-8?B?V2huTERtdms0VUdXSi9RYUpOOUc5dkpxMHZpeUNCSTFMRUUwVjU1aTVLMk5u?=
+ =?utf-8?B?L0dWWVg4alR2dXBFNFI1c1h0dmNNWnl3TDliNVRaeTJDcjB3RmsvYjJIazFa?=
+ =?utf-8?B?aDFTMDRLNE12Y0FaMWxJSjN4cUthcnZhVExMWEE3RktHV2xQaXZjbU51VUxI?=
+ =?utf-8?B?NlpzNU9oQ3ZsVU1YeHlCQ0VtclRraFZaL3F2Z3hFaHVjUEVzNE5abk1ScmdR?=
+ =?utf-8?B?WVFubWdGOEpJMkVaSTk3VklERnZJSEk4TzNZMmhJcUNnNzFSWVc4OUJkY2Fx?=
+ =?utf-8?B?WHJRZHJEdmJiM1F2U0tNMHFVZ3kwcldhNGU5YkNnUk96Y0hFRS9rUDJtL3RT?=
+ =?utf-8?B?ekZobC9JRW1QMVVGQzZBcEozUDFoMG16VVZ6Q0sxY1FVK0lqTC9hQ3RCcXA5?=
+ =?utf-8?B?SHhZbVRMTmdkdWZDYzg2SXp0cnJ5SVVFbGZVeWx2QkpzdkRwS1FxSmJzU0NN?=
+ =?utf-8?B?dUFXSTVzSmlNQjJpY2N1Qmlld1h6TXdOQkFpVXNhK1VPVUJzWVY2UFAvYURn?=
+ =?utf-8?B?S2hZWkFqbEMxdUZpQnNHaGZqTDFVT2cwZVdmRXNmeGU5RXVIWHdaTEh1dGk5?=
+ =?utf-8?B?Z0ovWFdmaWNrekxMN2tpMVdPaGY3L1dFSXlMRllaSDBlL3dLU2xOUFZYMHlp?=
+ =?utf-8?B?NlZvQVJkSlRzQUkwclNIM3dkNnFnbmlKK1dHbTJ4eXN4UEhCOFNRbHFqcUNu?=
+ =?utf-8?B?MFh3R2E4ZGNaN2FIRVZGVWZPTUIwMWtXMjNGcXNFMURZR2xLQUtQTDVGc1FT?=
+ =?utf-8?B?YmpqTDZxK2J0R241NG4vM0xSOThoVmV1bnl2MjJhRnByRERkakw4Zm0xUUti?=
+ =?utf-8?B?SlBCSlZRMS9MWE9xY0hydGs4cVByeUZockJQTitIUjFsVlF2VGFoOVgwdkFE?=
+ =?utf-8?B?WHliODFNTXhrTmZvaVpqTk9GV1R3RktnM0xiZVFvWGhyTmlJUldxc2VtaEJE?=
+ =?utf-8?B?WXJ4SktQL3djRlhRcitQLzJFNkUzMHcrUndiWmIweWFkSVRqaVVtb0tROXZE?=
+ =?utf-8?B?Mm1LSmQ4TVI4Z1JEYlNBQlkwNFZOTE00UVk3YTQvdHZ2cElTQTJqcDNkUHk1?=
+ =?utf-8?B?anovaHZPaHU4aFN2RlptdGpsb09FSWFkQmpqQ0t6eEhBRlpSeWl6eG1jK2pV?=
+ =?utf-8?B?Z095MjIxdWFxNDBXb3JoM1VuNGUrWFBITnV2NjYzQjhvZEhSYjQwbXUwK3Nu?=
+ =?utf-8?B?ZkRaUTd1T1dBWndsdTZyWmxreE9CQkE1NHkyTFZmWFFhalJ2emZJWXZ6RjBm?=
+ =?utf-8?B?RnBqakx2VElzSUhuRGxIc3BkYS9vSG1wVkdtQjJLWGVKTHZSL1E2VWw5bm0r?=
+ =?utf-8?B?NjR3UktvL2NKSStxeGtTaDdMaXQ2NnA2Vi9VRTJVUHdTcnFUekswV0cxdTlN?=
+ =?utf-8?B?Ykw5MU9sMzhhWGNPUVVrb3JtZ3lWc3lOYjZ2RkkzVFBKVXpVMmU0ZDhtU1BS?=
+ =?utf-8?B?c2JEeksraHY0aVIwbGVzK2FSNmZBV1NTRXd5UHlrN2xEWUhjczlOam13dCtX?=
+ =?utf-8?B?WWhGdE5wd2hCL2pwOUFGeTNscENFUWVOUjlVblpWMWtLSGd1UjRGTFdZYms3?=
+ =?utf-8?B?YThhcDlQeEp1cnhiOE9iV1lkTCt1eTRkNDlPUlIwV2R1aXBuN1pPU3E3SExZ?=
+ =?utf-8?B?bE5tR3BBQnkwVnJGaE9KbzlUVDlzeUZLeDhNc1psOXpRM0YxM0dEU1BodFB6?=
+ =?utf-8?B?azBHOXI1SFlBQkJpMXd3aGNjYjc0L2prelZUcEY2SEMxUSt0N0pBd1ZXUkxB?=
+ =?utf-8?Q?Nk+b5NXeaskceD2Vvup1kdCaO?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 56622a80-36f8-41e5-9d1d-08de09f90854
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8a91914c-c82e-405d-1a02-08de09f90b97
 X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Oct 2025 01:37:12.6789 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Oct 2025 01:37:18.1055 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: FuDXbVVjFIQiGbfrE8T2UUpS68WT+wgTh7MVxeRXPg1/DRLIwskWWSI77mxWixRTfHloFNXDYvbrceDIKmKm6g==
+X-MS-Exchange-CrossTenant-UserPrincipalName: hEVSMpo0hvpX4Z/HeoMPFV2BdxVrvs1Que2ovBmm0wuaIxmrZHzNcmj5AsEfr5ncYQ5bqWZ1rYyDfaxIqDROiw==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR04MB7077
 X-Mailman-Approved-At: Tue, 14 Oct 2025 07:30:14 +0000
 Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
@@ -155,7 +155,8 @@ Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
  Andrew Davis <afd@ti.com>, Beleswar Padhi <b-padhi@ti.com>,
  Judith Mendez <jm@ti.com>, Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Ryan Eatmon <reatmon@ti.com>, Hari Nagalla <hnagalla@ti.com>
-Subject: [Uboot-stm32] [PATCH 01/11] lib: Import iomem_copy from Linux Kernel
+Subject: [Uboot-stm32] [PATCH 02/11] remoteproc: Extend device_to_virt with
+ a is_iomem parameter
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -174,225 +175,308 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 From: Peng Fan <peng.fan@nxp.com>
 
-memcpy_{from,to}io and memset_io is needed for i.MX8M to write
-TCM area. So import the APIs from Linux Kernel 6.17.
+Some areas needs to be initialized by using memcpy_toio and memset_io.
+Following Linux Kernel commit: 40df0a91b2a5 ("remoteproc: add is_iomem to
+da_to_va"), add this to U-Boot.
 
 Reviewed-by: Ye Li <ye.li@nxp.com>
 Signed-off-by: Peng Fan <peng.fan@nxp.com>
 ---
- include/asm-generic/io.h |  37 +++++++++++++
- lib/Makefile             |   1 +
- lib/iomem_copy.c         | 136 +++++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 174 insertions(+)
+ drivers/remoteproc/renesas_apmu.c     |  3 +-
+ drivers/remoteproc/rproc-elf-loader.c | 93 ++++++++++++++++++++++++-----------
+ drivers/remoteproc/sandbox_testproc.c |  3 +-
+ drivers/remoteproc/stm32_copro.c      |  3 +-
+ drivers/remoteproc/ti_k3_dsp_rproc.c  |  2 +-
+ drivers/remoteproc/ti_k3_r5f_rproc.c  |  2 +-
+ include/remoteproc.h                  |  3 +-
+ 7 files changed, 74 insertions(+), 35 deletions(-)
 
-diff --git a/include/asm-generic/io.h b/include/asm-generic/io.h
-index 13d99cfb5973399209c00adee0080ff83414c064..cf981ad3501f935c714b7580536540e7aba249c1 100644
---- a/include/asm-generic/io.h
-+++ b/include/asm-generic/io.h
-@@ -3,6 +3,7 @@
-  * Generic I/O functions.
+diff --git a/drivers/remoteproc/renesas_apmu.c b/drivers/remoteproc/renesas_apmu.c
+index 1a50cd3289bc40de23f23630f2b591fba2241dbb..91586a99e0dacaff7d9cb5ecd1ea6e4489659521 100644
+--- a/drivers/remoteproc/renesas_apmu.c
++++ b/drivers/remoteproc/renesas_apmu.c
+@@ -170,11 +170,12 @@ static int renesas_apmu_rproc_init(struct udevice *dev)
+  * @dev:	corresponding remote processor device
+  * @da:		device address
+  * @size:	Size of the memory region @da is pointing to
++ * @is_iomem:	optional pointer filled in to indicate if @da is iomapped memory
   *
-  * Copyright (c) 2016 Imagination Technologies Ltd.
+  * Return: converted virtual address
+  */
+ static void *renesas_apmu_rproc_device_to_virt(struct udevice *dev, ulong da,
+-					       ulong size)
++					       ulong size, bool *is_iomem)
+ {
+ 	/*
+ 	 * The Cortex R52 and A76 share the same address space,
+diff --git a/drivers/remoteproc/rproc-elf-loader.c b/drivers/remoteproc/rproc-elf-loader.c
+index 0b3941b7798d3971cbe982d3c3d080a717fcef65..f904424ca49edb5c81f1016d8fedaf4aa8121ef1 100644
+--- a/drivers/remoteproc/rproc-elf-loader.c
++++ b/drivers/remoteproc/rproc-elf-loader.c
+@@ -1,6 +1,7 @@
+ // SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
+ /*
+  * Copyright (C) 2019, STMicroelectronics - All Rights Reserved
 + * Copyright 2025 NXP
   */
+ #include <cpu_func.h>
+ #include <dm.h>
+@@ -9,6 +10,7 @@
+ #include <mapmem.h>
+ #include <remoteproc.h>
+ #include <asm/cache.h>
++#include <asm/io.h>
+ #include <dm/device_compat.h>
+ #include <linux/compat.h>
+ #include <linux/printk.h>
+@@ -181,27 +183,38 @@ int rproc_elf32_load_image(struct udevice *dev, unsigned long addr, ulong size)
+ 	for (i = 0; i < ehdr->e_phnum; i++, phdr++) {
+ 		void *dst = (void *)(uintptr_t)phdr->p_paddr;
+ 		void *src = (void *)addr + phdr->p_offset;
++		bool is_iomem = false;
+ 		ulong dst_addr;
  
- #ifndef __ASM_GENERIC_IO_H__
-@@ -453,5 +454,41 @@ static inline void iowrite64_rep(volatile void __iomem *addr,
- #endif
- #endif /* CONFIG_64BIT */
+-		if (phdr->p_type != PT_LOAD)
++		if (phdr->p_type != PT_LOAD || !phdr->p_memsz)
+ 			continue;
  
-+#ifndef memset_io
-+/**
-+ * memset_io -	Set a range of I/O memory to a constant value
-+ * @addr:	The beginning of the I/O-memory range to set
-+ * @val:	The value to set the memory to
-+ * @count:	The number of bytes to set
-+ *
-+ * Set a range of I/O memory to a given value.
-+ */
-+void memset_io(volatile void __iomem *addr, int val, size_t count);
-+#endif
-+
-+#ifndef memcpy_fromio
-+/**
-+ * memcpy_fromio -	Copy a block of data from I/O memory
-+ * @dst:		The (RAM) destination for the copy
-+ * @src:		The (I/O memory) source for the data
-+ * @count:		The number of bytes to copy
-+ *
-+ * Copy a block of data from I/O memory.
-+ */
-+void memcpy_fromio(void *dst, const volatile void __iomem *src, size_t count);
-+#endif
-+
-+#ifndef memcpy_toio
-+/**
-+ * memcpy_toio -	Copy a block of data into I/O memory
-+ * @dst:		The (I/O memory) destination for the copy
-+ * @src:		The (RAM) source for the data
-+ * @count:		The number of bytes to copy
-+ *
-+ * Copy a block of data to I/O memory.
-+ */
-+void memcpy_toio(volatile void __iomem *dst, const void *src, size_t count);
-+#endif
-+
- #endif /* !__ASSEMBLY__ */
- #endif /* __ASM_GENERIC_IO_H__ */
-diff --git a/lib/Makefile b/lib/Makefile
-index a2e6066886495502a47bb1595217e8eb82374763..6e4f59141f3faca156b13e7f78c5d4312af20193 100644
---- a/lib/Makefile
-+++ b/lib/Makefile
-@@ -123,6 +123,7 @@ obj-y += ctype.o
- obj-y += div64.o
- obj-$(CONFIG_$(PHASE_)OF_LIBFDT) += fdtdec.o fdtdec_common.o
- obj-y += hang.o
-+obj-y += iomem_copy.o
- obj-y += linux_compat.o
- obj-y += linux_string.o
- obj-$(CONFIG_$(PHASE_)LMB) += lmb.o
-diff --git a/lib/iomem_copy.c b/lib/iomem_copy.c
-new file mode 100644
-index 0000000000000000000000000000000000000000..10661fe216f780b9ebb27828b2618d4306bb07e4
---- /dev/null
-+++ b/lib/iomem_copy.c
-@@ -0,0 +1,136 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Copyright 2024 Kalray, Inc.  All Rights Reserved.
-+ */
-+
-+#include <linux/compat.h>
-+#include <linux/io.h>
-+#include <linux/kernel.h>
-+#include <linux/types.h>
-+#include <asm-generic/unaligned.h>
-+
-+#ifndef memset_io
-+/**
-+ * memset_io() - Set a range of I/O memory to a constant value
-+ * @addr: The beginning of the I/O-memory range to set
-+ * @val: The value to set the memory to
-+ * @count: The number of bytes to set
-+ *
-+ * Set a range of I/O memory to a given value.
-+ */
-+void memset_io(volatile void __iomem *addr, int val, size_t count)
-+{
-+	long qc = (u8)val;
-+
-+	qc *= ~0UL / 0xff;
-+
-+	while (count && !IS_ALIGNED((long)addr, sizeof(long))) {
-+		__raw_writeb(val, addr);
-+		addr++;
-+		count--;
+ 		if (ops->device_to_virt)
+ 			dst = ops->device_to_virt(dev, (ulong)dst,
+-						  phdr->p_memsz);
++						  phdr->p_memsz, &is_iomem);
+ 
+ 		dev_dbg(dev, "Loading phdr %i to 0x%p (%i bytes)\n",
+ 			i, dst, phdr->p_filesz);
+-		if (phdr->p_filesz)
+-			memcpy(dst, src, phdr->p_filesz);
+-		if (phdr->p_filesz != phdr->p_memsz)
+-			memset(dst + phdr->p_filesz, 0x00,
+-			       phdr->p_memsz - phdr->p_filesz);
++		if (phdr->p_filesz) {
++			if (is_iomem)
++				memcpy_toio(dst, src, phdr->p_filesz);
++			else
++				memcpy(dst, src, phdr->p_filesz);
++		}
++		if (phdr->p_filesz != phdr->p_memsz) {
++			if (is_iomem)
++				memset_io(dst + phdr->p_filesz, 0x00,
++					  phdr->p_memsz - phdr->p_filesz);
++			else
++				memset(dst + phdr->p_filesz, 0x00,
++				       phdr->p_memsz - phdr->p_filesz);
++		}
+ 		dst_addr = map_to_sysmem(dst);
+-		flush_cache(rounddown(dst_addr, ARCH_DMA_MINALIGN),
+-			    roundup(dst_addr + phdr->p_filesz,
+-				    ARCH_DMA_MINALIGN) -
+-			    rounddown(dst_addr, ARCH_DMA_MINALIGN));
++		if (!is_iomem) {
++			flush_cache(rounddown(dst_addr, ARCH_DMA_MINALIGN),
++				    roundup(dst_addr + phdr->p_filesz,
++				    ARCH_DMA_MINALIGN) - rounddown(dst_addr, ARCH_DMA_MINALIGN));
++		}
+ 	}
+ 
+ 	return 0;
+@@ -230,6 +243,7 @@ int rproc_elf64_load_image(struct udevice *dev, ulong addr, ulong size)
+ 		memsz = phdr->p_memsz;
+ 		filesz = phdr->p_filesz;
+ 		offset = phdr->p_offset;
++		bool is_iomem = false;
+ 
+ 		if (phdr->p_type != PT_LOAD)
+ 			continue;
+@@ -239,7 +253,7 @@ int rproc_elf64_load_image(struct udevice *dev, ulong addr, ulong size)
+ 
+ 		ptr = (void *)(uintptr_t)da;
+ 		if (ops->device_to_virt) {
+-			ptr = ops->device_to_virt(dev, da, phdr->p_memsz);
++			ptr = ops->device_to_virt(dev, da, phdr->p_memsz, &is_iomem);
+ 			if (!ptr) {
+ 				dev_err(dev, "bad da 0x%llx mem 0x%llx\n", da,
+ 					memsz);
+@@ -248,14 +262,24 @@ int rproc_elf64_load_image(struct udevice *dev, ulong addr, ulong size)
+ 			}
+ 		}
+ 
+-		if (filesz)
+-			memcpy(ptr, (void *)addr + offset, filesz);
+-		if (filesz != memsz)
+-			memset(ptr + filesz, 0x00, memsz - filesz);
++		if (filesz) {
++			if (is_iomem)
++				memcpy_toio(ptr, (void *)addr + offset, filesz);
++			else
++				memcpy(ptr, (void *)addr + offset, filesz);
++		}
++		if (filesz != memsz) {
++			if (is_iomem)
++				memset_io(ptr + filesz, 0x00, memsz - filesz);
++			else
++				memset(ptr + filesz, 0x00, memsz - filesz);
++		}
+ 
+-		flush_cache(rounddown((ulong)ptr, ARCH_DMA_MINALIGN),
+-			    roundup((ulong)ptr + filesz, ARCH_DMA_MINALIGN) -
+-			    rounddown((ulong)ptr, ARCH_DMA_MINALIGN));
++		if (!is_iomem) {
++			flush_cache(rounddown((ulong)ptr, ARCH_DMA_MINALIGN),
++				    roundup((ulong)ptr + filesz, ARCH_DMA_MINALIGN) -
++				    rounddown((ulong)ptr, ARCH_DMA_MINALIGN));
++		}
+ 	}
+ 
+ 	return ret;
+@@ -381,6 +405,7 @@ int rproc_elf32_load_rsc_table(struct udevice *dev, ulong fw_addr,
+ 	Elf32_Shdr *shdr;
+ 	void *src, *dst;
+ 	ulong dst_addr;
++	bool is_iomem = false;
+ 
+ 	shdr = rproc_elf32_find_rsc_table(dev, fw_addr, fw_size);
+ 	if (!shdr)
+@@ -394,18 +419,23 @@ int rproc_elf32_load_rsc_table(struct udevice *dev, ulong fw_addr,
+ 
+ 	src = (void *)fw_addr + shdr->sh_offset;
+ 	if (ops->device_to_virt)
+-		dst = (void *)ops->device_to_virt(dev, *rsc_addr, *rsc_size);
++		dst = (void *)ops->device_to_virt(dev, *rsc_addr, *rsc_size, &is_iomem);
+ 	else
+ 		dst = (void *)rsc_addr;
+ 
+ 	dev_dbg(dev, "Loading resource table to 0x%8lx (%ld bytes)\n",
+ 		(ulong)dst, *rsc_size);
+ 
+-	memcpy(dst, src, *rsc_size);
++	if (is_iomem) {
++		memcpy_toio(dst, src, *rsc_size);
++	} else {
++		memcpy(dst, src, *rsc_size);
++		flush_cache(rounddown(dst_addr, ARCH_DMA_MINALIGN),
++			    roundup(dst_addr + *rsc_size, ARCH_DMA_MINALIGN) -
++			    rounddown(dst_addr, ARCH_DMA_MINALIGN));
 +	}
 +
-+	while (count >= sizeof(long)) {
-+#ifdef CONFIG_64BIT
-+		__raw_writeq(qc, addr);
-+#else
-+		__raw_writel(qc, addr);
-+#endif
-+
-+		addr += sizeof(long);
-+		count -= sizeof(long);
+ 	dst_addr = map_to_sysmem(dst);
+-	flush_cache(rounddown(dst_addr, ARCH_DMA_MINALIGN),
+-		    roundup(dst_addr + *rsc_size, ARCH_DMA_MINALIGN) -
+-		    rounddown(dst_addr, ARCH_DMA_MINALIGN));
+ 
+ 	return 0;
+ }
+@@ -490,6 +520,7 @@ int rproc_elf64_load_rsc_table(struct udevice *dev, ulong fw_addr,
+ 	const struct dm_rproc_ops *ops;
+ 	Elf64_Shdr *shdr;
+ 	void *src, *dst;
++	bool is_iomem = false;
+ 
+ 	shdr = rproc_elf64_find_rsc_table(dev, fw_addr, fw_size);
+ 	if (!shdr)
+@@ -503,18 +534,22 @@ int rproc_elf64_load_rsc_table(struct udevice *dev, ulong fw_addr,
+ 
+ 	src = (void *)fw_addr + shdr->sh_offset;
+ 	if (ops->device_to_virt)
+-		dst = (void *)ops->device_to_virt(dev, *rsc_addr, *rsc_size);
++		dst = (void *)ops->device_to_virt(dev, *rsc_addr, *rsc_size, &is_iomem);
+ 	else
+ 		dst = (void *)rsc_addr;
+ 
+ 	dev_dbg(dev, "Loading resource table to 0x%8lx (%ld bytes)\n",
+ 		(ulong)dst, *rsc_size);
+ 
+-	memcpy(dst, src, *rsc_size);
+-	flush_cache(rounddown((unsigned long)dst, ARCH_DMA_MINALIGN),
+-		    roundup((unsigned long)dst + *rsc_size,
++	if (is_iomem) {
++		memcpy_toio(dst, src, *rsc_size);
++	} else {
++		memcpy(dst, src, *rsc_size);
++		flush_cache(rounddown((unsigned long)dst, ARCH_DMA_MINALIGN),
++			    roundup((unsigned long)dst + *rsc_size,
+ 			    ARCH_DMA_MINALIGN) -
+-		    rounddown((unsigned long)dst, ARCH_DMA_MINALIGN));
++			    rounddown((unsigned long)dst, ARCH_DMA_MINALIGN));
 +	}
-+
-+	while (count) {
-+		__raw_writeb(val, addr);
-+		addr++;
-+		count--;
-+	}
-+}
-+EXPORT_SYMBOL(memset_io);
-+#endif
-+
-+#ifndef memcpy_fromio
-+/**
-+ * memcpy_fromio() - Copy a block of data from I/O memory
-+ * @dst: The (RAM) destination for the copy
-+ * @src: The (I/O memory) source for the data
-+ * @count: The number of bytes to copy
-+ *
-+ * Copy a block of data from I/O memory.
-+ */
-+void memcpy_fromio(void *dst, const volatile void __iomem *src, size_t count)
-+{
-+	while (count && !IS_ALIGNED((long)src, sizeof(long))) {
-+		*(u8 *)dst = __raw_readb(src);
-+		src++;
-+		dst++;
-+		count--;
-+	}
-+
-+	while (count >= sizeof(long)) {
-+#ifdef CONFIG_64BIT
-+		long val = __raw_readq(src);
-+#else
-+		long val = __raw_readl(src);
-+#endif
-+		put_unaligned(val, (long *)dst);
-+
-+
-+		src += sizeof(long);
-+		dst += sizeof(long);
-+		count -= sizeof(long);
-+	}
-+
-+	while (count) {
-+		*(u8 *)dst = __raw_readb(src);
-+		src++;
-+		dst++;
-+		count--;
-+	}
-+}
-+EXPORT_SYMBOL(memcpy_fromio);
-+#endif
-+
-+#ifndef memcpy_toio
-+/**
-+ * memcpy_toio() -Copy a block of data into I/O memory
-+ * @dst: The (I/O memory) destination for the copy
-+ * @src: The (RAM) source for the data
-+ * @count: The number of bytes to copy
-+ *
-+ * Copy a block of data to I/O memory.
-+ */
-+void memcpy_toio(volatile void __iomem *dst, const void *src, size_t count)
-+{
-+	while (count && !IS_ALIGNED((long)dst, sizeof(long))) {
-+		__raw_writeb(*(u8 *)src, dst);
-+		src++;
-+		dst++;
-+		count--;
-+	}
-+
-+	while (count >= sizeof(long)) {
-+		long val = get_unaligned((long *)src);
-+#ifdef CONFIG_64BIT
-+		__raw_writeq(val, dst);
-+#else
-+		__raw_writel(val, dst);
-+#endif
-+
-+		src += sizeof(long);
-+		dst += sizeof(long);
-+		count -= sizeof(long);
-+	}
-+
-+	while (count) {
-+		__raw_writeb(*(u8 *)src, dst);
-+		src++;
-+		dst++;
-+		count--;
-+	}
-+}
-+EXPORT_SYMBOL(memcpy_toio);
-+#endif
-+
-+
+ 
+ 	return 0;
+ }
+diff --git a/drivers/remoteproc/sandbox_testproc.c b/drivers/remoteproc/sandbox_testproc.c
+index ad575a7c10fdb399c77f4f01b8167a8ae71574a2..7ed38e8656c5f8d653e4aa32316a3cf7dbd7a767 100644
+--- a/drivers/remoteproc/sandbox_testproc.c
++++ b/drivers/remoteproc/sandbox_testproc.c
+@@ -308,10 +308,11 @@ static int sandbox_testproc_ping(struct udevice *dev)
+  * @dev:	device to operate upon
+  * @da:		device address
+  * @size:	Size of the memory region @da is pointing to
++ * @is_iomem:	optional pointer filled in to indicate if @da is iomapped memory
+  * Return: converted virtual address
+  */
+ static void *sandbox_testproc_device_to_virt(struct udevice *dev, ulong da,
+-					     ulong size)
++					     ulong size, bool *is_iomem)
+ {
+ 	u64 paddr;
+ 
+diff --git a/drivers/remoteproc/stm32_copro.c b/drivers/remoteproc/stm32_copro.c
+index f45da9a68ac6eaeef0c5a563785a2b9433430b7e..bf721e78bb36f52ee55a776dc7b6b45a89858fbd 100644
+--- a/drivers/remoteproc/stm32_copro.c
++++ b/drivers/remoteproc/stm32_copro.c
+@@ -61,10 +61,11 @@ static int stm32_copro_probe(struct udevice *dev)
+  * @dev:	corresponding STM32 remote processor device
+  * @da:		device address
+  * @size:	Size of the memory region @da is pointing to
++ * @is_iomem:	optional pointer filled in to indicate if @da is iomapped memory
+  * Return: converted virtual address
+  */
+ static void *stm32_copro_device_to_virt(struct udevice *dev, ulong da,
+-					ulong size)
++					ulong size, bool *is_iomem)
+ {
+ 	fdt32_t in_addr = cpu_to_be32(da), end_addr;
+ 	u64 paddr;
+diff --git a/drivers/remoteproc/ti_k3_dsp_rproc.c b/drivers/remoteproc/ti_k3_dsp_rproc.c
+index 5a7d63772830cf064e28042ebb6726f058cb8876..9275e1b241de7f13ddda08b27288cc32d7d95725 100644
+--- a/drivers/remoteproc/ti_k3_dsp_rproc.c
++++ b/drivers/remoteproc/ti_k3_dsp_rproc.c
+@@ -261,7 +261,7 @@ static int k3_dsp_reset(struct udevice *dev)
+ 	return 0;
+ }
+ 
+-static void *k3_dsp_da_to_va(struct udevice *dev, ulong da, ulong len)
++static void *k3_dsp_da_to_va(struct udevice *dev, ulong da, ulong len, bool *is_iomem)
+ {
+ 	struct k3_dsp_privdata *dsp = dev_get_priv(dev);
+ 	phys_addr_t bus_addr, dev_addr;
+diff --git a/drivers/remoteproc/ti_k3_r5f_rproc.c b/drivers/remoteproc/ti_k3_r5f_rproc.c
+index 48401bc6eb67b0d0bf673b8db033f9165353e495..c738607c10925c33d6f5a614d8ada2da0c5ecb2e 100644
+--- a/drivers/remoteproc/ti_k3_r5f_rproc.c
++++ b/drivers/remoteproc/ti_k3_r5f_rproc.c
+@@ -534,7 +534,7 @@ proc_release:
+ 	return ret;
+ }
+ 
+-static void *k3_r5f_da_to_va(struct udevice *dev, ulong da, ulong size)
++static void *k3_r5f_da_to_va(struct udevice *dev, ulong da, ulong size, bool *is_iomem)
+ {
+ 	struct k3_r5f_core *core = dev_get_priv(dev);
+ 	void __iomem *va = NULL;
+diff --git a/include/remoteproc.h b/include/remoteproc.h
+index 6f8068e14967571eea18522b70fa272697610a41..9adc3d17d8f773b0c01f3952fcc846fad7337861 100644
+--- a/include/remoteproc.h
++++ b/include/remoteproc.h
+@@ -495,9 +495,10 @@ struct dm_rproc_ops {
+ 	 * @dev:	Remote proc device
+ 	 * @da:		Device address
+ 	 * @size:	Size of the memory region @da is pointing to
++	 * @is_iomem:	optional pointer filled in to indicate if @da is iomapped memory
+ 	 * @return virtual address.
+ 	 */
+-	void * (*device_to_virt)(struct udevice *dev, ulong da, ulong size);
++	void * (*device_to_virt)(struct udevice *dev, ulong da, ulong size, bool *is_iomem);
+ 	int (*add_res)(struct udevice *dev,
+ 		       struct rproc_mem_entry *mapping);
+ 	void * (*alloc_mem)(struct udevice *dev, unsigned long len,
 
 -- 
 2.35.3

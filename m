@@ -2,64 +2,84 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 69462BD89DD
-	for <lists+uboot-stm32@lfdr.de>; Tue, 14 Oct 2025 12:00:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C8A8BBD9F94
+	for <lists+uboot-stm32@lfdr.de>; Tue, 14 Oct 2025 16:22:52 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D9B08C3FACE;
-	Tue, 14 Oct 2025 10:00:04 +0000 (UTC)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B1017C3FACB
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2EC9BC56603;
+	Tue, 14 Oct 2025 14:22:52 +0000 (UTC)
+Received: from mail-oi1-f177.google.com (mail-oi1-f177.google.com
+ [209.85.167.177])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 5914DC5558C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 14 Oct 2025 10:00:03 +0000 (UTC)
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59E9xgK51041174;
- Tue, 14 Oct 2025 04:59:42 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1760435982;
- bh=KBwvFWJx3s8V7Siqs+VGOJoIlO3RKW6ee2VF5g29rXk=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=sSsB4ZoD6jyDnPpzAVVGKBon6QHQ1bVTK2FsfMOOwuwzLTPaNM7+VEVcZl8ZNy5JU
- lGihFNYDG2VUM2hHS/wTD3DMtmzbctp8WRjANchkGI8sx9JympiN6/Yj/HcwqrK/T1
- Pu+on7i2A63Ku8g2H+JR9zaBFrV8HDyAysHdwe7M=
-Received: from DLEE203.ent.ti.com (dlee203.ent.ti.com [157.170.170.78])
- by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59E9xgpn356800
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 14 Oct 2025 04:59:42 -0500
-Received: from DLEE212.ent.ti.com (157.170.170.114) by DLEE203.ent.ti.com
- (157.170.170.78) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 14 Oct
- 2025 04:59:41 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE212.ent.ti.com
- (157.170.170.114) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Tue, 14 Oct 2025 04:59:41 -0500
-Received: from [172.24.26.46] (lt5cd2489kgj.dhcp.ti.com [172.24.26.46])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59E9xZYk3607441;
- Tue, 14 Oct 2025 04:59:36 -0500
-Message-ID: <d548843d-9342-43fa-8d18-f44105feff20@ti.com>
-Date: Tue, 14 Oct 2025 15:29:35 +0530
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>, <u-boot@lists.denx.de>,
- <uboot-stm32@st-md-mailman.stormreply.com>, "NXP i.MX U-Boot Team"
- <uboot-imx@nxp.com>, Fabio Estevam <festevam@gmail.com>, Stefano Babic
- <sbabic@nabladev.com>
+ Tue, 14 Oct 2025 14:22:50 +0000 (UTC)
+Received: by mail-oi1-f177.google.com with SMTP id
+ 5614622812f47-43f715fb44cso3166174b6e.0
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Tue, 14 Oct 2025 07:22:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1760451769; x=1761056569;
+ darn=st-md-mailman.stormreply.com; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=wEctA2w32PuSWWYU82c3qHcdGNcSRYtbljYtH4SLUwo=;
+ b=QxXK366aHE5TOOcLyQGog65Hp6ljgUBZKUay+QXNB6uT3PO8usGGWQ/TQukO8TQGPi
+ CAECE5+V8Iu/6qvRlcHTY+k7QaTuxb5vKlnTzOqmvluS3hWkPzZ322suHEZa+0kgKL3h
+ olVU5O2b+Fk4mCR9J/bbWSMXGK7ILbdkF1+6s=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760451769; x=1761056569;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=wEctA2w32PuSWWYU82c3qHcdGNcSRYtbljYtH4SLUwo=;
+ b=qQ6ohDfTrfZTLvpvPF0WbOCErlx6KlREy7Tcw7EPbO06pQ/4yyiOuoNE5vgkbK1tu+
+ nWjc7ALOvirKTaERa6mCUcPlD3DSpO9+HKD/RXkWYjqCEyNg/8zrmpjcyfqC0HDxWzXk
+ jS6ZYfuMIvv4jsMh5rZOf2KDlKrGvcElBlj5mAQpBrQc1sSY4FxBG0Vs5I9V6uCpGigW
+ N1+pyVuCbKPJLn5GmVviiEeSXdjM8e5VEjo3fqWk1kDCtCmKnDOxKRrnQY39/HFjhRVQ
+ GzSvn3yQjeO6cUGMvDdcdoAvI/EVxP0DacLUbrJxIX43/vvXmfea8rKR5GIFTMw/Hl3A
+ 7qmg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWAfUBB5XyRnfBKHPmVsB0mgPkAS+Hr5KKIJbJxeNd+4PVnxj9t2hqUw5mfDoCHMpbrKGPl/x7heBw61w==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0YzhSTHHvIRE+NA+dGzpIC3HG2w86gmGRvLqIjD4x0eKHRxrwJ2S
+ tli02+bUVJ149aTJEI6ZkUaM46/pNRNwXNSZmCrAF9GPeSF+rOl8gLR4x2IxVvhH5gY=
+X-Gm-Gg: ASbGncsAdMD/u5daLey29NyXZkiXOZUQG5jEl5ggCEj0WBi0oKdnWAGOqu4Fy1Hon2X
+ +BZ2wSG4ho4yLlzFxtqJnWCnEHtuTLZXVZ+lo3x4ROEptdcijHDELZo01sM8Y9it/8IaHRXoeiI
+ ldH/Y1kqTAn8CcqfUByKnYv8/qE9LSkzLpDPddwi/gSnDHZDslxZePaL9yoHovI4zbmU1Q2a+Dx
+ O/w9LNMDg9jlfAXCq7qHQvVQcmfpDBroAeVlgpS7aPv4iGM8ZdwrksUQJDO+PadL9pdnrBeNrn0
+ 07rTFvFFbhCpLoVQSp9STcYbxckv6TNNtLZB9Hi1ZHjDiI5fbNkv4kKLzZuqmOH21Qfso5rtccr
+ zUWQzlskwFneXJY1wXg3knQsRDA7sGQeLCxTnoseyilEM541OBZAn+SE3dKMzx2KQOUffUWsZwz
+ YJA01QTKgLwSp5oQ4=
+X-Google-Smtp-Source: AGHT+IEO4yXH3btx6YtaIrGCEzO2V4az5eDsxsBzdNQFztf7auFgMO+dkcNe3IwJed1xSvF+yIDYJg==
+X-Received: by 2002:a05:6808:5290:b0:437:dade:463f with SMTP id
+ 5614622812f47-4417b3dae8bmr11498957b6e.34.1760451768924; 
+ Tue, 14 Oct 2025 07:22:48 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-4419887fd8bsm3320246b6e.2.2025.10.14.07.22.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 14 Oct 2025 07:22:48 -0700 (PDT)
+Date: Tue, 14 Oct 2025 08:22:45 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Peng Fan <peng.fan@oss.nxp.com>
+Message-ID: <20251014142245.GN6113@bill-the-cat>
 References: <20251013-imx-rproc-v1-0-fb43a3fafcd0@nxp.com>
-Content-Language: en-US
-From: "Kumar, Udit" <u-kumar1@ti.com>
-In-Reply-To: <20251013-imx-rproc-v1-0-fb43a3fafcd0@nxp.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
- Ye Li <ye.li@nxp.com>, u-kumar1@ti.com,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>, Andrew Davis <afd@ti.com>,
+ <20251013-imx-rproc-v1-6-fb43a3fafcd0@nxp.com>
+ <20251013155546.GJ6113@bill-the-cat>
+ <20251014015037.GA31468@nxa18884-linux.ap.freescale.net>
+MIME-Version: 1.0
+In-Reply-To: <20251014015037.GA31468@nxa18884-linux.ap.freescale.net>
+X-Clacks-Overhead: GNU Terry Pratchett
+Cc: Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>,
+ Udit Kumar <u-kumar1@ti.com>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>, Ryan Eatmon <reatmon@ti.com>,
+ Andrew Davis <afd@ti.com>, u-boot@lists.denx.de,
  Beleswar Padhi <b-padhi@ti.com>, Judith Mendez <jm@ti.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Ryan Eatmon <reatmon@ti.com>,
- Hari Nagalla <hnagalla@ti.com>
-Subject: Re: [Uboot-stm32] [PATCH 00/11] remoteproc: Add support for
- i.MX8M[M/N/P/Q] and i.MX93
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ uboot-stm32@st-md-mailman.stormreply.com, Hari Nagalla <hnagalla@ti.com>,
+ Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@nabladev.com>
+Subject: Re: [Uboot-stm32] [PATCH 06/11] arm: dts: imx8m: Add remoteproc node
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,71 +91,79 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: multipart/mixed; boundary="===============6280153845917377459=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-SGkgUGVuZwoKT24gMTAvMTMvMjAyNSA4OjE5IEFNLCBQZW5nIEZhbiAoT1NTKSB3cm90ZToKPiBU
-aGlzIHBhdGNoIHNlcmllcyBpbnRyb2R1Y2VzIHJlbW90ZXByb2Mgc3VwcG9ydCBmb3IgTlhQIGku
-TVg4TSBhbmQgaS5NWDkzCj4gcGxhdGZvcm1zLiBNb3N0IG9mIHRoZSBpLk1YLXNwZWNpZmljIGxv
-Z2ljIGlzIHBvcnRlZCBmcm9tIHRoZSBMaW51eCBrZXJuZWwgdG8KPiBlbnN1cmUgY29tcGF0aWJp
-bGl0eSBhbmQgbWFpbnRhaW5hYmlsaXR5Lgo+Cj4gVGhlIGV4aXN0aW5nIGJvb3RhdXggY29tbWFu
-ZCBpbiBVLUJvb3Qgb25seSBzdXBwb3J0cyBsb2FkaW5nIHJhdyBiaW5hcnkgaW1hZ2VzLgo+IEhv
-d2V2ZXIsIHRoaXMgYXBwcm9hY2ggZmFpbHMgd2hlbiB0aGUgcmVtb3RlIHByb2Nlc3NvciBmaXJt
-d2FyZSBjb250YWlucwo+IHNlY3Rpb25zIHRoYXQgbXVzdCBiZSBsb2FkZWQgaW50byBib3RoIFRD
-TSBhbmQgRERSLiBUbyBhZGRyZXNzIHRoaXMgbGltaXRhdGlvbiwKPiBuZWVkIHRvIHVzZSByZW1v
-dGVwcm9jIGZyYW1ld29yayBFTEYgbG9hZGVyLCBlbmFibGluZyBwcm9wZXIgbG9hZGluZyBvZgo+
-IHNlZ21lbnRlZCBmaXJtd2FyZSBpbWFnZXMuCgoKSSBhbSBub3Qgc3VyZSwgd2hhdCBwcm9ibGVt
-IHlvdSBhcmUgZmFjaW5nIHRvIGxvYWQgZncgaGF2aW5nIHNlY3Rpb24gaW4gClRDTSBhbmQgRERS
-IGJvdGgswqAgd2l0aCBjdXJyZW50IGZyYW1lLXdvcmsuCgpUaGVyZSBhcmUgZmV3IGRyaXZlcnMs
-IHVzaW5nIGJvdGggVENNIGFuZCBERFIgYW5kIHdvcmtpbmcgb2sgcmVmWzBdCgpbMF0gCmh0dHBz
-Oi8vZWxpeGlyLmJvb3RsaW4uY29tL3UtYm9vdC92MjAyNS4xMC9zb3VyY2UvZHJpdmVycy9yZW1v
-dGVwcm9jL3RpX2szX3I1Zl9ycHJvYy5jI0wxMTAgCgoKCgoKPgo+IFBhdGNoIFN1bW1hcnk6Cj4K
-PiBQYXRjaGVzIDHigJMyOiBJbXBvcnQgbWVtY3B5X2lvIGFuZCBtZW1zZXRfaW8gZnJvbSB0aGUg
-TGludXgga2VybmVsIGFuZCBlbmFibGUKPiAgICAgICAgICAgICAgIHRoZW0gaW4gdGhlIHJlbW90
-ZXByb2Mgc3Vic3lzdGVtLgo+IFBhdGNoZXMgM+KAkzExOiBBZGQgcGxhdGZvcm0tc3BlY2lmaWMg
-cmVtb3RlcHJvYyBzdXBwb3J0IGZvciBpLk1YOE0gYW5kIGkuTVg5My4KPiBQYXRjaCA2OiBUZW1w
-b3JhcmlseSBhZGRzIENvcnRleC1NIG5vZGVzIHRvIHgtdS1ib290LmR0c2kgc2luY2UgdGhleSBh
-cmUgbm90Cj4gICAgICAgICAgIHlldCBhdmFpbGFibGUgaW4gdGhlIHVwc3RyZWFtIExpbnV4IGRl
-dmljZSB0cmVlLiBUaGVzZSBub2RlcyBjYW4gYmUKPiAJIHJlbW92ZWQgb25jZSB0aGV5IGFyZSBt
-ZXJnZWQgdXBzdHJlYW0uCj4KPiBOWFAgaW50ZXJuYWwgUi1iIHRhZ3MgYXJlIGtlcHQsIGJlY2F1
-c2UgdGhlIHBhdGNoZXMgYXJlIGRpcmVjdGx5Cj4gY2hlcnJ5LXBpY2tlZCBmcm9tIE5YUCBMVFMg
-dHJlZS4KPgo+IFNpZ25lZC1vZmYtYnk6IFBlbmcgRmFuIDxwZW5nLmZhbkBueHAuY29tPgo+IC0t
-LQo+IFBlbmcgRmFuICgxMSk6Cj4gICAgICAgIGxpYjogSW1wb3J0IGlvbWVtX2NvcHkgZnJvbSBM
-aW51eCBLZXJuZWwKPiAgICAgICAgcmVtb3RlcHJvYzogRXh0ZW5kIGRldmljZV90b192aXJ0IHdp
-dGggYSBpc19pb21lbSBwYXJhbWV0ZXIKPiAgICAgICAgcmVtb3RlcHJvYzogQWRkIGlteF9ycHJv
-YyBkcml2ZXIgdG8gc3VwcG9ydCBOWFAgaS5NWDhNUC9OCj4gICAgICAgIHJlbW90ZXByb2M6IGlt
-eF9ycHJvYzogU3VwcG9ydCBpLk1YOE1RL00KPiAgICAgICAgcmVtb3RlcHJvYzogaW14X3Jwcm9j
-OiBBZGQgc3VwcG9ydCBmb3IgaS5NWDkzIENNMzMKPiAgICAgICAgYXJtOiBkdHM6IGlteDhtOiBB
-ZGQgcmVtb3RlcHJvYyBub2RlCj4gICAgICAgIGlteDhtcDogRW5hYmxlIHJlbW90ZXByb2MgZm9y
-IGkuTVg4TVAgRVZLCj4gICAgICAgIGlteDhtbTogRW5hYmxlIHJlbW90ZXByb2MgZm9yIGkuTVg4
-TU0gRVZLCj4gICAgICAgIGlteDhtbjogRW5hYmxlIHJlbW90ZXByb2MgZm9yIGkuTVg4TU4gRVZL
-Cj4gICAgICAgIGlteDhtcTogRW5hYmxlIHJlbW90ZXByb2MgZm9yIGkuTVg4TVEgRVZLCj4gICAg
-ICAgIGlteDkzOiBFbmFibGUgcmVtb3RlcHJvYyBmb3IgaS5NWDkzLUVWSy9RU0IvRlJETQo+Cj4g
-ICBNQUlOVEFJTkVSUyAgICAgICAgICAgICAgICAgICAgICAgICAgIHwgICAxICsKPiAgIGFyY2gv
-YXJtL2R0cy9pbXg4bW0tdS1ib290LmR0c2kgICAgICAgfCAgIDQgKwo+ICAgYXJjaC9hcm0vZHRz
-L2lteDhtbi11LWJvb3QuZHRzaSAgICAgICB8ICAgNCArCj4gICBhcmNoL2FybS9kdHMvaW14OG1w
-LXUtYm9vdC5kdHNpICAgICAgIHwgICA0ICsKPiAgIGFyY2gvYXJtL2R0cy9pbXg4bXEtdS1ib290
-LmR0c2kgICAgICAgfCAgIDQgKwo+ICAgYXJjaC9hcm0vbWFjaC1pbXgvaW14OG0vS2NvbmZpZyAg
-ICAgICB8ICAyMCArKwo+ICAgYXJjaC9hcm0vbWFjaC1pbXgvaW14OS9LY29uZmlnICAgICAgICB8
-ICAxMiArKwo+ICAgZHJpdmVycy9yZW1vdGVwcm9jL0tjb25maWcgICAgICAgICAgICB8ICAgNyAr
-Cj4gICBkcml2ZXJzL3JlbW90ZXByb2MvTWFrZWZpbGUgICAgICAgICAgIHwgICAxICsKPiAgIGRy
-aXZlcnMvcmVtb3RlcHJvYy9pbXhfcnByb2MuYyAgICAgICAgfCAzNzAgKysrKysrKysrKysrKysr
-KysrKysrKysrKysrKysrKysrKwo+ICAgZHJpdmVycy9yZW1vdGVwcm9jL2lteF9ycHJvYy5oICAg
-ICAgICB8ICA1NiArKysrKwo+ICAgZHJpdmVycy9yZW1vdGVwcm9jL3JlbmVzYXNfYXBtdS5jICAg
-ICB8ICAgMyArLQo+ICAgZHJpdmVycy9yZW1vdGVwcm9jL3Jwcm9jLWVsZi1sb2FkZXIuYyB8ICA5
-MyArKysrKystLS0KPiAgIGRyaXZlcnMvcmVtb3RlcHJvYy9zYW5kYm94X3Rlc3Rwcm9jLmMgfCAg
-IDMgKy0KPiAgIGRyaXZlcnMvcmVtb3RlcHJvYy9zdG0zMl9jb3Byby5jICAgICAgfCAgIDMgKy0K
-PiAgIGRyaXZlcnMvcmVtb3RlcHJvYy90aV9rM19kc3BfcnByb2MuYyAgfCAgIDIgKy0KPiAgIGRy
-aXZlcnMvcmVtb3RlcHJvYy90aV9rM19yNWZfcnByb2MuYyAgfCAgIDIgKy0KPiAgIGluY2x1ZGUv
-YXNtLWdlbmVyaWMvaW8uaCAgICAgICAgICAgICAgfCAgMzcgKysrKwo+ICAgaW5jbHVkZS9yZW1v
-dGVwcm9jLmggICAgICAgICAgICAgICAgICB8ICAgMyArLQo+ICAgbGliL01ha2VmaWxlICAgICAg
-ICAgICAgICAgICAgICAgICAgICB8ICAgMSArCj4gICBsaWIvaW9tZW1fY29weS5jICAgICAgICAg
-ICAgICAgICAgICAgIHwgMTM2ICsrKysrKysrKysrKysKPiAgIDIxIGZpbGVzIGNoYW5nZWQsIDcz
-MSBpbnNlcnRpb25zKCspLCAzNSBkZWxldGlvbnMoLSkKPiAtLS0KPiBiYXNlLWNvbW1pdDogNDhm
-MjFlNjZlMzYwNTUyYzc1ZDcwYTUwNDIxZDBlMGVkMWY1OWU5MAo+IGNoYW5nZS1pZDogMjAyNTEw
-MTItaW14LXJwcm9jLTM4M2RiNzUyYzNmNwo+Cj4gQmVzdCByZWdhcmRzLApfX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpVYm9vdC1zdG0zMiBtYWlsaW5nIGxp
-c3QKVWJvb3Qtc3RtMzJAc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbQpodHRwczovL3N0LW1k
-LW1haWxtYW4uc3Rvcm1yZXBseS5jb20vbWFpbG1hbi9saXN0aW5mby91Ym9vdC1zdG0zMgo=
+
+--===============6280153845917377459==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="sxPSYHK7ToevmQhX"
+Content-Disposition: inline
+
+
+--sxPSYHK7ToevmQhX
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Oct 14, 2025 at 09:50:37AM +0800, Peng Fan wrote:
+> Hi Tom,
+>=20
+> On Mon, Oct 13, 2025 at 09:55:46AM -0600, Tom Rini wrote:
+> >On Mon, Oct 13, 2025 at 10:49:25AM +0800, Peng Fan (OSS) wrote:
+> >> From: Peng Fan <peng.fan@nxp.com>
+> >>=20
+> >> Add CM7/4 nodes for i.MX8MQ/M/N/P.
+> >>=20
+> >> Reviewed-by: Ye Li <ye.li@nxp.com>
+> >> Signed-off-by: Peng Fan <peng.fan@nxp.com>
+> >> ---
+> >>  arch/arm/dts/imx8mm-u-boot.dtsi | 4 ++++
+> >>  arch/arm/dts/imx8mn-u-boot.dtsi | 4 ++++
+> >>  arch/arm/dts/imx8mp-u-boot.dtsi | 4 ++++
+> >>  arch/arm/dts/imx8mq-u-boot.dtsi | 4 ++++
+> >>  4 files changed, 16 insertions(+)
+> >
+> >Why is this in the u-boot.dtsi? We have
+>=20
+> I am preparing the Linux dts patches and will send out for reviewing.
+> Before those lands into Linux dts, we need that in imx8m*-u-boot.dtsi.
+> After linux side done, we could clean up the imx8m*-u-boot.dtsi
+>=20
+> >dts/upstream/Bindings/remoteproc/fsl,imx-rproc.yaml and so your updates
+> >here should be compatible with that, yes?
+>=20
+> Yes. Per the dt-bindings, only compatible is required and that is what
+> this patch added.
+
+OK, thanks.
+
+--=20
+Tom
+
+--sxPSYHK7ToevmQhX
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaO5ctQAKCRAr4qD1Cr/k
+ChkfAP9vI0N2x92olno4Rl/jM5lq5dysXJzNscQfBDyTWnRDBQD/W32QcDdXcJz7
+j7IViYMlPNrfFox1W111yOB7BbTFDA0=
+=rltC
+-----END PGP SIGNATURE-----
+
+--sxPSYHK7ToevmQhX--
+
+--===============6280153845917377459==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============6280153845917377459==--

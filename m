@@ -2,84 +2,147 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id C8A8BBD9F94
-	for <lists+uboot-stm32@lfdr.de>; Tue, 14 Oct 2025 16:22:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 85FB5BDC1B8
+	for <lists+uboot-stm32@lfdr.de>; Wed, 15 Oct 2025 04:05:00 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2EC9BC56603;
-	Tue, 14 Oct 2025 14:22:52 +0000 (UTC)
-Received: from mail-oi1-f177.google.com (mail-oi1-f177.google.com
- [209.85.167.177])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3665BC56615;
+	Wed, 15 Oct 2025 02:05:00 +0000 (UTC)
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazon11013010.outbound.protection.outlook.com [40.107.159.10])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 5914DC5558C
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 0257BC56613
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 14 Oct 2025 14:22:50 +0000 (UTC)
-Received: by mail-oi1-f177.google.com with SMTP id
- 5614622812f47-43f715fb44cso3166174b6e.0
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 14 Oct 2025 07:22:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1760451769; x=1761056569;
- darn=st-md-mailman.stormreply.com; 
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=wEctA2w32PuSWWYU82c3qHcdGNcSRYtbljYtH4SLUwo=;
- b=QxXK366aHE5TOOcLyQGog65Hp6ljgUBZKUay+QXNB6uT3PO8usGGWQ/TQukO8TQGPi
- CAECE5+V8Iu/6qvRlcHTY+k7QaTuxb5vKlnTzOqmvluS3hWkPzZ322suHEZa+0kgKL3h
- olVU5O2b+Fk4mCR9J/bbWSMXGK7ILbdkF1+6s=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760451769; x=1761056569;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wEctA2w32PuSWWYU82c3qHcdGNcSRYtbljYtH4SLUwo=;
- b=qQ6ohDfTrfZTLvpvPF0WbOCErlx6KlREy7Tcw7EPbO06pQ/4yyiOuoNE5vgkbK1tu+
- nWjc7ALOvirKTaERa6mCUcPlD3DSpO9+HKD/RXkWYjqCEyNg/8zrmpjcyfqC0HDxWzXk
- jS6ZYfuMIvv4jsMh5rZOf2KDlKrGvcElBlj5mAQpBrQc1sSY4FxBG0Vs5I9V6uCpGigW
- N1+pyVuCbKPJLn5GmVviiEeSXdjM8e5VEjo3fqWk1kDCtCmKnDOxKRrnQY39/HFjhRVQ
- GzSvn3yQjeO6cUGMvDdcdoAvI/EVxP0DacLUbrJxIX43/vvXmfea8rKR5GIFTMw/Hl3A
- 7qmg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWAfUBB5XyRnfBKHPmVsB0mgPkAS+Hr5KKIJbJxeNd+4PVnxj9t2hqUw5mfDoCHMpbrKGPl/x7heBw61w==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0YzhSTHHvIRE+NA+dGzpIC3HG2w86gmGRvLqIjD4x0eKHRxrwJ2S
- tli02+bUVJ149aTJEI6ZkUaM46/pNRNwXNSZmCrAF9GPeSF+rOl8gLR4x2IxVvhH5gY=
-X-Gm-Gg: ASbGncsAdMD/u5daLey29NyXZkiXOZUQG5jEl5ggCEj0WBi0oKdnWAGOqu4Fy1Hon2X
- +BZ2wSG4ho4yLlzFxtqJnWCnEHtuTLZXVZ+lo3x4ROEptdcijHDELZo01sM8Y9it/8IaHRXoeiI
- ldH/Y1kqTAn8CcqfUByKnYv8/qE9LSkzLpDPddwi/gSnDHZDslxZePaL9yoHovI4zbmU1Q2a+Dx
- O/w9LNMDg9jlfAXCq7qHQvVQcmfpDBroAeVlgpS7aPv4iGM8ZdwrksUQJDO+PadL9pdnrBeNrn0
- 07rTFvFFbhCpLoVQSp9STcYbxckv6TNNtLZB9Hi1ZHjDiI5fbNkv4kKLzZuqmOH21Qfso5rtccr
- zUWQzlskwFneXJY1wXg3knQsRDA7sGQeLCxTnoseyilEM541OBZAn+SE3dKMzx2KQOUffUWsZwz
- YJA01QTKgLwSp5oQ4=
-X-Google-Smtp-Source: AGHT+IEO4yXH3btx6YtaIrGCEzO2V4az5eDsxsBzdNQFztf7auFgMO+dkcNe3IwJed1xSvF+yIDYJg==
-X-Received: by 2002:a05:6808:5290:b0:437:dade:463f with SMTP id
- 5614622812f47-4417b3dae8bmr11498957b6e.34.1760451768924; 
- Tue, 14 Oct 2025 07:22:48 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4419887fd8bsm3320246b6e.2.2025.10.14.07.22.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 Oct 2025 07:22:48 -0700 (PDT)
-Date: Tue, 14 Oct 2025 08:22:45 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Peng Fan <peng.fan@oss.nxp.com>
-Message-ID: <20251014142245.GN6113@bill-the-cat>
-References: <20251013-imx-rproc-v1-0-fb43a3fafcd0@nxp.com>
- <20251013-imx-rproc-v1-6-fb43a3fafcd0@nxp.com>
- <20251013155546.GJ6113@bill-the-cat>
- <20251014015037.GA31468@nxa18884-linux.ap.freescale.net>
-MIME-Version: 1.0
-In-Reply-To: <20251014015037.GA31468@nxa18884-linux.ap.freescale.net>
-X-Clacks-Overhead: GNU Terry Pratchett
-Cc: Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>,
- Udit Kumar <u-kumar1@ti.com>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>, Ryan Eatmon <reatmon@ti.com>,
- Andrew Davis <afd@ti.com>, u-boot@lists.denx.de,
- Beleswar Padhi <b-padhi@ti.com>, Judith Mendez <jm@ti.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- uboot-stm32@st-md-mailman.stormreply.com, Hari Nagalla <hnagalla@ti.com>,
+ Wed, 15 Oct 2025 02:04:58 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=PR8QKW7hK8pwAfrXdxbfvSwqm0Z8x7b/zkxkST50jMGGHSzsy8vM3d5JgaRjxlxUOpkvkfZHlu43Une1H0x7kpaN1fitoQKAtNfu0F5Z/8gcDm1Zlx3+k1ZS6rbVkW3lNZrC6PQJj0ozjvVRxLgxj0xRFnOD75zC+vCq1loG8vSxyShDPk0ZX7kdZ7tbcrZ2mZ1dLxY7k1rGzIDiYDey5fldplVxfd91ekLZr8jDJv0MuLNEndUcWvHdHJg/Yf3685SDBG2S/4pJagAwviaG/wRY08rCGfs1H2DIbUsjbYFOPGSED6WAsj+j6sIVsB8S3VgXOkzXxGWp0PdFgkreIg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ufkId0gtfeEetUBG4fs5kz8lhF+mY75ltFfAmm9xSUQ=;
+ b=XYC6E4yXci5gXAH1sll07IO6uSVi455+oUWijTJdU6woCoCHe26MwHB5Mj1tk7kGsMAEApMnGvKj2qeED7pA7DWntR5iCjvDPTGvWzcwQUF1EMnHhDP+I1MBOdwBleVRcElPrR9zmNFWRwCHCe4veIqE+pdWOoJ0nSZMmrG8JTRgwSxmAeiHw0yuCeXUiIiwoPDx+ThcGa61Li4mQDYHn2zKQHde0DcCwBLe7m3BfuV6Ssn7nTrVDTE2Ui5fyM83Wy3TeN9RST4XFQOxCDd99G+eYZYEDjSnPIwJFoSv+GVfm9kmjhSes7HZBhuKuUzdWPa9LMKfl8Xwf7Mh+SZ++Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ufkId0gtfeEetUBG4fs5kz8lhF+mY75ltFfAmm9xSUQ=;
+ b=Z+G/YnmxxnUUAKGzudSWqBKBStDQ7wk3l1/S+yEQc/UB9aKmogiL4879cf5gywznGLgZm17Kgp4T67tk8dD6RnkJJq6EuBtZCsE4IFAdwqw09jqPmx46dkp/vCP0cg/ST24PALlb6wfXRiYjtCh6gf3PPe730TcQY8rz2eS0p46j/dJBG4qA/Qz9qtEsfxkk3j758whWX5RCaYqR3FMnDoPC/Dwl9l1stdtPi4EOdDcEvlJ0qVVMScnOea4heNRpvrlBGo1ITI22rcymxukTtufylyhmtNP7nkoc80/DA5WqU7OS5XTXJAnTdex7Pjezt+K4QcIxaq/GxcMlrY7gHQ==
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
+ by AS8PR04MB8024.eurprd04.prod.outlook.com (2603:10a6:20b:2a3::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9228.10; Wed, 15 Oct
+ 2025 02:04:57 +0000
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630%4]) with mapi id 15.20.9228.010; Wed, 15 Oct 2025
+ 02:04:56 +0000
+From: Peng Fan <peng.fan@nxp.com>
+To: "Kumar, Udit" <u-kumar1@ti.com>, "Peng Fan (OSS)" <peng.fan@oss.nxp.com>, 
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "uboot-stm32@st-md-mailman.stormreply.com"
+ <uboot-stm32@st-md-mailman.stormreply.com>, dl-uboot-imx <uboot-imx@nxp.com>, 
  Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@nabladev.com>
-Subject: Re: [Uboot-stm32] [PATCH 06/11] arm: dts: imx8m: Add remoteproc node
+Thread-Topic: [PATCH 00/11] remoteproc: Add support for i.MX8M[M/N/P/Q] and
+ i.MX93
+Thread-Index: AQHcO+HinAN2+SqaeUGcXhctSkuHsLTBarmAgAEM7YA=
+Date: Wed, 15 Oct 2025 02:04:56 +0000
+Message-ID: <PAXPR04MB84591171BC097C3ED0BBD3FC88E8A@PAXPR04MB8459.eurprd04.prod.outlook.com>
+References: <20251013-imx-rproc-v1-0-fb43a3fafcd0@nxp.com>
+ <d548843d-9342-43fa-8d18-f44105feff20@ti.com>
+In-Reply-To: <d548843d-9342-43fa-8d18-f44105feff20@ti.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nxp.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: PAXPR04MB8459:EE_|AS8PR04MB8024:EE_
+x-ms-office365-filtering-correlation-id: 0350c1da-75b4-4c72-401c-08de0b8f3d41
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|19092799006|7416014|376014|366016|1800799024|38070700021; 
+x-microsoft-antispam-message-info: =?iso-8859-1?Q?D3fH29Upi7gydwiJ+i0j0ArkdZdUmhYH2acY3Gy0h10bRiQW3jfDpbH6Hp?=
+ =?iso-8859-1?Q?aJ0/hYrDgg3L+WAM+Sn2Etq6Ebknq6G4B8lhK4WhCQdkma8hOy/ZIUd/Kx?=
+ =?iso-8859-1?Q?KXE9Tv85Hdpaf+2Kybxt7F/Vw33v9309LHsOg+dWbpXRekNyWsHxdg2ek4?=
+ =?iso-8859-1?Q?PhTsdWg/P61UD1Q+iu9S8mfjpXK9AfjxFE2ylKkpXfdWR/G02uKkNJiKgR?=
+ =?iso-8859-1?Q?v65RBuKoLGtuy+m2cWEDoaxLrxlGS6Sr3xt4HMklLl2azmb+xDRjOfupEB?=
+ =?iso-8859-1?Q?o2tC1PI7SXopuqSS2RW3nskrlFd8SFHzFvrj6OAWvhcP2LLS57X9Lk6RtO?=
+ =?iso-8859-1?Q?fpROD+mq37o0D6IBIM8iyX2oremRHzciANdlJ84cuysfxriwM1Q9Oarby4?=
+ =?iso-8859-1?Q?KQ8pMXrAKLDmA7FAlrm9QkxrTpKxiTkCvLqSR+4DqF7eMbU0J+0YTWBcmZ?=
+ =?iso-8859-1?Q?Y9wJpJ0Yb6ywNJoxavBYzbAp7odloJNnfBrclms9RYGKsvnDXxBNIv8c8U?=
+ =?iso-8859-1?Q?lyVY7xNss1UNhLQPR0udzJD70sB56vJP/pzMMv3hvIHm7va9LBch4ra2yp?=
+ =?iso-8859-1?Q?bmkOJBjR1AIOoWoDq3vSu1VMx65wEdITELmVyshzfuPqDM4L1puf9CIv4I?=
+ =?iso-8859-1?Q?q80rJ1QJxyc8kXm6jwDFC6o2qiCbf16jh41fgie7HJ4l0DbMep02xDhaTx?=
+ =?iso-8859-1?Q?SoEB+Cq+8nlvA2avVAzWZ9LfTE8rZLxmQR+t+3qOMfH0UJbaOqYubtxYCs?=
+ =?iso-8859-1?Q?5YbqZNbBRApYHjwsjv7LBuTeAmOO/2O23/7hADFmX7G3nb+91EgZmIhxA0?=
+ =?iso-8859-1?Q?LBllGmtuhKwO0A4KBvAhB55g61j56CUbfxlI5yvXJZZan6QGbadxN3MTr7?=
+ =?iso-8859-1?Q?EIRVxf6/ohhtyN/dC0+Ntr+glv9aFE3Kf3KeCcMucmo9AXZ0P8WUZIajcw?=
+ =?iso-8859-1?Q?t40aoloW4criFLy6qjJ3gNtoMheHuwpSG2uAGHPIaWGvLkD2WAdqMLTG/i?=
+ =?iso-8859-1?Q?lc5BrOL9HK9yxvHYlVS2M/HOmO9ARs25O+2x2mdm3igxhWP4+lF4Az5qtF?=
+ =?iso-8859-1?Q?PxGetfUIhm17rsqL/nSyEIy7M9aspi5Yrqk3sE5FfAEl+rrHba5Mg9jMDs?=
+ =?iso-8859-1?Q?V1HIAIfNHkpbO+kfej9QLkgiEgGI1ZZpRWSsS3mvOQ8SzzAhCsrx96IxAU?=
+ =?iso-8859-1?Q?lyFmctBVF/q5IcbmXkfkRKq5b8rFN23YpONQgUxQM4jBnO4bhf+hrLIoUf?=
+ =?iso-8859-1?Q?IFlhcN5pagw7br+sqRera2k1G3Ksv/LZ3QvTA7jGeGjKqRD+1z5FDZ6fAA?=
+ =?iso-8859-1?Q?EvFfJi3+GVgzll0YNBtkgNQQ6zomUuoMuN63Tou3O19nONnPQ09uG/7Hga?=
+ =?iso-8859-1?Q?YQTp27WCv6CFYSvOWqdGA9/cYYt4ur8cf5w0DksRQs6qtVWJpms35yz4L7?=
+ =?iso-8859-1?Q?CUlf0vr0Mt7/Hbaul0M2vI5VzwC9IGez2f9ozYUadH9vFWPNDXxeEAs4/b?=
+ =?iso-8859-1?Q?0JpdRANLQ9hznPduZxnH6vtx73qMYTL3VDck5bcbeY6+uJaSzome5vHRrc?=
+ =?iso-8859-1?Q?pBqT1XhiWFXWajc4qPAtIs/kwhmr?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(19092799006)(7416014)(376014)(366016)(1800799024)(38070700021);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?PHk+y1gWjQRI+wEc4jCzrIDVrH7C46Od1EPG6GZH8z+Nd0hry9RR0so8pt?=
+ =?iso-8859-1?Q?hZLxeU0U9XYWB5QuIfnkemZUUn3NvXOTzzddzLTWJ+fLwH6JNTkQDbfra9?=
+ =?iso-8859-1?Q?FB7Ov/v04uD9EpF4d1eDV1zxSYXARqlXRbUwPY0mo6nDnKSFFF4WXhUgWj?=
+ =?iso-8859-1?Q?xb84KI2RHvs5CqGgRWf3tivmUb3T5Ggb9A+IhWnxCqqgSpqgLrX3AX+JDh?=
+ =?iso-8859-1?Q?7ct6XL+nqDjnltj9d84z8UfxKVvAK3QWzZb8CylqfVQMZCVdcZ3bAcyjh1?=
+ =?iso-8859-1?Q?1VLkkWF39JIdOxTxl+9rcrrsUnDww8CNjBTb+WdOpFwVJuklj3HgizOoqO?=
+ =?iso-8859-1?Q?+ed8ZovDM+vCI2kfLnweFJnZLyuQ1eOhnU2P9+vSjuyHkRx22J23f9JYya?=
+ =?iso-8859-1?Q?wGaLYPutxKRWnGB1kwUseaKMJw7e6g0znkeUQwcP8+256Q5+Pdlto546BL?=
+ =?iso-8859-1?Q?3wITdJ6h65nARSVqCYMk4ak1EKDetvAjYLIwzfS5vg/xY72AjcFmU0kpOS?=
+ =?iso-8859-1?Q?ypUfr1z8L/8iJ9M1APK8DfkIfmphDVXMhJEiIdIIka/k/HBhk4IigDLqG8?=
+ =?iso-8859-1?Q?Y7wHJR/KGLSJTgEDUuuohmnmyXq3QId+CQ7prv7PSpvh4csPVyxMKq1iEH?=
+ =?iso-8859-1?Q?bLWQ+bwgWDzkb7Kfg7SsjArprxunKgLYGDMXz6Aidw2Q6nhjMdxwQPF+Bk?=
+ =?iso-8859-1?Q?0BguHH3J9FwO4YHvzqefwAQ3GdUn7Hf7gTasvzKTGJ3bZ3cz4FnlZ75wE7?=
+ =?iso-8859-1?Q?sbr/ImrS/D8RGXh+1JTpOv3drUbM6L0VY5ISQtTE7psqEzKeqajqNSDHST?=
+ =?iso-8859-1?Q?db8IbPiBqO3VVVjf54rmx0cok39wLeYBPdK6+Qy+fzZSIHRHdrV9FSwCDm?=
+ =?iso-8859-1?Q?7PytRhVZGzzgq9KXEWYNDo3kch4s26AiFKRlMV8Fo4SGu65Wr8WvDwn1No?=
+ =?iso-8859-1?Q?zXglYJj7qW6yqGLfC9+qXvGjZd9zulvu1rf/B1aoDUwrhnShJch3dSgrAP?=
+ =?iso-8859-1?Q?csHnrgzs66J7G2eUbQFsGQJLlNO4zgN4ajpmorr11orzbq5panD985XrGl?=
+ =?iso-8859-1?Q?r2BpcD7Gav9XGMS+4jah5NZt7svt9onBrEo8tEvMIcVUb8XTlPrYhmTPBk?=
+ =?iso-8859-1?Q?NQMldNUr3t6MDh9z2wy1VY0sJ6hl4SMpBylcXssz/lQ/TRksos813e/4kA?=
+ =?iso-8859-1?Q?ajDNd3T4+LqV+hhxC8U15ntiLRr7d2tugz4o1CojUx26INHuenQBNsw5EJ?=
+ =?iso-8859-1?Q?eWlnAkaa40RYWPspfCvAZPno4FsZECVvL5OEvuiWQvq1Wfva2EOMBiDnyA?=
+ =?iso-8859-1?Q?U/d7lJw9f7UpHlmmrI3scTJ/scqwp3ZZcQymEGXcLHWmMEPN9bYbsKfWB1?=
+ =?iso-8859-1?Q?Fz75cvIyKvfMQiZ1viS+LSMJ5ysIzjS9zuRypPvow5IYGqksAWix69jOK9?=
+ =?iso-8859-1?Q?PvU4p2i4y/kKb2Sr9FZsPI+3uODXI5eKi860VbtLrna4LLlIPdEkhdRgA7?=
+ =?iso-8859-1?Q?RZqmWiW/4Hh/oo38xo4mcgMe9kRLwPh7gVTD5fa7xPe4m25EanDnxiQruv?=
+ =?iso-8859-1?Q?IDnXQeBvVFdSCeCvWuxULHm8WEE7t8nT4lhZBayjCIKla/emkFRp27caBW?=
+ =?iso-8859-1?Q?gSg642+x5L1jI=3D?=
+MIME-Version: 1.0
+X-OriginatorOrg: nxp.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0350c1da-75b4-4c72-401c-08de0b8f3d41
+X-MS-Exchange-CrossTenant-originalarrivaltime: 15 Oct 2025 02:04:56.8937 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: lIZscCUqRJHAN1KVhD0YU8H740Ml55okn1G9LeAtKMumOpEV/E3ox6YK4awgJVLDjQCB7X9B+Tnl0UfkTuIwAA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8024
+Cc: Tom Rini <trini@konsulko.com>, Ye Li <ye.li@nxp.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>, Andrew Davis <afd@ti.com>,
+ Beleswar Padhi <b-padhi@ti.com>, Judith Mendez <jm@ti.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Ryan Eatmon <reatmon@ti.com>,
+ Hari Nagalla <hnagalla@ti.com>
+Subject: Re: [Uboot-stm32] [PATCH 00/11] remoteproc: Add support for
+ i.MX8M[M/N/P/Q] and i.MX93
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -91,79 +154,53 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============6280153845917377459=="
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+> Subject: Re: [PATCH 00/11] remoteproc: Add support for
+> i.MX8M[M/N/P/Q] and i.MX93
+> =
 
---===============6280153845917377459==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="sxPSYHK7ToevmQhX"
-Content-Disposition: inline
+> Hi Peng
+> =
 
-
---sxPSYHK7ToevmQhX
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Oct 14, 2025 at 09:50:37AM +0800, Peng Fan wrote:
-> Hi Tom,
->=20
-> On Mon, Oct 13, 2025 at 09:55:46AM -0600, Tom Rini wrote:
-> >On Mon, Oct 13, 2025 at 10:49:25AM +0800, Peng Fan (OSS) wrote:
-> >> From: Peng Fan <peng.fan@nxp.com>
-> >>=20
-> >> Add CM7/4 nodes for i.MX8MQ/M/N/P.
-> >>=20
-> >> Reviewed-by: Ye Li <ye.li@nxp.com>
-> >> Signed-off-by: Peng Fan <peng.fan@nxp.com>
-> >> ---
-> >>  arch/arm/dts/imx8mm-u-boot.dtsi | 4 ++++
-> >>  arch/arm/dts/imx8mn-u-boot.dtsi | 4 ++++
-> >>  arch/arm/dts/imx8mp-u-boot.dtsi | 4 ++++
-> >>  arch/arm/dts/imx8mq-u-boot.dtsi | 4 ++++
-> >>  4 files changed, 16 insertions(+)
+> On 10/13/2025 8:19 AM, Peng Fan (OSS) wrote:
+> > This patch series introduces remoteproc support for NXP i.MX8M and
+> > i.MX93 platforms. Most of the i.MX-specific logic is ported from the
+> > Linux kernel to ensure compatibility and maintainability.
 > >
-> >Why is this in the u-boot.dtsi? We have
->=20
-> I am preparing the Linux dts patches and will send out for reviewing.
-> Before those lands into Linux dts, we need that in imx8m*-u-boot.dtsi.
-> After linux side done, we could clean up the imx8m*-u-boot.dtsi
->=20
-> >dts/upstream/Bindings/remoteproc/fsl,imx-rproc.yaml and so your updates
-> >here should be compatible with that, yes?
->=20
-> Yes. Per the dt-bindings, only compatible is required and that is what
-> this patch added.
+> > The existing bootaux command in U-Boot only supports loading raw
+> binary images.
+> > However, this approach fails when the remote processor firmware
+> > contains sections that must be loaded into both TCM and DDR. To
+> > address this limitation, need to use remoteproc framework ELF loader,
+> > enabling proper loading of segmented firmware images.
+> =
 
-OK, thanks.
+> =
 
---=20
-Tom
+> I am not sure, what problem you are facing to load fw having section in
+> TCM and DDR both,=A0 with current frame-work.
+> =
 
---sxPSYHK7ToevmQhX
-Content-Type: application/pgp-signature; name="signature.asc"
+> There are few drivers, using both TCM and DDR and working ok ref[0]
 
------BEGIN PGP SIGNATURE-----
+We have customers are building a very large image for the remote
+cores inside i.MX. But the TCM size is not large enough, so they need
+use TCM and DDR both, some sections in TCM, some sections in DDR.
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaO5ctQAKCRAr4qD1Cr/k
-ChkfAP9vI0N2x92olno4Rl/jM5lq5dysXJzNscQfBDyTWnRDBQD/W32QcDdXcJz7
-j7IViYMlPNrfFox1W111yOB7BbTFDA0=
-=rltC
------END PGP SIGNATURE-----
+No issue with current framework, it is i.MX bootaux command not
+support the above request.
 
---sxPSYHK7ToevmQhX--
+Thanks,
+Peng.
 
---===============6280153845917377459==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+> =
 
+> [0]
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============6280153845917377459==--

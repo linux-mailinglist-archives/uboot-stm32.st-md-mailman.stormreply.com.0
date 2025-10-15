@@ -2,71 +2,71 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 02718BDF122
-	for <lists+uboot-stm32@lfdr.de>; Wed, 15 Oct 2025 16:32:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0CD59BDF125
+	for <lists+uboot-stm32@lfdr.de>; Wed, 15 Oct 2025 16:32:57 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id BAA4EC5663B;
-	Wed, 15 Oct 2025 14:32:54 +0000 (UTC)
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com
- [209.85.221.48])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C8898C56639;
+	Wed, 15 Oct 2025 14:32:56 +0000 (UTC)
+Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com
+ [209.85.221.46])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 0C575C5663A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E40D6C56638
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 15 Oct 2025 14:32:54 +0000 (UTC)
-Received: by mail-wr1-f48.google.com with SMTP id
- ffacd0b85a97d-3ee15505cdeso1046901f8f.0
+ Wed, 15 Oct 2025 14:32:55 +0000 (UTC)
+Received: by mail-wr1-f46.google.com with SMTP id
+ ffacd0b85a97d-3f99ac9acc4so5467465f8f.3
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 15 Oct 2025 07:32:54 -0700 (PDT)
+ Wed, 15 Oct 2025 07:32:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1760538773; x=1761143573;
+ d=linaro.org; s=google; t=1760538775; x=1761143575;
  darn=st-md-mailman.stormreply.com; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=mcQ8CXNf57aPhy6c7X3EkXw8uO2jY7I9YKfUXV5n+24=;
- b=xG57N3SbmNHUHL8NaZnIiIWk0FO1mefAYmSSWBNrxNh7UiSgkPGwZsveAxHx/HY+P2
- xPBPQYDCbwLx2Sw/EzTU7MgiLy0bDvw8i6w5VRlO1AzwXj/MUkamfDP/2Dy1+S2YXYk2
- dRT0F2B6c8coVz6AZZNyT5bBZ0AY4hvY3YbuhEFolQwYhH6/6BUdCVwVuqyDxFzOCdsD
- Red+rNktFeSB2lV05J+/7QrD3XdiUzfyw2LOlqqQbsMFuofcHCcuwHT4SIxN79sdjZbA
- b4Yg3vgARe2y7zjQgcebop84QGlYtM69+Jl1O0aEynncJ80R7r080YLEXhteCGC2TsUT
- sdmg==
+ :reply-to; bh=WNRDxUD7dqMoMKbmkPhRutT8/NDVqXIfr5a7PBuyHxA=;
+ b=a/OYpaJY/IOg5bzG0iLccfCy2soTU15fWkntdgaQYlkNeC60PWyRpCn4fOt7kywAcM
+ 97xSFKcKkDXOjn0s5edjQoM1cYRkifUVSds/NmWDZXwzrYc3d479F9DVORzjqNWDcXR+
+ TaV9GxBDq1fSEXyZ42/8FUVxAfAev3SAe09BSHOZuaMEee+WP6xu5B8UJRWo4qd22i0J
+ zi9o0EDiM7C7pvQfrkHKUM55IWuOZPBRK0J8mpRBDv2Qqia/Inej4kJwFjNLRL+9AJlP
+ sbpvdT9SQqxmwejqaEcvs2VumKLtwB6ENaWOOwi/tQ9w2KnBt0dsj/cQcLnPgQrzuGCP
+ vevA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760538773; x=1761143573;
+ d=1e100.net; s=20230601; t=1760538775; x=1761143575;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mcQ8CXNf57aPhy6c7X3EkXw8uO2jY7I9YKfUXV5n+24=;
- b=vJQJKUIuPjbK0zF+Hz1zWv5HnJakDsLrao2Q1xdLIockmDV67YbWPcLLfxLy/B9APn
- 7lXCEFFR5R+Bz9TBEk+qYZ3LNAcV0tcW1c8L9cXqsPMrI9DRTr9DFHPOpjq5DtlsN9Q6
- spSKgvZH0xUz/rXK7mPI4R15HgbNU6oqWoFr+zKQ1t38uPoUbXf2Q5DMmNV3vueLhMbC
- wwkhUjyuoqdJdgSDVJoJGr7bQqxx7N6ffPdbSqYKCPStw657ixjpYWGZ+lvl1Aup8rVm
- QQxcvAjeYVIs6u43ZgWwrJjuPKjyJD4Dki1wjOeYdqYVv0wQoOjv5XUm6CfF/0ksnwB5
- ASFg==
+ bh=WNRDxUD7dqMoMKbmkPhRutT8/NDVqXIfr5a7PBuyHxA=;
+ b=ab4igJwmTkrse1+Si/+ZQR21fWJcw+77HP+XT/X/76k8VqAdq9nEfvHP6y9LdKoaHd
+ 32qNsyHCEWafXKrv5eb7JcX7dLva/WMbqHR5dzGWfpT6qssyVMG4T3QXzMha7o51DLIH
+ P3KJWa61Fd+kGFDekKuLE4YKHe/tetYYHR98ewVb6WXIqvaQrFMIy50l1yXRW79TGJ9Y
+ x64CpHNQWzuyC6Dg9TjucGYlbyw7Pny2yoJrzTtNIrigcGCmmECM4hm79oPCRtRs/Enx
+ 5yg5l1C9sHJWMCXek5dpCtSWrOBno2M5a5N3HIAMCbVLg2HqOcq/1eIY/FQQkoJtR2Hk
+ tOcA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVYEiGInnhKWASDPbQPGut5H9RO8vDdk+F4CcYLf11A2jao7Doi4JdwTy05jloz3CF0Fzw5pjZXhSslYg==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0YzqDvly6hplYbCdWuqhDsWvox7mW+alBTH7a2AhrKzWZJxoasra
- WHCBCqC4BaSyh4jdOJH5lGVUuPS6FFQ+7pI/gcqa05fPNbL3Mo7vbgHbRLVjCxu1IDk=
-X-Gm-Gg: ASbGnculbhHNCwsEbFydDIcsVvbuWu0ATfoTkMkksjvmJ4ARD2jy5qormZORZhqMduQ
- 8FyLiD4L7ucjycT1aZ79ZSHRRs6TNCbA7n3X/n+464z0WMGY3Fk6twPcwxKZ9GpSzTCVvNbZcr1
- fUZ0yf563YUOCiVGapcaQBngyWwrlSg/kgSBOUIHHaAB8wkj0EkLEuKfwlNLU1lWjHLPB5cT4Xs
- yfbjVqYyv8Gcy0x9dbkH8QzFVSlKRU7vCBkuTNwx+ssuBNr7wjH/n6CFyFDfQ9YW4QO3oRH7J/q
- kVRuP506qJWPsX0HtEnaPZ+dHHBvKsUaK9+zAoYzl4Gqvxah1kYxOB5Drpbx9kGfhZMasTcdDkh
- +xaj7+QMInM+ZcYdSF2zO9/PRY/l5Zga3BAS4q77thonkZCO5F3Tm86suwf9uEIhyIvOBaQ/MQg
- ==
-X-Google-Smtp-Source: AGHT+IEl7LqZhV2V+mRAvIp9HPyRtytEkYU4/Cq3hS3UEvinHw9MpC6lhYRaIylvccqIzXRaAszpmA==
-X-Received: by 2002:a05:6000:1843:b0:3f5:3578:e538 with SMTP id
- ffacd0b85a97d-426fb8b7789mr229863f8f.21.1760538773280; 
- Wed, 15 Oct 2025 07:32:53 -0700 (PDT)
+ AJvYcCV0S6zA27nRcGf0prVg32vjKsTWFbbQc6+04XlzncKMc072w028aJ7n9+lzSzlr/gaSRn5yKRfuqmz+5A==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0YyE5OQSwaJYjUF9uj9/j4byIrrgqN7sZRtOCXH01Sz+2s7ev2tS
+ fQXCBMgS4flcGQR0PgODl4zr44i6jbr8/B9Ges1fgOz2dzSjFY+r2Dbf0LyYGfyubDA=
+X-Gm-Gg: ASbGncvFZzADOtTue9LakQton9dZlkCo3pdznzWRJ2VORvVUGA0ZL09RDK73Ihh1eou
+ 4AtDwYAYjpJEAEKWUTml4TQ3xTHWnsdq2YEZj9aYD5X2BanZ243EWPVJr2+kYDbJecGQpCQtqiJ
+ ubM9x4v14TvYAHQf6thhJZ1VvFTyxA+S0IUSjI926AepqCFWgvD8xbkuNTVw1BT/R4xDF3v3EdL
+ 7UlrWHfCSA6wQGAcvRUlCR8spSnn2rGea9Lx7d2MkB6MYxczwQC6avmaeM88BOugHnOSBECRmmk
+ BoeWLjqaCGL4REGhwltGod+gIonPy61yFVa9TzD09x5lIctv6Da1/undJNMnBcZt7iORyWZhPCa
+ +vzTxSX9eeGZUKcVaiN+M8AnoiY/CJxrV3F1o7iomVBbMcezN8ZqIGZSAm2lw1GaKhfbpINpQgj
+ Ua6jMffx0/
+X-Google-Smtp-Source: AGHT+IHx2AJ0imqM0pHJ6UM8S9Z+SV2DnDS3huIp3+irF8Q2x0JcKbIuWNif+U4AlFTxFFyWT7iHGg==
+X-Received: by 2002:a5d:588b:0:b0:425:7f10:ada7 with SMTP id
+ ffacd0b85a97d-42667458124mr20041885f8f.20.1760538775250; 
+ Wed, 15 Oct 2025 07:32:55 -0700 (PDT)
 Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:fed:4601:4b30:fdb5:8c7d:59b5])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-470ff15ef28sm43185915e9.5.2025.10.15.07.32.51
+ 5b1f17b1804b1-470ff15ef28sm43185915e9.5.2025.10.15.07.32.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Oct 2025 07:32:52 -0700 (PDT)
+ Wed, 15 Oct 2025 07:32:54 -0700 (PDT)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Wed, 15 Oct 2025 15:32:21 +0100
+Date: Wed, 15 Oct 2025 15:32:22 +0100
 MIME-Version: 1.0
-Message-Id: <20251015-clk_ops-v1-16-5f80f827407e@linaro.org>
+Message-Id: <20251015-clk_ops-v1-17-5f80f827407e@linaro.org>
 References: <20251015-clk_ops-v1-0-5f80f827407e@linaro.org>
 In-Reply-To: <20251015-clk_ops-v1-0-5f80f827407e@linaro.org>
 To: u-boot-amlogic@groups.io, u-boot@lists.denx.de, 
@@ -123,7 +123,7 @@ Cc: Peng Fan <peng.fan@nxp.com>, Valentin Caron <valentin.caron@foss.st.com>,
  Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
  Padmarao Begari <padmarao.begari@amd.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>
-Subject: [Uboot-stm32] [PATCH 16/24] clk: imx: Remove negative error returns
+Subject: [Uboot-stm32] [PATCH 17/24] clk: ti: Remove negative error returns
  from clk_get_rate
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
@@ -146,86 +146,68 @@ codes through it.
 
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- drivers/clk/imx/clk-imx8qm.c    | 6 +++---
- drivers/clk/imx/clk-imx8qxp.c   | 6 +++---
- drivers/clk/imx/clk-imxrt1170.c | 2 +-
- drivers/clk/imx/clk-pllv3.c     | 2 +-
- 4 files changed, 8 insertions(+), 8 deletions(-)
+ drivers/clk/ti/clk-am3-dpll-x2.c | 4 ++--
+ drivers/clk/ti/clk-divider.c     | 4 ++--
+ drivers/clk/ti/clk-mux.c         | 2 +-
+ drivers/clk/ti/clk-sci.c         | 2 +-
+ 4 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/drivers/clk/imx/clk-imx8qm.c b/drivers/clk/imx/clk-imx8qm.c
-index 466d71786cfb2b1ffe617bd5c7ea7304238683c0..56db4ba262654a1e0837f1340800b115e2d9321f 100644
---- a/drivers/clk/imx/clk-imx8qm.c
-+++ b/drivers/clk/imx/clk-imx8qm.c
-@@ -135,16 +135,16 @@ ulong imx8_clk_get_rate(struct clk *clk)
- 		    clk->id >= IMX8QM_CLK_END) {
- 			printf("%s(Invalid clk ID #%lu)\n",
- 			       __func__, clk->id);
--			return -EINVAL;
-+			return 0;
- 		}
--		return -EINVAL;
-+		return 0;
- 	};
+diff --git a/drivers/clk/ti/clk-am3-dpll-x2.c b/drivers/clk/ti/clk-am3-dpll-x2.c
+index 1b0b9818cdd4d410bb0abf4ad8c3c5401b875147..dacde89efc490fb76f3a66c10af3348bc238eecc 100644
+--- a/drivers/clk/ti/clk-am3-dpll-x2.c
++++ b/drivers/clk/ti/clk-am3-dpll-x2.c
+@@ -22,8 +22,8 @@ static ulong clk_ti_am3_dpll_x2_get_rate(struct clk *clk)
+ 	unsigned long rate;
  
- 	ret = sc_pm_get_clock_rate(-1, resource, pm_clk,
- 				   (sc_pm_clock_rate_t *)&rate);
+ 	rate = clk_get_rate(&priv->parent);
+-	if (IS_ERR_VALUE(rate))
+-		return rate;
++	if (!rate)
++		return 0;
+ 
+ 	rate *= 2;
+ 	dev_dbg(clk->dev, "rate=%ld\n", rate);
+diff --git a/drivers/clk/ti/clk-divider.c b/drivers/clk/ti/clk-divider.c
+index 40a742d7fdc48ecf1c6b51913cc83cfa3d46e950..213be7dca30d7203dd36fbb95f4a0ac6592b5565 100644
+--- a/drivers/clk/ti/clk-divider.c
++++ b/drivers/clk/ti/clk-divider.c
+@@ -216,8 +216,8 @@ static ulong clk_ti_divider_get_rate(struct clk *clk)
+ 	u32 v;
+ 
+ 	parent_rate = clk_get_rate(&priv->parent);
+-	if (IS_ERR_VALUE(parent_rate))
+-		return parent_rate;
++	if (!parent_rate)
++		return 0;
+ 
+ 	v = clk_ti_readl(&priv->reg) >> priv->shift;
+ 	v &= priv->mask;
+diff --git a/drivers/clk/ti/clk-mux.c b/drivers/clk/ti/clk-mux.c
+index db5393414318f11c193a5f498c60a2415ec6fabc..ea424a197c1065d928d13de11529fd5a27865def 100644
+--- a/drivers/clk/ti/clk-mux.c
++++ b/drivers/clk/ti/clk-mux.c
+@@ -129,7 +129,7 @@ static ulong clk_ti_mux_get_rate(struct clk *clk)
+ 	index = clk_ti_mux_get_index(clk);
+ 	parent = clk_ti_mux_get_parent_by_index(&priv->parents, index);
+ 	if (IS_ERR(parent))
+-		return PTR_ERR(parent);
++		return 0;
+ 
+ 	rate = clk_get_rate(parent);
+ 	dev_dbg(clk->dev, "rate=%ld\n", rate);
+diff --git a/drivers/clk/ti/clk-sci.c b/drivers/clk/ti/clk-sci.c
+index e374bd3bcc20d140ca0e25d0ec63f3faeda06901..c055f6c678a58604d581a2fde3e5d94019d5c577 100644
+--- a/drivers/clk/ti/clk-sci.c
++++ b/drivers/clk/ti/clk-sci.c
+@@ -76,7 +76,7 @@ static ulong ti_sci_clk_get_rate(struct clk *clk)
+ 	ret = cops->get_freq(sci, clk->id, clk->data, &current_freq);
  	if (ret) {
- 		printf("%s err %d\n", __func__, ret);
+ 		dev_err(clk->dev, "%s: get_freq failed (%d)\n", __func__, ret);
 -		return ret;
 +		return 0;
  	}
  
- 	return rate;
-diff --git a/drivers/clk/imx/clk-imx8qxp.c b/drivers/clk/imx/clk-imx8qxp.c
-index 79098623bc8cc32d134b6cd8d21d990ae1bcd25a..cb7798ff0b963fb46573603873e99c993cc28ecc 100644
---- a/drivers/clk/imx/clk-imx8qxp.c
-+++ b/drivers/clk/imx/clk-imx8qxp.c
-@@ -128,16 +128,16 @@ ulong imx8_clk_get_rate(struct clk *clk)
- 		    clk->id >= IMX8QXP_CLK_END) {
- 			printf("%s(Invalid clk ID #%lu)\n",
- 			       __func__, clk->id);
--			return -EINVAL;
-+			return 0;
- 		}
--		return -EINVAL;
-+		return 0;
- 	};
- 
- 	ret = sc_pm_get_clock_rate(-1, resource, pm_clk,
- 				   (sc_pm_clock_rate_t *)&rate);
- 	if (ret) {
- 		printf("%s err %d\n", __func__, ret);
--		return ret;
-+		return 0;
- 	}
- 
- 	return rate;
-diff --git a/drivers/clk/imx/clk-imxrt1170.c b/drivers/clk/imx/clk-imxrt1170.c
-index bfd5dd6c464457af1d9e19344e555a984a36ef2f..d2cec8f224c549996e0643617f774eced5bb9881 100644
---- a/drivers/clk/imx/clk-imxrt1170.c
-+++ b/drivers/clk/imx/clk-imxrt1170.c
-@@ -23,7 +23,7 @@ static ulong imxrt1170_clk_get_rate(struct clk *clk)
- 
- 	ret = clk_get_by_id(clk->id, &c);
- 	if (ret)
--		return ret;
-+		return 0;
- 
- 	return clk_get_rate(c);
- }
-diff --git a/drivers/clk/imx/clk-pllv3.c b/drivers/clk/imx/clk-pllv3.c
-index 85b6a9809e8dbcd1c73c0f914077b54fbae85f1f..bde95e950129ea54cb98e3ea37e49883b3911fd9 100644
---- a/drivers/clk/imx/clk-pllv3.c
-+++ b/drivers/clk/imx/clk-pllv3.c
-@@ -210,7 +210,7 @@ static ulong clk_pllv3_av_get_rate(struct clk *clk)
- 	u64 temp64 = (u64)parent_rate;
- 
- 	if (mfd == 0)
--		return -EIO;
-+		return 0;
- 
- 	temp64 *= mfn;
- 	do_div(temp64, mfd);
+ 	debug("%s(current_freq=%llu)\n", __func__, current_freq);
 
 -- 
 2.47.3

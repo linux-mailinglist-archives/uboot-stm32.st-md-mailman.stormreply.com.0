@@ -2,71 +2,71 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id D1803BDF11C
-	for <lists+uboot-stm32@lfdr.de>; Wed, 15 Oct 2025 16:32:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DE568BDF11F
+	for <lists+uboot-stm32@lfdr.de>; Wed, 15 Oct 2025 16:32:53 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 95650C5663B;
-	Wed, 15 Oct 2025 14:32:50 +0000 (UTC)
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com
- [209.85.128.51])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A2F27C56639;
+	Wed, 15 Oct 2025 14:32:53 +0000 (UTC)
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com
+ [209.85.221.53])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 0B60AC5663B
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 205FDC56638
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 15 Oct 2025 14:32:50 +0000 (UTC)
-Received: by mail-wm1-f51.google.com with SMTP id
- 5b1f17b1804b1-47108104bcbso5358155e9.3
+ Wed, 15 Oct 2025 14:32:52 +0000 (UTC)
+Received: by mail-wr1-f53.google.com with SMTP id
+ ffacd0b85a97d-42421b1514fso3318566f8f.2
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 15 Oct 2025 07:32:50 -0700 (PDT)
+ Wed, 15 Oct 2025 07:32:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1760538769; x=1761143569;
+ d=linaro.org; s=google; t=1760538771; x=1761143571;
  darn=st-md-mailman.stormreply.com; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=bV/e8/t/Q2+spodtqDGG7TeDuDfPmijfIksYHrPyn9U=;
- b=M4GIt+fSQfA2lSCsQ0IJkrqb6IT20+UlCfdivooYorAMcoP1QiFr7gxKm7xsd2wa6+
- rC4P9YrVfZeu/3t2U/AKygEa/AZ5mnuzuQWKXZM3SRtsjPro9tVNMTtvlUzDtdrFoWrN
- JAP8S/ZSMmqRA5uM0oTNalUJQUvqsfmLCN9nLi+0d2JpA9XrwqNgA0511VeA+J7nY7PS
- JYzpSQoDxbbzeuMQbPyN0SdzHlEH9keWkVHoxyOpOMHS+KCWlz1XG9T+LcXGSSud2E8Q
- 2+LSwlzODdzehe0CpA4wC/zSbubkDChftpAjDJmwxb/S/WAF7A1/ySzZg5xYxofFbf/E
- 3VSA==
+ :reply-to; bh=c2Ex94fmhlLv2i2Yx1QhQ917Ez/zRaZdOvJOV/zm02o=;
+ b=uEOORD5IK4vl5hQzdbVIYasu387J2zNYKWN7Q/xqKJYQnPhAKnqewKp2ICMpLHCPu/
+ qAXlkfkcSkLUcPbAJVTBj2bx5pSZwV9ycQe05Ng4j/I92lE4YHKsxKboY71P6cLcwr4w
+ 6KMPSEUWF6w/QojNJf0/Xt57LPEMv3X6Khd1qtSZvOoRLbH0JLvzK91js4y23MQLw9Xw
+ e8Xve+QyjVRHyPB5PcECPmBZQ3u3N9XKsdQNx0m4BOZPXp2593Iov6acvBW8ZdO60g7Q
+ ru/lpFkVklT++Qxr85jMBe+ub47GhKOuMAIcFNMgidqO3F+8id+PxBb2QMyXP4slHK64
+ 3D5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760538769; x=1761143569;
+ d=1e100.net; s=20230601; t=1760538771; x=1761143571;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bV/e8/t/Q2+spodtqDGG7TeDuDfPmijfIksYHrPyn9U=;
- b=O9ONPbnH56GDPH0u/t2ifUK/+V3TyVwHjpUUREXuUQKTTRsFwb7MylCDMYwQHdB7QK
- Oq6UfX7JTrTvsVYqYpab/15jusJKBhVU5DaAPE+s4BIcB6q6RunwXq/F5qDhKYqiz0Gj
- 2RADgsSKtNELR8ApPqayByYMZsC4VugzqNIwmrXQobEWDmuPTZmMQD/XrQA3GmiCoAym
- cyr+ifRmNt9QBD6wB6xxxnbqnKiug9R1qGHsNZLarW35V7KnWNuEfD5hqI8qwNXyPp06
- XZKWRsU2sABu5aeNnZ8kkwmLKEsp0mwvgjQf28fbKWbQbRYd17VCvMQ5bsZ0BW4TXd22
- CkAw==
+ bh=c2Ex94fmhlLv2i2Yx1QhQ917Ez/zRaZdOvJOV/zm02o=;
+ b=gXalmLFLE8TNzfuSwcM7uyZsnLeBd8Gkh6mteYAKDNTT6hAIDGe6KwK5pctN6zcTVD
+ +53BMFxGR++xwWBS0p5hVpQawD/AIdMNAafQ/YCGkqybH+SHyAwZtbiWGM3bjTRGG6Q6
+ 4Aza60APcwPQhyYB0gUFi9eb9VjgaGS+0sFxIt06i3lSxiCnqdmO0dZApwLwJVu1ca+Z
+ 3156vYq4MiWjk1V5ycSu5mPwTP9N0hVB2d0cvFpSJmcBTnE8Sipneuq0V4vpd0bgesh9
+ B4j4ia1PF6rtOFNUZvRbnN0X4n71tDnyXlGlEboDoCUM5gGkW112FilP0eOZ9GxdQJB/
+ 77Zg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVho2aNU7WltM6aMkv9i73RyhUdvFIq1IjhdXOtLC01B3KM20rNNtRiabPekRf1SE3yWXwNVxdAdFT4dA==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0Yx4dJ3nurTSQI36eqJ4GbiePtUUwQHkwcQ1kIG8P4/o0nBy6faC
- pe4dshi4GNlB771ZyW4OZ2/H/EO+vqwOoDYtVVDBqSl1m0H3KVikqqsJBhb5l3TXXIY=
-X-Gm-Gg: ASbGncvRUnr3dMW6mOGwux8NRI4nQpwEU3aTykz1VNGwl1Dp0Wvs9ZhO6tZ6xobI1Yz
- ohnBcY1OEX8LinhxQ3l0fRZ0/tmSwtCM+ewanjsUM0TLMsv5RnFISDhmg28Jfb+Yjz+6BGs9I6J
- 2dMAnYxR0bonvYC6sXALkdvQVVqYPy62myORin0JDatwkDMJVtt8k1HHmFw4xgujuueW1iHBW0H
- ge9+r1iXPrCwupgJ/LMXb51o7es19icoaQL6FQbpOG/l6YmtLDyWnmU4M9lMGG9a4WcGNogQdlf
- variOqLWZbu5jryCMBOeySqXw5IkF139krJ3nw2EO4zqMHizuNKzMDn7++G5kSrXCiQC6P06erm
- IIU5mUgUruhtzONPuWznvJQPBGmdG/aVXXGZIpjZPi8GdNwStw12ZrLsTyGZcaJYly0o7M5kC+A
- ==
-X-Google-Smtp-Source: AGHT+IEdXqJ0ecDo7rFbfmDvnja6s23sdrsv131WYpUK2dXyZgikEBrPhQmktvo9H2vA2YUew3DXSg==
-X-Received: by 2002:a05:600c:c110:b0:46f:b42e:e3a0 with SMTP id
- 5b1f17b1804b1-46fb42ee4d2mr116739385e9.41.1760538769348; 
- Wed, 15 Oct 2025 07:32:49 -0700 (PDT)
+ AJvYcCWpO45Hw1ZD/cpLK7mNl96SBcxJMXEuZ11KUI/yZk49b79SVrXC2Qqpp4+nGRzWi7BzjfswzowuzKkG7g==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0YyudtWVmKzDnRF/9R0YvfJ4ZtSjuNB9xpjicRjRyNfRI1zAxBum
+ ZbXJ+PJK4ejVz/E/zgthijCtvRdrOWu+dHL7gtNXUjC9OFyIqX0WRT5IQGUV38R0LxY=
+X-Gm-Gg: ASbGncvJ6BMGwYVQYFS9KnG96kmkd8alZlT6LvA9q4jSqL0PTyEVIcOxuffSipNwmVD
+ NguRJv/aCsFRnmTMQB/yq1ZMwr2aMVziNX/q37CIB31hdcidlD/SwNJhQFgGuy+Zm3s7KKjHq2i
+ DYl7gjksSzYZ7AZ3lz5U8HDfesQ632CPALYjHBoWYjDLpvEauztwwEtR3pAvspdh018IeV6Es7r
+ jdLgTlSujfwBxRQv1jWJ3MfNs0PjhmEqyiGJEa3nMjk9lB3Kw5/8ZuacQAUxiFhH0LPcsU3O3c4
+ qQWE1k6/oi+xPKAD+5O9DVT0bfnxS/1UEGgdw4K55404Tm2qKOaJRQHXstBOBjtPlKXLsYk8mxs
+ yUhOHj75r7AHUygLYPZ0XfPOBJNXmKrrP+rh34ssxGX+2n5/+Q22KqhmSyXo3frln+qXze+PONK
+ pODOzWzZEe
+X-Google-Smtp-Source: AGHT+IFntIZgc8kpwywcm6Ac1YodmDRVT9uEaIFSPv2xMkytU2MPV98wALWC7FxueiIlE7bJN1OwyA==
+X-Received: by 2002:a5d:5d88:0:b0:425:7e38:419f with SMTP id
+ ffacd0b85a97d-42666ab867amr19302858f8f.16.1760538771388; 
+ Wed, 15 Oct 2025 07:32:51 -0700 (PDT)
 Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:fed:4601:4b30:fdb5:8c7d:59b5])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-470ff15ef28sm43185915e9.5.2025.10.15.07.32.47
+ 5b1f17b1804b1-470ff15ef28sm43185915e9.5.2025.10.15.07.32.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Oct 2025 07:32:48 -0700 (PDT)
+ Wed, 15 Oct 2025 07:32:50 -0700 (PDT)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Wed, 15 Oct 2025 15:32:19 +0100
+Date: Wed, 15 Oct 2025 15:32:20 +0100
 MIME-Version: 1.0
-Message-Id: <20251015-clk_ops-v1-14-5f80f827407e@linaro.org>
+Message-Id: <20251015-clk_ops-v1-15-5f80f827407e@linaro.org>
 References: <20251015-clk_ops-v1-0-5f80f827407e@linaro.org>
 In-Reply-To: <20251015-clk_ops-v1-0-5f80f827407e@linaro.org>
 To: u-boot-amlogic@groups.io, u-boot@lists.denx.de, 
@@ -123,7 +123,7 @@ Cc: Peng Fan <peng.fan@nxp.com>, Valentin Caron <valentin.caron@foss.st.com>,
  Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
  Padmarao Begari <padmarao.begari@amd.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>
-Subject: [Uboot-stm32] [PATCH 14/24] clk: nuvoton: Remove negative error
+Subject: [Uboot-stm32] [PATCH 15/24] clk: exynos: Remove negative error
  returns from clk_get_rate
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
@@ -146,51 +146,22 @@ codes through it.
 
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- drivers/clk/nuvoton/clk_npcm.c | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ drivers/clk/exynos/clk-exynos7420.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/clk/nuvoton/clk_npcm.c b/drivers/clk/nuvoton/clk_npcm.c
-index 18cb9cddbf38f4f68f9d035079ff147a4409878e..304c5f2ca07ba3c3e285494ca07330e572b4cac7 100644
---- a/drivers/clk/nuvoton/clk_npcm.c
-+++ b/drivers/clk/nuvoton/clk_npcm.c
-@@ -177,11 +177,11 @@ static ulong npcm_clk_get_fout(struct clk *clk)
- 
- 	parent_rate = npcm_clk_get_fin(clk);
- 	if (!parent_rate)
--		return -EINVAL;
-+		return 0;
- 
- 	div = npcm_clk_get_div(clk);
- 	if (!div)
--		return -EINVAL;
-+		return 0;
- 
- 	debug("fout of clk%lu = (%lu / %u)\n", clk->id, parent_rate, div);
- 	return (parent_rate / div);
-@@ -199,12 +199,12 @@ static ulong npcm_clk_get_pll_fout(struct clk *clk)
- 
- 	pll = npcm_clk_pll_get(priv->clk_data, clk->id);
- 	if (!pll)
--		return -ENODEV;
-+		return 0;
- 
- 	parent.id = pll->parent_id;
- 	ret = clk_request(clk->dev, &parent);
- 	if (ret)
--		return ret;
-+		return 0;
- 
- 	parent_rate = clk_get_rate(&parent);
- 
-@@ -236,7 +236,7 @@ static ulong npcm_clk_get_rate(struct clk *clk)
- 		if (!ret)
- 			return clk_get_rate(&refclk);
- 		else
+diff --git a/drivers/clk/exynos/clk-exynos7420.c b/drivers/clk/exynos/clk-exynos7420.c
+index 7de4e688f036d47adfa22c841400770b1b1ed3b3..494f5623259945376475c53dcd8d5b5fbf635b0f 100644
+--- a/drivers/clk/exynos/clk-exynos7420.c
++++ b/drivers/clk/exynos/clk-exynos7420.c
+@@ -199,7 +199,7 @@ static ulong exynos7420_peric1_get_rate(struct clk *clk)
+ 	case SCLK_UART2:
+ 		ret = clk_get_by_index(clk->dev, 3, &in_clk);
+ 		if (ret < 0)
 -			return ret;
 +			return 0;
+ 		freq = clk_get_rate(&in_clk);
+ 		break;
  	}
- 
- 	if (clk->id >= clk_data->pll0_id &&
 
 -- 
 2.47.3

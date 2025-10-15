@@ -2,71 +2,71 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id B517EBDF116
-	for <lists+uboot-stm32@lfdr.de>; Wed, 15 Oct 2025 16:32:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BF04EBDF119
+	for <lists+uboot-stm32@lfdr.de>; Wed, 15 Oct 2025 16:32:49 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 77437C56639;
-	Wed, 15 Oct 2025 14:32:47 +0000 (UTC)
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com
- [209.85.128.52])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8687FC5663A;
+	Wed, 15 Oct 2025 14:32:49 +0000 (UTC)
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com
+ [209.85.128.46])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 406D1C56639
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 332B5C5663A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 15 Oct 2025 14:32:46 +0000 (UTC)
-Received: by mail-wm1-f52.google.com with SMTP id
- 5b1f17b1804b1-46e3a50bc0fso49016725e9.3
+ Wed, 15 Oct 2025 14:32:48 +0000 (UTC)
+Received: by mail-wm1-f46.google.com with SMTP id
+ 5b1f17b1804b1-46e3a50bc0fso49017415e9.3
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 15 Oct 2025 07:32:46 -0700 (PDT)
+ Wed, 15 Oct 2025 07:32:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1760538766; x=1761143566;
+ d=linaro.org; s=google; t=1760538768; x=1761143568;
  darn=st-md-mailman.stormreply.com; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=49jSWRHsss//EBfN7zOwUemnNlZQX5Z/2fmZ0qpW5eQ=;
- b=PaNHuQIWCWPrqnTGFMLvLWmha/7u6YDIEwuuPX3x3Pnl5CQ8zoiJ0IsH6y66yaJ6hQ
- W6hIu7M9sLNzsw++L65j2TDk87uq1WZn8wJezfeGuhA7tKeeCXBXYTnLqq1atZ6qNP8Q
- 9HGBNzgyR/zNAf2co1J3ZYB9TBC7OTuG1JQ+4dGA5XmjebFUIFICbMUE9uKvpImJywhe
- OTJ0C8h36goOEdfXvgHBRNNgk4Bh7B+sUALVJSvwiMHmjEX0aF/HzK6y4HsYL6/XydLQ
- iWdmkp/yh7w7JMUxi44YoiDInVtoZi9ODnzYcsyTnx5mdXFM9wgCHydI1Vs4OB7sG+FP
- sq/A==
+ :reply-to; bh=X3kPH94duDXi2y0uFSPhGXlr4nkQRpFgaC0tEk4x3qc=;
+ b=DEC+CkALXHM2y4FEBXI1ihwjTXDlrkM6LNeM+338q7Mfc+yTdbltPaMjJme80LihvO
+ V2bVoorPf75pBPZaAmM0A4qs16RnEOsfkvXna7n+3lQSE1YCVmbdd4Mt7Nhqm4zPi1Gb
+ I0tM2L8ntIuIB1T0E9K3Ee0FFJZAbpktmKy7pDqhpEm28ePRFmkFGX3g8/l9d5amGo5q
+ WwDTHp+N6koro8CsofFHZwXVyVp6Bo4ClwBlaLl1cCGERU0+jUsepHmze6ayb/6Lzx0g
+ Yblg8Wc2i3A8GF9r7t/Bq96a0ME+w7VMpXc8xRpERcXBT8JJcYF6EtGc3R1IK9SEd6Zz
+ Rw+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760538766; x=1761143566;
+ d=1e100.net; s=20230601; t=1760538768; x=1761143568;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=49jSWRHsss//EBfN7zOwUemnNlZQX5Z/2fmZ0qpW5eQ=;
- b=IE2uxIybVqqrFt7gevRO0CRjYkclV0Tgr+K+Iv9DIrIeLmvDXDAvEisVV3S/6mDhyP
- I+Gcbb7I6Yfmd8ZS2GQ5fFlzas6bz974aajIZA0AAPL5L0+vD5Hem+MoSRxYFmAF/XWL
- A7x21Q9JnuthhjjCpX0NN855jHcFTWxMc9ACIxv6mG7ycBvpixzRTYC5c4SlH6SYWD1M
- yhXb4xpFcNzBQRFkzKS/gUKtS7DFbtpqXNQvGjbHYmGAtdieAIZrwODzFDDjnRS4K0MS
- qKpo06OIYiLowFtY0d2jV/npd9dhyrOziF8GiQXLcK1OHcXHf/f687sg38uzUwGjITpJ
- 0uGA==
+ bh=X3kPH94duDXi2y0uFSPhGXlr4nkQRpFgaC0tEk4x3qc=;
+ b=jGYYZAjky1IwOCRksFaJziUrkDKw48MKlaxpsAR1oPazkmr6rQsPk+60A1K/VqL00g
+ riHopKx34TSNbCjEllPtC+KSrcFpUHmcn8OxhDkKrUmFUA6pFbNiPMJzHD21jznh61Q7
+ QqcwkpGvN82Aa5JC5u9wR1qojlPWN245Ptu3arya1LLupYNa+fxobdbOmkoySW/Rz0EU
+ XlHaQVi7BCQL9Y0O92PPmjyBaq/gjUG793B+BCsYhWN62AyHMq39Yo2r7RFk79zerDHh
+ 8e2W38INAO9E5/BnHfOJ6WXYq0j7wnOs4jVdD0cKdqrt7O0el/4xe6o+IknD8BBxjdob
+ Lz3g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVcfL66eWHmnvv7JCH76Rzjlaevo1L807dn3OoYY3mRCZTlbtJSsUITkbLkn/yfP0IIiKvAG0Z0e5IcZQ==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0YwlcKUjCeoqaNlvBW0zRpvV4hxIFDxARKQhTCGrk97bonr+K3wv
- 5GmVOoenbGeqvF7v/Nwb9DaOji0Xll0evFFALYzfWtaLiKZWH6l01n7v++TuoguQo7c=
-X-Gm-Gg: ASbGnct2DvB1JCyxaiwapLHzch1jhaGxA2W3LpDnq5RgOCATBNmdVlddSMZRDmUPEIj
- U74RZujUPsmgjAZjUzH2zexJwq14VouZQsevl21uQeqrl9pMDeIG/x85skZrX5UEVU8XB/JKSD/
- dmrpHUEvwgcEhi0OxQNQgpUlm+9gXqvzCn610deQBbo8zlq6Q47PAdffc0wrBTstbscc+P3jryK
- jFah2qWgs9CvzSyUKo4PPhgvR2cJ+tSH0lOzX0d0ryRt+2gLTMkN2EyyBLwrazizp2y4TXZiGGa
- evGUotKfqwkX+FOiVr3ssguyQA1Tw0i1m0U1AZbN7yeUymnBF4Y9nxnHxpI4DXdieRT2uGOIlWj
- X3esVqBCSe/wATppJ7QaGWLA6veGoHiaN7iBwTxDUdfM24chIPaQ6a0l84t+uQLfgT/X5BS0/KQ
- ==
-X-Google-Smtp-Source: AGHT+IE61xZ44uz8zMhdoQ8tBs0hpzL01dSTtaZwdHp/BnAZL3FSDzrFGhj1LePLNzK4t2rGWJb6kg==
-X-Received: by 2002:a05:600c:530e:b0:46e:4c90:81d0 with SMTP id
- 5b1f17b1804b1-46fa9a8f1c5mr206392935e9.2.1760538765676; 
- Wed, 15 Oct 2025 07:32:45 -0700 (PDT)
+ AJvYcCUqkWDUJh5HVQVUUpuz+yf4BdwxaapRhdgnaHuA+qU5h3xkKlSF1N/KhPDBOazcm1K8IQa87fpWpDG4uA==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0Yw36rJmoBl91+xb1fRX1ky2KJb/j+d1DnoOmB3obO+0esYNCpRs
+ +qrHKG1P4I9qIRNKb63Tg0WUsoVVMksx5VOtlZjXHB8bzWVEoJ7M/7v5cp9RMR7Z2JE=
+X-Gm-Gg: ASbGncuD6+tDHvVlDYYOKOBmfZW4zzDeoBNK9FehTJAM3aVN2mmCz9GbZwAQEMY8Shd
+ Cg1S5z/k0ZXx8STL2vKiMb01VETyvtgYVguOHjPcAVPQRcpPsOLE/VR851XCZ0q+a0MLiZ4CBu7
+ fo3cL4pg3nbJfTKRR7kkNFftKdPvg2zcNTfMfDXMg0TZz3lNYpEhZkM3Mi/p22lZVa1qXdF6h1X
+ vE/GFUP3+svCAqB4InNpEfiDaKWPwYXDHJUkWdkjvQdYBU7zc/OE6Qs3EIrUsB7TS5UZP+zmjaU
+ 70KuOvcZicaz7uMLP2RtxRaTrWhzXi0MG+cJnEscFH4Ql/ffmRqYRgoLINV/8y9lDJt2XMTT7Ck
+ v1Gjcse8gncmX+sC2jJhgJhfXGBFFpc9r8M1T4LPRskPKobvcOYh4vn7IWTfsnVTKjHpo6FBrPR
+ t7hfTbUpGw
+X-Google-Smtp-Source: AGHT+IGjcPz60CY/ty2SwUER5zMHoK+uFYCxXPg7myYGlDxDfj3NBnrrq8j+DbTUrNlg3QcTBQ5jwA==
+X-Received: by 2002:a05:600c:3e1a:b0:46e:1d8d:cfa2 with SMTP id
+ 5b1f17b1804b1-46fa9af9842mr182565155e9.20.1760538767482; 
+ Wed, 15 Oct 2025 07:32:47 -0700 (PDT)
 Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:fed:4601:4b30:fdb5:8c7d:59b5])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-470ff15ef28sm43185915e9.5.2025.10.15.07.32.43
+ 5b1f17b1804b1-470ff15ef28sm43185915e9.5.2025.10.15.07.32.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Oct 2025 07:32:45 -0700 (PDT)
+ Wed, 15 Oct 2025 07:32:47 -0700 (PDT)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Wed, 15 Oct 2025 15:32:17 +0100
+Date: Wed, 15 Oct 2025 15:32:18 +0100
 MIME-Version: 1.0
-Message-Id: <20251015-clk_ops-v1-12-5f80f827407e@linaro.org>
+Message-Id: <20251015-clk_ops-v1-13-5f80f827407e@linaro.org>
 References: <20251015-clk_ops-v1-0-5f80f827407e@linaro.org>
 In-Reply-To: <20251015-clk_ops-v1-0-5f80f827407e@linaro.org>
 To: u-boot-amlogic@groups.io, u-boot@lists.denx.de, 
@@ -123,7 +123,7 @@ Cc: Peng Fan <peng.fan@nxp.com>, Valentin Caron <valentin.caron@foss.st.com>,
  Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
  Padmarao Begari <padmarao.begari@amd.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>
-Subject: [Uboot-stm32] [PATCH 12/24] clk: uniphier: Remove negative error
+Subject: [Uboot-stm32] [PATCH 13/24] clk: aspeed: Remove negative error
  returns from clk_get_rate
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
@@ -146,22 +146,36 @@ codes through it.
 
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- drivers/clk/uniphier/clk-uniphier-core.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/clk/aspeed/clk_ast2500.c | 2 +-
+ drivers/clk/aspeed/clk_ast2600.c | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/clk/uniphier/clk-uniphier-core.c b/drivers/clk/uniphier/clk-uniphier-core.c
-index 33369c93916b06a68f81db056988bd4954adae4c..32e1d7efb86e835a47e0c51bf913fbca4dcb6071 100644
---- a/drivers/clk/uniphier/clk-uniphier-core.c
-+++ b/drivers/clk/uniphier/clk-uniphier-core.c
-@@ -168,7 +168,7 @@ static unsigned long uniphier_clk_get_rate(struct clk *clk)
- 
- 	data = uniphier_clk_get_data(priv, clk->id);
- 	if (!data)
--		return -ENODEV;
+diff --git a/drivers/clk/aspeed/clk_ast2500.c b/drivers/clk/aspeed/clk_ast2500.c
+index a330dcda4dcbeeb602f7210e262f88e64ab99623..3ad47b9e19117eb888666087f5f3fa32b0f588d7 100644
+--- a/drivers/clk/aspeed/clk_ast2500.c
++++ b/drivers/clk/aspeed/clk_ast2500.c
+@@ -197,7 +197,7 @@ static ulong ast2500_clk_get_rate(struct clk *clk)
+ 		break;
+ 	default:
+ 		debug("%s: unknown clk %ld\n", __func__, clk->id);
+-		return -ENOENT;
 +		return 0;
+ 	}
  
- 	return __uniphier_clk_get_rate(priv, data);
- }
+ 	return rate;
+diff --git a/drivers/clk/aspeed/clk_ast2600.c b/drivers/clk/aspeed/clk_ast2600.c
+index 535010b7941484804573279f90226c2641dba034..8a36356c40f75abc799f71eb66c554a7caa1eab2 100644
+--- a/drivers/clk/aspeed/clk_ast2600.c
++++ b/drivers/clk/aspeed/clk_ast2600.c
+@@ -471,7 +471,7 @@ static ulong ast2600_clk_get_rate(struct clk *clk)
+ 		break;
+ 	default:
+ 		debug("%s: unknown clk %ld\n", __func__, clk->id);
+-		return -ENOENT;
++		return 0;
+ 	}
+ 
+ 	return rate;
 
 -- 
 2.47.3

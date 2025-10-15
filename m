@@ -2,75 +2,73 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id E1200BDF0E0
-	for <lists+uboot-stm32@lfdr.de>; Wed, 15 Oct 2025 16:32:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E176BBDF0E6
+	for <lists+uboot-stm32@lfdr.de>; Wed, 15 Oct 2025 16:32:25 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 97616C56638;
-	Wed, 15 Oct 2025 14:32:23 +0000 (UTC)
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com
- [209.85.128.42])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A6080C56639;
+	Wed, 15 Oct 2025 14:32:25 +0000 (UTC)
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com
+ [209.85.128.43])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 52249C349C1
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2FD0FC56639
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 15 Oct 2025 14:32:22 +0000 (UTC)
-Received: by mail-wm1-f42.google.com with SMTP id
- 5b1f17b1804b1-47106fc51faso6206525e9.0
+ Wed, 15 Oct 2025 14:32:24 +0000 (UTC)
+Received: by mail-wm1-f43.google.com with SMTP id
+ 5b1f17b1804b1-46e2826d5c6so40639265e9.1
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 15 Oct 2025 07:32:22 -0700 (PDT)
+ Wed, 15 Oct 2025 07:32:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1760538741; x=1761143541;
+ d=linaro.org; s=google; t=1760538744; x=1761143544;
  darn=st-md-mailman.stormreply.com; 
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Q5G/pzUDmAWP39RNeIkhwHh1OMLzLKAP5G+xfsbBMiU=;
- b=CHjlkibOBD1f/e02MB2r4x1ouPJQjmITacV2DRY54zMSJcXF9nxwOgSWG1zJBXrLAK
- SD4LpdLEhyxzS/Xs2zhRyptQXwFwvjXwZSPA9bq6oxnvTmZE6eLYHudWT9wIrnXuJvc4
- FuWhw8FQj4LoZ1HpnyKenOMpLqbDnrciRyvAQCRlc+RFHKV/ZxHF4kFcSnRu4pjP3pLV
- evSovYN9sSCp3Oe3BLnF9pKqVYsUbiVV7WL66WZJXIQTlnKhdKDRzuP0aNSVtAtA+cRh
- jpfBWKNmnA11RzmT5MRqvRA4ioWMCvkOlddOkRQw/H4sj1sLbUsWJdskAl5yxmRTinNQ
- RO/A==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=ma2chDb3vOw+DvVL+Elh8yWCMC9/MPlr8PtTT73X6dU=;
+ b=CFluCpDsLGoyiakn+ClZ/jix0q41EeLMIdTPVq+Ug7oIqZU83wD451vLrIHKV5ueMi
+ cZXrP3mezp+3Qr1wpFHXaZby2Cm/Ay693W1RCxIAV2NMAkhwyWTc00PQc00/PHbEdrII
+ 5BcVDUyEZAhK15Xs0nxC88GUthe2zLvnJLWfeHcgJfnnE7GZCdL0QFX++l61s4Yw7htF
+ SURLIyBdzTuqHHjPD9lIYQCJKS+0Hu4oCckUzbyGRxGYQU++dhMSs7oQein1yYdnTwgo
+ RyQXdWEaluyDq7qaF2tljEZAx7f7nam/YMOMJD2pnHN/tuiE/fJgi69SrYctaxmfn/ct
+ rMPg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760538741; x=1761143541;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Q5G/pzUDmAWP39RNeIkhwHh1OMLzLKAP5G+xfsbBMiU=;
- b=owhn/pzs59PCPiQrzRrqczQ8K3f0PYYxCiPdZNrs7Hu9FnCjdzZnBoRUrjICNBMiiH
- HBy0n519jOaz8cYgnXhncFxRB85u52PT0F/QNCacx0Ugrkvs/uhrcGvjMfATvkvAuXWC
- NiPUZvRtfQTEPpOc15Jr2r5tXuTuZrXNRW5Li8vqqySznsFyWXi2y4hLjgLobnc8qQW+
- j+16MGqgolROY2ftyvVOeBfKztJv0ulqAJm0L2k1IjiYcB7VS51PsFMGrPbufmtmHdQE
- F6ygOI1C4MpX7CdFAygu5zvW4WiSqQMe7GOZVmAWShPuwdcLiQg7e4B07d4MV4+84IKV
- Dcsg==
+ d=1e100.net; s=20230601; t=1760538744; x=1761143544;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ma2chDb3vOw+DvVL+Elh8yWCMC9/MPlr8PtTT73X6dU=;
+ b=V3EKwYk7TQU0zxOd4YhzqYAjU7Q0VQta8KlK1Q12K9gRzwBAL67OmIhREW80DZYogT
+ udwOU+bCY8w3fp+nJ1IL8OOF50uSNfmHLSPJ71Htr8lf43QSw1wl7pg08xNaIqQRsByJ
+ HDJqnnY0vayIC2x7KCj63ZIgxXUkV9iw3O3pmwNzOPQV0tSoV7Bgd6LxNi+sjf43i2Oc
+ CJ8bmFQDoADuPyMmV6KfuwDoVrd3tNMhc+XJ4nBjy76gbJSk5LxbEcwRiTAd4a0rc3LR
+ bYGdIYC2mNSlwWtef535sTIxatWMZRtmeVNTtV92r9rz2zcHSttHntuerwegPC5EQEMl
+ fYNw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXbWn1NRWQY8Qf7MAQzPbgT52lcMK/RuMryq0MR7LrYH558Ml7A6BNjyA0Biy12iwij59EHRLw1m5+z5w==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0YyTmsxaFR3OqOatWglKAsDjdeFcr2K9BL2awPwsaWfXsqm8/uk3
- l1ssD1kdEryTVDZs4MyRCHk6fVRBkrwqCou5nMy1faJTEcpE4qnB0PP6JhthhdLB0pQ=
-X-Gm-Gg: ASbGnctYknIoCCHRdvTFuhb+lt5Kd9P0NyO7MXPzUUohpLk1vdwL3qf1oCYs1mQEEpI
- XNl5R0qlnsXAbHFbDtF6wCjK+Wsb/DXAnHUp/Qsb8w4dddDvYhNngUBbRU5PPTq2Yl4Dc3B1Aus
- 6UE4McgviEtjDMt13xcfZCoHzJgXoSI/XhaJfb3CT+uTgKGIPoKH/wqcuszWaWuh178x61pok/3
- bre7QyxO88fmAVUwnNx+kyvjmmVWw8/AwywudzxLIQ5wiC29zB8gIrg1T39Wjjo67ah4wiXwRBs
- /8e4VePuNA3M6ybiJdNkbtoUBNvtR1xHCA6Pz+np6461vPpbGYRADPY7hXwt6k5ct6lvH0a6qJk
- 6eGpSUMwpAJGjPBY+yI9QrE9pkNz2Xq8Bs/yyYGz5TBu83gwmYNYEuD00e8pOFVaatzJOFn4N3Q
- ==
-X-Google-Smtp-Source: AGHT+IGpoVfGLE6ayqDBinGSA8T0Qgz6rCdE95D3/d6SX1NXBSxgZaQBiBLkHjt9eoMpy6vxWPuThg==
-X-Received: by 2002:a05:600c:5490:b0:46e:4744:add7 with SMTP id
- 5b1f17b1804b1-46fae33db7amr213440255e9.7.1760538741374; 
- Wed, 15 Oct 2025 07:32:21 -0700 (PDT)
+ AJvYcCUlGN86evcJJItiZcmKSn4YPowFchSrnl26QljQcdVAjXCMUHon57mgjHwrOulDoVpJFqEIQC17kDftxA==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0YxqTG52bzOxgZdbYaQHAPtOIyUd2bFHEpCEc++KZmbbcATAYDby
+ HF1wcbXhja/OlwxvgWptrjK4YOn4TXToaeAv+Ou+mW8k0sXLznUwjfqjeF3X1nliCYE=
+X-Gm-Gg: ASbGncvq54zbN7YO4dCprgnD5nL+Rm53SFltdNVFpFqo6RSUTIvabXCkEdYsivwZisN
+ X+5MykBa+i/bYJ2jvcsqh/odRN9HBsgyQf5LHpgiSv8h4/PVv7ypTTi2XUDq7fyYRk1N705uYQX
+ Iv4TwRblW4+m9a1XRjjWz+R/OKt221GFZXjVRjfOaEP98YbOBj1yN2dCGKaOY/7qYWOg7g1iQax
+ iNz6hz1Dkynhywhx8ouOF66cnlYbBg46BnlyouuxjVg2gOeBLEsTGKX2+C30/duu3Ag96IaNwox
+ 80jFjIs5MYYVfA9b/4sfEkrFW33HHE1K/y9xjRavH4lybO/LDKWqxUwQcz4gzxSUXDkVWSF9+g7
+ JZctkWQ7hP8638UYcOMzso3MuglHjZcY2s1iCyIkI8yiaLMEGMewSA3vZ7ISjhyppPcckQ0U3uL
+ L05ErcdN7Y
+X-Google-Smtp-Source: AGHT+IFxJ3tdTc9aXKyMZ7CBIzLF8xRR3KpTVUPPFRVIzybF4VytlYoKR7kxxnTeR6BEG36njzF8Fw==
+X-Received: by 2002:a05:6000:601:b0:426:d80c:2759 with SMTP id
+ ffacd0b85a97d-426d80c2f3amr10817335f8f.25.1760538743325; 
+ Wed, 15 Oct 2025 07:32:23 -0700 (PDT)
 Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:fed:4601:4b30:fdb5:8c7d:59b5])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-470ff15ef28sm43185915e9.5.2025.10.15.07.32.19
+ 5b1f17b1804b1-470ff15ef28sm43185915e9.5.2025.10.15.07.32.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Oct 2025 07:32:20 -0700 (PDT)
+ Wed, 15 Oct 2025 07:32:22 -0700 (PDT)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Wed, 15 Oct 2025 15:32:05 +0100
-Message-Id: <20251015-clk_ops-v1-0-5f80f827407e@linaro.org>
+Date: Wed, 15 Oct 2025 15:32:06 +0100
 MIME-Version: 1.0
-X-B4-Tracking: v=1; b=H4sIAGWw72gC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDI1NDA0MD3eSc7Pj8gmJd4yTz5GTL5OQUA3MDJaDqgqLUtMwKsEnRsbW1AEt
- mhXtZAAAA
-X-Change-ID: 20251010-clk_ops-3b7cc9ccd070
+Message-Id: <20251015-clk_ops-v1-1-5f80f827407e@linaro.org>
+References: <20251015-clk_ops-v1-0-5f80f827407e@linaro.org>
+In-Reply-To: <20251015-clk_ops-v1-0-5f80f827407e@linaro.org>
 To: u-boot-amlogic@groups.io, u-boot@lists.denx.de, 
  Paul Barker <paul@pbarker.dev>, uboot-snps-arc@synopsys.com, 
  Dai Okamura <okamura.dai@socionext.com>, 
@@ -125,8 +123,8 @@ Cc: Peng Fan <peng.fan@nxp.com>, Valentin Caron <valentin.caron@foss.st.com>,
  Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
  Padmarao Begari <padmarao.begari@amd.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>
-Subject: [Uboot-stm32] [PATCH 00/24] clk: Remove passing of negative errors
- through unsigned return
+Subject: [Uboot-stm32] [PATCH 01/24] clk: meson: Remove negative error
+ returns from clk_get_rate
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -143,115 +141,307 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-This series removes the passing of negative errors through the .get_rate
-function in the clk_ops struct. This function returns an unsigned long.
-The only value guaranteed to not be a valid clock rate is 0. This will
-also bring the drivers more in sync with Linux to allow for easier code
-porting and other maintenance in the future.
-Another series will address the calling of clk_get_rate and associated
-error handling.
+clk_get_rate() returns a ulong so do not attempt to pass negative error
+codes through it.
 
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
-Andrew Goodbody (24):
-      clk: meson: Remove negative error returns from clk_get_rate
-      clk: sifive: Remove negative error returns from clk_get_rate
-      clk: armada-37xx: Remove negative error returns from clk_get_rate
-      clk: thead: th1520-ap: Remove negative error returns from clk_get_rate
-      clk: ccf: Remove negative error returns from clk_get_rate
-      clk: at91: Remove negative error returns from clk_get_rate
-      clk: renesas: Remove negative error returns from clk_get_rate
-      clk: rockchip: Remove negative error returns from clk_get_rate
-      clk: Remove negative error returns from clk_get_rate
-      clk: starfive: Remove negative error returns from clk_get_rate
-      clk: altera: Remove negative error returns from clk_get_rate
-      clk: uniphier: Remove negative error returns from clk_get_rate
-      clk: aspeed: Remove negative error returns from clk_get_rate
-      clk: nuvoton: Remove negative error returns from clk_get_rate
-      clk: exynos: Remove negative error returns from clk_get_rate
-      clk: imx: Remove negative error returns from clk_get_rate
-      clk: ti: Remove negative error returns from clk_get_rate
-      clk: mediatek: Remove negative error returns from clk_get_rate
-      clk: owl: Remove negative error returns from clk_get_rate
-      clk: tegra: Remove negative error returns from clk_get_rate
-      clk: adi: Remove negative error returns from clk_get_rate
-      clk: sophgo: Remove negative error returns from clk_get_rate
-      clk: stm32: Remove negative error returns from clk_get_rate
-      clk: x86: Remove negative error returns from clk_get_rate
+ drivers/clk/meson/a1.c   | 10 +++++-----
+ drivers/clk/meson/axg.c  | 10 +++++-----
+ drivers/clk/meson/g12a.c | 36 ++++++++++++++++++------------------
+ drivers/clk/meson/gxbb.c | 20 ++++++++++----------
+ 4 files changed, 38 insertions(+), 38 deletions(-)
 
- drivers/clk/adi/clk-shared.c             |  2 +-
- drivers/clk/altera/clk-agilex.c          |  2 +-
- drivers/clk/altera/clk-agilex5.c         |  2 +-
- drivers/clk/altera/clk-n5x.c             |  2 +-
- drivers/clk/aspeed/clk_ast2500.c         |  2 +-
- drivers/clk/aspeed/clk_ast2600.c         |  2 +-
- drivers/clk/at91/compat.c                |  6 ++--
- drivers/clk/clk-hsdk-cgu.c               |  2 +-
- drivers/clk/clk-uclass.c                 |  4 +--
- drivers/clk/clk.c                        |  2 +-
- drivers/clk/clk_fixed_factor.c           |  4 +--
- drivers/clk/clk_k210.c                   |  6 ++--
- drivers/clk/clk_sandbox.c                |  4 +--
- drivers/clk/clk_scmi.c                   |  4 +--
- drivers/clk/clk_vexpress_osc.c           |  2 +-
- drivers/clk/clk_zynq.c                   |  4 +--
- drivers/clk/clk_zynqmp.c                 | 40 ++++++++++-----------
- drivers/clk/exynos/clk-exynos7420.c      |  2 +-
- drivers/clk/imx/clk-imx8qm.c             |  6 ++--
- drivers/clk/imx/clk-imx8qxp.c            |  6 ++--
- drivers/clk/imx/clk-imxrt1170.c          |  2 +-
- drivers/clk/imx/clk-pllv3.c              |  2 +-
- drivers/clk/intel/clk_intel.c            |  2 +-
- drivers/clk/mediatek/clk-mtk.c           |  2 +-
- drivers/clk/meson/a1.c                   | 10 +++---
- drivers/clk/meson/axg.c                  | 10 +++---
- drivers/clk/meson/g12a.c                 | 36 +++++++++----------
- drivers/clk/meson/gxbb.c                 | 20 +++++------
- drivers/clk/mvebu/armada-37xx-periph.c   |  2 +-
- drivers/clk/mvebu/armada-37xx-tbg.c      |  2 +-
- drivers/clk/nuvoton/clk_npcm.c           | 10 +++---
- drivers/clk/owl/clk_owl.c                |  2 +-
- drivers/clk/renesas/clk-rcar-gen2.c      |  8 ++---
- drivers/clk/renesas/rzg2l-cpg.c          |  8 ++---
- drivers/clk/rockchip/clk_px30.c          | 24 ++++++-------
- drivers/clk/rockchip/clk_rk3036.c        |  2 +-
- drivers/clk/rockchip/clk_rk3066.c        |  8 ++---
- drivers/clk/rockchip/clk_rk3128.c        |  6 ++--
- drivers/clk/rockchip/clk_rk3188.c        |  6 ++--
- drivers/clk/rockchip/clk_rk322x.c        |  4 +--
- drivers/clk/rockchip/clk_rk3288.c        |  6 ++--
- drivers/clk/rockchip/clk_rk3308.c        | 26 +++++++-------
- drivers/clk/rockchip/clk_rk3328.c        |  6 ++--
- drivers/clk/rockchip/clk_rk3368.c        |  8 ++---
- drivers/clk/rockchip/clk_rk3399.c        | 12 +++----
- drivers/clk/rockchip/clk_rk3528.c        | 20 +++++------
- drivers/clk/rockchip/clk_rk3568.c        | 62 ++++++++++++++++----------------
- drivers/clk/rockchip/clk_rk3576.c        | 36 +++++++++----------
- drivers/clk/rockchip/clk_rk3588.c        | 32 ++++++++---------
- drivers/clk/rockchip/clk_rv1108.c        |  4 +--
- drivers/clk/rockchip/clk_rv1126.c        | 52 +++++++++++++--------------
- drivers/clk/sifive/sifive-prci.c         |  8 ++---
- drivers/clk/sophgo/clk-cv1800b.c         |  2 +-
- drivers/clk/starfive/clk-jh7110-pll.c    |  2 +-
- drivers/clk/stm32/clk-stm32-core.c       |  4 +--
- drivers/clk/stm32/clk-stm32f.c           |  6 ++--
- drivers/clk/stm32/clk-stm32h7.c          |  4 +--
- drivers/clk/tegra/tegra-car-clk.c        |  2 +-
- drivers/clk/tegra/tegra186-clk.c         |  2 +-
- drivers/clk/thead/clk-th1520-ap.c        |  2 +-
- drivers/clk/ti/clk-am3-dpll-x2.c         |  4 +--
- drivers/clk/ti/clk-divider.c             |  4 +--
- drivers/clk/ti/clk-mux.c                 |  2 +-
- drivers/clk/ti/clk-sci.c                 |  2 +-
- drivers/clk/uniphier/clk-uniphier-core.c |  2 +-
- 65 files changed, 290 insertions(+), 290 deletions(-)
----
-base-commit: ecdc3872a767fb045be3296d4317ae978a14b022
-change-id: 20251010-clk_ops-3b7cc9ccd070
+diff --git a/drivers/clk/meson/a1.c b/drivers/clk/meson/a1.c
+index a1b8d79149102183402f470a60511d5300d0232c..78cad13239ca174a30f88cb2b18191cea74d6248 100644
+--- a/drivers/clk/meson/a1.c
++++ b/drivers/clk/meson/a1.c
+@@ -359,7 +359,7 @@ static ulong meson_div_get_rate(struct clk *clk, unsigned long id)
+ 
+ 	info = meson_clk_get_info(clk, id, MESON_CLK_DIV);
+ 	if (IS_ERR(info))
+-		return PTR_ERR(info);
++		return 0;
+ 
+ 	/* Actual divider value is (field value + 1), hence the increment */
+ 	n = GET_PARM_VALUE(priv, info->parm) + 1;
+@@ -402,7 +402,7 @@ static ulong meson_pll_get_rate(struct clk *clk, unsigned long id)
+ 
+ 	info = meson_clk_get_info(clk, id, MESON_CLK_ANY);
+ 	if (IS_ERR(info))
+-		return PTR_ERR(info);
++		return 0;
+ 
+ 	pm = &info->parm[0];
+ 	pn = &info->parm[1];
+@@ -411,7 +411,7 @@ static ulong meson_pll_get_rate(struct clk *clk, unsigned long id)
+ 	m = GET_PARM_VALUE(priv, pm);
+ 
+ 	if (n == 0)
+-		return -EINVAL;
++		return 0;
+ 
+ 	parent = info->parents[0];
+ 	parent_rate_mhz = meson_clk_get_rate_by_id(clk, parent) / 1000000;
+@@ -453,13 +453,13 @@ static ulong meson_clk_get_rate_by_id(struct clk *clk, unsigned long id)
+ 
+ 		ret = clk_get_by_name(clk->dev, info->name, &external_clk);
+ 		if (ret)
+-			return ret;
++			return 0;
+ 
+ 		rate = clk_get_rate(&external_clk);
+ 		break;
+ 	}
+ 	default:
+-		rate = -EINVAL;
++		rate = 0;
+ 		break;
+ 	}
+ 
+diff --git a/drivers/clk/meson/axg.c b/drivers/clk/meson/axg.c
+index c421a622a587d2eddef70d28b65e560722cf7f62..e0b41811b0dfcc59f9a57366639ff2133209b697 100644
+--- a/drivers/clk/meson/axg.c
++++ b/drivers/clk/meson/axg.c
+@@ -104,7 +104,7 @@ static unsigned long meson_clk81_get_rate(struct clk *clk)
+ 		parent_rate = XTAL_RATE;
+ 		break;
+ 	case 1:
+-		return -ENOENT;
++		return 0;
+ 	default:
+ 		parent_rate = meson_clk_get_rate_by_id(clk, parents[reg]);
+ 	}
+@@ -123,7 +123,7 @@ static long mpll_rate_from_params(unsigned long parent_rate,
+ 	unsigned long divisor = (SDM_DEN * n2) + sdm;
+ 
+ 	if (n2 < N2_MIN)
+-		return -EINVAL;
++		return 0;
+ 
+ 	return DIV_ROUND_UP_ULL((u64)parent_rate * SDM_DEN, divisor);
+ }
+@@ -171,7 +171,7 @@ static ulong meson_mpll_get_rate(struct clk *clk, unsigned long id)
+ 		pn2 = &meson_mpll2_parm[1];
+ 		break;
+ 	default:
+-		return -ENOENT;
++		return 0;
+ 	}
+ 
+ 	parent_rate = meson_clk_get_rate_by_id(clk, CLKID_FIXED_PLL);
+@@ -219,7 +219,7 @@ static ulong meson_pll_get_rate(struct clk *clk, unsigned long id)
+ 		pod = &meson_sys_pll_parm[2];
+ 		break;
+ 	default:
+-		return -ENOENT;
++		return 0;
+ 	}
+ 
+ 	regmap_read(priv->map, pn->reg_off, &reg);
+@@ -272,7 +272,7 @@ static ulong meson_clk_get_rate_by_id(struct clk *clk, unsigned long id)
+ 			rate = meson_clk81_get_rate(clk);
+ 			break;
+ 		}
+-		return -ENOENT;
++		return 0;
+ 	}
+ 
+ 	debug("clock %lu has rate %lu\n", id, rate);
+diff --git a/drivers/clk/meson/g12a.c b/drivers/clk/meson/g12a.c
+index a7a42b2edb6a5b98612fb71fec6d17b1f3ab77c8..910b91e874bfdf6753ffc40bec7cd3a94e0b41ad 100644
+--- a/drivers/clk/meson/g12a.c
++++ b/drivers/clk/meson/g12a.c
+@@ -264,7 +264,7 @@ static ulong meson_div_get_rate(struct clk *clk, unsigned long id)
+ 		parent = meson_hdmi_div_parent;
+ 		break;
+ 	default:
+-		return -ENOENT;
++		return 0;
+ 	}
+ 
+ 	regmap_read(priv->map, parm->reg_off, &reg);
+@@ -273,8 +273,8 @@ static ulong meson_div_get_rate(struct clk *clk, unsigned long id)
+ 	debug("%s: div of %ld is %d\n", __func__, id, reg + 1);
+ 
+ 	parent_rate = meson_clk_get_rate_by_id(clk, parent);
+-	if (IS_ERR_VALUE(parent_rate))
+-		return parent_rate;
++	if (!parent_rate)
++		return 0;
+ 
+ 	debug("%s: parent rate of %ld is %d\n", __func__, id, parent_rate);
+ 
+@@ -323,12 +323,12 @@ static ulong meson_div_set_rate(struct clk *clk, unsigned long id, ulong rate,
+ 		parent = meson_hdmi_div_parent;
+ 		break;
+ 	default:
+-		return -ENOENT;
++		return 0;
+ 	}
+ 
+ 	parent_rate = meson_clk_get_rate_by_id(clk, parent);
+-	if (IS_ERR_VALUE(parent_rate))
+-		return parent_rate;
++	if (!parent_rate)
++		return 0;
+ 
+ 	debug("%s: parent rate of %ld is %ld\n", __func__, id, parent_rate);
+ 
+@@ -348,15 +348,15 @@ static ulong meson_div_set_rate(struct clk *clk, unsigned long id, ulong rate,
+ 			return ret;
+ 
+ 		parent_rate = meson_clk_get_rate_by_id(clk, parent);
+-		if (IS_ERR_VALUE(parent_rate))
+-			return parent_rate;
++		if (!parent_rate)
++			return 0;
+ 
+ 		new_div = DIV_ROUND_CLOSEST(parent_rate, rate);
+ 
+ 		debug("%s: new new div of %ld is %d\n", __func__, id, new_div);
+ 
+ 		if (!new_div || new_div > (1 << parm->width))
+-			return -EINVAL;
++			return 0;
+ 	}
+ 
+ 	debug("%s: setting div of %ld to %d\n", __func__, id, new_div);
+@@ -471,7 +471,7 @@ static ulong meson_mux_get_parent(struct clk *clk, unsigned long id)
+ 		parents = meson_hdmi_mux_parents;
+ 		break;
+ 	default:
+-		return -ENOENT;
++		return 0;
+ 	}
+ 
+ 	regmap_read(priv->map, parm->reg_off, &reg);
+@@ -560,8 +560,8 @@ static ulong meson_mux_get_rate(struct clk *clk, unsigned long id)
+ {
+ 	int parent = meson_mux_get_parent(clk, id);
+ 
+-	if (IS_ERR_VALUE(parent))
+-		return parent;
++	if (!parent)
++		return 0;
+ 
+ 	return meson_clk_get_rate_by_id(clk, parent);
+ }
+@@ -588,7 +588,7 @@ static unsigned long meson_clk81_get_rate(struct clk *clk)
+ 
+ 	switch (reg) {
+ 	case 1:
+-		return -ENOENT;
++		return 0;
+ 	default:
+ 		parent_rate = meson_clk_get_rate_by_id(clk, parents[reg]);
+ 	}
+@@ -655,12 +655,12 @@ static ulong meson_mpll_get_rate(struct clk *clk, unsigned long id)
+ 		pn2 = &meson_mpll2_parm[1];
+ 		break;
+ 	default:
+-		return -ENOENT;
++		return 0;
+ 	}
+ 
+ 	parent_rate = meson_clk_get_rate_by_id(clk, CLKID_FIXED_PLL);
+-	if (IS_ERR_VALUE(parent_rate))
+-		return parent_rate;
++	if (!parent_rate)
++		return 0;
+ 
+ 	regmap_read(priv->map, psdm->reg_off, &reg);
+ 	sdm = PARM_GET(psdm->width, psdm->shift, reg);
+@@ -711,7 +711,7 @@ static ulong meson_pll_get_rate(struct clk *clk, unsigned long id)
+ 		pod = &meson_sys_pll_parm[2];
+ 		break;
+ 	default:
+-		return -ENOENT;
++		return 0;
+ 	}
+ 
+ 	regmap_read(priv->map, pn->reg_off, &reg);
+@@ -851,7 +851,7 @@ static ulong meson_clk_get_rate_by_id(struct clk *clk, unsigned long id)
+ 			rate = meson_clk81_get_rate(clk);
+ 			break;
+ 		}
+-		return -ENOENT;
++		return 0;
+ 	}
+ 
+ 	debug("clock %lu has rate %lu\n", id, rate);
+diff --git a/drivers/clk/meson/gxbb.c b/drivers/clk/meson/gxbb.c
+index 51f124869c9c4043dfe047cf2f694bf59df7e87f..6dcfd084b8f93ade3fe1270db48f91f87cb61d26 100644
+--- a/drivers/clk/meson/gxbb.c
++++ b/drivers/clk/meson/gxbb.c
+@@ -306,7 +306,7 @@ static ulong meson_div_get_rate(struct clk *clk, unsigned long id)
+ 		parent = meson_hdmi_div_parent;
+ 		break;
+ 	default:
+-		return -ENOENT;
++		return 0;
+ 	}
+ 
+ 	regmap_read(priv->map, parm->reg_off, &reg);
+@@ -315,8 +315,8 @@ static ulong meson_div_get_rate(struct clk *clk, unsigned long id)
+ 	debug("%s: div of %ld is %d\n", __func__, id, reg + 1);
+ 
+ 	parent_rate = meson_clk_get_rate_by_id(clk, parent);
+-	if (IS_ERR_VALUE(parent_rate))
+-		return parent_rate;
++	if (!parent_rate)
++		return 0;
+ 
+ 	debug("%s: parent rate of %ld is %d\n", __func__, id, parent_rate);
+ 
+@@ -596,8 +596,8 @@ static ulong meson_mux_get_rate(struct clk *clk, unsigned long id)
+ {
+ 	int parent = meson_mux_get_parent(clk, id);
+ 
+-	if (IS_ERR_VALUE(parent))
+-		return parent;
++	if (parent < 0)
++		return 0;
+ 
+ 	return meson_clk_get_rate_by_id(clk, parent);
+ }
+@@ -627,7 +627,7 @@ static unsigned long meson_clk81_get_rate(struct clk *clk)
+ 		parent_rate = XTAL_RATE;
+ 		break;
+ 	case 1:
+-		return -ENOENT;
++		return 0;
+ 	default:
+ 		parent_rate = meson_clk_get_rate_by_id(clk, parents[reg]);
+ 	}
+@@ -695,12 +695,12 @@ static ulong meson_mpll_get_rate(struct clk *clk, unsigned long id)
+ 		pn2 = &meson_mpll2_parm[1];
+ 		break;
+ 	default:
+-		return -ENOENT;
++		return 0;
+ 	}
+ 
+ 	parent_rate = meson_clk_get_rate_by_id(clk, CLKID_FIXED_PLL);
+-	if (IS_ERR_VALUE(parent_rate))
+-		return parent_rate;
++	if (!parent_rate)
++		return 0;
+ 
+ 	regmap_read(priv->map, psdm->reg_off, &reg);
+ 	sdm = PARM_GET(psdm->width, psdm->shift, reg);
+@@ -833,7 +833,7 @@ static ulong meson_clk_get_rate_by_id(struct clk *clk, unsigned long id)
+ 			rate = meson_clk81_get_rate(clk);
+ 			break;
+ 		}
+-		return -ENOENT;
++		return 0;
+ 	}
+ 
+ 	debug("clock %lu has rate %lu\n", id, rate);
 
-Best regards,
 -- 
-Andrew Goodbody <andrew.goodbody@linaro.org>
+2.47.3
 
 _______________________________________________
 Uboot-stm32 mailing list

@@ -2,80 +2,86 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0372ABEE5E1
-	for <lists+uboot-stm32@lfdr.de>; Sun, 19 Oct 2025 15:05:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 21067BEE62A
+	for <lists+uboot-stm32@lfdr.de>; Sun, 19 Oct 2025 15:45:39 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5FE5FC57B70;
-	Sun, 19 Oct 2025 13:05:49 +0000 (UTC)
-Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com
- [209.85.218.53])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id AC514C06934;
+	Sun, 19 Oct 2025 13:45:38 +0000 (UTC)
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com
+ [209.85.221.51])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 35C28C3FACB
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id DF441C3FACB
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun, 19 Oct 2025 13:05:47 +0000 (UTC)
-Received: by mail-ej1-f53.google.com with SMTP id
- a640c23a62f3a-b3d5088259eso530388366b.1
+ Sun, 19 Oct 2025 13:45:36 +0000 (UTC)
+Received: by mail-wr1-f51.google.com with SMTP id
+ ffacd0b85a97d-3ee130237a8so2229394f8f.0
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun, 19 Oct 2025 06:05:47 -0700 (PDT)
+ Sun, 19 Oct 2025 06:45:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1760879146; x=1761483946;
+ d=gmail.com; s=20230601; t=1760881536; x=1761486336;
  darn=st-md-mailman.stormreply.com; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=61CUEQQ+hDuAvFz7ToNb7uwJIOWP7RK0Vt9mWw41tSg=;
- b=cwq74oX6CubMu8noW+8wHPKH1O/b5ccIqLMc5GdVI4tPDDVbzrXrRPUNSYopTB76/u
- NWQ9Uhu4RQQZAeVanRxIJFRbsOjhurwjUDwYFhuAG9zml9JyCl+vgvqAVWx3rUKMc2ts
- ILGnh91zXLr5LHpTxPQ/+IbDNsdwQHiCSl7Mk=
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=dPkQ7fyaCBH53Nh4OdjBaToVG/kxbzLE+Jj1kBn4ETc=;
+ b=b/szjroAt3439IgjnOIYT/r9mrHQ7uxaaahBb7fvBCS0D3xVk1GxKrSruEOv2pN2Gb
+ U34CshLkuneRl5Lx2RrKGMr7FqOx0zTlsEhFjcVWNZWvMv+tkd+xnJbj7W9qirbUXJa6
+ A52ixXmGaOp32AucAPKaftLNXz04DSOlA60dnsGvSyPIIgyEINIU1F3Xi6VJyN6n1uWz
+ YIywJFo9wMTo9YT7THE6E583PkBczWOG1jBwVOvoB9Ix6UDE3tdLdyxV2JyWTSCvHf5Y
+ /0cxgWSinwvOwKQLQqWszqpUeoMX+yt4SaznCKeLcLIXOALrFhU9vDeaLxdA70Y2aZ3l
+ lCdA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760879146; x=1761483946;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=61CUEQQ+hDuAvFz7ToNb7uwJIOWP7RK0Vt9mWw41tSg=;
- b=xEDqySedVOXiv+D7CcwyQdaC88/Sh6NbdD4QZeonVKozZp5i0Ta2KDW/Ht8dlaNqag
- IiWfDsHFxUMCOg4W7Gd4JGEqF+jz3IoyS2ZPbWlvGkRGpwkv/+N5lH5KAh0Ab4+oYmJX
- neGdWrvNKgfx1CbtYMmmN33UW+f/NCddjtHNrltLPtPmDgffHO5fQmwcOlrkCn3xVkl/
- 1+7UfPX+M824gnHzi5hAcn604kTovUW984CFcUuY53MaHA89UVqygutF0t1RyqqzF7IT
- c7cAZYEKreIzRx/PJlSJbVY2GCNB1zVdS/JFInmXJ+QBuwBxQ8aIIixZzEPR0Y2fyttW
- i5tw==
+ d=1e100.net; s=20230601; t=1760881536; x=1761486336;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=dPkQ7fyaCBH53Nh4OdjBaToVG/kxbzLE+Jj1kBn4ETc=;
+ b=Bs9T8CDbIXU+LuckfKfAstww1aDK5AVQ3IeLYq6QyaCXL8iVDcj2umcQeLxi2B+7M2
+ POARXlTCuraVoQWhAZFCrs9jXUW3WMUC4kKizpOXBx6A7Vl94LLNwNsE6f0I5RXjo8mR
+ rNkI8qNMBE33837/F/2TF36TY0sZnVgScwfxPhb4E7XbWk3gdu/0wPFBq7aMqhweNG+R
+ DG651GZXoJUL7cr7LufXv+EXJ1Zjj/ri/cuZASZ/j2D2KcomlUlVummhZ3UJzsLHkkl0
+ B34AfqjNrxFO3LhkP3eYo1OgtE7GaeyGCRLmlYxV13kSDVDEtsnT9sSmm2KevuelaBSd
+ O3zw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW6pMH5a96B9bBKDh2iO+6fHXWTEHbLMH13qb2Yjlr4mTgxgEKRAB8CPCDvHlt4doX75Mut0AgNT9gTqw==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0Yxi8xAI8bblIKD0yvpPLejBpwcMi5SIYUfcjFxBBG1yvhhap6II
- 39kmFdcexqMUGrbxFflGpOYm6RrIbnlIoUkcrNKnDeuaHm8cF3biWcfrgqUaL6Y8xV0mDgBKpt0
- NTB87pchxHIDHc5UF5XsLAklDUEUrub+Tix+tZpsO
-X-Gm-Gg: ASbGncvkEyXrbigXnTt2Q7bEkoDMKb3zODg6Bw8jdMUiWA5IbIRBYdKMVorW8z2umrm
- gufYFRVCkuWn5zhojLlZ3aqOxZMfuGBPVWSo/qklitNR1CL1UhSZY1YIOS/I4VOUo4mtN8FyK+y
- MpYEbdHD0+GWgUic/jvEy7iahsjioSXhcFTrHrD9FqxLSnZ0ylXgRwEiUwrAPYYH0xzVvMp+N2A
- l10sU/hMF6qcJKp2rfKyLWuB2mJNDmjAjtSL50eHs094e3WIKMjgswpJMA=
-X-Google-Smtp-Source: AGHT+IFsPQ+2Lh7NL+SGdqd7kFMCRpqHA34otaYopaxB5tR/x/4rgBreQLI30q9f537j6YitG2fCgcTrfJ6qSET/20M=
-X-Received: by 2002:a17:907:1b12:b0:b41:79ff:250c with SMTP id
- a640c23a62f3a-b64732441d6mr1030559866b.23.1760879146282; Sun, 19 Oct 2025
- 06:05:46 -0700 (PDT)
+ AJvYcCW0qxQZ4IVikaDEfGd4R9m0V4kcn1agfjKy1AAjYszlv/VbRNftVW5fGAdSEYCr7LqrqtY9sxAlEng37g==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0YyGWxeIRRH95ZmWa5O1jh1OBeajzMn+oie6o933L0W/Bf32fhLd
+ PcZf3WNv2tI+7xvpn4PKTkUsa40SdO7dhlieksayiVii1TJ5eaA+gRVnNavcqTIsjFy2bTYa4OZ
+ 1BV17u03Inm+U6oifX5QbpRcYJeYH9zQ=
+X-Gm-Gg: ASbGnctJjWQc3NiQl/n3yMEBDqmi6w+4yA9kqkmh+sf3YYUbEcOK0fXGtdF6pPbslQ9
+ i+TWDClkxw17Fl409FGV+dndOgncYUyexzq1a+mv0AIC4Jnus3f1vlCw4+Ry8Hw6eGpqv9p0daY
+ sqSdzmvwchPRJLzZZ4GTm+BsHTAPv5u2Gt05FJS7lJtVAaxv3JtrhORTDbR2upZ5cv/pe7Xb31A
+ 64zB21lUMNgMb3TbZiKQwECgK9/sJ5R7g7KxIrCdLkVUCFhXJZb4DN3xyTkpFexAqvx024FQeag
+ yyBY+L0=
+X-Google-Smtp-Source: AGHT+IGSTJwUgHIr7wWK0z4/DDh17ybUzaPDOhOtS1Kt4686OV1sD1BvAryxuDm54Hx3iwG/XfxXBwKc+4JlyHmOgj8=
+X-Received: by 2002:a05:6000:184f:b0:427:a05:2ff with SMTP id
+ ffacd0b85a97d-4270a050510mr4825567f8f.33.1760881535849; Sun, 19 Oct 2025
+ 06:45:35 -0700 (PDT)
 MIME-Version: 1.0
 References: <20251015-clk_ops-v1-0-5f80f827407e@linaro.org>
  <CAFLszTjnB5zji6JkCpKTHMRZYvcR9hS5rebxZ2_rHj77BWN2VQ@mail.gmail.com>
  <20251018140414.GN6688@bill-the-cat>
-In-Reply-To: <20251018140414.GN6688@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 19 Oct 2025 14:05:33 +0100
-X-Gm-Features: AS18NWDKwx3BAEstg0Q0vrzhEDXt43WpLd6lhHNT_8WYOBCzn-OAmN-tBv9jhtk
-Message-ID: <CAFLszTjE5Gi8-UEjzAciasnWrBwanqDdDW2xX57ykrsYqAGFyQ@mail.gmail.com>
-To: Tom Rini <trini@konsulko.com>
+ <CAFLszTjE5Gi8-UEjzAciasnWrBwanqDdDW2xX57ykrsYqAGFyQ@mail.gmail.com>
+In-Reply-To: <CAFLszTjE5Gi8-UEjzAciasnWrBwanqDdDW2xX57ykrsYqAGFyQ@mail.gmail.com>
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+Date: Sun, 19 Oct 2025 16:45:24 +0300
+X-Gm-Features: AS18NWDvKl5Vef-YYdeanLXFGKwrK9IGi5hPzWb10UjLWVADMdWrMs275_fSpuE
+Message-ID: <CAPVz0n2seuNyeJzhYgintpj0OR9qzutYER8LxxLDkssPtQbevg@mail.gmail.com>
+To: Andrew Goodbody <andrew.goodbody@linaro.org>
 Cc: adsp-linux@analog.com, Peng Fan <peng.fan@nxp.com>,
  Valentin Caron <valentin.caron@foss.st.com>, Heiko Stuebner <heiko@sntech.de>,
  Liviu Dudau <liviu.dudau@foss.arm.com>, Alice Guo <alice.guo@nxp.com>,
  Stefan Roese <stefan.roese@mailbox.org>,
  Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
  Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>,
- Kever Yang <kever.yang@rock-chips.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>, Sean Anderson <seanga2@gmail.com>,
+ Kever Yang <kever.yang@rock-chips.com>, Sean Anderson <seanga2@gmail.com>,
  u-boot@lists.denx.de,
  Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>,
  Finley Xiao <finley.xiao@rock-chips.com>,
  Miquel Raynal <miquel.raynal@bootlin.com>,
  uboot-stm32@st-md-mailman.stormreply.com, Minkyu Kang <mk7.kang@samsung.com>,
  Hal Feng <hal.feng@starfivetech.com>, Marek Vasut <marex@denx.de>,
+ Tom Rini <trini@konsulko.com>,
  Muhammad Hazim Izzat Zamri <muhammad.hazim.izzat.zamri@altera.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
  Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
@@ -102,13 +108,12 @@ Cc: adsp-linux@analog.com, Peng Fan <peng.fan@nxp.com>,
  Jonathan Currier <dullfire@yahoo.com>,
  Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
  Ryan Chen <ryan_chen@aspeedtech.com>, uboot-snps-arc@synopsys.com,
- Michal Simek <michal.simek@amd.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Greg Malysa <malysagreg@gmail.com>, Heiko Schocher <hs@nabladev.com>,
- Aspeed BMC SW team <BMC-SW@aspeedtech.com>,
+ Michal Simek <michal.simek@amd.com>, Utsav Agarwal <utsav.agarwal@analog.com>,
+ Heiko Schocher <hs@nabladev.com>, Aspeed BMC SW team <BMC-SW@aspeedtech.com>,
  Leo Yu-Chi Liang <ycliang@andestech.com>,
  Tingting Meng <tingting.meng@altera.com>,
- Ian Roberts <ian.roberts@timesys.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Ian Roberts <ian.roberts@timesys.com>, Simon Glass <sjg@chromium.org>,
+ Greg Malysa <malysagreg@gmail.com>,
  Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
  Padmarao Begari <padmarao.begari@amd.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
@@ -127,192 +132,184 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Tom, Andrew,
-
-On Sat, 18 Oct 2025 at 15:04, Tom Rini <trini@konsulko.com> wrote:
->
-> On Sat, Oct 18, 2025 at 09:34:42AM +0100, Simon Glass wrote:
-> > Hi Andrew,
-> >
-> > On Wed, 15 Oct 2025 at 15:32, Andrew Goodbody
-> > <andrew.goodbody@linaro.org> wrote:
-> > >
-> > > This series removes the passing of negative errors through the .get_rate
-> > > function in the clk_ops struct. This function returns an unsigned long.
-> > > The only value guaranteed to not be a valid clock rate is 0. This will
-> > > also bring the drivers more in sync with Linux to allow for easier code
-> > > porting and other maintenance in the future.
-> > > Another series will address the calling of clk_get_rate and associated
-> > > error handling.
-> >
-> > Some indication of the problem you ran into would be useful here.
->
-> The problem statement is in the paragraph you're quoting. The numerical
-> value of -ENOENT is a valid clock rate.
-
-No, I mean a problem with a board, or something like that. We are
-talking here about not being able to return a valid clock rate between
-4294967040 and 4294967295, which is only even a theoretical problem on
-32-bit machines. So I think it is reasonable to include a motivation.
-
-
->
-> > > Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
-> > > ---
-> > > Andrew Goodbody (24):
-> > >       clk: meson: Remove negative error returns from clk_get_rate
-> > >       clk: sifive: Remove negative error returns from clk_get_rate
-> > >       clk: armada-37xx: Remove negative error returns from clk_get_rate
-> > >       clk: thead: th1520-ap: Remove negative error returns from clk_get_rate
-> > >       clk: ccf: Remove negative error returns from clk_get_rate
-> > >       clk: at91: Remove negative error returns from clk_get_rate
-> > >       clk: renesas: Remove negative error returns from clk_get_rate
-> > >       clk: rockchip: Remove negative error returns from clk_get_rate
-> > >       clk: Remove negative error returns from clk_get_rate
-> > >       clk: starfive: Remove negative error returns from clk_get_rate
-> > >       clk: altera: Remove negative error returns from clk_get_rate
-> > >       clk: uniphier: Remove negative error returns from clk_get_rate
-> > >       clk: aspeed: Remove negative error returns from clk_get_rate
-> > >       clk: nuvoton: Remove negative error returns from clk_get_rate
-> > >       clk: exynos: Remove negative error returns from clk_get_rate
-> > >       clk: imx: Remove negative error returns from clk_get_rate
-> > >       clk: ti: Remove negative error returns from clk_get_rate
-> > >       clk: mediatek: Remove negative error returns from clk_get_rate
-> > >       clk: owl: Remove negative error returns from clk_get_rate
-> > >       clk: tegra: Remove negative error returns from clk_get_rate
-> > >       clk: adi: Remove negative error returns from clk_get_rate
-> > >       clk: sophgo: Remove negative error returns from clk_get_rate
-> > >       clk: stm32: Remove negative error returns from clk_get_rate
-> > >       clk: x86: Remove negative error returns from clk_get_rate
-> > >
-> > >  drivers/clk/adi/clk-shared.c             |  2 +-
-> > >  drivers/clk/altera/clk-agilex.c          |  2 +-
-> > >  drivers/clk/altera/clk-agilex5.c         |  2 +-
-> > >  drivers/clk/altera/clk-n5x.c             |  2 +-
-> > >  drivers/clk/aspeed/clk_ast2500.c         |  2 +-
-> > >  drivers/clk/aspeed/clk_ast2600.c         |  2 +-
-> > >  drivers/clk/at91/compat.c                |  6 ++--
-> > >  drivers/clk/clk-hsdk-cgu.c               |  2 +-
-> > >  drivers/clk/clk-uclass.c                 |  4 +--
-> > >  drivers/clk/clk.c                        |  2 +-
-> > >  drivers/clk/clk_fixed_factor.c           |  4 +--
-> > >  drivers/clk/clk_k210.c                   |  6 ++--
-> > >  drivers/clk/clk_sandbox.c                |  4 +--
-> > >  drivers/clk/clk_scmi.c                   |  4 +--
-> > >  drivers/clk/clk_vexpress_osc.c           |  2 +-
-> > >  drivers/clk/clk_zynq.c                   |  4 +--
-> > >  drivers/clk/clk_zynqmp.c                 | 40 ++++++++++-----------
-> > >  drivers/clk/exynos/clk-exynos7420.c      |  2 +-
-> > >  drivers/clk/imx/clk-imx8qm.c             |  6 ++--
-> > >  drivers/clk/imx/clk-imx8qxp.c            |  6 ++--
-> > >  drivers/clk/imx/clk-imxrt1170.c          |  2 +-
-> > >  drivers/clk/imx/clk-pllv3.c              |  2 +-
-> > >  drivers/clk/intel/clk_intel.c            |  2 +-
-> > >  drivers/clk/mediatek/clk-mtk.c           |  2 +-
-> > >  drivers/clk/meson/a1.c                   | 10 +++---
-> > >  drivers/clk/meson/axg.c                  | 10 +++---
-> > >  drivers/clk/meson/g12a.c                 | 36 +++++++++----------
-> > >  drivers/clk/meson/gxbb.c                 | 20 +++++------
-> > >  drivers/clk/mvebu/armada-37xx-periph.c   |  2 +-
-> > >  drivers/clk/mvebu/armada-37xx-tbg.c      |  2 +-
-> > >  drivers/clk/nuvoton/clk_npcm.c           | 10 +++---
-> > >  drivers/clk/owl/clk_owl.c                |  2 +-
-> > >  drivers/clk/renesas/clk-rcar-gen2.c      |  8 ++---
-> > >  drivers/clk/renesas/rzg2l-cpg.c          |  8 ++---
-> > >  drivers/clk/rockchip/clk_px30.c          | 24 ++++++-------
-> > >  drivers/clk/rockchip/clk_rk3036.c        |  2 +-
-> > >  drivers/clk/rockchip/clk_rk3066.c        |  8 ++---
-> > >  drivers/clk/rockchip/clk_rk3128.c        |  6 ++--
-> > >  drivers/clk/rockchip/clk_rk3188.c        |  6 ++--
-> > >  drivers/clk/rockchip/clk_rk322x.c        |  4 +--
-> > >  drivers/clk/rockchip/clk_rk3288.c        |  6 ++--
-> > >  drivers/clk/rockchip/clk_rk3308.c        | 26 +++++++-------
-> > >  drivers/clk/rockchip/clk_rk3328.c        |  6 ++--
-> > >  drivers/clk/rockchip/clk_rk3368.c        |  8 ++---
-> > >  drivers/clk/rockchip/clk_rk3399.c        | 12 +++----
-> > >  drivers/clk/rockchip/clk_rk3528.c        | 20 +++++------
-> > >  drivers/clk/rockchip/clk_rk3568.c        | 62 ++++++++++++++++----------------
-> > >  drivers/clk/rockchip/clk_rk3576.c        | 36 +++++++++----------
-> > >  drivers/clk/rockchip/clk_rk3588.c        | 32 ++++++++---------
-> > >  drivers/clk/rockchip/clk_rv1108.c        |  4 +--
-> > >  drivers/clk/rockchip/clk_rv1126.c        | 52 +++++++++++++--------------
-> > >  drivers/clk/sifive/sifive-prci.c         |  8 ++---
-> > >  drivers/clk/sophgo/clk-cv1800b.c         |  2 +-
-> > >  drivers/clk/starfive/clk-jh7110-pll.c    |  2 +-
-> > >  drivers/clk/stm32/clk-stm32-core.c       |  4 +--
-> > >  drivers/clk/stm32/clk-stm32f.c           |  6 ++--
-> > >  drivers/clk/stm32/clk-stm32h7.c          |  4 +--
-> > >  drivers/clk/tegra/tegra-car-clk.c        |  2 +-
-> > >  drivers/clk/tegra/tegra186-clk.c         |  2 +-
-> > >  drivers/clk/thead/clk-th1520-ap.c        |  2 +-
-> > >  drivers/clk/ti/clk-am3-dpll-x2.c         |  4 +--
-> > >  drivers/clk/ti/clk-divider.c             |  4 +--
-> > >  drivers/clk/ti/clk-mux.c                 |  2 +-
-> > >  drivers/clk/ti/clk-sci.c                 |  2 +-
-> > >  drivers/clk/uniphier/clk-uniphier-core.c |  2 +-
-> > >  65 files changed, 290 insertions(+), 290 deletions(-)
-> > > ---
-> > > base-commit: ecdc3872a767fb045be3296d4317ae978a14b022
-> > > change-id: 20251010-clk_ops-3b7cc9ccd070
-> > >
-> > > Best regards,
-> > > --
-> > > Andrew Goodbody <andrew.goodbody@linaro.org>
-> > >
-> >
-> > If you don't return an error, we cannot tell if the operation
-> > succeeded, or not. U-Boot needs to be deterministic and we need to be
-> > able to debug errors and detect them at runtime.
-> >
-> > We use ulong for the return value as a bit of a compromise, since it
-> > is inefficient to use 64-bit on a 32-bit machine. Ideally it would be
-> > long, but some clock rates are 3GHz and it would be confusing to cast
-> > to ulong before using the value.
-> >
-> > An alternative we discussed was to return an integer error with the
-> > clock rate returned in a parameter, but that seemed less efficient.
-> >
-> > With 64-bit machines, there really isn't a problem. Just checking for
-> > a negative value is good enough, since the clock rate isn't going to
-> > be 9 exahertz(?). Values between -CONFIG_ERR_PTR_OFFSET and 0 are
-> > errors and are defined to be so.
-> >
-> > If you want clk_get_rate() to work like Linux (suppress / ignore
-> > errors?), that's fine, but please create a clk_get_rate_err() (or
-> > similar) which actually returns the correct error, and keep the error
-> > return on the uclass interface. It is not uncommon to have the uclass
-> > do some processing on values passed to/from driver. This allows people
-> > who care to obtain the error.
->
-> This is moving things in the right direction of having the error
-> reporting and handling done where it can be done correctly. If there's
-> further parts of the Linux kernel-like API we need, we can take those
-> next.
-
-Here is part of the patch:
-
---- a/drivers/clk/meson/a1.c
-+++ b/drivers/clk/meson/a1.c
-@@ -359,7 +359,7 @@ static ulong meson_div_get_rate(struct clk *clk,
-unsigned long id)
-
-        info = meson_clk_get_info(clk, id, MESON_CLK_DIV);
-        if (IS_ERR(info))
--               return PTR_ERR(info);
-+               return 0;
-
-I don't see anything in that fragment other than just ignoring errors.
-
-Please, put this handling in the uclass function.
-
-Regards,
-Simon
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+0L3QtCwgMTkg0LbQvtCy0YIuIDIwMjXigK/RgC4g0L4gMTY6MDUgU2ltb24gR2xhc3MgPHNqZ0Bj
+aHJvbWl1bS5vcmc+INC/0LjRiNC1Ogo+Cj4gSGkgVG9tLCBBbmRyZXcsCj4KPiBPbiBTYXQsIDE4
+IE9jdCAyMDI1IGF0IDE1OjA0LCBUb20gUmluaSA8dHJpbmlAa29uc3Vsa28uY29tPiB3cm90ZToK
+PiA+Cj4gPiBPbiBTYXQsIE9jdCAxOCwgMjAyNSBhdCAwOTozNDo0MkFNICswMTAwLCBTaW1vbiBH
+bGFzcyB3cm90ZToKPiA+ID4gSGkgQW5kcmV3LAo+ID4gPgo+ID4gPiBPbiBXZWQsIDE1IE9jdCAy
+MDI1IGF0IDE1OjMyLCBBbmRyZXcgR29vZGJvZHkKPiA+ID4gPGFuZHJldy5nb29kYm9keUBsaW5h
+cm8ub3JnPiB3cm90ZToKPiA+ID4gPgo+ID4gPiA+IFRoaXMgc2VyaWVzIHJlbW92ZXMgdGhlIHBh
+c3Npbmcgb2YgbmVnYXRpdmUgZXJyb3JzIHRocm91Z2ggdGhlIC5nZXRfcmF0ZQo+ID4gPiA+IGZ1
+bmN0aW9uIGluIHRoZSBjbGtfb3BzIHN0cnVjdC4gVGhpcyBmdW5jdGlvbiByZXR1cm5zIGFuIHVu
+c2lnbmVkIGxvbmcuCj4gPiA+ID4gVGhlIG9ubHkgdmFsdWUgZ3VhcmFudGVlZCB0byBub3QgYmUg
+YSB2YWxpZCBjbG9jayByYXRlIGlzIDAuIFRoaXMgd2lsbAo+ID4gPiA+IGFsc28gYnJpbmcgdGhl
+IGRyaXZlcnMgbW9yZSBpbiBzeW5jIHdpdGggTGludXggdG8gYWxsb3cgZm9yIGVhc2llciBjb2Rl
+Cj4gPiA+ID4gcG9ydGluZyBhbmQgb3RoZXIgbWFpbnRlbmFuY2UgaW4gdGhlIGZ1dHVyZS4KPiA+
+ID4gPiBBbm90aGVyIHNlcmllcyB3aWxsIGFkZHJlc3MgdGhlIGNhbGxpbmcgb2YgY2xrX2dldF9y
+YXRlIGFuZCBhc3NvY2lhdGVkCj4gPiA+ID4gZXJyb3IgaGFuZGxpbmcuCj4gPiA+Cj4gPiA+IFNv
+bWUgaW5kaWNhdGlvbiBvZiB0aGUgcHJvYmxlbSB5b3UgcmFuIGludG8gd291bGQgYmUgdXNlZnVs
+IGhlcmUuCj4gPgo+ID4gVGhlIHByb2JsZW0gc3RhdGVtZW50IGlzIGluIHRoZSBwYXJhZ3JhcGgg
+eW91J3JlIHF1b3RpbmcuIFRoZSBudW1lcmljYWwKPiA+IHZhbHVlIG9mIC1FTk9FTlQgaXMgYSB2
+YWxpZCBjbG9jayByYXRlLgo+Cj4gTm8sIEkgbWVhbiBhIHByb2JsZW0gd2l0aCBhIGJvYXJkLCBv
+ciBzb21ldGhpbmcgbGlrZSB0aGF0LiBXZSBhcmUKPiB0YWxraW5nIGhlcmUgYWJvdXQgbm90IGJl
+aW5nIGFibGUgdG8gcmV0dXJuIGEgdmFsaWQgY2xvY2sgcmF0ZSBiZXR3ZWVuCj4gNDI5NDk2NzA0
+MCBhbmQgNDI5NDk2NzI5NSwgd2hpY2ggaXMgb25seSBldmVuIGEgdGhlb3JldGljYWwgcHJvYmxl
+bSBvbgo+IDMyLWJpdCBtYWNoaW5lcy4gU28gSSB0aGluayBpdCBpcyByZWFzb25hYmxlIHRvIGlu
+Y2x1ZGUgYSBtb3RpdmF0aW9uLgo+Cj4KPiA+Cj4gPiA+ID4gU2lnbmVkLW9mZi1ieTogQW5kcmV3
+IEdvb2Rib2R5IDxhbmRyZXcuZ29vZGJvZHlAbGluYXJvLm9yZz4KPiA+ID4gPiAtLS0KPiA+ID4g
+PiBBbmRyZXcgR29vZGJvZHkgKDI0KToKPiA+ID4gPiAgICAgICBjbGs6IG1lc29uOiBSZW1vdmUg
+bmVnYXRpdmUgZXJyb3IgcmV0dXJucyBmcm9tIGNsa19nZXRfcmF0ZQo+ID4gPiA+ICAgICAgIGNs
+azogc2lmaXZlOiBSZW1vdmUgbmVnYXRpdmUgZXJyb3IgcmV0dXJucyBmcm9tIGNsa19nZXRfcmF0
+ZQo+ID4gPiA+ICAgICAgIGNsazogYXJtYWRhLTM3eHg6IFJlbW92ZSBuZWdhdGl2ZSBlcnJvciBy
+ZXR1cm5zIGZyb20gY2xrX2dldF9yYXRlCj4gPiA+ID4gICAgICAgY2xrOiB0aGVhZDogdGgxNTIw
+LWFwOiBSZW1vdmUgbmVnYXRpdmUgZXJyb3IgcmV0dXJucyBmcm9tIGNsa19nZXRfcmF0ZQo+ID4g
+PiA+ICAgICAgIGNsazogY2NmOiBSZW1vdmUgbmVnYXRpdmUgZXJyb3IgcmV0dXJucyBmcm9tIGNs
+a19nZXRfcmF0ZQo+ID4gPiA+ICAgICAgIGNsazogYXQ5MTogUmVtb3ZlIG5lZ2F0aXZlIGVycm9y
+IHJldHVybnMgZnJvbSBjbGtfZ2V0X3JhdGUKPiA+ID4gPiAgICAgICBjbGs6IHJlbmVzYXM6IFJl
+bW92ZSBuZWdhdGl2ZSBlcnJvciByZXR1cm5zIGZyb20gY2xrX2dldF9yYXRlCj4gPiA+ID4gICAg
+ICAgY2xrOiByb2NrY2hpcDogUmVtb3ZlIG5lZ2F0aXZlIGVycm9yIHJldHVybnMgZnJvbSBjbGtf
+Z2V0X3JhdGUKPiA+ID4gPiAgICAgICBjbGs6IFJlbW92ZSBuZWdhdGl2ZSBlcnJvciByZXR1cm5z
+IGZyb20gY2xrX2dldF9yYXRlCj4gPiA+ID4gICAgICAgY2xrOiBzdGFyZml2ZTogUmVtb3ZlIG5l
+Z2F0aXZlIGVycm9yIHJldHVybnMgZnJvbSBjbGtfZ2V0X3JhdGUKPiA+ID4gPiAgICAgICBjbGs6
+IGFsdGVyYTogUmVtb3ZlIG5lZ2F0aXZlIGVycm9yIHJldHVybnMgZnJvbSBjbGtfZ2V0X3JhdGUK
+PiA+ID4gPiAgICAgICBjbGs6IHVuaXBoaWVyOiBSZW1vdmUgbmVnYXRpdmUgZXJyb3IgcmV0dXJu
+cyBmcm9tIGNsa19nZXRfcmF0ZQo+ID4gPiA+ICAgICAgIGNsazogYXNwZWVkOiBSZW1vdmUgbmVn
+YXRpdmUgZXJyb3IgcmV0dXJucyBmcm9tIGNsa19nZXRfcmF0ZQo+ID4gPiA+ICAgICAgIGNsazog
+bnV2b3RvbjogUmVtb3ZlIG5lZ2F0aXZlIGVycm9yIHJldHVybnMgZnJvbSBjbGtfZ2V0X3JhdGUK
+PiA+ID4gPiAgICAgICBjbGs6IGV4eW5vczogUmVtb3ZlIG5lZ2F0aXZlIGVycm9yIHJldHVybnMg
+ZnJvbSBjbGtfZ2V0X3JhdGUKPiA+ID4gPiAgICAgICBjbGs6IGlteDogUmVtb3ZlIG5lZ2F0aXZl
+IGVycm9yIHJldHVybnMgZnJvbSBjbGtfZ2V0X3JhdGUKPiA+ID4gPiAgICAgICBjbGs6IHRpOiBS
+ZW1vdmUgbmVnYXRpdmUgZXJyb3IgcmV0dXJucyBmcm9tIGNsa19nZXRfcmF0ZQo+ID4gPiA+ICAg
+ICAgIGNsazogbWVkaWF0ZWs6IFJlbW92ZSBuZWdhdGl2ZSBlcnJvciByZXR1cm5zIGZyb20gY2xr
+X2dldF9yYXRlCj4gPiA+ID4gICAgICAgY2xrOiBvd2w6IFJlbW92ZSBuZWdhdGl2ZSBlcnJvciBy
+ZXR1cm5zIGZyb20gY2xrX2dldF9yYXRlCj4gPiA+ID4gICAgICAgY2xrOiB0ZWdyYTogUmVtb3Zl
+IG5lZ2F0aXZlIGVycm9yIHJldHVybnMgZnJvbSBjbGtfZ2V0X3JhdGUKPiA+ID4gPiAgICAgICBj
+bGs6IGFkaTogUmVtb3ZlIG5lZ2F0aXZlIGVycm9yIHJldHVybnMgZnJvbSBjbGtfZ2V0X3JhdGUK
+PiA+ID4gPiAgICAgICBjbGs6IHNvcGhnbzogUmVtb3ZlIG5lZ2F0aXZlIGVycm9yIHJldHVybnMg
+ZnJvbSBjbGtfZ2V0X3JhdGUKPiA+ID4gPiAgICAgICBjbGs6IHN0bTMyOiBSZW1vdmUgbmVnYXRp
+dmUgZXJyb3IgcmV0dXJucyBmcm9tIGNsa19nZXRfcmF0ZQo+ID4gPiA+ICAgICAgIGNsazogeDg2
+OiBSZW1vdmUgbmVnYXRpdmUgZXJyb3IgcmV0dXJucyBmcm9tIGNsa19nZXRfcmF0ZQo+ID4gPiA+
+Cj4gPiA+ID4gIGRyaXZlcnMvY2xrL2FkaS9jbGstc2hhcmVkLmMgICAgICAgICAgICAgfCAgMiAr
+LQo+ID4gPiA+ICBkcml2ZXJzL2Nsay9hbHRlcmEvY2xrLWFnaWxleC5jICAgICAgICAgIHwgIDIg
+Ky0KPiA+ID4gPiAgZHJpdmVycy9jbGsvYWx0ZXJhL2Nsay1hZ2lsZXg1LmMgICAgICAgICB8ICAy
+ICstCj4gPiA+ID4gIGRyaXZlcnMvY2xrL2FsdGVyYS9jbGstbjV4LmMgICAgICAgICAgICAgfCAg
+MiArLQo+ID4gPiA+ICBkcml2ZXJzL2Nsay9hc3BlZWQvY2xrX2FzdDI1MDAuYyAgICAgICAgIHwg
+IDIgKy0KPiA+ID4gPiAgZHJpdmVycy9jbGsvYXNwZWVkL2Nsa19hc3QyNjAwLmMgICAgICAgICB8
+ICAyICstCj4gPiA+ID4gIGRyaXZlcnMvY2xrL2F0OTEvY29tcGF0LmMgICAgICAgICAgICAgICAg
+fCAgNiArKy0tCj4gPiA+ID4gIGRyaXZlcnMvY2xrL2Nsay1oc2RrLWNndS5jICAgICAgICAgICAg
+ICAgfCAgMiArLQo+ID4gPiA+ICBkcml2ZXJzL2Nsay9jbGstdWNsYXNzLmMgICAgICAgICAgICAg
+ICAgIHwgIDQgKy0tCj4gPiA+ID4gIGRyaXZlcnMvY2xrL2Nsay5jICAgICAgICAgICAgICAgICAg
+ICAgICAgfCAgMiArLQo+ID4gPiA+ICBkcml2ZXJzL2Nsay9jbGtfZml4ZWRfZmFjdG9yLmMgICAg
+ICAgICAgIHwgIDQgKy0tCj4gPiA+ID4gIGRyaXZlcnMvY2xrL2Nsa19rMjEwLmMgICAgICAgICAg
+ICAgICAgICAgfCAgNiArKy0tCj4gPiA+ID4gIGRyaXZlcnMvY2xrL2Nsa19zYW5kYm94LmMgICAg
+ICAgICAgICAgICAgfCAgNCArLS0KPiA+ID4gPiAgZHJpdmVycy9jbGsvY2xrX3NjbWkuYyAgICAg
+ICAgICAgICAgICAgICB8ICA0ICstLQo+ID4gPiA+ICBkcml2ZXJzL2Nsay9jbGtfdmV4cHJlc3Nf
+b3NjLmMgICAgICAgICAgIHwgIDIgKy0KPiA+ID4gPiAgZHJpdmVycy9jbGsvY2xrX3p5bnEuYyAg
+ICAgICAgICAgICAgICAgICB8ICA0ICstLQo+ID4gPiA+ICBkcml2ZXJzL2Nsay9jbGtfenlucW1w
+LmMgICAgICAgICAgICAgICAgIHwgNDAgKysrKysrKysrKy0tLS0tLS0tLS0tCj4gPiA+ID4gIGRy
+aXZlcnMvY2xrL2V4eW5vcy9jbGstZXh5bm9zNzQyMC5jICAgICAgfCAgMiArLQo+ID4gPiA+ICBk
+cml2ZXJzL2Nsay9pbXgvY2xrLWlteDhxbS5jICAgICAgICAgICAgIHwgIDYgKystLQo+ID4gPiA+
+ICBkcml2ZXJzL2Nsay9pbXgvY2xrLWlteDhxeHAuYyAgICAgICAgICAgIHwgIDYgKystLQo+ID4g
+PiA+ICBkcml2ZXJzL2Nsay9pbXgvY2xrLWlteHJ0MTE3MC5jICAgICAgICAgIHwgIDIgKy0KPiA+
+ID4gPiAgZHJpdmVycy9jbGsvaW14L2Nsay1wbGx2My5jICAgICAgICAgICAgICB8ICAyICstCj4g
+PiA+ID4gIGRyaXZlcnMvY2xrL2ludGVsL2Nsa19pbnRlbC5jICAgICAgICAgICAgfCAgMiArLQo+
+ID4gPiA+ICBkcml2ZXJzL2Nsay9tZWRpYXRlay9jbGstbXRrLmMgICAgICAgICAgIHwgIDIgKy0K
+PiA+ID4gPiAgZHJpdmVycy9jbGsvbWVzb24vYTEuYyAgICAgICAgICAgICAgICAgICB8IDEwICsr
+Ky0tLQo+ID4gPiA+ICBkcml2ZXJzL2Nsay9tZXNvbi9heGcuYyAgICAgICAgICAgICAgICAgIHwg
+MTAgKysrLS0tCj4gPiA+ID4gIGRyaXZlcnMvY2xrL21lc29uL2cxMmEuYyAgICAgICAgICAgICAg
+ICAgfCAzNiArKysrKysrKystLS0tLS0tLS0tCj4gPiA+ID4gIGRyaXZlcnMvY2xrL21lc29uL2d4
+YmIuYyAgICAgICAgICAgICAgICAgfCAyMCArKysrKy0tLS0tLQo+ID4gPiA+ICBkcml2ZXJzL2Ns
+ay9tdmVidS9hcm1hZGEtMzd4eC1wZXJpcGguYyAgIHwgIDIgKy0KPiA+ID4gPiAgZHJpdmVycy9j
+bGsvbXZlYnUvYXJtYWRhLTM3eHgtdGJnLmMgICAgICB8ICAyICstCj4gPiA+ID4gIGRyaXZlcnMv
+Y2xrL251dm90b24vY2xrX25wY20uYyAgICAgICAgICAgfCAxMCArKystLS0KPiA+ID4gPiAgZHJp
+dmVycy9jbGsvb3dsL2Nsa19vd2wuYyAgICAgICAgICAgICAgICB8ICAyICstCj4gPiA+ID4gIGRy
+aXZlcnMvY2xrL3JlbmVzYXMvY2xrLXJjYXItZ2VuMi5jICAgICAgfCAgOCArKy0tLQo+ID4gPiA+
+ICBkcml2ZXJzL2Nsay9yZW5lc2FzL3J6ZzJsLWNwZy5jICAgICAgICAgIHwgIDggKystLS0KPiA+
+ID4gPiAgZHJpdmVycy9jbGsvcm9ja2NoaXAvY2xrX3B4MzAuYyAgICAgICAgICB8IDI0ICsrKysr
+Ky0tLS0tLS0KPiA+ID4gPiAgZHJpdmVycy9jbGsvcm9ja2NoaXAvY2xrX3JrMzAzNi5jICAgICAg
+ICB8ICAyICstCj4gPiA+ID4gIGRyaXZlcnMvY2xrL3JvY2tjaGlwL2Nsa19yazMwNjYuYyAgICAg
+ICAgfCAgOCArKy0tLQo+ID4gPiA+ICBkcml2ZXJzL2Nsay9yb2NrY2hpcC9jbGtfcmszMTI4LmMg
+ICAgICAgIHwgIDYgKystLQo+ID4gPiA+ICBkcml2ZXJzL2Nsay9yb2NrY2hpcC9jbGtfcmszMTg4
+LmMgICAgICAgIHwgIDYgKystLQo+ID4gPiA+ICBkcml2ZXJzL2Nsay9yb2NrY2hpcC9jbGtfcmsz
+MjJ4LmMgICAgICAgIHwgIDQgKy0tCj4gPiA+ID4gIGRyaXZlcnMvY2xrL3JvY2tjaGlwL2Nsa19y
+azMyODguYyAgICAgICAgfCAgNiArKy0tCj4gPiA+ID4gIGRyaXZlcnMvY2xrL3JvY2tjaGlwL2Ns
+a19yazMzMDguYyAgICAgICAgfCAyNiArKysrKysrLS0tLS0tLQo+ID4gPiA+ICBkcml2ZXJzL2Ns
+ay9yb2NrY2hpcC9jbGtfcmszMzI4LmMgICAgICAgIHwgIDYgKystLQo+ID4gPiA+ICBkcml2ZXJz
+L2Nsay9yb2NrY2hpcC9jbGtfcmszMzY4LmMgICAgICAgIHwgIDggKystLS0KPiA+ID4gPiAgZHJp
+dmVycy9jbGsvcm9ja2NoaXAvY2xrX3JrMzM5OS5jICAgICAgICB8IDEyICsrKy0tLS0KPiA+ID4g
+PiAgZHJpdmVycy9jbGsvcm9ja2NoaXAvY2xrX3JrMzUyOC5jICAgICAgICB8IDIwICsrKysrLS0t
+LS0tCj4gPiA+ID4gIGRyaXZlcnMvY2xrL3JvY2tjaGlwL2Nsa19yazM1NjguYyAgICAgICAgfCA2
+MiArKysrKysrKysrKysrKysrLS0tLS0tLS0tLS0tLS0tLQo+ID4gPiA+ICBkcml2ZXJzL2Nsay9y
+b2NrY2hpcC9jbGtfcmszNTc2LmMgICAgICAgIHwgMzYgKysrKysrKysrLS0tLS0tLS0tLQo+ID4g
+PiA+ICBkcml2ZXJzL2Nsay9yb2NrY2hpcC9jbGtfcmszNTg4LmMgICAgICAgIHwgMzIgKysrKysr
+KystLS0tLS0tLS0KPiA+ID4gPiAgZHJpdmVycy9jbGsvcm9ja2NoaXAvY2xrX3J2MTEwOC5jICAg
+ICAgICB8ICA0ICstLQo+ID4gPiA+ICBkcml2ZXJzL2Nsay9yb2NrY2hpcC9jbGtfcnYxMTI2LmMg
+ICAgICAgIHwgNTIgKysrKysrKysrKysrKy0tLS0tLS0tLS0tLS0tCj4gPiA+ID4gIGRyaXZlcnMv
+Y2xrL3NpZml2ZS9zaWZpdmUtcHJjaS5jICAgICAgICAgfCAgOCArKy0tLQo+ID4gPiA+ICBkcml2
+ZXJzL2Nsay9zb3BoZ28vY2xrLWN2MTgwMGIuYyAgICAgICAgIHwgIDIgKy0KPiA+ID4gPiAgZHJp
+dmVycy9jbGsvc3RhcmZpdmUvY2xrLWpoNzExMC1wbGwuYyAgICB8ICAyICstCj4gPiA+ID4gIGRy
+aXZlcnMvY2xrL3N0bTMyL2Nsay1zdG0zMi1jb3JlLmMgICAgICAgfCAgNCArLS0KPiA+ID4gPiAg
+ZHJpdmVycy9jbGsvc3RtMzIvY2xrLXN0bTMyZi5jICAgICAgICAgICB8ICA2ICsrLS0KPiA+ID4g
+PiAgZHJpdmVycy9jbGsvc3RtMzIvY2xrLXN0bTMyaDcuYyAgICAgICAgICB8ICA0ICstLQo+ID4g
+PiA+ICBkcml2ZXJzL2Nsay90ZWdyYS90ZWdyYS1jYXItY2xrLmMgICAgICAgIHwgIDIgKy0KPiA+
+ID4gPiAgZHJpdmVycy9jbGsvdGVncmEvdGVncmExODYtY2xrLmMgICAgICAgICB8ICAyICstCj4g
+PiA+ID4gIGRyaXZlcnMvY2xrL3RoZWFkL2Nsay10aDE1MjAtYXAuYyAgICAgICAgfCAgMiArLQo+
+ID4gPiA+ICBkcml2ZXJzL2Nsay90aS9jbGstYW0zLWRwbGwteDIuYyAgICAgICAgIHwgIDQgKy0t
+Cj4gPiA+ID4gIGRyaXZlcnMvY2xrL3RpL2Nsay1kaXZpZGVyLmMgICAgICAgICAgICAgfCAgNCAr
+LS0KPiA+ID4gPiAgZHJpdmVycy9jbGsvdGkvY2xrLW11eC5jICAgICAgICAgICAgICAgICB8ICAy
+ICstCj4gPiA+ID4gIGRyaXZlcnMvY2xrL3RpL2Nsay1zY2kuYyAgICAgICAgICAgICAgICAgfCAg
+MiArLQo+ID4gPiA+ICBkcml2ZXJzL2Nsay91bmlwaGllci9jbGstdW5pcGhpZXItY29yZS5jIHwg
+IDIgKy0KPiA+ID4gPiAgNjUgZmlsZXMgY2hhbmdlZCwgMjkwIGluc2VydGlvbnMoKyksIDI5MCBk
+ZWxldGlvbnMoLSkKPiA+ID4gPiAtLS0KPiA+ID4gPiBiYXNlLWNvbW1pdDogZWNkYzM4NzJhNzY3
+ZmIwNDViZTMyOTZkNDMxN2FlOTc4YTE0YjAyMgo+ID4gPiA+IGNoYW5nZS1pZDogMjAyNTEwMTAt
+Y2xrX29wcy0zYjdjYzljY2QwNzAKPiA+ID4gPgo+ID4gPiA+IEJlc3QgcmVnYXJkcywKPiA+ID4g
+PiAtLQo+ID4gPiA+IEFuZHJldyBHb29kYm9keSA8YW5kcmV3Lmdvb2Rib2R5QGxpbmFyby5vcmc+
+Cj4gPiA+ID4KPiA+ID4KPiA+ID4gSWYgeW91IGRvbid0IHJldHVybiBhbiBlcnJvciwgd2UgY2Fu
+bm90IHRlbGwgaWYgdGhlIG9wZXJhdGlvbgo+ID4gPiBzdWNjZWVkZWQsIG9yIG5vdC4gVS1Cb290
+IG5lZWRzIHRvIGJlIGRldGVybWluaXN0aWMgYW5kIHdlIG5lZWQgdG8gYmUKPiA+ID4gYWJsZSB0
+byBkZWJ1ZyBlcnJvcnMgYW5kIGRldGVjdCB0aGVtIGF0IHJ1bnRpbWUuCj4gPiA+Cj4gPiA+IFdl
+IHVzZSB1bG9uZyBmb3IgdGhlIHJldHVybiB2YWx1ZSBhcyBhIGJpdCBvZiBhIGNvbXByb21pc2Us
+IHNpbmNlIGl0Cj4gPiA+IGlzIGluZWZmaWNpZW50IHRvIHVzZSA2NC1iaXQgb24gYSAzMi1iaXQg
+bWFjaGluZS4gSWRlYWxseSBpdCB3b3VsZCBiZQo+ID4gPiBsb25nLCBidXQgc29tZSBjbG9jayBy
+YXRlcyBhcmUgM0dIeiBhbmQgaXQgd291bGQgYmUgY29uZnVzaW5nIHRvIGNhc3QKPiA+ID4gdG8g
+dWxvbmcgYmVmb3JlIHVzaW5nIHRoZSB2YWx1ZS4KPiA+ID4KPiA+ID4gQW4gYWx0ZXJuYXRpdmUg
+d2UgZGlzY3Vzc2VkIHdhcyB0byByZXR1cm4gYW4gaW50ZWdlciBlcnJvciB3aXRoIHRoZQo+ID4g
+PiBjbG9jayByYXRlIHJldHVybmVkIGluIGEgcGFyYW1ldGVyLCBidXQgdGhhdCBzZWVtZWQgbGVz
+cyBlZmZpY2llbnQuCj4gPiA+Cj4gPiA+IFdpdGggNjQtYml0IG1hY2hpbmVzLCB0aGVyZSByZWFs
+bHkgaXNuJ3QgYSBwcm9ibGVtLiBKdXN0IGNoZWNraW5nIGZvcgo+ID4gPiBhIG5lZ2F0aXZlIHZh
+bHVlIGlzIGdvb2QgZW5vdWdoLCBzaW5jZSB0aGUgY2xvY2sgcmF0ZSBpc24ndCBnb2luZyB0bwo+
+ID4gPiBiZSA5IGV4YWhlcnR6KD8pLiBWYWx1ZXMgYmV0d2VlbiAtQ09ORklHX0VSUl9QVFJfT0ZG
+U0VUIGFuZCAwIGFyZQo+ID4gPiBlcnJvcnMgYW5kIGFyZSBkZWZpbmVkIHRvIGJlIHNvLgo+ID4g
+Pgo+ID4gPiBJZiB5b3Ugd2FudCBjbGtfZ2V0X3JhdGUoKSB0byB3b3JrIGxpa2UgTGludXggKHN1
+cHByZXNzIC8gaWdub3JlCj4gPiA+IGVycm9ycz8pLCB0aGF0J3MgZmluZSwgYnV0IHBsZWFzZSBj
+cmVhdGUgYSBjbGtfZ2V0X3JhdGVfZXJyKCkgKG9yCj4gPiA+IHNpbWlsYXIpIHdoaWNoIGFjdHVh
+bGx5IHJldHVybnMgdGhlIGNvcnJlY3QgZXJyb3IsIGFuZCBrZWVwIHRoZSBlcnJvcgo+ID4gPiBy
+ZXR1cm4gb24gdGhlIHVjbGFzcyBpbnRlcmZhY2UuIEl0IGlzIG5vdCB1bmNvbW1vbiB0byBoYXZl
+IHRoZSB1Y2xhc3MKPiA+ID4gZG8gc29tZSBwcm9jZXNzaW5nIG9uIHZhbHVlcyBwYXNzZWQgdG8v
+ZnJvbSBkcml2ZXIuIFRoaXMgYWxsb3dzIHBlb3BsZQo+ID4gPiB3aG8gY2FyZSB0byBvYnRhaW4g
+dGhlIGVycm9yLgo+ID4KPiA+IFRoaXMgaXMgbW92aW5nIHRoaW5ncyBpbiB0aGUgcmlnaHQgZGly
+ZWN0aW9uIG9mIGhhdmluZyB0aGUgZXJyb3IKPiA+IHJlcG9ydGluZyBhbmQgaGFuZGxpbmcgZG9u
+ZSB3aGVyZSBpdCBjYW4gYmUgZG9uZSBjb3JyZWN0bHkuIElmIHRoZXJlJ3MKPiA+IGZ1cnRoZXIg
+cGFydHMgb2YgdGhlIExpbnV4IGtlcm5lbC1saWtlIEFQSSB3ZSBuZWVkLCB3ZSBjYW4gdGFrZSB0
+aG9zZQo+ID4gbmV4dC4KPgo+IEhlcmUgaXMgcGFydCBvZiB0aGUgcGF0Y2g6Cj4KPiAtLS0gYS9k
+cml2ZXJzL2Nsay9tZXNvbi9hMS5jCj4gKysrIGIvZHJpdmVycy9jbGsvbWVzb24vYTEuYwo+IEBA
+IC0zNTksNyArMzU5LDcgQEAgc3RhdGljIHVsb25nIG1lc29uX2Rpdl9nZXRfcmF0ZShzdHJ1Y3Qg
+Y2xrICpjbGssCj4gdW5zaWduZWQgbG9uZyBpZCkKPgo+ICAgICAgICAgaW5mbyA9IG1lc29uX2Ns
+a19nZXRfaW5mbyhjbGssIGlkLCBNRVNPTl9DTEtfRElWKTsKPiAgICAgICAgIGlmIChJU19FUlIo
+aW5mbykpCj4gLSAgICAgICAgICAgICAgIHJldHVybiBQVFJfRVJSKGluZm8pOwo+ICsgICAgICAg
+ICAgICAgICByZXR1cm4gMDsKPgo+IEkgZG9uJ3Qgc2VlIGFueXRoaW5nIGluIHRoYXQgZnJhZ21l
+bnQgb3RoZXIgdGhhbiBqdXN0IGlnbm9yaW5nIGVycm9ycy4KPgoKSSBhZ3JlZSB3aXRoIFNpbW9u
+LiBUaGlzIHBhdGNoc2V0IG1heSBjYXVzZSBhIGxvdCBvZiBwcm9ibGVtcyBmb3IgYWxsCmJvYXJk
+cyBpdCBjaGFuZ2VzIGluIGNhc2UgY2xrIG9wcyBmYWlsLCBzaW5jZSBpdCBzaWxlbmNlcyBhbGwg
+ZXJyb3IKcmV0dXJucy4gQW55IGNsb2NrIGVycm9yIHdpbGwgYmUgdW50cmFja2FibGUgdW5sZXNz
+IHlvdSBrbm93IHdoZXJlIGFuZAp3aGF0IHRvIGxvb2sgc3BlY2lmaWNhbGx5LgoKPiBQbGVhc2Us
+IHB1dCB0aGlzIGhhbmRsaW5nIGluIHRoZSB1Y2xhc3MgZnVuY3Rpb24uCj4KPiBSZWdhcmRzLAo+
+IFNpbW9uCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClVi
+b290LXN0bTMyIG1haWxpbmcgbGlzdApVYm9vdC1zdG0zMkBzdC1tZC1tYWlsbWFuLnN0b3JtcmVw
+bHkuY29tCmh0dHBzOi8vc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbS9tYWlsbWFuL2xpc3Rp
+bmZvL3Vib290LXN0bTMyCg==

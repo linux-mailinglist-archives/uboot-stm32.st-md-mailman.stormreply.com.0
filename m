@@ -2,65 +2,69 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9B9D8C039BA
-	for <lists+uboot-stm32@lfdr.de>; Thu, 23 Oct 2025 23:49:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 441F1C039BD
+	for <lists+uboot-stm32@lfdr.de>; Thu, 23 Oct 2025 23:49:14 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5E5AAC349C4;
-	Thu, 23 Oct 2025 21:49:12 +0000 (UTC)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6A9AAC5EC7C;
+	Thu, 23 Oct 2025 21:49:13 +0000 (UTC)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C698AC5A4CA
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 726FEC5EC79
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 23 Oct 2025 21:49:10 +0000 (UTC)
+ Thu, 23 Oct 2025 21:49:12 +0000 (UTC)
 Received: from smtp102.mailbox.org (smtp102.mailbox.org
  [IPv6:2001:67c:2050:b231:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4ct06Z2YYhz9thc;
- Thu, 23 Oct 2025 23:49:10 +0200 (CEST)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4ct06c0BkVz9v4L;
+ Thu, 23 Oct 2025 23:49:12 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1761256150;
+ s=mail20150812; t=1761256152;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=w3KTPYyYKcRJm6YwNZcC82u0HEITFxzKDLPL12WUOmk=;
- b=dHKzrN+XOc3CbTB9+pTWPe/84kAB6O3mINewYvaCDN5ZKfG2zm81qHX9AiJEzxvYsBz1kj
- I2SS44kvyyAXLcJiAP+yw9JyBQ/wJ0joqN3KbgqnsJzoqOY4mgN+RonDTuuaYJWX73RCms
- N3jEJhpcrL1XIsaOB+iQc0gGDaN3wCObnk5Po5iAiNxQimJCe6VuveGGCt0M/I+rOI1bHR
- Vz7OCGW9MWu9cJvknKPY2yrd/LxTZ5VEHMg8JbTPw9IjnxA+rjpG0wrIPFn8oINjDNiMKp
- t6at2USJ60kCAOkEIAkmFYM02Kx7a8XJlErUizhDoQTJU81a+p6IrX7aMGm6xA==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=kP+o7fkimcdmDGMdmXRK571uONr3jO/wq3U8humkhvM=;
+ b=N0HcU+EowQipGusMRPU2dvpBZDMZkmMWCyztJxQin5B4kVGxoCEMFIzJ5R0JfiU6bBumZT
+ yL1md/nu4MdlorxLxxipijP24I9iUwKwV1bukKATfCFbVk9Y07jjoWFmvIfSgYohJwYlP3
+ iSUaNTnTHQxtqmHIEJPkVY5JuzjtkgYpWylfrRVOCQcswpygNqvK1erWd/fTm0udpNyoFK
+ 4treJlWmq8QKYhLZ9HFfyB8ZcVyrQOwAaYrz5wblaBsCm1Y/jT40LjFv2bd0I0KTMrJ8zj
+ 4++yDxTNg9yiVZm6JZgu7oADNz0g4EeN+oAPHA7/YTNgWLz2akzaHlqcQICIRw==
 Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=L18wB3mO;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=W9yf02vk;
  spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
  2001:67c:2050:b231:465::102 as permitted sender)
  smtp.mailfrom=marek.vasut@mailbox.org
 From: Marek Vasut <marek.vasut@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1761256148;
+ s=mail20150812; t=1761256149;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=w3KTPYyYKcRJm6YwNZcC82u0HEITFxzKDLPL12WUOmk=;
- b=L18wB3mOjw9JoDBWygcxURNo7/OadnepM56LhlJKMvEYmoA1HOhTBVagxurki0y18o61p4
- 790XK0Gh8o5ctjsUB00GxdwgcBRAX8XJRrie1ohtm9/+/x3Dh9v9xi2RjgtZDDp5UWVn9Y
- qaMdx1Ry3QCkj0+/e/+AKmf05UEs3uHbN2Sm30fsFLPNvZrq4+qEDP1qXSeBdgYiXV3Kyt
- TqN+a1C+i+MGerEmMRo3VY9FeO5NG3TF65HhdLxUwNO9hl+BUkHLi4ElGGW/oR1mCwfBbY
- kiQ+dkxqILntunUxv/h7rZ2RpVs+aAHEF2prQT/i83yrKK3BRSVukIFCic7KrQ==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=kP+o7fkimcdmDGMdmXRK571uONr3jO/wq3U8humkhvM=;
+ b=W9yf02vkTuQHjfZWjOpS7GNP1QTOUAKA2G31ivIod1fWryIp6+7AYb7N1IvzRxjNlny7QQ
+ g7Iy8s9+jJyJYC5gF+RUQeT1lIIWXkFCryulzLjFgc5gvvlr36az6tBZmrV/J7Q7pndeRu
+ /1Udou6qNSd3CAW89dcB0SKSEXlhlJ1b8+wgpMDJomyYVlVzwaW9lN6/vQYIF2u7/mSxVJ
+ Mphr49hy2zB2YNycp6Ev8Xbe5tebCOUsMlh8mcmPyfBr8/+TeGqkSmQUPMQa6Izp/jxsJs
+ 6LOw95/ewj8EBMXg4VJWCxNPESX926mFrJT4OgHzOZ1kSiZ8aCS/L2ADSc4CZA==
 To: u-boot@lists.denx.de
-Date: Thu, 23 Oct 2025 23:48:24 +0200
-Message-ID: <20251023214855.181410-1-marek.vasut@mailbox.org>
+Date: Thu, 23 Oct 2025 23:48:25 +0200
+Message-ID: <20251023214855.181410-2-marek.vasut@mailbox.org>
+In-Reply-To: <20251023214855.181410-1-marek.vasut@mailbox.org>
+References: <20251023214855.181410-1-marek.vasut@mailbox.org>
 MIME-Version: 1.0
-X-MBO-RS-META: dygbab7pxr9xch5gkghknfeg76uqawfx
-X-MBO-RS-ID: 49610a680fbb4128ec2
-X-Rspamd-Queue-Id: 4ct06Z2YYhz9thc
+X-MBO-RS-META: 9xsjscay851rtnym54oio8r164trycp6
+X-MBO-RS-ID: b5351ac27350787d70e
+X-Rspamd-Queue-Id: 4ct06c0BkVz9v4L
 Cc: Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com,
  Marek Vasut <marek.vasut@mailbox.org>,
  uboot-stm32@st-md-mailman.stormreply.com,
  Patrick Delaunay <patrick.delaunay@foss.st.com>
-Subject: [Uboot-stm32] [PATCH 1/3] board: dhelectronics: Move
-	dh_add_item_number_and_serial_to_env() to common code
+Subject: [Uboot-stm32] [PATCH 2/3] ARM: stm32: Read values from M24256
+	write-lockable page on STM32MP13xx DHCOR
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -77,9 +81,14 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Move dh_add_item_number_and_serial_to_env() to common code, so it
-can be used by both STM32MP13xx and iMX8MP DHSOM. No functional
-change.
+The STM32MP13xx DHCOR SoM is populated with M24256 EEPROM that contains
+an additional write-lockable page called ID page, which is populated with
+a structure containing ethernet MAC addresses, DH item number and DH serial
+number.
+
+Read out the MAC address from the WL page between higher priority SoC fuses
+and lower priority plain EEPROM storage area. Read out the DH item and serial
+numbers and set environment variables accordingly.
 
 Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
 ---
@@ -90,125 +99,111 @@ Cc: u-boot@dh-electronics.com
 Cc: u-boot@lists.denx.de
 Cc: uboot-stm32@st-md-mailman.stormreply.com
 ---
- board/dhelectronics/common/dh_common.c        | 37 +++++++++++++++++++
- board/dhelectronics/common/dh_common.h        |  9 +++++
- .../dh_imx8mp/imx8mp_dhcom_pdk2.c             | 37 -------------------
- 3 files changed, 46 insertions(+), 37 deletions(-)
+ arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi |  1 +
+ board/dhelectronics/dh_stm32mp1/board.c    | 51 ++++++++++++++++++----
+ 2 files changed, 43 insertions(+), 9 deletions(-)
 
-diff --git a/board/dhelectronics/common/dh_common.c b/board/dhelectronics/common/dh_common.c
-index 6101ecc7ebc..e7ee23aa8ce 100644
---- a/board/dhelectronics/common/dh_common.c
-+++ b/board/dhelectronics/common/dh_common.c
-@@ -246,3 +246,40 @@ __weak int dh_setup_mac_address(struct eeprom_id_page *eip)
- 	printf("%s: Unable to set mac address!\n", __func__);
- 	return -ENXIO;
+diff --git a/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi b/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
+index 5ca0258e3ff..bedb7c600d5 100644
+--- a/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
++++ b/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
+@@ -10,6 +10,7 @@
+ / {
+ 	aliases {
+ 		eeprom0 = &eeprom0;
++		eeprom0wl = &eeprom0wl;
+ 	};
+ 
+ 	config {
+diff --git a/board/dhelectronics/dh_stm32mp1/board.c b/board/dhelectronics/dh_stm32mp1/board.c
+index a9b1a0f2c34..065d2f338c2 100644
+--- a/board/dhelectronics/dh_stm32mp1/board.c
++++ b/board/dhelectronics/dh_stm32mp1/board.c
+@@ -119,7 +119,7 @@ static bool dh_stm32_mac_is_in_ks8851(void)
+ 	return false;
  }
+ 
+-static int dh_stm32_setup_ethaddr(void)
++static int dh_stm32_setup_ethaddr(struct eeprom_id_page *eip)
+ {
+ 	unsigned char enetaddr[6];
+ 
+@@ -129,13 +129,19 @@ static int dh_stm32_setup_ethaddr(void)
+ 	if (dh_get_mac_is_enabled("ethernet0"))
+ 		return 0;
+ 
++	if (!dh_get_value_from_eeprom_buffer(DH_MAC0, enetaddr, sizeof(enetaddr), eip))
++		goto out;
 +
-+void dh_add_item_number_and_serial_to_env(struct eeprom_id_page *eip)
-+{
-+	char *item_number_env;
-+	char item_number[8];	/* String with 7 characters + string termination */
-+	char *serial_env;
-+	char serial[10];	/* String with 9 characters + string termination */
+ 	if (!dh_get_mac_from_eeprom(enetaddr, "eeprom0"))
+-		return eth_env_set_enetaddr("ethaddr", enetaddr);
++		goto out;
+ 
+ 	return -ENXIO;
++
++out:
++	return eth_env_set_enetaddr("ethaddr", enetaddr);
+ }
+ 
+-static int dh_stm32_setup_eth1addr(void)
++static int dh_stm32_setup_eth1addr(struct eeprom_id_page *eip)
+ {
+ 	unsigned char enetaddr[6];
+ 
+@@ -148,20 +154,47 @@ static int dh_stm32_setup_eth1addr(void)
+ 	if (dh_stm32_mac_is_in_ks8851())
+ 		return 0;
+ 
+-	if (!dh_get_mac_from_eeprom(enetaddr, "eeprom0")) {
+-		enetaddr[5]++;
+-		return eth_env_set_enetaddr("eth1addr", enetaddr);
+-	}
++	if (!dh_get_value_from_eeprom_buffer(DH_MAC1, enetaddr, sizeof(enetaddr), eip))
++		goto out;
++
++	if (!dh_get_mac_from_eeprom(enetaddr, "eeprom0"))
++		goto increment_out;
+ 
+ 	return -ENXIO;
++
++increment_out:
++	enetaddr[5]++;
++
++out:
++	return eth_env_set_enetaddr("eth1addr", enetaddr);
+ }
+ 
+ int setup_mac_address(void)
+ {
+-	if (dh_stm32_setup_ethaddr())
++	u8 eeprom_buffer[DH_EEPROM_ID_PAGE_MAX_SIZE] = { 0 };
++	struct eeprom_id_page *eip = (struct eeprom_id_page *)eeprom_buffer;
 +	int ret;
 +
-+	ret = dh_get_value_from_eeprom_buffer(DH_ITEM_NUMBER, item_number, sizeof(item_number),
-+					      eip);
++	ret = dh_read_eeprom_id_page(eeprom_buffer, "eeprom0wl");
 +	if (ret) {
-+		printf("%s: Unable to get DHSOM item number from EEPROM ID page! ret = %d\n",
-+		       __func__, ret);
++		/*
++		 * The EEPROM ID page is available on SoM rev. 200 and greater.
++		 * For SoM rev. 100 the return value will be -ENODEV. Suppress
++		 * the error message for that, because the absence cannot be
++		 * treated as an error.
++		 */
++		if (ret != -ENODEV)
++			printf("%s: Cannot read valid data from EEPROM ID page! ret = %d\n",
++			       __func__, ret);
++		eip = NULL;
 +	} else {
-+		item_number_env = env_get("dh_som_item_number");
-+		if (!item_number_env)
-+			env_set("dh_som_item_number", item_number);
-+		else if (strcmp(item_number_env, item_number))
-+			printf("Warning: Environment dh_som_item_number differs from EEPROM ID page value (%s != %s)\n",
-+			       item_number_env, item_number);
++		dh_add_item_number_and_serial_to_env(eip);
 +	}
 +
-+	ret = dh_get_value_from_eeprom_buffer(DH_SERIAL_NUMBER, serial, sizeof(serial),
-+					      eip);
-+	if (ret) {
-+		printf("%s: Unable to get DHSOM serial number from EEPROM ID page! ret = %d\n",
-+		       __func__, ret);
-+	} else {
-+		serial_env = env_get("dh_som_serial_number");
-+		if (!serial_env)
-+			env_set("dh_som_serial_number", serial);
-+		else if (strcmp(serial_env, serial))
-+			printf("Warning: Environment dh_som_serial_number differs from EEPROM ID page value (%s != %s)\n",
-+			       serial_env, serial);
-+	}
-+}
-diff --git a/board/dhelectronics/common/dh_common.h b/board/dhelectronics/common/dh_common.h
-index c4693c60618..b4f31bdb88e 100644
---- a/board/dhelectronics/common/dh_common.h
-+++ b/board/dhelectronics/common/dh_common.h
-@@ -107,7 +107,16 @@ int dh_get_value_from_eeprom_buffer(enum eip_request_values request, u8 *data, i
++	if (dh_stm32_setup_ethaddr(eip))
+ 		log_err("%s: Unable to setup ethaddr!\n", __func__);
  
- /*
-  * dh_setup_mac_address - Try to get MAC address from various locations and write it to env
-+ * @eip: ID EEPROM buffer
-  *
-  * Return: 0 if OK, other value on error
-  */
- int dh_setup_mac_address(struct eeprom_id_page *eip);
-+
-+/*
-+ * dh_add_item_number_and_serial_to_env - Try to get DH IDs from WLP write them to env
-+ * @eip: ID EEPROM buffer
-+ *
-+ * Return: 0 if OK, other value on error
-+ */
-+void dh_add_item_number_and_serial_to_env(struct eeprom_id_page *eip);
-diff --git a/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c b/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
-index 3a890c5920c..5c35a5bf447 100644
---- a/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
-+++ b/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
-@@ -116,43 +116,6 @@ int dh_setup_mac_address(struct eeprom_id_page *eip)
- 	return ret;
- }
+-	if (dh_stm32_setup_eth1addr())
++	if (dh_stm32_setup_eth1addr(eip))
+ 		log_err("%s: Unable to setup eth1addr!\n", __func__);
  
--void dh_add_item_number_and_serial_to_env(struct eeprom_id_page *eip)
--{
--	char *item_number_env;
--	char item_number[8];	/* String with 7 characters + string termination */
--	char *serial_env;
--	char serial[10];	/* String with 9 characters + string termination */
--	int ret;
--
--	ret = dh_get_value_from_eeprom_buffer(DH_ITEM_NUMBER, item_number, sizeof(item_number),
--					      eip);
--	if (ret) {
--		printf("%s: Unable to get DHSOM item number from EEPROM ID page! ret = %d\n",
--		       __func__, ret);
--	} else {
--		item_number_env = env_get("dh_som_item_number");
--		if (!item_number_env)
--			env_set("dh_som_item_number", item_number);
--		else if (strcmp(item_number_env, item_number))
--			printf("Warning: Environment dh_som_item_number differs from EEPROM ID page value (%s != %s)\n",
--			       item_number_env, item_number);
--	}
--
--	ret = dh_get_value_from_eeprom_buffer(DH_SERIAL_NUMBER, serial, sizeof(serial),
--					      eip);
--	if (ret) {
--		printf("%s: Unable to get DHSOM serial number from EEPROM ID page! ret = %d\n",
--		       __func__, ret);
--	} else {
--		serial_env = env_get("dh_som_serial_number");
--		if (!serial_env)
--			env_set("dh_som_serial_number", serial);
--		else if (strcmp(serial_env, serial))
--			printf("Warning: Environment dh_som_serial_number differs from EEPROM ID page value (%s != %s)\n",
--			       serial_env, serial);
--	}
--}
--
- int board_late_init(void)
- {
- 	u8 eeprom_buffer[DH_EEPROM_ID_PAGE_MAX_SIZE] = { 0 };
+ 	return 0;
 -- 
 2.51.0
 

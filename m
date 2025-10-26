@@ -2,69 +2,79 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id B9626C039C0
-	for <lists+uboot-stm32@lfdr.de>; Thu, 23 Oct 2025 23:49:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E3905C0A6BA
+	for <lists+uboot-stm32@lfdr.de>; Sun, 26 Oct 2025 12:29:04 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 7FB90C5EC7C;
-	Thu, 23 Oct 2025 21:49:15 +0000 (UTC)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6E5A9C5EC7D
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 23 Oct 2025 21:49:13 +0000 (UTC)
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 848FBC5F1F9;
+	Sun, 26 Oct 2025 11:29:04 +0000 (UTC)
+Received: from mail-lj1-f177.google.com (mail-lj1-f177.google.com
+ [209.85.208.177])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4ct06d0nnLz9v4P;
- Thu, 23 Oct 2025 23:49:13 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1761256153;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=li5U7VeG22caadE9S9YNPgp4M1x5MlFKrYxqbEdqmTY=;
- b=yDV+dTNsnVcPH675NF6qY3lnsm1jW8ZXQG1R6W42X4MYqV1Z6A+NrE4xN6ilEJz8sPapjB
- Zy/zkTbGfkKe6Y3aSLqtHvNScf0l+YnUCaeZ3oBHgFZ8+vbynpLs/JihmtRiZI+HzBMu9P
- dGKochqg+VRhEi/jy1SNFDs2wbEUyf/SMQSr13D9z/8v4Mu9ioIopwSlCa+HamTOK2vfUq
- di+BUNdPsVSfi9mCTAG94ezQ1Y+qYO2Dfy893jXjcZtDihHtmVmIykVT/f1Moe5UmpPGvs
- Ren4CqsLVR9pIo1fbSB71MNjcoV3oOKiZs7xiLOZQHVM3JSWAAcP76PFLp1Zng==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=XMjFJFAT;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
- 2001:67c:2050:b231:465::102 as permitted sender)
- smtp.mailfrom=marek.vasut@mailbox.org
-From: Marek Vasut <marek.vasut@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1761256150;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=li5U7VeG22caadE9S9YNPgp4M1x5MlFKrYxqbEdqmTY=;
- b=XMjFJFATTjVKMHTbzICvuQPu/8TqEO0gj0yhwssZTBi9fUjR6iey273949+8npitdF/iwn
- GljoiXYA2czJ6YefM0xVVLhcJBuCMFyBkkOD6q7h0BG8W1rBCoZ0xF4s4KXpwZu+/N/ENg
- V4RDXgtCQQR82ACgckkBJSS/WTKiKw4ch88m48QxA4bgUVBh3PYSMtAbD9qgEDXWAhxT3S
- /DgwK5nlsCorFK0yxF+GNs6gcaI8wVXXoHNAZxSX4ojbAuJpjgOYbnAlncWKsNFBpL6pZg
- yuA+CA1voJaIG1CyagZ2LftOumBS0hui6M7Hs7lha4S/vzUbtxTbcQkNVeUNFA==
-To: u-boot@lists.denx.de
-Date: Thu, 23 Oct 2025 23:48:26 +0200
-Message-ID: <20251023214855.181410-3-marek.vasut@mailbox.org>
-In-Reply-To: <20251023214855.181410-1-marek.vasut@mailbox.org>
-References: <20251023214855.181410-1-marek.vasut@mailbox.org>
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B0A9DC5A4DB
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Sun, 26 Oct 2025 11:29:03 +0000 (UTC)
+Received: by mail-lj1-f177.google.com with SMTP id
+ 38308e7fff4ca-36a448c8aa2so29805261fa.0
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Sun, 26 Oct 2025 04:29:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1761478143; x=1762082943;
+ darn=st-md-mailman.stormreply.com; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ynTadvmvoc4pSoY0OewF8in8Z1Yuq8/00xoZUqgg8e4=;
+ b=lS2yC1pWgqCeVL73vyMzizcLtR6xrkc82ZowOcIzDn/6eAc16BamtL39giNvxwfAhz
+ Atn+n/lIH3ytXjfz3iFkeKgI8D3ZPpwiZUK3GjGSLWGta8Qu3zuqEFcchrC4fsBSvqHk
+ 6FN1DnQXz11ZfHyONlqVgWm4NaD2WCd0qjHY7Vb8HGVj10idP0UHXP8rrjs407xssjEH
+ 3nx0/huE19c55yEklZV/c2jtC10d8DTFq6m6wHwbEFlJC5pLVzOYwSz4T/4TC9erl1Ah
+ Rvii7IF5VU7OtvWNiLq/nFJDxvwHs57hO2+dh9FxL13ryababd1Mp9Jm/VeSWW08QFCr
+ tQ6A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1761478143; x=1762082943;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ynTadvmvoc4pSoY0OewF8in8Z1Yuq8/00xoZUqgg8e4=;
+ b=OFOQOpizuCFlbi4PTBbQlTIQXjfNixuFpKpQxhk3w2JM8527Qpp3isceKEMmvpVCab
+ piOLzPyIgRJsv7lUTTjCiAkYiBeHD4s0ZHgMrWUtGEQu5fpX4n+P8DjGm+fQGI20zlT+
+ Ia+m0Xaux/b1WxejlfvsbiWOZYgqAvntTCS2nOfHYSJsSJx1BymZFSBAHnV0i72Ixj/q
+ FvtB/ZBB19P90rOPzziRMfCNMoAFK2TURJ6Farcr0x7TbLZQtfwBROd6HASNc26jvGo4
+ DGOj7x1mFKSNVBTUybklaCnldvStb8NUtgbz93lT1H2J5WPQI0UESTg7uauq/x4Bk3qT
+ uPNQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVkWc/sInAt06rTYefG3NX/uA4pq7UHas6NR7nCe1rbA+o+yrjhQxfM1oZTwWif7QaBoKfZ3phA1a3Vhg==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0YyA0I6T4I+0HSWzYTHfQM18e2hCP9YVPsyAd7ECf7MVB2GB0N8i
+ HwSEnrrCsQOzlDM/2t21QSiezh0ZAIw3gOiN0p1rzPbTfz0v6QpR7nWIuLFsCzIhg6ugxHsWq3J
+ jb7aMWfDxRc5SGBFSMiWg6awTDeZR4I8=
+X-Gm-Gg: ASbGnctEohV+qgAFKhRurSBXvgbEziNA+kfkC1zlAILORjdnVv/gvP+NdWVf8hcomcd
+ 5A/8qDV5Mzdrj2OAQNg7nNaexrrlL62Sq6C7cuSEZTlcmF0eKbyCdBBHtmdmAADITouqyERQy8V
+ G19nPysZW/6swhNclEzPl4p4OOjEXCbqH9/yg13IGpMzbdwOeYoddotEZQLvt79fU4Mv7IdTtS6
+ ULT4TAHVPFrE4n5Zff4Py8wpfleJc4H3wU4PZOxshv6xN41RqwcgPaE2w51fsqOmJMjlfEN5hBY
+ Oa/elbq9oYguF4Jz6EdE2CFnbdg=
+X-Google-Smtp-Source: AGHT+IFLKKqmGQ3wE2zzJi6BFxHhDNwCUT0PKVJBwtSnM7rSh6lKQ2j3j5s2gHDX5QVIdMU0dMLp8iU/lF+HZ1MaswE=
+X-Received: by 2002:a05:651c:b06:b0:378:d63b:9d29 with SMTP id
+ 38308e7fff4ca-378e43d6654mr23250731fa.47.1761478142486; Sun, 26 Oct 2025
+ 04:29:02 -0700 (PDT)
 MIME-Version: 1.0
-X-MBO-RS-ID: dcdd40aaf9eefe5b2e7
-X-MBO-RS-META: fu5y7tsq4zt1n7867yikgzxgzbicjzq9
-X-Rspamd-Queue-Id: 4ct06d0nnLz9v4P
-Cc: Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com,
- Marek Vasut <marek.vasut@mailbox.org>,
- uboot-stm32@st-md-mailman.stormreply.com,
- Patrick Delaunay <patrick.delaunay@foss.st.com>
-Subject: [Uboot-stm32] [PATCH 3/3] ARM: stm32: Add MAC address readout from
-	fuses on DH STM32MP1 DHSOM
+References: <20251022-imx-rproc-v3-v3-0-92273a82c5da@nxp.com>
+In-Reply-To: <20251022-imx-rproc-v3-v3-0-92273a82c5da@nxp.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Sun, 26 Oct 2025 08:28:50 -0300
+X-Gm-Features: AWmQ_bmmMbRvPogXPfX7up5DAniUNizY89HBxZuZ3MVwTIKDOuuzingVzpb60Ec
+Message-ID: <CAOMZO5ASxBCdTQFfoUA7k5aXKwQZS+MC75kHw7uHoHsF1AgbcQ@mail.gmail.com>
+To: Peng Fan <peng.fan@nxp.com>
+Cc: Tom Rini <trini@konsulko.com>, Ye Li <ye.li@nxp.com>,
+ Udit Kumar <u-kumar1@ti.com>, Alice Guo <alice.guo@nxp.com>,
+ Andrew Davis <afd@ti.com>, u-boot@lists.denx.de,
+ Beleswar Padhi <b-padhi@ti.com>, Judith Mendez <jm@ti.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ uboot-stm32@st-md-mailman.stormreply.com, Hari Nagalla <hnagalla@ti.com>,
+ Ryan Eatmon <reatmon@ti.com>, Stefano Babic <sbabic@nabladev.com>
+Subject: Re: [Uboot-stm32] [PATCH v3 00/12] remoteproc: Add support for
+	i.MX8M[M/N/P/Q] and i.MX93
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -76,87 +86,20 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Add support for reading out the MAC address from SoC fuses on DH STM32MP1 DHSOM.
-The DH STM32MP1 DHSOM may contain external ethernet MACs, which benefit from the
-MAC address stored in SoC fuses as well, handle those consistently. This however
-means the architecture setup_mac_address() cannot be used and instead a simpler
-local fuse read out is implemented in the board file.
-
-Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
----
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@dh-electronics.com
-Cc: u-boot@lists.denx.de
-Cc: uboot-stm32@st-md-mailman.stormreply.com
----
- board/dhelectronics/dh_stm32mp1/board.c | 29 +++++++++++++++++++++++++
- 1 file changed, 29 insertions(+)
-
-diff --git a/board/dhelectronics/dh_stm32mp1/board.c b/board/dhelectronics/dh_stm32mp1/board.c
-index 065d2f338c2..c18f1911fe4 100644
---- a/board/dhelectronics/dh_stm32mp1/board.c
-+++ b/board/dhelectronics/dh_stm32mp1/board.c
-@@ -119,6 +119,29 @@ static bool dh_stm32_mac_is_in_ks8851(void)
- 	return false;
- }
- 
-+static int dh_stm32_get_mac_from_fuse(unsigned char *enetaddr, int index)
-+{
-+	struct udevice *dev;
-+	u8 otp[12];
-+	int ret;
-+
-+	ret = uclass_get_device_by_driver(UCLASS_MISC,
-+					  DM_DRIVER_GET(stm32mp_bsec),
-+					  &dev);
-+	if (ret)
-+		return ret;
-+
-+	ret = misc_read(dev, STM32_BSEC_SHADOW(BSEC_OTP_MAC), otp, sizeof(otp));
-+	if (ret < 0)
-+		return ret;
-+
-+	memcpy(enetaddr, otp + ARP_HLEN * index, ARP_HLEN);
-+	if (!is_valid_ethaddr(enetaddr))
-+		return -EINVAL;
-+
-+	return 0;
-+}
-+
- static int dh_stm32_setup_ethaddr(struct eeprom_id_page *eip)
- {
- 	unsigned char enetaddr[6];
-@@ -129,6 +152,9 @@ static int dh_stm32_setup_ethaddr(struct eeprom_id_page *eip)
- 	if (dh_get_mac_is_enabled("ethernet0"))
- 		return 0;
- 
-+	if (!dh_stm32_get_mac_from_fuse(enetaddr, 0))
-+		goto out;
-+
- 	if (!dh_get_value_from_eeprom_buffer(DH_MAC0, enetaddr, sizeof(enetaddr), eip))
- 		goto out;
- 
-@@ -154,6 +180,9 @@ static int dh_stm32_setup_eth1addr(struct eeprom_id_page *eip)
- 	if (dh_stm32_mac_is_in_ks8851())
- 		return 0;
- 
-+	if (!dh_stm32_get_mac_from_fuse(enetaddr, 1))
-+		goto out;
-+
- 	if (!dh_get_value_from_eeprom_buffer(DH_MAC1, enetaddr, sizeof(enetaddr), eip))
- 		goto out;
- 
--- 
-2.51.0
-
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+SGkgUGVuZywKCk9uIFR1ZSwgT2N0IDIxLCAyMDI1IGF0IDk6NDjigK9QTSBQZW5nIEZhbiA8cGVu
+Zy5mYW5AbnhwLmNvbT4gd3JvdGU6Cj4KPiBDSTogaHR0cHM6Ly9kZXYuYXp1cmUuY29tL3Blbmdm
+YW4vdWJvb3QtY2kvX2J1aWxkL3Jlc3VsdHM/YnVpbGRJZD0yMQo+Cj4gVGhpcyBwYXRjaCBzZXJp
+ZXMgaW50cm9kdWNlcyByZW1vdGVwcm9jIHN1cHBvcnQgZm9yIE5YUCBpLk1YOE0gYW5kIGkuTVg5
+Mwo+IHBsYXRmb3Jtcy4gTW9zdCBvZiB0aGUgaS5NWC1zcGVjaWZpYyBsb2dpYyBpcyBwb3J0ZWQg
+ZnJvbSB0aGUgTGludXgga2VybmVsIHRvCj4gZW5zdXJlIGNvbXBhdGliaWxpdHkgYW5kIG1haW50
+YWluYWJpbGl0eS4KCkknbSBnZXR0aW5nIHRoZSBmb2xsb3dpbmcgdXRfZG1fZG1fdGVzdF9yZW1v
+dGVwcm9jX2VsZiBlcnJvciBpbiBHaXRsYWIgQ0k6CgpodHRwczovL3NvdXJjZS5kZW54LmRlL3Ut
+Ym9vdC9jdXN0b2RpYW5zL3UtYm9vdC1pbXgvLS9qb2JzLzEyNzQxNjgjTDI3NgpfX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpVYm9vdC1zdG0zMiBtYWlsaW5n
+IGxpc3QKVWJvb3Qtc3RtMzJAc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbQpodHRwczovL3N0
+LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20vbWFpbG1hbi9saXN0aW5mby91Ym9vdC1zdG0zMgo=

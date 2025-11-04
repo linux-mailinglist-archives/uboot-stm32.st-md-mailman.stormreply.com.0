@@ -2,85 +2,174 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id BABABC2C5BF
-	for <lists+uboot-stm32@lfdr.de>; Mon, 03 Nov 2025 15:17:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id F06FFC30151
+	for <lists+uboot-stm32@lfdr.de>; Tue, 04 Nov 2025 09:56:07 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 7189AC62D2D;
-	Mon,  3 Nov 2025 14:17:32 +0000 (UTC)
-Received: from mail-oa1-f46.google.com (mail-oa1-f46.google.com
- [209.85.160.46])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9D7CEC62ECF;
+	Tue,  4 Nov 2025 08:56:07 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id EF15AC5F1C5
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 656C0C62ECD
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon,  3 Nov 2025 14:17:30 +0000 (UTC)
-Received: by mail-oa1-f46.google.com with SMTP id
- 586e51a60fabf-3d220c5a16aso2820110fac.2
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 03 Nov 2025 06:17:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762179450; x=1762784250;
- darn=st-md-mailman.stormreply.com; 
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ryw1QHhCShG7ZEnRjA9RaY4JjG3v/UyzrigR96WVRjY=;
- b=oQ8uEdBJKFMSUOeeUXHU1/qJC2hhABgM3EjiGIQFMJ+czbG3b54F14kGdn/SilEef+
- CPc8Yh6YLXyxsJJRUQdLAxqVtp9+SbAiSzToELF4Wu4U16moEX0tNJwWgT2cAu2CQ2ON
- dff2tvWBcLhGmrEJdeVgcSG8TlhLYExiyTNUg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762179450; x=1762784250;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ryw1QHhCShG7ZEnRjA9RaY4JjG3v/UyzrigR96WVRjY=;
- b=gosB0dimlWeDr5dRZOS6GRllhixp8yl3Z2gJJNHDT/Vb2EuwFr5EtukKrHyV8K9/AD
- sOhsRX25qsbM2PD48T89DpmwOJphivZGRtSRF3/ngmo+9BnnAmKPR7NfLtADycJzyAng
- JyZ3qPsWWNkM3RVISgaYQRRixdUJP8zxG0xizBHdMwLUiAMj2nr5KS7fZkx7IcACc3Ue
- wLjWLiAQGQktC1Iq/4IHp2L0b1Fuw2pDsKI37o+x6voxCaVdD/xS5f1FOBCDaO0sjpBG
- 2L3GFH2gQEELPbdb04bzDz2duLXx3CHYWP5lxEWeoiw7/M93J111aeIgzPHrMfCeBhZb
- URGA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXlHO7R8fDJNm+Vb9spnjFHNtLGi8ucNYeiEjVTv1AJEmR9ur/q6kE0EOn+0d+KPzBeq+CJCrZfOUA6bA==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0Yw2f3QOFCR/pLUI4GPwvHUuDrQzDn0DtpqtWwJf3oK+J34cWdL6
- ZsBsJ5N0p4GiCnSDwOHw3UWjywo5rRCZUCR61/fjUBxmtRc+tMtI9E+Jqsg/fjVj+LE=
-X-Gm-Gg: ASbGnctULI+Z4LT1oJVvD7WIoNu18axURbO5eeeCt90SfbK1tcUzOmZYTHat8u7avgA
- R72MGRA1kH/cgbLNUcZvMvYwZnCCbsa+CBx3UxgJoBsKIyxOAqpFWsQzTO3sML8ECGayWTNlp1+
- j2HYvvbBHJx0bxIJGzpg2awTPaEJdNJU533GGJeiApZAYBGMecFSvZLkKWWvDd/W5tgvaFQ6VmB
- duD+gQD41YTsh5L6l5qeOwfT3ncdXh+DaD3fVdWw33lV9iO2HT8qRV0X1BQVBMsK3TTJBuTvMwg
- ID8AOYmm9eYGnajJLQhGgXu7PX1InLQUvJezM6NWLCu0iR7puiY47qkRAvWwZkM+l99IQ3AXh8X
- 9D3tZETI34vaI2vVW84Zv+f2sLvz2qSvviq8Nhv/+Y/rKI51VT7TaKEj6G7DGbJLyLMDA8Pd27+
- YH9wGVDRSTqghPek7MmHLDnZEC+hMcmj8AcCts1Aw=
-X-Google-Smtp-Source: AGHT+IGPwkMNxSr+dWAFHLWHwiy7iymH1PZdb9e+LV13y3wzQjPuqo2XLFWtbt11DZD75ySIBBC7SQ==
-X-Received: by 2002:a05:6870:d107:b0:365:a979:553 with SMTP id
- 586e51a60fabf-3dacc5ce491mr5452836fac.36.1762179449564; 
- Mon, 03 Nov 2025 06:17:29 -0800 (PST)
-Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3dff6f625b7sm87258fac.15.2025.11.03.06.17.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Nov 2025 06:17:28 -0800 (PST)
-Date: Mon, 3 Nov 2025 08:17:26 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Message-ID: <20251103141726.GJ6688@bill-the-cat>
-References: <20250904-master-v3-0-b42847884974@foss.st.com>
- <20250904-master-v3-1-b42847884974@foss.st.com>
- <CAFLszTiT9iLx6gguhVui2Qh0Ew89yhvpDggKwPo71cB+Rv=xJA@mail.gmail.com>
- <aQavXq6jVagkIa53@thinkstation>
- <CAFLszThdV7cZ-uBXzqRYWv-HsGbNJV9BVKVOC4FQUD1yjZDNkg@mail.gmail.com>
+ Tue,  4 Nov 2025 08:56:06 +0000 (UTC)
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 5A48lU4p1591789; Tue, 4 Nov 2025 09:55:51 +0100
+Received: from duzpr83cu001.outbound.protection.outlook.com
+ (mail-northeuropeazon11012060.outbound.protection.outlook.com [52.101.66.60])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4a7c80gxms-2
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Tue, 04 Nov 2025 09:55:51 +0100 (CET)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=duaybghTXPXL8I+3gGcFOKBSVbXfQtLgSjBwx2vzlFb6ewe2TWQBqLrDUkFOzKWGvEFSmUQC/ONbbl/YBM/xpnO3YQjUL8yFTIl8RnoZH8nZfiFi/7x89Mr85DauUiqJXh/OHnV3NdIS+gAFDWgai9YGFZwu8an+7hvHdy0dkZHjnoyA2PlFolNKAEfwP7bQOKH695Nbu2oo5fqZmaXDYq5qXxzom+Htrr7kzMamNAX50Rok+2VMUoC9Z7OJ9gQwYIqn6QWlkgObg5lDrZH3yWTkYRQqIeDH7zPY30Bpg+q8CBu9aAQyM9e2s0q7bhoDsFj4XL8o9b89iujdSwCxqg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=+oFC8Pud3SEnyV3dM3MkepltL4bKU2LQ3hSqoYK0zJk=;
+ b=RIWnXkHbqeGKlO+Y+u8L/ahg6cFk48OmLbo/5NKNxnZ4bRB0ah5NjZfbv/Ccj1P3ud6t6HEHDJ1ZNipSAOTLm2UIV7fLWELPIjv/TI7dY2KmGP8Bo/m64lGPiI4TTVYzbLqH9EWLwGuFLzbIhdPky72R5Fr5L70+q05EqEN2kr/EuHIEqWyApB3a67EEyrPNTizeTGHC+RrLjwG5OlcDtmx7ZMeg+WC99O56Gf0oUVRpE3SELL3IwkifqwtapvlZvQZgtqRUCdQ6Cu9Di3s/bZfGt2chmR9sPvSHiVHVeIa9Gde3jY0myKvhgPDhZ5RB/a+aRlisvKjARJg1IQBkmA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 164.130.1.43) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=foss.st.com;
+ dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=+oFC8Pud3SEnyV3dM3MkepltL4bKU2LQ3hSqoYK0zJk=;
+ b=MOWYSvWdBrPu6Pz6GRavehfmrzt+LFMNa2phTiROeYSrqpjgswH4Km+Suu64u/uomaiuDL3QzTsn1PzUsKXI+qq55PEemxaC8Yhge+F3HmizSn/cve248NfdScFDECQu/aV8UmQp/E9YQnPHUCTiceiSiF+Cm+t0dwWtM3Aa1gaREXMB/iXZqmV/c60Q1B8QxWdkQ3Da6XIlsMhVf9LaZh9NzLXEkUMd9Q6gZU5u2fnDxpzWa6+cjMnFFZxtzrQhSy+se8kIgLM3zlMBk7bIdapbWLYtkz5bQqr1Zdc7IP5bCTmEe2Zn6wu1q90Fvdd5q+xkbQXEHR7Bhzvf78o0pQ==
+Received: from DU7PR01CA0038.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:50e::20) by PR3PR10MB3820.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:102:49::17) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.16; Tue, 4 Nov
+ 2025 08:55:49 +0000
+Received: from DB5PEPF00014B88.eurprd02.prod.outlook.com
+ (2603:10a6:10:50e:cafe::ee) by DU7PR01CA0038.outlook.office365.com
+ (2603:10a6:10:50e::20) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9298.7 via Frontend Transport; Tue, 4
+ Nov 2025 08:55:52 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.43)
+ smtp.mailfrom=foss.st.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=none header.from=foss.st.com;
+Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
+ designate 164.130.1.43 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.43; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.43) by
+ DB5PEPF00014B88.mail.protection.outlook.com (10.167.8.196) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9298.6 via Frontend Transport; Tue, 4 Nov 2025 08:55:48 +0000
+Received: from SHFDAG1NODE1.st.com (10.75.129.69) by smtpO365.st.com
+ (10.250.44.66) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.57; Tue, 4 Nov
+ 2025 09:53:29 +0100
+Received: from [10.48.87.93] (10.48.87.93) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.57; Tue, 4 Nov
+ 2025 09:55:47 +0100
+Message-ID: <2a3aa43a-ce19-41e1-ab56-556629ce5cf9@foss.st.com>
+Date: Tue, 4 Nov 2025 09:55:46 +0100
 MIME-Version: 1.0
-In-Reply-To: <CAFLszThdV7cZ-uBXzqRYWv-HsGbNJV9BVKVOC4FQUD1yjZDNkg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
-Cc: Yannick Fertre <yannick.fertre@foss.st.com>,
+User-Agent: Mozilla Thunderbird
+To: <u-boot@lists.denx.de>
+References: <20251009135417.282290-1-patrice.chotard@foss.st.com>
+Content-Language: en-US
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20251009135417.282290-1-patrice.chotard@foss.st.com>
+X-Originating-IP: [10.48.87.93]
+X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB5PEPF00014B88:EE_|PR3PR10MB3820:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2e49f31a-edda-4a3e-0d78-08de1b7ff302
+X-LD-Processed: 75e027c9-20d5-47d5-b82f-77d7cd041e8f,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|376014|36860700013|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?ZmVVbk9qWXVXaXl5bEJkY3RhQ0had0N4ZjdwYU9rY1BBV3U1dU5MZ3B0cmZR?=
+ =?utf-8?B?alozcG1GWUtRcjFFbUlTSGVaNUpFL0VTZFU2Ui90dngwNU1hc0V0b2p3a2dS?=
+ =?utf-8?B?cEpEWXJnOTJuNHFpc0piNTVUN1NOZlFKVnR1WjErUFYveG1zdlArSWZPSVp4?=
+ =?utf-8?B?UkMwTUpOa2l1KzJMWUhveGNhNkhZNEtLMkNEZkZiUGdyLzZxVCtOekJLeGpI?=
+ =?utf-8?B?YVozK21meWtqbFE5NG1DVE9OT3JVZ09PU0NZSURrREN4enM3N2xzQVUzZGto?=
+ =?utf-8?B?c2N4c09HNXpaTFhCY2IxZmpDc3lHeWtsd0QzTmZxUkFkTjRZVUc5ZmdzaDRZ?=
+ =?utf-8?B?ekpiUEsrb3JQT3pZMWZ5SnBOek9oSERaekp6dVFHeTRlQ0tFQ1luS29FNU9F?=
+ =?utf-8?B?TzNGRi85OTdXSWpKVE1hTFdVU2JvWUFUQjB6dmhpRUNQeDNPb2lCd1FEM1cy?=
+ =?utf-8?B?enB1Qjhqdm5xSmZuUnJELzBlQUl4UC9zcDBWVnJKellsSW5xU3VqVmlMYy9s?=
+ =?utf-8?B?VmdIZnl6M2FjWXFwZ3ZDd2VHTDVZSHBqQ1JDUlZybGtlczluWDlOZGNpTEx1?=
+ =?utf-8?B?SEc3SzNzVmpIS1dTRndTSEtVVlFUbTlIRVhCUitUa2VMeDhMdnhpbmRxTU9o?=
+ =?utf-8?B?cTRHMkJUdkJsQXp5OGFnVWZDclhrOTBOT2ZjTkRYZXNUYllVR1o5TFYycXMw?=
+ =?utf-8?B?VTBzZEsyaEZwQytxeXFtQkEwQWZ2NEh1WkNKcXdXNDVaczNMZE9zalkwVXJG?=
+ =?utf-8?B?RFZucjd0SER3T3Z3ZXRCaG1BZVhtSUw3cVo1UVdkSjE1MUNtUW1NU1dnTFFn?=
+ =?utf-8?B?TUROTHZ4L2UzeXdVZEkrbjFlVTNPdnFodzhuZS9XRXI3K21QejhBYldPc0FK?=
+ =?utf-8?B?b3BicDdWdVhhQmxXYm9vbTVIRHlkQVNBUExoSU1CWTk1TVRWQmxSRHV4RDBr?=
+ =?utf-8?B?QjB0S1pzV0Y2ZCtxbGsxcmFtV0lFakxIU0psQUE4TXBWK2pqUTdVaEk0M1pp?=
+ =?utf-8?B?MW5UNXdBSkZKUXNyZW9GeGpCcmpORWtWbWxEMWtNV0JSQzQ0RkpYU0g3bHNJ?=
+ =?utf-8?B?WE0zZDZBOVg5eXRHemhkbFdUTUdzMHlISXBOVzJXRHgvejZFSmNNWG9acUF5?=
+ =?utf-8?B?c0E2RGlHN0pnc3hsMjlGSzkvdGRScTZxdkVidmV1aC9yTGRpNTZjb2FLYXV5?=
+ =?utf-8?B?dnNPZEsrNkZsYXBZeDVtNCt1cStweDJWRG56KzdEcFlXTDlxTWJpcCtLUCsy?=
+ =?utf-8?B?aVlvOXBaZnNlS2ljOTdvYlB2elpuRXFnbGdqRVdiVDd2SmtsdlZtUWtWV0ZV?=
+ =?utf-8?B?WEdCS1Foa3Y1VG4rcGF2SXVLeTlsM3ZLRm82Mm82VVZuREt6ZWVNQ0UrWi95?=
+ =?utf-8?B?OWt3emk0NVViRG9EUTZLWWFscHZIQWJiSmFGTXh6WHdtNjM4SDRDalFJTHk3?=
+ =?utf-8?B?QlpzdW1GWEZjU0FEZzRVaW1MS3pxVXpLY0dWa3VDNFJ5UGJFU1NwMElQd1lr?=
+ =?utf-8?B?YVFFOHVFNFpncE11eGZZeWt3ZDlOZFE1UXNKeXBWNzJTMjRRU2F2cCtRT1kx?=
+ =?utf-8?B?NFBoc1JuSHNYdnJ0S2pwREZGNGllMlNpOFVaaTB2RHNOS2ttMkVRb01pNEdK?=
+ =?utf-8?B?VEZIYW5QUkkwdml1M1lYb1dSK1lISG15eTFXSGhHang4ZWxnNTB2RnV5TDg2?=
+ =?utf-8?B?WVVUWWEzS1JJS0haYUlpSmpFdnl0ZkFWMXl0NWRxY3EwRSsxdkNFMStsWHN6?=
+ =?utf-8?B?SUFXZ2E3OHA0OFpNY1ArYXdNbHNxREFCVUZmQS8xdVFTdDYxTzIzSmE5NFZs?=
+ =?utf-8?B?V0QwQXNmS2cxK083U05zOVJpV1hKSkxITzNZSnNxbFhkdTIxbVhobEt1MXZU?=
+ =?utf-8?B?ZEN1dkNwR2d4ZnN2U1JZV2kxWEdoTHpZdkdDRFRlZ3lyaVhETzhGWDRxUngv?=
+ =?utf-8?B?aHZ4R1JjeGU0ZWhONzVlYnhZSERmcHQydmVQSHhLSTRKcmYzOUltZFBEN25V?=
+ =?utf-8?B?WVNWL0RudjVQYWpaNzh0OUdQVG8rM1FidWFUMlQydkZnWk1DSW54a0llZEFX?=
+ =?utf-8?B?YlhnZ3I3bEE1UWtNcHcyN09Qa1FRcFN2S3ZiVFlNSjJ1dFd3ekhyMCtYVzdU?=
+ =?utf-8?Q?RuOc=3D?=
+X-Forefront-Antispam-Report: CIP:164.130.1.43; CTRY:IT; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: foss.st.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Nov 2025 08:55:48.3943 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2e49f31a-edda-4a3e-0d78-08de1b7ff302
+X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.43];
+ Helo=[smtpO365.st.com]
+X-MS-Exchange-CrossTenant-AuthSource: DB5PEPF00014B88.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3PR10MB3820
+X-Authority-Analysis: v=2.4 cv=b5i/I9Gx c=1 sm=1 tr=0 ts=6909bf97 cx=c_pps
+ a=0FIfyxYfePq3aMp09QyktA==:117 a=peP7VJn1Wk7OJvVWh4ABVQ==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=XWp4PHTOCikA:10 a=IkcTkHD0fZMA:10
+ a=6UeiqGixMTsA:10 a=s63m1ICgrNkA:10 a=KrXZwBdWH7kA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=voM4FWlXAAAA:8 a=hnaajLL-A62Ox9eL94sA:9
+ a=QEXdDO2ut3YA:10 a=IC2XNlieTeVoXbcui8wp:22 a=cPQSjfK2_nFv0Q5t_7PE:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTA0MDA3MyBTYWx0ZWRfXyFpWyabHZxpt
+ 8FLHQMgKfxxtLgsXlCpuXaqokKoXsdOdOi+BYBBK0ncpfzZ/nTOsaptgho753PHS2rbqgyxl3CJ
+ n2cv4oxiAamW5PO9K2c0JRFwnRiy19IELyGwAfVUJgggNbuPv40+kLhCkAUjnU9QnD26NsZAH6l
+ odZaktb6cQrSjVxmCKvphRVtL5nwHldrLYyAfMNtM04vljL+lF/ERbpYkA0h56bNpN7CLG6sNHZ
+ SrkjflzElG2yvkrjhQb3cRIXWhI5uRgGkOW7+/5LpNaUA3saskBUNVGAmxSGI3/asdWrCddQfBE
+ 86p2uuSU4y40GQJUT6eCIWu/oQ3OP/6sQURBHmeu7wr4zGEvLBw3xCEGnrfj+bgFo/JFYsOm5DP
+ bK2nlpEupedq6GR3WPon9bIFYYNTLw==
+X-Proofpoint-GUID: sVsRpTnvESTCK-nkeDN66odF4Dd1gxfC
+X-Proofpoint-ORIG-GUID: sVsRpTnvESTCK-nkeDN66odF4Dd1gxfC
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-11-03_06,2025-11-03_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 clxscore=1015
+ impostorscore=0 malwarescore=0 spamscore=0 priorityscore=1501 bulkscore=0
+ lowpriorityscore=0 adultscore=0 phishscore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2511040073
+Cc: Kory Maincent <kory.maincent@bootlin.com>,
+ Antonio Borneo <antonio.borneo@foss.st.com>, Tom Rini <trini@konsulko.com>,
+ Cheick Traore <cheick.traore@foss.st.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Kamil Lulko <kamil.lulko@gmail.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Sumit Garg <sumit.garg@kernel.org>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Dillon Min <dillon.minfei@gmail.com>,
- Anatolij Gustschin <ag.dev.uboot@gmail.com>
-Subject: Re: [Uboot-stm32] [PATCH v3 1/7] ofnode: support panel-timings in
- ofnode_decode_display_timing
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: Re: [Uboot-stm32] [PATCH v1 00/11] stm32mp1: Update led management
+ for stm32mp1 boards
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -92,145 +181,56 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============4376175469789198764=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
---===============4376175469789198764==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="qbjBMJgEwQtVadz2"
-Content-Disposition: inline
 
+On 10/9/25 15:53, Patrice Chotard wrote:
+>   - Drop old LED code from STM32F429-discovery.
+>   - Update LED management for stm32mp1 boards.
+>   - Enable stm32mp13/15 LED_BOOT flag.
+>   - Make usage of /options/u-boot/ to configure led in stm32mp1x-u-boot.dtsi.
+> 
+> Patrice Chotard (10):
+>   board: st: Update LED management for stm32mp1
+>   ARM: dts: Update config node for stm32mp135f-dk-u-boot
+>   ARM: dts: Update config node for stm32mp157a-dk1-u-boot
+>   ARM: dts: Update config node for stm32mp137a-dk1-scmi-u-boot
+>   ARM: dts: Update config node for stm32mp157c-ed1-u-boot
+>   ARM: dts: Update config node for stm32mp157c-ed1-scmi-u-boot
+>   configs: stm32mp13: Enable LED_BOOT for stm32mp13_defconfig
+>   configs: stm32mp15: Enable LED_BOOT for stm32mp15_defconfig
+>   configs: stm32mp15: Enable LED_BOOT for stm32mp15_basic_defconfig
+>   configs: stm32mp15: Enable LED_BOOT for stm32mp15_trusted_defconfig
+> 
+> Simon Glass (1):
+>   board: st: Drop old LED code from stm32f429-discovery
+> 
+>  arch/arm/dts/stm32mp135f-dk-u-boot.dtsi       | 11 +++--
+>  arch/arm/dts/stm32mp157a-dk1-scmi-u-boot.dtsi | 10 +++--
+>  arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi      | 10 +++--
+>  arch/arm/dts/stm32mp157c-ed1-scmi-u-boot.dtsi | 10 +++--
+>  arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi      | 10 +++--
+>  board/st/stm32f429-discovery/Makefile         |  1 -
+>  board/st/stm32f429-discovery/led.c            | 39 ----------------
+>  board/st/stm32mp1/stm32mp1.c                  | 45 ++-----------------
+>  configs/stm32mp13_defconfig                   |  1 +
+>  configs/stm32mp15_basic_defconfig             |  1 +
+>  configs/stm32mp15_defconfig                   |  1 +
+>  configs/stm32mp15_trusted_defconfig           |  1 +
+>  12 files changed, 44 insertions(+), 96 deletions(-)
+>  delete mode 100644 board/st/stm32f429-discovery/led.c
+> 
 
---qbjBMJgEwQtVadz2
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This serie and https://patchwork.ozlabs.org/project/uboot/list/?series=478275 will be reworked
+All DTS part will be removed and submitted on kernel side.
 
-On Sun, Nov 02, 2025 at 08:53:43PM +0100, Simon Glass wrote:
-> Hi Raphael,
->=20
-> On Sun, 2 Nov 2025 at 02:10, Rapha=EBl Gallais-Pou <rgallaispou@gmail.com>
-> wrote:
-> >
-> > Le Sat, Nov 01, 2025 at 10:03:59AM +0100, Simon Glass a =E9crit :
-> > > Hi Raphael,
-> > >
-> > > On Thu, 4 Sept 2025 at 14:53, Raphael Gallais-Pou
-> > > <raphael.gallais-pou@foss.st.com> wrote:
-> > > >
-> > > > The "Display Timings" in panel-common.yaml can be provided by 2
-> properties
-> > > > - panel-timing: when display panels are restricted to a single
-> resolution
-> > > >                 the "panel-timing" node expresses the required
-> timings.
-> > > > - display-timings: several resolutions with different timings are
-> supported
-> > > >                    with several timing subnode of "display-timings"
-> node
-> > > >
-> > > > This patch update the parsing function to handle this 2 possibility
-> > > > when index =3D 0.
-> > > >
-> > > > Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> > > > Reviewed-by: Yannick Fertre <yannick.fertre@foss.st.com>
-> > > > Signed-off-by: Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>
-> > > > ---
-> > > >  drivers/core/ofnode.c | 17 ++++++++++-------
-> > > >  1 file changed, 10 insertions(+), 7 deletions(-)
-> > > >
-> > > > diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
-> > > > index
-> e040e3f2806ffe74c58dcd82f36307351acd5a99..5a721b46e5a3214e7bd437739776362=
-c2d22a3c9
-> 100644
-> > > > --- a/drivers/core/ofnode.c
-> > > > +++ b/drivers/core/ofnode.c
-> > > > @@ -1221,13 +1221,16 @@ int ofnode_decode_display_timing(ofnode
-> parent, int index,
-> > > >         int ret =3D 0;
-> > > >
-> > > >         timings =3D ofnode_find_subnode(parent, "display-timings");
-> > > > -       if (!ofnode_valid(timings))
-> > > > -               return -EINVAL;
-> > > > -
-> > > > -       i =3D 0;
-> > > > -       ofnode_for_each_subnode(node, timings) {
-> > > > -               if (i++ =3D=3D index)
-> > > > -                       break;
-> > > > +       if (ofnode_valid(timings)) {
-> > > > +               i =3D 0;
-> > > > +               ofnode_for_each_subnode(node, timings) {
-> > > > +                       if (i++ =3D=3D index)
-> > > > +                               break;
-> > > > +               }
-> > > > +       } else {
-> > > > +               if (index !=3D 0)
-> > > > +                       return -EINVAL;
-> > > > +               node =3D ofnode_find_subnode(parent, "panel-timing"=
-);
-> > > >         }
-> > > >
-> > > >         if (!ofnode_valid(node))
-> > > >
-> > > > --
-> > > > 2.25.1
-> > > >
-> > >
-> > > Please add a test for this in test/dm/ofnode.c
-> >
-> > Hi Simon,
-> >
-> > I'll gladly do that, but I haven't write and use any test in U-Boot.  So
-> > it is a bit foggy how to implement it.
->=20
-> There is some info here:
->=20
-> https://docs.u-boot.org/en/latest/develop/testing.html
->=20
-> >
-> > Do we want to create a fake device-tree and test each configuration or
-> > do we want to test in the _current_ device-tree if timings are correctly
-> > set according to the index value ?
->=20
-> It looks like there is a 'display-timings' node in test.dts, with three
-> subnodes, so you should just be able to get an ofnode for that and then
-> read out one of them and check it.
-
-OK, but what is the utility in doing that? We don't, and aren't, going
-to have tests for every valid possible DT node, and this isn't
-introducing new library parsing functionality (the most recent patch to
-test/dm/ofnode.c was for ofnode_graph and that is important to test). We
-don't have display-timing tests to start with, so we're fine not adding
-something more here.
-
---=20
-Tom
-
---qbjBMJgEwQtVadz2
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQi5cwAKCRAr4qD1Cr/k
-Cq0NAP45uCx3S5eNa2JBm2ta5ckDnStj6Szp37Ej6bCS6MtLpQD/YZ3dDqGbeJWp
-HIrPZMN5QKqTN42LbFlWHLipf5yIogA=
-=zg5P
------END PGP SIGNATURE-----
-
---qbjBMJgEwQtVadz2--
-
---===============4376175469789198764==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+Patrice
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============4376175469789198764==--

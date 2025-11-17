@@ -2,173 +2,175 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 192AEC62AB7
-	for <lists+uboot-stm32@lfdr.de>; Mon, 17 Nov 2025 08:10:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3EC3CC62AC3
+	for <lists+uboot-stm32@lfdr.de>; Mon, 17 Nov 2025 08:10:47 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D1238C628B2;
-	Mon, 17 Nov 2025 07:10:15 +0000 (UTC)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 04AC9C628DE;
+	Mon, 17 Nov 2025 07:10:47 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2F228C030AF
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 166E3C030AF
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 17 Nov 2025 07:10:15 +0000 (UTC)
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
+ Mon, 17 Nov 2025 07:10:46 +0000 (UTC)
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 5AH6r7eY615518; Mon, 17 Nov 2025 08:09:56 +0100
-Received: from am0pr02cu008.outbound.protection.outlook.com
- (mail-westeuropeazon11013043.outbound.protection.outlook.com [52.101.72.43])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4af5bptyau-1
+ 5AH6oBZb615783; Mon, 17 Nov 2025 08:10:14 +0100
+Received: from mrwpr03cu001.outbound.protection.outlook.com
+ (mail-francesouthazon11011044.outbound.protection.outlook.com
+ [40.107.130.44])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4aejghn9v8-1
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Mon, 17 Nov 2025 08:09:56 +0100 (CET)
+ Mon, 17 Nov 2025 08:10:13 +0100 (CET)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=QzXisUvz7BvmRzTc5RL8kHYXt9V7TIAk/OZWMD/eyjwkZtwHv5QvdyZmZdwjkRQprQJIHpx05db/3HZiunAmWZxbLEZA891sh/8dOzmbncwuCTRgN81fIutrnx3Zv9j0pVbBlp3d+B7H25rOkQMxFZD1+TZ7jfsuRzlmuWtuiGPkxWrktBtpttF+6Dz4dWTFQ0OnpuCGtfJ5IxRTO/4fM2CXqkZoIVsUW+qz04rg1uh7TO6jqH773n+JWrdpN8XT8UEyxIGcr71r/su8OSnCe/W/W+PahCcMdee5v2EJjLbRQl292enUjFYr4z1pmYJQqWFP2yFriamCgt1u/etlRA==
+ b=mP5d5GRMUXBLcHbU5sBGFTup2zXi1zsDTORzTAdxOHJKLV3qUhw9kglXZASM5lgD2hIsUPTsV9AKn5U3PhNR6yGLsvDXvpsnJcznB0PMbZXqcjpY+MX9V7SfVfQPpiHiE5cspxwfJrOL5VxdiNxS2TkDuFv2rr4qnPjwXH2Cz+2JHHUQGCJhOlKhKp3lAbwOqN0cFZDfYh3tw5y7ZWFYQ9J/2Qb29aFDS9FvwmoVmvcg6nBKeTVx1BhG3Px+v+/RkJlGlw0FtWczO8HumOUBfncVvrLvWXPBdBrIQmZu0rcavHkuCN78oULQXcaxtr4g84jNljqXqP+SZlICgDzBLw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=xKuv66APNgx697XCVN/Gbx5f6/UDoaxmw2439fNzhyQ=;
- b=OlR6rVSI5R78zN5tjKa7tMzUZ3AvML8RVemM1OShUQoT69qShVY3euAsTxfvcgqsvLpkD5mlOMs+k8PkeL677ajttxuSAK2HvL+KJ7kF/0DeMxm5r0DsYWG2SaAOA+SRpqMsagg/iQxOZVuQ3d1RoiMzeuhDhkx6N6BL/0ELkCYs7+2I7t3/cuIC50I175JamrJ/p2aPq//jDCbbUkhFKXeDnekfRJ1QebkzJ8xWgDNIBLxlgqJzfUoajzPZdBO34J3YTxnLuRcVaATdayN8m+3WbfTf8rN22FLRckkoBPtJsRI54bGZuI7+Kruvtxr+9O3EZblw4Scr/IhpAOTrVQ==
+ bh=+cH17TE0GnKZMW1o6+SBLDImfcrAqfE3ZjP2K1Lwi/I=;
+ b=nCRhqNE+h/RbJ0a3pP4Ran7EXYSTDZe0UUOmLYVb+kDK5tqtz4AJ0nW8VLZGsqXqvmZkYMC6TeYAaH5sVKxwAsOBHmMlPTyIAQiMC6ROUMFL3VOI8X9o57r16OXbnEhhdm7Bv1YrqA20G3PkUHRsTw0zThxPCk0kPuQ4/DP0BgiutHSJ3y7pwkmyJAEPRT8cbmsA04YZ7qJ6CmjA8qIjSwOHz7l4zxPcf+5whAHuaODQJEa4vy+zMS6YuCw+CChOZv/pqXNnydQs98zfnTugDQYLeLth0ndp0TKwDKeKchKRZyiCSmdDkXu11aCLq13t5OQcpkIgwXvpBg59ks/ZAA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.60) smtp.rcpttodomain=mailbox.org smtp.mailfrom=foss.st.com;
+ 164.130.1.59) smtp.rcpttodomain=mailbox.org smtp.mailfrom=foss.st.com;
  dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=xKuv66APNgx697XCVN/Gbx5f6/UDoaxmw2439fNzhyQ=;
- b=A1BtiUSyeI8WaGlEWj1PxkBHTFFzGdJlss1RyDTF8ApwFQoVLlVp+C8DIGLMyK+2oALScZ9kh8cpN7zsRs/tf92vOotNDTkia3eXAPLeRydm5toSIG0P5jo4u0EiEBW5RvuRoanlFhcTs1pSu//7TvPc/WDVTzKG95qWNMNWv5bMehWqfDy4QwIMfL7vUL0spWSDMC1sDY0lATWGPK5tdsGlhdcqQFq4Dshh6Rvcac5YdXhnsjA0vNB5VY5MLZUT3+7qbSrH5FbzFXzfvuKRZHwBPUumCy/tGJRTv9njhGqEArCYn14VxPGkigXK9dvPSPdsxL7n4qfr4zUqD2oDcQ==
-Received: from DU7P251CA0011.EURP251.PROD.OUTLOOK.COM (2603:10a6:10:551::13)
- by DB4PR10MB6239.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:381::15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9320.21; Mon, 17 Nov
- 2025 07:09:52 +0000
-Received: from DB1PEPF000509F4.eurprd02.prod.outlook.com
- (2603:10a6:10:551:cafe::bd) by DU7P251CA0011.outlook.office365.com
- (2603:10a6:10:551::13) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9320.22 via Frontend Transport; Mon,
- 17 Nov 2025 07:09:50 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
+ bh=+cH17TE0GnKZMW1o6+SBLDImfcrAqfE3ZjP2K1Lwi/I=;
+ b=KTJ9YF70XZ92dYlYkhYUjB7j4bBOnwuXxkcuDzS/8r/Q/quxhADZNIKlnmEJFe/xqC8VaYIIm/64k9oiTRtNVoECDhBCXKa+ZR1HuA6Qb76bAfhJmK7GuPaNs9Tcs/bVa8jBBCDoVWjpckFegYiEyQ4m81tMZMjD0QaF9GST6c6kSbivKxjpZCPiNRv2FtnfBnHvZEnj1Yq1aF5aoZNXC1aBRfsL1cPjgfG3kAm4jNKUEHbJm95kNEGmL8TTWfRsTPzbbcRlskHDNLT987yuNBQ/WA0BRTaKdCwXr0bEC/u1BGC02hN5CcG2dbD1cdbXkDk1K9sE17qsRRJhoIFscQ==
+Received: from AM0PR10CA0040.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:150::20)
+ by AS2PR10MB7763.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:64a::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9320.17; Mon, 17 Nov
+ 2025 07:10:04 +0000
+Received: from AMS1EPF0000004C.eurprd04.prod.outlook.com
+ (2603:10a6:20b:150:cafe::69) by AM0PR10CA0040.outlook.office365.com
+ (2603:10a6:20b:150::20) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9320.21 via Frontend Transport; Mon,
+ 17 Nov 2025 07:09:58 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
  smtp.mailfrom=foss.st.com; dkim=none (message not signed)
  header.d=none;dmarc=fail action=none header.from=foss.st.com;
 Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.60; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.60) by
- DB1PEPF000509F4.mail.protection.outlook.com (10.167.242.150) with Microsoft
+ designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.59; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.59) by
+ AMS1EPF0000004C.mail.protection.outlook.com (10.167.16.137) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9343.9 via Frontend Transport; Mon, 17 Nov 2025 07:09:52 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
- (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9343.9 via Frontend Transport; Mon, 17 Nov 2025 07:10:04 +0000
+Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
+ (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Mon, 17 Nov
- 2025 08:10:15 +0100
+ 2025 08:10:17 +0100
 Received: from [10.48.87.93] (10.48.87.93) by STKDAG1NODE1.st.com
  (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Mon, 17 Nov
- 2025 08:09:51 +0100
-Message-ID: <0db24602-e41d-4aaf-b00a-9bdc824e38e4@foss.st.com>
-Date: Mon, 17 Nov 2025 08:09:48 +0100
+ 2025 08:10:03 +0100
+Message-ID: <98804eef-ad91-4543-9c81-00c1c87f13d0@foss.st.com>
+Date: Mon, 17 Nov 2025 08:10:02 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
 To: Marek Vasut <marek.vasut@mailbox.org>, <u-boot@lists.denx.de>
 References: <20251023214855.181410-1-marek.vasut@mailbox.org>
- <98964a94-9be5-493d-9d09-c1e9ba3ff250@foss.st.com>
+ <20251023214855.181410-2-marek.vasut@mailbox.org>
+ <4050a7ca-7a3c-45c7-bcfc-ee62caf4a6d6@foss.st.com>
 Content-Language: en-US
-In-Reply-To: <98964a94-9be5-493d-9d09-c1e9ba3ff250@foss.st.com>
+In-Reply-To: <4050a7ca-7a3c-45c7-bcfc-ee62caf4a6d6@foss.st.com>
 X-Originating-IP: [10.48.87.93]
 X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
  (10.75.128.132)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB1PEPF000509F4:EE_|DB4PR10MB6239:EE_
-X-MS-Office365-Filtering-Correlation-Id: e7af285b-27c2-4a86-a46a-08de25a84db2
+X-MS-TrafficTypeDiagnostic: AMS1EPF0000004C:EE_|AS2PR10MB7763:EE_
+X-MS-Office365-Filtering-Correlation-Id: 557736e3-27ca-4ade-815e-08de25a8553e
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|82310400026|36860700013|7053199007; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?TkFUMXlRMm1JMVZ0eXRxWVVxcWxTWTI3TitTcC9UbDl6RllRZmlIWFJwQW9B?=
- =?utf-8?B?RlR2SEhwYUIzWm41ckpyenVsbzNpbldqSzh3ZDIxbWVSQUt6SUlXUHZnVUdh?=
- =?utf-8?B?aGtaeUpnMVpaRmhoT1lVSkI0NWhWRVBvYi9XMVBKeW5rdkNWejNicDBQcDcw?=
- =?utf-8?B?M0I2MzU0NTB4U3NpM0hsdGkxNXRMeE1ISmlMckR3bU9IRVRYWGRKZ1VIT1Rw?=
- =?utf-8?B?Wk01bk9aWkF1S1FlTTRBSnJCL0xEK0NuZlBhUXNFSWt6L1R5ckc3NTB0R0Jr?=
- =?utf-8?B?UWg4aC85TmdCUHVBZ2ZXVmk3S2VvMHdLOTY4WlBhbUxQZC82WS82Um5DRmZO?=
- =?utf-8?B?a3NrWHJ2TXppek4yRC9rOUFVRXBWMDRoTFl1cUhuT0YvQVFxSmNDbmhleGU3?=
- =?utf-8?B?ZmZVYlZEeXh5eGVzSk04dkwxemRvL3ZhcEZqaFQzWGhlTUFjK0ZFd2hqZVk5?=
- =?utf-8?B?b1NOaDR0bkcwbnBFVXhVU0hIbXlYSlZqbU1JV2hjTjRwQjA0b3ZBcTEydzRV?=
- =?utf-8?B?SnA4WUk1Rzk4cEU3d284VWg1WFJwaTJuU1BoSmNMQ09Id0wwa2lLdVhBUjVm?=
- =?utf-8?B?Q2pUQ2drUm45bEdRYmwrbzBLM3hta3JwU0RUenNTUVlNVWJ1TWhPU2NXZzc1?=
- =?utf-8?B?dExCazVwbi9FY3A1Q241d1J2WlhuYWtBVHk5LzFwZHFSRFlmR3Z3ekg3SFdr?=
- =?utf-8?B?bkdvdVRqVThFUnQrWlpyY1d0T0dyRFhsNkNTVVo0YStRb0YzN2J5UThyUnhI?=
- =?utf-8?B?OHdKOHF3OVMwT2dEREduWHRORmlXQWFsOE5TeWliczdWM1BLV1Qva3pxZnNv?=
- =?utf-8?B?WlFuZU5jWGxpMnE4SFF1Z1RvTXlTQlZzQldHQlB1YUplc2dPR2lhNUtlRThL?=
- =?utf-8?B?UUdxeEl6R3NCTlhlQTVZdUdJL3g2cjNnSXVuNGwxSkdKZ1dRWUY2NVcyVGVH?=
- =?utf-8?B?emY5N0ZCV01VM0t3b2hXM3dmNDZ5aGE0UEVneUpUL3Z4YnpzUDI0ZVRSNTRM?=
- =?utf-8?B?Zm9QTW9qajdEcWdFc0hoaUFodDZoL0dWOVQySXNwbEZxUzE0RmlENW95R1hj?=
- =?utf-8?B?OXJ6aGFmU1RBQUxtQU5YM3ZTSkNUVmdlV0xhZ0pOWEk3UDFKRG5NQUhILzNt?=
- =?utf-8?B?VVpuYVFiaHpUZDh5NkpXRjZMSWJWT0xaNmlqL1FMNGZScmVldGtQRmRJakox?=
- =?utf-8?B?S3RxVXRMemlKS080N3krZmZxSURvV1BJN09KNkIwdkYraXhkUmhxZGJpT0JP?=
- =?utf-8?B?OGsxWHVqckJMRlVWMlMxT3RFSU9ybmswaHdXaXNuZG5naExDNWMzYlFneHBG?=
- =?utf-8?B?R3FVWlZpc1lNU3ZHUStSeFl0dXpyaXNQVUZSYWRGdythc2kxSGx5anJxUFkz?=
- =?utf-8?B?d3UyZTZzdGtNYnRrME9pSjdabm9vMW1GL1c2RFo3dXhTd0VMaHZTSVMvV1VJ?=
- =?utf-8?B?NjNVWUNiVmd4Z0xUQXFnMHBaVGd3dDVoS3d5RE5WVzBHMnI0Nm9jTmRSZEdz?=
- =?utf-8?B?QkQ1Qm1lSEpqd2s4MjRlL1M3QytqN0lxWjVDaFh3UE5keTk4M3dORlZnWm94?=
- =?utf-8?B?NGhVcmpUUVFpMzlSRjU3WFNGMm9JM1lwM053Nm9KNmhzK3RTVm1xRWlYWFJ5?=
- =?utf-8?B?YzdXaXRsMDlkK2thZmNlWG9PRVBmNzhiZEFXdEs3RHp0MkZzNlNCbVpyR2No?=
- =?utf-8?B?ZDZJNHgveVlKaEYyVG96Nzd0TmNJZG9ML1JmZjVoT1Z1RTNRU0wzMndBYzMr?=
- =?utf-8?B?SWc5ZjJLakNabkJibWpuTExBaXE2NzdWSFZUWmZIZFlHelZ2Q0c2MUJpVjNo?=
- =?utf-8?B?S0JPUW81K2RVekVJTVNLcGE3d3drdDRtcEQrNTNsQWFna3RxWXZyTkRWRThz?=
- =?utf-8?B?aWt1S2hMVXYrSEhLQ1dCdFdlbGR1T0Iwa0FlYnRqR1IxUElLUEI4NUlaMFh1?=
- =?utf-8?B?a2s0MDhBRVhuS1lRd3NNZDNveVB1NE50bTVHWWdvVUNXelNzWFZDSE1vMG9K?=
- =?utf-8?B?WjBEQXVhaVZIZ1VqVlJaSDJWMWU0WUJMd2cvRTZ3czAzcXZxck0rNXkvbTMv?=
- =?utf-8?B?dlBPZndWeVlRbnFGZjhycTlVNTJEaGt1WURpd2FQR2J1bjZhUGkyNmlTbkhJ?=
- =?utf-8?Q?I2pc=3D?=
-X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
+ ARA:13230040|376014|36860700013|1800799024|82310400026|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?azFIT1p1bE1heUY4Ym9sUldPN1pHSG5USE5SbWJhcFErYXhCN2NvSStUQVdC?=
+ =?utf-8?B?YjRIM0RhUittei9sTzdkSFdjRjRBUEFnb2c1eEowWUo2YXVicVVFTWFLcFhW?=
+ =?utf-8?B?aElFWXRJNkpVd3djem9WRS85ZmFZM0xXRldFTkt1aDAxMFpIQkFneDV1aHp2?=
+ =?utf-8?B?ZHBXb3cydVZrZzNtcnQ4QzB4TEhORG5YdEZ3andCS1Z0TzV4dXJlazV4akJx?=
+ =?utf-8?B?TjR6ZFZSMmcvK2FZZTdXa0NwU0R1cGZkb3V1MzRiVklsbUVMQ091TVpkeWFl?=
+ =?utf-8?B?UXRKaHZiODhNUHdMeTB6dnV1SDU5cDd4MDNUSW14YkRuNU9pTEVpaklYbldU?=
+ =?utf-8?B?WngrZzdma0RjbUN5MHQxdHc2ZHNvNHVOL0xMRU02TGphWHAwQW5Pa0RxVi8x?=
+ =?utf-8?B?TzI1WDBXQldJM1A2NmxMc3NLclJUQjJyQkVwOEh6SmVRcDBpZVhWOERab1NY?=
+ =?utf-8?B?Wnc3R1J4U2ZwUFV2enZDV2RIeEhXSnU2a25pbEpiZHRDM1dCWEw5aUhNaTh5?=
+ =?utf-8?B?OVNnY05IVHJWUjRyYmlzR29JWXZpWng4S3hkblVXS1BMM0dYbDhtSk9pbjBN?=
+ =?utf-8?B?eHZmTjdtSjNWcGxPbTZxc0NkTHJaakdYU2p6M05qaVdEUEZhbVo0Qmt1VnZZ?=
+ =?utf-8?B?WmFOdGZaSGw3TmwyeGJvbUxiU2hVUkhPRXNMWGtpNnpuSDBYeTQ2aEdSUmEv?=
+ =?utf-8?B?WG9BM2hPZHR2blEwTEtHVkt5bFJsTklqbW5WYXZpTnUybWZ0ejJwb3FOQjhC?=
+ =?utf-8?B?dVdxWTN4bFV1S2YxK2hKUEtyRkVpdXNtTm05ZDRORWswSjBpNFhCUmtYZWxD?=
+ =?utf-8?B?di80M09pZG5kSVlyTUJjQWpsVkJWMW1taUZMOXZwdXdMUENCTUVqenNHTkJi?=
+ =?utf-8?B?aTRvOXdqbk1nTFo1Sk15VVZibmRmbXBtMnlGZnZqdjhtUHJBWVRRSzNZMUVu?=
+ =?utf-8?B?aE56UWhUaDBIRVJrL1FyVm84aWVTMjVXOFE0ZU4rTjdKKzJ1S2ZzQ0hiOWN1?=
+ =?utf-8?B?M0hhS2IwekFNZENvU3pCRDF0WWovUGthOVJXVnpmcG8wVWwxWkR4Rkhxc2g3?=
+ =?utf-8?B?NHZpVjhweFhvQlQ2aENPVHRHcE9uVUZIWG1zMWx6TWtEVlg2MUgrV2lLV3I4?=
+ =?utf-8?B?QnFRZm00ZXREM0FJY1owbGxMTXNlN2lwOHg4RDV5bDhVVzdBbEVlU3QxTmlp?=
+ =?utf-8?B?ckRxdk1xazFyeThGNlU4MWU5UExqN2dyZ0d2Y1lMbmViM2VOMlgvOWI5Rklh?=
+ =?utf-8?B?S0hDbmd1VnRjTmppUERDNEJRVVloMXNSRzkvRW5Mc2N1aGxnOGpHdjJkZS9M?=
+ =?utf-8?B?MW9oTGJ3elJ3RWZQSmY1VGRmcGdrSVNOT0lUeWkvdGpuQm4rWWlCZ2pWSkg3?=
+ =?utf-8?B?NGhJVTh4cFR3YVRreGNUZ0o3S1g0TWNlR3FtYjZpa2t4a0xsRjd6OWJ4a1kx?=
+ =?utf-8?B?ZEhzYTlOdEUxU3gwc09UMWFacnp3ZEhEaUV4b01sV3owdUFOUmttMUlFczh3?=
+ =?utf-8?B?N1ZPaTh4SDBDb01wQjVCdUlPRGV3MjBYdmE0d2Y1aWwvaDQwcHhENng0aEZo?=
+ =?utf-8?B?Rm1uNHZPNVJBZWJqRGEyU1ZTaVhZc3luVCtuQ3JCdXgrYmRUangwZGovSWUv?=
+ =?utf-8?B?OFh0QVlQQklMclVZK3Q3c3NEblBxd2JtNXRCNE1XdHVWT01hOWtmMC96b0My?=
+ =?utf-8?B?VUpuV01JVFhhYnBMenpRTS9uZjFuS0dRU3JvTjA3Q2tsZ1Fsa1VRN0s3OGwr?=
+ =?utf-8?B?elQ0aldsaVAzUFJkNXBkRmVtSTdncldwK0lMVTRxNjZsSFMybjArdU8vWkl5?=
+ =?utf-8?B?WE1xcnBhOGhid0xOUm1taVBsSVZtd3JzYlEwV1VTcUtETWZXcG4wdFV1UHRi?=
+ =?utf-8?B?WmFtWkZUWUV5RG9QdVl1ek1UZFJ1Snh3TWNBajQrNjl3Y2pXc1MvbnJCT2Nz?=
+ =?utf-8?B?U1hUeitjVkxhd1lMSWt3UnV5MndmOE05SHhVMWwxRVRjYjVscCtSbHBRcEpW?=
+ =?utf-8?B?ektGZ2V5ZmNrSWVoaVRWZWlURU9nYjFJR3lRbW5aZXBydk03VzF4L1pydjdE?=
+ =?utf-8?B?NDViYTJqOExicTVNd0lXNzBUeWdheVhHYlZXRFhZV0dkaHRiVnVIZFltbDg5?=
+ =?utf-8?Q?XCTw=3D?=
+X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(82310400026)(36860700013)(7053199007);
+ SFS:(13230040)(376014)(36860700013)(1800799024)(82310400026)(7053199007);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Nov 2025 07:09:52.0399 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e7af285b-27c2-4a86-a46a-08de25a84db2
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Nov 2025 07:10:04.7255 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 557736e3-27ca-4ade-815e-08de25a8553e
 X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
  Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: DB1PEPF000509F4.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: AMS1EPF0000004C.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB4PR10MB6239
-X-Authority-Analysis: v=2.4 cv=StCdKfO0 c=1 sm=1 tr=0 ts=691aca44 cx=c_pps
- a=YkxNESviQPhk0sQhJIPXlg==:117 a=uCuRqK4WZKO1kjFMGfU4lQ==:17
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR10MB7763
+X-Authority-Analysis: v=2.4 cv=G+cR0tk5 c=1 sm=1 tr=0 ts=691aca56 cx=c_pps
+ a=/50zGBynOqPJ0sMV+cRBzg==:117 a=d6reE3nDawwanmLcZTMRXA==:17
  a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=XWp4PHTOCikA:10 a=IkcTkHD0fZMA:10
  a=6UeiqGixMTsA:10 a=s63m1ICgrNkA:10 a=KrXZwBdWH7kA:10
  a=VkNPw1HP01LnGYTKEx00:22 a=b3CbU_ItAAAA:8 a=8b9GpE9nAAAA:8 a=k-42gJp3AAAA:8
- a=zk4-lHRcAAAA:8 a=phlkwaE_AAAA:8 a=Ael1myuxsjpW-mCXQZ0A:9 a=QEXdDO2ut3YA:10
+ a=zk4-lHRcAAAA:8 a=phlkwaE_AAAA:8 a=lMqmPoWa79AlLkrwY_wA:9 a=QEXdDO2ut3YA:10
  a=Rv2g8BkzVjQTVhhssdqe:22 a=T3LWEMljR5ZiDmsYVIUa:22 a=uCSXFHLys93vLW5PjgO_:22
  a=7cv85riZL9-k45RWW8P6:22 a=uKTQOUHymn4LaG7oTSIC:22 a=HhbK4dLum7pmb74im6QT:22
  a=cPQSjfK2_nFv0Q5t_7PE:22 a=pHzHmUro8NiASowvMSCR:22 a=Ew2E2A-JSTLzCXPT_086:22
-X-Proofpoint-GUID: 8FVQbvgCsEJxt5Ao3jbVGFzE9-fQ3Uyt
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTE3MDA1OSBTYWx0ZWRfX5SxtiMPJZTxl
- QWEiLviBOcDr7p0FsG+rVgS3PQbuKL2srtJKP0/YFjr3xq66fg43e8tEAQJJqIutS51mU7I//Tg
- 5KDCZ5fHb5ACriHKf3aOyAKj40XOrZQfgBx5pjgTzgzbrYbRkQ547qqnhzF5VYRCvIsKnGl8BA8
- oTlLd1A23Ujke0QBRHQ4XXoJYDkZQEZqqU+JGF21MdueEjDwhaelWlpZEP7HoXeR4NBM20VlyG8
- 5CO4X6/mVrzq3szZp7vvTXzMES3K/SIJPoHIFPVAgTrVC/bjlRx4I3zOjXocxE4gNzrhVsXZPzG
- bpTaQ4Z/0Omz3dnAugzIiUT1l2j4o5cBxOpRek3i7A1uFj6eGBEs7WchwJriE+rYNP+Af3Ecldu
- p3aAuOJ/cED4Tah3rlBFZw3EV8b69Q==
-X-Proofpoint-ORIG-GUID: 8FVQbvgCsEJxt5Ao3jbVGFzE9-fQ3Uyt
+X-Proofpoint-GUID: sCV6vnlgEUdjJYq9m7A2cju31wEwllA5
+X-Proofpoint-ORIG-GUID: sCV6vnlgEUdjJYq9m7A2cju31wEwllA5
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTE3MDA1OSBTYWx0ZWRfXykPlomIb+ttQ
+ 1Ab8A66iF7Ac8DJbupu6f7kdpktDfSt6tBSwh2xuU5zua+q97Imdcok9yXmO49x2vwNpkfg/qfc
+ d9C2moChTS4ZcdcjVXLBiw/lw/gaFBAnMJEb0MxJFu3gBFp9tCTW+uTA0vysu+Uwv5Vthq4DOgL
+ LYS2E/H7IGHinRSuMB9+vH0Jcc63JmlbmSZh1mEiPznO2xlIu5W30cbD2qPQxTZ6DSiLSGTDpbN
+ DY1Lb/r2CqQ9JlxZ/H8x9LvKC1qVxRzcCPdcvS710uf1tDzTH8soR+Tz5X0FpfgbT9ZP9aUUFe8
+ V2NKwwBFURHdmkVGAYaDT7QMJDXZt6Jz0E09GCDqXkGM7JebKz2mU0+NhhLvJclJ/a+yqnihglJ
+ ImFq6oEQb0Q8GQ/+roDr7tOvR6A7uw==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
  definitions=2025-11-17_02,2025-11-13_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 impostorscore=0
- suspectscore=0 priorityscore=1501 bulkscore=0
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 malwarescore=0
+ bulkscore=0 lowpriorityscore=0 suspectscore=0
  adultscore=0 phishscore=0
- lowpriorityscore=0 malwarescore=0 clxscore=1015 spamscore=0
+ impostorscore=0 spamscore=0 clxscore=1015 priorityscore=1501
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2511170059
 Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Tom Rini <trini@konsulko.com>, uboot-stm32@st-md-mailman.stormreply.com,
  u-boot@dh-electronics.com
-Subject: Re: [Uboot-stm32] [PATCH 1/3] board: dhelectronics: Move
- dh_add_item_number_and_serial_to_env() to common code
+Subject: Re: [Uboot-stm32] [PATCH 2/3] ARM: stm32: Read values from M24256
+ write-lockable page on STM32MP13xx DHCOR
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -187,13 +189,18 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
 
-On 10/27/25 18:12, Patrice CHOTARD wrote:
+On 10/27/25 18:18, Patrice CHOTARD wrote:
 > 
 > 
 > On 10/23/25 23:48, Marek Vasut wrote:
->> Move dh_add_item_number_and_serial_to_env() to common code, so it
->> can be used by both STM32MP13xx and iMX8MP DHSOM. No functional
->> change.
+>> The STM32MP13xx DHCOR SoM is populated with M24256 EEPROM that contains
+>> an additional write-lockable page called ID page, which is populated with
+>> a structure containing ethernet MAC addresses, DH item number and DH serial
+>> number.
+>>
+>> Read out the MAC address from the WL page between higher priority SoC fuses
+>> and lower priority plain EEPROM storage area. Read out the DH item and serial
+>> numbers and set environment variables accordingly.
 >>
 >> Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
 >> ---
@@ -204,137 +211,121 @@ On 10/27/25 18:12, Patrice CHOTARD wrote:
 >> Cc: u-boot@lists.denx.de
 >> Cc: uboot-stm32@st-md-mailman.stormreply.com
 >> ---
->>  board/dhelectronics/common/dh_common.c        | 37 +++++++++++++++++++
->>  board/dhelectronics/common/dh_common.h        |  9 +++++
->>  .../dh_imx8mp/imx8mp_dhcom_pdk2.c             | 37 -------------------
->>  3 files changed, 46 insertions(+), 37 deletions(-)
+>>  arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi |  1 +
+>>  board/dhelectronics/dh_stm32mp1/board.c    | 51 ++++++++++++++++++----
+>>  2 files changed, 43 insertions(+), 9 deletions(-)
 >>
->> diff --git a/board/dhelectronics/common/dh_common.c b/board/dhelectronics/common/dh_common.c
->> index 6101ecc7ebc..e7ee23aa8ce 100644
->> --- a/board/dhelectronics/common/dh_common.c
->> +++ b/board/dhelectronics/common/dh_common.c
->> @@ -246,3 +246,40 @@ __weak int dh_setup_mac_address(struct eeprom_id_page *eip)
->>  	printf("%s: Unable to set mac address!\n", __func__);
->>  	return -ENXIO;
+>> diff --git a/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi b/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
+>> index 5ca0258e3ff..bedb7c600d5 100644
+>> --- a/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
+>> +++ b/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
+>> @@ -10,6 +10,7 @@
+>>  / {
+>>  	aliases {
+>>  		eeprom0 = &eeprom0;
+>> +		eeprom0wl = &eeprom0wl;
+>>  	};
+>>  
+>>  	config {
+>> diff --git a/board/dhelectronics/dh_stm32mp1/board.c b/board/dhelectronics/dh_stm32mp1/board.c
+>> index a9b1a0f2c34..065d2f338c2 100644
+>> --- a/board/dhelectronics/dh_stm32mp1/board.c
+>> +++ b/board/dhelectronics/dh_stm32mp1/board.c
+>> @@ -119,7 +119,7 @@ static bool dh_stm32_mac_is_in_ks8851(void)
+>>  	return false;
 >>  }
+>>  
+>> -static int dh_stm32_setup_ethaddr(void)
+>> +static int dh_stm32_setup_ethaddr(struct eeprom_id_page *eip)
+>>  {
+>>  	unsigned char enetaddr[6];
+>>  
+>> @@ -129,13 +129,19 @@ static int dh_stm32_setup_ethaddr(void)
+>>  	if (dh_get_mac_is_enabled("ethernet0"))
+>>  		return 0;
+>>  
+>> +	if (!dh_get_value_from_eeprom_buffer(DH_MAC0, enetaddr, sizeof(enetaddr), eip))
+>> +		goto out;
 >> +
->> +void dh_add_item_number_and_serial_to_env(struct eeprom_id_page *eip)
->> +{
->> +	char *item_number_env;
->> +	char item_number[8];	/* String with 7 characters + string termination */
->> +	char *serial_env;
->> +	char serial[10];	/* String with 9 characters + string termination */
+>>  	if (!dh_get_mac_from_eeprom(enetaddr, "eeprom0"))
+>> -		return eth_env_set_enetaddr("ethaddr", enetaddr);
+>> +		goto out;
+>>  
+>>  	return -ENXIO;
+>> +
+>> +out:
+>> +	return eth_env_set_enetaddr("ethaddr", enetaddr);
+>>  }
+>>  
+>> -static int dh_stm32_setup_eth1addr(void)
+>> +static int dh_stm32_setup_eth1addr(struct eeprom_id_page *eip)
+>>  {
+>>  	unsigned char enetaddr[6];
+>>  
+>> @@ -148,20 +154,47 @@ static int dh_stm32_setup_eth1addr(void)
+>>  	if (dh_stm32_mac_is_in_ks8851())
+>>  		return 0;
+>>  
+>> -	if (!dh_get_mac_from_eeprom(enetaddr, "eeprom0")) {
+>> -		enetaddr[5]++;
+>> -		return eth_env_set_enetaddr("eth1addr", enetaddr);
+>> -	}
+>> +	if (!dh_get_value_from_eeprom_buffer(DH_MAC1, enetaddr, sizeof(enetaddr), eip))
+>> +		goto out;
+>> +
+>> +	if (!dh_get_mac_from_eeprom(enetaddr, "eeprom0"))
+>> +		goto increment_out;
+>>  
+>>  	return -ENXIO;
+>> +
+>> +increment_out:
+>> +	enetaddr[5]++;
+>> +
+>> +out:
+>> +	return eth_env_set_enetaddr("eth1addr", enetaddr);
+>>  }
+>>  
+>>  int setup_mac_address(void)
+>>  {
+>> -	if (dh_stm32_setup_ethaddr())
+>> +	u8 eeprom_buffer[DH_EEPROM_ID_PAGE_MAX_SIZE] = { 0 };
+>> +	struct eeprom_id_page *eip = (struct eeprom_id_page *)eeprom_buffer;
 >> +	int ret;
 >> +
->> +	ret = dh_get_value_from_eeprom_buffer(DH_ITEM_NUMBER, item_number, sizeof(item_number),
->> +					      eip);
+>> +	ret = dh_read_eeprom_id_page(eeprom_buffer, "eeprom0wl");
 >> +	if (ret) {
->> +		printf("%s: Unable to get DHSOM item number from EEPROM ID page! ret = %d\n",
->> +		       __func__, ret);
+>> +		/*
+>> +		 * The EEPROM ID page is available on SoM rev. 200 and greater.
+>> +		 * For SoM rev. 100 the return value will be -ENODEV. Suppress
+>> +		 * the error message for that, because the absence cannot be
+>> +		 * treated as an error.
+>> +		 */
+>> +		if (ret != -ENODEV)
+>> +			printf("%s: Cannot read valid data from EEPROM ID page! ret = %d\n",
+>> +			       __func__, ret);
+>> +		eip = NULL;
 >> +	} else {
->> +		item_number_env = env_get("dh_som_item_number");
->> +		if (!item_number_env)
->> +			env_set("dh_som_item_number", item_number);
->> +		else if (strcmp(item_number_env, item_number))
->> +			printf("Warning: Environment dh_som_item_number differs from EEPROM ID page value (%s != %s)\n",
->> +			       item_number_env, item_number);
+>> +		dh_add_item_number_and_serial_to_env(eip);
 >> +	}
 >> +
->> +	ret = dh_get_value_from_eeprom_buffer(DH_SERIAL_NUMBER, serial, sizeof(serial),
->> +					      eip);
->> +	if (ret) {
->> +		printf("%s: Unable to get DHSOM serial number from EEPROM ID page! ret = %d\n",
->> +		       __func__, ret);
->> +	} else {
->> +		serial_env = env_get("dh_som_serial_number");
->> +		if (!serial_env)
->> +			env_set("dh_som_serial_number", serial);
->> +		else if (strcmp(serial_env, serial))
->> +			printf("Warning: Environment dh_som_serial_number differs from EEPROM ID page value (%s != %s)\n",
->> +			       serial_env, serial);
->> +	}
->> +}
->> diff --git a/board/dhelectronics/common/dh_common.h b/board/dhelectronics/common/dh_common.h
->> index c4693c60618..b4f31bdb88e 100644
->> --- a/board/dhelectronics/common/dh_common.h
->> +++ b/board/dhelectronics/common/dh_common.h
->> @@ -107,7 +107,16 @@ int dh_get_value_from_eeprom_buffer(enum eip_request_values request, u8 *data, i
+>> +	if (dh_stm32_setup_ethaddr(eip))
+>>  		log_err("%s: Unable to setup ethaddr!\n", __func__);
 >>  
->>  /*
->>   * dh_setup_mac_address - Try to get MAC address from various locations and write it to env
->> + * @eip: ID EEPROM buffer
->>   *
->>   * Return: 0 if OK, other value on error
->>   */
->>  int dh_setup_mac_address(struct eeprom_id_page *eip);
->> +
->> +/*
->> + * dh_add_item_number_and_serial_to_env - Try to get DH IDs from WLP write them to env
->> + * @eip: ID EEPROM buffer
->> + *
->> + * Return: 0 if OK, other value on error
->> + */
->> +void dh_add_item_number_and_serial_to_env(struct eeprom_id_page *eip);
->> diff --git a/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c b/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
->> index 3a890c5920c..5c35a5bf447 100644
->> --- a/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
->> +++ b/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
->> @@ -116,43 +116,6 @@ int dh_setup_mac_address(struct eeprom_id_page *eip)
->>  	return ret;
->>  }
+>> -	if (dh_stm32_setup_eth1addr())
+>> +	if (dh_stm32_setup_eth1addr(eip))
+>>  		log_err("%s: Unable to setup eth1addr!\n", __func__);
 >>  
->> -void dh_add_item_number_and_serial_to_env(struct eeprom_id_page *eip)
->> -{
->> -	char *item_number_env;
->> -	char item_number[8];	/* String with 7 characters + string termination */
->> -	char *serial_env;
->> -	char serial[10];	/* String with 9 characters + string termination */
->> -	int ret;
->> -
->> -	ret = dh_get_value_from_eeprom_buffer(DH_ITEM_NUMBER, item_number, sizeof(item_number),
->> -					      eip);
->> -	if (ret) {
->> -		printf("%s: Unable to get DHSOM item number from EEPROM ID page! ret = %d\n",
->> -		       __func__, ret);
->> -	} else {
->> -		item_number_env = env_get("dh_som_item_number");
->> -		if (!item_number_env)
->> -			env_set("dh_som_item_number", item_number);
->> -		else if (strcmp(item_number_env, item_number))
->> -			printf("Warning: Environment dh_som_item_number differs from EEPROM ID page value (%s != %s)\n",
->> -			       item_number_env, item_number);
->> -	}
->> -
->> -	ret = dh_get_value_from_eeprom_buffer(DH_SERIAL_NUMBER, serial, sizeof(serial),
->> -					      eip);
->> -	if (ret) {
->> -		printf("%s: Unable to get DHSOM serial number from EEPROM ID page! ret = %d\n",
->> -		       __func__, ret);
->> -	} else {
->> -		serial_env = env_get("dh_som_serial_number");
->> -		if (!serial_env)
->> -			env_set("dh_som_serial_number", serial);
->> -		else if (strcmp(serial_env, serial))
->> -			printf("Warning: Environment dh_som_serial_number differs from EEPROM ID page value (%s != %s)\n",
->> -			       serial_env, serial);
->> -	}
->> -}
->> -
->>  int board_late_init(void)
->>  {
->>  	u8 eeprom_buffer[DH_EEPROM_ID_PAGE_MAX_SIZE] = { 0 };
+>>  	return 0;
 > Hi 
 > 
 > Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > 
 > Thanks
 > Patrice
-
 Applied to u-boot-stm32/master
 
 Thanks
 Patrice
-
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

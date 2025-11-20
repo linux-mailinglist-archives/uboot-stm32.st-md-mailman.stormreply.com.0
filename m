@@ -2,76 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id D1A31C6C19D
-	for <lists+uboot-stm32@lfdr.de>; Wed, 19 Nov 2025 01:09:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 10E33C76373
+	for <lists+uboot-stm32@lfdr.de>; Thu, 20 Nov 2025 21:38:39 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 7D4D3C62D2D;
-	Wed, 19 Nov 2025 00:09:54 +0000 (UTC)
-Received: from mail-oa1-f45.google.com (mail-oa1-f45.google.com
- [209.85.160.45])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A1203C58D7B;
+	Thu, 20 Nov 2025 20:38:38 +0000 (UTC)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 43CF4C58D79
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Thu, 20 Nov 2025 20:38:38 +0000 (UTC)
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id BDE02C62D20
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 19 Nov 2025 00:09:53 +0000 (UTC)
-Received: by mail-oa1-f45.google.com with SMTP id
- 586e51a60fabf-3e898ba2a03so1725946fac.0
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 18 Nov 2025 16:09:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1763510992; x=1764115792;
- darn=st-md-mailman.stormreply.com; 
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=0HBBjk4Dj7shOveulG1Gq22RUBGdGMbA/CYa78qmNBE=;
- b=BuQt+ZTh0PqBQN8WzNXKQb5imYpJGldWJ67KYiTd53Yu2P3Ify/yUS8iLwFSvH6jDH
- Otafov6DmkgN+dhoMoe+lHsbbWEgiKEamiDZP6FC/Ej37T5b93ukyowh7x0pcbFgE4nY
- mOY7uPYXrJj81+LNfSh4rrRtCETqbWD/ug42k=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763510992; x=1764115792;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=0HBBjk4Dj7shOveulG1Gq22RUBGdGMbA/CYa78qmNBE=;
- b=o9LN7d4MS8i9OVJdCpSKJYho2RUryOKPZgL5STaQ7gmwonjTM1fRoqIgbVEdPY1zch
- 6uQ5lKDfuRJCriPQsT7FN07E+JBxzfYm8T+8q93U/Oui4M2KDU3cZ8ZnGrhVaJDyfvWT
- SP5oarwFWaJ/Sh/S/i1EImnh8tpKKpejPe4nwWdsOWElkBDyFx/oFYjQWc990+rQ1ArK
- WsKPT24B71gtztpvCmxsHcofle829XJ10XSq88oNWQ2MCGSG5TSxEy8OAtBulR8IMnBb
- k+aiH3C0SV0pUCHGF91iDmr2UQgGmc7KREFVZNfg4zj5a1t7h1tEma7jGDOmnHiDRm18
- 8M5w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUOB2e+5jaulPHri4v4/JWeeDK7toRuJv/yg4wvSFS9St94DikO9C4TK5NsdIzGmPCBxFMfq6jwdGmz2A==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0Yxt2YeHFfiuOhXMAmFZc7pgrRIwocVXeI3Q9aTc22C1cwreDwS7
- kp7X8x3SYMERFbVXXGnKmNxKgkU0j3pQ1o27Hn5oQxPiDJLpRV3lyNODIW1l8bxkcyo=
-X-Gm-Gg: ASbGncuuWhv63TiRaGdi9z+IVh+pmINU8T8N24RJr+U6orcLlR2FKw8FX6QKs56aA1b
- OYhNUzGPvbKmvBtfK0z9NjRepVCYOXtIffsottZtAqRar+195Ohi7zcAJ6FFq7cJMh2pXTUY1i4
- k0oehRRhCCOLAAdbZW632K0A3LcFCi9pz+RwKFDr3ytokTX9Z4DFBA/Bm+ACpwS6L/yKf+gqcMy
- oCYZaPuIy3QDS06rjD0dOdktxgwLQwb75uLLBbc+EppScCCdULH3f8Y3JnnNGWg7zAefK6PePSP
- rkBI0mRJiwKz7WWGrcOqAYBTOnHifQ1v1wZ7JHVdOTpztizEuC9hK/2qbwjIROfF4rHxK2zdsTk
- aIwCkmzWApHa32XPrJgbWxp2ORCo7N104RoSEDfOskj96ZvxWyTPf0HWFISWhfiS95Nnijp8cci
- 7Varh5V0MDyPqREcX+1h1Zfgd8J5hEDXM0qV+mbk4TVJ7aPeC1iM0f35qbzNne
-X-Google-Smtp-Source: AGHT+IEG3WHOrFUSeRsUZsyxgc2b5g5meQcsUELKESR3w8pYTupHXGo9EXuldZ3+5O9BYDI0/GuiRw==
-X-Received: by 2002:a05:6870:4f88:b0:3ec:50cd:2415 with SMTP id
- 586e51a60fabf-3ec50cd3754mr3912023fac.29.1763510992311; 
- Tue, 18 Nov 2025 16:09:52 -0800 (PST)
-Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3e851ff9dfesm7566406fac.2.2025.11.18.16.09.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Nov 2025 16:09:51 -0800 (PST)
-Date: Tue, 18 Nov 2025 18:09:49 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- u-boot@dh-electronics.com, uboot-stm32@st-md-mailman.stormreply.com
-Message-ID: <20251119000949.GW2125796@bill-the-cat>
-References: <20251118231732.577952-1-marek.vasut@mailbox.org>
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4dC9DC6D9wz9tNF;
+ Thu, 20 Nov 2025 21:38:35 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1763671115;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=pnuWa/y4fyB08cL/bLUxYRcb/+YqIMaiPT9la5fyAhg=;
+ b=rtZGC4RO0FWcDNbOWaSPxZNGBCvtZoq7LK7PFaHzoGF1NH0WSdsuxsb1cb97PIDaw7ul+l
+ jDDxj7KloTHUgLNWRGvLMPCDrHsZ7lxuoaGLakXmdcXQ6Ddu6RnWQQHvIa3GOvI50ZCUcO
+ X3012I+Ws4dJMndzcBsneIruE9Q13n5T+bg1Fv6SjqkXL6T2F9/IUdxUYnP/WkmrqDXmy4
+ Bfg5aoswJ8dU/BYlKRRAYYo1sPTAcB6IwVtuMaoFnqKmiD0hOyCRZID3HeVIVHqvrVWEVU
+ XgA9E04Av1tFvGYTxavz2bQA5ZDCdiNlF+wLD7O+lpnasobwAOqZDvtNqmO6rQ==
+Message-ID: <d90e6eca-2b3d-4274-8738-b2eb49f1e722@mailbox.org>
+Date: Thu, 20 Nov 2025 21:38:29 +0100
 MIME-Version: 1.0
-In-Reply-To: <20251118231732.577952-1-marek.vasut@mailbox.org>
-X-Clacks-Overhead: GNU Terry Pratchett
-Cc: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de
-Subject: Re: [Uboot-stm32] [PATCH] ARM: stm32: Add missing build of debug
- UART init code on DH STM32MP1 DHSOM
+To: Patrice CHOTARD <patrice.chotard@foss.st.com>, u-boot@lists.denx.de
+References: <20251114154259.4035206-1-patrice.chotard@foss.st.com>
+ <20251114154259.4035206-3-patrice.chotard@foss.st.com>
+ <4a71038b-ce5b-4119-9493-4e33642a8528@mailbox.org>
+ <71047e69-164e-4c65-9eb7-587de4f147ff@foss.st.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <71047e69-164e-4c65-9eb7-587de4f147ff@foss.st.com>
+X-MBO-RS-META: qik4h1fq7tqifh4z71c6eh6urhsrbck6
+X-MBO-RS-ID: ac1924b393938235c66
+Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
+ Valentin Caron <valentin.caron@foss.st.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Vinh Nguyen <vinh.nguyen.xz@renesas.com>, Alice Guo <alice.guo@nxp.com>,
+ Kamlesh Gurudasani <kamlesh@ti.com>,
+ Casey Connolly <casey.connolly@linaro.org>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ "u-boot@dh-electronics.com" <u-boot@dh-electronics.com>,
+ Michal Simek <michal.simek@amd.com>, Yao Zi <ziyao@disroot.org>
+Subject: Re: [Uboot-stm32] [PATCH 2/6] clk: scmi: Force call of
+ scmi_clk_get_attribute() during probe
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -83,85 +70,63 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============3236480505368618539=="
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+On 11/17/25 5:36 PM, Patrice CHOTARD wrote:
 
---===============3236480505368618539==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="5NSMHfX4GuePnLiQ"
-Content-Disposition: inline
+Hello Patrice,
 
+> On 11/15/25 00:08, Marek Vasut wrote:
+>> On 11/14/25 4:41 PM, Patrice Chotard wrote:
+>>> Since commit fdb1bffe2827 ("clk: scmi: Postpone clock name resolution"),
+>>> all clocks which are parent clocks are name "scmi-%zu" which
+>>> leads to error during their children clocks registration.
+>>>
+>>> In order to not cancel boot time optimization done in
+>>> commit 3547e315c188 ("clk: scmi: Defer issue of SCMI_CLOCK_ATTRIBUTES"),
+>>> choice has been done to re-introduce scmi_clk_get_attribute() call
+>>> during scmi_clk_probe() under new CLK_SCMI_FORCE_ATTRIBUTE flag.
+>>>
+>>> This restores boot on stm32mp13 and stm32mp2 family boards.
+>>>
+>>> Fixes: fdb1bffe2827 ("clk: scmi: Postpone clock name resolution")
+>> SCMI spec says that clock IDs have to be monotonic and incrementing, without gaps . This driver registers all SCMI clock for you exactly this way. What exactly is the problem on STM32 ? Are you maybe missing some reparenting somewhere else ? Maybe the clock parent resolution should happen when the clock are first used, just like attributes are now resolved when the clock are first used ?
+> 
+> Hi Marek
+> 
+> Initially, on STM32 we first registered SCMI clocks with their real names and then we registered all RCC clocks
+> in stm32_rcc_init(). For most of these latter clocks, their parent are SCMI clocks.
+> 
+> After commit fdb1bffe2827 ("clk: scmi: Postpone clock name resolution"), the name of these SCMI "parent" clocks
+> becames "scmi-%zu" which makes clk_register() failed as we still try to register RCC clocks using their parent's "real names".
+> 
+> For example: for STM32MP13, clock "ck_hse" becames "scmi-0", so all clocks which are "ck_hse"'s child can't be registered.
 
---5NSMHfX4GuePnLiQ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I don't think any clock driver can depend on SCMI clock shortnames for 
+clock look up, because the SCMI clock shortnames are an optional hint.
 
-On Wed, Nov 19, 2025 at 12:17:23AM +0100, Marek Vasut wrote:
-> Commit c37a6684818d ("stm32mp: fix compilation issue with DEBUG_UART")
-> split the debug UART initialization code into two files, but failed to
-> update other non-ST boards. This did not lead to noticeable breakage
-> until debug UART is enabled, which is not the default. Update the
-> Makefile accordingly to allow debug UART to work.
->=20
-> Fixes: c37a6684818d ("stm32mp: fix compilation issue with DEBUG_UART")
-> Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
-> ---
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@dh-electronics.com
-> Cc: u-boot@lists.denx.de
-> Cc: uboot-stm32@st-md-mailman.stormreply.com
-> ---
->  board/dhelectronics/dh_stm32mp1/Makefile | 2 ++
->  1 file changed, 2 insertions(+)
->=20
-> diff --git a/board/dhelectronics/dh_stm32mp1/Makefile b/board/dhelectroni=
-cs/dh_stm32mp1/Makefile
-> index 2f4a301d1a0..429e01453bb 100644
-> --- a/board/dhelectronics/dh_stm32mp1/Makefile
-> +++ b/board/dhelectronics/dh_stm32mp1/Makefile
-> @@ -3,6 +3,8 @@
->  # Copyright (C) 2018, STMicroelectronics - All Rights Reserved
->  #
-> =20
-> +obj-$(CONFIG_DEBUG_UART_BOARD_INIT) +=3D ../../st/stm32mp1/debug_uart.o
-> +
->  obj-$(CONFIG_PMIC_STPMIC1) +=3D ../../st/common/stpmic1.o
->  obj-y +=3D board.o
+Instead, if some clock registered in this RCC driver have SCMI parent 
+clock, those SCMI parent clock have to be referred to by SCMI clock 
+udevice and matching clock identifier (in this case, I assume that would 
+be SCMI clock ID).
 
-As a future cleanup perhaps for ST folks, this feels to me like there
-should be more code under arch/arm/mach-stm32mp1/ somewhere and not
-board/st/.../
+The relationship between this RCC clock and SCMI parent clock can likely 
+be described in DT using 'clocks = <&scmi_clk N>' , which you already 
+have in stm32mp131.dtsi:
 
---=20
-Tom
+  788                         clock-names = "hse", "hsi", "csi", "lse", 
+"lsi";
+  789                         clocks = <&scmi_clk CK_SCMI_HSE>,
+  790                                  <&scmi_clk CK_SCMI_HSI>,
+  791                                  <&scmi_clk CK_SCMI_CSI>,
+  792                                  <&scmi_clk CK_SCMI_LSE>,
+  793                                  <&scmi_clk CK_SCMI_LSI>;
 
---5NSMHfX4GuePnLiQ
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaR0KygAKCRAr4qD1Cr/k
-CiUgAQC/cwyzIjDTjlDqBkrCtI8VhOjVOCPVspMPx7Rmn8KFrQEA4wj3I6tF/ulZ
-l6M4ZqiyNRDofj6oF2xINVD2ntdCkQo=
-=hJHD
------END PGP SIGNATURE-----
-
---5NSMHfX4GuePnLiQ--
-
---===============3236480505368618539==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
+Can you use that for the parent lookup and simply ignore the shortnames?
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============3236480505368618539==--

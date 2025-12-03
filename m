@@ -2,33 +2,33 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 37BE3C9F3B5
-	for <lists+uboot-stm32@lfdr.de>; Wed, 03 Dec 2025 15:07:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E49A9C9F452
+	for <lists+uboot-stm32@lfdr.de>; Wed, 03 Dec 2025 15:20:30 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8BE10C5C842;
-	Wed,  3 Dec 2025 14:07:08 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 86194C5C842;
+	Wed,  3 Dec 2025 14:20:30 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 4E231C5A4E0
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 45ADEC5A4E4
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  3 Dec 2025 14:07:07 +0000 (UTC)
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ Wed,  3 Dec 2025 14:20:29 +0000 (UTC)
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 5B3Dt3Mr1916044; Wed, 3 Dec 2025 15:06:01 +0100
-Received: from duzpr83cu001.outbound.protection.outlook.com
- (mail-northeuropeazon11012065.outbound.protection.outlook.com [52.101.66.65])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4asrmvxw44-1
+ 5B3EEa1U933320; Wed, 3 Dec 2025 15:20:06 +0100
+Received: from db3pr0202cu003.outbound.protection.outlook.com
+ (mail-northeuropeazon11010020.outbound.protection.outlook.com [52.101.84.20])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4asy5an5fx-1
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Wed, 03 Dec 2025 15:06:00 +0100 (CET)
+ Wed, 03 Dec 2025 15:20:06 +0100 (CET)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=eecNoYBzuxjoD8NshwePuMg8q2NpLvwdVoIXwNSzt6Mo/FKza8VG1yh9ZngAn9iCO6fGpshGfrrqG13zxxqDB3QfH7XItFXJfnAfpmDpPer08UDrKge2IjGnRgcelbPfMRc0ZHnaClUbw/tKnZcz7TdDdXkHchVeTdXxk1MXrMQ3loML0gYIkNAjVmrYiDFR1R//kz0cKcrurX5i7vnpEVkYfoBF34Rnlv4SiF9tLsnt8lDuK22sneXTuyoczKNNuUDupzrOZjpLaRGfAT4c7S8h/MBOau2XY0fkidy2Uxuj0gZ0niSxBCjbwfWn7VeWhKz1RnZ8l/jjqpVRFr3DFA==
+ b=M9P1MCMaQDeXnxTTUhJFdufuKIeSz/sKeW1xcGfRF67GpBMW0nL/NjBfeEfOR0y9X11UJOpAkPSPQvdlW3PP4354QrSDw5XmmiDIZ7cRJq/GS0O61vOVMqH+gBwKN/5BiiQKV24Mn9vhyAYvx5K0QWL2mG97s4WIJQL2AtkQA+6GwWBZeJOoPP7BXmhtwKfmFv++iv0v7zi4zF6WlvtVgF97MJWcS0GY0pKn6e2blT0L5/0Pnu+wC1kyoNfL00LvG4t8/Eo6l8s3QTH9cS2t8EcEMJnsZJXISpgmgOHSYlqCNZlitL+d+WKo7tdBeCX0NuRMaS1eBMpcmFx1Kz8Edg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=yji/PstSVP9Nl6O7ft+wU0tqgHm6xeiWPM1fdcMWcDI=;
- b=cDCVTXeWdyPD+P1Qpyvp70fa+91Xbx42EN2N+9CIjGm6o1/Zo5SC+JyNWlkQ0Km3b/yV2GCRiTERTvwKBtSXv96C0IcciK9K7Kcsp5m/4SsFBBMRoijzdONYP43o/79gAMhy0hYqRqAjZQDYcv8lyxiOf9EjVyCT9WxPEjUkARArjbzGBBeljnE6j/Ji3Wr1U2z75qVsmEgs2vRRdTpVP/eNxRph5SxEX9XwkK4/t87S0ZGr2UZNN6GbYQ/WrOUsaf54j1QTHqS3jrmMxuSE5DFjvOZ1vh0ZehlHsS4Ru+zUEFVPtoPWfU6xSF4vriAgbF+SJ5XrCm1cMKElJPCNtA==
+ bh=hBzMJF705OjS1nCO9W7ctxk7IwEtXJoGpGH5zLlqe/A=;
+ b=hBX7rnDdevvWw2rmo+7AiK9q36cQ9rD6W7BlCVcEO2Du4RUHQ1YIxsw4Laz0n9oVve8h1+39pODrLp81DPUPkoy1NkaWHY+rKpr6NJ8AnFefKSzQiOB9j5C0V4i/oPjHrHkBqVicAX7kHRESktgbpQniLRtF+tJr94YHnzuopvlW+8g3ZFCL2Ejp+sYti1gJfVLtRLfBjUgNHNhnuIF0eqMnckvYnCMMdCM30DxnkAzZvLDdhCLDpTxGW1FoFDjXKreqidYeiTN8v7nFwFzhESHYY0LvleNvMZppRCEz2c1fJn3e6gH9heeNGvtNOucd185NnSuqknm0DVovSXQChg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
  164.130.1.60) smtp.rcpttodomain=mailbox.org smtp.mailfrom=foss.st.com;
  dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
@@ -36,18 +36,18 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=yji/PstSVP9Nl6O7ft+wU0tqgHm6xeiWPM1fdcMWcDI=;
- b=EGM93FR2G+/4GidTnbmHzTGrbPpCjXmDnjALF4WL2p7j7+AbG4+0Kd7+z57ahwEb0VGW5G8GlM24Py52gkNQvxXm1tZQGIDA843EVDfjJHx1LeScxb+WAHlHznqT5IEFUuNRjTqFpU9Pe/MJYjYXCI33CsX4J8vt2zkmkdpep4nOHOSWs+pvojhsi7zQScpymD8F1UXxUk3d6ct8aFulBXJkB5OiowOP/2Lxv0VMPqYIQcGv0KIgNo01exH26ZIBOk0WS6Rkt/FvmdOGUpZx1LX1LOD4O34Ul1JV4DxsD/N2rXDazNZo0qgCYbIZDFxZjE3NoT0CnjF+NAP51kGPKA==
-Received: from DU2PR04CA0337.eurprd04.prod.outlook.com (2603:10a6:10:2b4::35)
- by DU4PR10MB8542.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:566::21)
- with Microsoft SMTP Server (version=TLS1_2,
+ bh=hBzMJF705OjS1nCO9W7ctxk7IwEtXJoGpGH5zLlqe/A=;
+ b=HxkxOtHSpMtCzJRb45Bxj0OAqvwYCTNtQiOB+kO8R2y/yj6mvwWhgosMlpSLL8sQxmWvYFLQdBJhKglZ9FqDtxR5ZwfUeG/P3riACoYKbd1ozo22WG+Y2JUOSaAJW2/CI0UoBeBfWV3ST6371JVwZrWeT8+RxojRh9igI+BaVXYPHK6253YqG7J55C5hBZhyZLSnXjc5xHNKgrVt0KggqPxcC5gj6fSwO0QH5eo2avtSNwPjqMtZkptXvaw7wH4wuyeRjLK6rfRikBejEsJ0wV0HtO7Mw1QPcJyvphipS1oRYGftarH5hvvVkmdxKrtvVkwGgtu1CKp84wvX+3CwZw==
+Received: from DUZP191CA0064.EURP191.PROD.OUTLOOK.COM (2603:10a6:10:4fa::17)
+ by AS2PR10MB7480.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:590::22) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9388.9; Wed, 3 Dec
- 2025 14:05:58 +0000
-Received: from DB1PEPF000509FE.eurprd03.prod.outlook.com
- (2603:10a6:10:2b4:cafe::85) by DU2PR04CA0337.outlook.office365.com
- (2603:10a6:10:2b4::35) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9366.17 via Frontend Transport; Wed,
- 3 Dec 2025 14:05:58 +0000
+ 2025 14:20:01 +0000
+Received: from DB1PEPF0003922E.eurprd03.prod.outlook.com
+ (2603:10a6:10:4fa:cafe::93) by DUZP191CA0064.outlook.office365.com
+ (2603:10a6:10:4fa::17) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9388.10 via Frontend Transport; Wed,
+ 3 Dec 2025 14:19:59 +0000
 X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
  smtp.mailfrom=foss.st.com; dkim=none (message not signed)
  header.d=none;dmarc=fail action=none header.from=foss.st.com;
@@ -55,129 +55,117 @@ Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
  designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
  client-ip=164.130.1.60; helo=smtpO365.st.com;
 Received: from smtpO365.st.com (164.130.1.60) by
- DB1PEPF000509FE.mail.protection.outlook.com (10.167.242.40) with Microsoft
+ DB1PEPF0003922E.mail.protection.outlook.com (10.167.8.101) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9388.8 via Frontend Transport; Wed, 3 Dec 2025 14:05:57 +0000
+ 15.20.9388.8 via Frontend Transport; Wed, 3 Dec 2025 14:20:00 +0000
 Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
  (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Wed, 3 Dec
- 2025 15:06:34 +0100
+ 2025 15:20:37 +0100
 Received: from [10.48.87.93] (10.48.87.93) by STKDAG1NODE1.st.com
  (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Wed, 3 Dec
- 2025 15:05:56 +0100
-Message-ID: <4ecb9533-1def-44bb-9401-d1cc2cb52e7e@foss.st.com>
-Date: Wed, 3 Dec 2025 15:05:56 +0100
+ 2025 15:19:59 +0100
+Message-ID: <7d765b01-f905-4139-a72d-059f748eba87@foss.st.com>
+Date: Wed, 3 Dec 2025 15:19:59 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Marek Vasut <marek.vasut@mailbox.org>, <u-boot@lists.denx.de>
-References: <20251114154259.4035206-1-patrice.chotard@foss.st.com>
- <20251114154259.4035206-3-patrice.chotard@foss.st.com>
- <4a71038b-ce5b-4119-9493-4e33642a8528@mailbox.org>
- <71047e69-164e-4c65-9eb7-587de4f147ff@foss.st.com>
- <d90e6eca-2b3d-4274-8738-b2eb49f1e722@mailbox.org>
+References: <20251118231953.578007-1-marek.vasut@mailbox.org>
 Content-Language: en-US
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <d90e6eca-2b3d-4274-8738-b2eb49f1e722@mailbox.org>
+In-Reply-To: <20251118231953.578007-1-marek.vasut@mailbox.org>
 X-Originating-IP: [10.48.87.93]
 X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
  (10.75.128.132)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB1PEPF000509FE:EE_|DU4PR10MB8542:EE_
-X-MS-Office365-Filtering-Correlation-Id: e885c725-aabc-462c-2e29-08de3275152c
+X-MS-TrafficTypeDiagnostic: DB1PEPF0003922E:EE_|AS2PR10MB7480:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0ff9494c-5be2-4b27-1a77-08de32770b8f
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|7416014|376014|36860700013|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?T24zT0puRFVub1NhWFg5STJQeUpsanpuTTFJZGFReWgxY0VnV1Y4elVzZ1NM?=
- =?utf-8?B?REpXTXZwNk1BRmREVzYvNWkvanNpeUZEMStxVDZDcHA3cHRCek93V0pvMzFW?=
- =?utf-8?B?cXpLNDV6WWdyajFxL0dnUHR0Q2Z5cklaQkZwcTBnMEVxTXF1TU1LbnZwYXdh?=
- =?utf-8?B?clAxeGhMZENyMWNMamUxWXYwNmpZMXN2WFNTbXEvL2paNDA4WEo5YlRyR012?=
- =?utf-8?B?L1NNaE9VNVMzcDlEUEQrN2pzZUt2WFNkeGdTTTdhQnlyUE9YckdZSG9CazFl?=
- =?utf-8?B?S1kvSnZSZlljcyt4VHJGODZHdzNhaDNrditmd0NhVVJNc05FMzZnd092cVU4?=
- =?utf-8?B?V296RlRYUmdyN1ZCTjhZaE1Jamx3eWNnVEg1bkpFSTNuUDZzRzVzWTVSeDA2?=
- =?utf-8?B?TURQbVNXQjFpQzV5SndKajIzaVZvdnVzMzV0MFhzbHFBU1FBK2xpMDN2eW5j?=
- =?utf-8?B?emRCMEFyK1lWM1ZYVHVIb2FmK01vRFZWdDM5aUtzcmg4MWVkQ0FHWUNCQTRr?=
- =?utf-8?B?NEV3L1BzT2NNRnRNaHMrQ0tOYm5qWjhkaEljTDk3RDdqWFlDT3ZCWGtWV1BV?=
- =?utf-8?B?ZzRzNmRYSjQ5dkV4TFRjRnJ6a3YzVFdwa3J1aS9yalEyejRoSW1OK1lqbCsw?=
- =?utf-8?B?cit4RS9EOFlaOVg2TUZyeWRtMCtaWW1YbnkyRUxTTDIzVGlCV2dmS0xrSE9V?=
- =?utf-8?B?dnhuUEZjc0s1YlB3Qm4xT2M3V2w4aDJSUjZWSmd5QzJhRkZEK1pDWVR6UUJE?=
- =?utf-8?B?MzViRnZuQjkxSE96c3lhcFgrSlNnWEFndWtKVlh2aGJuSDBYUWtPemlhUnhI?=
- =?utf-8?B?Y3lRdlMyQi9ZMEh3dUtVZWxvd2d0amEweG9wa29MbXdUcis2NmplTklZMnJH?=
- =?utf-8?B?dksySHFtNVhPMGZteUt3V09XWDRhRVJFa0hqMWRPSUtza2VrWE5LS1pyeHA0?=
- =?utf-8?B?Ti82TXpreEJZUHo5MkdvYTR6b2ZhMVcxRWZPMjU1QmRWbDZxV1dVcWxjRGhD?=
- =?utf-8?B?c1dmdi9JSWtZTnNYZDJQZVhsZGZ0WlRyRmtnQTlEbDJOMmNna3ZSMlcyKzgv?=
- =?utf-8?B?S1BFZWNPWkVQVWRuQmF6VTVCMWhzS0RuTW1EQzdlSkE5Q0QxNXlmZzFURWhB?=
- =?utf-8?B?WXRVa1dYM3dkYytveUtOQzQzMWtXdElNNFUySmkxcDRSZ2NZcG1JbnFLRW83?=
- =?utf-8?B?SUs0MzBVMHY2YnltZWtMU1lLNkF3QXQvL3pKcENHTWF5OWN6dXFJZENpYnk0?=
- =?utf-8?B?SVpiYmNiVGwwNmpGK211bDZTeEl3bTVYWm1WWCtsV2hUWDRDM2F6TU5MNXhS?=
- =?utf-8?B?TVNYekY3V0t1OFdnaDVvZUYwcEprckxuVHoyWjQ1RHpsL2UzRHEvUmYwUndS?=
- =?utf-8?B?VHJLbmtnVEo3eXl4bjJveTFTb0tsRlRtS1VhL3BRdGpuL1NodXJwK0RsOU93?=
- =?utf-8?B?Mmg2TWJzWHRJcFlsT1NHd2QxK0RSMURMUFRrazVFd2J3Yndjck9TaE4vOVUr?=
- =?utf-8?B?WHdZTjhqaWtaQlJqaXIzbnM1T0dSemYzYXdVb0hNdDA0Q2Erais3UXY2OWdL?=
- =?utf-8?B?eTlaRHphOW1ncVgyN2lvQzJFOXBIRFF6cDUxblJSS2lydUhtUkZlc3dKd0RP?=
- =?utf-8?B?aWh1RS9reTVqYno5QzVncEdQZnZiQzd2K2lhZ2FHOGo0UVRZUXpMNU84ZDhU?=
- =?utf-8?B?ZFQ4bGRRQUVDZHBMWXN5M3Z6Qk9KYXVDY3BaSVMrRlcrZTJuMkNBbnZRSjBv?=
- =?utf-8?B?bnJXQVJRZ2IxQ3pvNzBtRG43aHVLL3FheTVBci9xZ0srWWdJY2lRbDZkbDlP?=
- =?utf-8?B?QjV3OGhXK0N1a21ObVVXWXNKTDFsU3JTNE9xZnMxbERMa3dtNXpYME9OY2Yw?=
- =?utf-8?B?amZ4TC9LUWRGWkhMeThZMGorV2p5d3B5R0F3WVBXa0MvaVpJNk5TUVE1N0hK?=
- =?utf-8?B?dXF5Nk1qa2ZkTFQrS1lOZG0zRWx2RjlrcUFndTBpT3dVNkYxb1RkTURYQ1du?=
- =?utf-8?B?NWc0eHRaalBmRlkrSWt6bGIwRlhVeTNtdldQMWhXQXVHcFZmOC9qQkxWNm5S?=
- =?utf-8?B?dzNPN3pGMHRmSTJhbXdDMFlwVjdkblFIK0NjZ3F5V2dwb1E4Sm9qMlJvTWdo?=
- =?utf-8?Q?KpYY=3D?=
+ ARA:13230040|1800799024|376014|36860700013|82310400026|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?eXN0L3ZqZmk0TnJWRGNrYXJzWXlQc0FSNnRHa0JXdkdybERPL0JmcFVTVk41?=
+ =?utf-8?B?SFloNS9zOXc4STdZY3VwUDkrSXFsSFRySlY0Q0Q1UXVFYlpNMlVYVzZqeEkw?=
+ =?utf-8?B?UkQ5TTRWQ0FBSjhpQUZRR01jKzhKcno3RFhHWEJRSTRLY1BKUEx0UGlLVVhF?=
+ =?utf-8?B?dVhmNUFiWmNKZnlCNDEreG1YOG9MdnNRUnJWNzdHUmpySjNXaGhlS3E0TzI5?=
+ =?utf-8?B?VXh6am5UZHJGdzVMbThQWnNKQVpNdHVlWmhjU3ZyMCt4OS9tZnBRUkRMRytU?=
+ =?utf-8?B?Y1ZzZkZsdEc4NXJEV1N3RUhEamFjdVhwOU9BVTB5M1BwSmpYQmd3ZkEvOFJM?=
+ =?utf-8?B?OEYwU3ZuOHl0ZDBPcEdTbHJCcjBjTTZPMnkxN3hVdDNNY25mQ2RzZjZLS3di?=
+ =?utf-8?B?VDR1WC85K3piOFVERGtCYVFnU1dNOTZWZG9TZnJIQmMzY0lsbUxzQW4zbC9q?=
+ =?utf-8?B?YXNvZWZwNG9LNjBpdU00Qk5uMzgxMG5MTGIwd2Vna1B1aEh3THVsbUVEa2lT?=
+ =?utf-8?B?a0dLdmpwVkxvSXovdDhMQkJIaDloU3hZN1BFNUVsSkR4YkRzTWtRcjBFaUFO?=
+ =?utf-8?B?MG9FeVp0akZHeW1WL0h2T1ZmSkgvSmlVbWswVi9WdkpLWjdhRVQyei8wVUFa?=
+ =?utf-8?B?eGttVjh4eFg2aTFzQzhhWlJLcUdaeXl0cGxrVjVtd1FBZlNRU3QzeHpCK0lp?=
+ =?utf-8?B?ZGJpZUt4Sk52NlpqMEtTU2piNWtxMlV2K00xSFdudzBSTlBhRFRzbXVGcCtM?=
+ =?utf-8?B?YmwwTkdFanVCMEJTaE5zL2pVOUJHbXdIMEZuWlB6S1d1K3o0QzFjbExic0RW?=
+ =?utf-8?B?L1NSZDZnYW53ZHRrdnRXNUROS0xTdTBVbFgvR2xNQnROOCt0ZEdIWWQzVGRY?=
+ =?utf-8?B?Sk0zRnZYTUQ4dDQ2b0d6Nkx3bWZOYURXblhrdTh6WkNzbWRFanNEVDhzRnl1?=
+ =?utf-8?B?bzZob2tkaTBsaE1mM29JVC9zd0Q3WENjUi9NT0g4Z2J0SFcxY3NNdU9PcHJG?=
+ =?utf-8?B?WUc1VGFVNUpPOUJEY2tjSDZpd21SaDcwSlB3T3Q4NzhDdjZqdUs3QzBRTDJK?=
+ =?utf-8?B?UHZrNlE0SUtueElNYXRoVENVbjZqYlJncDk3WWRjaDhtSG4zckZQU1YxaXZY?=
+ =?utf-8?B?YlBsZ1ZLMmdFaUJ1SnQyUC9nQllmK01ReldmZzFNRTRPaDJwUlZmb0RET3A2?=
+ =?utf-8?B?bUJ2ZHRBZUYybUJkdnhVZE1uclRjZkNubkxydHJqZXlVc1U3L21FVWZNSlUz?=
+ =?utf-8?B?aHZmTXFmQnNTTERmNVNCTU83VFYzVDdrRzBqaTNPTHk2WnVXWitYUkVOOG83?=
+ =?utf-8?B?UHo5dE1WOEJHN0JlTTVwZHFaSXIzMm1OZ0luL2cxa2h0bHhiZjJ2OFArSkds?=
+ =?utf-8?B?Ym54VXMwZDEweTlEVmx3dExJRnhVempoeExVVUtiY2w3M3BoalZVVHhVR0kw?=
+ =?utf-8?B?NHh5SklPWUQrQlZTVzhCYmlXTC9qVHFVNENWZTFaeWgrdWZ2TFhZbzErQ2F0?=
+ =?utf-8?B?bHV0QTVTWWNQelRLSmZoS3ZKc1VZMUxFRWROZmtGeHJ0cVZuU1kySVZFRk1s?=
+ =?utf-8?B?bWFsc0VuNTJWSDQ2TldDVjhKSklVUU1FMi9rVjZIem9Pc1FET2RhQXA0c0lC?=
+ =?utf-8?B?c1MveDJhUE91K1pHRVJKQkxnbk4xcTR3UW5LMXhLcExwLzl5N1NrZElHTWFF?=
+ =?utf-8?B?SVR5TXNQRll3WXBFcTJwV0FVL25scEJNbHpHZDhXTW5UN2dkdy9OU0RCTUhr?=
+ =?utf-8?B?UlFMeCtBaDBnelNtMFViTHpRNDNVTit6OERhV0pKQndyb0tFYWFNWXpnYS9o?=
+ =?utf-8?B?SFJ5NWptcHk5Mkxub0dhdGdsUFZiR0lSRkZ5U2NiZVQ1MFdvUHBXREMyQXJt?=
+ =?utf-8?B?UVhCSjZlMm5LZys3VEphZGw2MjN3WHM5ZlZsamo2alY3U3J3NjNpNHNZb1Jh?=
+ =?utf-8?B?THdtOFkwZU9vWVRMRElUTTFqNnFoS2MrVzB3RVMvVXQ2ZFhHWkY1RHNKTUh3?=
+ =?utf-8?B?Kys0YWhhNjZZNkRCbTlYNmNzUjdaWk1jbHRKcTN3OHEwWkRMYmd6Tlg5Ni9L?=
+ =?utf-8?B?VTAwYjFRTGRzZ2pNdnA3cVhpblBYMHdiODhCVnAvMk9TTzg1dlBWY1A0WmZv?=
+ =?utf-8?Q?JwfY=3D?=
 X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(7416014)(376014)(36860700013)(82310400026); DIR:OUT;
- SFP:1101; 
+ SFS:(13230040)(1800799024)(376014)(36860700013)(82310400026)(7053199007);
+ DIR:OUT; SFP:1101; 
 X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Dec 2025 14:05:57.9797 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e885c725-aabc-462c-2e29-08de3275152c
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Dec 2025 14:20:00.8506 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0ff9494c-5be2-4b27-1a77-08de32770b8f
 X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
  Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: DB1PEPF000509FE.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: DB1PEPF0003922E.eurprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR10MB8542
-X-Authority-Analysis: v=2.4 cv=e8YLiKp/ c=1 sm=1 tr=0 ts=693043c9 cx=c_pps
- a=QwrbhXh03MhuZ2mRWfjA2w==:117 a=uCuRqK4WZKO1kjFMGfU4lQ==:17
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR10MB7480
+X-Proofpoint-ORIG-GUID: 2tfa4YAdGpc4EnAMcanwyUlMmTSEayP2
+X-Authority-Analysis: v=2.4 cv=S+vUAYsP c=1 sm=1 tr=0 ts=69304716 cx=c_pps
+ a=gpZAzFDmpECe51Nb6QHpHA==:117 a=uCuRqK4WZKO1kjFMGfU4lQ==:17
  a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=XWp4PHTOCikA:10 a=IkcTkHD0fZMA:10
  a=wP3pNCr1ah4A:10 a=s63m1ICgrNkA:10 a=KrXZwBdWH7kA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=wZF5xgHrhGkYw9plCIAA:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10
-X-Proofpoint-ORIG-GUID: 0OlS7QaojibFqLQ1vxM5tng_dJr_XiYq
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMjAzMDExMiBTYWx0ZWRfX8Fb1XHFq+EcB
- ox4dQt7zhMoLrjWvLnqO4keH3CmTfsB59jeWT5xv0Bh1uSJWffE468KWd6oawMSs5IHmhv4vLNd
- CqTrb/CNcePXl/DtxOBMT1dPcEcXCuueNv9+fPDFPSRofEwX54VOUpYbmWTXs8qk4dXTeIAvjtf
- W92fl1xRWL2xbt5FT0utA+VAjo/u/n2qSFhn7WKouQPkYBnp8K461LxceYEFIzCalh6yGcWhLbV
- PQcGVFIhWna+s0KG5DfrXdtxcZwQKWv/Tgv4exFvzJNQERsXdjctIW9Cz29rRtWdT+jdySUQ47G
- 7ynhyV0/i7A+cI4Yj/NDrb5tT8qDWR/Q9YRJkaENCgTM5oEjYt6ua3uA5R1gN5SRtYBH/mCVl8X
- 66qH7eeiEumEtOjDQ58tY/20FrzmkA==
-X-Proofpoint-GUID: 0OlS7QaojibFqLQ1vxM5tng_dJr_XiYq
+ a=VkNPw1HP01LnGYTKEx00:22 a=b3CbU_ItAAAA:8 a=8b9GpE9nAAAA:8 a=k-42gJp3AAAA:8
+ a=zk4-lHRcAAAA:8 a=phlkwaE_AAAA:8 a=5VH98buAzicV2Y1zDbUA:9 a=QEXdDO2ut3YA:10
+ a=Rv2g8BkzVjQTVhhssdqe:22 a=T3LWEMljR5ZiDmsYVIUa:22 a=uCSXFHLys93vLW5PjgO_:22
+ a=7cv85riZL9-k45RWW8P6:22 a=uKTQOUHymn4LaG7oTSIC:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMjAzMDExMiBTYWx0ZWRfX8y1PdfCodmuT
+ YCGNcVAs3iSr8Zp40NKDA77IDE3k9hZs7nARRRgKtLN5kqHmoCD1CVO5mPzKCBc5g/xGDdQ+Ehr
+ Anzw7mFlpI8CUjBAJd/+5kYS0OGKF6899nbA3jFbZAM3CAnQ310SuMjiVGq7nEASGKNJ9g1OXZp
+ MGX04p5cvDmnXoCl9n53WaFdXRX2nJTlXnHaYoKWyxi8uVjwkaDkCJ1C6V42vGMdzoeES0Y2tEG
+ cEpO0+vus2jpPMmwIMpMdv5TApskFXpInegsJzvpNW69rZN5TQ19+DwnOIeHObXQLwYIvPrbyVr
+ sBT2mALEEGffYunsYPcbjBKxxokSjiV0m3wpsJHVOi8A8i0s+bVupTmtC1z/PX00kXHGBuj6Ix5
+ ysBBDSfvuT6LO63IQufmHTac8Won/w==
+X-Proofpoint-GUID: 2tfa4YAdGpc4EnAMcanwyUlMmTSEayP2
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
  definitions=2025-12-03_01,2025-11-27_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
- clxscore=1015 impostorscore=0 spamscore=0
- adultscore=0 malwarescore=0
- phishscore=0 lowpriorityscore=0 bulkscore=0 priorityscore=1501
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0
+ lowpriorityscore=0 phishscore=0 suspectscore=0 bulkscore=0 spamscore=0
+ clxscore=1015 impostorscore=0 priorityscore=1501 malwarescore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2512030112
-Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
- Valentin Caron <valentin.caron@foss.st.com>, Leo Yu-Chi
- Liang <ycliang@andestech.com>, Vinh
- Nguyen <vinh.nguyen.xz@renesas.com>, Alice Guo <alice.guo@nxp.com>,
- Kamlesh Gurudasani <kamlesh@ti.com>,
- Casey Connolly <casey.connolly@linaro.org>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- "u-boot@dh-electronics.com" <u-boot@dh-electronics.com>,
- Michal Simek <michal.simek@amd.com>, Yao Zi <ziyao@disroot.org>
-Subject: Re: [Uboot-stm32] [PATCH 2/6] clk: scmi: Force call of
- scmi_clk_get_attribute() during probe
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Tom Rini <trini@konsulko.com>, uboot-stm32@st-md-mailman.stormreply.com,
+ u-boot@dh-electronics.com
+Subject: Re: [Uboot-stm32] [PATCH] ARM: dts: stm32: Add 1 GiB DRAM settings
+ for DH STM32MP13xx DHCOR SoM
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -189,69 +177,228 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-CgpPbiAxMS8yMC8yNSAyMTozOCwgTWFyZWsgVmFzdXQgd3JvdGU6Cj4gT24gMTEvMTcvMjUgNToz
-NiBQTSwgUGF0cmljZSBDSE9UQVJEIHdyb3RlOgo+IAo+IEhlbGxvIFBhdHJpY2UsCj4gCj4+IE9u
-IDExLzE1LzI1IDAwOjA4LCBNYXJlayBWYXN1dCB3cm90ZToKPj4+IE9uIDExLzE0LzI1IDQ6NDEg
-UE0sIFBhdHJpY2UgQ2hvdGFyZCB3cm90ZToKPj4+PiBTaW5jZSBjb21taXQgZmRiMWJmZmUyODI3
-ICgiY2xrOiBzY21pOiBQb3N0cG9uZSBjbG9jayBuYW1lIHJlc29sdXRpb24iKSwKPj4+PiBhbGwg
-Y2xvY2tzIHdoaWNoIGFyZSBwYXJlbnQgY2xvY2tzIGFyZSBuYW1lICJzY21pLSV6dSIgd2hpY2gK
-Pj4+PiBsZWFkcyB0byBlcnJvciBkdXJpbmcgdGhlaXIgY2hpbGRyZW4gY2xvY2tzIHJlZ2lzdHJh
-dGlvbi4KPj4+Pgo+Pj4+IEluIG9yZGVyIHRvIG5vdCBjYW5jZWwgYm9vdCB0aW1lIG9wdGltaXph
-dGlvbiBkb25lIGluCj4+Pj4gY29tbWl0IDM1NDdlMzE1YzE4OCAoImNsazogc2NtaTogRGVmZXIg
-aXNzdWUgb2YgU0NNSV9DTE9DS19BVFRSSUJVVEVTIiksCj4+Pj4gY2hvaWNlIGhhcyBiZWVuIGRv
-bmUgdG8gcmUtaW50cm9kdWNlIHNjbWlfY2xrX2dldF9hdHRyaWJ1dGUoKSBjYWxsCj4+Pj4gZHVy
-aW5nIHNjbWlfY2xrX3Byb2JlKCkgdW5kZXIgbmV3IENMS19TQ01JX0ZPUkNFX0FUVFJJQlVURSBm
-bGFnLgo+Pj4+Cj4+Pj4gVGhpcyByZXN0b3JlcyBib290IG9uIHN0bTMybXAxMyBhbmQgc3RtMzJt
-cDIgZmFtaWx5IGJvYXJkcy4KPj4+Pgo+Pj4+IEZpeGVzOiBmZGIxYmZmZTI4MjcgKCJjbGs6IHNj
-bWk6IFBvc3Rwb25lIGNsb2NrIG5hbWUgcmVzb2x1dGlvbiIpCj4+PiBTQ01JIHNwZWMgc2F5cyB0
-aGF0IGNsb2NrIElEcyBoYXZlIHRvIGJlIG1vbm90b25pYyBhbmQgaW5jcmVtZW50aW5nLCB3aXRo
-b3V0IGdhcHMgLiBUaGlzIGRyaXZlciByZWdpc3RlcnMgYWxsIFNDTUkgY2xvY2sgZm9yIHlvdSBl
-eGFjdGx5IHRoaXMgd2F5LiBXaGF0IGV4YWN0bHkgaXMgdGhlIHByb2JsZW0gb24gU1RNMzIgPyBB
-cmUgeW91IG1heWJlIG1pc3Npbmcgc29tZSByZXBhcmVudGluZyBzb21ld2hlcmUgZWxzZSA/IE1h
-eWJlIHRoZSBjbG9jayBwYXJlbnQgcmVzb2x1dGlvbiBzaG91bGQgaGFwcGVuIHdoZW4gdGhlIGNs
-b2NrIGFyZSBmaXJzdCB1c2VkLCBqdXN0IGxpa2UgYXR0cmlidXRlcyBhcmUgbm93IHJlc29sdmVk
-IHdoZW4gdGhlIGNsb2NrIGFyZSBmaXJzdCB1c2VkID8KPj4KPj4gSGkgTWFyZWsKPj4KPj4gSW5p
-dGlhbGx5LCBvbiBTVE0zMiB3ZSBmaXJzdCByZWdpc3RlcmVkIFNDTUkgY2xvY2tzIHdpdGggdGhl
-aXIgcmVhbCBuYW1lcyBhbmQgdGhlbiB3ZSByZWdpc3RlcmVkIGFsbCBSQ0MgY2xvY2tzCj4+IGlu
-IHN0bTMyX3JjY19pbml0KCkuIEZvciBtb3N0IG9mIHRoZXNlIGxhdHRlciBjbG9ja3MsIHRoZWly
-IHBhcmVudCBhcmUgU0NNSSBjbG9ja3MuCj4+Cj4+IEFmdGVyIGNvbW1pdCBmZGIxYmZmZTI4Mjcg
-KCJjbGs6IHNjbWk6IFBvc3Rwb25lIGNsb2NrIG5hbWUgcmVzb2x1dGlvbiIpLCB0aGUgbmFtZSBv
-ZiB0aGVzZSBTQ01JICJwYXJlbnQiIGNsb2Nrcwo+PiBiZWNhbWVzICJzY21pLSV6dSIgd2hpY2gg
-bWFrZXMgY2xrX3JlZ2lzdGVyKCkgZmFpbGVkIGFzIHdlIHN0aWxsIHRyeSB0byByZWdpc3RlciBS
-Q0MgY2xvY2tzIHVzaW5nIHRoZWlyIHBhcmVudCdzICJyZWFsIG5hbWVzIi4KPj4KPj4gRm9yIGV4
-YW1wbGU6IGZvciBTVE0zMk1QMTMsIGNsb2NrICJja19oc2UiIGJlY2FtZXMgInNjbWktMCIsIHNv
-IGFsbCBjbG9ja3Mgd2hpY2ggYXJlICJja19oc2UiJ3MgY2hpbGQgY2FuJ3QgYmUgcmVnaXN0ZXJl
-ZC4KPiAKPiBJIGRvbid0IHRoaW5rIGFueSBjbG9jayBkcml2ZXIgY2FuIGRlcGVuZCBvbiBTQ01J
-IGNsb2NrIHNob3J0bmFtZXMgZm9yIGNsb2NrIGxvb2sgdXAsIGJlY2F1c2UgdGhlIFNDTUkgY2xv
-Y2sgc2hvcnRuYW1lcyBhcmUgYW4gb3B0aW9uYWwgaGludC4KPiAKPiBJbnN0ZWFkLCBpZiBzb21l
-IGNsb2NrIHJlZ2lzdGVyZWQgaW4gdGhpcyBSQ0MgZHJpdmVyIGhhdmUgU0NNSSBwYXJlbnQgY2xv
-Y2ssIHRob3NlIFNDTUkgcGFyZW50IGNsb2NrIGhhdmUgdG8gYmUgcmVmZXJyZWQgdG8gYnkgU0NN
-SSBjbG9jayB1ZGV2aWNlIGFuZCBtYXRjaGluZyBjbG9jayBpZGVudGlmaWVyIChpbiB0aGlzIGNh
-c2UsIEkgYXNzdW1lIHRoYXQgd291bGQgYmUgU0NNSSBjbG9jayBJRCkuCj4gCj4gVGhlIHJlbGF0
-aW9uc2hpcCBiZXR3ZWVuIHRoaXMgUkNDIGNsb2NrIGFuZCBTQ01JIHBhcmVudCBjbG9jayBjYW4g
-bGlrZWx5IGJlIGRlc2NyaWJlZCBpbiBEVCB1c2luZyAnY2xvY2tzID0gPCZzY21pX2NsayBOPicg
-LCB3aGljaCB5b3UgYWxyZWFkeSBoYXZlIGluIHN0bTMybXAxMzEuZHRzaToKPiAKPiDCoDc4OMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBjbG9jay1uYW1l
-cyA9ICJoc2UiLCAiaHNpIiwgImNzaSIsICJsc2UiLCAibHNpIjsKPiDCoDc4OcKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBjbG9ja3MgPSA8JnNjbWlfY2xr
-IENLX1NDTUlfSFNFPiwKPiDCoDc5MMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCA8JnNjbWlfY2xrIENLX1NDTUlfSFNJPiwK
-PiDCoDc5McKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoCA8JnNjbWlfY2xrIENLX1NDTUlfQ1NJPiwKPiDCoDc5MsKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oCA8JnNjbWlfY2xrIENLX1NDTUlfTFNFPiwKPiDCoDc5M8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCA8JnNjbWlfY2xrIENL
-X1NDTUlfTFNJPjsKPiAKPiBDYW4geW91IHVzZSB0aGF0IGZvciB0aGUgcGFyZW50IGxvb2t1cCBh
-bmQgc2ltcGx5IGlnbm9yZSB0aGUgc2hvcnRuYW1lcz8KCkhpIE1hcmVrCgpJIHJld29ya2VkIGRy
-aXZlcnMvY2xrL2Nsay1zdG0zMi1jb3JlLmMsIGNsay1zdG0zMm1wMTMuYyBhbmQgY2xrLXN0bTMy
-bXAyNS5jIGFuZCBmb3VuZCAKb25lIGFkZGl0aW9uYWwgaXNzdWUgaW4gZHJpdmVycy9jbGsvY2xr
-X3NjbWkuYy4KClRoZSBzZXJpZSB3aWxsIGJlIHNvb24gc3VibWl0dGVkIG9uIG1haWxpbmcgbGlz
-dC4KClRoYW5rcwpQYXRyaWNlCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX18KVWJvb3Qtc3RtMzIgbWFpbGluZyBsaXN0ClVib290LXN0bTMyQHN0LW1kLW1h
-aWxtYW4uc3Rvcm1yZXBseS5jb20KaHR0cHM6Ly9zdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29t
-L21haWxtYW4vbGlzdGluZm8vdWJvb3Qtc3RtMzIK
+
+
+On 11/19/25 00:19, Marek Vasut wrote:
+> Add DRAM settings for 1 GiB variant of DH STM32MP13xx DHCOR SoM
+> and support for SoM DRAM coding HW straps decoding and automatic
+> DRAM configuration selection. Enable CONFIG_BOARD_EARLY_INIT_F on
+> all STM32MP1 DHSOM, as it is required for the HW straps decoding.
+> 
+> Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
+> ---
+> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@dh-electronics.com
+> Cc: u-boot@lists.denx.de
+> Cc: uboot-stm32@st-md-mailman.stormreply.com
+> ---
+>  .../stm32mp13-ddr3-dhsom-1x4Gb-1066-binG.dtsi | 100 ++++++++++++++++++
+>  arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi    |   1 +
+>  board/dhelectronics/dh_stm32mp1/board.c       |  30 ++++--
+>  configs/stm32mp15_dhsom.config                |   1 -
+>  configs/stm32mp_dhsom.config                  |   1 +
+>  5 files changed, 123 insertions(+), 10 deletions(-)
+>  create mode 100644 arch/arm/dts/stm32mp13-ddr3-dhsom-1x4Gb-1066-binG.dtsi
+> 
+> diff --git a/arch/arm/dts/stm32mp13-ddr3-dhsom-1x4Gb-1066-binG.dtsi b/arch/arm/dts/stm32mp13-ddr3-dhsom-1x4Gb-1066-binG.dtsi
+> new file mode 100644
+> index 00000000000..1d268d58b54
+> --- /dev/null
+> +++ b/arch/arm/dts/stm32mp13-ddr3-dhsom-1x4Gb-1066-binG.dtsi
+> @@ -0,0 +1,100 @@
+> +// SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
+> +/*
+> + * Copyright (C) 2025, DH electronics - All Rights Reserved
+> + *
+> + * STM32MP13xx DHSOM configuration
+> + * 1x DDR3L 8Gb, 16-bit, 533MHz, Single Die Package in flyby topology.
+> + * Reference used W638GU6QB11I from Winbond
+> + *
+> + * DDR type / Platform	DDR3/3L
+> + * freq		533MHz
+> + * width	16
+> + * datasheet	0  = W638GU6QB11I / DDR3-1866
+> + * DDR density	4
+> + * timing mode	optimized
+> + * address mapping : RBC
+> + * Tc > + 85C : J
+> + */
+> +#define DDR_MEM_COMPATIBLE ddr3l-dhsom-1066-888-bin-g-1x4gb-533mhz
+> +#define DDR_MEM_NAME	"DDR3-DDR3L 16bits 533000kHz"
+> +#define DDR_MEM_SPEED	533000
+> +#define DDR_MEM_SIZE	0x40000000
+> +
+> +#define DDR_MSTR 0x00040401
+> +#define DDR_MRCTRL0 0x00000010
+> +#define DDR_MRCTRL1 0x00000000
+> +#define DDR_DERATEEN 0x00000000
+> +#define DDR_DERATEINT 0x00800000
+> +#define DDR_PWRCTL 0x00000000
+> +#define DDR_PWRTMG 0x00400010
+> +#define DDR_HWLPCTL 0x00000000
+> +#define DDR_RFSHCTL0 0x00210000
+> +#define DDR_RFSHCTL3 0x00000000
+> +#define DDR_RFSHTMG 0x0081008B
+> +#define DDR_CRCPARCTL0 0x00000000
+> +#define DDR_DRAMTMG0 0x121B2414
+> +#define DDR_DRAMTMG1 0x000A041B
+> +#define DDR_DRAMTMG2 0x0607080F
+> +#define DDR_DRAMTMG3 0x0050400C
+> +#define DDR_DRAMTMG4 0x07040607
+> +#define DDR_DRAMTMG5 0x06060403
+> +#define DDR_DRAMTMG6 0x02020002
+> +#define DDR_DRAMTMG7 0x00000202
+> +#define DDR_DRAMTMG8 0x00001005
+> +#define DDR_DRAMTMG14 0x000000A0
+> +#define DDR_ZQCTL0 0xC2000040
+> +#define DDR_DFITMG0 0x02050105
+> +#define DDR_DFITMG1 0x00000202
+> +#define DDR_DFILPCFG0 0x07000000
+> +#define DDR_DFIUPD0 0xC0400003
+> +#define DDR_DFIUPD1 0x00000000
+> +#define DDR_DFIUPD2 0x00000000
+> +#define DDR_DFIPHYMSTR 0x00000000
+> +#define DDR_ADDRMAP1 0x00080808
+> +#define DDR_ADDRMAP2 0x00000000
+> +#define DDR_ADDRMAP3 0x00000000
+> +#define DDR_ADDRMAP4 0x00001F1F
+> +#define DDR_ADDRMAP5 0x07070707
+> +#define DDR_ADDRMAP6 0x07070707
+> +#define DDR_ADDRMAP9 0x00000000
+> +#define DDR_ADDRMAP10 0x00000000
+> +#define DDR_ADDRMAP11 0x00000000
+> +#define DDR_ODTCFG 0x06000600
+> +#define DDR_ODTMAP 0x00000001
+> +#define DDR_SCHED 0x00000F01
+> +#define DDR_SCHED1 0x00000000
+> +#define DDR_PERFHPR1 0x00000001
+> +#define DDR_PERFLPR1 0x04000200
+> +#define DDR_PERFWR1 0x08000400
+> +#define DDR_DBG0 0x00000000
+> +#define DDR_DBG1 0x00000000
+> +#define DDR_DBGCMD 0x00000000
+> +#define DDR_POISONCFG 0x00000000
+> +#define DDR_PCCFG 0x00000010
+> +#define DDR_PCFGR_0 0x00000000
+> +#define DDR_PCFGW_0 0x00000000
+> +#define DDR_PCFGQOS0_0 0x00100009
+> +#define DDR_PCFGQOS1_0 0x00000020
+> +#define DDR_PCFGWQOS0_0 0x01100B03
+> +#define DDR_PCFGWQOS1_0 0x01000200
+> +#define DDR_PGCR 0x01442E02
+> +#define DDR_PTR0 0x0022AA5B
+> +#define DDR_PTR1 0x04841104
+> +#define DDR_PTR2 0x042DA068
+> +#define DDR_ACIOCR 0x10400812
+> +#define DDR_DXCCR 0x00000C40
+> +#define DDR_DSGCR 0xF200011F
+> +#define DDR_DCR 0x0000000B
+> +#define DDR_DTPR0 0x36D477D0
+> +#define DDR_DTPR1 0x098B00D8
+> +#define DDR_DTPR2 0x10023600
+> +#define DDR_MR0 0x00000830
+> +#define DDR_MR1 0x00000000
+> +#define DDR_MR2 0x00000208
+> +#define DDR_MR3 0x00000000
+> +#define DDR_ODTCR 0x00010000
+> +#define DDR_ZQ0CR1 0x00000038
+> +#define DDR_DX0GCR 0x0000CE81
+> +#define DDR_DX1GCR 0x0000CE81
+> +
+> +#include "stm32mp13-ddr.dtsi"
+> diff --git a/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi b/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
+> index bedb7c600d5..39ac5692e08 100644
+> --- a/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
+> +++ b/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
+> @@ -6,6 +6,7 @@
+>  #include <dt-bindings/clock/stm32mp13-clksrc.h>
+>  #include "stm32mp13-u-boot.dtsi"
+>  #include "stm32mp13-ddr3-dhsom-1x2Gb-1066-binG.dtsi"
+> +#include "stm32mp13-ddr3-dhsom-1x4Gb-1066-binG.dtsi"
+>  
+>  / {
+>  	aliases {
+> diff --git a/board/dhelectronics/dh_stm32mp1/board.c b/board/dhelectronics/dh_stm32mp1/board.c
+> index c18f1911fe4..55526189d5a 100644
+> --- a/board/dhelectronics/dh_stm32mp1/board.c
+> +++ b/board/dhelectronics/dh_stm32mp1/board.c
+> @@ -304,17 +304,29 @@ static void board_get_coding_straps(void)
+>  int board_stm32mp1_ddr_config_name_match(struct udevice *dev,
+>  					 const char *name)
+>  {
+> -	if (ddr3code == 1 &&
+> -	    !strcmp(name, "st,ddr3l-dhsom-1066-888-bin-g-2x1gb-533mhz"))
+> -		return 0;
+> +	if (IS_ENABLED(CONFIG_TARGET_DH_STM32MP13X)) {
+> +		if (ddr3code == 1 &&
+> +		    !strcmp(name, "st,ddr3l-dhsom-1066-888-bin-g-1x2gb-533mhz"))
+> +			return 0;
+> +
+> +		if (ddr3code == 2 &&
+> +		    !strcmp(name, "st,ddr3l-dhsom-1066-888-bin-g-1x4gb-533mhz"))
+> +			return 0;
+> +	}
+>  
+> -	if (ddr3code == 2 &&
+> -	    !strcmp(name, "st,ddr3l-dhsom-1066-888-bin-g-2x2gb-533mhz"))
+> -		return 0;
+> +	if (IS_ENABLED(CONFIG_TARGET_DH_STM32MP15X)) {
+> +		if (ddr3code == 1 &&
+> +		    !strcmp(name, "st,ddr3l-dhsom-1066-888-bin-g-2x1gb-533mhz"))
+> +			return 0;
+>  
+> -	if (ddr3code == 3 &&
+> -	    !strcmp(name, "st,ddr3l-dhsom-1066-888-bin-g-2x4gb-533mhz"))
+> -		return 0;
+> +		if (ddr3code == 2 &&
+> +		    !strcmp(name, "st,ddr3l-dhsom-1066-888-bin-g-2x2gb-533mhz"))
+> +			return 0;
+> +
+> +		if (ddr3code == 3 &&
+> +		    !strcmp(name, "st,ddr3l-dhsom-1066-888-bin-g-2x4gb-533mhz"))
+> +			return 0;
+> +	}
+>  
+>  	return -EINVAL;
+>  }
+> diff --git a/configs/stm32mp15_dhsom.config b/configs/stm32mp15_dhsom.config
+> index 210ec201bf5..d5ecbac29e0 100644
+> --- a/configs/stm32mp15_dhsom.config
+> +++ b/configs/stm32mp15_dhsom.config
+> @@ -2,7 +2,6 @@
+>  
+>  # CONFIG_ARMV7_VIRT is not set
+>  # CONFIG_BINMAN_FDT is not set
+> -CONFIG_BOARD_EARLY_INIT_F=y
+>  CONFIG_BOARD_SIZE_LIMIT=1441792
+>  CONFIG_BOOTCOUNT_BOOTLIMIT=3
+>  CONFIG_BOOTDELAY=1
+> diff --git a/configs/stm32mp_dhsom.config b/configs/stm32mp_dhsom.config
+> index 56a40839d28..31fae2de19d 100644
+> --- a/configs/stm32mp_dhsom.config
+> +++ b/configs/stm32mp_dhsom.config
+> @@ -6,6 +6,7 @@
+>  # CONFIG_SPL_PARTITION_UUIDS is not set
+>  # CONFIG_SPL_PINCTRL_FULL is not set
+>  # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+> +CONFIG_BOARD_EARLY_INIT_F=y
+>  CONFIG_BOOTCOMMAND="run bootcmd_stm32mp"
+>  CONFIG_BOOTCOUNT_LIMIT=y
+>  CONFIG_CMD_BOOTCOUNT=y
+
+
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+
+Thanks
+Patrice
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

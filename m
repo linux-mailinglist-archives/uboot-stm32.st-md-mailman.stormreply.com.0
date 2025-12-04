@@ -2,170 +2,154 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id D9D1DC9F5B8
-	for <lists+uboot-stm32@lfdr.de>; Wed, 03 Dec 2025 15:52:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 05080CA3BD4
+	for <lists+uboot-stm32@lfdr.de>; Thu, 04 Dec 2025 14:13:37 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 84524C5F1F7;
-	Wed,  3 Dec 2025 14:52:28 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C3380C58D77;
+	Thu,  4 Dec 2025 13:13:36 +0000 (UTC)
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazon11012043.outbound.protection.outlook.com [52.101.66.43])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D6BA0C5C842
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 3DB7DC3F95E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  3 Dec 2025 14:52:26 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 5B3ElZGx1650348; Wed, 3 Dec 2025 15:52:10 +0100
-Received: from am0pr02cu008.outbound.protection.outlook.com
- (mail-westeuropeazon11013047.outbound.protection.outlook.com [52.101.72.47])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4at2bxmegj-1
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Wed, 03 Dec 2025 15:52:10 +0100 (CET)
+ Thu,  4 Dec 2025 13:13:36 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=fSlz+BDPTXkrRlG6BPSuWt6m5NkpK58m/tWFaFUQWTXmVrx4keFNcxf5N3qki0vyzWUzt9y1YcYuHXrpC7F/x+0Szdc0CaUEFnFu5rvsHhqEtsgH5xmIz3rE3Eem8zpI0dkN0imCxowZPDrXF9DsN36nWzWjzOmGhABvXjNyhWgtw1rK9EIYMVCfS27ZVl6ZnEUOgeRyfKR5yI9ALEmSZpeOIC/xHeK9Ycqt79A+ux1o676kAXQx7a4Uu7gJ52CxPuVktuq8zXKJ94Qh4fBQgbUjIqxNXsGqTCjpaecit0tRd7V2C4cDAUHb57OLXOxT1M3th2iM5GZlzkcXwe8G2Q==
+ b=pPypF3VDMndxTPG0+fdbIwcMamhQwA43Rnqy7vd5owl6CLI8x8QtYKXaha4/WtY79xZ4J7Z7ciAMcJkFDgGZVAWSHfoCsii9GMLmA37S2ER5rf9t3b/OVV1sqMXqqWlvpQ+sYFZPTMnyZH/cFmJX1VdRlQQJliNKSYAJKoaghIuyCeC30HnCCnotLRsTdKrN3TbiXCDYQSh1f/3bwqAkaZ2EaS9bi/lk8nmxKHCVn4XQ0COwaEJ/43O7fl/SdqWvzaXQiVfdm3h3PfcpRU95gfDJLS2AWFqSW0aNz69wpAK1EdHZ2+mBOrLgbbE39gKbbxG/zCQZRLqFuqypuDaPgQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=QEdiXYfA8gbreIHCWBP2oCuf+jssnkAKyUeL8PsM87o=;
- b=pcZKRMdvLQe0JnJqHJKns5eQ5rbfiI0M/Zf/0af3QH5TsdGIZJQYK5/QYcahp+fQpth3/n7u7RLiq4XdjoQUR0ZURRHHLW369bg5bDGLoWSSNPGGXwdFuRsZFDvu1mYwDCIMTAR6t+wjf4kLciqNeNCdI6tDT9oj/mO7v2YrmwMMA1mEtKmenxN8fkd58giZ+xZc/fM7rrFlczyMdY2aVtYiumWkTfX/jtgcLD6QNsEm6K1ck95vEZgNAFpCoHqGDYZSSQiB62GTWrglulWYIAuJ56HYONwYr4i3TaXBELnoRRgHUHmVmCNShuF0Zs/cthgffx50XzovRj5Mlm06NA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.60) smtp.rcpttodomain=mailbox.org smtp.mailfrom=foss.st.com;
- dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
+ bh=1U2oPWWx4AzY8wNQduzv2KG9uH6pzG2nxODaZkvlpyM=;
+ b=gAo+GCGKIe+D+ei1oWI2hL1wyhVeuXDpv5/O1weDxx3oTfXj4hOttrlqRhKAe3qwiDBMcq8x6gTAJf+CmGSi/YnXUB4S4L4wTFZQUD/u6FuhcHM3LwZw0P+59P7IjFcuN5zW1JKXqYiA8/ruWc2s8GtU+MW49us0kA2QhKdAc5tVFJ7ZfujyeLdqHD68BDSSbOfMV5/FiBw8HG01yTCmX2SwYAKnUIjfG33oN8oMcDWfknZ1cWWnzVVp3Cf/xEjayaQ5HVxrS8CBQjHqNAYdd99CQ2fcOqsti5dez4SIZ6TJ/YaTyWJWC15Qu24Yfl5mwV/KJb45QUb0nWR10WZxCQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=QEdiXYfA8gbreIHCWBP2oCuf+jssnkAKyUeL8PsM87o=;
- b=ABGgNQ3SeDTOb8X7yugyZMJ9CQAzCCsGQhCdE5IP/ISsE4x+68m01T1mT3tTfJXRgnlPQ0TuLYFJHvf3N/wb1YIbTzu3P9YPR3jp5u8pkAnQVYDsoQ8Lm7TpNHtw8VYPeisT69IO7r4FEJ2icDoSvXQmmYeQUATWZprV+RnUnU//IL/Bg3acy9NVAqkUwSScvwmRA40vOLzai1ECvdJBznUm2fdKWR9d5+PAbUrPc6VfNOtnB5G2iM49HTR0SZaAgzCg+IYCLscz/SS8RE0aGMKHKp/vK72I4wmxnEtr7tNhZ1h161xSWM3XClBgPV9Uny0FHrHg10DgUpSoCqBftg==
-Received: from DU2PR04CA0346.eurprd04.prod.outlook.com (2603:10a6:10:2b4::33)
- by AS5PR10MB8203.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:652::17)
+ bh=1U2oPWWx4AzY8wNQduzv2KG9uH6pzG2nxODaZkvlpyM=;
+ b=KPnivb5IPHUTP2pk4D7eyAUtWS/Vo8FxSXvXFtYXV6/gvvstQz/niMZGgN73GbX3pSXwj9fAmjYl8p1paRLPnRN78V0kMgSMf3svvIwHmXQe+KQ9bw4ug6M9t+mK7t5RxtBHNpESSVcU6UUudbt8nSPOHkvwmf4AOXoWkqzKDhc=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
+ by VI1PR04MB7168.eurprd04.prod.outlook.com (2603:10a6:800:129::8)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9388.9; Wed, 3 Dec
- 2025 14:52:07 +0000
-Received: from DU2PEPF00028CFC.eurprd03.prod.outlook.com
- (2603:10a6:10:2b4:cafe::9) by DU2PR04CA0346.outlook.office365.com
- (2603:10a6:10:2b4::33) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9366.17 via Frontend Transport; Wed,
- 3 Dec 2025 14:52:07 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.60; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.60) by
- DU2PEPF00028CFC.mail.protection.outlook.com (10.167.242.180) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9366.7 via Frontend Transport; Wed, 3 Dec 2025 14:52:06 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
- (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Wed, 3 Dec
- 2025 15:52:43 +0100
-Received: from [10.48.87.93] (10.48.87.93) by STKDAG1NODE1.st.com
- (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Wed, 3 Dec
- 2025 15:52:06 +0100
-Message-ID: <b97630e9-d93d-4c63-84f7-685027b54957@foss.st.com>
-Date: Wed, 3 Dec 2025 15:52:05 +0100
-MIME-Version: 1.0
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9388.9; Thu, 4 Dec
+ 2025 13:13:32 +0000
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::1033:5a9a:dc18:dad]) by GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::1033:5a9a:dc18:dad%4]) with mapi id 15.20.9388.009; Thu, 4 Dec 2025
+ 13:13:31 +0000
+Message-ID: <68fd4327-58b6-49d5-9f37-594e16209708@cherry.de>
+Date: Thu, 4 Dec 2025 14:12:47 +0100
 User-Agent: Mozilla Thunderbird
-To: Marek Vasut <marek.vasut@mailbox.org>, <u-boot@lists.denx.de>
-References: <20251118231717.577932-1-marek.vasut@mailbox.org>
+To: Patrice Chotard <patrice.chotard@foss.st.com>, u-boot@lists.denx.de
+References: <20251114162417.4054006-1-patrice.chotard@foss.st.com>
+ <20251114162417.4054006-2-patrice.chotard@foss.st.com>
 Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20251118231717.577932-1-marek.vasut@mailbox.org>
-X-Originating-IP: [10.48.87.93]
-X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
- (10.75.128.132)
-X-EOPAttributedMessage: 0
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20251114162417.4054006-2-patrice.chotard@foss.st.com>
+X-ClientProxiedBy: WA0P291CA0019.POLP291.PROD.OUTLOOK.COM
+ (2603:10a6:1d0:1::21) To GVXPR04MB12038.eurprd04.prod.outlook.com
+ (2603:10a6:150:2be::5)
+MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PEPF00028CFC:EE_|AS5PR10MB8203:EE_
-X-MS-Office365-Filtering-Correlation-Id: dc77fe37-635f-41c2-b98c-08de327b879c
+X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|VI1PR04MB7168:EE_
+X-MS-Office365-Filtering-Correlation-Id: a23c056a-ee2e-4011-ddad-08de3336ebcf
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|376014|82310400026|1800799024|7053199007; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?Wlp5b29hQm41STVibTAxWFNmV3hMeUMzL1FxajZtbGhFYmFBU0ZQcVFQajY2?=
- =?utf-8?B?a2V2NU9aKzdOblZtSW43SmUvQWJvSHZLQnUrVFZxRHRFSFBQaFdyeFkwd1dW?=
- =?utf-8?B?SnhjajRaeXJjME9iaytYREVVSHozU3VjcXVsVTBXK3MvblpQb1Bwakx0azRF?=
- =?utf-8?B?dElnQUpXVU5Tb3B6QUc1SlluVWJ0UVFqNmxZWWp4Znd4RXNIMjg1MjVzZVdn?=
- =?utf-8?B?K3gzT0l6d1IvOXh3YkdwemNTL044bFN6NUViMnRxVThWQjYzMy9xUENzTVZO?=
- =?utf-8?B?QkkvVWZzbERLbVlnVEw4b09KUTJIVm1tSEJUQStZSGJrQUFKcUZ6TENhQkZ4?=
- =?utf-8?B?NXMwbzRlR2t3U21hUHgzalJzN1dEMzlNV3cxak1rWXhXb0FOODhuN0dFbFBx?=
- =?utf-8?B?K3k2b0U3L2hRVi9HZm03UVZQVWhRc0FMZnpMZlY4NkJib1puTVgvZU1oWVpk?=
- =?utf-8?B?RjFodjkycVltaHF4ZzZxcXRjdi9sTTZQNW9Ud2hBc1MvSlk5UzZYeWFMbGVs?=
- =?utf-8?B?c242TjMyVWhya2tMR1VqcFA1S1Q1YUtZd25FQzB1QlFJRDFZWWpUUmtnTVl0?=
- =?utf-8?B?QUo5b3dxMHVKY2taZXJ5eVo4d0FwaEtVeWhvWVBzcEtTcG02WktqYnhNcytj?=
- =?utf-8?B?S0NHcU8yYU1mSjZmckYxQUE5dWpMVFY5dzFOSDdhT0g0OGVDU0dPTE1TK3B3?=
- =?utf-8?B?QitxbHhPNjRqRWpmMXlMYUVMMVJqTXl1ZC9tMXFYbHlibnJBd2JGN2dxNm5G?=
- =?utf-8?B?TFpmSERjN3F1bUxNeTIyWERIVGorU05yeUp6K2h2b21XaTR1cnkvbXRBdlNU?=
- =?utf-8?B?VHdKblQ2L3NkNVJIZkwrTEdDWTJucWgxZlVjM0s2OEI2Z2w4UElwajcraXBW?=
- =?utf-8?B?akxvUE1JSHFxNU53dnZtOGczbEFEWmtURlZDU0ZoOG9tK3NrbmJPeEVxV045?=
- =?utf-8?B?cEhSbFZVUXFrMVhEN2pXVFQ1Z0U3Q1lwc0JYWXF1MGJGcnpBMzg1YVI2TGNw?=
- =?utf-8?B?REJWR2lUZC84WjdwR0RUQys4U2VReWpaS1lCMGhSWHRYNk1RWjNCWUkweE5W?=
- =?utf-8?B?Mk43cWswRlhpZnlORG5Qb2tZMVlDN09TK3RUc01FclN5dWV2REQvYzhCb21X?=
- =?utf-8?B?enJ4djlpL0JRbWZkZmVrWnZSUUovWXI1V29pRHE0UEM4ZWRmNHpWVnBTTzVM?=
- =?utf-8?B?OEVHaXRLNU1oeWcvTGZ3aTYrMEl1RytRc0U5TlpVZm1TLzh2bEN3VWMzVTFa?=
- =?utf-8?B?b3dSYWRNRmg0a2tncUNSMnM1QnlOK2xmaHIxbHBPRmZtVjBuWmtQNDhYQm5M?=
- =?utf-8?B?TkZyaTUzei84eVFSK2VWRXd2Q0RUS3dKSk4wQlArLy9PSnlYQVd6R05JUDR2?=
- =?utf-8?B?NThEOTl5ZUxxZ2RDMDBONWZQQmdRdW00L0VTUGhHbVByM1FZam4wb3ozMU1K?=
- =?utf-8?B?alh3bjZxY0p6RkJtSnpLNGR1YzVmZjh3RDhHVW5wZXJBZ0lzV2NRczJ2VnBS?=
- =?utf-8?B?eDZScHJPeWlqNDVMWnJTY3psTXVPWDRjUkg0T2dHVWJEOEZveUJDYVI2SlI3?=
- =?utf-8?B?MTQyRE5JZjlzT3V1VHZHVEk4QVpTSVhrbEdoQ0RZTGRZNmlSRmU4b0pOaGw4?=
- =?utf-8?B?Zk5qVlo0VEtkckUyVFdFdGJsQXpoYmMyQXBZR0ozOTZTdEV3cVYwRjVXY2xw?=
- =?utf-8?B?RlZTbTZHVktZTmF4aXc3WXIya0FiMU1FdUt2RnRVRmwweU5LZ2w1elc1WFJi?=
- =?utf-8?B?MnlVdWo1WjRCclNtZVdBb3Rib0hxemJOV29wM1l5WUl4WEJvRERDUys2Mm9h?=
- =?utf-8?B?a1BBbTA0bm0wdW56cVFRVkhnTDdUbzdiQ1NDcmk4MGlObXJoWXBtZDRSdk9l?=
- =?utf-8?B?d2ltSXlPN3FRdzh0NmRtK1hZRGhVT095YjlLaHM5RlRuK3F6SU5wOW1EWlox?=
- =?utf-8?B?VGlDTjZNd0EvdVYwOHhVQVpIeFdJdU1QRlBrdEZFSm9MYUcrMnNYSGJyR2JL?=
- =?utf-8?B?VURVdi9Pa2luOE1nM1lvdTZIOTZ4VTMrdEdEUEFsVGFmS0ZrUU5wUGlJVTlQ?=
- =?utf-8?B?Ti9RalE4SEJFa24xYnBVcnJ3MjlDVUU5bWk4RmNOcFNNclVqNGdJa1NrdzhF?=
- =?utf-8?Q?3zIg=3D?=
-X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(376014)(82310400026)(1800799024)(7053199007);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Dec 2025 14:52:06.9662 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: dc77fe37-635f-41c2-b98c-08de327b879c
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: DU2PEPF00028CFC.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS5PR10MB8203
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMjAzMDExNyBTYWx0ZWRfX3nCfEKAvKPip
- Gmu8KXcTDLKsr5iMZ/nLW5xsB+AtYW8KUdIBDlAFlRM4ysh4ITCR2tzT5ea15d1z1rYi+1PZzO1
- 4gXM5HshhMpKmi9Busgyyaq/LMKYzD0enulTw5SGTMcVwg74XRdjopj5AyBGuE1sLzxcfWNgXhe
- LT+kBiOwRo/AH1TrsTd6EkzIOeFVUGZgYaHOYI2GfmsekjFhac30NaryiTbhzCkYrToC4SJb0Os
- y+9VyfbvZMHb+2rgpkHJJb2kOX5G0plancyoPdHlTQf0hAE6sI/B3rdub/Bi1ARBDtWgEApOrTB
- bACfk8utaeAAD2ancNdpdoMTRJ9tqqzS+MvZ56qLEf05PKUuppYMdwvRFMZjxLUtsLD+/2ND+Qf
- utO2y2BhN7PsSBbFUDBUrGV52x9p2g==
-X-Authority-Analysis: v=2.4 cv=buhBxUai c=1 sm=1 tr=0 ts=69304e9a cx=c_pps
- a=/riwZtEhZw8wleqld+6sWQ==:117 a=uCuRqK4WZKO1kjFMGfU4lQ==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=vMDSZMCM2png5bxp:21 a=XWp4PHTOCikA:10
- a=IkcTkHD0fZMA:10 a=wP3pNCr1ah4A:10 a=s63m1ICgrNkA:10 a=KrXZwBdWH7kA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=b3CbU_ItAAAA:8 a=8b9GpE9nAAAA:8 a=k-42gJp3AAAA:8
- a=zk4-lHRcAAAA:8 a=phlkwaE_AAAA:8 a=SoRHu5N-5CeALsXmRx4A:9 a=QEXdDO2ut3YA:10
- a=Rv2g8BkzVjQTVhhssdqe:22 a=T3LWEMljR5ZiDmsYVIUa:22 a=uCSXFHLys93vLW5PjgO_:22
- a=7cv85riZL9-k45RWW8P6:22 a=uKTQOUHymn4LaG7oTSIC:22
-X-Proofpoint-GUID: Q7OeMjTQtAUQysD07BysSPIqHnHemWId
-X-Proofpoint-ORIG-GUID: Q7OeMjTQtAUQysD07BysSPIqHnHemWId
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2025-12-03_02,2025-11-27_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
- priorityscore=1501 spamscore=0 lowpriorityscore=0 clxscore=1015 phishscore=0
- impostorscore=0 bulkscore=0 adultscore=0 malwarescore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2512030117
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Tom Rini <trini@konsulko.com>, uboot-stm32@st-md-mailman.stormreply.com,
- u-boot@dh-electronics.com
-Subject: Re: [Uboot-stm32] [PATCH] stm32mp: Fix handling of OPTEE in the
-	middle of DRAM
+ ARA:13230040|10070799003|376014|1800799024|366016|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?UlRLUHluSWFLNmR0d0QyelBxYzNKVnU4ZHR6WUxoSGhnNUhwdE5wVlN2SjFS?=
+ =?utf-8?B?a2luZ0xlbjVCYUJ4WElwWkpCMHp1a1dnVWFjN2ZxbnE0UUpkZ1M5OGsxaTNr?=
+ =?utf-8?B?TEtvYUhtaVpOV1BVWTVka2lnNnZNa0Nlb3h1dDk3b3FPYzVHdDY0SmJ3WS9C?=
+ =?utf-8?B?U2dzbmRibWRySGM5d3Fkb3hKTHhUWFo5UUkwRVdJbXF1WUN5SlRlQmdjMlVr?=
+ =?utf-8?B?SHpJOUx2clljU3EwWUhMdmtVN3F3UDdxdkFZdVVKeGpqaUcvNjk4aytYblRQ?=
+ =?utf-8?B?ZVE4Nkl6eW5jS0Uzb1V1QWdXT3h4Ti9DQ0pZMGRxMEs0N0I4aTVOUVlkUjQ2?=
+ =?utf-8?B?SjYzREdPQXBBR0wzclEyVEJ3QVJxTU9uTjdHS3hWbFJRUWpiQ3RTOWQ2MnFB?=
+ =?utf-8?B?bUFyNTdaM2RRN0psQUR1ZTBSNnBMYWVCQ1Z2VG5QN3dSNGFRY2ZJRW9zR2Fo?=
+ =?utf-8?B?eFJjdzFIeEVKVGk1bm0zSDg4WUJJT0dyR1kzaDNMLy9WeWw1S2hOMGVvekha?=
+ =?utf-8?B?NDA2emVXL05xWm9zUTRBSDZnaW1Zam1jYTB6RWJJZGZBT0ZjSjA2TjR0anBr?=
+ =?utf-8?B?bHZ0NlRLZlRuL3ZaQ2IxanRkTTFIRG51Q3FPOTBIamJBUGFSSDMxUVh2c0NF?=
+ =?utf-8?B?cmhHZFZBWk02L2NhcjJUeWJvQTNiN0pVSjJXenBoNkVCNHg2eEU3ZEVXS3FS?=
+ =?utf-8?B?bGl1eVJmVldMekNIaVVXMlBPaHlIdUFIckwyRGx2VGZxVk1SWDlSay9ETUly?=
+ =?utf-8?B?REt3Q095RU9HZ0lJeVkwODR5NXFwNXliMUpVS0gxemNhSHNqaDNIQzdCTkhz?=
+ =?utf-8?B?a0owRUVuNUhmYTdIV2YvTVJzK1Vmd3liaXpSemxKME0xT0YxOGVlN3cwT2dJ?=
+ =?utf-8?B?NFFScm9raU9BUVFBcjZWTVVHQ2s3aFE3K21XSjJpUXhYdThPeWZMZTlJSmtE?=
+ =?utf-8?B?VXRZcU1vMmdwSHRWTzRUa0haeGZPTm91eEs3bjRoVzVub2hrcXJsSmkyM00w?=
+ =?utf-8?B?aWJ0d01WQ0p4TGZ3RkVJODhBc3E0elVoQi9aSmtRaDJDRFc2Q1Q4QnNNWUkz?=
+ =?utf-8?B?Nk9jeFV0Q0l5czJ1Ui90Q29ZS2lyam5TZkxJdFpTd0R1a2djUmlER09YM2NK?=
+ =?utf-8?B?NGgzcUd5NUdwWnVFaTVRMFdBTTljbFA3NGxQUGlWYXZqVXNVcHFwKzF4UDVt?=
+ =?utf-8?B?RkkvTCsyOTdjTDBqakJUa2o0c2RPRERIRGNUdDYzbjgyM3dhQmNBb09GUkg2?=
+ =?utf-8?B?RmJkMHZTL29tQmRQa1F2Y1hqcnhWWExubmN1akZEa3ByL2ZrQm5MRWNta21J?=
+ =?utf-8?B?WDVBSTRjazJhS1hHYkIyWmdod0JjY1dXUjZ0VHBNR1UyaUNtems3T0pjZjlj?=
+ =?utf-8?B?MFZ5cHBBOVlQUVpWWnM4cldpVWVNdXdSVGtScFlYcHA2eERzWklFdE5jemFM?=
+ =?utf-8?B?b2JhMytPR0IwU3JXOWNKYVRMY1FiSldRTytTR0dlbnkrU3gvYmdpaEZZWWZX?=
+ =?utf-8?B?ZEl6R1QyNy9ubm1ia2xpK0dpRHlWZTMzcnNDb1NxVUFhNE9EMXlCbnFzQXdE?=
+ =?utf-8?B?REdmbmN3MjZOTXQzNXB2WXk4ZkRqOWpGT2xFWkh1ZERJaFVXR0x5a0JHZ0pB?=
+ =?utf-8?B?MW95bFZKUHh6cU5ORTQzTkdlRHNzZTBYSjdQQ1RaOU9oUXhHbGRTclEyVkpp?=
+ =?utf-8?B?QXEwcVdPMmxvUjEwUER6VGErekgvSHp5eEhpUy9mRHVnRFJmSFRBQzZpNC9J?=
+ =?utf-8?B?SU1qVHlLYkxBZmZSVTFBdUxMaG9EdkZpcUxzVUVmcWhqbDJ3eWlkK3R2NWpr?=
+ =?utf-8?B?WE5WVVYrYlltdnpJL2ZVTWtmckVTVnl0djNkS1B4aS9MajNIOTRiMDBQemxy?=
+ =?utf-8?B?dnFXZ2ppVkxqMUJWSlpRS3B5ekdscURjMVBTT2dRZFNRcHhyZzNEd04xbWh3?=
+ =?utf-8?Q?A0Vd+9czt20hVY4ShlYVdA6IfwsnPcvL?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(10070799003)(376014)(1800799024)(366016)(7053199007); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dTBqcFZncEFVNHA1b1VrNEU3alpHMlJZRjRacmIrN2xoVUVVakdrc2lOTCtU?=
+ =?utf-8?B?Y0lIZmdmVUF0N2ZTMkhCTjJRa09INTQ2T3JrSDVTamdNeCtUSFd4Qi9aU0Fj?=
+ =?utf-8?B?WXRvZzkyTVM0V2NoVzJaZXd4ZGQ0OW9LQmxLT1ZmSzlMVU9WQU9BM3U5SVpk?=
+ =?utf-8?B?c0hZWEUySDFZd2RadWpoQk1OZkdjQ3BwVGVCUnlCR1dkVHJOaXlQTTdzWWVC?=
+ =?utf-8?B?ODBPcmdCSWlqSXJHQktxQm9BMDFXSFVGeG1PZnhJY2M3Q3IrMTNkKzI2bVFy?=
+ =?utf-8?B?bWxzcnJMRnhHaWYzbHMxOUl3ZWxDcElRSTNiOE1yVXhjZlYrZ0hpUXd1elNz?=
+ =?utf-8?B?QW1QZGtUcEZpM3lIRWtNenFJVG9TSUIwcXV0akgxaDVsL1A5TW0xYm12MFlG?=
+ =?utf-8?B?TlcxTGlXZnBkRk5waFVsR2swRXZ2bTBtUi83bXZNTDR0SUtid2hDT2FLcytz?=
+ =?utf-8?B?STFqc2tPekhsZDhJMWMwQjBKTjUwVER4UEVVTFhJR0txVHJ3U3VtbGVhcGgx?=
+ =?utf-8?B?WVY1QmFHandsNU1iS2hnK09IdFpla09zZjBpb2RaN2VGbzUxUE9SRFExNE1W?=
+ =?utf-8?B?QVM0K2hDWldjaU9zRDZ3eHY0UmFnSERKRm9IYStLN2w3WnF1Wm56Sm85VEpB?=
+ =?utf-8?B?TUJyTGwxR2EyUFY2REhVRERFVDNoa3hJU2Z1ZmVNdEJpUit3RHIrSnhGUXl0?=
+ =?utf-8?B?QUhxSHA1VmI2WWZjamNnUnFKeWVwYWpjc1F0bUtTQUE1ZDdLeWFydnVJMEhG?=
+ =?utf-8?B?cWlDUXdqYWFjaTIzdjFvcldIWjBoaGxOelA5VTdhSzJ5V2hPRGVjd0xtVmlk?=
+ =?utf-8?B?VTBPcUxRbTlDbFJsa0JGK29yL1dZYzBzYi9CYUZKWmRKWUJVdWRCWXM5QTlP?=
+ =?utf-8?B?SEd4RnZ1WnQ1Qi9qRFRkaGRTV3hHVU1XWG5PbW5FTzJSRDhZWFpuZCtnUGc0?=
+ =?utf-8?B?a1RPcUE5OEpuakFVWjJJYmtPUFMrTHQzd0pDRjhoQkN1TXRROEJrZ0FDTWgz?=
+ =?utf-8?B?MU8zbGJpY3ZWYWVwUkk4bkFNclN2OHVoc2dBYkJHemk3UWZXdXdRVHZnMS9T?=
+ =?utf-8?B?TEptekNVMzNxeXBab3dFdkoxZ1MxZ0wrSGNyaGJKMVFPVzhxNFBJS2VBOGJW?=
+ =?utf-8?B?cDRGNEpDNGRBaWwwVDVBcW1RM0VLU2lLVys2UnB4UlpkejgyUnVsVlRBWnpI?=
+ =?utf-8?B?U010QStmaXhFSmV4Wnd2YXRlNndraG1FOTdRb2ZCak1pK2h1dUk2ajJSZWJ0?=
+ =?utf-8?B?bjM1WFpGSFZLSVdkUTVDQzJHRmRwcUZoUW9RakFJTzZUTnJJbGpFeFJQM0Zv?=
+ =?utf-8?B?a3lZVGpHQ2VGQnhZQjBXbHlnbUl1SENLME8yRVBKVmdpaHd2TlBFOE9xZ3lL?=
+ =?utf-8?B?QU9lS1cweGxocHFZZkhoUFRQOGZ2bit0dy92TnJWZklxVjFuT3A2MEpjSEd2?=
+ =?utf-8?B?SHA1WVExdkZQcndoVmJLOUdKK0pTNmtxTm02Z05abEZMMHdZYVZEby9WUkl3?=
+ =?utf-8?B?THE5S0dTWDc4OXZadk54MUlkYkdieWJFZk1TdzlaaTN1Z2RWMjRYZ0srV1hY?=
+ =?utf-8?B?bitPcXlRQkIvM1I2MFp2MjkrZWhCbmlHcmFCTW9CdnVibktVSEQrNW1hMzVK?=
+ =?utf-8?B?Q0s0aldCMUliWkV3THUrbXdkbEloWC9ISFV3UmV0V3B4QmVGb1J5QjhOVG5r?=
+ =?utf-8?B?MXBzcUZoQTFjdCtUZStlQWkrZno3Nk5iNFlnVmZ4M3R2dXpjbW1aeWJhWkYr?=
+ =?utf-8?B?ckpyUmZKODdhMkVKb1RJQXhnUmJNTlAvV0lyeTRuRnkvaGZjV2NVTFBydFpF?=
+ =?utf-8?B?TDZvbXpJM1FOUkJ4UXFjSWVoT0tJT283cEJzK3IvdkUyTXNkQlZDQ3h1a0Zw?=
+ =?utf-8?B?KzhwWk04aVBQMWVOQURkZjhQU0lubGh6QzRJek43aEtTYnVwR1JCTlBjQllu?=
+ =?utf-8?B?aFkyUGErVjFRWXpPQ1gvWC9wYmNzR2ZUWFhjYTV3S25iOVllQXgvaDE5R2Yw?=
+ =?utf-8?B?MXN5QytiTXBDUlJqMzk0UHpOR2R3LzRZdURKWFQzNTZ0V3pYYlQ3d1hzVFhs?=
+ =?utf-8?B?VjJ0K01GWXdMV3NxN2NkVTNPWk9ISlFSc3c0UlM1Tkw2dW5EdUdHc0I5dkVJ?=
+ =?utf-8?B?SG9PSjJCbmh6RklXU2JCdmZ4ekwwb2V1Z0hVVTNLUWcxSDRsc29uZnZCYmth?=
+ =?utf-8?Q?6lz11X7MHuGwQvnezQVjYlY=3D?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: a23c056a-ee2e-4011-ddad-08de3336ebcf
+X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Dec 2025 13:13:31.1648 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: sNTndJd0qorHikHAQ/pEMa1bJHfbFnWnD44OSJbVYB9FxZo1vqJXa65KR3tO9/M7kc6At1EUsfr6KTUV79/uT75WahGUAqAM43RJ2IpLang=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB7168
+Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Kamil Lulko <kamil.lulko@gmail.com>
+Subject: Re: [Uboot-stm32] [PATCH 01/23] board: st: Drop old LED code from
+	stm32f429-disco
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -177,96 +161,94 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Hi Patrice,
 
+On 11/14/25 5:23 PM, Patrice Chotard wrote:
+> From: Simon Glass <sjg@chromium.org>
+> 
+> This predates the LED framework, so drop it.
+> 
 
-On 11/19/25 00:17, Marek Vasut wrote:
-> STM32MP13xx may have OPTEE-OS at 0xdd000000 even on systems with 1 GiB
-> of DRAM at 0xc0000000, which is not the end of DRAM anymore. This puts
-> the OPTEE-OS in the middle of DRAM. Currently, the code sets RAM top to
-> 0xdd000000 and prevents the DRAM range past OPTEE at 0xe0000000..0xffffffff
-> from being set as cacheable and from being usable. The code also sets the
-> area over OPTEE as invalid region in MMU tables, which is not correct.
-> 
-> Adjust the code such, that it only ever sets RAM top just before OPTEE
-> in case the OPTEE is really at the end of DRAM, mainly to be backward
-> compatible. Furthermore, adjust the MMU table configuration such, that
-> the regions over the OPTEE are simply skipped and not reconfigured, and
-> the regions between end of OPTEE and RAM top are set as cacheable, if
-> any actually exist.
-> 
-> Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
+Well, we could still use it with the legacy LED API if we enable it, but 
+stm32f429-discovery_defconfig doesn't, so I guess it's fine?
+
+Since it was disabled, I assume we don't need/want to migrate it to the 
+new LED framework using DT?
+
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+
+Thanks!
+Quentin
+
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > ---
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
-> Cc: u-boot@dh-electronics.com
-> Cc: uboot-stm32@st-md-mailman.stormreply.com
-> ---
->  arch/arm/mach-stm32mp/dram_init.c    |  4 +++-
->  arch/arm/mach-stm32mp/stm32mp1/cpu.c | 11 ++++++-----
->  2 files changed, 9 insertions(+), 6 deletions(-)
 > 
-> diff --git a/arch/arm/mach-stm32mp/dram_init.c b/arch/arm/mach-stm32mp/dram_init.c
-> index 34b958d7afd..e36e42e7c61 100644
-> --- a/arch/arm/mach-stm32mp/dram_init.c
-> +++ b/arch/arm/mach-stm32mp/dram_init.c
-> @@ -65,6 +65,7 @@ int dram_init(void)
->  
->  phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
->  {
-> +	phys_addr_t top = gd->ram_top;
->  	phys_size_t size;
->  	phys_addr_t reg;
->  	u32 optee_start, optee_size;
-> @@ -86,7 +87,8 @@ phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
->  	/* Reserved memory for OP-TEE at END of DDR for STM32MP1 SoC */
->  	if (IS_ENABLED(CONFIG_STM32MP13X) || IS_ENABLED(CONFIG_STM32MP15X)) {
->  		if (!optee_get_reserved_memory(&optee_start, &optee_size))
-> -			reg = ALIGN(optee_start - size, MMU_SECTION_SIZE);
-> +			if (optee_start + optee_size == top)
-> +				reg = ALIGN(optee_start - size, MMU_SECTION_SIZE);
->  	}
->  
->  	/* before relocation, mark the U-Boot memory as cacheable by default */
-> diff --git a/arch/arm/mach-stm32mp/stm32mp1/cpu.c b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
-> index e0c6f8ba937..252aef1852e 100644
-> --- a/arch/arm/mach-stm32mp/stm32mp1/cpu.c
-> +++ b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
-> @@ -82,11 +82,12 @@ void dram_bank_mmu_setup(int bank)
->  	     i++) {
->  		addr = i << MMU_SECTION_SHIFT;
->  		option = DCACHE_DEFAULT_OPTION;
-> -		if (use_lmb &&
-> -		    (lmb_is_reserved_flags(i << MMU_SECTION_SHIFT, LMB_NOMAP) ||
-> -		     (gd->ram_top && addr >= gd->ram_top))
-> -		   )
-> -			option = 0; /* INVALID ENTRY in TLB */
-> +		if (use_lmb) {
-> +			if (lmb_is_reserved_flags(i << MMU_SECTION_SHIFT, LMB_NOMAP))
-> +				continue;
-> +			if (gd->ram_top && addr >= gd->ram_top)
-> +				option = 0; /* INVALID ENTRY in TLB */
-> +		}
->  		set_section_dcache(i, option);
->  	}
->  }
+>   board/st/stm32f429-discovery/Makefile |  1 -
+>   board/st/stm32f429-discovery/led.c    | 39 ---------------------------
+>   2 files changed, 40 deletions(-)
+>   delete mode 100644 board/st/stm32f429-discovery/led.c
+> 
+> diff --git a/board/st/stm32f429-discovery/Makefile b/board/st/stm32f429-discovery/Makefile
+> index 6b02c0fddec..233eafdad3d 100644
+> --- a/board/st/stm32f429-discovery/Makefile
+> +++ b/board/st/stm32f429-discovery/Makefile
+> @@ -7,4 +7,3 @@
+>   # Kamil Lulko, <kamil.lulko@gmail.com>
+>   
+>   obj-y	:= stm32f429-discovery.o
+> -obj-y	+= led.o
+> diff --git a/board/st/stm32f429-discovery/led.c b/board/st/stm32f429-discovery/led.c
+> deleted file mode 100644
+> index 4b8038341b9..00000000000
+> --- a/board/st/stm32f429-discovery/led.c
+> +++ /dev/null
+> @@ -1,39 +0,0 @@
+> -// SPDX-License-Identifier: GPL-2.0+
+> -/*
+> - * (C) Copyright 2015
+> - * Kamil Lulko, <kamil.lulko@gmail.com>
+> - */
+> -
+> -#include <status_led.h>
+> -#include <asm-generic/gpio.h>
+> -
+> -#define RED_LED			110
+> -#define GREEN_LED		109
+> -
+> -void coloured_LED_init(void)
+> -{
+> -	gpio_request(RED_LED, "red led");
+> -	gpio_direction_output(RED_LED, 0);
+> -	gpio_request(GREEN_LED, "green led");
+> -	gpio_direction_output(GREEN_LED, 0);
+> -}
+> -
+> -void red_led_off(void)
+> -{
+> -	gpio_set_value(RED_LED, 0);
+> -}
+> -
+> -void green_led_off(void)
+> -{
+> -	gpio_set_value(GREEN_LED, 0);
+> -}
+> -
+> -void red_led_on(void)
+> -{
+> -	gpio_set_value(RED_LED, 1);
+> -}
+> -
+> -void green_led_on(void)
+> -{
+> -	gpio_set_value(GREEN_LED, 1);
+> -}
 
-
-Hi Marek
-
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-Tested-by: Patrice Chotard <patrice.chotard@foss.st.com>
-
-Tested on stm32mp135f-dk and stm32mp157c-dk2 boards.
-
-Thanks
-Patrice
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

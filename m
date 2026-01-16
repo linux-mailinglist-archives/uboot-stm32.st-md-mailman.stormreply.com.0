@@ -2,25 +2,26 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id D7EF2D384FB
-	for <lists+uboot-stm32@lfdr.de>; Fri, 16 Jan 2026 19:57:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0A3D2D384FD
+	for <lists+uboot-stm32@lfdr.de>; Fri, 16 Jan 2026 19:58:02 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 94B87C8F290;
-	Fri, 16 Jan 2026 18:57:54 +0000 (UTC)
-Received: from AM0PR02CU008.outbound.protection.outlook.com
- (mail-westeuropeazon11013042.outbound.protection.outlook.com [52.101.72.42])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C85CEC8F28E;
+	Fri, 16 Jan 2026 18:58:01 +0000 (UTC)
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazon11013005.outbound.protection.outlook.com
+ [40.107.162.5])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B01A9C5A4C0
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8EB0FC5A4C0
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 16 Jan 2026 18:57:52 +0000 (UTC)
+ Fri, 16 Jan 2026 18:58:00 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ikvv7Di8SzWu6vv8GXcydJCJt6in6s7jXwugDCwlK2clDJehhyATrs9hbj2z0kivpNuHdU/nu4Ys7Gsc3ev1mdFZhZDbszCNk5GdDnqoG7CjkCsqoaZsfm66g0M86pT/VLDl1pQ88eSeSmjPE3ELtxEsiUu4ijNScwWVoobAUxZFCKL55zXV66sukFncTlg62Gf2XnBzoPkMsDXtkg62VY1jf50qqAoTCrf1eueIzdULJO0QlZSTDjfyeylhjtnDM18T+piUVjf01si9U0r5ioENlt51OpJ0KQ/AEE5u7/GybNTnqoi69BPn8dbUplajBeMpNhofsDE0KHjQyYhCtA==
+ b=ZuXTHS6e3qQqW4su2pTnWxOEocuLkYSmxOgePFB8YI9JWZJDufRWjQb6GVBu0OcvT/KdLnhTxgtXfCDH3RZk5CoUC30I7nWEhURDnDHUYd8O5BOxgxSRueAY/nlzQeIl8Od9/goZnUbaOkl3ydzBGK5DvN4Ddxv2Syb4HBdIkRrHX9i/M9Aw3d7/jpa8KJcjXQK7mbdkNtcVR7owzwq5pASfOoQGxSK3kGS3y6nYsasmB0sygXBunUL/I1DvFyE9+q+hTU6pzf28vSnZD0qgUw1L8QzpXkp65jkIL27MtKC5955SEKZaNgU7w29eGSenaThuD1IwaTOzglF6Pdvrkw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Y/JYoGQb3y/IYJDGSjCL3UrueO+FaAGnxukATJfJ9Gc=;
- b=QPfi/v75UfSCr7iMzVXWjU1wr+I5PwiF76jEEx1q1KNmRAXxm1etOza49jUh2SlLmowsnhF3IyrCHw510f62D9l3BpWNXhpn5fKNtnRls9kkd5/hDwbTRKkH/o6i5kCVWFsIro0A8D9BMEOErTFDn/jf193QWzyxucWd5/k2WK7tb4arA/1fGwPZZ1T2hvGq1Gz4hBpmWCglHCW5fLSko+BXvWYe86t1ayhUEPhtg1LK+LT370kT2zemUoaQfP2Lr9WzA72tS05ry8eGGUIQ/m8cF0qDDKUVVkNAkrSOvTOu+Vk85UZjmVUfo42nu7XmU17d9b88aM7VQu8t4uetlQ==
+ bh=f2GyA3dHWuOmmEafxCKub2sM7H7bllyTkDvrbW2tU9Y=;
+ b=Czmcua/snnkzYnQlyEbht3fwbqnKmQ7nVh2F0AUylcXHh8v7Of+AAe7NKII3ti9ttbOwegRZ1s10f4DrUhg/Z1ZTx7rl1AdJOWBuxLLzuoyvIcYPGLUv3NNus78movDIxKR+ZXwVO5f4BxWFGZvwOXEPz1p6qPtaAGBbmnrEEmcSnCv82nUOWlxcYrOGHQMhP40VdbsCDNFnCU0IRjLRnZihigsIwH9wgSXbmsHuhIo2tFyHVF8LiqhUKxqH4jjG9cpFFix/n5iM/Oa8ODfeMmRUhIvOG1X8sSYx0XOpt3zLVnwzeHOt1grIt+LuwWYmqy03hAqP0yZBObcqWvGylA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
  164.130.1.60) smtp.rcpttodomain=denx.de smtp.mailfrom=foss.st.com; dmarc=fail
  (p=none sp=none pct=100) action=none header.from=foss.st.com; dkim=none
@@ -28,18 +29,18 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Y/JYoGQb3y/IYJDGSjCL3UrueO+FaAGnxukATJfJ9Gc=;
- b=GpG4jEsLFpV5lt7id+itAPRydLFtIe3nrPTIPkDeFajqj8o8RSPduA065SSFlzKnOigkc2JzCB+N8b/xhRCDLh6AGFEe9CKYteX0CEDyMzqB+LjMIXlvYOSh0YLLIr254mxQC69xifUn5lcIPPBmxp+MnJF3L/eiWqxqe1RVTTkkegCLXOzOVAntXXY6VUdFOYobTpUeIEJQ1RE8LG+tyNc/FYm+53zKFfPSSpsncE19l5lltrMCgQV7LFb3bO7lzsBysE4nZ7tC3xjs2ciVjBgp6vZn1mTs018rPZCt9WdIaj8Tr02hui07x9j3Puep97VWSJpB5LJ21lnlskFMCw==
-Received: from DU2PR04CA0249.eurprd04.prod.outlook.com (2603:10a6:10:28e::14)
- by GV1PR10MB5794.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:61::12)
+ bh=f2GyA3dHWuOmmEafxCKub2sM7H7bllyTkDvrbW2tU9Y=;
+ b=msdv/b87ii+2UK+KlNuw7gLs9BR1r6MNc69X/jzfoJGAj1rb7/A+LtVNteW9aFkKv0keY89/QkT2hUDn99ETnKcnCmZwiepbyUphT+YWUmHF29HnvYkWM/nwViv6s3PjnNXxsB5t1Bn6vat7f5qvvW/vrzJtZWxcxU5IAppx0JUlDdZfEQzRDWjaglIskXp3eZUh4+qCC6oHwqH20EkV2TkcyF3RDiAqNbvUI0WwQHsBvtxtFfORdrpiV8J7jrAHz/TnlHNboSHUeOwuPf9Hp7+YlshGhtr70Faje1E/XG9UUt3X8GpcYkCruS1irFaTjiHfOFdEU3iKzoNFlWbE1A==
+Received: from DU2PR04CA0255.eurprd04.prod.outlook.com (2603:10a6:10:28e::20)
+ by GV1PR10MB6291.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:91::11)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.5; Fri, 16 Jan
  2026 18:57:50 +0000
 Received: from DB5PEPF00014B8B.eurprd02.prod.outlook.com
- (2603:10a6:10:28e:cafe::f3) by DU2PR04CA0249.outlook.office365.com
- (2603:10a6:10:28e::14) with Microsoft SMTP Server (version=TLS1_3,
+ (2603:10a6:10:28e:cafe::e0) by DU2PR04CA0255.outlook.office365.com
+ (2603:10a6:10:28e::20) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9520.7 via Frontend Transport; Fri,
- 16 Jan 2026 18:57:33 +0000
+ 16 Jan 2026 18:57:45 +0000
 X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
  smtp.mailfrom=foss.st.com; dkim=none (message not signed)
  header.d=none;dmarc=fail action=none header.from=foss.st.com;
@@ -49,7 +50,7 @@ Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
 Received: from smtpO365.st.com (164.130.1.60) by
  DB5PEPF00014B8B.mail.protection.outlook.com (10.167.8.199) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9542.4 via Frontend Transport; Fri, 16 Jan 2026 18:57:49 +0000
+ 15.20.9542.4 via Frontend Transport; Fri, 16 Jan 2026 18:57:50 +0000
 Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
  (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Fri, 16 Jan
@@ -57,11 +58,11 @@ Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
 Received: from localhost (10.252.20.137) by STKDAG1NODE1.st.com
  (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Fri, 16 Jan
- 2026 19:57:31 +0100
+ 2026 19:57:32 +0100
 From: Patrice Chotard <patrice.chotard@foss.st.com>
-Date: Fri, 16 Jan 2026 19:57:26 +0100
+Date: Fri, 16 Jan 2026 19:57:27 +0100
 MIME-Version: 1.0
-Message-ID: <20260116-restore_boot_for_stm32mp13_stm32mp25_boards_v2-v4-2-d7cf17cd678c@foss.st.com>
+Message-ID: <20260116-restore_boot_for_stm32mp13_stm32mp25_boards_v2-v4-3-d7cf17cd678c@foss.st.com>
 References: <20260116-restore_boot_for_stm32mp13_stm32mp25_boards_v2-v4-0-d7cf17cd678c@foss.st.com>
 In-Reply-To: <20260116-restore_boot_for_stm32mp13_stm32mp25_boards_v2-v4-0-d7cf17cd678c@foss.st.com>
 To: <uboot-stm32@st-md-mailman.stormreply.com>, <u-boot@lists.denx.de>, "Peng
@@ -72,74 +73,74 @@ X-ClientProxiedBy: ENXCAS1NODE2.st.com (10.75.128.138) To STKDAG1NODE1.st.com
  (10.75.128.132)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB5PEPF00014B8B:EE_|GV1PR10MB5794:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2a8945a9-4fde-4bfa-0670-08de55312520
+X-MS-TrafficTypeDiagnostic: DB5PEPF00014B8B:EE_|GV1PR10MB6291:EE_
+X-MS-Office365-Filtering-Correlation-Id: 722fe37c-6e07-45f8-2014-08de55312589
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|376014|82310400026|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?cmhTcUhobGluc1V3d3IzK2RMdncvSEg5SnNPQy84SmJueDNWWDZ2c3pUVjFF?=
- =?utf-8?B?OUhwK2lzdGpkWUdyV2JkcU9PcE5VOGxjbnNqRFZ2TU5wcm01WExSRlNJSHJl?=
- =?utf-8?B?VUdTQTI5dHd3RW9mcXk4ZUVubWM0RFlmeERTMUtYZmJjeGtpOXc1UlhBUjZD?=
- =?utf-8?B?UmUySC92U3Bxa2R4S0V4eFRuN0NhZVVCOXlOSWZLMldWTWwvM2dYTWhLRk52?=
- =?utf-8?B?Yzlzdnh0a3NaQkVMU3VFSzJUZDI4di9zTXk4QzN2cFJBUjNMU1h4UFRldGNi?=
- =?utf-8?B?RVNaN2RiM1ZYMTR5VSsvRTdzTk9jUDZQaFowblVlWTdrRmJ6ODJNeVMra2dT?=
- =?utf-8?B?b2laVjVsRFVtL21oYmE0Vy85bUN2WERDMlNLdFd2TzhmOElEM2FIUGc1RE9I?=
- =?utf-8?B?cE1QRzRvQjVPQjlYSlNnR3dMYitwVEJBU3VlMGxRQjZBcmIvMTFUOUE2UU5w?=
- =?utf-8?B?TGxTNnFYR2tsRkpZeWFjaDVXT25zODNtUlhWZUFSeVd0RXNYSTdraHBUS0Ns?=
- =?utf-8?B?QWtsbkRVbUlhWk1Xb2plck9kcWZhUDdVVVJnd2Qwa09uZWFsZlhrRWt4QlVX?=
- =?utf-8?B?YUtCMCs5b3NYMmtLUTJrS2NRYjM1S2lSdU9HWEJrZkl2ZkNDdWJmNHVDRTBJ?=
- =?utf-8?B?NHExbWJValZ3VHFzdTRNbTlkTXE1SFpveHcrUlZlZVJZaFBNV1YvcGh6d3FC?=
- =?utf-8?B?cEFPUmpjRkdQai9yNU1lN0l0Q3N4eG5BRjRBUHMvNU1rOG93ekpGMTRNWnhi?=
- =?utf-8?B?T09pdkcwTEZEamtQWFFWU2pzb1ZFYWdmUWFTK1lsU2htMzBxOVBPNFUwaFRF?=
- =?utf-8?B?aHVEZWNhVWpvTE12b2NmeXduWitINnlucy9ROVBxQXVwRGpxaVBjQVNRZ25m?=
- =?utf-8?B?UUg5Y2MwQTJRVkt3NzM3RjBDaW5kY3k5UURSdzMzVlpneDdTbFN0ekdHVFJi?=
- =?utf-8?B?Ym5jWkMvZDNKbHRtSmtpdFE1cGt2UUVaSGMxWm44SFBQR2hWbFplTUxhYU00?=
- =?utf-8?B?NzB4Ym8rU3BhSmJlL01KMEt4RmVCcUE0SnhqYTlRcVRzd1R6dExHZm5wU0Iz?=
- =?utf-8?B?cStZbWl5T01jWk5la2Z4THlHRmZIaWd3eEQ4dWcxMTVzOUFTM1FPNnc5L1l5?=
- =?utf-8?B?OWtOYUJLcE80S1Jqc3BuVlF0QUVuWWZIWlNOUUp0cm8vRjAyalE5TDBMQTBr?=
- =?utf-8?B?NWV2d1J4UjdIcG12MkN3ZGptYk4zdlV0Z243b3VnSTcvWm11NHBCWEo0U1RY?=
- =?utf-8?B?MERpN3B5TCt4a2dja3FtamtyM3NleVRPblYzckwrVFcwallzcHZTV1JmeGdp?=
- =?utf-8?B?RmxmNC9TMFkvdmRQckVZT3FpL2NYTDlhWXlac0ZqQkk0L1hPbTNIazZOZ2Jl?=
- =?utf-8?B?OFpEblRnWUUxUmY5VGNsRkZIbzhoeHlxYVkxU3Q1L0V0Y3g1YjBTSi9ycGtj?=
- =?utf-8?B?dkZ6dFE1YUZPTktYcUw1SVU2L1dJWXFjTWJOUUN5MUNyanUzZUN5anpvRjkr?=
- =?utf-8?B?UllCdzhaS1F5WG9SSHB4YUlsNHFtNmkwNytzMXhqcEphaWcwK2toK254ZFN3?=
- =?utf-8?B?cnk4clVNc0V0MHpiZ2Q1OVFBMGtETG5FZ3BLNDhwNHJvdkdKOWYrWE5pT0dl?=
- =?utf-8?B?MGt1ak9uK1BwOXVuOWRHamF0WnVNdDAvMkNtWVNJRDVRSUxjQTRsOU9tSTdr?=
- =?utf-8?B?UEkxOVN0MnZjVjdrZzBVZUgxUEtYaWN1U3orbXM0WDRUYWNnWkZ0UWpmWUl3?=
- =?utf-8?B?SjZreVZ1VFBHbG9IdUVZOEsyc2Q2RHRPaEZlY3lQTEhHUW5qTXlaNVcyQ21X?=
- =?utf-8?B?VHBVdFlLSGRaK1YvNmFSMG10N1FXR0NpZWtkeDNjOGFyRTRIZUt6TXZXVjFp?=
- =?utf-8?B?a25NQ1ZmZHN3T3lzY2tXdlV1ZkcvM3lZVktIQTVCM3hUcnZpbGdLQURTMWNV?=
- =?utf-8?B?elV4cXFBdDJDcmZtKzZnYkRCcm9mQmZaNnp4UUZTNVJBdFd4WXVSWHBDVFc1?=
- =?utf-8?B?Wk1Hek1VSCtaeTd4eHh3SFF4VWJ2elA4S3RqTlAvUGI2eWxOaTlEQUo1R093?=
- =?utf-8?B?NnVrbGw5ZHdXVE5xeW9saWpIbzJVWGNEU3hCRTBiTUFIcWkzYVdWWXQ0WDNR?=
- =?utf-8?B?ek81ZjJmak9saDY5dnl4Y0dnZVBOcm5jMFVucmg0VXRJL0RrVHRmYzhHKzVw?=
- =?utf-8?B?S1RyK29xK2sxbTd1dUh3cU5VTmlHOWtWbGNnaVhadVQrSXpFRGlUNHZFMHcw?=
- =?utf-8?B?SnowMnBSSTIrN29NWll0MVJkS1BnPT0=?=
+ ARA:13230040|376014|82310400026|36860700013|1800799024|7142099003; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?dnpENW11MVVJQ1ptYS8rYmRBY1hMemZHZnU5V0x0b0NhUTl0eXBIcHdRSFpp?=
+ =?utf-8?B?U1hkYStXYzdHSzZPNW1xbXN2QmxIcWEvMTlCTGRoeWZVTEtYaHo0TFFsS3M0?=
+ =?utf-8?B?WEV5dDJyYXRFaytZek9kTmdFQmNDU0Q3N3FxYWVUWGhYTUdvZFhpTkIxK24y?=
+ =?utf-8?B?UmQ1TWpoUlNMbjZsSkZ6dDg3TFFaRmFZeW1RV3ZteFpEY2FXcGR1T0V4NThZ?=
+ =?utf-8?B?bXBzdE9RcXFsWXhaTGs1SFNMV29kVHFraGhoVDBHVGNOeUpEM2xWSitxdHdB?=
+ =?utf-8?B?MjlwSUpyVW1hSWhpVC91bjNUUzhHRnNCNSs3V1ppR0FuaDRveFFkbzdIdkdR?=
+ =?utf-8?B?UmJyOHc2Mnpmcnh1RlVUVnJ3aThzM1ZxT0FGbTF6d1JoZlFtRVQvM3pVUnR3?=
+ =?utf-8?B?NWRUbFpLdndmV1NMcUJ0REhLdnJQd0RTWncyeVNOT0U4S3cycjNubjluei9R?=
+ =?utf-8?B?RVJkZUpob2htSGVSRUovMEhwQUxzcS9kL2h0VDA2M3FJamM2cjY1L1Iyc3Fa?=
+ =?utf-8?B?R0h0U3Y5UUxuTGk2OFBwL1lTaXAvVVdBWXBZQWRLR2wwR2NiRXk3ZUdyUXlz?=
+ =?utf-8?B?YXdmK1k2UmpmUE9XVGRsS1MvNXg4VTFUckdNdHYrR2MyclJYZDU1alZjM1lF?=
+ =?utf-8?B?TURPVm1Vemk1M3p2M002TGE0cld3YytBRlQ1cHdwRDU1RjFZUEo5c1J4U3RX?=
+ =?utf-8?B?dG5XelN6L3M5YUUzVDR2Zkcwc3ljbXZzZEtnaDVEdlpVZVI3ZkdBRXkzbEEw?=
+ =?utf-8?B?TzZkalpsMHNKV0hwbGR4RmE3QlR2aHJrQVBWNlB6eldnelBBek5ET2QwNjMy?=
+ =?utf-8?B?a0ZqbUZIaldyMm1Qa2MvRlFVV3pKVFlOOFk0UVI0S0M5WnA2dzJ6YU5vRjR0?=
+ =?utf-8?B?SDJHSk1BY2o5cUdob1lIUnljcXN1T1RhU0JwMzQ2RllMRWxRMTgwVDIraDA0?=
+ =?utf-8?B?d3hBVXVPUFd4VVI4YkFpMW9HdHJhbEFZc1J4RlA5VklqYkgxWXBNMFBjUEJV?=
+ =?utf-8?B?RUpyZm5yOEZPUlJ4cXlmR0hlSml5QlRTeFVxZTg0cm5TVVFKcGhGdDk0SUJY?=
+ =?utf-8?B?Vm8waVNkZ0tmdTZZQlZpUmR6dU0yNUpnWk13d0ZJZmdzVWN2MzNXeWJ5ZDA2?=
+ =?utf-8?B?eFJJZTRUeFF1WGQ3aVg0Si9kQUlUWXlmU2VobG9LN2txbGNjUDloRkhuQXJq?=
+ =?utf-8?B?Mmk5SHpCQmN5bW1SMTlTdEx4djV1bURocDVQM3pGblp6NDA5ZHYrMlRQK3RJ?=
+ =?utf-8?B?M2UzbHgvRVltTW5nUkVFNDVUZDh2eGNPKzc3NTU2Nzd5MjgrTXJuUjh4UWhy?=
+ =?utf-8?B?QjloTVZNZE5KNU5WTW10UDFYZVRpcll1anZudDdMWE9XUkU5Nll4MDBuaDhh?=
+ =?utf-8?B?b0lXQVYwNVFHOGVWMmF0cENLdVpNY29FNC9Ld3laamdzV09JeG1PQURMMGdT?=
+ =?utf-8?B?ckhlRm1MRmVuTnREczJZYnlndnMzK2M4MFdFMzY4TGFSK3JjTFN6SlR4YkhO?=
+ =?utf-8?B?WC9sc2xxN3NmaTdBZmhQSVNpN2xPdlBLcEdyaWowRG5vQytsUE4vUDdCS3lw?=
+ =?utf-8?B?U3JzZ2krKysra0EzWDQ1bG1aWDUrYk1ZQ3J6V1FndzdUdUFMTURZVDdPTTk4?=
+ =?utf-8?B?aVVqekh5ZTRINzFkMjJNNUNPSzBxZTRVNUNlekFVaVdaMzVOYWFwZzg0WDRH?=
+ =?utf-8?B?QUhLQXYrZVhPaTJMS2RhREZ0WkFPdXNKUWhkUFdsdEt3K1VaVFpNMEdJU1o2?=
+ =?utf-8?B?bUR2Q2VBL1F0bjMyMDNXWjZsK2trZSt0SllzdTZWNkY5Q0FoNTA5WlNpZ0ZI?=
+ =?utf-8?B?dnlYKzNJYjV2aE5aRmJVTE1LQ0cyWjV5S05BUFFHcVRBRFAvQXFCaTBzUzhl?=
+ =?utf-8?B?bFRJaUVaLzh4S3htVUtOWFljYnBDTjRpcG1FTWFESEUzamZVaitUU3R3Rk1Z?=
+ =?utf-8?B?ZTU4T1NsNDhQMkh2d1dUajdlcjc2ZDZUMzM5NUJQNUFJMFUremVWZHNlWFly?=
+ =?utf-8?B?L2RIL3lmUWxya1FRb1A3S3NEM0lhQkFpRlJGdFRqQUdmLzVKZHpvMHdhbGtw?=
+ =?utf-8?B?b0U0dEpMOG1YUmIxYlVQUWF2RUVlSW00emtwUXNxcnlucjdpVTRnYjdzUXN6?=
+ =?utf-8?B?cEdDZlkvS0cyeE5sRm5KRk9KcldwS1NBMnh4WGVpWG12bGtMYVVpWFdnSnp6?=
+ =?utf-8?B?ZDc1R09VaGs4MU5nSDBVWE9GbVlzZERmNjA3cFl0Zk40MWtrYmZZMm1TbWlm?=
+ =?utf-8?B?Tjh3cm5jL2NTalFyRDdkMjRPMmJ3PT0=?=
 X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(376014)(82310400026)(1800799024); DIR:OUT;
- SFP:1101; 
+ SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024)(7142099003);
+ DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: N03PRvVQs4HiB8cXHF0d3FAV+Nb+kfaBiUCtuF8KdJmTcVY/m9h4MbqJj9E0tnMBIl8ZPMt4HDxMkMOm6tIfFhr0Bf5p+FUTRDwBin6ibaKl5U3WfKFh5n+fpLA+Q/cr2AbIlHmvMzAVBeCf8k3MQWqR+F+d7LQae8cQ1qDd+hDKzlU0XmZoGsZ7BM8ztc2JrFOozXIk/Hxf3rKhQj+tcnuSopyvphyxFTqku3QkU42Wq4PYX4eFp8UjX8e6CpmMupp6lzzVLGU/iJw/R0H6c1/sbT4zFsQdbEOexaN7PXOs9LSMynICF3LnpP3uvAd7N6J9F/6+NeGAzC+hXy3ZK4YbFhACZwLUUoTsoqhrlqL+MnbcZN0ciKRwI/mbwNTaRXqI7aMt9GFWuOEG6yv9L0/Z+cCRb5Il2+KFPu9r8Bt+HYtiIW3T3RfMmB+2yAOaEU7CAmyut3ttYSpVCDSWJ+bhPwg/dF193WOb0m5xwSvqTSxPCYiE0KlT9+CIHPibJI5dCJNxPpyeKsPUQYykM3dasdOFlMfWcTYz+87QnaiOxmqDQPmODqlATtBt+4sT9igTvzI5f60d1gUVOIpSL/17Ctan0lrtaubmG/xUc2KeiGcZFPi8RwRpNVS9h217F57+dqgRq7TPFniQTqdZVI3veQKutMV261ce61OW71OX93m+MkuEcJeizRyQcHcB
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: 1np4LkuT3IYgLzfsyTLGRisgZSsDyb5pIwI1UQHUkt3xVBpJ0Xz52gv+akSH9BYbvonBF478ujdBNoayazOJz3FaFRsVKgkaxfKUTn0+6F9pSljJ896SmxOX3Z6dPZw9Lwq9rJn/5Ylvh43MT1vgVSyvBCQ6VNgNH9NqOKcX0uUb3w7Zpr/65jbBf77Huf56ZA7qVeLJZ9AJepX+bErIbWcUpYGpJF6Uc4/66kBBG3xAMTRlJzNJdb4eZ70HGkNlvstVn/B3eMWBJu3gfMaqgFny3Yu+AL6zIWN5mzA5LrY2K/R5iE5sCN5ugY0i//BM8/U1CRN6vT8xs/9vo//xaewUBfNfEqy4idOyG4kYJNt2irWrFNjceGwP01lx7pv8m6kkJWnar5j6XyCQcXmJS4BcJ9MY3TI2ps3Hjyaij8oBbXo4XAhqWHqaHsyOOxXWSEbkukz2COeC1rUISCcjYvr2xoBb87d+T+rgq6N/R2Aq/oyvUDiROe7RUJyIBZ+YG+429U8o6XTpG2zVCyqNrt1bvlDEG2p/Zhc131IV/yoN70EKt3Wj2BJm0Z13T/IHof8Zo0vy29+1kdft4wA1C7NHPDUNB1ID8KgaODRxdCz8wchb/z8IwLcdvag8KKIaFBJHd3awT0hJW5PRX861PihVVnmY+afw4gmWJn9YKBlzgvibHr2ZPyk+Aojb10+S
 X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jan 2026 18:57:49.6692 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2a8945a9-4fde-4bfa-0670-08de55312520
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jan 2026 18:57:50.3489 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 722fe37c-6e07-45f8-2014-08de55312589
 X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
  Helo=[smtpO365.st.com]
 X-MS-Exchange-CrossTenant-AuthSource: DB5PEPF00014B8B.eurprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR10MB5794
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR10MB6291
 Cc: Tom Rini <trini@konsulko.com>, Valentin Caron <valentin.caron@foss.st.com>,
  Marek Vasut <marek.vasut@mailbox.org>, Lukasz Majewski <lukma@denx.de>,
  Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Lionel Debieve <lionel.debieve@foss.st.com>,
  Gatien Chevallier <gatien.chevallier@foss.st.com>
-Subject: [Uboot-stm32] [PATCH v4 2/3] ARM: dts: stm32: Add SCMI clocks in
- rcc node for stm32mp131.dtsi
+Subject: [Uboot-stm32] [PATCH v4 3/3] clk: stm32: Update clock management
+ for STM32MP13/25
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -156,51 +157,1541 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Add SCMI clocks. These clocks are used as parent clocks and are
-referenced by their rcc's node position in clk-stm32mp13.c
+During clock's registration, clock's name are used to establish parent -
+child relation. On STM32MP13 and STM32MP25, most of SCMI clocks are parent
+clocks.
+
+Since commit fdb1bffe2827 ("clk: scmi: Postpone clock name resolution"),
+all scmi clocks are named by default "scmi-%zu" until they are enabled,
+it breaks clocks registration and boot process for STM32MP13/25
+platforms.
+
+Rework the STM32 core clock driver and STM32MP13/25 clock description
+to use clock index instead of their real name.
+
+Introduce struct clk_parent_data which allows to identify parent clock
+either by index or by name. Name is only used for particular clocks
+provided by IP which are clock provider as i2s/i2s_ckin, usb0/ck_usbo_48m,
+and ltdc/ck_ker_ltdc.
+
+STM32_GATE() and STM32_COMPOSITE_NOMUX macros are updated in order to
+use parent clock index.
+
+As STM32MP13 supports both SPL and SCMI boot, keep using an array
+with clock's name for SPL.
 
 Fixes: fdb1bffe2827 ("clk: scmi: Postpone clock name resolution")
 Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 ---
- arch/arm/dts/stm32mp13-u-boot.dtsi | 27 +++++++++++++++++++++++++++
- 1 file changed, 27 insertions(+)
+ drivers/clk/stm32/clk-stm32-core.c | 116 +++++++++--
+ drivers/clk/stm32/clk-stm32-core.h |  42 ++--
+ drivers/clk/stm32/clk-stm32mp13.c  | 417 ++++++++++++++++++++++++++-----------
+ drivers/clk/stm32/clk-stm32mp25.c  | 405 +++++++++++++++++++++--------------
+ 4 files changed, 671 insertions(+), 309 deletions(-)
 
-diff --git a/arch/arm/dts/stm32mp13-u-boot.dtsi b/arch/arm/dts/stm32mp13-u-boot.dtsi
-index ad63d5027b2..623c796cc79 100644
---- a/arch/arm/dts/stm32mp13-u-boot.dtsi
-+++ b/arch/arm/dts/stm32mp13-u-boot.dtsi
-@@ -186,6 +186,33 @@
+diff --git a/drivers/clk/stm32/clk-stm32-core.c b/drivers/clk/stm32/clk-stm32-core.c
+index 858f122db1a..cd6bdee5412 100644
+--- a/drivers/clk/stm32/clk-stm32-core.c
++++ b/drivers/clk/stm32/clk-stm32-core.c
+@@ -11,6 +11,8 @@
+ #include <log.h>
+ #include <asm/io.h>
+ #include <dm/device_compat.h>
++#include <dm/devres.h>
++#include <dm/uclass-internal.h>
+ #include <linux/clk-provider.h>
+ #include "clk-stm32-core.h"
+ 
+@@ -34,8 +36,8 @@ int stm32_rcc_init(struct udevice *dev,
+ 		return -ENOMEM;
+ 
+ 	priv->gate_cpt = cpt;
+-
+-	priv->data = clock_data;
++	priv->clock_data = clock_data;
++	priv->match_data = data;
+ 
+ 	for (i = 0; i < data->num_clocks; i++) {
+ 		const struct clock_config *cfg = &data->tab_clocks[i];
+@@ -57,9 +59,58 @@ int stm32_rcc_init(struct udevice *dev,
+ 	return 0;
+ }
+ 
+-ulong clk_stm32_get_rate_by_name(const char *name)
++static int clk_stm32_resolve_clk_name(struct udevice *dev, int idx, const char **name)
+ {
+-	struct udevice *dev;
++#ifdef CONFIG_TFABOOT
++	struct ofnode_phandle_args args;
++	struct udevice *clk_udevice;
++	struct udevice *child;
++	int ret;
++
++	ret = dev_read_phandle_with_args(dev, "clocks", "#clock-cells", 0, idx, &args);
++	if (ret) {
++		dev_err(dev, "%s: dev_read_phandle_with_args failed: err=%d\n",
++			__func__, ret);
++		return ret;
++	}
++
++	ret = uclass_find_device_by_ofnode(UCLASS_CLK, args.node, &clk_udevice);
++	if (ret)
++		return ret;
++
++	if (args.args_count) {
++		device_foreach_child(child, clk_udevice) {
++			struct clk *clkp;
++
++			clkp = dev_get_clk_ptr(child);
++			if (clk_get_id(clkp) == args.args[0])
++				break;
++
++			clk_udevice = child;
++		}
++		*name = child->name;
++	} else {
++		*name = clk_udevice->name;
++	}
++#else
++	struct stm32mp_rcc_priv *priv = dev_get_priv(dev);
++	*name = priv->match_data->get_clock_name(idx);
++
++	if (!*name)
++		return -ENOENT;
++#endif
++
++	return 0;
++}
++
++ulong clk_stm32_get_rate_by_index(struct udevice *dev, int index)
++{
++	const char *name;
++	int ret;
++
++	ret = clk_stm32_resolve_clk_name(dev, index, &name);
++	if (ret)
++		return ret;
+ 
+ 	if (!uclass_get_device_by_name(UCLASS_CLK, name, &dev)) {
+ 		struct clk *clk = dev_get_clk_ptr(dev);
+@@ -171,7 +222,7 @@ static int clk_stm32_gate_enable(struct clk *clk)
+ 	struct clk_stm32_gate *stm32_gate = to_clk_stm32_gate(clk);
+ 	struct stm32mp_rcc_priv *priv = stm32_gate->priv;
+ 
+-	clk_stm32_gate_set_state(priv->base, priv->data, priv->gate_cpt,
++	clk_stm32_gate_set_state(priv->base, priv->clock_data, priv->gate_cpt,
+ 				 stm32_gate->gate_id, 1);
+ 
+ 	return 0;
+@@ -182,7 +233,7 @@ static int clk_stm32_gate_disable(struct clk *clk)
+ 	struct clk_stm32_gate *stm32_gate = to_clk_stm32_gate(clk);
+ 	struct stm32mp_rcc_priv *priv = stm32_gate->priv;
+ 
+-	clk_stm32_gate_set_state(priv->base, priv->data, priv->gate_cpt,
++	clk_stm32_gate_set_state(priv->base, priv->clock_data, priv->gate_cpt,
+ 				 stm32_gate->gate_id, 0);
+ 
+ 	return 0;
+@@ -209,6 +260,7 @@ struct clk *clk_stm32_gate_register(struct udevice *dev,
+ 	struct stm32_clk_gate_cfg *clk_cfg = cfg->clock_cfg;
+ 	struct clk_stm32_gate *stm32_gate;
+ 	struct clk *clk;
++	const char *parent_name;
+ 	int ret;
+ 
+ 	stm32_gate = kzalloc(sizeof(*stm32_gate), GFP_KERNEL);
+@@ -221,8 +273,17 @@ struct clk *clk_stm32_gate_register(struct udevice *dev,
+ 	clk = &stm32_gate->clk;
+ 	clk->flags = cfg->flags;
+ 
++	if (cfg->parent_data->name) {
++		parent_name = cfg->parent_data->name;
++	} else {
++		ret = clk_stm32_resolve_clk_name(dev, cfg->parent_data->index,
++						 &parent_name);
++		if (ret)
++			return ERR_PTR(ret);
++	}
++
+ 	ret = clk_register(clk, UBOOT_DM_CLK_STM32_GATE,
+-			   cfg->name, cfg->parent_name);
++			   cfg->name, parent_name);
+ 	if (ret) {
+ 		kfree(stm32_gate);
+ 		return ERR_PTR(ret);
+@@ -236,7 +297,7 @@ clk_stm32_register_composite(struct udevice *dev,
+ 			     const struct clock_config *cfg)
+ {
+ 	struct stm32_clk_composite_cfg *composite = cfg->clock_cfg;
+-	const char *const *parent_names;
++	const char **parent_names = NULL;
+ 	int num_parents;
+ 	struct clk *clk = ERR_PTR(-ENOMEM);
+ 	struct clk_mux *mux = NULL;
+@@ -249,7 +310,8 @@ clk_stm32_register_composite(struct udevice *dev,
+ 	struct clk *div_clk = NULL;
+ 	const struct clk_ops *div_ops = NULL;
+ 	struct stm32mp_rcc_priv *priv = dev_get_priv(dev);
+-	const struct clk_stm32_clock_data *data = priv->data;
++	const struct clk_stm32_clock_data *data = priv->clock_data;
++	int i, ret;
+ 
+ 	if  (composite->mux_id != NO_STM32_MUX) {
+ 		const struct stm32_mux_cfg *mux_cfg;
+@@ -260,27 +322,50 @@ clk_stm32_register_composite(struct udevice *dev,
+ 
+ 		mux_cfg = &data->muxes[composite->mux_id];
+ 
++		parent_names = devm_kcalloc(dev, mux_cfg->num_parents,
++					    sizeof(char *), GFP_KERNEL);
++		if (!parent_names)
++			goto fail;
++
+ 		mux->reg = priv->base + mux_cfg->reg_off;
+ 		mux->shift = mux_cfg->shift;
+ 		mux->mask = BIT(mux_cfg->width) - 1;
+ 		mux->num_parents = mux_cfg->num_parents;
+ 		mux->flags = 0;
+-		mux->parent_names = mux_cfg->parent_names;
+ 
++		for (i = 0; i < mux_cfg->num_parents; i++) {
++			if (mux_cfg->parent_data[i].name) {
++				parent_names[i] = mux_cfg->parent_data[i].name;
++			} else {
++				ret = clk_stm32_resolve_clk_name(dev,
++								 mux_cfg->parent_data[i].index,
++								 &parent_names[i]);
++				if (ret)
++					return ERR_CAST(clk);
++			}
++		}
++
++		mux->parent_names = (const char * const*)parent_names;
+ 		mux_clk = &mux->clk;
+ 		mux_ops = &clk_mux_ops;
+-
+-		parent_names = mux_cfg->parent_names;
+ 		num_parents = mux_cfg->num_parents;
+ 	} else {
+-		parent_names = &cfg->parent_name;
++		parent_names = devm_kzalloc(dev, sizeof(char *), GFP_KERNEL);
++		if (!parent_names)
++			goto fail;
++
++		ret = clk_stm32_resolve_clk_name(dev, cfg->parent_data->index,
++						 parent_names);
++		if (ret)
++			return ERR_CAST(clk);
++
+ 		num_parents = 1;
+ 	}
+ 
+ 	if  (composite->div_id != NO_STM32_DIV) {
+ 		const struct stm32_div_cfg *div_cfg;
+ 
+-		div = kzalloc(sizeof(*div), GFP_KERNEL);
++		div = devm_kzalloc(dev, sizeof(*div), GFP_KERNEL);
+ 		if (!div)
+ 			goto fail;
+ 
+@@ -310,7 +395,7 @@ clk_stm32_register_composite(struct udevice *dev,
+ 	}
+ 
+ 	clk = clk_register_composite(dev, cfg->name,
+-				     parent_names, num_parents,
++				     (const char * const *)parent_names, num_parents,
+ 				     mux_clk, mux_ops,
+ 				     div_clk, div_ops,
+ 				     gate_clk, gate_ops,
+@@ -321,6 +406,7 @@ clk_stm32_register_composite(struct udevice *dev,
+ 	return clk;
+ 
+ fail:
++	kfree(parent_names);
+ 	kfree(gate);
+ 	kfree(div);
+ 	kfree(mux);
+diff --git a/drivers/clk/stm32/clk-stm32-core.h b/drivers/clk/stm32/clk-stm32-core.h
+index baf2a996ef3..3134e33aa6c 100644
+--- a/drivers/clk/stm32/clk-stm32-core.h
++++ b/drivers/clk/stm32/clk-stm32-core.h
+@@ -6,10 +6,20 @@
+ 
+ struct stm32_clock_match_data;
+ 
++/**
++ * struct clk_parent_data - clk parent information
++ * @name: globally unique parent name
++ * @index: parent index local to provider registering clk
++ */
++struct clk_parent_data {
++	const char	*name;
++	int		index;
++};
++
+ /**
+  * struct stm32_mux_cfg - multiplexer configuration
+  *
+- * @parent_names:	array of string names for all possible parents
++ * @parent_data:	array of parent information for all possible parent
+  * @num_parents:	number of possible parents
+  * @reg_off:		register controlling multiplexer
+  * @shift:		shift to multiplexer bit field
+@@ -19,7 +29,7 @@ struct stm32_clock_match_data;
+  *			index
+  */
+ struct stm32_mux_cfg {
+-	const char * const *parent_names;
++	const struct clk_parent_data *parent_data;
+ 	u8 num_parents;
+ 	u32 reg_off;
+ 	u8 shift;
+@@ -81,7 +91,7 @@ struct stm32_composite_cfg {
+  *
+  * @id:			binding id of the clock
+  * @name:		clock name
+- * @parent_name:	name of the clock parent
++ * @parent_data:	parent information
+  * @flags:		framework-specific flags
+  * @sec_id:		secure id (use to known if the clock is secured or not)
+  * @clock_cfg:		specific clock data configuration
+@@ -91,7 +101,7 @@ struct stm32_composite_cfg {
+ struct clock_config {
+ 	unsigned long id;
+ 	const char *name;
+-	const char *parent_name;
++	const struct clk_parent_data *parent_data;
+ 	unsigned long flags;
+ 	int sec_id;
+ 	void *clock_cfg;
+@@ -129,6 +139,7 @@ struct stm32_clock_match_data {
+ 	const struct clk_stm32_clock_data *clock_data;
+ 	int (*check_security)(struct udevice *dev, void __iomem *base,
+ 			      const struct clock_config *cfg);
++	const char *(*get_clock_name)(u8 index);
  };
  
- &rcc {
-+	clocks = <&scmi_clk CK_SCMI_HSE>,
-+		 <&scmi_clk CK_SCMI_HSI>,
-+		 <&scmi_clk CK_SCMI_CSI>,
-+		 <&scmi_clk CK_SCMI_LSE>,
-+		 <&scmi_clk CK_SCMI_LSI>,
-+		 <&scmi_clk CK_SCMI_HSE_DIV2>,
-+		 <&scmi_clk CK_SCMI_PLL2_Q>,
-+		 <&scmi_clk CK_SCMI_PLL2_R>,
-+		 <&scmi_clk CK_SCMI_PLL3_P>,
-+		 <&scmi_clk CK_SCMI_PLL3_Q>,
-+		 <&scmi_clk CK_SCMI_PLL3_R>,
-+		 <&scmi_clk CK_SCMI_PLL4_P>,
-+		 <&scmi_clk CK_SCMI_PLL4_Q>,
-+		 <&scmi_clk CK_SCMI_PLL4_R>,
-+		 <&scmi_clk CK_SCMI_MPU>,
-+		 <&scmi_clk CK_SCMI_AXI>,
-+		 <&scmi_clk CK_SCMI_MLAHB>,
-+		 <&scmi_clk CK_SCMI_CKPER>,
-+		 <&scmi_clk CK_SCMI_PCLK1>,
-+		 <&scmi_clk CK_SCMI_PCLK2>,
-+		 <&scmi_clk CK_SCMI_PCLK3>,
-+		 <&scmi_clk CK_SCMI_PCLK4>,
-+		 <&scmi_clk CK_SCMI_PCLK5>,
-+		 <&scmi_clk CK_SCMI_PCLK6>,
-+		 <&scmi_clk CK_SCMI_CKTIMG1>,
-+		 <&scmi_clk CK_SCMI_CKTIMG2>,
-+		 <&scmi_clk CK_SCMI_CKTIMG3>;
- 	bootph-all;
+ /**
+@@ -143,7 +154,8 @@ struct stm32_clock_match_data {
+ struct stm32mp_rcc_priv {
+ 	void __iomem *base;
+ 	u8 *gate_cpt;
+-	const struct clk_stm32_clock_data *data;
++	const struct clk_stm32_clock_data *clock_data;
++	const struct stm32_clock_match_data *match_data;
+ 	struct clk osc_clk[6];
+ };
+ 
+@@ -224,12 +236,14 @@ struct stm32_clk_gate_cfg {
+ 
+ #define STM32_GATE(_id, _name, _parent, _flags, _gate_id, _sec_id) \
+ { \
+-	.id		= _id, \
+-	.sec_id		= _sec_id, \
+-	.name		= _name, \
+-	.parent_name	= _parent, \
+-	.flags		= _flags, \
+-	.clock_cfg	= &(struct stm32_clk_gate_cfg) { \
++	.id			= _id, \
++	.sec_id			= _sec_id, \
++	.name			= _name, \
++	.parent_data		= &(struct clk_parent_data) { \
++		.index		= _parent, \
++	}, \
++	.flags			= _flags, \
++	.clock_cfg		= &(struct stm32_clk_gate_cfg) { \
+ 		.gate_id	= _gate_id, \
+ 	}, \
+ 	.setup		= clk_stm32_gate_register, \
+@@ -261,7 +275,9 @@ struct stm32_clk_composite_cfg {
+ { \
+ 	.id		= _id, \
+ 	.name		= _name, \
+-	.parent_name	= _parent, \
++	.parent_data		= &(struct clk_parent_data) { \
++		.index		= _parent, \
++	}, \
+ 	.sec_id		= _sec_id, \
+ 	.flags		= _flags, \
+ 	.clock_cfg	= &(struct stm32_clk_composite_cfg) { \
+@@ -274,4 +290,4 @@ struct stm32_clk_composite_cfg {
+ 
+ extern const struct clk_ops stm32_clk_ops;
+ 
+-ulong clk_stm32_get_rate_by_name(const char *name);
++ulong clk_stm32_get_rate_by_index(struct udevice *dev, int index);
+diff --git a/drivers/clk/stm32/clk-stm32mp13.c b/drivers/clk/stm32/clk-stm32mp13.c
+index 18e9ab364b4..39ec06a9556 100644
+--- a/drivers/clk/stm32/clk-stm32mp13.c
++++ b/drivers/clk/stm32/clk-stm32mp13.c
+@@ -31,123 +31,248 @@
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+-static const char * const adc12_src[] = {
+-	"pll4_r", "ck_per", "pll3_q"
++ /* must match scmi clock order found in DT */
++enum {
++	IDX_HSE,
++	IDX_HSI,
++	IDX_CSI,
++	IDX_LSE,
++	IDX_LSI,
++	IDX_HSE_DIV2,
++	IDX_PLL2_Q,
++	IDX_PLL2_R,
++	IDX_PLL3_P,
++	IDX_PLL3_Q,
++	IDX_PLL3_R,
++	IDX_PLL4_P,
++	IDX_PLL4_Q,
++	IDX_PLL4_R,
++	IDX_MPU,
++	IDX_AXI,
++	IDX_MLAHB,
++	IDX_CKPER,
++	IDX_PCLK1,
++	IDX_PCLK2,
++	IDX_PCLK3,
++	IDX_PCLK4,
++	IDX_PCLK5,
++	IDX_PCLK6,
++	IDX_CKTIMG1,
++	IDX_CKTIMG2,
++	IDX_CKTIMG3,
++	IDX_PARENT_NB,
+ };
+ 
+-static const char * const dcmipp_src[] = {
+-	"ck_axi", "pll2_q", "pll4_p", "ck_per",
++static const struct clk_parent_data adc12_src[] = {
++	{ .index = IDX_PLL4_R },
++	{ .index = IDX_CKPER },
++	{ .index = IDX_PLL3_Q },
+ };
+ 
+-static const char * const eth12_src[] = {
+-	"pll4_p", "pll3_q"
++static const struct clk_parent_data dcmipp_src[] = {
++	{ .index = IDX_AXI },
++	{ .index = IDX_PLL2_Q },
++	{ .index = IDX_PLL4_P },
++	{ .index = IDX_CKPER },
+ };
+ 
+-static const char * const fdcan_src[] = {
+-	"ck_hse", "pll3_q", "pll4_q", "pll4_r"
++static const struct clk_parent_data eth12_src[] = {
++	{ .index = IDX_PLL4_P },
++	{ .index = IDX_PLL3_Q },
+ };
+ 
+-static const char * const fmc_src[] = {
+-	"ck_axi", "pll3_r", "pll4_p", "ck_per"
++static const struct clk_parent_data fdcan_src[] = {
++	{ .index = IDX_HSE },
++	{ .index = IDX_PLL3_Q },
++	{ .index = IDX_PLL4_Q },
++	{ .index = IDX_PLL4_R },
+ };
+ 
+-static const char * const i2c12_src[] = {
+-	"pclk1", "pll4_r", "ck_hsi", "ck_csi"
++static const struct clk_parent_data fmc_src[] = {
++	{ .index = IDX_AXI },
++	{ .index = IDX_PLL3_R },
++	{ .index = IDX_PLL4_P },
++	{ .index = IDX_CKPER },
+ };
+ 
+-static const char * const i2c345_src[] = {
+-	"pclk6", "pll4_r", "ck_hsi", "ck_csi"
++static const struct clk_parent_data i2c12_src[] = {
++	{ .index = IDX_PCLK1 },
++	{ .index = IDX_PLL4_R },
++	{ .index = IDX_HSI },
++	{ .index = IDX_CSI },
+ };
+ 
+-static const char * const lptim1_src[] = {
+-	"pclk1", "pll4_p", "pll3_q", "ck_lse", "ck_lsi", "ck_per"
++static const struct clk_parent_data i2c345_src[] = {
++	{ .index = IDX_PCLK6 },
++	{ .index = IDX_PLL4_R },
++	{ .index = IDX_HSI },
++	{ .index = IDX_CSI },
+ };
+ 
+-static const char * const lptim23_src[] = {
+-	"pclk3", "pll4_q", "ck_per", "ck_lse", "ck_lsi"
++static const struct clk_parent_data lptim1_src[] = {
++	{ .index = IDX_PCLK1 },
++	{ .index = IDX_PLL4_P },
++	{ .index = IDX_PLL3_Q },
++	{ .index = IDX_LSE },
++	{ .index = IDX_LSI },
++	{ .index = IDX_CKPER },
+ };
+ 
+-static const char * const lptim45_src[] = {
+-	"pclk3", "pll4_p", "pll3_q", "ck_lse", "ck_lsi", "ck_per"
++static const struct clk_parent_data lptim23_src[] = {
++	{ .index = IDX_PCLK3 },
++	{ .index = IDX_PLL4_Q },
++	{ .index = IDX_CKPER },
++	{ .index = IDX_LSE },
++	{ .index = IDX_LSI },
+ };
+ 
+-static const char * const mco1_src[] = {
+-	"ck_hsi", "ck_hse", "ck_csi", "ck_lsi", "ck_lse"
++static const struct clk_parent_data lptim45_src[] = {
++	{ .index = IDX_PCLK3 },
++	{ .index = IDX_PLL4_P },
++	{ .index = IDX_PLL3_Q },
++	{ .index = IDX_LSE },
++	{ .index = IDX_LSI },
++	{ .index = IDX_CKPER },
+ };
+ 
+-static const char * const mco2_src[] = {
+-	"ck_mpu", "ck_axi", "ck_mlahb", "pll4_p", "ck_hse", "ck_hsi"
++static const struct clk_parent_data mco1_src[] = {
++	{ .index = IDX_HSI },
++	{ .index = IDX_HSE },
++	{ .index = IDX_CSI },
++	{ .index = IDX_LSI },
++	{ .index = IDX_LSE },
+ };
+ 
+-static const char * const qspi_src[] = {
+-	"ck_axi", "pll3_r", "pll4_p", "ck_per"
++static const struct clk_parent_data mco2_src[] = {
++	{ .index = IDX_MPU },
++	{ .index = IDX_AXI },
++	{ .index = IDX_MLAHB },
++	{ .index = IDX_PLL4_P },
++	{ .index = IDX_HSE },
++	{ .index = IDX_HSI },
+ };
+ 
+-static const char * const rng1_src[] = {
+-	"ck_csi", "pll4_r", "reserved", "ck_lsi"
++static const struct clk_parent_data qspi_src[] = {
++	{ .index = IDX_AXI },
++	{ .index = IDX_PLL3_R },
++	{ .index = IDX_PLL4_P },
++	{ .index = IDX_CKPER },
+ };
+ 
+-static const char * const saes_src[] = {
+-	"ck_axi", "ck_per", "pll4_r", "ck_lsi"
++static const struct clk_parent_data rng1_src[] = {
++	{ .index = IDX_CSI },
++	{ .index = IDX_PLL4_R },
++	{ .name = "reserved" },
++	{ .index = IDX_LSI },
+ };
+ 
+-static const char * const sai1_src[] = {
+-	"pll4_q", "pll3_q", "i2s_ckin", "ck_per", "pll3_r"
++static const struct clk_parent_data saes_src[] = {
++	{ .index = IDX_AXI },
++	{ .index = IDX_CKPER },
++	{ .index = IDX_PLL4_R },
++	{ .index = IDX_LSI },
+ };
+ 
+-static const char * const sai2_src[] = {
+-	"pll4_q", "pll3_q", "i2s_ckin", "ck_per", "spdif_ck_symb", "pll3_r"
++static const struct clk_parent_data sai1_src[] = {
++	{ .index = IDX_PLL4_Q },
++	{ .index = IDX_PLL3_Q },
++	{ .name = "i2s_ckin" },
++	{ .index = IDX_CKPER },
++	{ .index = IDX_PLL3_R },
+ };
+ 
+-static const char * const sdmmc12_src[] = {
+-	"ck_axi", "pll3_r", "pll4_p", "ck_hsi"
++static const struct clk_parent_data sai2_src[] = {
++	{ .index = IDX_PLL4_Q },
++	{ .index = IDX_PLL3_Q },
++	{ .name = "i2s_ckin" },
++	{ .index = IDX_CKPER },
++	{ .name = "spdif_ck_symb" },
++	{ .index = IDX_PLL3_R },
+ };
+ 
+-static const char * const spdif_src[] = {
+-	"pll4_p", "pll3_q", "ck_hsi"
++static const struct clk_parent_data sdmmc12_src[] = {
++	{ .index = IDX_AXI },
++	{ .index = IDX_PLL3_R },
++	{ .index = IDX_PLL4_P },
++	{ .index = IDX_HSI },
+ };
+ 
+-static const char * const spi123_src[] = {
+-	"pll4_p", "pll3_q", "i2s_ckin", "ck_per", "pll3_r"
++static const struct clk_parent_data spdif_src[] = {
++	{ .index = IDX_PLL4_P },
++	{ .index = IDX_PLL3_Q },
++	{ .index = IDX_HSI },
+ };
+ 
+-static const char * const spi4_src[] = {
+-	"pclk6", "pll4_q", "ck_hsi", "ck_csi", "ck_hse", "i2s_ckin"
++static const struct clk_parent_data spi123_src[] = {
++	{ .index = IDX_PLL4_P },
++	{ .index = IDX_PLL3_Q },
++	{ .name = "i2s_ckin" },
++	{ .index = IDX_CKPER },
++	{ .index = IDX_PLL3_R },
+ };
+ 
+-static const char * const spi5_src[] = {
+-	"pclk6", "pll4_q", "ck_hsi", "ck_csi", "ck_hse"
++static const struct clk_parent_data spi4_src[] = {
++	{ .index = IDX_PCLK6 },
++	{ .index = IDX_PLL4_Q },
++	{ .index = IDX_HSI },
++	{ .index = IDX_CSI },
++	{ .index = IDX_HSE },
++	{ .name = "i2s_ckin" },
+ };
+ 
+-static const char * const stgen_src[] = {
+-	"ck_hsi", "ck_hse"
++static const struct clk_parent_data spi5_src[] = {
++	{ .index = IDX_PCLK6 },
++	{ .index = IDX_PLL4_Q },
++	{ .index = IDX_HSI },
++	{ .index = IDX_CSI },
++	{ .index = IDX_HSE },
+ };
+ 
+-static const char * const usart12_src[] = {
+-	"pclk6", "pll3_q", "ck_hsi", "ck_csi", "pll4_q", "ck_hse"
++static const struct clk_parent_data stgen_src[] = {
++	{ .index = IDX_HSI },
++	{ .index = IDX_HSE },
+ };
+ 
+-static const char * const usart34578_src[] = {
+-	"pclk1", "pll4_q", "ck_hsi", "ck_csi", "ck_hse"
++static const struct clk_parent_data usart12_src[] = {
++	{ .index = IDX_PCLK6 },
++	{ .index = IDX_PLL3_Q },
++	{ .index = IDX_HSI },
++	{ .index = IDX_CSI },
++	{ .index = IDX_PLL4_Q },
++	{ .index = IDX_HSE },
+ };
+ 
+-static const char * const usart6_src[] = {
+-	"pclk2", "pll4_q", "ck_hsi", "ck_csi", "ck_hse"
++static const struct clk_parent_data usart34578_src[] = {
++	{ .index = IDX_PCLK1 },
++	{ .index = IDX_PLL4_Q },
++	{ .index = IDX_HSI },
++	{ .index = IDX_CSI },
++	{ .index = IDX_HSE },
+ };
+ 
+-static const char * const usbo_src[] = {
+-	"pll4_r", "ck_usbo_48m"
++static const struct clk_parent_data usart6_src[] = {
++	{ .index = IDX_PCLK2 },
++	{ .index = IDX_PLL4_Q },
++	{ .index = IDX_HSI },
++	{ .index = IDX_CSI },
++	{ .index = IDX_HSE },
+ };
+ 
+-static const char * const usbphy_src[] = {
+-	"ck_hse", "pll4_r", "clk-hse-div2"
++static const struct clk_parent_data usbo_src[] = {
++	{ .index = IDX_PLL4_R },
++	{ .name = "ck_usbo_48m" },
+ };
+ 
++static const struct clk_parent_data usbphy_src[] = {
++	{ .index = IDX_HSE },
++	{ .index = IDX_PLL4_R },
++	{ .index = IDX_HSE_DIV2 },
++};
+ 
+ #define MUX_CFG(id, src, _offset, _shift, _witdh) \
+ 	[id] = { \
+ 		.num_parents	= ARRAY_SIZE(src), \
+-		.parent_names	= (src), \
++		.parent_data	= (src), \
+ 		.reg_off	= (_offset), \
+ 		.shift		= (_shift), \
+ 		.width		= (_witdh), \
+@@ -602,73 +727,73 @@ static const struct clk_stm32_security stm32mp13_security[] = {
+ 
+ static const struct clock_config stm32mp13_clock_cfg[] = {
+ #ifndef CONFIG_XPL_BUILD
+-	TIMER(TIM2_K, "tim2_k", "timg1_ck", 0, GATE_TIM2, SECF_NONE),
+-	TIMER(TIM3_K, "tim3_k", "timg1_ck", 0, GATE_TIM3, SECF_NONE),
+-	TIMER(TIM4_K, "tim4_k", "timg1_ck", 0, GATE_TIM4, SECF_NONE),
+-	TIMER(TIM5_K, "tim5_k", "timg1_ck", 0, GATE_TIM5, SECF_NONE),
+-	TIMER(TIM6_K, "tim6_k", "timg1_ck", 0, GATE_TIM6, SECF_NONE),
+-	TIMER(TIM7_K, "tim7_k", "timg1_ck", 0, GATE_TIM7, SECF_NONE),
+-	TIMER(TIM1_K, "tim1_k", "timg2_ck", 0, GATE_TIM1, SECF_NONE),
+-	TIMER(TIM8_K, "tim8_k", "timg2_ck", 0, GATE_TIM8, SECF_NONE),
+-	TIMER(TIM12_K, "tim12_k", "timg3_ck", 0, GATE_TIM12, SECF_TIM12),
+-	TIMER(TIM13_K, "tim13_k", "timg3_ck", 0, GATE_TIM13, SECF_TIM13),
+-	TIMER(TIM14_K, "tim14_k", "timg3_ck", 0, GATE_TIM14, SECF_TIM14),
+-	TIMER(TIM15_K, "tim15_k", "timg3_ck", 0, GATE_TIM15, SECF_TIM15),
+-	TIMER(TIM16_K, "tim16_k", "timg3_ck", 0, GATE_TIM16, SECF_TIM16),
+-	TIMER(TIM17_K, "tim17_k", "timg3_ck", 0, GATE_TIM17, SECF_TIM17),
++	TIMER(TIM2_K, "tim2_k", IDX_CKTIMG1, 0, GATE_TIM2, SECF_NONE),
++	TIMER(TIM3_K, "tim3_k", IDX_CKTIMG1, 0, GATE_TIM3, SECF_NONE),
++	TIMER(TIM4_K, "tim4_k", IDX_CKTIMG1, 0, GATE_TIM4, SECF_NONE),
++	TIMER(TIM5_K, "tim5_k", IDX_CKTIMG1, 0, GATE_TIM5, SECF_NONE),
++	TIMER(TIM6_K, "tim6_k", IDX_CKTIMG1, 0, GATE_TIM6, SECF_NONE),
++	TIMER(TIM7_K, "tim7_k", IDX_CKTIMG1, 0, GATE_TIM7, SECF_NONE),
++	TIMER(TIM1_K, "tim1_k", IDX_CKTIMG2, 0, GATE_TIM1, SECF_NONE),
++	TIMER(TIM8_K, "tim8_k", IDX_CKTIMG2, 0, GATE_TIM8, SECF_NONE),
++	TIMER(TIM12_K, "tim12_k", IDX_CKTIMG3, 0, GATE_TIM12, SECF_TIM12),
++	TIMER(TIM13_K, "tim13_k", IDX_CKTIMG3, 0, GATE_TIM13, SECF_TIM13),
++	TIMER(TIM14_K, "tim14_k", IDX_CKTIMG3, 0, GATE_TIM14, SECF_TIM14),
++	TIMER(TIM15_K, "tim15_k", IDX_CKTIMG3, 0, GATE_TIM15, SECF_TIM15),
++	TIMER(TIM16_K, "tim16_k", IDX_CKTIMG3, 0, GATE_TIM16, SECF_TIM16),
++	TIMER(TIM17_K, "tim17_k", IDX_CKTIMG3, 0, GATE_TIM17, SECF_TIM17),
+ #endif
+ 
+ 	/* Peripheral clocks */
+-	PCLK(SYSCFG, "syscfg", "pclk3", 0, GATE_SYSCFG, SECF_NONE),
+-	PCLK(VREF, "vref", "pclk3", 0, GATE_VREF, SECF_VREF),
++	PCLK(SYSCFG, "syscfg", IDX_PCLK3, 0, GATE_SYSCFG, SECF_NONE),
++	PCLK(VREF, "vref", IDX_PCLK3, 0, GATE_VREF, SECF_VREF),
+ #ifndef CONFIG_XPL_BUILD
+-	PCLK(PMBCTRL, "pmbctrl", "pclk3", 0, GATE_PMBCTRL, SECF_NONE),
+-	PCLK(HDP, "hdp", "pclk3", 0, GATE_HDP, SECF_NONE),
++	PCLK(PMBCTRL, "pmbctrl", IDX_PCLK3, 0, GATE_PMBCTRL, SECF_NONE),
++	PCLK(HDP, "hdp", IDX_PCLK3, 0, GATE_HDP, SECF_NONE),
+ #endif
+-	PCLK(IWDG2, "iwdg2", "pclk4", 0, GATE_IWDG2APB, SECF_NONE),
+-	PCLK(STGENRO, "stgenro", "pclk4", 0, GATE_STGENRO, SECF_STGENRO),
+-	PCLK(TZPC, "tzpc", "pclk5", 0, GATE_TZC, SECF_TZC),
+-	PCLK(IWDG1, "iwdg1", "pclk5", 0, GATE_IWDG1APB, SECF_IWDG1),
+-	PCLK(BSEC, "bsec", "pclk5", 0, GATE_BSEC, SECF_BSEC),
++	PCLK(IWDG2, "iwdg2", IDX_PCLK4, 0, GATE_IWDG2APB, SECF_NONE),
++	PCLK(STGENRO, "stgenro", IDX_PCLK4, 0, GATE_STGENRO, SECF_STGENRO),
++	PCLK(TZPC, "tzpc", IDX_PCLK5, 0, GATE_TZC, SECF_TZC),
++	PCLK(IWDG1, "iwdg1", IDX_PCLK5, 0, GATE_IWDG1APB, SECF_IWDG1),
++	PCLK(BSEC, "bsec", IDX_PCLK5, 0, GATE_BSEC, SECF_BSEC),
+ #ifndef CONFIG_XPL_BUILD
+-	PCLK(DMA1, "dma1", "ck_mlahb", 0, GATE_DMA1, SECF_NONE),
+-	PCLK(DMA2, "dma2", "ck_mlahb",  0, GATE_DMA2, SECF_NONE),
+-	PCLK(DMAMUX1, "dmamux1", "ck_mlahb", 0, GATE_DMAMUX1, SECF_NONE),
+-	PCLK(DMAMUX2, "dmamux2", "ck_mlahb", 0, GATE_DMAMUX2, SECF_DMAMUX2),
+-	PCLK(ADC1, "adc1", "ck_mlahb", 0, GATE_ADC1, SECF_ADC1),
+-	PCLK(ADC2, "adc2", "ck_mlahb", 0, GATE_ADC2, SECF_ADC2),
++	PCLK(DMA1, "dma1", IDX_MLAHB, 0, GATE_DMA1, SECF_NONE),
++	PCLK(DMA2, "dma2", IDX_MLAHB,  0, GATE_DMA2, SECF_NONE),
++	PCLK(DMAMUX1, "dmamux1", IDX_MLAHB, 0, GATE_DMAMUX1, SECF_NONE),
++	PCLK(DMAMUX2, "dmamux2", IDX_MLAHB, 0, GATE_DMAMUX2, SECF_DMAMUX2),
++	PCLK(ADC1, "adc1", IDX_MLAHB, 0, GATE_ADC1, SECF_ADC1),
++	PCLK(ADC2, "adc2", IDX_MLAHB, 0, GATE_ADC2, SECF_ADC2),
+ #endif
+-	PCLK(GPIOA, "gpioa", "pclk4", 0, GATE_GPIOA, SECF_NONE),
+-	PCLK(GPIOB, "gpiob", "pclk4", 0, GATE_GPIOB, SECF_NONE),
+-	PCLK(GPIOC, "gpioc", "pclk4", 0, GATE_GPIOC, SECF_NONE),
+-	PCLK(GPIOD, "gpiod", "pclk4", 0, GATE_GPIOD, SECF_NONE),
+-	PCLK(GPIOE, "gpioe", "pclk4", 0, GATE_GPIOE, SECF_NONE),
+-	PCLK(GPIOF, "gpiof", "pclk4", 0, GATE_GPIOF, SECF_NONE),
+-	PCLK(GPIOG, "gpiog", "pclk4", 0, GATE_GPIOG, SECF_NONE),
+-	PCLK(GPIOH, "gpioh", "pclk4", 0, GATE_GPIOH, SECF_NONE),
+-	PCLK(GPIOI, "gpioi", "pclk4", 0, GATE_GPIOI, SECF_NONE),
+-	PCLK(TSC, "tsc", "pclk4", 0, GATE_TSC, SECF_TZC),
+-	PCLK(PKA, "pka", "ck_axi", 0, GATE_PKA, SECF_PKA),
+-	PCLK(CRYP1, "cryp1", "ck_axi", 0, GATE_CRYP1, SECF_CRYP1),
+-	PCLK(HASH1, "hash1", "ck_axi", 0, GATE_HASH1, SECF_HASH1),
+-	PCLK(BKPSRAM, "bkpsram", "ck_axi", 0, GATE_BKPSRAM, SECF_BKPSRAM),
+-	PCLK(MDMA, "mdma", "ck_axi", 0, GATE_MDMA, SECF_NONE),
++	PCLK(GPIOA, "gpioa", IDX_PCLK4, 0, GATE_GPIOA, SECF_NONE),
++	PCLK(GPIOB, "gpiob", IDX_PCLK4, 0, GATE_GPIOB, SECF_NONE),
++	PCLK(GPIOC, "gpioc", IDX_PCLK4, 0, GATE_GPIOC, SECF_NONE),
++	PCLK(GPIOD, "gpiod", IDX_PCLK4, 0, GATE_GPIOD, SECF_NONE),
++	PCLK(GPIOE, "gpioe", IDX_PCLK4, 0, GATE_GPIOE, SECF_NONE),
++	PCLK(GPIOF, "gpiof", IDX_PCLK4, 0, GATE_GPIOF, SECF_NONE),
++	PCLK(GPIOG, "gpiog", IDX_PCLK4, 0, GATE_GPIOG, SECF_NONE),
++	PCLK(GPIOH, "gpioh", IDX_PCLK4, 0, GATE_GPIOH, SECF_NONE),
++	PCLK(GPIOI, "gpioi", IDX_PCLK4, 0, GATE_GPIOI, SECF_NONE),
++	PCLK(TSC, "tsc", IDX_PCLK4, 0, GATE_TSC, SECF_TZC),
++	PCLK(PKA, "pka", IDX_AXI, 0, GATE_PKA, SECF_PKA),
++	PCLK(CRYP1, "cryp1", IDX_AXI, 0, GATE_CRYP1, SECF_CRYP1),
++	PCLK(HASH1, "hash1", IDX_AXI, 0, GATE_HASH1, SECF_HASH1),
++	PCLK(BKPSRAM, "bkpsram", IDX_AXI, 0, GATE_BKPSRAM, SECF_BKPSRAM),
++	PCLK(MDMA, "mdma", IDX_AXI, 0, GATE_MDMA, SECF_NONE),
+ #ifndef CONFIG_XPL_BUILD
+-	PCLK(ETH1TX, "eth1tx", "ck_axi", 0, GATE_ETH1TX, SECF_ETH1TX),
+-	PCLK(ETH1RX, "eth1rx", "ck_axi", 0, GATE_ETH1RX, SECF_ETH1RX),
+-	PCLK(ETH1MAC, "eth1mac", "ck_axi", 0, GATE_ETH1MAC, SECF_ETH1MAC),
+-	PCLK(ETH2TX, "eth2tx", "ck_axi", 0, GATE_ETH2TX, SECF_ETH2TX),
+-	PCLK(ETH2RX, "eth2rx", "ck_axi", 0, GATE_ETH2RX, SECF_ETH2RX),
+-	PCLK(ETH2MAC, "eth2mac", "ck_axi", 0, GATE_ETH2MAC, SECF_ETH2MAC),
++	PCLK(ETH1TX, "eth1tx", IDX_AXI, 0, GATE_ETH1TX, SECF_ETH1TX),
++	PCLK(ETH1RX, "eth1rx", IDX_AXI, 0, GATE_ETH1RX, SECF_ETH1RX),
++	PCLK(ETH1MAC, "eth1mac", IDX_AXI, 0, GATE_ETH1MAC, SECF_ETH1MAC),
++	PCLK(ETH2TX, "eth2tx", IDX_AXI, 0, GATE_ETH2TX, SECF_ETH2TX),
++	PCLK(ETH2RX, "eth2rx", IDX_AXI, 0, GATE_ETH2RX, SECF_ETH2RX),
++	PCLK(ETH2MAC, "eth2mac", IDX_AXI, 0, GATE_ETH2MAC, SECF_ETH2MAC),
+ #endif
+-	PCLK(CRC1, "crc1", "ck_axi", 0, GATE_CRC1, SECF_NONE),
++	PCLK(CRC1, "crc1", IDX_AXI, 0, GATE_CRC1, SECF_NONE),
+ #ifndef CONFIG_XPL_BUILD
+-	PCLK(USBH, "usbh", "ck_axi", 0, GATE_USBH, SECF_NONE),
++	PCLK(USBH, "usbh", IDX_AXI, 0, GATE_USBH, SECF_NONE),
+ #endif
+-	PCLK(DDRPERFM, "ddrperfm", "pclk4", 0, GATE_DDRPERFM, SECF_NONE),
++	PCLK(DDRPERFM, "ddrperfm", IDX_PCLK4, 0, GATE_DDRPERFM, SECF_NONE),
+ #ifndef CONFIG_XPL_BUILD
+-	PCLK(ETH1STP, "eth1stp", "ck_axi", 0, GATE_ETH1STP, SECF_ETH1STP),
+-	PCLK(ETH2STP, "eth2stp", "ck_axi", 0, GATE_ETH2STP, SECF_ETH2STP),
++	PCLK(ETH1STP, "eth1stp", IDX_AXI, 0, GATE_ETH1STP, SECF_ETH1STP),
++	PCLK(ETH2STP, "eth2stp", IDX_AXI, 0, GATE_ETH2STP, SECF_ETH2STP),
+ #endif
+ 
+ 	/* Kernel clocks */
+@@ -728,11 +853,11 @@ static const struct clock_config stm32mp13_clock_cfg[] = {
+ 	KCLK(ETH2CK_K, "eth2ck_k", 0, GATE_ETH2CK, MUX_ETH2, SECF_ETH2CK),
+ 	KCLK(SAES_K, "saes_k", 0, GATE_SAES, MUX_SAES, SECF_SAES),
+ 
+-	STM32_GATE(DFSDM_K, "dfsdm_k", "ck_mlahb", 0, GATE_DFSDM, SECF_NONE),
+-	STM32_GATE(LTDC_PX, "ltdc_px", "pll4_q", CLK_SET_RATE_PARENT,
++	STM32_GATE(DFSDM_K, "dfsdm_k", IDX_MLAHB, 0, GATE_DFSDM, SECF_NONE),
++	STM32_GATE(LTDC_PX, "ltdc_px", IDX_PLL4_Q, CLK_SET_RATE_PARENT,
+ 		   GATE_LTDC, SECF_NONE),
+ 
+-	STM32_GATE(DTS_K, "dts_k", "ck_lse", 0, GATE_DTS, SECF_NONE),
++	STM32_GATE(DTS_K, "dts_k", IDX_LSE, 0, GATE_DTS, SECF_NONE),
+ #endif
+ 
+ 	STM32_COMPOSITE(ETH1PTP_K, "eth1ptp_k", CLK_OPS_PARENT_ENABLE |
+@@ -753,23 +878,23 @@ static const struct clock_config stm32mp13_clock_cfg[] = {
+ 			GATE_MCO2, MUX_MCO2, DIV_MCO2),
+ 
+ 	/* Debug clocks */
+-	STM32_GATE(CK_DBG, "ck_sys_dbg", "ck_axi", CLK_IGNORE_UNUSED,
++	STM32_GATE(CK_DBG, "ck_sys_dbg", IDX_AXI, CLK_IGNORE_UNUSED,
+ 		   GATE_DBGCK, SECF_NONE),
+ 
+-	STM32_COMPOSITE_NOMUX(CK_TRACE, "ck_trace", "ck_axi",
++	STM32_COMPOSITE_NOMUX(CK_TRACE, "ck_trace", IDX_AXI,
+ 			      CLK_OPS_PARENT_ENABLE, SECF_NONE,
+ 			      GATE_TRACECK, DIV_TRACE),
+ 
+ #ifdef CONFIG_XPL_BUILD
+-	STM32_GATE(AXIDCG, "axidcg", "ck_axi", CLK_IGNORE_UNUSED,
++	STM32_GATE(AXIDCG, "axidcg", IDX_AXI, CLK_IGNORE_UNUSED,
+ 		   GATE_AXIDCG, SECF_NONE),
+-	STM32_GATE(DDRC1, "ddrc1", "ck_axi", CLK_IGNORE_UNUSED,
++	STM32_GATE(DDRC1, "ddrc1", IDX_AXI, CLK_IGNORE_UNUSED,
+ 		   GATE_DDRC1, SECF_NONE),
+-	STM32_GATE(DDRPHYC, "ddrphyc", "pll2_r", CLK_IGNORE_UNUSED,
++	STM32_GATE(DDRPHYC, "ddrphyc", IDX_PLL2_R, CLK_IGNORE_UNUSED,
+ 		   GATE_DDRPHYC, SECF_NONE),
+-	STM32_GATE(DDRCAPB, "ddrcapb", "pclk4", CLK_IGNORE_UNUSED,
++	STM32_GATE(DDRCAPB, "ddrcapb", IDX_PCLK4, CLK_IGNORE_UNUSED,
+ 		   GATE_DDRCAPB, SECF_NONE),
+-	STM32_GATE(DDRPHYCAPB, "ddrphycapb", "pclk4", CLK_IGNORE_UNUSED,
++	STM32_GATE(DDRPHYCAPB, "ddrphycapb", IDX_PCLK4, CLK_IGNORE_UNUSED,
+ 		   GATE_DDRPHYCAPB, SECF_NONE),
+ #endif
+ };
+@@ -790,6 +915,44 @@ static int stm32mp13_check_security(struct udevice *dev, void __iomem *base,
+ 
+ 	return secured;
+ }
++#else
++static char * const stm32mp13_clk_parent_name[IDX_PARENT_NB] = {
++	[IDX_HSE] = "ck_hse",
++	[IDX_HSI] = "ck_hsi",
++	[IDX_CSI] = "ck_csi",
++	[IDX_LSE] = "ck_lse",
++	[IDX_LSI] = "ck_lsi",
++	[IDX_HSE_DIV2] = "clk-hse-div2",
++	[IDX_PLL2_Q] = "pll2_q",
++	[IDX_PLL2_R] = "pll2_r",
++	[IDX_PLL3_P] = "pll3_p",
++	[IDX_PLL3_Q] = "pll3_q",
++	[IDX_PLL3_R] = "pll3_r",
++	[IDX_PLL4_P] = "pll4_p",
++	[IDX_PLL4_Q] = "pll4_q",
++	[IDX_PLL4_R] = "pll4_r",
++	[IDX_MPU] = "ck_mpu",
++	[IDX_AXI] = "ck_axi",
++	[IDX_MLAHB] = "ck_mlahb",
++	[IDX_CKPER] = "ck_per",
++	[IDX_PCLK1] = "pclk1",
++	[IDX_PCLK2] = "pclk2",
++	[IDX_PCLK3] = "pclk3",
++	[IDX_PCLK4] = "pclk4",
++	[IDX_PCLK5] = "pclk5",
++	[IDX_PCLK6] = "pclk6",
++	[IDX_CKTIMG1] = "tim1_k",
++	[IDX_CKTIMG2] = "tim2_k",
++	[IDX_CKTIMG3] = "tim3_k",
++};
++
++static const char *stm32mp13_get_clock_name(u8 index)
++{
++	if (index >= IDX_PARENT_NB)
++		return NULL;
++
++	return stm32mp13_clk_parent_name[index];
++}
+ #endif
+ 
+ static const struct stm32_clock_match_data stm32mp13_data = {
+@@ -803,6 +966,8 @@ static const struct stm32_clock_match_data stm32mp13_data = {
+ 	},
+ #ifdef CONFIG_TFABOOT
+ 	.check_security = stm32mp13_check_security,
++#else
++	.get_clock_name = stm32mp13_get_clock_name,
+ #endif
+ };
+ 
+@@ -2004,11 +2169,11 @@ static int stm32mp1_clk_probe(struct udevice *dev)
+ 	if (err)
+ 		return err;
+ 
+-	gd->cpu_clk = clk_stm32_get_rate_by_name("ck_mpu");
+-	gd->bus_clk = clk_stm32_get_rate_by_name("ck_axi");
++	gd->cpu_clk = clk_stm32_get_rate_by_index(dev, IDX_MPU);
++	gd->bus_clk = clk_stm32_get_rate_by_index(dev, IDX_AXI);
+ 
+ 	/* DDRPHYC father */
+-	gd->mem_clk = clk_stm32_get_rate_by_name("pll2_r");
++	gd->mem_clk = clk_stm32_get_rate_by_index(dev, IDX_PLL2_R);
+ 
+ #ifndef CONFIG_XPL_BUILD
+ 	if (IS_ENABLED(CONFIG_DISPLAY_CPUINFO)) {
+@@ -2019,7 +2184,7 @@ static int stm32mp1_clk_probe(struct udevice *dev)
+ 			log_info("- MPU : %s MHz\n", strmhz(buf, gd->cpu_clk));
+ 			log_info("- AXI : %s MHz\n", strmhz(buf, gd->bus_clk));
+ 			log_info("- PER : %s MHz\n",
+-				 strmhz(buf, clk_stm32_get_rate_by_name("ck_per")));
++				 strmhz(buf, clk_stm32_get_rate_by_index(dev, IDX_CKPER)));
+ 			log_info("- DDR : %s MHz\n", strmhz(buf, gd->mem_clk));
+ 		}
+ 	}
+diff --git a/drivers/clk/stm32/clk-stm32mp25.c b/drivers/clk/stm32/clk-stm32mp25.c
+index b487f33b6c7..93ee38ed59e 100644
+--- a/drivers/clk/stm32/clk-stm32mp25.c
++++ b/drivers/clk/stm32/clk-stm32mp25.c
+@@ -43,48 +43,143 @@
+ #define SEC_RIFRCC(_id)		(STM32MP25_RIFRCC_##_id##_ID)
+ #define SEC_RIFSC(_id)		((_id) | SEC_RIFSC_FLAG)
+ 
+-static const char * const adc12_src[] = {
+-	"ck_flexgen_46", "ck_icn_ls_mcu"
++/* must match scmi clock order found in DT */
++enum {
++	IDX_HSE,
++	IDX_HSI,
++	IDX_MSI,
++	IDX_LSE,
++	IDX_LSI,
++	IDX_HSE_DIV2,
++	IDX_ICN_HS_MCU,
++	IDX_ICN_LS_MCU,
++	IDX_ICN_SDMMC,
++	IDX_ICN_DDR,
++	IDX_ICN_DISPLAY,
++	IDX_ICN_HSL,
++	IDX_ICN_NIC,
++	IDX_ICN_VID,
++	IDX_FLEXGEN_07,
++	IDX_FLEXGEN_08,
++	IDX_FLEXGEN_09,
++	IDX_FLEXGEN_10,
++	IDX_FLEXGEN_11,
++	IDX_FLEXGEN_12,
++	IDX_FLEXGEN_13,
++	IDX_FLEXGEN_14,
++	IDX_FLEXGEN_15,
++	IDX_FLEXGEN_16,
++	IDX_FLEXGEN_17,
++	IDX_FLEXGEN_18,
++	IDX_FLEXGEN_19,
++	IDX_FLEXGEN_20,
++	IDX_FLEXGEN_21,
++	IDX_FLEXGEN_22,
++	IDX_FLEXGEN_23,
++	IDX_FLEXGEN_24,
++	IDX_FLEXGEN_25,
++	IDX_FLEXGEN_26,
++	IDX_FLEXGEN_27,
++	IDX_FLEXGEN_28,
++	IDX_FLEXGEN_29,
++	IDX_FLEXGEN_30,
++	IDX_FLEXGEN_31,
++	IDX_FLEXGEN_32,
++	IDX_FLEXGEN_33,
++	IDX_FLEXGEN_34,
++	IDX_FLEXGEN_35,
++	IDX_FLEXGEN_36,
++	IDX_FLEXGEN_37,
++	IDX_FLEXGEN_38,
++	IDX_FLEXGEN_39,
++	IDX_FLEXGEN_40,
++	IDX_FLEXGEN_41,
++	IDX_FLEXGEN_42,
++	IDX_FLEXGEN_43,
++	IDX_FLEXGEN_44,
++	IDX_FLEXGEN_45,
++	IDX_FLEXGEN_46,
++	IDX_FLEXGEN_47,
++	IDX_FLEXGEN_48,
++	IDX_FLEXGEN_49,
++	IDX_FLEXGEN_50,
++	IDX_FLEXGEN_51,
++	IDX_FLEXGEN_52,
++	IDX_FLEXGEN_53,
++	IDX_FLEXGEN_54,
++	IDX_FLEXGEN_55,
++	IDX_FLEXGEN_56,
++	IDX_FLEXGEN_57,
++	IDX_FLEXGEN_58,
++	IDX_FLEXGEN_59,
++	IDX_FLEXGEN_60,
++	IDX_FLEXGEN_61,
++	IDX_FLEXGEN_62,
++	IDX_FLEXGEN_63,
++	IDX_ICN_APB1,
++	IDX_ICN_APB2,
++	IDX_ICN_APB3,
++	IDX_ICN_APB4,
++	IDX_ICN_APBDBG,
++	IDX_TIMG1,
++	IDX_TIMG2,
++	IDX_PLL3,
++	DSI_TXBYTE,
+ };
+ 
+-static const char * const adc3_src[] = {
+-	"ck_flexgen_47", "ck_icn_ls_mcu", "ck_flexgen_46"
++static const struct clk_parent_data adc12_src[] = {
++	{ .index = IDX_FLEXGEN_46 },
++	{ .index = IDX_ICN_LS_MCU },
+ };
+ 
+-static const char * const usb2phy1_src[] = {
+-	"ck_flexgen_57", "hse_div2_ck"
++static const struct clk_parent_data adc3_src[] = {
++	{ .index = IDX_FLEXGEN_47 },
++	{ .index = IDX_ICN_LS_MCU },
++	{ .index = IDX_FLEXGEN_46 },
+ };
+ 
+-static const char * const usb2phy2_src[] = {
+-	"ck_flexgen_58", "hse_div2_ck"
++static const struct clk_parent_data usb2phy1_src[] = {
++	{ .index = IDX_FLEXGEN_57 },
++	{ .index = IDX_HSE_DIV2 },
+ };
+ 
+-static const char * const usb3pciphy_src[] = {
+-	"ck_flexgen_34", "hse_div2_ck"
++static const struct clk_parent_data usb2phy2_src[] = {
++	{ .index = IDX_FLEXGEN_58 },
++	{ .index = IDX_HSE_DIV2 },
+ };
+ 
+-static const char * const dsiblane_src[] = {
+-	"txbyteclk", "ck_ker_ltdc"
++static const struct clk_parent_data usb3pciphy_src[] = {
++	{ .index = IDX_FLEXGEN_34 },
++	{ .index = IDX_HSE_DIV2 },
+ };
+ 
+-static const char * const dsiphy_src[] = {
+-	"ck_flexgen_28", "hse_ck"
++static const struct clk_parent_data dsiblane_src[] = {
++	{ .index = DSI_TXBYTE },
++	{ .name = "ck_ker_ltdc" },
+ };
+ 
+-static const char * const lvdsphy_src[] = {
+-	"ck_flexgen_32", "hse_ck"
++static const struct clk_parent_data dsiphy_src[] = {
++	{ .index = IDX_FLEXGEN_28 },
++	{ .index = IDX_HSE },
+ };
+ 
+-static const char * const dts_src[] = {
+-	"hsi_ck", "hse_ck", "msi_ck"
++static const struct clk_parent_data lvdsphy_src[] = {
++	{ .index = IDX_FLEXGEN_32 },
++	{ .index = IDX_HSE },
+ };
+ 
+-static const char * const mco1_src[] = {
+-	"ck_flexgen_61", "ck_obs0"
++static const struct clk_parent_data dts_src[] = {
++	{ .index = IDX_HSI },
++	{ .index = IDX_HSE },
++	{ .index = IDX_MSI },
+ };
+ 
+-static const char * const mco2_src[] = {
+-	"ck_flexgen_62", "ck_obs1"
++static const struct clk_parent_data mco1_src[] = {
++	{ .index = IDX_FLEXGEN_61 },
++};
++
++static const struct clk_parent_data mco2_src[] = {
++	{ .index = IDX_FLEXGEN_62 },
+ };
+ 
+ enum enum_mux_cfg {
+@@ -104,7 +199,7 @@ enum enum_mux_cfg {
+ 
+ #define MUX_CFG(id, src, _offset, _shift, _witdh)[id] = {\
+ 		.num_parents	= ARRAY_SIZE(src),\
+-		.parent_names	= src,\
++		.parent_data	= src,\
+ 		.reg_off	= (_offset),\
+ 		.shift		= (_shift),\
+ 		.width		= (_witdh),\
+@@ -443,42 +538,42 @@ static int stm32mp25_check_security(struct udevice *dev, void __iomem *base,
+ 
+ static const struct clock_config stm32mp25_clock_cfg[] = {
+ 	/* ADC */
+-	STM32_GATE(CK_BUS_ADC12, "ck_icn_p_adc12", "ck_icn_ls_mcu", 0, GATE_ADC12,
++	STM32_GATE(CK_BUS_ADC12, "ck_icn_p_adc12", IDX_ICN_LS_MCU, 0, GATE_ADC12,
+ 		   SEC_RIFSC(58)),
+ 	STM32_COMPOSITE_NODIV(CK_KER_ADC12, "ck_ker_adc12", 0, SEC_RIFSC(58),
+ 			      GATE_ADC12, MUX_ADC12),
+-	STM32_GATE(CK_BUS_ADC3, "ck_icn_p_adc3", "ck_icn_ls_mcu", 0, GATE_ADC3, SEC_RIFSC(59)),
++	STM32_GATE(CK_BUS_ADC3, "ck_icn_p_adc3", IDX_ICN_LS_MCU, 0, GATE_ADC3, SEC_RIFSC(59)),
+ 	STM32_COMPOSITE_NODIV(CK_KER_ADC3, "ck_ker_adc3", 0, SEC_RIFSC(59), GATE_ADC3, MUX_ADC3),
+ 
+ 	/* ADF */
+-	STM32_GATE(CK_BUS_ADF1, "ck_icn_p_adf1", "ck_icn_ls_mcu", 0, GATE_ADF1, SEC_RIFSC(55)),
+-	STM32_GATE(CK_KER_ADF1, "ck_ker_adf1", "ck_flexgen_42", 0, GATE_ADF1, SEC_RIFSC(55)),
++	STM32_GATE(CK_BUS_ADF1, "ck_icn_p_adf1", IDX_ICN_LS_MCU, 0, GATE_ADF1, SEC_RIFSC(55)),
++	STM32_GATE(CK_KER_ADF1, "ck_ker_adf1", IDX_FLEXGEN_42, 0, GATE_ADF1, SEC_RIFSC(55)),
+ 
+ 	/* Camera */
+ 	/* DCMI */
+-	STM32_GATE(CK_BUS_CCI, "ck_icn_p_cci", "ck_icn_ls_mcu", 0, GATE_CCI, SEC_RIFSC(88)),
++	STM32_GATE(CK_BUS_CCI, "ck_icn_p_cci", IDX_ICN_LS_MCU, 0, GATE_CCI, SEC_RIFSC(88)),
+ 
+ 	/* CSI-HOST */
+-	STM32_GATE(CK_BUS_CSI, "ck_icn_p_csi", "ck_icn_apb4", 0, GATE_CSI, SEC_RIFSC(86)),
+-	STM32_GATE(CK_KER_CSI, "ck_ker_csi", "ck_flexgen_29", 0, GATE_CSI, SEC_RIFSC(86)),
+-	STM32_GATE(CK_KER_CSITXESC, "ck_ker_csitxesc", "ck_flexgen_30", 0, GATE_CSI,
++	STM32_GATE(CK_BUS_CSI, "ck_icn_p_csi", IDX_ICN_APB4, 0, GATE_CSI, SEC_RIFSC(86)),
++	STM32_GATE(CK_KER_CSI, "ck_ker_csi", IDX_FLEXGEN_29, 0, GATE_CSI, SEC_RIFSC(86)),
++	STM32_GATE(CK_KER_CSITXESC, "ck_ker_csitxesc", IDX_FLEXGEN_30, 0, GATE_CSI,
+ 		   SEC_RIFSC(86)),
+ 
+ 	/* CSI-PHY */
+-	STM32_GATE(CK_KER_CSIPHY, "ck_ker_csiphy", "ck_flexgen_31", 0, GATE_CSI,
++	STM32_GATE(CK_KER_CSIPHY, "ck_ker_csiphy", IDX_FLEXGEN_31, 0, GATE_CSI,
+ 		   SEC_RIFSC(86)),
+ 
+ 	/* DCMIPP */
+-	STM32_GATE(CK_BUS_DCMIPP, "ck_icn_p_dcmipp", "ck_icn_apb4", 0, GATE_DCMIPP,
++	STM32_GATE(CK_BUS_DCMIPP, "ck_icn_p_dcmipp", IDX_ICN_APB4, 0, GATE_DCMIPP,
+ 		   SEC_RIFSC(87)),
+ 
+ 	/* CRC */
+-	STM32_GATE(CK_BUS_CRC, "ck_icn_p_crc", "ck_icn_ls_mcu", 0, GATE_CRC, SEC_RIFSC(109)),
++	STM32_GATE(CK_BUS_CRC, "ck_icn_p_crc", IDX_ICN_LS_MCU, 0, GATE_CRC, SEC_RIFSC(109)),
+ 
+ 	/* CRYP */
+-	STM32_GATE(CK_BUS_CRYP1, "ck_icn_p_cryp1", "ck_icn_ls_mcu", 0, GATE_CRYP1,
++	STM32_GATE(CK_BUS_CRYP1, "ck_icn_p_cryp1", IDX_ICN_LS_MCU, 0, GATE_CRYP1,
+ 		   SEC_RIFSC(96)),
+-	STM32_GATE(CK_BUS_CRYP2, "ck_icn_p_cryp2", "ck_icn_ls_mcu", 0, GATE_CRYP2,
++	STM32_GATE(CK_BUS_CRYP2, "ck_icn_p_cryp2", IDX_ICN_LS_MCU, 0, GATE_CRYP2,
+ 		   SEC_RIFSC(97)),
+ 
+ 	/* DBG & TRACE*/
+@@ -486,17 +581,17 @@ static const struct clock_config stm32mp25_clock_cfg[] = {
+ 
+ 	/* Display subsystem */
+ 	/* LTDC */
+-	STM32_GATE(CK_BUS_LTDC, "ck_icn_p_ltdc", "ck_icn_apb4", 0, GATE_LTDC, SEC_RIFSC(80)),
+-	STM32_GATE(CK_KER_LTDC, "ck_ker_ltdc", "ck_flexgen_27", CLK_SET_RATE_PARENT, GATE_LTDC,
++	STM32_GATE(CK_BUS_LTDC, "ck_icn_p_ltdc", IDX_ICN_APB4, 0, GATE_LTDC, SEC_RIFSC(80)),
++	STM32_GATE(CK_KER_LTDC, "ck_ker_ltdc", IDX_FLEXGEN_27, CLK_SET_RATE_PARENT, GATE_LTDC,
+ 		   SEC_RIFSC(80)),
+ 
+ 	/* DSI */
+-	STM32_GATE(CK_BUS_DSI, "ck_icn_p_dsi", "ck_icn_apb4", 0, GATE_DSI, SEC_RIFSC(81)),
++	STM32_GATE(CK_BUS_DSI, "ck_icn_p_dsi", IDX_ICN_APB4, 0, GATE_DSI, SEC_RIFSC(81)),
+ 	STM32_COMPOSITE_NODIV(CK_KER_DSIBLANE, "clk_lanebyte", 0, SEC_RIFSC(81),
+ 			      GATE_DSI, MUX_DSIBLANE),
+ 
+ 	/* LVDS */
+-	STM32_GATE(CK_BUS_LVDS, "ck_icn_p_lvds", "ck_icn_apb4", 0, GATE_LVDS, SEC_RIFSC(84)),
++	STM32_GATE(CK_BUS_LVDS, "ck_icn_p_lvds", IDX_ICN_APB4, 0, GATE_LVDS, SEC_RIFSC(84)),
+ 
+ 	/* DSI PHY */
+ 	STM32_COMPOSITE_NODIV(CK_KER_DSIPHY, "ck_ker_dsiphy", 0, SEC_RIFSC(81),
+@@ -510,88 +605,88 @@ static const struct clock_config stm32mp25_clock_cfg[] = {
+ 	STM32_COMPOSITE_NODIV(CK_KER_DTS, "ck_ker_dts", 0, SEC_RIFSC(107), GATE_DTS, MUX_DTS),
+ 
+ 	/* ETHERNET */
+-	STM32_GATE(CK_BUS_ETH1, "ck_icn_p_eth1", "ck_icn_ls_mcu", 0, GATE_ETH1, SEC_RIFSC(60)),
+-	STM32_GATE(CK_ETH1_STP, "ck_ker_eth1stp", "ck_icn_ls_mcu", 0, GATE_ETH1STP,
++	STM32_GATE(CK_BUS_ETH1, "ck_icn_p_eth1", IDX_ICN_LS_MCU, 0, GATE_ETH1, SEC_RIFSC(60)),
++	STM32_GATE(CK_ETH1_STP, "ck_ker_eth1stp", IDX_ICN_LS_MCU, 0, GATE_ETH1STP,
+ 		   SEC_RIFSC(60)),
+-	STM32_GATE(CK_KER_ETH1, "ck_ker_eth1", "ck_flexgen_54", 0, GATE_ETH1, SEC_RIFSC(60)),
+-	STM32_GATE(CK_KER_ETH1, "ck_ker_eth1ptp", "ck_flexgen_56", 0, GATE_ETH1, SEC_RIFSC(60)),
+-	STM32_GATE(CK_ETH1_MAC, "ck_ker_eth1mac", "ck_icn_ls_mcu", 0, GATE_ETH1MAC,
++	STM32_GATE(CK_KER_ETH1, "ck_ker_eth1", IDX_FLEXGEN_54, 0, GATE_ETH1, SEC_RIFSC(60)),
++	STM32_GATE(CK_KER_ETH1, "ck_ker_eth1ptp", IDX_FLEXGEN_56, 0, GATE_ETH1, SEC_RIFSC(60)),
++	STM32_GATE(CK_ETH1_MAC, "ck_ker_eth1mac", IDX_ICN_LS_MCU, 0, GATE_ETH1MAC,
+ 		   SEC_RIFSC(60)),
+-	STM32_GATE(CK_ETH1_TX, "ck_ker_eth1tx", "ck_icn_ls_mcu", 0, GATE_ETH1TX, SEC_RIFSC(60)),
+-	STM32_GATE(CK_ETH1_RX, "ck_ker_eth1rx", "ck_icn_ls_mcu", 0, GATE_ETH1RX, SEC_RIFSC(60)),
++	STM32_GATE(CK_ETH1_TX, "ck_ker_eth1tx", IDX_ICN_LS_MCU, 0, GATE_ETH1TX, SEC_RIFSC(60)),
++	STM32_GATE(CK_ETH1_RX, "ck_ker_eth1rx", IDX_ICN_LS_MCU, 0, GATE_ETH1RX, SEC_RIFSC(60)),
+ 
+-	STM32_GATE(CK_BUS_ETH2, "ck_icn_p_eth2", "ck_icn_ls_mcu", 0, GATE_ETH2, SEC_RIFSC(61)),
+-	STM32_GATE(CK_ETH2_STP, "ck_ker_eth2stp", "ck_icn_ls_mcu", 0, GATE_ETH2STP,
++	STM32_GATE(CK_BUS_ETH2, "ck_icn_p_eth2", IDX_ICN_LS_MCU, 0, GATE_ETH2, SEC_RIFSC(61)),
++	STM32_GATE(CK_ETH2_STP, "ck_ker_eth2stp", IDX_ICN_LS_MCU, 0, GATE_ETH2STP,
+ 		   SEC_RIFSC(61)),
+-	STM32_GATE(CK_KER_ETH2, "ck_ker_eth2", "ck_flexgen_54", 0, GATE_ETH2, SEC_RIFSC(61)),
+-	STM32_GATE(CK_KER_ETH2, "ck_ker_eth2ptp", "ck_flexgen_56", 0, GATE_ETH2, SEC_RIFSC(61)),
+-	STM32_GATE(CK_ETH2_MAC, "ck_ker_eth2mac", "ck_icn_ls_mcu", 0, GATE_ETH2MAC,
++	STM32_GATE(CK_KER_ETH2, "ck_ker_eth2", IDX_FLEXGEN_54, 0, GATE_ETH2, SEC_RIFSC(61)),
++	STM32_GATE(CK_KER_ETH2, "ck_ker_eth2ptp", IDX_FLEXGEN_56, 0, GATE_ETH2, SEC_RIFSC(61)),
++	STM32_GATE(CK_ETH2_MAC, "ck_ker_eth2mac", IDX_ICN_LS_MCU, 0, GATE_ETH2MAC,
+ 		   SEC_RIFSC(61)),
+-	STM32_GATE(CK_ETH2_TX, "ck_ker_eth2tx", "ck_icn_ls_mcu", 0, GATE_ETH2TX, SEC_RIFSC(61)),
+-	STM32_GATE(CK_ETH2_RX, "ck_ker_eth2rx", "ck_icn_ls_mcu", 0, GATE_ETH2RX, SEC_RIFSC(61)),
++	STM32_GATE(CK_ETH2_TX, "ck_ker_eth2tx", IDX_ICN_LS_MCU, 0, GATE_ETH2TX, SEC_RIFSC(61)),
++	STM32_GATE(CK_ETH2_RX, "ck_ker_eth2rx", IDX_ICN_LS_MCU, 0, GATE_ETH2RX, SEC_RIFSC(61)),
+ 
+-	STM32_GATE(CK_BUS_ETHSW, "ck_icn_p_ethsw", "ck_icn_ls_mcu", 0, GATE_ETHSWMAC,
++	STM32_GATE(CK_BUS_ETHSW, "ck_icn_p_ethsw", IDX_ICN_LS_MCU, 0, GATE_ETHSWMAC,
+ 		   SEC_RIFSC(70)),
+-	STM32_GATE(CK_KER_ETHSW, "ck_ker_ethsw", "ck_flexgen_54", 0, GATE_ETHSW,
++	STM32_GATE(CK_KER_ETHSW, "ck_ker_ethsw", IDX_FLEXGEN_54, 0, GATE_ETHSW,
+ 		   SEC_RIFSC(70)),
+-	STM32_GATE(CK_KER_ETHSWREF, "ck_ker_ethswref", "ck_flexgen_60", 0, GATE_ETHSWREF,
++	STM32_GATE(CK_KER_ETHSWREF, "ck_ker_ethswref", IDX_FLEXGEN_60, 0, GATE_ETHSWREF,
+ 		   SEC_RIFSC(70)),
+ 
+ 	/* FDCAN */
+-	STM32_GATE(CK_BUS_FDCAN, "ck_icn_p_fdcan", "ck_icn_apb2", 0, GATE_FDCAN, SEC_RIFSC(56)),
+-	STM32_GATE(CK_KER_FDCAN, "ck_ker_fdcan", "ck_flexgen_26", 0, GATE_FDCAN, SEC_RIFSC(56)),
++	STM32_GATE(CK_BUS_FDCAN, "ck_icn_p_fdcan", IDX_ICN_APB2, 0, GATE_FDCAN, SEC_RIFSC(56)),
++	STM32_GATE(CK_KER_FDCAN, "ck_ker_fdcan", IDX_FLEXGEN_26, 0, GATE_FDCAN, SEC_RIFSC(56)),
+ 
+ 	/* GPU */
+-	STM32_GATE(CK_BUS_GPU, "ck_icn_m_gpu", "ck_flexgen_59", 0, GATE_GPU, SEC_RIFSC(79)),
+-	STM32_GATE(CK_KER_GPU, "ck_ker_gpu", "ck_pll3", 0, GATE_GPU, SEC_RIFSC(79)),
++	STM32_GATE(CK_BUS_GPU, "ck_icn_m_gpu", IDX_FLEXGEN_59, 0, GATE_GPU, SEC_RIFSC(79)),
++	STM32_GATE(CK_KER_GPU, "ck_ker_gpu", IDX_PLL3, 0, GATE_GPU, SEC_RIFSC(79)),
+ 
+ 	/* HASH */
+-	STM32_GATE(CK_BUS_HASH, "ck_icn_p_hash", "ck_icn_ls_mcu", 0, GATE_HASH, SEC_RIFSC(95)),
++	STM32_GATE(CK_BUS_HASH, "ck_icn_p_hash", IDX_ICN_LS_MCU, 0, GATE_HASH, SEC_RIFSC(95)),
+ 
+ 	/* HDP */
+-	STM32_GATE(CK_BUS_HDP, "ck_icn_p_hdp", "ck_icn_apb3", 0, GATE_HDP, SEC_RIFSC(57)),
++	STM32_GATE(CK_BUS_HDP, "ck_icn_p_hdp", IDX_ICN_APB3, 0, GATE_HDP, SEC_RIFSC(57)),
+ 
+ 	/* I2C */
+-	STM32_GATE(CK_KER_I2C1, "ck_ker_i2c1", "ck_flexgen_12", 0, GATE_I2C1, SEC_RIFSC(41)),
+-	STM32_GATE(CK_KER_I2C2, "ck_ker_i2c2", "ck_flexgen_12", 0, GATE_I2C2, SEC_RIFSC(42)),
+-	STM32_GATE(CK_KER_I2C3, "ck_ker_i2c3", "ck_flexgen_13", 0, GATE_I2C3, SEC_RIFSC(43)),
+-	STM32_GATE(CK_KER_I2C5, "ck_ker_i2c5", "ck_flexgen_13", 0, GATE_I2C5, SEC_RIFSC(45)),
+-	STM32_GATE(CK_KER_I2C4, "ck_ker_i2c4", "ck_flexgen_14", 0, GATE_I2C4, SEC_RIFSC(44)),
+-	STM32_GATE(CK_KER_I2C6, "ck_ker_i2c6", "ck_flexgen_14", 0, GATE_I2C6, SEC_RIFSC(46)),
+-	STM32_GATE(CK_KER_I2C7, "ck_ker_i2c7", "ck_flexgen_15", 0, GATE_I2C7, SEC_RIFSC(47)),
+-	STM32_GATE(CK_KER_I2C8, "ck_ker_i2c8", "ck_flexgen_38", 0, GATE_I2C8, SEC_RIFSC(48)),
++	STM32_GATE(CK_KER_I2C1, "ck_ker_i2c1", IDX_FLEXGEN_12, 0, GATE_I2C1, SEC_RIFSC(41)),
++	STM32_GATE(CK_KER_I2C2, "ck_ker_i2c2", IDX_FLEXGEN_12, 0, GATE_I2C2, SEC_RIFSC(42)),
++	STM32_GATE(CK_KER_I2C3, "ck_ker_i2c3", IDX_FLEXGEN_13, 0, GATE_I2C3, SEC_RIFSC(43)),
++	STM32_GATE(CK_KER_I2C5, "ck_ker_i2c5", IDX_FLEXGEN_13, 0, GATE_I2C5, SEC_RIFSC(45)),
++	STM32_GATE(CK_KER_I2C4, "ck_ker_i2c4", IDX_FLEXGEN_14, 0, GATE_I2C4, SEC_RIFSC(44)),
++	STM32_GATE(CK_KER_I2C6, "ck_ker_i2c6", IDX_FLEXGEN_14, 0, GATE_I2C6, SEC_RIFSC(46)),
++	STM32_GATE(CK_KER_I2C7, "ck_ker_i2c7", IDX_FLEXGEN_15, 0, GATE_I2C7, SEC_RIFSC(47)),
++	STM32_GATE(CK_KER_I2C8, "ck_ker_i2c8", IDX_FLEXGEN_38, 0, GATE_I2C8, SEC_RIFSC(48)),
+ 
+ 	/* I3C */
+-	STM32_GATE(CK_KER_I3C1, "ck_ker_i3c1", "ck_flexgen_12", 0, GATE_I3C1, SEC_RIFSC(114)),
+-	STM32_GATE(CK_KER_I3C2, "ck_ker_i3c2", "ck_flexgen_12", 0, GATE_I3C2, SEC_RIFSC(115)),
+-	STM32_GATE(CK_KER_I3C3, "ck_ker_i3c3", "ck_flexgen_13", 0, GATE_I3C3, SEC_RIFSC(116)),
+-	STM32_GATE(CK_KER_I3C4, "ck_ker_i3c4", "ck_flexgen_36", 0, GATE_I3C4, SEC_RIFSC(117)),
++	STM32_GATE(CK_KER_I3C1, "ck_ker_i3c1", IDX_FLEXGEN_12, 0, GATE_I3C1, SEC_RIFSC(114)),
++	STM32_GATE(CK_KER_I3C2, "ck_ker_i3c2", IDX_FLEXGEN_12, 0, GATE_I3C2, SEC_RIFSC(115)),
++	STM32_GATE(CK_KER_I3C3, "ck_ker_i3c3", IDX_FLEXGEN_13, 0, GATE_I3C3, SEC_RIFSC(116)),
++	STM32_GATE(CK_KER_I3C4, "ck_ker_i3c4", IDX_FLEXGEN_36, 0, GATE_I3C4, SEC_RIFSC(117)),
+ 
+ 	/* I2S */
+-	STM32_GATE(CK_BUS_IS2M, "ck_icn_p_is2m", "ck_icn_apb3", 0, GATE_IS2M, SEC_RIFRCC(IS2M)),
++	STM32_GATE(CK_BUS_IS2M, "ck_icn_p_is2m", IDX_ICN_APB3, 0, GATE_IS2M, SEC_RIFRCC(IS2M)),
+ 
+ 	/* IWDG */
+-	STM32_GATE(CK_BUS_IWDG1, "ck_icn_p_iwdg1", "ck_icn_apb3", 0, GATE_IWDG1, SEC_RIFSC(98)),
+-	STM32_GATE(CK_BUS_IWDG2, "ck_icn_p_iwdg2", "ck_icn_apb3", 0, GATE_IWDG2, SEC_RIFSC(99)),
+-	STM32_GATE(CK_BUS_IWDG3, "ck_icn_p_iwdg3", "ck_icn_apb3", 0, GATE_IWDG3, SEC_RIFSC(100)),
+-	STM32_GATE(CK_BUS_IWDG4, "ck_icn_p_iwdg4", "ck_icn_apb3", 0, GATE_IWDG4, SEC_RIFSC(101)),
+-	STM32_GATE(CK_BUS_IWDG5, "ck_icn_p_iwdg5", "ck_icn_ls_mcu", 0, GATE_IWDG5,
++	STM32_GATE(CK_BUS_IWDG1, "ck_icn_p_iwdg1", IDX_ICN_APB3, 0, GATE_IWDG1, SEC_RIFSC(98)),
++	STM32_GATE(CK_BUS_IWDG2, "ck_icn_p_iwdg2", IDX_ICN_APB3, 0, GATE_IWDG2, SEC_RIFSC(99)),
++	STM32_GATE(CK_BUS_IWDG3, "ck_icn_p_iwdg3", IDX_ICN_APB3, 0, GATE_IWDG3, SEC_RIFSC(100)),
++	STM32_GATE(CK_BUS_IWDG4, "ck_icn_p_iwdg4", IDX_ICN_APB3, 0, GATE_IWDG4, SEC_RIFSC(101)),
++	STM32_GATE(CK_BUS_IWDG5, "ck_icn_p_iwdg5", IDX_ICN_LS_MCU, 0, GATE_IWDG5,
+ 		   SEC_RIFSC(102)),
+ 
+ 	/* LPTIM */
+-	STM32_GATE(CK_KER_LPTIM1, "ck_ker_lptim1", "ck_flexgen_07", 0, GATE_LPTIM1,
++	STM32_GATE(CK_KER_LPTIM1, "ck_ker_lptim1", IDX_FLEXGEN_07, 0, GATE_LPTIM1,
+ 		   SEC_RIFSC(17)),
+-	STM32_GATE(CK_KER_LPTIM2, "ck_ker_lptim2", "ck_flexgen_07", 0, GATE_LPTIM2,
++	STM32_GATE(CK_KER_LPTIM2, "ck_ker_lptim2", IDX_FLEXGEN_07, 0, GATE_LPTIM2,
+ 		   SEC_RIFSC(18)),
+-	STM32_GATE(CK_KER_LPTIM3, "ck_ker_lptim3", "ck_flexgen_40", 0, GATE_LPTIM3,
++	STM32_GATE(CK_KER_LPTIM3, "ck_ker_lptim3", IDX_FLEXGEN_40, 0, GATE_LPTIM3,
+ 		   SEC_RIFSC(19)),
+-	STM32_GATE(CK_KER_LPTIM4, "ck_ker_lptim4", "ck_flexgen_41", 0, GATE_LPTIM4,
++	STM32_GATE(CK_KER_LPTIM4, "ck_ker_lptim4", IDX_FLEXGEN_41, 0, GATE_LPTIM4,
+ 		   SEC_RIFSC(20)),
+-	STM32_GATE(CK_KER_LPTIM5, "ck_ker_lptim5", "ck_flexgen_41", 0, GATE_LPTIM5,
++	STM32_GATE(CK_KER_LPTIM5, "ck_ker_lptim5", IDX_FLEXGEN_41, 0, GATE_LPTIM5,
+ 		   SEC_RIFSC(21)),
+ 
+ 	/* LPUART */
+-	STM32_GATE(CK_KER_LPUART1, "ck_ker_lpuart1", "ck_flexgen_39", 0, GATE_LPUART1,
++	STM32_GATE(CK_KER_LPUART1, "ck_ker_lpuart1", IDX_FLEXGEN_39, 0, GATE_LPUART1,
+ 		   SEC_RIFSC(40)),
+ 
+ 	/* MCO1 & MCO2 */
+@@ -599,102 +694,102 @@ static const struct clock_config stm32mp25_clock_cfg[] = {
+ 	STM32_COMPOSITE_NODIV(CK_MCO2, "ck_mco2", 0, SEC_RIFRCC(MCO2), GATE_MCO2, MUX_MCO2),
+ 
+ 	/* MDF */
+-	STM32_GATE(CK_KER_MDF1, "ck_ker_mdf1", "ck_flexgen_23", 0, GATE_MDF1, SEC_RIFSC(54)),
++	STM32_GATE(CK_KER_MDF1, "ck_ker_mdf1", IDX_FLEXGEN_23, 0, GATE_MDF1, SEC_RIFSC(54)),
+ 
+ 	/* OCTOSPI */
+-	STM32_GATE(CK_BUS_OSPIIOM, "ck_icn_p_ospiiom", "ck_icn_ls_mcu", 0, GATE_OSPIIOM,
++	STM32_GATE(CK_BUS_OSPIIOM, "ck_icn_p_ospiiom", IDX_ICN_LS_MCU, 0, GATE_OSPIIOM,
+ 		   SEC_RIFSC(111)),
+ 
+ 	/* PCIE */
+-	STM32_GATE(CK_BUS_PCIE, "ck_icn_p_pcie", "ck_icn_ls_mcu", 0, GATE_PCIE, SEC_RIFSC(68)),
++	STM32_GATE(CK_BUS_PCIE, "ck_icn_p_pcie", IDX_ICN_LS_MCU, 0, GATE_PCIE, SEC_RIFSC(68)),
+ 
+ 	/* PKA */
+-	STM32_GATE(CK_BUS_PKA, "ck_icn_p_pka", "ck_icn_ls_mcu", 0, GATE_PKA, SEC_RIFSC(93)),
++	STM32_GATE(CK_BUS_PKA, "ck_icn_p_pka", IDX_ICN_LS_MCU, 0, GATE_PKA, SEC_RIFSC(93)),
+ 
+ 	/* RNG */
+-	STM32_GATE(CK_BUS_RNG, "ck_icn_p_rng", "ck_icn_ls_mcu", CLK_IGNORE_UNUSED, GATE_RNG,
++	STM32_GATE(CK_BUS_RNG, "ck_icn_p_rng", IDX_ICN_LS_MCU, CLK_IGNORE_UNUSED, GATE_RNG,
+ 		   SEC_RIFSC(92)),
+ 
+ 	/* SAES */
+-	STM32_GATE(CK_BUS_SAES, "ck_icn_p_saes", "ck_icn_ls_mcu", 0, GATE_SAES, SEC_RIFSC(94)),
++	STM32_GATE(CK_BUS_SAES, "ck_icn_p_saes", IDX_ICN_LS_MCU, 0, GATE_SAES, SEC_RIFSC(94)),
+ 
+ 	/* SAI [1..4] */
+-	STM32_GATE(CK_BUS_SAI1, "ck_icn_p_sai1", "ck_icn_apb2", 0, GATE_SAI1, SEC_RIFSC(49)),
+-	STM32_GATE(CK_BUS_SAI2, "ck_icn_p_sai2", "ck_icn_apb2", 0, GATE_SAI2, SEC_RIFSC(50)),
+-	STM32_GATE(CK_BUS_SAI3, "ck_icn_p_sai3", "ck_icn_apb2", 0, GATE_SAI3, SEC_RIFSC(51)),
+-	STM32_GATE(CK_BUS_SAI4, "ck_icn_p_sai4", "ck_icn_apb2", 0, GATE_SAI4, SEC_RIFSC(52)),
+-	STM32_GATE(CK_KER_SAI1, "ck_ker_sai1", "ck_flexgen_23", 0, GATE_SAI1, SEC_RIFSC(49)),
+-	STM32_GATE(CK_KER_SAI2, "ck_ker_sai2", "ck_flexgen_24", 0, GATE_SAI2, SEC_RIFSC(50)),
+-	STM32_GATE(CK_KER_SAI3, "ck_ker_sai3", "ck_flexgen_25", 0, GATE_SAI3, SEC_RIFSC(51)),
+-	STM32_GATE(CK_KER_SAI4, "ck_ker_sai4", "ck_flexgen_25", 0, GATE_SAI4, SEC_RIFSC(52)),
++	STM32_GATE(CK_BUS_SAI1, "ck_icn_p_sai1", IDX_ICN_APB2, 0, GATE_SAI1, SEC_RIFSC(49)),
++	STM32_GATE(CK_BUS_SAI2, "ck_icn_p_sai2", IDX_ICN_APB2, 0, GATE_SAI2, SEC_RIFSC(50)),
++	STM32_GATE(CK_BUS_SAI3, "ck_icn_p_sai3", IDX_ICN_APB2, 0, GATE_SAI3, SEC_RIFSC(51)),
++	STM32_GATE(CK_BUS_SAI4, "ck_icn_p_sai4", IDX_ICN_APB2, 0, GATE_SAI4, SEC_RIFSC(52)),
++	STM32_GATE(CK_KER_SAI1, "ck_ker_sai1", IDX_FLEXGEN_23, 0, GATE_SAI1, SEC_RIFSC(49)),
++	STM32_GATE(CK_KER_SAI2, "ck_ker_sai2", IDX_FLEXGEN_24, 0, GATE_SAI2, SEC_RIFSC(50)),
++	STM32_GATE(CK_KER_SAI3, "ck_ker_sai3", IDX_FLEXGEN_25, 0, GATE_SAI3, SEC_RIFSC(51)),
++	STM32_GATE(CK_KER_SAI4, "ck_ker_sai4", IDX_FLEXGEN_25, 0, GATE_SAI4, SEC_RIFSC(52)),
+ 
+ 	/* SDMMC */
+-	STM32_GATE(CK_KER_SDMMC1, "ck_ker_sdmmc1", "ck_flexgen_51", 0, GATE_SDMMC1,
++	STM32_GATE(CK_KER_SDMMC1, "ck_ker_sdmmc1", IDX_FLEXGEN_51, 0, GATE_SDMMC1,
+ 		   SEC_RIFSC(76)),
+-	STM32_GATE(CK_KER_SDMMC2, "ck_ker_sdmmc2", "ck_flexgen_52", 0, GATE_SDMMC2,
++	STM32_GATE(CK_KER_SDMMC2, "ck_ker_sdmmc2", IDX_FLEXGEN_52, 0, GATE_SDMMC2,
+ 		   SEC_RIFSC(77)),
+-	STM32_GATE(CK_KER_SDMMC3, "ck_ker_sdmmc3", "ck_flexgen_53", 0, GATE_SDMMC3,
++	STM32_GATE(CK_KER_SDMMC3, "ck_ker_sdmmc3", IDX_FLEXGEN_53, 0, GATE_SDMMC3,
+ 		   SEC_RIFSC(78)),
+ 
+ 	/* SERC */
+-	STM32_GATE(CK_BUS_SERC, "ck_icn_p_serc", "ck_icn_apb3", 0, GATE_SERC, SEC_RIFSC(110)),
++	STM32_GATE(CK_BUS_SERC, "ck_icn_p_serc", IDX_ICN_APB3, 0, GATE_SERC, SEC_RIFSC(110)),
+ 
+ 	/* SPDIF */
+-	STM32_GATE(CK_KER_SPDIFRX, "ck_ker_spdifrx", "ck_flexgen_11", 0, GATE_SPDIFRX,
++	STM32_GATE(CK_KER_SPDIFRX, "ck_ker_spdifrx", IDX_FLEXGEN_11, 0, GATE_SPDIFRX,
+ 		   SEC_RIFSC(30)),
+ 
+ 	/* SPI */
+-	STM32_GATE(CK_KER_SPI1, "ck_ker_spi1", "ck_flexgen_16", 0, GATE_SPI1, SEC_RIFSC(22)),
+-	STM32_GATE(CK_KER_SPI2, "ck_ker_spi2", "ck_flexgen_10", 0, GATE_SPI2, SEC_RIFSC(23)),
+-	STM32_GATE(CK_KER_SPI3, "ck_ker_spi3", "ck_flexgen_10", 0, GATE_SPI3, SEC_RIFSC(24)),
+-	STM32_GATE(CK_KER_SPI4, "ck_ker_spi4", "ck_flexgen_17", 0, GATE_SPI4, SEC_RIFSC(25)),
+-	STM32_GATE(CK_KER_SPI5, "ck_ker_spi5", "ck_flexgen_17", 0, GATE_SPI5, SEC_RIFSC(26)),
+-	STM32_GATE(CK_KER_SPI6, "ck_ker_spi6", "ck_flexgen_18", 0, GATE_SPI6, SEC_RIFSC(27)),
+-	STM32_GATE(CK_KER_SPI7, "ck_ker_spi7", "ck_flexgen_18", 0, GATE_SPI7, SEC_RIFSC(28)),
+-	STM32_GATE(CK_KER_SPI8, "ck_ker_spi8", "ck_flexgen_37", 0, GATE_SPI8, SEC_RIFSC(29)),
++	STM32_GATE(CK_KER_SPI1, "ck_ker_spi1", IDX_FLEXGEN_16, 0, GATE_SPI1, SEC_RIFSC(22)),
++	STM32_GATE(CK_KER_SPI2, "ck_ker_spi2", IDX_FLEXGEN_10, 0, GATE_SPI2, SEC_RIFSC(23)),
++	STM32_GATE(CK_KER_SPI3, "ck_ker_spi3", IDX_FLEXGEN_10, 0, GATE_SPI3, SEC_RIFSC(24)),
++	STM32_GATE(CK_KER_SPI4, "ck_ker_spi4", IDX_FLEXGEN_17, 0, GATE_SPI4, SEC_RIFSC(25)),
++	STM32_GATE(CK_KER_SPI5, "ck_ker_spi5", IDX_FLEXGEN_17, 0, GATE_SPI5, SEC_RIFSC(26)),
++	STM32_GATE(CK_KER_SPI6, "ck_ker_spi6", IDX_FLEXGEN_18, 0, GATE_SPI6, SEC_RIFSC(27)),
++	STM32_GATE(CK_KER_SPI7, "ck_ker_spi7", IDX_FLEXGEN_18, 0, GATE_SPI7, SEC_RIFSC(28)),
++	STM32_GATE(CK_KER_SPI8, "ck_ker_spi8", IDX_FLEXGEN_37, 0, GATE_SPI8, SEC_RIFSC(29)),
+ 
+ 	/* STGEN */
+-	STM32_GATE(CK_KER_STGEN, "ck_ker_stgen", "ck_flexgen_33", CLK_IGNORE_UNUSED, GATE_STGEN,
++	STM32_GATE(CK_KER_STGEN, "ck_ker_stgen", IDX_FLEXGEN_33, CLK_IGNORE_UNUSED, GATE_STGEN,
+ 		   SEC_RIFSC(73)),
+ 
+ 	/* Timers */
+-	STM32_GATE(CK_KER_TIM2, "ck_ker_tim2", "timg1_ck", 0, GATE_TIM2, SEC_RIFSC(1)),
+-	STM32_GATE(CK_KER_TIM3, "ck_ker_tim3", "timg1_ck", 0, GATE_TIM3, SEC_RIFSC(2)),
+-	STM32_GATE(CK_KER_TIM4, "ck_ker_tim4", "timg1_ck", 0, GATE_TIM4, SEC_RIFSC(3)),
+-	STM32_GATE(CK_KER_TIM5, "ck_ker_tim5", "timg1_ck", 0, GATE_TIM5, SEC_RIFSC(4)),
+-	STM32_GATE(CK_KER_TIM6, "ck_ker_tim6", "timg1_ck", 0, GATE_TIM6, SEC_RIFSC(5)),
+-	STM32_GATE(CK_KER_TIM7, "ck_ker_tim7", "timg1_ck", 0, GATE_TIM7, SEC_RIFSC(6)),
+-	STM32_GATE(CK_KER_TIM10, "ck_ker_tim10", "timg1_ck", 0, GATE_TIM10, SEC_RIFSC(8)),
+-	STM32_GATE(CK_KER_TIM11, "ck_ker_tim11", "timg1_ck", 0, GATE_TIM11, SEC_RIFSC(9)),
+-	STM32_GATE(CK_KER_TIM12, "ck_ker_tim12", "timg1_ck", 0, GATE_TIM12, SEC_RIFSC(10)),
+-	STM32_GATE(CK_KER_TIM13, "ck_ker_tim13", "timg1_ck", 0, GATE_TIM13, SEC_RIFSC(11)),
+-	STM32_GATE(CK_KER_TIM14, "ck_ker_tim14", "timg1_ck", 0, GATE_TIM14, SEC_RIFSC(12)),
+-
+-	STM32_GATE(CK_KER_TIM1, "ck_ker_tim1", "timg2_ck", 0, GATE_TIM1, SEC_RIFSC(0)),
+-	STM32_GATE(CK_KER_TIM8, "ck_ker_tim8", "timg2_ck", 0, GATE_TIM8, SEC_RIFSC(7)),
+-	STM32_GATE(CK_KER_TIM15, "ck_ker_tim15", "timg2_ck", 0, GATE_TIM15, SEC_RIFSC(13)),
+-	STM32_GATE(CK_KER_TIM16, "ck_ker_tim16", "timg2_ck", 0, GATE_TIM16, SEC_RIFSC(14)),
+-	STM32_GATE(CK_KER_TIM17, "ck_ker_tim17", "timg2_ck", 0, GATE_TIM17, SEC_RIFSC(15)),
+-	STM32_GATE(CK_KER_TIM20, "ck_ker_tim20", "timg2_ck", 0, GATE_TIM20, SEC_RIFSC(20)),
++	STM32_GATE(CK_KER_TIM2, "ck_ker_tim2", IDX_TIMG1, 0, GATE_TIM2, SEC_RIFSC(1)),
++	STM32_GATE(CK_KER_TIM3, "ck_ker_tim3", IDX_TIMG1, 0, GATE_TIM3, SEC_RIFSC(2)),
++	STM32_GATE(CK_KER_TIM4, "ck_ker_tim4", IDX_TIMG1, 0, GATE_TIM4, SEC_RIFSC(3)),
++	STM32_GATE(CK_KER_TIM5, "ck_ker_tim5", IDX_TIMG1, 0, GATE_TIM5, SEC_RIFSC(4)),
++	STM32_GATE(CK_KER_TIM6, "ck_ker_tim6", IDX_TIMG1, 0, GATE_TIM6, SEC_RIFSC(5)),
++	STM32_GATE(CK_KER_TIM7, "ck_ker_tim7", IDX_TIMG1, 0, GATE_TIM7, SEC_RIFSC(6)),
++	STM32_GATE(CK_KER_TIM10, "ck_ker_tim10", IDX_TIMG1, 0, GATE_TIM10, SEC_RIFSC(8)),
++	STM32_GATE(CK_KER_TIM11, "ck_ker_tim11", IDX_TIMG1, 0, GATE_TIM11, SEC_RIFSC(9)),
++	STM32_GATE(CK_KER_TIM12, "ck_ker_tim12", IDX_TIMG1, 0, GATE_TIM12, SEC_RIFSC(10)),
++	STM32_GATE(CK_KER_TIM13, "ck_ker_tim13", IDX_TIMG1, 0, GATE_TIM13, SEC_RIFSC(11)),
++	STM32_GATE(CK_KER_TIM14, "ck_ker_tim14", IDX_TIMG1, 0, GATE_TIM14, SEC_RIFSC(12)),
++
++	STM32_GATE(CK_KER_TIM1, "ck_ker_tim1", IDX_TIMG2, 0, GATE_TIM1, SEC_RIFSC(0)),
++	STM32_GATE(CK_KER_TIM8, "ck_ker_tim8", IDX_TIMG2, 0, GATE_TIM8, SEC_RIFSC(7)),
++	STM32_GATE(CK_KER_TIM15, "ck_ker_tim15", IDX_TIMG2, 0, GATE_TIM15, SEC_RIFSC(13)),
++	STM32_GATE(CK_KER_TIM16, "ck_ker_tim16", IDX_TIMG2, 0, GATE_TIM16, SEC_RIFSC(14)),
++	STM32_GATE(CK_KER_TIM17, "ck_ker_tim17", IDX_TIMG2, 0, GATE_TIM17, SEC_RIFSC(15)),
++	STM32_GATE(CK_KER_TIM20, "ck_ker_tim20", IDX_TIMG2, 0, GATE_TIM20, SEC_RIFSC(20)),
+ 
+ 	/* UART/USART */
+-	STM32_GATE(CK_KER_USART2, "ck_ker_usart2", "ck_flexgen_08", 0, GATE_USART2,
++	STM32_GATE(CK_KER_USART2, "ck_ker_usart2", IDX_FLEXGEN_08, 0, GATE_USART2,
+ 		   SEC_RIFSC(32)),
+-	STM32_GATE(CK_KER_UART4, "ck_ker_uart4", "ck_flexgen_08", 0, GATE_UART4,
++	STM32_GATE(CK_KER_UART4, "ck_ker_uart4", IDX_FLEXGEN_08, 0, GATE_UART4,
+ 		   SEC_RIFSC(34)),
+-	STM32_GATE(CK_KER_USART3, "ck_ker_usart3", "ck_flexgen_09", 0, GATE_USART3,
++	STM32_GATE(CK_KER_USART3, "ck_ker_usart3", IDX_FLEXGEN_09, 0, GATE_USART3,
+ 		   SEC_RIFSC(33)),
+-	STM32_GATE(CK_KER_UART5, "ck_ker_uart5", "ck_flexgen_09", 0, GATE_UART5,
++	STM32_GATE(CK_KER_UART5, "ck_ker_uart5", IDX_FLEXGEN_09, 0, GATE_UART5,
+ 		   SEC_RIFSC(35)),
+-	STM32_GATE(CK_KER_USART1, "ck_ker_usart1", "ck_flexgen_19", 0, GATE_USART1,
++	STM32_GATE(CK_KER_USART1, "ck_ker_usart1", IDX_FLEXGEN_19, 0, GATE_USART1,
+ 		   SEC_RIFSC(31)),
+-	STM32_GATE(CK_KER_USART6, "ck_ker_usart6", "ck_flexgen_20", 0, GATE_USART6,
++	STM32_GATE(CK_KER_USART6, "ck_ker_usart6", IDX_FLEXGEN_20, 0, GATE_USART6,
+ 		   SEC_RIFSC(36)),
+-	STM32_GATE(CK_KER_UART7, "ck_ker_uart7", "ck_flexgen_21", 0, GATE_UART7,
++	STM32_GATE(CK_KER_UART7, "ck_ker_uart7", IDX_FLEXGEN_21, 0, GATE_UART7,
+ 		   SEC_RIFSC(37)),
+-	STM32_GATE(CK_KER_UART8, "ck_ker_uart8", "ck_flexgen_21", 0, GATE_UART8,
++	STM32_GATE(CK_KER_UART8, "ck_ker_uart8", IDX_FLEXGEN_21, 0, GATE_UART8,
+ 		   SEC_RIFSC(38)),
+-	STM32_GATE(CK_KER_UART9, "ck_ker_uart9", "ck_flexgen_22", 0, GATE_UART9,
++	STM32_GATE(CK_KER_UART9, "ck_ker_uart9", IDX_FLEXGEN_22, 0, GATE_UART9,
+ 		   SEC_RIFSC(39)),
+ 
+ 	/* USB2PHY1 */
+@@ -702,9 +797,9 @@ static const struct clock_config stm32mp25_clock_cfg[] = {
+ 			      GATE_USB2PHY1, MUX_USB2PHY1),
+ 
+ 	/* USBH */
+-	STM32_GATE(CK_BUS_USB2OHCI, "ck_icn_m_usb2ohci", "ck_icn_hsl", 0, GATE_USBH,
++	STM32_GATE(CK_BUS_USB2OHCI, "ck_icn_m_usb2ohci", IDX_ICN_HSL, 0, GATE_USBH,
+ 		   SEC_RIFSC(63)),
+-	STM32_GATE(CK_BUS_USB2EHCI, "ck_icn_m_usb2ehci", "ck_icn_hsl", 0, GATE_USBH,
++	STM32_GATE(CK_BUS_USB2EHCI, "ck_icn_m_usb2ehci", IDX_ICN_HSL, 0, GATE_USBH,
+ 		   SEC_RIFSC(63)),
+ 
+ 	/* USB2PHY2 */
+@@ -712,36 +807,36 @@ static const struct clock_config stm32mp25_clock_cfg[] = {
+ 			      GATE_USB2PHY2, MUX_USB2PHY2),
+ 
+ 	/* USB3 PCIe COMBOPHY */
+-	STM32_GATE(CK_BUS_USB3PCIEPHY, "ck_icn_p_usb3pciephy", "ck_icn_apb4", 0, GATE_USB3PCIEPHY,
+-		   SEC_RIFSC(67)),
++	STM32_GATE(CK_BUS_USB3PCIEPHY, "ck_icn_p_usb3pciephy", IDX_ICN_APB4, 0,
++		   GATE_USB3PCIEPHY, SEC_RIFSC(67)),
+ 
+ 	STM32_COMPOSITE_NODIV(CK_KER_USB3PCIEPHY, "ck_ker_usb3pciephy", 0, SEC_RIFSC(67),
+ 			      GATE_USB3PCIEPHY, MUX_USB3PCIEPHY),
+ 
+ 	/* USB3 DRD */
+-	STM32_GATE(CK_BUS_USB3DR, "ck_icn_m_usb3dr", "ck_icn_hsl", 0, GATE_USB3DR,
++	STM32_GATE(CK_BUS_USB3DR, "ck_icn_m_usb3dr", IDX_ICN_HSL, 0, GATE_USB3DR,
+ 		   SEC_RIFSC(66)),
+-	STM32_GATE(CK_KER_USB2PHY2, "ck_ker_usb2phy2", "ck_flexgen_58", 0, GATE_USB3DR,
++	STM32_GATE(CK_KER_USB2PHY2, "ck_ker_usb2phy2", IDX_FLEXGEN_58, 0, GATE_USB3DR,
+ 		   SEC_RIFSC(66)),
+ 
+ 	/* UCPD */
+-	STM32_GATE(CK_BUS_USBTC, "ck_icn_p_usbtc", "ck_flexgen_35", 0, GATE_USBTC,
++	STM32_GATE(CK_BUS_USBTC, "ck_icn_p_usbtc", IDX_FLEXGEN_35, 0, GATE_USBTC,
+ 		   SEC_RIFSC(69)),
+-	STM32_GATE(CK_KER_USBTC, "ck_ker_usbtc", "ck_flexgen_35", 0, GATE_USBTC,
++	STM32_GATE(CK_KER_USBTC, "ck_ker_usbtc", IDX_FLEXGEN_35, 0, GATE_USBTC,
+ 		   SEC_RIFSC(69)),
+ 
+ 	/* VDEC / VENC */
+-	STM32_GATE(CK_BUS_VDEC, "ck_icn_p_vdec", "ck_icn_apb4", 0, GATE_VDEC, SEC_RIFSC(89)),
+-	STM32_GATE(CK_BUS_VENC, "ck_icn_p_venc", "ck_icn_apb4", 0, GATE_VENC, SEC_RIFSC(90)),
++	STM32_GATE(CK_BUS_VDEC, "ck_icn_p_vdec", IDX_ICN_APB4, 0, GATE_VDEC, SEC_RIFSC(89)),
++	STM32_GATE(CK_BUS_VENC, "ck_icn_p_venc", IDX_ICN_APB4, 0, GATE_VENC, SEC_RIFSC(90)),
+ 
+ 	/* VREF */
+-	STM32_GATE(CK_BUS_VREF, "ck_icn_p_vref", "ck_icn_apb3", 0, RCC_VREFCFGR,
++	STM32_GATE(CK_BUS_VREF, "ck_icn_p_vref", IDX_ICN_APB3, 0, RCC_VREFCFGR,
+ 		   SEC_RIFSC(106)),
+ 
+ 	/* WWDG */
+-	STM32_GATE(CK_BUS_WWDG1, "ck_icn_p_wwdg1", "ck_icn_apb3", 0, GATE_WWDG1,
++	STM32_GATE(CK_BUS_WWDG1, "ck_icn_p_wwdg1", IDX_ICN_APB3, 0, GATE_WWDG1,
+ 		   SEC_RIFSC(103)),
+-	STM32_GATE(CK_BUS_WWDG2, "ck_icn_p_wwdg2", "ck_icn_ls_mcu", 0, GATE_WWDG2,
++	STM32_GATE(CK_BUS_WWDG2, "ck_icn_p_wwdg2", IDX_ICN_LS_MCU, 0, GATE_WWDG2,
+ 		   SEC_RIFSC(104)),
  };
  
 

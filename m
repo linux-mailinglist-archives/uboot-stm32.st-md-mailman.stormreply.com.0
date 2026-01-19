@@ -2,178 +2,177 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id CF60AD3A8BF
-	for <lists+uboot-stm32@lfdr.de>; Mon, 19 Jan 2026 13:29:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7BA87D3A92C
+	for <lists+uboot-stm32@lfdr.de>; Mon, 19 Jan 2026 13:40:37 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 7C6CBC87ED3;
-	Mon, 19 Jan 2026 12:29:45 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2DDDDC8F28C;
+	Mon, 19 Jan 2026 12:40:37 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 71C96C555BE
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 30921C8F27C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 19 Jan 2026 12:29:44 +0000 (UTC)
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ Mon, 19 Jan 2026 12:40:36 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 60JCJRIk1317075; Mon, 19 Jan 2026 13:29:18 +0100
-Received: from pa4pr04cu001.outbound.protection.outlook.com
- (mail-francecentralazon11013055.outbound.protection.outlook.com
- [40.107.162.55])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4br0qkww14-1
+ 60JCAYax613717; Mon, 19 Jan 2026 13:39:44 +0100
+Received: from osppr02cu001.outbound.protection.outlook.com
+ (mail-norwayeastazon11013028.outbound.protection.outlook.com [40.107.159.28])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4br0e95mbq-1
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Mon, 19 Jan 2026 13:29:18 +0100 (CET)
+ Mon, 19 Jan 2026 13:39:44 +0100 (CET)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=BLoCOO0YujVzC4SG/BYvvJyy+rkczN69XECbob0mAxK2ySRZwZcvQZAd8dQG5Y3b4uwwJ6Q+JXtpg7SkoaPtxoF8UAnhBnrmEcC3rcUmDT413fDKsAOV7EnmmvWugu2syvLHK8p5pq3UAbRk9vGDrXn5trPSdvwP1qIq9SfzfryvVBh/9818g5C/y0QG8qWckZ1yYbYxEsBGMv7WyefS388DLdGgYC/u2M5qCWUadE5108/g/pVxBmCbH8QJXIol/p7h8PFKMbf9W+Wkw92+6okh6RgEvVnMVWZXuBjBRUX5w0dSO2AdK0knI2eAglVK5OR1IaN78wz5fRMGSmoqyg==
+ b=OKVffP/qNJjvJsnNJa+IhBENYZuYVXLtlh1mSdAvVHHN+a/gcA2px3i4OMZVqGW1qC6JHrtA1AK4RI+WRncYjUg2gstja45sVqkShXsXsLXz7pixXoGC1ZZtJCiOoRfPBRw1qNoc9f2OvqUpn3NRf+LCoYdZialsnRHmPT1IyNVua9DLq4KRhuxChMV8ngSEWIzQkfEQLte1+p+DhNwoHnr3Cy4dLsgs6RffWlVeMqpWgDDDmcayFYqowDEPB/b3d929zfoQtqm7MEh+n9U8RqTFlFdKpTzj6R4bZPvxbMbnU1UNoyL1mbdhBMCBvjFv81QAVELo1uOIcWNAOgHQ0g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=qLg7C+tXgo2Ub8SQEWs2iIEVBD7DEcZ4QVC1d4AgFr4=;
- b=Ufb2obPQQkhvecUHh8nRnpbjqY1ltHwkFOYwLFcn80pzGNAEZsxugzvIYo1nZlCd9Lzv6SWf5RpeAHgkVIojWs/N3vSJn2VZ1wMkb/t60RBAUX6cqpqKN2/t8+MErhpMydUAYOdAWbYWrh/97+R8cQj5GhXK/UUL0aV+9CBal2+josJvSD+00krRZXDc14wZZ/CF3eVxFUQXsb45gkafjQOQehJTQKegfVv3zliUDpUMB7crtpUqXBLBHJtGwsXxgk2ijJU9Aii927VjC1H5UHjnAeUC0b+woqqux1dhb+9oHHKFo9Y5CAQG2U4qV6CrB+nXSRS4RgD9BPZNLUy0+g==
+ bh=ktjppQlAoCkDlyXbKhMyKl9BqK43KwBCBPFjQoHojd8=;
+ b=jD4pHsHiaaiipnf/fluISHqiXGzKnEhco8IVNF2iZrGOFfH9EtU8xcABk4vjUNYZUcs/mi0KZklkeNIWxyzq9vXsXPFhyMDcCPPWjcijr+jr+h1nowC0AmCqp4UBzrbldW02VT3FqdcJT8gAGpb/gFBTRvTvq2OsjXZb51SdgUGJMS9UB0qTPq9qp0ttS49b9zMEP3HC2e8XKPf4NE+dFhor7aq7KEQ30Ouj0r9hfAhO0j0StPeZNm8SqcjSq5jcPnNCyw1rkO+nE22Hka7zTBuUrK7IczYj8LzZIh50XIdmfdC+IXN+wCCQ/nC/Y9meVMEE736quN8Ws7LWOO9o0Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.60) smtp.rcpttodomain=st-md-mailman.stormreply.com
+ 164.130.1.59) smtp.rcpttodomain=st-md-mailman.stormreply.com
  smtp.mailfrom=foss.st.com; dmarc=fail (p=none sp=none pct=100) action=none
  header.from=foss.st.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qLg7C+tXgo2Ub8SQEWs2iIEVBD7DEcZ4QVC1d4AgFr4=;
- b=VcwmgV3Gi3ts6KAFJ5uMGDSLMJ3f9nZfYCkI9Y2So3MKYet5s/fUzkDqEhSUBWRrp6BWuxayp0spHW1oxDBNo1sB/rWfaUw1EVT3r53B0xMmbG0koEgiXM8pFyXD+UDGpKDhgWMJ828oA8kGRZSdcve8jQdzWpXvQcFyEJcLt8s+l7TGyuLLO0O5mxfrx5utE9+IVVY2PSm5rtMT5jaFUb6TBeXFcHk9OlqKsC50ba5KBnk34FtU3OC6BrRrd0YPYkpulfhvDZZ6B9Us3/vCkd2aGpAx7wkugF5RIdq9/DHV8e1Cbv7v9UelFkuQKTrEx/tknzB3lcM2eWjOXZvAhA==
-Received: from AM8P191CA0006.EURP191.PROD.OUTLOOK.COM (2603:10a6:20b:21a::11)
- by AS8PR10MB7066.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:5a9::10)
+ bh=ktjppQlAoCkDlyXbKhMyKl9BqK43KwBCBPFjQoHojd8=;
+ b=A9Bmnh4IOCDUrbi+Z/3gRdYoY5Y6OA+gqvQgHHQtQFroElerL48RHtxDyk+9Ab6o25Xq4QtOlb+L6k0d/ptH6kwrYExtbuFyr6EyTphNZ15O8W7oXhPCrG6RzbM1qNVFrI/EJPH8MtFQ8NGw/kPBEaQTsP52Y261tviCC6WRCOmMTp10ENYwFuDzAu/gIbO17X0Jzc01OHu7nt+9ByXjvmYqisxX9yJ8h4h6cFjxrbjUuYEHVLf3rWQjKut5tRa20ryY39pJlSfLEmc2snmboLxRNSE7d2xg5zdypceT450eE9hwbTmhbXd6Q3D2buQxZur+lYsUyYYUCo0qm/J1fQ==
+Received: from AM0P190CA0008.EURP190.PROD.OUTLOOK.COM (2603:10a6:208:190::18)
+ by PA1PR10MB8537.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:448::9)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.12; Mon, 19 Jan
- 2026 12:29:15 +0000
-Received: from AMS0EPF000001AD.eurprd05.prod.outlook.com
- (2603:10a6:20b:21a:cafe::93) by AM8P191CA0006.outlook.office365.com
- (2603:10a6:20b:21a::11) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.11; Mon, 19 Jan
+ 2026 12:39:41 +0000
+Received: from AMS1EPF00000047.eurprd04.prod.outlook.com
+ (2603:10a6:208:190:cafe::54) by AM0P190CA0008.outlook.office365.com
+ (2603:10a6:208:190::18) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9520.12 via Frontend Transport; Mon,
- 19 Jan 2026 12:29:22 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
+ 19 Jan 2026 12:39:24 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
  smtp.mailfrom=foss.st.com; dkim=none (message not signed)
  header.d=none;dmarc=fail action=none header.from=foss.st.com;
 Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.60; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.60) by
- AMS0EPF000001AD.mail.protection.outlook.com (10.167.16.153) with Microsoft
+ designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.59; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.59) by
+ AMS1EPF00000047.mail.protection.outlook.com (10.167.16.135) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9542.4 via Frontend Transport; Mon, 19 Jan 2026 12:29:15 +0000
-Received: from STKDAG1NODE2.st.com (10.75.128.133) by smtpO365.st.com
- (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9542.4 via Frontend Transport; Mon, 19 Jan 2026 12:39:40 +0000
+Received: from STKDAG1NODE2.st.com (10.75.128.133) by smtpo365.st.com
+ (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Mon, 19 Jan
- 2026 13:30:34 +0100
+ 2026 13:41:08 +0100
 Received: from [10.48.87.244] (10.48.87.244) by STKDAG1NODE2.st.com
  (10.75.128.133) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Mon, 19 Jan
- 2026 13:29:14 +0100
-Message-ID: <0c3d33fc-d4ef-406e-afd5-021f28a2689a@foss.st.com>
-Date: Mon, 19 Jan 2026 13:29:00 +0100
+ 2026 13:39:39 +0100
+Message-ID: <17d5918d-2819-47b4-80a9-e14eb049e391@foss.st.com>
+Date: Mon, 19 Jan 2026 13:39:38 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Patrice Chotard <patrice.chotard@foss.st.com>,
  <uboot-stm32@st-md-mailman.stormreply.com>, <u-boot@lists.denx.de>,
  Peng Fan <peng.fan@nxp.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>
 References: <20251215-restore_boot_for_stm32mp13_stm32mp25_boards_v2-v3-0-d055da246e55@foss.st.com>
- <20251215-restore_boot_for_stm32mp13_stm32mp25_boards_v2-v3-1-d055da246e55@foss.st.com>
+ <20251215-restore_boot_for_stm32mp13_stm32mp25_boards_v2-v3-2-d055da246e55@foss.st.com>
 Content-Language: en-US
 From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-In-Reply-To: <20251215-restore_boot_for_stm32mp13_stm32mp25_boards_v2-v3-1-d055da246e55@foss.st.com>
+In-Reply-To: <20251215-restore_boot_for_stm32mp13_stm32mp25_boards_v2-v3-2-d055da246e55@foss.st.com>
 X-Originating-IP: [10.48.87.244]
 X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE2.st.com
  (10.75.128.133)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AMS0EPF000001AD:EE_|AS8PR10MB7066:EE_
-X-MS-Office365-Filtering-Correlation-Id: 70b67f1c-62c9-43c6-159f-08de57565be5
+X-MS-TrafficTypeDiagnostic: AMS1EPF00000047:EE_|PA1PR10MB8537:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5f4e3543-033f-4f64-3eb1-08de5757d042
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|376014|1800799024|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?b3hheHdjRERuM1JVR0w5VVFBcEtMYmY4SnFXVWZ4T3d5SlB0dk95TERjM0RC?=
- =?utf-8?B?SUVVS05mdDkwM3FsZXhPczBIamhNMEhyb0JnQXJDVFZnOHhUQ2JTalJKK2E3?=
- =?utf-8?B?ZlMxWm16OWtNOUplNDBLWm5mSld6aWk5ZkNpbS9uajh3TWtsWlNPZlp1UXdS?=
- =?utf-8?B?RmZ4OE1QSnhkNS9UTjJ6clBHTFZlRjJUTmh4S3RuUjB4UXZ2S3BKU1Q3WHBT?=
- =?utf-8?B?MWxsUXNWdVdwZzVnc2hDUmdZMVF0M2FxeTI5eGVHanIrMm5Zc25IRXV0cWto?=
- =?utf-8?B?THhCRVhGUFBqcGJic0tOT1RwWE5wcHM4eG5Zd0xkaGJpWE05bkQvQ0ViTm1Q?=
- =?utf-8?B?ejBRQWxiRlkyRDlRdEF2ZGpyTGlzR0F0Y1AwUTVkbEU4Y2xRQjRVOHdiZUo0?=
- =?utf-8?B?anFRendwcVROQVUrenlPSzErUHQ0amVzNWJPdXUxRnI0VjBYR0JEOEk4MmVJ?=
- =?utf-8?B?SHdleXdIVHhlUjdGR0lvMEZTaVBnbE5MYTIvN2UyTEcwYVJtYjlJYVJrU2c2?=
- =?utf-8?B?QS9tTkxXWWRtZ0JZMWo4TXZHYUYwWHNPbDNCNnh0RmFjeTQvRDFBMXJjMThX?=
- =?utf-8?B?VkZpbThib3dSYTNvbGRkYlgxMkJXYTZNY1IzUmpBT200eTJpZ0NIODlsSE4w?=
- =?utf-8?B?dW1zM2F4aXNBTVVvTXRzTTJWdjVYQ0Y4VFllNUlYTUtSdHJoMEtZMU1xaXhL?=
- =?utf-8?B?TXl3aVVhd09yazRleU8zT3RwcCtzTUwzRXdubHdhVFVsWEpOWVZCV3NBT1Bh?=
- =?utf-8?B?WnZXUXc1VjllbE81RUpEdDhxZkxvOC9yU2YwQ3gzZDRpRXF6TGZyTE12RWln?=
- =?utf-8?B?NUxXRW4vTTNzR3Y2YmIxTkZOQmpaWG5QYllDb0NiUks5RU1sb2dsMTRxZlNP?=
- =?utf-8?B?SDM1SWVkZmFSZkRSQ2d4L1FTSm1oMS9YaHU0dExUUjZlS0dpOWlLSHB2Ukh0?=
- =?utf-8?B?RzJNelB2MFBaL1BINVh3RHdDQ2hYODg5SGxNV09wU3czZnJhZWpkRFBzd0x1?=
- =?utf-8?B?YlBvQmpYdzVMUUFZTmI4L3hnWDVIUFBSRmpKQm9iQWJqL0ZZVjBHQmRCclE4?=
- =?utf-8?B?aXZzdmVHeVB4d3NvaDV2V1BISElZQndrT3RoNHloYUhmNFBqd21hQzNkUjl1?=
- =?utf-8?B?QnlDSFAwU2Y3RWh0YkkxdkRlL1BEOTE5N3FqeVQxZzEwS0YrOFlXZFNLZjdj?=
- =?utf-8?B?UWpJUStCWHFYY2NLV3VLSi8wY083QitQcFlSU1dEWVJZVHFmaDZXVEhCSVVU?=
- =?utf-8?B?TjJlUUxmeS9LN3Y4WExKU3MzeURZR01RWS9OeFg0K2svODVreTZCTW0xVHp3?=
- =?utf-8?B?SXQ5MFlXWWxHVVowRmVPOHBrNkErRk1rUUthc3BpY2hTZHNhNEw3TGpHK1Zv?=
- =?utf-8?B?ek1BSWRjOUNiZm1aRXlBK0NDZ3FWa1JMZG1FT0k1U0VuMDdhU0xVN0xNL1l1?=
- =?utf-8?B?NTNiRUwyN1VKVlE2VGRyWFF0QXptbGx3a1RaaUJ3My9PajJ2N2tpMzgrQkQ3?=
- =?utf-8?B?ZGRONEVpR25EbXRrN2ptSGgvc1lQM3JqQVZYMXJHbGw1Y2FSeXdXSzBmRzlD?=
- =?utf-8?B?NTBFR2NaWUFqdkRoOE1TZ1IzeFpFMWJXWXhWOEM5Y1RhUTBuWDZCdkI5Nm9y?=
- =?utf-8?B?VWNGM3FpMGhOVFUzWGZkazkxU2RGbDNSaEYySkx0Zm5lM2d5a1RIbEwwUnJp?=
- =?utf-8?B?Uk1kMFVWWFQ0UUZYUHlFeDUwSVRtOU5wbXp5ZjF5ZEJqTVlqUFFRR1pSYnk1?=
- =?utf-8?B?aXBPMWFKUURwcitiTlNRYVAxdmZ2cUFMMytFVEpJRGhwNzRXS3g1T0czKzZD?=
- =?utf-8?B?UFNtQXluUDJObGxGT0RSbjUyeW4rVnRnL3dKbVZJR0hMakVsOHlSSG50UGgw?=
- =?utf-8?B?TTExSlhJeTRTRjVTUU92czBqOUYxZk5NRjgzR3hHNkdoS29ySEZ6bjg3T04w?=
- =?utf-8?B?VUMxdjVQK1pnOXdXWi9KNTJoa0pKRVF0cVA0N3V5THZIUllIMi9VL2ptUGx1?=
- =?utf-8?B?eWx6VXkza1E4b3ZtYVAyaWNrNDJ3emI3UW5LN2cva3lSU2VrMmVGSjZONDhU?=
- =?utf-8?B?MStjNVlDelBZWVhTYis0ZGZaenYvYkdGS3BqZ1RJMmJTNW9DdjVKR0I2K0FN?=
- =?utf-8?B?YkI4QzdjSGZ4T3IyUDREZWlnQUtZSjlQcUcybzQ5UEswYVZGVklDSWwxTHY5?=
- =?utf-8?B?enc9PQ==?=
-X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
+ ARA:13230040|82310400026|1800799024|376014|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?M0dIZDhBbE12dEVEaVNTYzVNMExEN3BqNW1pODBOc0hSMCsxN2xodXQwamxz?=
+ =?utf-8?B?d1VBNnpuVnlBaWljMU1JM0xEVFJ3Z3FmeWJTUnpmRE9rN2lvRDZ4REFXdUE1?=
+ =?utf-8?B?QXMvMVBwSWpEZnF1RFNDU2cyR0E4MHFlTnlUUGVyWnlDc0xFQTJNRTZpTUdx?=
+ =?utf-8?B?dmsxU0FmNCtBSW05cWhNcTVOUGk3azJnQ0U4S01YSi9hT0l4azI5Y2RkRmN2?=
+ =?utf-8?B?VGFiekIrWEIyTGkrWkg4d0pBQjBiYVNCcDZ3bk9ZT3o3WGhZL0NDQXZ0SVlk?=
+ =?utf-8?B?NlNacnhVTHFOZGhVOXppQXZnYkdLeXBFNzluZ3J1N1oraVN2blB6emw4R2Fn?=
+ =?utf-8?B?WTZieWJ6d0ZyNFRYZ0Rwb0Q0N0g0YXloT3FXN1grQXhnMVF1UVZaVW8xSzdJ?=
+ =?utf-8?B?NUxzekwzbHRYZWhlRzJpd1l3SFplT1puUVVKa1pLWm5MNTlXL056aDZtT05p?=
+ =?utf-8?B?WjdEaWdFN3h0dENVeGFndDFycDNFb1A1cFZJa2oxcXI1L01hL0Nmd2xhSlJr?=
+ =?utf-8?B?TmdNMFp4clYwdE8yV3RuYjMzbGMzaFZXRUZJdHJWWG5vQlVQUjJBZU14T3NO?=
+ =?utf-8?B?WHFMQnhjNTl2UE5NL041ZDNOLzExR1VaVVk2cS8zVzgxQXQvdS9RK1BtbXpu?=
+ =?utf-8?B?RWxiOTRqWTZ2ZWJ4N0hleXhNSHYxYzdCNmJIS3BoN25Zc0pteGt2YVZHNEha?=
+ =?utf-8?B?ZGF1OFhxbEsyZ1ZidHN3Z3o2Qk55a2paSit6NGl2OVpTMjJPVVRsY291cWxU?=
+ =?utf-8?B?VUFYbURkRmNySHB1SE1ZbHpSZXk3ckxnaVV5QnpreW10Qm1ha2I3azBRRE05?=
+ =?utf-8?B?VGdGTTR5U0kzditpei9zMkF0L1Q0Tk5NL2xzSGhKK1g5aDl4RTJlTFlTRWk0?=
+ =?utf-8?B?dW1kbGVnbEdzNFlMb21CdFo0bW1sYldGOHl6NGRZMXlGMWNNYlhTOS9IZWd4?=
+ =?utf-8?B?RTdPSVJiaDFSY1VmWndhS1RvS0FrOHduZlJCb2J5RFpwdFAvc3dJLzJEaml5?=
+ =?utf-8?B?N0JxRzFjd04xaHVveTJSOXl3OTlYYUpYd1MvNWNzTk5uSUF1SUttZTFTWVFK?=
+ =?utf-8?B?S3dXc1VZdEoyOGoxYkVZeEZWeFJyOWo1Q0NjMjhQdnJTNUFzMENTaVVoWnh5?=
+ =?utf-8?B?blZPWElLQ2hwNjlkczRNNG93ckx4UHpBamtNYUgwTmhoTnhpaHZicDBBZE9Z?=
+ =?utf-8?B?UEZhQUdEcnhsTVhObjdaRGg1cDNwdnY4S3FaNSt4bXplVGNGN3dNTG1WeU1C?=
+ =?utf-8?B?ZG9pcDE5RHZFNWdGaTgrczY1MlRDVXV5NlJGK0FQTHpkSVdjdVlpYTlRNzlh?=
+ =?utf-8?B?L0prR3pFQmtpKzZpUzk3UDYwakJnVUR2WlRnWDFqLzd1TnRJL3Z1WHRDaUxR?=
+ =?utf-8?B?MnRXdDB4RDlXU29mS01QZUxuZXMya25ualZkNE0yODJEalh6Qk5rVkZ3WWVI?=
+ =?utf-8?B?ckxJczM5bUJmZE5mcDNxRlhPNElvVFg5cVlER29Telp3dWk5ZHFCVENrMmhi?=
+ =?utf-8?B?R2cxbGZLV0FWaEgzaXIvSFE2VDlTaWNjYW5ydis0bjVtajZFcDUwbCs2TmVZ?=
+ =?utf-8?B?Ukh1ZDVCYStibGpKcEdTcTVDdUVrN2YxSHBHMmFnVUJ5MDZVNmcwR0U2MmxB?=
+ =?utf-8?B?YjlMTHUvNjRja1BDT3crMUN1dWdDd1dIYlRBakNGQnZIUG0zV3h5M0Eybzhm?=
+ =?utf-8?B?dzBwUzdScTBuR3JvVUk0Z0dwNll5dlErZzVsb1B5bndNVWFxZ3U4LzVkRFZv?=
+ =?utf-8?B?bC9aaU80YkVCTEloNjkvUlVtU0l2clpzeDQ1TDhMT0E2TGRZdWx5SDlueWxS?=
+ =?utf-8?B?RUZLdWdIeUhWc0ROYktyZ3dqdlI5d21Wb3N4enJvT0VkT3k1emFPWEloWmpG?=
+ =?utf-8?B?Nm1vVGZXRDJPOVNNd2NXWnVGdHlPTjdjVnFMWnlPYXppTkpQZkhDNXRSd1E4?=
+ =?utf-8?B?bTcrQmU3NHpMc2k2QkN5OG42TVZhQkF5SnZySkpyazB6TzhWelpxM1pSUGh6?=
+ =?utf-8?B?TzlNalR0QkJ1aFBsbi83TGVndG4yNXNidU1MQUtydmR2SENaZHZVZmxibTlK?=
+ =?utf-8?B?ZXI3TnNZSmMrYkhxTEppZ1I1VFZ1QldvZnVxbXFabFk2M2NZNi9aOUhFUXJv?=
+ =?utf-8?B?cC9NTFVpLzFIVm1tWE1qb0dyYzg1VTY3dVJCcjVtKzZkNmhQZHBUUkxmb3Z0?=
+ =?utf-8?B?MHZyZmRSU1VLNCtQVmFLNkVWTXF3UGxkMS9TL1VBaWZhbmdyQk4xOWFvbWZ6?=
+ =?utf-8?B?RVA4RFZuWnJrZHpJL01ieDk4dTZBPT0=?=
+X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(376014)(1800799024)(36860700013); DIR:OUT;
+ SFS:(13230040)(82310400026)(1800799024)(376014)(36860700013); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Jan 2026 12:29:15.2891 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 70b67f1c-62c9-43c6-159f-08de57565be5
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Jan 2026 12:39:40.0069 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5f4e3543-033f-4f64-3eb1-08de5757d042
 X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
  Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: AMS0EPF000001AD.eurprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: AMS1EPF00000047.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR10MB7066
-X-Proofpoint-GUID: B6dZ7Eqft04-UtrljmCc-NXYVXHkiCHB
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTE5MDEwMyBTYWx0ZWRfX1z8fcyoaTFSf
- HCuZrLRI9WeNYLFJZ5HSPMBqPOfaNojRvWXxnzPtPYzW1I2tSrp600nlY6ceC3DHzEFzcGTAnJs
- P/DPryS6BHrf1wPWwQCpwwfYPJL3YlSJ8QZzDv+c1yesQHrJlTvMiY3w51p1WQkglf7nLG3e2aY
- kmeHgpj8VWem1ADvDYNN1hvX6Xo4IGSOrqJjzFZFHP0vX0Vp9dpZhoZ3I9nLAufXOKhCAf188i5
- aXuHBoP47GNCGtlowMl4e6bijgYDc7CBzZdmlNTvN7nBwhDCx0ZKAwjMZ9o0eurGCvfLD52fF19
- GOAHT9qc6Ayn86CRSKOcA+6kACOiqPKCD2vuRPYud3qf9/0jsRjMsnvrbd56pRKufc/fE7w3HWR
- jo4PbGGScip1RV5ETc4hq0vdH5zL1sEi4VoExzZYvf38+iBbj2qJmMsfQv9lDw7JGBT4eDBc+9c
- M/giaCaSDpMsqMp74AQ==
-X-Authority-Analysis: v=2.4 cv=TNdIilla c=1 sm=1 tr=0 ts=696e239e cx=c_pps
- a=KrdtjRokVkZpNyWqjvoQ6Q==:117 a=uCuRqK4WZKO1kjFMGfU4lQ==:17
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR10MB8537
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTE5MDEwNSBTYWx0ZWRfX76gOha6ehV79
+ Ttrd16/PyJsOFg5k144zDFv2jl4XHTubl1HLuOjRlYR7fiymn1jKOffY82cPPH9UcukHGxydXE/
+ deEctUleT/PkSHQfWoCng0/skCCNcvkJJ9YmVvVp3VgCWLfGlkv/O1Jxdio1hLTBTm0Ans3Ujom
+ ia3ZOSf2IpKT1cZ8U9fqQGkFIuJkM3b7AiJ6WvLzMjKRR75ee9dUn+gb29ApWcStF2s9XjcVgy4
+ f1PTw/kEwy91Ca0Kfbww8PZlHsUzeehQ1auM7cyvPr+HhCaQFJM4kdF2j0+aC324AT3kwmFoM7t
+ hHsAGfTxsnzMeFRppbtGqU5GxLi4ENSPogHBVcdNATRquT2N9DpYEYdJ0CkxxSC/qzHQFgRswDv
+ hZM9R/a4ypnBPDv3afDcSynXzwcvrWEoS7iICCSVn7l1VLOSg1gottiyfTmtKLqtlY2Ylcv90cU
+ LPkvQyLlmA47gsOfmNw==
+X-Authority-Analysis: v=2.4 cv=ZOPaWH7b c=1 sm=1 tr=0 ts=696e2610 cx=c_pps
+ a=C738UIxDWZtlaVY02jKDEQ==:117 a=d6reE3nDawwanmLcZTMRXA==:17
  a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=vW1nh7Jg1_YA:10 a=IkcTkHD0fZMA:10
  a=vUbySO9Y5rIA:10 a=s63m1ICgrNkA:10 a=KrXZwBdWH7kA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=XpE1AkgCAAAA:8 a=8b9GpE9nAAAA:8
- a=enggsrxaHjHF0MqrOHgA:9 a=QEXdDO2ut3YA:10 a=_VNrz7lXTIYA:10
- a=dpZMgbseYPk84XhQl7oQ:22 a=T3LWEMljR5ZiDmsYVIUa:22
-X-Proofpoint-ORIG-GUID: B6dZ7Eqft04-UtrljmCc-NXYVXHkiCHB
+ a=VkNPw1HP01LnGYTKEx00:22 a=8b9GpE9nAAAA:8 a=WeavhLENqrrCZG4pG3cA:9
+ a=QEXdDO2ut3YA:10 a=T3LWEMljR5ZiDmsYVIUa:22
+X-Proofpoint-ORIG-GUID: PTA0oYRxX5lNyWlhaV_MBlcP8_WWkEsr
+X-Proofpoint-GUID: PTA0oYRxX5lNyWlhaV_MBlcP8_WWkEsr
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
  definitions=2026-01-19_02,2026-01-19_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 impostorscore=0
- malwarescore=0 priorityscore=1501 suspectscore=0
- spamscore=0 bulkscore=0
- lowpriorityscore=0 adultscore=0 clxscore=1011 phishscore=0
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
+ priorityscore=1501 spamscore=0 phishscore=0
+ bulkscore=0 impostorscore=0
+ adultscore=0 lowpriorityscore=0 clxscore=1015 malwarescore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2601150000 definitions=main-2601190103
+ reason=mlx scancount=1 engine=8.22.0-2601150000 definitions=main-2601190105
 Cc: Tom Rini <trini@konsulko.com>, Valentin Caron <valentin.caron@foss.st.com>,
  Marek Vasut <marek.vasut@mailbox.org>, Lukasz Majewski <lukma@denx.de>,
  Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
  Lionel Debieve <lionel.debieve@foss.st.com>,
  Gatien Chevallier <gatien.chevallier@foss.st.com>
-Subject: Re: [Uboot-stm32] [PATCH v3 1/3] clk: stm32mp13: Reorder include
-	files
+Subject: Re: [Uboot-stm32] [PATCH v3 2/3] ARM: dts: stm32: Add SCMI clocks
+ in rcc node for stm32mp131.dtsi
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -193,61 +192,57 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Hi,
 
 On 12/15/25 15:56, Patrice Chotard wrote:
-> Reorder include following rules available here :
-> https://docs.u-boot.org/en/latest/develop/codingstyle.html#include-files
+> Add SCMI clocks. These clocks are used as parent clocks and are
+> referenced by their rcc's node position in clk-stm32mp13.c
 >
+> Fixes: fdb1bffe2827 ("clk: scmi: Postpone clock name resolution")
 > Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > ---
->   drivers/clk/stm32/clk-stm32mp13.c | 24 +++++++++++-------------
->   1 file changed, 11 insertions(+), 13 deletions(-)
+>   arch/arm/dts/stm32mp13-u-boot.dtsi | 27 +++++++++++++++++++++++++++
+>   1 file changed, 27 insertions(+)
 >
-> diff --git a/drivers/clk/stm32/clk-stm32mp13.c b/drivers/clk/stm32/clk-stm32mp13.c
-> index b4d0890f902..18e9ab364b4 100644
-> --- a/drivers/clk/stm32/clk-stm32mp13.c
-> +++ b/drivers/clk/stm32/clk-stm32mp13.c
-> @@ -5,28 +5,26 @@
->    */
->   #define LOG_CATEGORY UCLASS_CLK
+> diff --git a/arch/arm/dts/stm32mp13-u-boot.dtsi b/arch/arm/dts/stm32mp13-u-boot.dtsi
+> index ad63d5027b2..623c796cc79 100644
+> --- a/arch/arm/dts/stm32mp13-u-boot.dtsi
+> +++ b/arch/arm/dts/stm32mp13-u-boot.dtsi
+> @@ -186,6 +186,33 @@
+>   };
 >   
-> -#include <clk-uclass.h>
-> -#include <dm.h>
-> -#include <log.h>
-> -#include <asm/io.h>
-> -#include <dt-bindings/clock/stm32mp13-clks.h>
-> -#include <linux/clk-provider.h>
-> -#include <dt-bindings/clock/stm32mp13-clksrc.h>
-> -#include <asm/arch/sys_proto.h>
-> -#include <asm/global_data.h>
->   #include <clk-uclass.h>
->   #include <div64.h>
-> -#include <dm/device_compat.h>
-> +#include <dm.h>
->   #include <init.h>
-> -#include <linux/bitops.h>
-> -#include <linux/io.h>
-> -#include <linux/iopoll.h>
-> +#include <log.h>
->   #include <regmap.h>
->   #include <spl.h>
->   #include <syscon.h>
->   #include <time.h>
->   #include <vsprintf.h>
-> +#include <asm/io.h>
-> +#include <asm/global_data.h>
->   #include <asm/arch/sys_proto.h>
-> +#include <dm/device_compat.h>
-> +#include <dt-bindings/clock/stm32mp13-clks.h>
-> +#include <dt-bindings/clock/stm32mp13-clksrc.h>
-> +#include <linux/bitops.h>
-> +#include <linux/clk-provider.h>
-> +#include <linux/io.h>
-> +#include <linux/iopoll.h>
+>   &rcc {
+> +	clocks = <&scmi_clk CK_SCMI_HSE>,
+> +		 <&scmi_clk CK_SCMI_HSI>,
+> +		 <&scmi_clk CK_SCMI_CSI>,
+> +		 <&scmi_clk CK_SCMI_LSE>,
+> +		 <&scmi_clk CK_SCMI_LSI>,
+> +		 <&scmi_clk CK_SCMI_HSE_DIV2>,
+> +		 <&scmi_clk CK_SCMI_PLL2_Q>,
+> +		 <&scmi_clk CK_SCMI_PLL2_R>,
+> +		 <&scmi_clk CK_SCMI_PLL3_P>,
+> +		 <&scmi_clk CK_SCMI_PLL3_Q>,
+> +		 <&scmi_clk CK_SCMI_PLL3_R>,
+> +		 <&scmi_clk CK_SCMI_PLL4_P>,
+> +		 <&scmi_clk CK_SCMI_PLL4_Q>,
+> +		 <&scmi_clk CK_SCMI_PLL4_R>,
+> +		 <&scmi_clk CK_SCMI_MPU>,
+> +		 <&scmi_clk CK_SCMI_AXI>,
+> +		 <&scmi_clk CK_SCMI_MLAHB>,
+> +		 <&scmi_clk CK_SCMI_CKPER>,
+> +		 <&scmi_clk CK_SCMI_PCLK1>,
+> +		 <&scmi_clk CK_SCMI_PCLK2>,
+> +		 <&scmi_clk CK_SCMI_PCLK3>,
+> +		 <&scmi_clk CK_SCMI_PCLK4>,
+> +		 <&scmi_clk CK_SCMI_PCLK5>,
+> +		 <&scmi_clk CK_SCMI_PCLK6>,
+> +		 <&scmi_clk CK_SCMI_CKTIMG1>,
+> +		 <&scmi_clk CK_SCMI_CKTIMG2>,
+> +		 <&scmi_clk CK_SCMI_CKTIMG3>;
+>   	bootph-all;
+>   };
 >   
->   #include "clk-stm32-core.h"
->   #include "stm32mp13_rcc.h"
-
+>
 
 Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+
 
 Thanks
 Patrick

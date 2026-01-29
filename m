@@ -2,148 +2,146 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id AO55AUQ4e2k5CgIAu9opvQ
+	id LXphAXA5e2mNCgIAu9opvQ
 	(envelope-from <uboot-stm32-bounces@st-md-mailman.stormreply.com>)
-	for <lists+uboot-stm32@lfdr.de>; Thu, 29 Jan 2026 11:36:52 +0100
+	for <lists+uboot-stm32@lfdr.de>; Thu, 29 Jan 2026 11:41:52 +0100
 X-Original-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 96DD2AEDE9
-	for <lists+uboot-stm32@lfdr.de>; Thu, 29 Jan 2026 11:36:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8D8ADAEF5E
+	for <lists+uboot-stm32@lfdr.de>; Thu, 29 Jan 2026 11:41:51 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A82A9C5663A;
-	Thu, 29 Jan 2026 10:31:37 +0000 (UTC)
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazon11010019.outbound.protection.outlook.com [52.101.69.19])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id BAF8BC57A50;
+	Thu, 29 Jan 2026 10:32:10 +0000 (UTC)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazon11011009.outbound.protection.outlook.com [52.101.70.9])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 13328C1A97C
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C21A3C1A97C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 29 Jan 2026 10:31:35 +0000 (UTC)
+ Thu, 29 Jan 2026 10:32:09 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=wkZK/eRTQDp8PPJy5U5qKcUULEj85UWbCDzR3EQON98YykDwp6eeVpEd732ope0eXjGKKpryctUORxIy+dMFNQAkCzxDvY6Se3oO5NmoEo1VPZDwmG+3xpqBkuMe4Ocscd2pdhRnHRUV6+vcx+zdHpMShfQ9PYdpwXUkavxevsL06J9j3lssgpArgvvmOfk6kMZrr12H2F+wID8fWKGYEsZnvov26L5KxgssWJ0hRmbp7hOrWNS+WzN18Enwckem6bjr/v76uCk2ui+6rb9QjEXr+7d98Q83KtVESXUa59uIcyY4kJvPwwdIIYrF3REN9bOrd1p/+k2kfk3GkIEH2w==
+ b=Wg0cpMsWHfw1fGxf6cPUT8AP/KqA7Ccz63JjCGY0baFgD6IYUoo08gf+gtmzrp7huk3RhWFmBjX6MO9KFXPJBYuLqRc9NFWW5pYptSCHnpml6F7MUSSNjgLQoaRTzUB2+20cCX4Zra0blcKnSFLCva1hCoI6Mvx5530GdM5Cn+Zc7BwvdQAW2QtJwzbCqoiJvlQrTV9498I99b1MKXTarLLuTm04eymDeYVZt2yM+FMF45UXVjvh7q2WK8AW99BvYEVEovTBtyimImWxOtETTAzGDKubYDcmmu+/hjTYRu8UovclRpqK7EiLJqyBFmg2HCxBMHvpVqK3qM+gl2nxAg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=gmbnZECGljYJ4Wd2F+sYI46noQwS9YvVE/4cFzvMIxY=;
- b=N3ndNHAHUblxJeSCEM802JXaiqIRFycOLtqDGdsuHg1yDKNuRBHiUfCHn/7R2nxn2N/5PvYpXAzYQaeMppmz+Fa1CsTOiH0sGcBMCf8iBrpOiX4DdxSHOePkITVaLQlAaU1o3BZvUFf/7GYgIITu7dCc4NSeQ/4fg28zPZU8MhoMCexFiz8Y2TTdPSBXFG9PcUFK+kmZ7yziC1xAaFINw0hUmePllBxC0NsqUeNPzxHnzpSVD65KIy9dNy8jbnNbc39oVquBP2gOq20ckNvdeeBzEcb8DRvfvoT5S/vSbAjr/sVWNgL+hswf1P24d+j/iIPMNLK+xCTVwqvLpf4M+w==
+ bh=FpxX+AuR+/XNfpD74v5dB8iiqCT2gbTSJJEbF+l6lqA=;
+ b=ogDyHPEdxTuIWX+yBZbM7KJljFtMB8iTKC9vobJnj7zhp3ucToNjR967nlreyG5q50+jK7mNNZ1zIeNS5FyI+CRCR6Ne1CdIqC8S8fWDM9NTKFEkQ9T6iazJyz8dOpVE1W48vmNzmj3IsjzQfV/c3Mz9XyIqcgpBzBsr0nEKycrCerCyxTFXoppvmN6xfyW+kcsMM0t3diQqaR/xLGzBQctU7y/6mPkmWhQM1DZRjO2HGCASH4cxvKEKE35RXXC244pL2SPuTglfNu+Bo55lB7b2llVcfsejf9GYkJhC0uNvbTsYpOolvT4q3CkfDEWt8T5cv5/E1f7lXfkC4TaQZA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.60) smtp.rcpttodomain=st-md-mailman.stormreply.com
- smtp.mailfrom=foss.st.com; dmarc=fail (p=none sp=none pct=100) action=none
- header.from=foss.st.com; dkim=none (message not signed); arc=none (0)
+ 164.130.1.59) smtp.rcpttodomain=nabladev.com smtp.mailfrom=foss.st.com;
+ dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
+ dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gmbnZECGljYJ4Wd2F+sYI46noQwS9YvVE/4cFzvMIxY=;
- b=NO+4qV7mjToMOETtpim2mFi85HqJFP9ltWgiVe9MKiz6qNOUFpBIvb4pZMLL5PU2FGRXXDF9DJR0JpOZQ+ytsq9aPGv97GYLQoGVD7lVsX1IBCE64HoexDFglZEKImo0v9Sk1VFFW+exbinkLgdtrKwi3v2j50wSPlDdrXkXeFjptkVPDTlg6pIx/wRKT3Bwsg21zI6hV3hpk45x0xKG2xD0dHKm4SWHfAWNJav7XeEHsPR7HYBQVglt7snePADd3XHDRQLVc53AEUuUSF1lZ4mMs/nhYQD29a2XIZB9PE5c2VwLn+qsLNxkMtduVSjHl+6+beDbu9fRnmWxOV7qHA==
-Received: from AM9P193CA0001.EURP193.PROD.OUTLOOK.COM (2603:10a6:20b:21e::6)
- by DU0PR10MB5362.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:34d::12) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.9; Thu, 29 Jan
- 2026 10:31:33 +0000
-Received: from AMS1EPF00000047.eurprd04.prod.outlook.com
- (2603:10a6:20b:21e:cafe::d3) by AM9P193CA0001.outlook.office365.com
- (2603:10a6:20b:21e::6) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9564.7 via Frontend Transport; Thu,
- 29 Jan 2026 10:31:29 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
+ bh=FpxX+AuR+/XNfpD74v5dB8iiqCT2gbTSJJEbF+l6lqA=;
+ b=MtAMl5z+YM0QtAzleooVJ/wJj6tytb9+sKPTxMCDbDkRuj9B0e4+EzqDJJrhInGQ1UsWMM06EHspveJk4CgqZrdR73GXkxbl6/a6UCZWThsl3GGO4d/e824/D76ObPLEjlZNpXZXi23zLMDwx6A9kYB1gEmPz6x4PcSWH463zGdwdgMySUSf19l+sJ9L7SOcLwo7Vye/soeIueQ8s4PhX4DPiXhP+3xiCmwk2aW+KhvQGwAHJV4PNE/VX6rWvOFLbpAPZaBP565EZMJ143DmTNFdNnT9Lm0ZOo9JcY4tHZoD93TTjxlCDJYAH2EGyYlhtiMGXaAO9T7WMFuqtliOIA==
+Received: from DB9PR01CA0006.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:1d8::11) by VI0PR10MB8716.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:800:213::21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.7; Thu, 29 Jan
+ 2026 10:32:05 +0000
+Received: from DB1PEPF000509FA.eurprd03.prod.outlook.com
+ (2603:10a6:10:1d8:cafe::f4) by DB9PR01CA0006.outlook.office365.com
+ (2603:10a6:10:1d8::11) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9564.10 via Frontend Transport; Thu,
+ 29 Jan 2026 10:31:54 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
  smtp.mailfrom=foss.st.com; dkim=none (message not signed)
  header.d=none;dmarc=fail action=none header.from=foss.st.com;
 Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.60; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.60) by
- AMS1EPF00000047.mail.protection.outlook.com (10.167.16.135) with Microsoft
+ designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.59; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.59) by
+ DB1PEPF000509FA.mail.protection.outlook.com (10.167.242.36) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9564.3 via Frontend Transport; Thu, 29 Jan 2026 10:31:33 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
- (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9564.3 via Frontend Transport; Thu, 29 Jan 2026 10:32:05 +0000
+Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
+ (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Thu, 29 Jan
- 2026 11:33:09 +0100
+ 2026 11:33:48 +0100
 Received: from [10.48.86.129] (10.48.86.129) by STKDAG1NODE1.st.com
  (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Thu, 29 Jan
- 2026 11:31:32 +0100
-Message-ID: <b2e5534b-7bf1-49fc-9585-946d7737f39c@foss.st.com>
-Date: Thu, 29 Jan 2026 11:31:32 +0100
+ 2026 11:32:04 +0100
+Message-ID: <23ee924a-4135-46cd-8793-81c228fd65ad@foss.st.com>
+Date: Thu, 29 Jan 2026 11:32:04 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-To: Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>,
- <uboot-stm32@st-md-mailman.stormreply.com>, <u-boot@lists.denx.de>
-References: <20251209-ltdc-v1-1-9b8f14dfcb57@foss.st.com>
- <6c668b8d-77c6-4335-a9d1-438a67f122e9@foss.st.com>
+To: Marek Vasut <marex@nabladev.com>, <u-boot@lists.denx.de>
+References: <20260108021645.518220-1-marex@nabladev.com>
+ <fce4a08f-38ca-4514-a4a3-280bdc81ff6e@foss.st.com>
 Content-Language: en-US
-In-Reply-To: <6c668b8d-77c6-4335-a9d1-438a67f122e9@foss.st.com>
+In-Reply-To: <fce4a08f-38ca-4514-a4a3-280bdc81ff6e@foss.st.com>
 X-Originating-IP: [10.48.86.129]
 X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
  (10.75.128.132)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AMS1EPF00000047:EE_|DU0PR10MB5362:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0deb8329-300a-40da-929b-08de5f2192d8
+X-MS-TrafficTypeDiagnostic: DB1PEPF000509FA:EE_|VI0PR10MB8716:EE_
+X-MS-Office365-Filtering-Correlation-Id: e259880a-0cb7-4c92-b524-08de5f21a5eb
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|82310400026|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?Y0NFcitjeWVGdmtncW5EUVhNRktSWGVrV0x6UnkrQnVKNlArY29KVFArSGhO?=
- =?utf-8?B?R1NKZ2ovaTlVa09tams4cDUwblozcVRXTnh3MHJ3SWtzR1A5emFhMktBbjMr?=
- =?utf-8?B?K01haVhBUll2eXJYNS9Pd2hZUjlOY1V6NHZOR2FHeWRvd1kzcVFRako1QVJa?=
- =?utf-8?B?V1ZZWU9CNStpOHkwQVRhRG9kUkVyWXM1YUkwYU9iOHJldUJzNTlGTjJRMDFW?=
- =?utf-8?B?M3I1RllPUk0rSVZSaHQ1R3pyNFo2dnpKT0ZBaDZBN2o4SnFJT3U1UGNHZDNH?=
- =?utf-8?B?ZkdvYlBmdGJHS3lWNUZ1VXFmZW1xdmwvRkhUQXNjaFVVc0kvNGtMOS9lVlFG?=
- =?utf-8?B?cUpud21YcTFQdkVGWm9qQTZ1RC9VcXpDV3MvZmNrRFJsNk5DSjZLKzg3R0JW?=
- =?utf-8?B?eERUM1dzcWZkaFR6Q0VRNkFhczNKWXJZRlBlMVdGQlRuNENaWkdQc0wzUmQ0?=
- =?utf-8?B?SWpiVHlGalhFcHRSMXV5cm1LOVNJR01sOGdsSjdJa3UxZVBjQ2NvTTMwYkNy?=
- =?utf-8?B?ak5sbmZBd3UrNEJDQ29sMkhIRlZERTIxanVQdHpXazFJUmYzaFFHN2NKM1d6?=
- =?utf-8?B?SUhmdVNpZ1dpOXB6WnA3aW4rMmVTS1VFMVNVUGdDWldqMTJNRTF0RXlWRzFK?=
- =?utf-8?B?bDdmdHhvVytJN3luYktHMXI2SkxXNHpOeGNjcFQyeStFSkt3M1NjZ2FwNHJk?=
- =?utf-8?B?WjJDdjlVa2g1bnFmY1R4VFBCR0NxZE5DVldWZGk2VEFLWEpQeDRpRDIvWDU1?=
- =?utf-8?B?dko3ZzJjRktENm5iSXdJZFhSeCtTMy9oaUpPZXA0SEpMMnFEaHV0VGVhczVN?=
- =?utf-8?B?QVpUZjh0emw1ZldJK3BZVW5qTEMzVFg2Y2Jwd2VLbHJzUUgyckE2MzFKNmVC?=
- =?utf-8?B?QUpFTW9PeUxTRm9vSkZxYk82M1haSzBYRmIvbXc4OFdVckxtL0VweHd2Tkh5?=
- =?utf-8?B?djBndHFRSjBnb0s5SWlhV2Y1U1JTdytZL0c2SEJXc3RjcEdnR28wOHdyWXFh?=
- =?utf-8?B?a25nNWQwK2psendDaDQzVVBaZkhLVUk3SkZkdngvdEVnMmZsTU9qd2hTeTFT?=
- =?utf-8?B?Q2dCZ2hTU05TV0x1cXZHZERac3JnZTNJVG5jd0o3Y2NlTlA5N1FudmhqQVcw?=
- =?utf-8?B?Zk82aW96QWtSdnVkN1NGTU1NV2ZsSFFyK21yVGQ1SDcyRWdLU1B5Vng3Y1RM?=
- =?utf-8?B?bUk0VkIwMzBWZ25FOHlhK2VsWnhCNEVLdmo5bEJBS0txc1kwcHJjbGx4ZGRy?=
- =?utf-8?B?QWpGc0V3SFlUV2d5WElWdHY1RTJjakVib1JPdi9sYWpVVWxsaVE4d3FrOVhC?=
- =?utf-8?B?eVZpeW4vU3VQMDBRWW4zMm5pelg5ZWV4NXVrcE41UkJwdE9EVkFuSE11UWdK?=
- =?utf-8?B?SFZZVmRZUWJ2M2FZSDhxQ2pwR3g5T2dEcjNpZGVFcUJMTHhKYnZwSTcxWU1y?=
- =?utf-8?B?WGE0c1YyQWErT3NSNGdFWEhzNHdrbWd6Mzdyb1pKQnk5NnVzM1lCMyt5dFAv?=
- =?utf-8?B?bnoxV3dWS3J6bEZ0dm9VOGlvNWoreHJsK2N5Z2FpSUdMVWxTcS9GNzNlMWU2?=
- =?utf-8?B?d1BvYWhadzhRNjdBVDl5T3c0WmhlWjlQL0ZjKzAyQ1FoanV0NnAyMzFUNEpN?=
- =?utf-8?B?U3h2UXpRaDZSMW5QcDhWSmVYa0xQaDVacGVTV1FYdWZ3R1ppc0VMbUZQY0dQ?=
- =?utf-8?B?cTJFS2ZXNmhMYXdoRjlvVEg0QmV6bkU1OVFEKzg1dFF1aVhwUzQ2aElhZXdF?=
- =?utf-8?B?NUR5MHllWmJ5WlQwcEJMWU1zLzVHYW4rUDZzR2EvbW5HVFJvSDc3QVV1WUlZ?=
- =?utf-8?B?K0xMOXBQY1ZILzFDTnQ2eG5kUHRmK2JRU1M4T0tZR1ZUbkF4akFGNG1qYmxE?=
- =?utf-8?B?YmcvQmwwd0V4QU9nclZvc3FpK1puUXQ2VjdWbG1FOGRIa3JOcHJobWY5eitW?=
- =?utf-8?B?OTZPdXFEbUdqRWxMeFh5QXB0QmRHRG4raGlyZFlQZGNZS0hnbDhHMUUwbFFp?=
- =?utf-8?B?QWovY1JrMWxDRG9QWjM1MnpwZ0hyZFhvWXNTNWFobVh2cEVONU51d0ZXcUxp?=
- =?utf-8?B?bTAyT0NRL29OZEJ2Lys3QXp4eGpyQUlmdkxMa01VcHlkQXQvcHhBaFhZTFZi?=
- =?utf-8?B?K21XR0JaNDN5YnVSN0o1RHpKdDhVZHNuNEh0a3BrNFJPZWtmeGdKckZCVHJu?=
- =?utf-8?B?Y29VRktlMWNpTHZOZjlzRDg3Z2NFaGhhSURuaVQ2bjhOcUNKZTdWVEN0ckxt?=
- =?utf-8?B?VzRBZFRvQm5pclJramNBUG9LbnB3PT0=?=
-X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
+ ARA:13230040|376014|1800799024|82310400026|36860700013|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?MFI4QlU1UkJoTHB5Ukt4WFR1ZzZyaDh1c1pacGZ1WU1iSVRzNkhvcTJuekhu?=
+ =?utf-8?B?cjBJS1hiSk91dGRKSzlqdEJzZ2dVTG5BLzhWa1VzZ3haSnlBWUFDWENkZXNY?=
+ =?utf-8?B?OEZ2YWZtMkJwVi9zN2g5alhCSE9uR0gwS0Jndis5SXQvNlhUeXhzTmgvWi9E?=
+ =?utf-8?B?a0RXYW5xcDIvd1BkNk9wWHdidE1yQkZIR0YrWnh2THVTdEk3enQvbWVodm1W?=
+ =?utf-8?B?TGxQeklTdFg0dVF0M3c4eFhCVFNqMUZzcmRpZnlsT2NkQkovRGhkQ0UwMzhC?=
+ =?utf-8?B?Mnl4QUVzSUtSR3NORnNRdUxkYXJ1bm5kY2w3MkpRUHFsamEremtIckVsMmxK?=
+ =?utf-8?B?UGNKa2NHMkNvMSt3enY4dVBicHB3RWRTRG1YMW9GZVVITTUycmdsZFF1SUZN?=
+ =?utf-8?B?Q0JicDlEVmIvK2VxaE13TkdiOFhWckRQS1RXL0Q4T3B2SDZYZGs5S0RNS3V5?=
+ =?utf-8?B?eHVleWxGenIyOVR6Y0tNYmJmbXhMbERmUzhsSSt5QWU4NEhqRTd1RkQ2Q2p3?=
+ =?utf-8?B?cGw4bmJhSGRiZ1hubDZlOFVPQkh1YTFMV1RwR1Y2Yko4R1dRNC9CRStnRnFZ?=
+ =?utf-8?B?U3c2RDQ5UFZzbVU0TGQxeklNaGQvdWJYSHFySHNWM0YvUlQ2dUdYdjZTV1hK?=
+ =?utf-8?B?bzliSG1lSEFZWkZzcnc1N1lrWnBPaGVHdGFXR1pVL1dQN2Z1QVBqbllXMDNj?=
+ =?utf-8?B?VkU1WE5iZUVPTXhzcSsydC83bzhsU09qSkhway9WNVBlUUZNeFcvb25WTWhS?=
+ =?utf-8?B?bW5aQjFzYyt2M2lLQkxwb2JrUXNmekk4aS9QMjI2cVlxcUY3Qk1sOU1sYkNs?=
+ =?utf-8?B?RUZ3TnNNdXEvZFByZng0ZWxjWnBVUFlDTlUrbTBCQXhvN1BITHFSV0thTGFo?=
+ =?utf-8?B?a0hCNVZJcU52cE1RZWxhNXc1K3gvNHVPbXRhcktuOHFpbUpPd1VYUkgzVzBG?=
+ =?utf-8?B?cnkyT3RsMDJadHRzbGJ4U0hiQnBSNFhQQm52Y0E4UFhrVndjVXF3ZkRsWWlK?=
+ =?utf-8?B?bGNodlJtUGlqaWpOQW9OOWFOUUs1bnA5cHE4eHUra0xxNXlZZWlnbmZ6bEFU?=
+ =?utf-8?B?N2h6K1dhcUMwdWJoeW5qQmdDY2wrRzExRHdPZHBLWE95ZEpFMkZMV1hFK0ln?=
+ =?utf-8?B?WVA0VHdFRHMwQmlINWlWVVY5OUpNc3czakt1ZzQ4Q0JLQ3g4RTEwdlpuVjRq?=
+ =?utf-8?B?c0YvV0dqenBIM1NvSXcyTXU2R1dnWlBBKzlZMHNYWFJiL0ZsN0lNTzNpdHp0?=
+ =?utf-8?B?ckpsVXpFKzBrdi9QNGZOdlQ5WUZ5ZEc0OFNWM2Yyc29veC9MSXhaK2hBMHAv?=
+ =?utf-8?B?NXhMQTkwdThqa0RzQzdCdVQ2QlFjb0VsRmhMR3FGUVlHNlFIL3BvMVRnQStj?=
+ =?utf-8?B?Ui83ZXdUN0Ixc3pZdWIxdXZSbm9sUVRmYlNNQ3hDZE0zVE82bXFlS3MyRXFN?=
+ =?utf-8?B?QzNrdVVPT2xjNXhuUThsZFhNcGRad2pRck1udGRnNnpIWlA3cGEzWGMxbGJx?=
+ =?utf-8?B?dUtaS2txOHBDZUZMRzZlWXF3ZS9TL2kyUG51VGxHQjhSeU5qT1MvUDIyNnAx?=
+ =?utf-8?B?YnJXekRSN1Q0a1ZtSXJJdDQvVS85NFA2bGxTRVl5OERJWHJkOEl0eWpxdUI4?=
+ =?utf-8?B?VE41OW9FVEJqQlhaQTRlQlB0R01ROUhLemRudS8vUDZETUR1dVloZndseXFM?=
+ =?utf-8?B?QmpVMDl5SnFkcW1YcmthWDcyZ1ljSWsxL0FWa0s1VGpiM1ZCWUNFajBhZ1Zs?=
+ =?utf-8?B?akxFOVIySzNhZkkxbzAwVUVzUzRoL2tKZVkyNXJiaStoSlN5TEtoRWZEWmZ5?=
+ =?utf-8?B?SWdOZW1yTlBlUU9zRnpqcTczRlZmZTVYTGNtVVdTc1Vabnk5NEhtU2JsTVZC?=
+ =?utf-8?B?RGNIZ04rMGpDcDkyeEduWk9VVmxDQnRIV1pocWFTaFVqMkJEZHBjRi81OHAz?=
+ =?utf-8?B?VjVtdE5GUGpWeHd6ZmdIa1BBUHBGeWRIemw2Qm00Z0MwQzU0bkhtTkVZZzh5?=
+ =?utf-8?B?ZlRxc3dOTE5tbjVEWHF0OFJyNENhS1k4K3MxT1Z1c0RpYUQrNzUrV2lHa3N4?=
+ =?utf-8?B?YWNmQzVjUkJScDdBWGtzQ2ZtT1pBL055ZzNGUHI1RlFmUk9XclczSVlJcU9h?=
+ =?utf-8?B?WjF6blVYNDM4K1BNUXp5ZEJ0b1IwNFJHV04xMlYvSXU2bFdyOHFKRVJPUVNq?=
+ =?utf-8?Q?7ntUGu8smOJ8hqNn6afh+dE=3D?=
+X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(82310400026)(36860700013); DIR:OUT;
- SFP:1101; 
+ SFS:(13230040)(376014)(1800799024)(82310400026)(36860700013)(7053199007);
+ DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: 59LeWaSxu6wMbfMo6N7eJYa6vI+G7KmKHHoX8IHWthG0DU7LeNnFyWlservTJajdIu2GkWzVW9o9zTRhbk5ZuqCPeZdomvWByYHUfK0tbVlkxOg0FFSaYmcwAN31INrTT0WxTDjV0PM40aJ3KMRvVA0BwwUWRwjHUw9NM8FZ+QHsY3rCPUotsnLnxYlQpvWrLHGc+tBY4NxF0L/DOnfBqbHTyBqYt9v1TUDIGeh/0zffO4IOuGnBjIfTXie85LClN4/DpNWj0KBl5/ufCHa5EBFmaCaMWXIL147lOrIr+diY+b+P0VnB8QWzGblx2tJrtrqAsK7+VME+EimTZo6DmM3rIV4B8ZwyOmNqrq4zPltXDtmmY/Jf5RKHVbWSvURlmexcjrsPpAVXPEhzd7fgVw+tql+2X+Z1bz6ome2IMmFPfUpukiHX5P8NA80YkJ9IKVIi+TYPSuOaLBfrL+I4aPdAKG6Z51IjL3w8NAVesdASw3yIyGneRgi4AOVSBAaYdqKqtd2G2I3IHRy1dCaMZm/gavLwUB00Z+9OgehbUjj9fbgqLfgelz8+0fB3gXltEl7amXCzkmRphOr2tBz3V2VS3wWjeJCh0onI/Lnebt1o+XXAa3tsLIMbn+R6sSjuEUPYYqI34uubIbaAikEdLVU4BYKPcv4PWQ1rr1/oPPWFHrahPMv658BHPV3i1SQ4cvK7OBhPLnuUGmcQIqubUQ==
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: MJwEW6ialJgkIOb98h5KIUnVWAG3shZGYUKyDbjGKrCo9iXC/wB1kPZqSX8rNkfuUUahVo3N5lavpIawHFHX4XmWdXqComzpRgWVQvBbtf2Mx13v2FKBRv4B4H/LTZK7TLpiEFnfEnQRy8RDfMj0mSMUlPEq099aI9YMg3wy1Z1+67b+3oOm5pHMujxRYrsFFwGK3Er2JucXJdEj76/vqRRiciRu8zud8XRWNbCoDLH0TJMsjWW/yDF3qlq2LuXR3cOm4A63sqLNK3RazL2gtSNabF0ijaqHA5S0aDcm9QzbXnf7aN4W0M2dkHmSMR2RFtuNyfkrvP939ONrp6VYV+DONPFxdb/q8iBGScd/bQeop46wEPlX1+IDs84OpbrItw5Job1iskVMn5Cjk6eMO438bt+FEVnOP9rjOUDBnfGCmLfNwccgM5dX2lhSmD30UmFoX0S+PYzC+F30QGnUgoomlvyf/CbKEgo0pnD1fqq3J+jgeBMToVoV4OUpjXCgv4LWE7p+XnlFOhHUJPC76bDAOABkdTOkeNz+WfzcREU4mg4hQKThTdyL0hPyZWmnXei4ThFXXwYgLYFdaox4h8tcpjarLaJIbci+L4Uc9YOljXXHWm5NB5nVB1uzz8SKqrwU0vYCvM4eTPWy3RcnuG8RfAvlYr4u/7IEw8U7qVnx6EJMfFKw/wuTRh6lGdJRBiOFBKXsrpzYp4IAtdB1qA==
 X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jan 2026 10:31:33.4497 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0deb8329-300a-40da-929b-08de5f2192d8
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jan 2026 10:32:05.4306 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e259880a-0cb7-4c92-b524-08de5f21a5eb
 X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
  Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: AMS1EPF00000047.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: DB1PEPF000509FA.eurprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR10MB5362
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR10MB8716
 Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Tom Rini <trini@konsulko.com>, Yannick Fertre <yannick.fertre@foss.st.com>,
- Anatolij Gustschin <ag.dev.uboot@gmail.com>
-Subject: Re: [Uboot-stm32] [PATCH] video: stm32: ltdc: add .of_to_plat
-	callback
+ Tom Rini <trini@konsulko.com>, Antonio Borneo <antonio.borneo@foss.st.com>,
+ u-boot@dh-electronics.com, uboot-stm32@st-md-mailman.stormreply.com
+Subject: Re: [Uboot-stm32] [PATCH] ARM: stm32: Use CONFIG_STM32MP15X to
+ discern STM32MP15xx on DH STM32MP15xx DHSOM
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -160,422 +158,91 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [4.39 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [2.89 / 15.00];
 	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
-	R_DKIM_REJECT(1.00)[foss.st.com:s=selector2];
 	HFILTER_HELO_IP_A(1.00)[stm-ict-prod-mailman-01.stormreply.prv];
+	R_DKIM_REJECT(1.00)[foss.st.com:s=selector2];
 	HFILTER_HELO_NORES_A_OR_MX(0.30)[stm-ict-prod-mailman-01.stormreply.prv];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+ip4:52.209.6.89];
+	R_SPF_ALLOW(-0.20)[+ip4:52.209.6.89:c];
 	MIME_GOOD(-0.10)[text/plain];
 	DMARC_POLICY_SOFTFAIL(0.10)[foss.st.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[foss.st.com:mid,stormreply.com:url,stormreply.com:email,stm-ict-prod-mailman-01.stormreply.prv:helo,st.com:email,st-md-mailman.stormreply.com:rdns];
-	GREYLIST(0.00)[pass,body];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[foss.st.com:mid,st-md-mailman.stormreply.com:rdns,st.com:email,denx.de:email,stm-ict-prod-mailman-01.stormreply.prv:helo,stormreply.com:url,stormreply.com:email,nabladev.com:email,dh-electronics.com:email];
 	SUSPICIOUS_AUTH_ORIGIN(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS(0.00)[m:raphael.gallais-pou@foss.st.com,m:uboot-stm32@st-md-mailman.stormreply.com,m:u-boot@lists.denx.de,m:patrick.delaunay@foss.st.com,m:trini@konsulko.com,m:yannick.fertre@foss.st.com,m:ag.dev.uboot@gmail.com,m:agdevuboot@gmail.com,s:lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:marex@nabladev.com,m:u-boot@lists.denx.de,m:patrick.delaunay@foss.st.com,m:trini@konsulko.com,m:antonio.borneo@foss.st.com,m:u-boot@dh-electronics.com,m:uboot-stm32@st-md-mailman.stormreply.com,s:lists@lfdr.de];
 	FORWARDED(0.00)[uboot-stm32@st-md-mailman.stormreply.com];
 	FORGED_SENDER(0.00)[patrice.chotard@foss.st.com,uboot-stm32-bounces@st-md-mailman.stormreply.com];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_CC(0.00)[foss.st.com,konsulko.com,gmail.com];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[uboot-stm32@st-md-mailman.stormreply.com];
-	HAS_XOIP(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[patrice.chotard@foss.st.com,uboot-stm32-bounces@st-md-mailman.stormreply.com];
 	DKIM_TRACE(0.00)[foss.st.com:-];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_SEVEN(0.00)[7];
 	ASN(0.00)[asn:16509, ipnet:52.208.0.0/13, country:US];
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[uboot-stm32@st-md-mailman.stormreply.com];
+	FROM_NEQ_ENVFROM(0.00)[patrice.chotard@foss.st.com,uboot-stm32-bounces@st-md-mailman.stormreply.com];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	HAS_XOIP(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[uboot-stm32];
+	NEURAL_HAM(-0.00)[-1.000];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[7];
 	RCVD_COUNT_SEVEN(0.00)[7]
-X-Rspamd-Queue-Id: 96DD2AEDE9
+X-Rspamd-Queue-Id: 8D8ADAEF5E
 X-Rspamd-Action: no action
 
 
 
-On 12/16/25 18:08, Patrice CHOTARD wrote:
+On 1/19/26 09:49, Patrice CHOTARD wrote:
 > 
 > 
-> On 12/9/25 13:19, Raphael Gallais-Pou wrote:
->> Drivers should extract device-tree data before probing via the
->> .of_to_plat hook.
+> On 1/8/26 03:16, Marek Vasut wrote:
+>> Use plain CONFIG_STM32MP15X to discern code which is specific to
+>> STM32MP15xx in DH STM32MP1 DHSOM board files.
 >>
->> Implement it for stm32_ltdc driver.  No functional change.
->>
->> Signed-off-by: Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>
+>> Signed-off-by: Marek Vasut <marex@nabladev.com>
 >> ---
->> This patch has been tested on stm32mp135f-dk and stm32mp257f-ev1.
+>> Cc: Antonio Borneo <antonio.borneo@foss.st.com>
+>> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+>> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+>> Cc: Tom Rini <trini@konsulko.com>
+>> Cc: u-boot@dh-electronics.com
+>> Cc: u-boot@lists.denx.de
+>> Cc: uboot-stm32@st-md-mailman.stormreply.com
 >> ---
->>  drivers/video/stm32/stm32_ltdc.c | 218 +++++++++++++++++++++------------------
->>  1 file changed, 117 insertions(+), 101 deletions(-)
+>>  board/dhelectronics/dh_stm32mp1/board.c | 2 +-
+>>  1 file changed, 1 insertion(+), 1 deletion(-)
 >>
->> diff --git a/drivers/video/stm32/stm32_ltdc.c b/drivers/video/stm32/stm32_ltdc.c
->> index 834bfb625d2d34a44bd8edff1c92af6dec344c20..1c55fc94b3aa67dbcb822684c2c9a128b159e8a6 100644
->> --- a/drivers/video/stm32/stm32_ltdc.c
->> +++ b/drivers/video/stm32/stm32_ltdc.c
->> @@ -22,8 +22,17 @@
->>  #include <linux/bitops.h>
->>  #include <linux/printk.h>
->>  
->> -struct stm32_ltdc_priv {
->> +struct stm32_ltdc_plat {
->>  	void __iomem *regs;
->> +	struct udevice *bridge;
->> +	struct udevice *panel;
->> +	struct reset_ctl rst;
->> +	struct clk pclk;
->> +	struct clk bclk;
->> +};
->> +
->> +struct stm32_ltdc_priv {
->> +	struct display_timing timings;
->>  	enum video_log2_bpp l2bpp;
->>  	u32 bg_col_argb;
->>  	const u32 *layer_regs;
->> @@ -364,18 +373,20 @@ static bool has_alpha(u32 fmt)
->>  	}
->>  }
->>  
->> -static void stm32_ltdc_enable(struct stm32_ltdc_priv *priv)
->> +static void stm32_ltdc_enable(void __iomem *regs)
->>  {
->>  	/* Reload configuration immediately & enable LTDC */
->> -	setbits_le32(priv->regs + LTDC_SRCR, SRCR_IMR);
->> -	setbits_le32(priv->regs + LTDC_GCR, GCR_LTDCEN);
->> +	setbits_le32(regs + LTDC_SRCR, SRCR_IMR);
->> +	setbits_le32(regs + LTDC_GCR, GCR_LTDCEN);
->>  }
->>  
->> -static void stm32_ltdc_set_mode(struct stm32_ltdc_priv *priv,
->> -				struct display_timing *timings)
->> +static void stm32_ltdc_set_mode(struct udevice *dev)
->>  {
->> -	void __iomem *regs = priv->regs;
->> +	struct stm32_ltdc_plat *plat = dev_get_plat(dev);
->> +	struct stm32_ltdc_priv *priv = dev_get_priv(dev);
->> +	struct display_timing *timings = &priv->timings;
->>  	u32 hsync, vsync, acc_hbp, acc_vbp, acc_act_w, acc_act_h;
->> +	void __iomem *regs = plat->regs;
->>  	u32 total_w, total_h;
->>  	u32 val;
->>  
->> @@ -422,12 +433,14 @@ static void stm32_ltdc_set_mode(struct stm32_ltdc_priv *priv,
->>  			GCR_HSPOL | GCR_VSPOL | GCR_DEPOL | GCR_PCPOL, val);
->>  
->>  	/* Overall background color */
->> -	writel(priv->bg_col_argb, priv->regs + LTDC_BCCR);
->> +	writel(priv->bg_col_argb, regs + LTDC_BCCR);
->>  }
->>  
->> -static void stm32_ltdc_set_layer1(struct stm32_ltdc_priv *priv, ulong fb_addr)
->> +static void stm32_ltdc_set_layer1(struct udevice *dev, ulong fb_addr)
->>  {
->> -	void __iomem *regs = priv->regs;
->> +	struct stm32_ltdc_plat *plat = dev_get_plat(dev);
->> +	struct stm32_ltdc_priv *priv = dev_get_priv(dev);
->> +	void __iomem *regs = plat->regs;
->>  	u32 x0, x1, y0, y1;
->>  	u32 pitch_in_bytes;
->>  	u32 line_length;
->> @@ -493,7 +506,7 @@ static void stm32_ltdc_set_layer1(struct stm32_ltdc_priv *priv, ulong fb_addr)
->>  	writel(fb_addr, regs + LTDC_L1CFBAR);
->>  
->>  	/* Enable layer 1 */
->> -	setbits_le32(priv->regs + LTDC_L1CR, LXCR_LEN);
->> +	setbits_le32(regs + LTDC_L1CR, LXCR_LEN);
->>  }
->>  
->>  static int stm32_ltdc_get_remote_device(struct udevice *dev, ofnode ep_node,
->> @@ -618,53 +631,99 @@ static inline int stm32_ltdc_alloc_fb(struct udevice *dev)
->>  }
->>  #endif
->>  
->> -static int stm32_ltdc_probe(struct udevice *dev)
->> +static int stm32_ltdc_of_to_plat(struct udevice *dev)
->>  {
->> -	struct video_uc_plat *uc_plat = dev_get_uclass_plat(dev);
->> -	struct video_priv *uc_priv = dev_get_uclass_priv(dev);
->> +	struct stm32_ltdc_plat *plat = dev_get_plat(dev);
->>  	struct stm32_ltdc_priv *priv = dev_get_priv(dev);
->> -	struct udevice *bridge = NULL;
->> -	struct udevice *panel = NULL;
->> -	struct display_timing timings;
->> -	struct clk pclk, bclk;
->> -	struct reset_ctl rst;
->>  	ofnode node, port;
->> -	ulong rate;
->>  	int ret;
->>  
->> -	priv->regs = dev_read_addr_ptr(dev);
->> -	if (!priv->regs) {
->> +	plat->regs = dev_read_addr_ptr(dev);
->> +	if (!plat->regs) {
->>  		dev_err(dev, "ltdc dt register address error\n");
->>  		return -EINVAL;
+>> diff --git a/board/dhelectronics/dh_stm32mp1/board.c b/board/dhelectronics/dh_stm32mp1/board.c
+>> index 55526189d5a..90590d14941 100644
+>> --- a/board/dhelectronics/dh_stm32mp1/board.c
+>> +++ b/board/dhelectronics/dh_stm32mp1/board.c
+>> @@ -314,7 +314,7 @@ int board_stm32mp1_ddr_config_name_match(struct udevice *dev,
+>>  			return 0;
 >>  	}
 >>  
->> -	ret = clk_get_by_name(dev, "bus", &bclk);
->> -	if (ret) {
->> -		if (ret != -ENODATA) {
->> -			dev_err(dev, "bus clock get error %d\n", ret);
->> -			return ret;
->> -		}
->> -	} else {
->> -		ret = clk_enable(&bclk);
->> -		if (ret) {
->> -			dev_err(dev, "bus clock enable error %d\n", ret);
->> -			return ret;
->> -		}
->> +	ret = clk_get_by_name(dev, "bus", &plat->bclk);
->> +	if (ret && ret != -ENODATA) {
->> +		dev_err(dev, "bus clock get error %d\n", ret);
->> +		return ret;
->>  	}
->>  
->> -	ret = clk_get_by_name(dev, "lcd", &pclk);
->> +	ret = clk_get_by_name(dev, "lcd", &plat->pclk);
->>  	if (ret) {
->>  		dev_err(dev, "peripheral clock get error %d\n", ret);
->>  		return ret;
->>  	}
->>  
->> -	ret = clk_enable(&pclk);
->> +	/*
->> +	 * Try all the ports until one working.
->> +	 *
->> +	 * This is done in two times. First is checks for the
->> +	 * UCLASS_VIDEO_BRIDGE available, and then for this bridge
->> +	 * it scans for a UCLASS_PANEL.
->> +	 */
->> +	port = dev_read_subnode(dev, "port");
->> +	if (!ofnode_valid(port)) {
->> +		dev_err(dev, "%s(%s): 'port' subnode not found\n",
->> +			__func__, dev_read_name(dev));
->> +		return -EINVAL;
->> +	}
->> +
->> +	for (node = ofnode_first_subnode(port);
->> +	     ofnode_valid(node);
->> +	     node = dev_read_next_subnode(node)) {
->> +		ret = stm32_ltdc_display_init(dev, &node, &plat->panel, &plat->bridge);
->> +		if (ret)
->> +			dev_dbg(dev, "Device failed ret=%d\n", ret);
->> +		else
->> +			break;
->> +	}
->> +
->> +	/* Sanity check */
->> +	if (ret)
->> +		return ret;
->> +
->> +	ret = panel_get_display_timing(plat->panel, &priv->timings);
->> +	if (ret) {
->> +		ret = ofnode_decode_display_timing(dev_ofnode(plat->panel),
->> +						   0, &priv->timings);
->> +		if (ret) {
->> +			dev_err(dev, "decode display timing error %d\n", ret);
->> +			return ret;
->> +		}
->> +	}
->> +
->> +	ret = reset_get_by_index(dev, 0, &plat->rst);
->> +	if (ret)
->> +		dev_err(dev, "missing ltdc hardware reset\n");
->> +
->> +	return ret;
->> +}
->> +
->> +static int stm32_ltdc_probe(struct udevice *dev)
->> +{
->> +	struct video_uc_plat *uc_plat = dev_get_uclass_plat(dev);
->> +	struct video_priv *uc_priv = dev_get_uclass_priv(dev);
->> +	struct stm32_ltdc_plat *plat = dev_get_plat(dev);
->> +	struct stm32_ltdc_priv *priv = dev_get_priv(dev);
->> +	struct display_timing *timings = &priv->timings;
->> +	ulong rate;
->> +	int ret;
->> +
->> +	ret = clk_enable(&plat->bclk);
->> +	if (ret) {
->> +		dev_err(dev, "bus clock enable error %d\n", ret);
->> +		return ret;
->> +	}
->> +
->> +	ret = clk_enable(&plat->pclk);
->>  	if (ret) {
->>  		dev_err(dev, "peripheral clock enable error %d\n", ret);
->>  		return ret;
->>  	}
->>  
->> -	priv->hw_version = readl(priv->regs + LTDC_IDR);
->> +	priv->hw_version = readl(plat->regs + LTDC_IDR);
->>  	dev_dbg(dev, "%s: LTDC hardware 0x%x\n", __func__, priv->hw_version);
->>  
->>  	switch (priv->hw_version) {
->> @@ -686,67 +745,22 @@ static int stm32_ltdc_probe(struct udevice *dev)
->>  		return -ENODEV;
->>  	}
->>  
->> -	/*
->> -	 * Try all the ports until one working.
->> -	 *
->> -	 * This is done in two times. First is checks for the
->> -	 * UCLASS_VIDEO_BRIDGE available, and then for this bridge
->> -	 * it scans for a UCLASS_PANEL.
->> -	 */
->> -
->> -	port = dev_read_subnode(dev, "port");
->> -	if (!ofnode_valid(port)) {
->> -		dev_err(dev, "%s(%s): 'port' subnode not found\n",
->> -			__func__, dev_read_name(dev));
->> -		return -EINVAL;
->> -	}
->> -
->> -	for (node = ofnode_first_subnode(port);
->> -	     ofnode_valid(node);
->> -	     node = dev_read_next_subnode(node)) {
->> -		ret = stm32_ltdc_display_init(dev, &node, &panel, &bridge);
->> -		if (ret)
->> -			dev_dbg(dev, "Device failed ret=%d\n", ret);
->> -		else
->> -			break;
->> -	}
->> -
->> -	/* Sanity check */
->> -	if (ret)
->> -		return ret;
->> -
->> -	ret = panel_get_display_timing(panel, &timings);
->> -	if (ret) {
->> -		ret = ofnode_decode_display_timing(dev_ofnode(panel),
->> -						   0, &timings);
->> -		if (ret) {
->> -			dev_err(dev, "decode display timing error %d\n", ret);
->> -			return ret;
->> -		}
->> -	}
->> -
->> -	rate = clk_set_rate(&pclk, timings.pixelclock.typ);
->> +	rate = clk_set_rate(&plat->pclk, timings->pixelclock.typ);
->>  	if (IS_ERR_VALUE(rate))
->>  		dev_warn(dev, "fail to set pixel clock %d hz, ret=%ld\n",
->> -			 timings.pixelclock.typ, rate);
->> +			 timings->pixelclock.typ, rate);
->>  
->>  	dev_dbg(dev, "Set pixel clock req %d hz get %ld hz\n",
->> -		timings.pixelclock.typ, rate);
->> -
->> -	ret = reset_get_by_index(dev, 0, &rst);
->> -	if (ret) {
->> -		dev_err(dev, "missing ltdc hardware reset\n");
->> -		return ret;
->> -	}
->> +		timings->pixelclock.typ, rate);
->>  
->>  	/* Reset */
->> -	reset_deassert(&rst);
->> +	reset_deassert(&plat->rst);
->>  
->>  	if (IS_ENABLED(CONFIG_VIDEO_BRIDGE)) {
->> -		if (bridge) {
->> -			ret = video_bridge_attach(bridge);
->> +		if (plat->bridge) {
->> +			ret = video_bridge_attach(plat->bridge);
->>  			if (ret) {
->> -				dev_err(bridge, "fail to attach bridge\n");
->> +				dev_err(plat->bridge, "fail to attach bridge\n");
->>  				return ret;
->>  			}
->>  		}
->> @@ -757,8 +771,8 @@ static int stm32_ltdc_probe(struct udevice *dev)
->>  	priv->bg_col_argb = 0xFFFFFFFF; /* white no transparency */
->>  	priv->crop_x = 0;
->>  	priv->crop_y = 0;
->> -	priv->crop_w = timings.hactive.typ;
->> -	priv->crop_h = timings.vactive.typ;
->> +	priv->crop_w = timings->hactive.typ;
->> +	priv->crop_h = timings->vactive.typ;
->>  	priv->alpha = 0xFF;
->>  
->>  	ret = stm32_ltdc_alloc_fb(dev);
->> @@ -766,30 +780,30 @@ static int stm32_ltdc_probe(struct udevice *dev)
->>  		return ret;
->>  
->>  	dev_dbg(dev, "%dx%d %dbpp frame buffer at 0x%lx\n",
->> -		timings.hactive.typ, timings.vactive.typ,
->> +		timings->hactive.typ, timings->vactive.typ,
->>  		VNBITS(priv->l2bpp), uc_plat->base);
->>  	dev_dbg(dev, "crop %d,%d %dx%d bg 0x%08x alpha %d\n",
->>  		priv->crop_x, priv->crop_y, priv->crop_w, priv->crop_h,
->>  		priv->bg_col_argb, priv->alpha);
->>  
->>  	/* Configure & start LTDC */
->> -	stm32_ltdc_set_mode(priv, &timings);
->> -	stm32_ltdc_set_layer1(priv, uc_plat->base);
->> -	stm32_ltdc_enable(priv);
->> +	stm32_ltdc_set_mode(dev);
->> +	stm32_ltdc_set_layer1(dev, uc_plat->base);
->> +	stm32_ltdc_enable(plat->regs);
->>  
->> -	uc_priv->xsize = timings.hactive.typ;
->> -	uc_priv->ysize = timings.vactive.typ;
->> +	uc_priv->xsize = timings->hactive.typ;
->> +	uc_priv->ysize = timings->vactive.typ;
->>  	uc_priv->bpix = priv->l2bpp;
->>  
->> -	if (!bridge) {
->> -		ret = panel_enable_backlight(panel);
->> +	if (!plat->bridge) {
->> +		ret = panel_enable_backlight(plat->panel);
->>  		if (ret) {
->>  			dev_err(dev, "panel %s enable backlight error %d\n",
->> -				panel->name, ret);
->> +				plat->panel->name, ret);
->>  			return ret;
->>  		}
->>  	} else if (IS_ENABLED(CONFIG_VIDEO_BRIDGE)) {
->> -		ret = video_bridge_set_backlight(bridge, 80);
->> +		ret = video_bridge_set_backlight(plat->bridge, 80);
->>  		if (ret) {
->>  			dev_err(dev, "fail to set backlight\n");
->>  			return ret;
->> @@ -827,7 +841,9 @@ U_BOOT_DRIVER(stm32_ltdc) = {
->>  	.name			= "stm32_display",
->>  	.id			= UCLASS_VIDEO,
->>  	.of_match		= stm32_ltdc_ids,
->> +	.of_to_plat		= stm32_ltdc_of_to_plat,
->>  	.probe			= stm32_ltdc_probe,
->>  	.bind			= stm32_ltdc_bind,
->> +	.plat_auto	= sizeof(struct stm32_ltdc_plat),
->>  	.priv_auto	= sizeof(struct stm32_ltdc_priv),
->>  };
->>
->> ---
->> base-commit: c98b6a6dcd1fc7bcba081fc2353954e33de5053c
->> change-id: 20251209-ltdc-48abd0de6852
->>
->> Best regards,
-> 
-> Hi Raphael
-> 
+>> -	if (IS_ENABLED(CONFIG_TARGET_DH_STM32MP15X)) {
+>> +	if (IS_ENABLED(CONFIG_STM32MP15X)) {
+>>  		if (ddr3code == 1 &&
+>>  		    !strcmp(name, "st,ddr3l-dhsom-1066-888-bin-g-2x1gb-533mhz"))
+>>  			return 0;
 > Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > 
 > Thanks
 > Patrice
-> 
 
 Applied to u-boot-stm32/master
 
 Thanks
 Patrice
+
+> _______________________________________________
+> Uboot-stm32 mailing list
+> Uboot-stm32@st-md-mailman.stormreply.com
+> https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
 
 _______________________________________________
 Uboot-stm32 mailing list

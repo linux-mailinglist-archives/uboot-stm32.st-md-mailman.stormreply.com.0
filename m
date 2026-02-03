@@ -2,71 +2,71 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id QMMGMiQngmnPPgMAu9opvQ
+	id iLQhOCUngmnPPgMAu9opvQ
 	(envelope-from <uboot-stm32-bounces@st-md-mailman.stormreply.com>)
-	for <lists+uboot-stm32@lfdr.de>; Tue, 03 Feb 2026 17:49:40 +0100
+	for <lists+uboot-stm32@lfdr.de>; Tue, 03 Feb 2026 17:49:41 +0100
 X-Original-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id B6FDFDC3FB
-	for <lists+uboot-stm32@lfdr.de>; Tue, 03 Feb 2026 17:49:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C8AEFDC402
+	for <lists+uboot-stm32@lfdr.de>; Tue, 03 Feb 2026 17:49:41 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 75533C87EC9;
-	Tue,  3 Feb 2026 16:49:40 +0000 (UTC)
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazon11013063.outbound.protection.outlook.com [40.107.159.63])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8C806C87ECA;
+	Tue,  3 Feb 2026 16:49:41 +0000 (UTC)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazon11011038.outbound.protection.outlook.com [52.101.70.38])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 83688C0693E
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 48803C87EC6
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  3 Feb 2026 16:49:38 +0000 (UTC)
+ Tue,  3 Feb 2026 16:49:40 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Nw/PzOBFVNUSR7k7UZewlxIQJQIyps1mHEOKdzROBRhw71J3p1dd0ZPnsYRgNXr2KMy/7dEeit8hAOCjGlxuEkYzvGT8AqWd7DkXoJxJTiwLgr+w0FdgiJeHrDTgsjYrKzFMcdCf5+9Kz2KTUDbq5g9Mq5Sr8BiZ4ijnT6XnY6smzQ5AjD6PeJ9rvUY0Tunyx65hrNU4z0ScMFu/ZLTaP6KDZReGUthnNgb+2hWjNjCh8FeiGF1/ED7x9J8S9jyGBBvsrl3s+bIux/nkCrpCV818Il1pQCKInhBLv/W7dzngXvfZNzhtjQBGeOdT9uw00+XX8bvLT0XcBU1BSi/1Cg==
+ b=hMpUep/uEaiBadqSrl3wC/PAHo+bpNRsrYJ3mMqyr72zmwynoqiKL1/mWx642ilRKlDv9YJG2xT4XAS57mPhQwwO7mkggdw5CINlUG0qkewCcf1PzBEVVuq0fF/YW73kWPE5dnyobLyDvvKG1NT9SFp8Xta1Hgvbn6+DckIdyf2XMoWqNkgRvza/To7khNGu2SPe6wtBHN9S7eL3Hb1zyQS4yDPuKsF4HQ0sOpPXk90FtOnIz8zz1q8ZssFS/xjrNcCMren8JEJPI3K6zjCQ9nLtnpvI+x68fVmKhwS0x43BdhZHKg4iFY8r2NFSvE/jhskHt7wFww7B5d58x7efwQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1so7zF2nGMbnBAnGjDonSAdhe9F2EepyVQZ5YjVKrmc=;
- b=cCxWOepP3SqCP5XYKX2f450qmf6SBIIhNs4jN5oWzwZhCtjT43CkdvSlMcnahv+Hzc8+wYyqWy9hP29PtP/Jw0cuvFJvsbTWfuqTsDhvfXbPZgV9jyQyCk9E9eKWbdTtMmyhtmGZXvlsA9l+ZpmaBWraQhF5osEP90g3NYwVtwhzTEFZSKhBLhXghWo2wlPHQmA9h3wqneuFYEU3EIyEo7cEGbyy6bHGY5rUXAp/5SR1KnlyrNR/T3pkHK3cdobwyBjheKZkp91AviwsogPKwXDuwkq7sRH/s6Of/RTTKavvxfISuqJnF0sP9t0oHao5C/pYi8pLZHwGAUz0WmqJgw==
+ bh=B/DBJfHtXRW9jcC9bdTzmAWp7FGgXN4WdILPxAwjDlU=;
+ b=b/K48nocuJIVHBLnoX069Xk2yk2I8ZI84LHXu2ffYPO7PP0ST1t5L9BwjRDl8l3tPYFghXw+bncvomy6CM2LQZzn9qqhN3gkTUGrtEsPbyi+J2KGZCAfgV5wZpym4fvkeSFGYb3MsoA09S2rnq3UwKetLoSumbfRv09PO1iN0TsN2M3r8ugO4smuzGug6xvsG407BACH2ol7TTowsp7USv1MqpUDkfmATz1uuCU/+NcVLZvtc4z23e4gzde+5D9oSKVD+x4iTsZxO2cs6VwSdeUsoh6ajGp5esHXpM/ON6GcGIrT2OolOdWf5Mt69gXlQsZbCAWOCk67WpKTyWkbig==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.60) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=foss.st.com;
+ 164.130.1.59) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=foss.st.com;
  dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1so7zF2nGMbnBAnGjDonSAdhe9F2EepyVQZ5YjVKrmc=;
- b=IV4ftBnp1BGzdG0Gl3vObybbzqev19Q+1O5RoOJQOqyq3W4zVOc294gbgyH+q09UPVoU9a6P80OoYDsKT3V7tdX4mWSIL+XmxyuD7YIkTu7PMGWHvVTlo2ehp+YHSB2cvaoT/AouQfZ4qjT83u1CNPOrO1ABh+OMemAe1/2cOyeBF0AFBhxnDW6QkwxY9nssgyWOPT86UkbGcL3aHxQlCC4dIEbhvQiR/+YlIRZLqoBgto48wSE3h7cQM5OlW9qHrDcPHx6okMQ+tnzVe6ho+j4rt26X2Fcn1a2B3wS8zLyjoesD4KFhkCi/yH4dYNzCDbIh9W7gVoG7Px7Ci/eeQA==
-Received: from DU2PR04CA0027.eurprd04.prod.outlook.com (2603:10a6:10:3b::32)
- by AMBPR10MB9273.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:6a6::24) with
+ bh=B/DBJfHtXRW9jcC9bdTzmAWp7FGgXN4WdILPxAwjDlU=;
+ b=YYMulVb/vQr92lGvEI+TWQQXXk0GFVKfW2U8kbvAMPjkWORQisjgVBi7ZIv2AOu32FxdGrqljA/y/PxyMQ7GEpD8B6sv+2uRPp4FaJlgHo2scoFkdLbZrB0KJPpYpVGyQe79T+xnQQQm0uE0JvzspL4hgXmNv+Flf1E0goCyAjbs9gVm1bR4g2T9x4vIpY5ma/OEV9/DTcOZKXd5P35KvUdXT6b5uLJmYcZ92QmLidDcTDtpkaG3dit4q1gQNKnyiS1wBZ+Q1PJfcEDzk2idUpz7cSg4ZVJ632MUcwLAGjJ1YYT6HDLpxBKm8my4wcu7aPVfZ53SE0qxLw4iL3WGOQ==
+Received: from AS4P195CA0003.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:5e2::9)
+ by PAWPR10MB7197.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:2ed::14) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.15; Tue, 3 Feb
- 2026 16:49:36 +0000
-Received: from DB3PEPF0000885D.eurprd02.prod.outlook.com
- (2603:10a6:10:3b:cafe::81) by DU2PR04CA0027.outlook.office365.com
- (2603:10a6:10:3b::32) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9564.16 via Frontend Transport; Tue,
- 3 Feb 2026 16:49:36 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.12; Tue, 3 Feb
+ 2026 16:49:37 +0000
+Received: from AM4PEPF00027A66.eurprd04.prod.outlook.com
+ (2603:10a6:20b:5e2:cafe::7f) by AS4P195CA0003.outlook.office365.com
+ (2603:10a6:20b:5e2::9) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9587.12 via Frontend Transport; Tue,
+ 3 Feb 2026 16:49:35 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
  smtp.mailfrom=foss.st.com; dkim=none (message not signed)
  header.d=none;dmarc=fail action=none header.from=foss.st.com;
 Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.60; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.60) by
- DB3PEPF0000885D.mail.protection.outlook.com (10.167.242.8) with Microsoft
+ designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.59; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.59) by
+ AM4PEPF00027A66.mail.protection.outlook.com (10.167.16.91) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
  15.20.9587.10 via Frontend Transport; Tue, 3 Feb 2026 16:49:36 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
- (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
+Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
+ (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Tue, 3 Feb
- 2026 17:51:14 +0100
+ 2026 17:51:23 +0100
 Received: from localhost (10.48.87.93) by STKDAG1NODE1.st.com (10.75.128.132)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Tue, 3 Feb
- 2026 17:49:35 +0100
+ 2026 17:49:36 +0100
 From: Patrice Chotard <patrice.chotard@foss.st.com>
-Date: Tue, 3 Feb 2026 17:49:23 +0100
+Date: Tue, 3 Feb 2026 17:49:24 +0100
 MIME-Version: 1.0
-Message-ID: <20260203-upstream_add_stm32mp21_support-v1-3-48ca3409cce1@foss.st.com>
+Message-ID: <20260203-upstream_add_stm32mp21_support-v1-4-48ca3409cce1@foss.st.com>
 References: <20260203-upstream_add_stm32mp21_support-v1-0-48ca3409cce1@foss.st.com>
 In-Reply-To: <20260203-upstream_add_stm32mp21_support-v1-0-48ca3409cce1@foss.st.com>
 To: <u-boot@lists.denx.de>, <uboot-stm32@st-md-mailman.stormreply.com>
@@ -76,66 +76,66 @@ X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
  (10.75.128.132)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB3PEPF0000885D:EE_|AMBPR10MB9273:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8c63de91-a5fd-4a02-5724-08de634436de
+X-MS-TrafficTypeDiagnostic: AM4PEPF00027A66:EE_|PAWPR10MB7197:EE_
+X-MS-Office365-Filtering-Correlation-Id: 911ca2ec-0424-46d5-0372-08de6344373e
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|376014|36860700013|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?dlo5R1orazFDcnN2MHhjd2NYTVZWUWlxc1JETFBzZ3g4bWthell0bVlNcXBn?=
- =?utf-8?B?Y0hCL2dzQ2UxLzRQSVNmRW9oMFVDRE1hZGFPUXRPNm1zTFM1Z0lhdjdqZURl?=
- =?utf-8?B?Qi9BdmxWcVhGTDRoWUYwdnhXQzN1TkJ6OFFQa2NZM0hVSU9EaHpqTlRUbDBj?=
- =?utf-8?B?Yk43RCsyM3pBTER2dHRQVzNYQ1NLNEZRSWQzdWhWak8wTitUYVYxNGxwSmRs?=
- =?utf-8?B?Zzd5K0FEckFhYzBML29GZzBxN28zMmZrWkFTbUZzQXlOV2RmQ2pzMjlxbmJn?=
- =?utf-8?B?U2dXYXJVdG1CQUlRNmp1ODRtZ1czdEx2eWFlMzBhR0ZaM2ZYS053cnpyUVpM?=
- =?utf-8?B?MzI3RVJ3TlRkb3BRRGNIUEIyMDdtZmNmZVBsNnV2UGpXRWZaQ2FNUUIzK0FW?=
- =?utf-8?B?WldFOWhwN3NaaGUzQjUwZ3VyQ2JLWHFzd29OcWxDcFZrcHp0N2R4RWN3M3g1?=
- =?utf-8?B?Zjh4eWgxaDYxdlpvQXBCSEV1SkthSStSZm9RQzByQXhGTFZGWlNBZ2JnWnU0?=
- =?utf-8?B?TFdleHgwWFpyUVZJQjJodU1xdlZ6bjVOK1ZZaFpnV2tyTEw4OUlHODdDZkdw?=
- =?utf-8?B?ODZCemVtYWE0ejZ6UlBENjFZN1ZJM245OWxtRWdtMktGcXBmd2NVSUMrejA5?=
- =?utf-8?B?ODFzM1BaZFpRVVhpTGowbEV6dWNVSS8vSU9VQ3dQNDBCcWs4OGdBNHY5VHB5?=
- =?utf-8?B?Z0pIL0p6R0QwcTdhd21mam8zYmtyZi9yQlBDb0ZBamJ4Vmk5LytjbVFPZjFq?=
- =?utf-8?B?SUJKcEllZGhmdWVmQ3lCWjMxeWlKUHA4Q1gweGJCR2huNDhtNjdXdjlNVFhR?=
- =?utf-8?B?YUtjdFp5NVdBdC81QUdqNWk5a0R6N0xXNVFmcmZ3NCtYR3ZNZTkxRUJQaFkw?=
- =?utf-8?B?eXFIYnRmSi9YaUEyREtVbkNMdkRoVS9CbVdwUFVKUkxoRENhQjJIeFlFcWdk?=
- =?utf-8?B?eWFLYmUyZUFOQ3NaaHp3eW1wMUhmdFhUdnBaSnZ5SWVJTFJwb2J2amx2bW5T?=
- =?utf-8?B?bFNXWEozMDVkdGZGazNMeS9OMHNlRHgrd2JJYUVwVEhYcnBsMWFNd0FDWEJK?=
- =?utf-8?B?QloxcUdyNW85YlNoZVNGU3dZSHpGTk1RUmErdzVYL1RQU3UzOFp6alV2Y2ZJ?=
- =?utf-8?B?d2Z6bWhqV2xZY1UzVGsvZTBIeFNlczNMRWtaU0xjY3plRW1CT092Wm1uaDY5?=
- =?utf-8?B?b1hrYjk4emRFVDMyanpxQVFvV3g5SW00Z2hxMHAzZWdFQ0xTZDhtbS9kT1lt?=
- =?utf-8?B?WmZHRDIrVERUcDBvRUVHM09tRTRlYzkrSERMWTByYnczN0dxSzNqYzhOU29w?=
- =?utf-8?B?VWZpMmtPTzRrckxrNTNBWXRFY3A2SUlZWm1rMlU2ZUpHc2VjcEFiMWV5SGZD?=
- =?utf-8?B?K2hYdCs2a0w5VklOV3hRWnp6SUZkdTg2RG9BUmZiM0QvMjc5aXVuTUljY1B6?=
- =?utf-8?B?bDJDMEkvWGZVYWp5N3dDSnUwekwvcGJFLzdaL0x6ZkFiU1pFSzh1M0lHRGlm?=
- =?utf-8?B?L1FIc2FYYVVaRXZDTnBIbytUTEtBMnNvMktWVXYzU216VmlTcEJud05DT3BM?=
- =?utf-8?B?SDVaRko2VjIxZE56TXBqY0tqcEJ2QUwyWWdEVE1adWFGZVpPVlZRUjZQV1Jk?=
- =?utf-8?B?Wnp0eTZWckhsenZYSk1tY3JiUTdhQ1hrdW5sWUZCbCsxM1NMQ3Y3akhJUGZY?=
- =?utf-8?B?Qzl1UmljOWRURDIxL2x6TldSTkE5QUJ6cHdYNUlGcUpGcW90aTltRUlXN0th?=
- =?utf-8?B?a24wb2hXUXJSY1Q3RmZHYWV4b1VXN3hQenJjeGx0Y3NwTG5uQUx2NSswV2Rl?=
- =?utf-8?B?Q28zQ1h2K1JLbVdudGpTcWZDVTU1a1JZeXd3bHVKU1dubW1nSllCRkVzUFBq?=
- =?utf-8?B?RHZwaHZ3WThxOThFR2QyRkFJcVdmcStUQ1hKQjdGbm8vNGM1cFQvKzN1dHdQ?=
- =?utf-8?B?RHJCcUxFNkt6eGs0WVNWeThtbHNvMDZWYmd4cCt6Q2d1WlU2WkQvL2gyV2k1?=
- =?utf-8?B?V1FUaWVSVHlveXFaeWZBRlBKUTJ0dFRVSXdCSldWbW5hREZQcGpTV1AzOU9E?=
- =?utf-8?B?RzU2UWdCd1FaUXg5dVdFcUtXSVpGUDVveGRzbUVkUGJNSmZlVjBXL2w2b1F1?=
- =?utf-8?B?YWIwN2k4SmV6L1VHS1FyNzRXVXJuWFI5TmtXWGJ6RDcrN3lXQS9UbDZ2REZ5?=
- =?utf-8?B?bWxtME84bEJZd092YjlFazRSd3NiVUlnVWpuZmowUjNhOG11cXF2UmlzVDRq?=
- =?utf-8?B?YUhPenBFVXBPUDNoQ3dZQjFSUzlRPT0=?=
-X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
+ ARA:13230040|376014|82310400026|1800799024|36860700013|7142099003; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?WW9TL2RZMDFqR0VoNS8raE1hNTR2TGtFL2ppYnNrWFNFMndXZ2JTcnFZT3BP?=
+ =?utf-8?B?RUFQa0NEdWM4WjZmcnEwUTFjS1lsbGpNeXRaRUJBM0JoQnZsbGRTbVZTb0VJ?=
+ =?utf-8?B?bFZQcWNGRDJIZGhKK3JqU3d2QS90Y1U5OGhBSHFvTHFDSGVzTkRYSXVweWMx?=
+ =?utf-8?B?WG1zbjkzOTB5cjcyZnlQeVFxNHkxdGs2WFRUZjNQUTBodHJlWWFjMWZQVFkv?=
+ =?utf-8?B?SXFxR2Y2VGtyTnhDSzNHeXQzb1pQQmcvODhOTGxEWU1uUEx3cDl2aUljUXpK?=
+ =?utf-8?B?RDVDNlR5c1ZRL1pzM284SXBTUG1kTWEyaFpsdGNkdndRVDROdzFKWlRobkVB?=
+ =?utf-8?B?T3kxMTR3UVZiSDJnUGxBU3d6UlE2S3JnQ3JnU01GVkJMOUJsZ292TkFQSmky?=
+ =?utf-8?B?NG1NVGN5ZUswMHFnQUpKWTZXNEJaMjBraHJJdTJHTE41SzlqNDFvQm9JMVFH?=
+ =?utf-8?B?bXJldGdqRjNwNDEzbTRZeEt6QjVKZ21KdGpMN2Nicm1rUWd1OVVPZGdpZno5?=
+ =?utf-8?B?TUFBVjlhM01sMk5kRWh0OVF0cTZ2WEQ2ZVRlWGM0Rlh3aGRFdS9hcTVKSTdN?=
+ =?utf-8?B?UG5kdWZiako2enhGaHVOTVNxdlBCUi9mWm91RVpUbndEUWMyTHBmK1NEcmJv?=
+ =?utf-8?B?bHQwSHBMcVZPY0YvVWNvWjkvRzVTTzBTcDRKUTZCQjZxd0h4T1lORU5xZ2JY?=
+ =?utf-8?B?WjJ0Sm0yeU5BajRON0F1TXZGNGVhZ0J2ckpBUXNUWUpFdkFGOUpnVWhUR0VI?=
+ =?utf-8?B?SFFmTTdpeS9UWXp1dzlTdFZtb1IwY0YydHlPeWdmaXRvVTBwQUNlMmlPM0xI?=
+ =?utf-8?B?My9WeStBUHVISnFiZGhudXJNRU9BeVJ5eVZTUW9neFNCcW9tNThwUy9xcDJV?=
+ =?utf-8?B?RUk5V2tIdWNVYTg3YzB4ZmxGc2RWRmdmSlNqZ1ZTSEdPamM2a21XbFhpTGIr?=
+ =?utf-8?B?RjI0RFBsZGg2QUlSdzRQWWRUeVB4YU1NTUd5NDJHRnQ1TklXdnk1Wm5mK1Zw?=
+ =?utf-8?B?aStobHlQYmd6alNsRnI5eEV2VFpvSUwweUlQeGk4NUtTQVlscVlBSHFzRUwv?=
+ =?utf-8?B?dmZpMFRQbmQ1aDhsanNNUlFvbC9GOVZwMXExYUZ1U2IrSnVXb1dOTXd2YjNE?=
+ =?utf-8?B?YXhXd2lHTVRXQmllSjlWclFuTzA4cEdaM2JocGZxcWpXYk5mN1l2NWwyNjJM?=
+ =?utf-8?B?Nlc3Z2V6aVVzRWdKcmgxRnBnczk2RHRKV3NXMTVwSTZFOEJKajY0NFdyWi8v?=
+ =?utf-8?B?RHhzN290NTJJejl6L0xUVVR2R3NNZzNtbGcxRWNMRS9wREhWWk5BakVQQzNq?=
+ =?utf-8?B?ak5UQUVBSDVGcUZxczRxRDNxOS9JT0VWeCswZnQzejdHWHBIeVdtSjgyWmpI?=
+ =?utf-8?B?aXJITUF0MHFRNFFhQ3NhWXBzbTZwcXRqOWRJNFRBTFNIc3RxSzJxMDhtaGll?=
+ =?utf-8?B?c055S2pxZFZWenh5SDFCRnNodnFjNnBFUlducU1yRDhpTE9tTDVnMUxISXBu?=
+ =?utf-8?B?VkNVRTRqSHdGNVN0LzVUb1UvS2pmNDlHdTVaMCtyWUYrRTVxdmN5VEdtSFpL?=
+ =?utf-8?B?WWxxell1VlVJMmpwcHpKRHFTZTl6UHpFaHozZ3dIYU5tRWlwR1VDWWw4MEQv?=
+ =?utf-8?B?Z1Nlemd4bjdZMnRyNUF3SEg5QWVteUZUeWowQmg3VUxBM295amJ4YzJUaW9a?=
+ =?utf-8?B?RUNxMWhRckFDdTZYenFhUXowM3ByUXo5MkxTUXArQjViWXc3QlBCSjFYKytW?=
+ =?utf-8?B?aklMR1ZqaEdWQ1FOalZTR0VNOHJhS1lrbnAvcWRYMmMyVzR1bnBtZHFOM2ZJ?=
+ =?utf-8?B?c3dzZlU3ZS8wa0NxTWxHWkhJMXBSMHJlcmdLMFhYQ0owcjJvTDJacmlPUWZn?=
+ =?utf-8?B?dEpXS25FTUpJcUxMbGhSeFJlMlpYeDFBc3ZXSVdJbEh2b1g1M3FhNnc2ZGVq?=
+ =?utf-8?B?U1RmSkV4RDYreHVmK0hpdnNjcTBMbzZib2wzS0JvQ1dGR3R4Syt1UFVQeElI?=
+ =?utf-8?B?aWlyb2xsMHc5eUxkd2pmdTd1bkhKY0ZsVnRUUDFLZWltazlrSU1ydmRoTGM2?=
+ =?utf-8?B?Z1diR3IrOUFUN3E1N1VGR2tSdG1GaWVGeldwZEtzSUNucXJTWWw1eFNHTHVC?=
+ =?utf-8?B?eGpNRjBidk9GQXhWRGttVUxMSG43S1RhVEdsdDBWb2ZyVUxBQWN5Nm90eUEw?=
+ =?utf-8?B?WlRoSVEyazdoTVNnemhpRGRxMnVXb09Ib0Q0RGVGL2p1WVF6Nnk0aVVXaW1v?=
+ =?utf-8?B?OWgyTnlVSUZoTzhTNmdqMzhSY3ZnPT0=?=
+X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024); DIR:OUT;
- SFP:1101; 
+ SFS:(13230040)(376014)(82310400026)(1800799024)(36860700013)(7142099003);
+ DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: XuAp6b5KGohaue3FvHVfHV41NQjXNGvHPeC0dEtsJPN6ENckaX/qH/BxqYFt/HcJpltANrGvCa0FxAcQXxt5gYBFZNUkoHSYRiord/4bjScnKLONb7/cvkN3W/2JybTqC1DKjKqcd5pwDHOB5/bbMaqcKS82OLXRuOZl7qQoDyad5G1eMYwe7kowB3rhRxxXPHUeDt7qsuv3ndGF7OoJgfxAlhsPAt1VH3E9fxAWcalyZH7yT/+CD9rnirhb/HC7268ApNMFGJV37oz7wYlGjs8ByenFyHR9GvWSjDBL9/CTOvjU3eWkCb34uEweJicMW+j3G21a1N8kqa4nBpy/gwv7Yq4mCzwzL6RtRmi6l9bRVAgf0oO5oJjBpflKRIFjULYlTt2a72Qjw2LjXRq3sHJcp4pOH8veuw464jxX89Vvxl3hLbn26mJ36HYPHlPU
+X-MS-Exchange-AntiSpam-MessageData-0: /MOb5DPFGh+61tLfdi0y91nNEz2fwLgmsSP+nxG2qEEKXnF94GyXUWf3mgVSgdrePr3h71Ehynf6tuRkYWfVYp+CKtdQKRUBP7vg0YGNqqbedHU2HTgm3IY/s2cLD3gmnYfYXh5EDbbTOz6CTghSd98t2oGc7vfRZM0J/iTpXXXSh4K9pRpXfiGEnIjDv3Bom35tjl7L87mDT8powIIxiFejxhMOJTx7wsFzggTSdAjSpHW2vVTL6LzrsvGrWMYS5V6bqoQiHn8rVbGibgxZj+nLbSMy31fNfk1bkcNHdLlv95jL/lUMafGrT4wQC26Hc1eV5NHl4lZfwMBjY75PcIKTLfm7mkkrk12pbTMuTt7hTMJankIVCkY/5tVxDrO5k8uiw/z1jfruNZyTWsxInaLm4rtV5zIP3bZzXGE27GpI3swiwipyv2y3GPu+JPSN
 X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2026 16:49:36.1481 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8c63de91-a5fd-4a02-5724-08de634436de
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2026 16:49:36.8073 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 911ca2ec-0424-46d5-0372-08de6344373e
 X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
  Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: DB3PEPF0000885D.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: AM4PEPF00027A66.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AMBPR10MB9273
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWPR10MB7197
 Cc: Tom Rini <trini@konsulko.com>, Valentin Caron <valentin.caron@foss.st.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
  Michael Trimarchi <michael@amarulasolutions.com>,
@@ -148,7 +148,8 @@ Cc: Tom Rini <trini@konsulko.com>, Valentin Caron <valentin.caron@foss.st.com>,
  Delaunay <patrick.delaunay@foss.st.com>,
  Lionel Debieve <lionel.debieve@foss.st.com>,
  Gatien Chevallier <gatien.chevallier@foss.st.com>
-Subject: [Uboot-stm32] [PATCH 3/7] stm32mp: syscon: Add STM32MP21 support
+Subject: [Uboot-stm32] [PATCH 4/7] stm32mp: cmd_stm32key: add support of
+	STM32MP21x
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -198,28 +199,171 @@ X-Spamd-Result: default: False [2.89 / 15.00];
 	ASN(0.00)[asn:16509, ipnet:52.208.0.0/13, country:US];
 	TAGGED_RCPT(0.00)[uboot-stm32];
 	RCVD_COUNT_SEVEN(0.00)[7]
-X-Rspamd-Queue-Id: B6FDFDC3FB
+X-Rspamd-Queue-Id: C8AEFDC402
 X-Rspamd-Action: no action
 
-Add "st,stm32mp21-syscfg" compatible.
+Add cmd_stm32key support for STM32MP21x SoCs family.
 
+Signed-off-by: Yann Gautier <yann.gautier@foss.st.com>
+Signed-off-by: Nicolas Le Bayon <nicolas.le.bayon@st.com>
 Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 ---
- arch/arm/mach-stm32mp/syscon.c | 1 +
- 1 file changed, 1 insertion(+)
+ arch/arm/mach-stm32mp/cmd_stm32key.c | 70 +++++++++++++++++++-----------------
+ 1 file changed, 37 insertions(+), 33 deletions(-)
 
-diff --git a/arch/arm/mach-stm32mp/syscon.c b/arch/arm/mach-stm32mp/syscon.c
-index b00897e87ec..f2cfc9465a5 100644
---- a/arch/arm/mach-stm32mp/syscon.c
-+++ b/arch/arm/mach-stm32mp/syscon.c
-@@ -10,6 +10,7 @@
+diff --git a/arch/arm/mach-stm32mp/cmd_stm32key.c b/arch/arm/mach-stm32mp/cmd_stm32key.c
+index f5def4cd2dc..f1e0a3e817c 100644
+--- a/arch/arm/mach-stm32mp/cmd_stm32key.c
++++ b/arch/arm/mach-stm32mp/cmd_stm32key.c
+@@ -1,6 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
+ /*
+- * Copyright (C) 2019, STMicroelectronics - All Rights Reserved
++ * Copyright (C) 2019-2024, STMicroelectronics - All Rights Reserved
+  */
  
- static const struct udevice_id stm32mp_syscon_ids[] = {
- 	{ .compatible = "st,stm32mp157-syscfg", .data = STM32MP_SYSCON_SYSCFG },
-+	{ .compatible = "st,stm32mp21-syscfg", .data = STM32MP_SYSCON_SYSCFG},
- 	{ .compatible = "st,stm32mp23-syscfg", .data = STM32MP_SYSCON_SYSCFG},
- 	{ .compatible = "st,stm32mp25-syscfg", .data = STM32MP_SYSCON_SYSCFG},
- 	{ }
+ #include <command.h>
+@@ -16,21 +16,21 @@
+  * Closed device: OTP0
+  * STM32MP15x: bit 6 of OTP0
+  * STM32MP13x: 0b111111 = 0x3F for OTP_SECURED closed device
+- * STM32MP25x: bit 0 of OTP18
++ * STM32MP2xx: bit 0 of OTP18
+  */
+ #define STM32MP1_OTP_CLOSE_ID				0
+ #define STM32_OTP_STM32MP13X_CLOSE_MASK		GENMASK(5, 0)
+ #define STM32_OTP_STM32MP15X_CLOSE_MASK		BIT(6)
+-#define STM32MP25_OTP_WORD8				8
+-#define STM32_OTP_STM32MP25X_BOOTROM_CLOSE_MASK	GENMASK(7, 0)
+-#define STM32MP25_OTP_CLOSE_ID			18
+-#define STM32_OTP_STM32MP25X_CLOSE_MASK		GENMASK(3, 0)
+-#define STM32_OTP_STM32MP25X_PROVISIONING_DONE_MASK	GENMASK(7, 4)
+-#define STM32MP25_OTP_HWCONFIG			124
+-#define STM32_OTP_STM32MP25X_DISABLE_SCAN_MASK	BIT(20)
++#define STM32MP2X_OTP_WORD8				8
++#define STM32_OTP_STM32MP2X_BOOTROM_CLOSE_MASK	GENMASK(7, 0)
++#define STM32MP2X_OTP_CLOSE_ID			18
++#define STM32_OTP_STM32MP2X_CLOSE_MASK		GENMASK(3, 0)
++#define STM32_OTP_STM32MP2X_PROVISIONING_DONE_MASK	GENMASK(7, 4)
++#define STM32MP2X_OTP_HWCONFIG			124
++#define STM32_OTP_STM32MP2X_DISABLE_SCAN_MASK	BIT(20)
+ 
+-#define STM32MP25_OTP_BOOTROM_CONF8	17
+-#define STM32_OTP_STM32MP25X_OEM_KEY2_EN	BIT(8)
++#define STM32MP2X_OTP_BOOTROM_CONF8	17
++#define STM32_OTP_STM32MP2X_OEM_KEY2_EN	BIT(8)
+ 
+ /* PKH is the first element of the key list */
+ #define STM32KEY_PKH 0
+@@ -69,7 +69,7 @@ const struct stm32key stm32mp15_list[] = {
+ 
+ static int post_process_oem_key2(struct udevice *dev);
+ 
+-const struct stm32key stm32mp25_list[] = {
++const struct stm32key stm32mp2x_list[] = {
+ 	[STM32KEY_PKH] = {
+ 		.name = "OEM-KEY1",
+ 		.desc = "Hash of the 8 ECC Public Keys Hashes Table (ECDSA is the authentication algorithm) for FSBLA or M",
+@@ -138,23 +138,23 @@ const struct otp_close stm32mp15_close_state_otp[] = {
+ 	}
+ };
+ 
+-const struct otp_close stm32mp25_close_state_otp[] = {
++const struct otp_close stm32mp2x_close_state_otp[] = {
+ 	{
+-		.word = STM32MP25_OTP_WORD8,
+-		.mask_wr = STM32_OTP_STM32MP25X_BOOTROM_CLOSE_MASK,
++		.word = STM32MP2X_OTP_WORD8,
++		.mask_wr = STM32_OTP_STM32MP2X_BOOTROM_CLOSE_MASK,
+ 		.mask_rd = 0,
+ 		.close_status_ops = NULL
+ 	},
+ 	{
+-		.word = STM32MP25_OTP_CLOSE_ID,
+-		.mask_wr = STM32_OTP_STM32MP25X_CLOSE_MASK |
+-			   STM32_OTP_STM32MP25X_PROVISIONING_DONE_MASK,
+-		.mask_rd = STM32_OTP_STM32MP25X_CLOSE_MASK,
++		.word = STM32MP2X_OTP_CLOSE_ID,
++		.mask_wr = STM32_OTP_STM32MP2X_CLOSE_MASK |
++			   STM32_OTP_STM32MP2X_PROVISIONING_DONE_MASK,
++		.mask_rd = STM32_OTP_STM32MP2X_CLOSE_MASK,
+ 		.close_status_ops = compare_any_bits
+ 	},
+ 	{
+-		.word = STM32MP25_OTP_HWCONFIG,
+-		.mask_wr = STM32_OTP_STM32MP25X_DISABLE_SCAN_MASK,
++		.word = STM32MP2X_OTP_HWCONFIG,
++		.mask_wr = STM32_OTP_STM32MP2X_DISABLE_SCAN_MASK,
+ 		.mask_rd = 0,
+ 		.close_status_ops = NULL
+ 	},
+@@ -171,8 +171,9 @@ static u8 get_key_nb(void)
+ 	if (IS_ENABLED(CONFIG_STM32MP15X))
+ 		return ARRAY_SIZE(stm32mp15_list);
+ 
+-	if (IS_ENABLED(CONFIG_STM32MP23X) || IS_ENABLED(CONFIG_STM32MP25X))
+-		return ARRAY_SIZE(stm32mp25_list);
++	if (IS_ENABLED(CONFIG_STM32MP21X) || IS_ENABLED(CONFIG_STM32MP23X) ||
++	    IS_ENABLED(CONFIG_STM32MP25X))
++		return ARRAY_SIZE(stm32mp2x_list);
+ }
+ 
+ static const struct stm32key *get_key(u8 index)
+@@ -183,8 +184,9 @@ static const struct stm32key *get_key(u8 index)
+ 	if (IS_ENABLED(CONFIG_STM32MP15X))
+ 		return &stm32mp15_list[index];
+ 
+-	if (IS_ENABLED(CONFIG_STM32MP23X) || IS_ENABLED(CONFIG_STM32MP25X))
+-		return &stm32mp25_list[index];
++	if (IS_ENABLED(CONFIG_STM32MP21X) || IS_ENABLED(CONFIG_STM32MP23X) ||
++	    IS_ENABLED(CONFIG_STM32MP25X))
++		return &stm32mp2x_list[index];
+ }
+ 
+ static u8 get_otp_close_state_nb(void)
+@@ -195,8 +197,9 @@ static u8 get_otp_close_state_nb(void)
+ 	if (IS_ENABLED(CONFIG_STM32MP15X))
+ 		return ARRAY_SIZE(stm32mp15_close_state_otp);
+ 
+-	if (IS_ENABLED(CONFIG_STM32MP23X) || IS_ENABLED(CONFIG_STM32MP25X))
+-		return ARRAY_SIZE(stm32mp25_close_state_otp);
++	if (IS_ENABLED(CONFIG_STM32MP21X) || IS_ENABLED(CONFIG_STM32MP23X) ||
++	    IS_ENABLED(CONFIG_STM32MP25X))
++		return ARRAY_SIZE(stm32mp2x_close_state_otp);
+ }
+ 
+ static const struct otp_close *get_otp_close_state(u8 index)
+@@ -207,8 +210,9 @@ static const struct otp_close *get_otp_close_state(u8 index)
+ 	if (IS_ENABLED(CONFIG_STM32MP15X))
+ 		return &stm32mp15_close_state_otp[index];
+ 
+-	if (IS_ENABLED(CONFIG_STM32MP23X) || IS_ENABLED(CONFIG_STM32MP25X))
+-		return &stm32mp25_close_state_otp[index];
++	if (IS_ENABLED(CONFIG_STM32MP21X) || IS_ENABLED(CONFIG_STM32MP23X) ||
++	    IS_ENABLED(CONFIG_STM32MP25X))
++		return &stm32mp2x_close_state_otp[index];
+ }
+ 
+ static int get_misc_dev(struct udevice **dev)
+@@ -352,14 +356,14 @@ static int post_process_oem_key2(struct udevice *dev)
+ 	int ret;
+ 	u32 val;
+ 
+-	ret = misc_read(dev, STM32_BSEC_OTP(STM32MP25_OTP_BOOTROM_CONF8), &val, 4);
++	ret = misc_read(dev, STM32_BSEC_OTP(STM32MP2X_OTP_BOOTROM_CONF8), &val, 4);
+ 	if (ret != 4) {
+-		log_err("Error %d failed to read STM32MP25_OTP_BOOTROM_CONF8\n", ret);
++		log_err("Error %d failed to read STM32MP2X_OTP_BOOTROM_CONF8\n", ret);
+ 		return -EIO;
+ 	}
+ 
+-	val |= STM32_OTP_STM32MP25X_OEM_KEY2_EN;
+-	ret = misc_write(dev, STM32_BSEC_OTP(STM32MP25_OTP_BOOTROM_CONF8), &val, 4);
++	val |= STM32_OTP_STM32MP2X_OEM_KEY2_EN;
++	ret = misc_write(dev, STM32_BSEC_OTP(STM32MP2X_OTP_BOOTROM_CONF8), &val, 4);
+ 	if (ret != 4) {
+ 		log_err("Error %d failed to write OEM_KEY2_ENABLE\n", ret);
+ 		return -EIO;
 
 -- 
 2.43.0

@@ -2,56 +2,54 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id KAP9MTrSgWl1JwMAu9opvQ
+	id qK2ALjrSgWl1JwMAu9opvQ
 	(envelope-from <uboot-stm32-bounces@st-md-mailman.stormreply.com>)
 	for <lists+uboot-stm32@lfdr.de>; Tue, 03 Feb 2026 11:47:22 +0100
 X-Original-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 634FCD7EE5
+	by mail.lfdr.de (Postfix) with ESMTPS id 637EFD7EE6
 	for <lists+uboot-stm32@lfdr.de>; Tue, 03 Feb 2026 11:47:22 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B4D33C87EC6;
-	Tue,  3 Feb 2026 10:41:09 +0000 (UTC)
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazon11013021.outbound.protection.outlook.com [40.107.159.21])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id DDCA9C87EC8;
+	Tue,  3 Feb 2026 10:41:54 +0000 (UTC)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazon11011001.outbound.protection.outlook.com [52.101.65.1])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C3E01C0693E
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E6167C0693E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  3 Feb 2026 10:41:07 +0000 (UTC)
+ Tue,  3 Feb 2026 10:41:52 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=MO3LP8tVW/zbTO1ODsQT5Z5gdcgdzFm165k4nJpQilCH4VlhxHYQ7DuhMeBZ6nuDOO/nl8exeJnfoB5wa3qQ1cBKj6KyRdAC2aTeDZnYCtgLk1dZEN0tDS1cm3+zDHIoJso+oHAymfrbA/ZoitETe9kL7E2j1mYW/4GR2KJ8Ra2FsVQUrn2HeaGdpZmdKUi1tQc9cbrAGjgQ5j3dIyijPFioQDh020ndnY3zgs+8hn99CggyFKSD6DGSyAwzmGNn132+TpyHVZkdvu0MtnUCuFbgMtL/+gj0Qr3vxbrQ+cWj8ieQczaNfwlvWYVOW+iR1F3iGiUyErX4uTIGwo6mNQ==
+ b=II04IJaHZSTYKahjN7ob/xcgUO31HC3p8ycfTf1U+Mb+GZfDKCn228+8j3XJ6/tETfpS+imHpkHsErB3TVf2iL85Z5UUnXkmq+bSR9BVYkc/+YFm1fDVDwPnx/Jyt+4wPm5DIBNgFwx2v13xThtPoiZ4UhhQCwkANxMRPTpUmQzM6V68tYHJF4+cjnQkxTpedrcZin1cXlxcC9HKmr76NOKtcPWW0Zw+cMDszxLASwxWRQ8A2rWTi1Z0uqj4HluHVLw4CY2zWmLrJFM25O5LKSBvpureQfn7jeRg/oBYmBR1VbTtdfZ+NonUuq2u9INkBO7f+TJulS/Cvy91FrKV0w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=eWn1Sb4Qk23EPNx9ZDbTWRmQJJYk/Z/qrvh9epoBqwk=;
- b=eJOghiTKS97wCe6jfG2X04lbLssvenemVLDYCewyWQVz2nfHLGxIcccx63TJJkJd0cOFKSIaOfq72HlV1V+KYa5e91DwRZ6hp6tIOVfbqMBfkzt13oIQCjzwHbJtUmgPJ9kfxJUarVDzlNLHWrHOObsLC3bLb0DrNJoTpO95xIUpBxCLUwLS4HvnCGCzJHFFW1K/gOfoOMt+1MEmzfrsCu+4s6cTVk4S897dvz111HyOLYl3KynXAmU38gAU4Dz9+WtRbD9+8AvBxST0cEgr2E+KGqu7K+ZfDN6gJZafxIcT19/2KAfhqC2KacREFXOoHIKDincwPgRiyB1/nlJSJg==
+ bh=qXIalp749cy1dt2rrod5zpIWmAn2Ztur8mGaWhxYvzc=;
+ b=WE+B/TZ9789y230jtXiDffOhu/bwrZYj94jnq9z7MgiAzxz8PVBcLdUY+j+CSXYgP9t9tRyVDj565dPeXrNNQ0A2cIV40vTnrrGG4+4yM1UdY1r2WXQl5m3Ord3zrRm2LLtUZcmo7fNtu18RngnYJVxIg/K2wzH3m7eeaJPtd9KzceYoHBn4yKPcfDTOGI8Y8c2W26dOonT+8NsIFoC2Lc4J/zGwVGVZ2r2zfU8Hz09hVWJvGDp8JFd5XNueR8IRRLmn0HHoucO73A/ahuGq+lbzmL/8Nb8ydCorj7hwXcKrfnBjUPtPYLL+DYItxHAf7KBG2eC37++7DkRhujBTIg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=eWn1Sb4Qk23EPNx9ZDbTWRmQJJYk/Z/qrvh9epoBqwk=;
- b=Brrn61dm/rKxzEHdnMvyvtOHubitum3rttPepYVdbku8sTLJSorletr4wwqzP1d2Qr6+VzrBPQ83Xjxl/dohZUzvqqcHBjTZ+C5nb5fcYSdsbPJ4Y3Or4W0OivbXwlLlDPtbZI5k3ZFhBXnps/sBU1utY63IHFlpu7Km49lINvEshcU00vgIqOgXcp5ncd44+a2xXz2q1WSCLiQYwYZjzwYGTd1X037UpA/gHEFByTBkSq4wu74Z79pAnKrj5lWNetxgn2ujLp2QGOhbkbjq+QV7Y4YUIxWMDXkZ4D2fcleRflGTEjFYihjwqauoojZYKCjG4jBwvmull/PsKklFnA==
+ bh=qXIalp749cy1dt2rrod5zpIWmAn2Ztur8mGaWhxYvzc=;
+ b=FhFcCInNPj2S214SGFhcwRMQmtqKkfs/Nqg1fv2+8AFo+vlVDsRKZBvm4X8hkBOP4qPM0yx3JcU2ksmVIR7lvSNT5XMwiS9Fx2UohI32W/FSstbqazn8ruiWYku9CZar9yUJ57f5F0m6XVhDx+eU4RSpo34J5C+GkbMPo0YM8UgLPWXXaoRfLTOKvObKdL9Mbf/YPe3ObUT9FUjcl/5XRz6qhMVjPFA3I8vzyjI2uWrZZvl3H4rDWoUNHzLlni1GpDv6Q0cz7CUAweNHqof52gA2klCsgBp2JnWhiaDWGoVmtxQHWDIkULeLSH6rO+5age1RyR88Nz0FiWVUJDXDFw==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by PR3PR04MB7291.eurprd04.prod.outlook.com (2603:10a6:102:8c::21)
+ by AM9PR04MB8291.eurprd04.prod.outlook.com (2603:10a6:20b:3e5::18)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.16; Tue, 3 Feb
- 2026 10:40:59 +0000
+ 2026 10:41:44 +0000
 Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
  ([fe80::4972:7eaa:b9f6:7b5e]) by PAXPR04MB8459.eurprd04.prod.outlook.com
  ([fe80::4972:7eaa:b9f6:7b5e%5]) with mapi id 15.20.9564.006; Tue, 3 Feb 2026
- 10:40:59 +0000
+ 10:41:44 +0000
 From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Date: Tue, 03 Feb 2026 18:41:31 +0800
-Message-Id: <20260203-cleanup-v1-0-4221c13e7558@nxp.com>
-X-B4-Tracking: v=1; b=H4sIANzQgWkC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzMDIKGbnJOamFdaoGtqZpBsaWCQZp6UbKwEVF1QlJqWWQE2KTq2thYAmV9
- mXlkAAAA=
-X-Change-ID: 20260202-cleanup-560c900f7bc3
+Date: Tue, 03 Feb 2026 18:41:32 +0800
+Message-Id: <20260203-cleanup-v1-1-4221c13e7558@nxp.com>
+References: <20260203-cleanup-v1-0-4221c13e7558@nxp.com>
+In-Reply-To: <20260203-cleanup-v1-0-4221c13e7558@nxp.com>
 To: u-boot@lists.denx.de, 
  GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
  "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
@@ -69,105 +67,105 @@ X-ClientProxiedBy: SG2PR04CA0187.apcprd04.prod.outlook.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|PR3PR04MB7291:EE_
-X-MS-Office365-Filtering-Correlation-Id: 66db614b-585f-4c25-e63b-08de6310b79a
+X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|AM9PR04MB8291:EE_
+X-MS-Office365-Filtering-Correlation-Id: 130af9bc-6b69-471f-d6bb-08de6310d2f8
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|366016|52116014|7416014|376014|19092799006|1800799024|38350700014|921020;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?bUpVL2VjSjkvM0dFWVhQUHNEdHRQTFJhTXhBcWZnMHlKYndkRkZqNlRocXZq?=
- =?utf-8?B?QVhHMzN6cDk3NVJTY09WaWp3V0VEYSsrbGNQem50Sm5GVklHVlFoRTJXbmhw?=
- =?utf-8?B?eHBpVFpFZ1NyNzdUdHQrM2I2NnJiY2ZoTVNMbHZMRUhLNWxWUTVVejByOFNi?=
- =?utf-8?B?alg1TUpZQWpYbGpDQ1JPTDdGR1lUMW5kY0RrSGJ6cUFSNStJV2pNUnREWnhW?=
- =?utf-8?B?MjV2T0tyUTR3ZHk5WlRyTmpZV285bUY4K0Z0Yi9YaWwwSTBkUlVuZHJHTmFi?=
- =?utf-8?B?bHBIL1NxYlp1QWp2Yy9aOVNtM05WOXBjQW9sUHNqNlhkMk9DN0kvbnBwTDh5?=
- =?utf-8?B?YktQcWpvUVdJOGdlNXZodHRhd3ZqY00waml6a0w2a2VKTjR5N3I0UUExQ1pB?=
- =?utf-8?B?YVdwTjA0aUw4OXhkd3J6WlQ3ZXhqa0hoYzExMVhiN1hvZEttdHdjalBZMmVK?=
- =?utf-8?B?bHdWTzZiWUVKOEFZa29QS2YxTytiUXc5aWNwRFVKYnBNUTRlUURPbGxVQ2cr?=
- =?utf-8?B?c2s5VEVOSEhtVVVoSWsxMm91dGo3aEx1NjhySXNOSkN0Y2kxdE1GNzlMRm1r?=
- =?utf-8?B?YUVHaUp0Z2V2VythMVFvTEpDaEZkdFBFY2V6NmRXbkRCYTlqSU9oVzVFOGFF?=
- =?utf-8?B?c3JoV0NNT2xUeUZtVjlYdFBGaVZZbk5nbjYrZGFobFlRekErUytDOWNXOXJv?=
- =?utf-8?B?amhHSHh4ZDlPSks5TWQ5N3dkOTBvKzQvZldsd3BQak5TdU5VMnRuRGxyeG1E?=
- =?utf-8?B?YnVTd2ZSb21mK3U2Lzc2ZHkrWDMyejR0VnpQd2ZVb3BUMnlwY096Rm5LbHNo?=
- =?utf-8?B?WXFOb0IvNWhtWC94VXhqaThWTFFSRk16WUJ1YUlueTJYc0dsb0s4M0N6VEZw?=
- =?utf-8?B?RVNxYjJkTFVoQkh2M3k5ckQ5bU4wN2pTR0tzYXV6V1lnd3ZzT3VUQmlaOXk1?=
- =?utf-8?B?TGRCT0prZ3RoVXJPSkE1R1FIOVlGQ25QdjhQOGpLUDNRT0ZJQmI2UnBLRWl1?=
- =?utf-8?B?Wnc4S1AyQlFXZ3pPQjI0bjNLZ242dHZlMCtUYVI4TElEbktDdTVTS2pVREUr?=
- =?utf-8?B?cGszV2V1akdWNHBWdWtGQmVvUmIwRExkMis3UFRRTm8rV0xaa2RjTlBxNTBF?=
- =?utf-8?B?RVV6SFJwM1VIekZZMW11UUt5ZC85ZkNHUk9ZdXBKYUVGaWhYSFJ5N0o4aDNj?=
- =?utf-8?B?eHZsSGhYVlhJNlVnczllOFRwRVF5NWxKYmJjQ0xweUdYeUc0OHlUTjV6NWIy?=
- =?utf-8?B?M1g2YU43RGx4NnRnSHkxS0xacTR0T2R1RWtZR1BwWkh5Z2tQTXE4ZERwYlBH?=
- =?utf-8?B?d09pOXMxYVFVUzJZNUpJMG1QeldXa3dUanh3TG1XdUdjZGRTUjFHZE9TbGlT?=
- =?utf-8?B?LzFwZmpmYWxhbjdXRDR0OFBreHp3blEzQUVRQkNOcFRPRWtBeWJaR2YxWDEx?=
- =?utf-8?B?QnVlSXZKOGw4bXJxWnpCRVJmQ1dFZm5VYVJEVmdaL3BYbitjR0JYcXlieE0z?=
- =?utf-8?B?VWdDQ0RHWi94ejRLZTd2N2N4RTd1aTFobCtPNkp4eEM1Y0RmQXNVMStYMVZX?=
- =?utf-8?B?SHo5Uk11U3NyN2MrR1NVWWV6Z1BOS1lDS1ljUlJnWExiNHE0OHNING1LNFNM?=
- =?utf-8?B?L3RHZ2gyN0c3RlNKSlNHVzdCWGMxZkY3eTMwcThXMlB2SFVnU1F3RkdPZTd1?=
- =?utf-8?B?Z1h0cWljY2s1UjBvNXp0TlhvUlRWd2I2cVUyUFZsWHVmbXVGOWRwRmFqbXVU?=
- =?utf-8?B?alAxU2xoSjV3OVRBYngvOWxqKzNISDlrcXRRNnAzTnFDdTVkWUdEWjVMb2xh?=
- =?utf-8?B?NytWUjc3R0I0a0J0RVJpUzlBOFZPTmJMNGZuQzZIV0JwYlp3eEV5Q3o4d3dH?=
- =?utf-8?B?YTVDNldOM3M2cHcwZXNnWjdsTkRPY2JlOTl0dzU0a1QwVCtLSDZBU1ZwUm8w?=
- =?utf-8?B?MThTTVo5YmdiQkpGT1p1SExXTmRSOUdWSUdlU1FvQ2dnRjZtRzhqWFo1c2xL?=
- =?utf-8?B?SVFacWpPMndFbXBJbmtZdi9wNGZiWFpGbXQybVNScURtQWNVRktmdjNLQTQy?=
- =?utf-8?B?N1V2WVczVG14NFRYTUlpWnkrR1ZyVHpmejYyaGhFUWhDazQ0Y1NQN0dCY2Fk?=
- =?utf-8?B?VkVuNUdsT2Mya2NGVHJWc3RoVDhocENKQ1J1VVVzczZjdWhLZkpsU3N1SE9v?=
- =?utf-8?B?SXc9PQ==?=
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?dW4wMjdUQUxmSTNTVkNDRThiTUlERXpGUHNjeDNvWmVxc0dhYkEydVJic242?=
+ =?utf-8?B?bkp4Q1A4aHhMU2lMbUZrZVJGUXRPbzZ3blZWMCswendqa2tpeFQ1K0hBam9X?=
+ =?utf-8?B?YmQrZjdsbWFGSU15T0Q2dWhORDRNWFliSFlzbUtDdmwvd2xQL21LVVNHOU5T?=
+ =?utf-8?B?ZzhzcXA4M1hEaDZrckJhVEl0VTF4Q0VZajNib0pBRjVta0ZFTnpiV0xuMVV3?=
+ =?utf-8?B?cVdLY1JaTFhDaFNFMXlHeHRVS0dPaENOQjJmM3haK2tzZm9FVG9PNlE3a1lz?=
+ =?utf-8?B?NHVJODRieWIyOC9DU1M3ZkJWdG1OamlmN2Nwa0tnRkQwRDhLZWZhZk91WVVW?=
+ =?utf-8?B?TXVPZkEwd0cvTTRZN0s5T3JDa0tqTWF3S0VsU2QrWGM2WEtBaStEWndIS3lq?=
+ =?utf-8?B?Rk1sVG91N0ZlZnJXRDM4SmpWTC83ekFadDZPSkF0RmlySHhNV0M4aGo4TE4v?=
+ =?utf-8?B?RFZBdUJ4djUwSTI5UnR0Tk4wS2ljWUFBNDNGRkhNS3NkWG9CZDlJYThqaEkw?=
+ =?utf-8?B?WTZpSFltTUt6b1p4MS9SdU9PVWVMWHZRMElGNURlL2gwNTkzY2xudHZKTmpC?=
+ =?utf-8?B?b0loMFREWExRbkVGQlR6aWlaZEtEcytocGJ6ZGhnOE16clBwNWMxczBmZzEx?=
+ =?utf-8?B?V0U5MHAvTS9hY0RROHhuZzZWdWhZa2krOTV1aUpnKzFsWDZHaWhBekFVaTdn?=
+ =?utf-8?B?OHBrSHE2aFZONjB4VHB4MTMrK2J3R3BuQ3BSejFCbDV6WCtNRjRRUUtzblkz?=
+ =?utf-8?B?RThNeERqK1pGMlBzcXNzQ2tha1RVRWhraFlPTHl4YnJ3Q0pZUER4N1NVVlhL?=
+ =?utf-8?B?Vk82Q1RJZ1ZuYnRmcEJpWmM1Uk1tcTVGcnFTVExaRkVFWFQ3UmZlaVZPLzRU?=
+ =?utf-8?B?cURYUXZqU09XSjFQNXBKYlQ4WjJ1S21aeWRtVEZCVUVNaWs5L3ZQWUpIVGYx?=
+ =?utf-8?B?UG0zMWpuZVhkVDBFM28wS3IraStha1pFay9aMys5K3VQUEJmVW91emU3TWhU?=
+ =?utf-8?B?U1d6ck5WRmRtVGd2d3ZSR3dDbHV5aVByOVV5Wmk1VUlBL0gzTHRQSWtoZVZm?=
+ =?utf-8?B?M0x1ejFyZXBDb0lhNExlYlFmMldNclJlVEw4Q2cwVmJodzIyTVBYOW8weW5q?=
+ =?utf-8?B?aDBhdk9qU1hCTU04ODZmY29rYmVLWlhIMmJWb1VvKzg4MW1ScjgrZ3NTZFhO?=
+ =?utf-8?B?cVA3ejBtL0hxMWlOOUJON3Fkd0xsYnRpOFd4bXFxTWVKaFV6MFVoRkY1Z2Z4?=
+ =?utf-8?B?UlRuUk5kTC9KN092N2JuOUN1SzNJTTFwVlJLOC9xWkU3OGFZamxEN29ueHdI?=
+ =?utf-8?B?bVlMMi9DcTdHb0tPcTRDeG9wRmNTM2p6MEE1SVliQ3ZKM0xMcEhBU3dGclRz?=
+ =?utf-8?B?bFByNnZsOVFBb20wNWxOWUJGVFBNZTdsakVseFZUdWV4M2hWZ0ZDVU1FcHhQ?=
+ =?utf-8?B?SlA3Vml0Y2IvWEVBeVZZVGs3QVdWcmx6SVZlbHYxK2VNUTQvYkJVMkI5enp2?=
+ =?utf-8?B?U3VmeHkrdVVvK2VnSERpVFlqQXBlQnAwMjhwVGhEeHpMdEpLLzJvdkxId3ha?=
+ =?utf-8?B?T2Rub3FJSlllMUhPUWhSdkpwV0tBWnlBWkNaWlM3cSsxZzNkQitBQ0Nwcitt?=
+ =?utf-8?B?STV0dXQwZ3R4QXJrSzBZVzVucUYwT3hISHVuT1BaenJaN0pESkJtNkxyVVQ2?=
+ =?utf-8?B?L0dZeUdKUUc5UUxmVENXYjdIY1hVSjlvTjZHQlpSaGtyWmtaQWk3TVc5dWQw?=
+ =?utf-8?B?aFVaK2dsSjFkb3IyeVBFdGVjZ0E2bTNFOTQzd05ma2EwVjdjenhkNEE1RDR2?=
+ =?utf-8?B?dTRnWHFYTkFjZ1luSEdlaGFMa0tGOXAzTW1pc3B5cGZKWTljMGZCbHp1SWJT?=
+ =?utf-8?B?d3FMMVI2QUtqTnhTa3dlN3F2VDlYZ0tIWm5EcWlycWdoR0tYSFdYeXBPN0Ux?=
+ =?utf-8?B?RVhVTGkxdDRvY3grTk9LTUwxTjhDK2cvWm45bE85clBGRG16Y2ZPRkc3d1Zz?=
+ =?utf-8?B?TGE4d3RnMnI2SGNUSHBpdldJbHhoUFdDNVNISHMwbkN5cmorYUdFblNTOHcv?=
+ =?utf-8?B?OUVsN3ZkUExidFFKZ01LMkxQZnJtdHZlMGloRkp6ZldiRVZHYWo1VkxSakY0?=
+ =?utf-8?B?OGZDN1ZSZ2FHc2lzbC9OR0dWenhFSzZvcHJQN1JjbU5meWJtdTFDdVJQekQ3?=
+ =?utf-8?Q?Db/pzjWNQwaK5URUHOJBC+AR1n9IFKbZuW4NVJ9Mi7FP?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(366016)(52116014)(7416014)(376014)(19092799006)(1800799024)(38350700014)(921020);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VnAwTEZjNVBCT2Z1U3BZVGl5cjlubVBYZ3NlU09SbVdwYklBRzJ6TlJrUmNp?=
- =?utf-8?B?ZWRzRXBWSzFudm5NZ1dPY1BXV2pYOGx6UVVqNmllclAyU0J4aks2YVc0NzM4?=
- =?utf-8?B?VTEzcHVoMWZKaFJRSTNnSldjKzA2RGpOQXRRRk56ckw1cEJoQ0Y3eUIyRThV?=
- =?utf-8?B?bzRKMDFUWUdncVdVL0k5a1JpVFRWUmNsbVVXR09PTU5HMFJYdmF2VTJScXFo?=
- =?utf-8?B?ZmlmcnFibUJ0dHBTRWIrZXg5RzdWaHpCYVlaQ3FwZzVCeWNna2tzRW5VeU5S?=
- =?utf-8?B?R0NpcENDaTFSN2s0bGRuK25kYWpVeHE5QUF3UTBmTkVzTXVUS3Q4cU0wT1Qw?=
- =?utf-8?B?Q0llV2dNYVlZSDdUSUlWU1d3aG03cXp2QTVtOW11dmJwTzltdTZpcUhFRVJ4?=
- =?utf-8?B?UEd1bVp5MUVsVjRWZkZiNHRlOXVZazVEbGYrU0JLY1N2cFpucktQV3JjYzRt?=
- =?utf-8?B?Nm9nelZTQlY0cmpPRHluaGtiTis1NzNQZG0weEo4SUtOeGFpcXJ5WDg2Mjhp?=
- =?utf-8?B?cmxNVm14ZUdnRC9MdklBZ25BZDVjZVNFaG4xeWYrSmloL05tQlJrMTVkUzRz?=
- =?utf-8?B?bTlDNmdwd2k4K0gzYzlVQVhyQXIzMGFQMFFSTUdsZzlGNXA3Z0FibVlFMnV4?=
- =?utf-8?B?NnN5bkY3Yjh6SG5rUmMwOFpBRmJtY05va3ZtbGxpT1hBV1lwVHNHSGZYNyt6?=
- =?utf-8?B?VVFQMnUrb2xnSmpNYmkvVSt2TEh1TWxxV1MxaG1OZWpqTzNsUjBSdWNXMUNF?=
- =?utf-8?B?ZUFiNE1nMFVCU3dNaG02Ky84T3Z4dlpVLzhRTlQxcXlyUFpFM2dPVjlEREdQ?=
- =?utf-8?B?Z1hjaThtc25NUWpjVFlGSWE4dDFaeUtUc1lHRnh6NWlKem5pY1FCamh6aVBh?=
- =?utf-8?B?T1NRRzZ2UXFpWkR3L01OZVdXTFJrazIwQ1dUOTZ3Z0dIZlRCSUMyWS9pUGlO?=
- =?utf-8?B?UVlTL1JRbDBSQ2hiay9iVW9BNlRZemluVGRQak9mY1VXb2pUVEZNZUl2SC9Z?=
- =?utf-8?B?SEZrUmJncWFqNEdxTzNEcXZZZWlsUy9wVHliNTFKZ1VZemNRZGhuaElPL1dv?=
- =?utf-8?B?RHF5UHBlbEttUUMyZHBYcys2bllGU0ZyUDRkNUIrSzQ0OGdzUVNGZHVYUE5G?=
- =?utf-8?B?VEFIWCswY2JaTXlXUk82OVVlZHdlV0dTZThFNDNsNWkwbzcrWjgwSGthczdz?=
- =?utf-8?B?K1BSRmhYcmpKZ3kyVy80b3BqeEVqRjVzc0ZFNGdKaGJhREFCZEs3bi9yZ0ky?=
- =?utf-8?B?Z2xnM1FXalBPb1VZTWJVanB4NEFuWFgvZkwrU1BVdENicENjUzI1U21aN0FO?=
- =?utf-8?B?VEFDOEUxZUthVkhzbFdpZnRXcnlYM3hhMHhsRkt2amxGTGdCR1llUFFyY0w3?=
- =?utf-8?B?TWxWaXRHeXB0ZnFQK2MrOHNxZVBGeGIyZGJ3cE05elhRM2QwVThaVEZSdmR1?=
- =?utf-8?B?Z3M4QnRMY2Y2S0dFNmFzZHF6Vk8vVGo5d0o4a1BKNE5FNURhb0JZZ3lFOFFH?=
- =?utf-8?B?UHJiTVF6MkxLRnZSVmhhTm1VQ0E5TEl6OVhyMkZaaWJ0NlVSRks0djNZVENz?=
- =?utf-8?B?dkVxU25XV1NXbDJ5MVovSzdjcTJFbFNYdm1CSkdDYXpKc09aRmlEK0NqMlRr?=
- =?utf-8?B?clprNzEwUDJXTFA2MytqU2tKSm45dVlmVitrMTlwTlcxdTdiN3ZrWHZwdW95?=
- =?utf-8?B?N25WUTlmTVkvTVRTbUZBKy8rd0NsRDBGeVhNMXpWWFVSK0c2ZWVHcmVkeDcw?=
- =?utf-8?B?ZjFsSlNMeEF2QXlwM1ZHV0x3U3FEQnJlMit3RlhRVW05V2hKTjc4czN1SWJ4?=
- =?utf-8?B?L29mSTZkMExCM21iQjgzNXIvNVdnRHM2Q1RmK1FhdnZFV2RZSDRuLzY4OFkv?=
- =?utf-8?B?ZUpheU5rZi9uYXptalJDaHRkNktvWkx6eUdXMzZYMnV6QVV4SjEzNnB0emp2?=
- =?utf-8?B?S3ZRN2RoV0orcEFDbUlaUFZqRlJ0ZGl0UWdDZ3NyYjliM1FOR0IvUUc2QVV5?=
- =?utf-8?B?a2VvQUdrZXBjWmlzd2JBeEF6YkgxSHA4L2Jab0Ryckc2UjZzeDB0S29OTzZp?=
- =?utf-8?B?ZC9VTEkzYW5yN0VEeDhCb3RyaFRtUVR5aEpreGx3Yk5OdElFaFhKMGFZaUh1?=
- =?utf-8?B?amZMOTZRRDlhdjc2eDVrdEFTU2FrVGJraHBua1pzaFFPUlJWZ1NKb3FobE5D?=
- =?utf-8?B?VWl5ZVcxVXl5aWorSWJxV2tmc3VtdGpBOE1iNXRKNitMSDA2OGoraFdCVnlC?=
- =?utf-8?B?QkF5WG02Z1kzOW9vUEZpWXpTRjJrTk5RcG1rTllONVB4aUF3Wko0UTdFV0RP?=
- =?utf-8?B?YWE5ZkZuRGxWejZRWnFGV1crQVpVS2kxNi9hUmozcEJzNFR0a1E4QT09?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?K0c0WEtsaHpZQ29hMlh2ZUxNV1BpMVFycVVPdXJxOUs5YXQzaHVobWVBT1l1?=
+ =?utf-8?B?VForb2JTUm1SNzRselNDNUVFQVVZZmtkTFV6bzFCT24yUnhNK0hDdHpsZVUr?=
+ =?utf-8?B?bkh4cDdERjRnbzM3Y0Fob3RvVks3OWQ4Rkg5QkF0MG13T2VkOEZaVzBxTmdO?=
+ =?utf-8?B?Qk9SY2xYZzJ3MTVHTzF1M2FsZmNuUHFwL1pFNFlGS2NsTmg0YVlkQ2thdDZa?=
+ =?utf-8?B?OHl5aTB5ODFPMlNudjU1V3dyQTNIOVVvMXl5K2pGSFNWWmFURnZNUkFtSUxm?=
+ =?utf-8?B?RmhjaFltRXRNYi9QWndoZkFaaDNjbmtGbnN4RG92MzlOTzRmV0RiM3pna2hw?=
+ =?utf-8?B?NURORUhJK1hVRDFLSVd5RmpDaHd1MUNGVGNneGxwRFo2ejNVYk5xY2VNUndP?=
+ =?utf-8?B?dGhXaGhDUjlTeVMyTHNsWmVjZDRWc1N5MWpoU2ZZQlozTHVxeHg1K25SWHlF?=
+ =?utf-8?B?SXJFZFgrZVhXNU41dVFiakJOTXgwa0tOVU9rR2l0anpXcnlYRG5nQkVUSmxI?=
+ =?utf-8?B?ckZXZG90ZEFqVkpOT3c1TEowK0Via25kNkhGSUVkWWtpaVh4RDZRajBkY2hY?=
+ =?utf-8?B?NDJXVFpMcmlKazN6eGJzT1FoMjVIVjlwNExoWVkwWW5hYUhXb1VVcUhNMVlL?=
+ =?utf-8?B?TmtzcEUwV00rRkxySnQzUGM0WGdBZmQrT2NQdlMvbkI5QUlaa0xPV3lpZnRF?=
+ =?utf-8?B?bDE4TTlwZUVzcUlYQVFCOFFESCsyOEYyT3NCbkR5dGhyZVM0amI1MENhMU1u?=
+ =?utf-8?B?OEdjS2JtL2I4cVdZSEUreklZaHBtNXhUaWRYT1hjdXpQQVo3MktRbUdOODR5?=
+ =?utf-8?B?d0FBd2FXZ2RYVnJYaTd5RG5LS0ZZVG9MaVRIVGoyUUVoUStmZHp4M3RKb0VO?=
+ =?utf-8?B?WVRTSVBDSEo3QkYrd0RGSWp5S2RIUlMvd1MrU0VTZkZ6aFRyeU0ycFMxSVdU?=
+ =?utf-8?B?RVdaalFXeEdXWWN3a1NTd2ppc1JsUlZTUUJkS3UvdWJ5dXdseTdaK0FQSVIz?=
+ =?utf-8?B?Q1ZCclJ1QTUybFRxejZDMkl4VHJnYndHdVk0V1J0Tnd5aVpha0ltMkhZamkz?=
+ =?utf-8?B?ajlQR1N5VTRCcXZPZnNzTnlOVkR4RGhMVU0yNkwzWFREZ0NGNkNhVTZ6UERz?=
+ =?utf-8?B?Wkl2N216cEtmMUZ3MjRQYmJBMDdFYjI3b0RqbWE2NThKa29YWkRwc2RxL2Qy?=
+ =?utf-8?B?aDZxVGxJbHYxUW5hdE5jNjdxRmJmbnlJRHJMZ2RWS1A3L1VyaWlxdTZwOFFu?=
+ =?utf-8?B?S2tvTWRuUjJrcGlOY29nQnViOFJGN0U5RVRlN1FSaWI3OEhna2RMN2ZxKzdB?=
+ =?utf-8?B?ZjJ3REpHQmIvbk52WXdWYWJXQ21kQmdRQllIUm02Q2RvNURzZldQbndTWGJo?=
+ =?utf-8?B?SDhQVkI1eVA3cXBJeDBvR1lZLzF1RW93OHpHcEdiRlJQcWtzOGd4MVB3SmZ0?=
+ =?utf-8?B?YkFBbjlPZkJUbll5N2JEMTQ4S3NwdUhTL29nSG1SaHpQeWcvOFZ5cEpSalBJ?=
+ =?utf-8?B?dWdIa1RkNmFtK292ZXFCV3FzanFiYkU3MW8rbXNDQWkyODJhcHRUZ1NaM2Mx?=
+ =?utf-8?B?bDgvTVJQRERWNitxMzVnOE0zcFRqM0NDR2tsN2FaN1k0Qk5RcWd2WElzdTlw?=
+ =?utf-8?B?TDdQMVRHbW53akF2R2ZDVWlsOEx6SGhoNllMUkN0eEZ0cE5neW4vQ0VvZDBr?=
+ =?utf-8?B?cVI4QzNObzkyNXlzWjBWam9sNzlnd2YvVktseHhvcFNBZjV4K3RCUXNJS2JH?=
+ =?utf-8?B?WEVCODA4TFNVb3A3dFR2dGhVRWYyQlpkWnNWTkh0NElYUUl6U2FWWE8vNXZk?=
+ =?utf-8?B?N01HY0hzdk9ta0x0L21iZFBQZVM2SzhGeWh5UmJZWUJlMnF5dEhUSG0zcytp?=
+ =?utf-8?B?ZWZWeHluV2dhVVNDU3pUVlJuV21ETXI4dDkyampSZ1FVaE1FZWExbGdOV0Rz?=
+ =?utf-8?B?K3dJQXY4SmNmT0ZIQTFLNGk3YzlIWDVyL0RNL2M3STdtbkJ1TWtjRHRSTGlH?=
+ =?utf-8?B?bHhGNkFJbXRUOHl5RHRpamtJUFlsT1VjSzUxdDB0S3ZCTDBuRFpMY3J3K2FI?=
+ =?utf-8?B?b3RQY2ZrREVWbldkNTRiMUpsWDdLTnJFWWNpbzM3YmVhR1Z0WHJUd1Jpd0Yz?=
+ =?utf-8?B?V1pmT0NGUWYyU0tDZUFWMDFkNFAxYk8zaU5tOVZQeTZrVXY2MjQraGNhQjho?=
+ =?utf-8?B?cnZpMm5jRGo4VkE0b2pERnR4UGw1cktBYmN0SC9ZVzdTYnVGNG42cy8vaXl4?=
+ =?utf-8?B?TXNVUGQ1cHhzb3c1cHdtTDZaNTg0T1p5cGcvM2dHRmJ3QURPdVpWNWxraGNU?=
+ =?utf-8?B?dVJ2YzY5TEdEM2Q2dEh2S2lQSFVBQ2Z4QjM2NnZRaGlxV1hVOTJiQT09?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 66db614b-585f-4c25-e63b-08de6310b79a
+X-MS-Exchange-CrossTenant-Network-Message-Id: 130af9bc-6b69-471f-d6bb-08de6310d2f8
 X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2026 10:40:58.9911 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2026 10:41:44.6881 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: SPhK8NdUzCDLSw50B+G5UuRGOTHbKkSwUXEJNcnA4aTjXtiY/qRk4NOx2MERkzPZVZouYhfyFrTnx1/70DcxwQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3PR04MB7291
+X-MS-Exchange-CrossTenant-UserPrincipalName: CpyQUpW3/vyDy67LFWllcq0726+6dmUs+eMeJwgDWlBXQqJc8OFqrQJyPCeNWFFEkRUh/Vx+Sru/ZI5yfxyYLQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB8291
 Cc: Debbie Horsfall <debbie.horsfall@arm.com>, Heiko Stuebner <heiko@sntech.de>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>, Angus Ainslie <angus@akkea.ca>,
  Antonio Borneo <antonio.borneo@foss.st.com>,
@@ -301,8 +299,7 @@ Cc: Debbie Horsfall <debbie.horsfall@arm.com>, Heiko Stuebner <heiko@sntech.de>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>, Bin Meng <bmeng.cn@gmail.com>,
  Robert Nelson <robertcnelson@gmail.com>,
  Anatolij Gustschin <ag.dev.uboot@gmail.com>, Anshul Dalal <anshuld@ti.com>
-Subject: [Uboot-stm32] [PATCH 00/14] treewide: Clean up usage of
-	DECLARE_GLOBAL_DATA_PTR
+Subject: [Uboot-stm32] [PATCH 01/14] beacon: imx8mm/n: Drop useless files
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -332,7 +329,7 @@ X-Spamd-Result: default: False [4.39 / 15.00];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
-	GREYLIST(0.00)[pass,body];
+	GREYLIST(0.00)[pass,meta];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_RECIPIENTS(0.00)[m:u-boot@lists.denx.de,m:GSS_MTK_Uboot_upstream@mediatek.com,m:uboot-imx@nxp.com,m:BMC-SW@aspeedtech.com,m:joel@jms.id.au,m:c.stoidner@phytec.de,m:kernel@puri.sm,m:me@samcday.com,m:sumit.garg@kernel.org,m:tudor.ambarus@linaro.org,m:uboot-snps-arc@synopsys.com,m:u-boot-amlogic@groups.io,m:u-boot@dh-electronics.com,m:upstream@lists.phytec.de,m:u-boot-qcom@groups.io,m:uboot-stm32@st-md-mailman.stormreply.com,m:adsp-linux@analog.com,m:debbie.horsfall@arm.com,m:heiko@sntech.de,m:mkorpershoek@kernel.org,m:angus@akkea.ca,m:antonio.borneo@foss.st.com,m:ian.ray@gehealthcare.com,m:mchitale@ventanamicro.com,m:alvin@pqrs.dk,m:finley.xiao@rock-chips.com,m:admin@hifiphile.com,m:vitor.soares@toradex.com,m:jorge.ramirez.ortiz@gmail.com,m:horatiu.vultur@microchip.com,m:jh80.chung@samsung.com,m:s-jain1@ti.com,m:Peter.Hoyes@arm.com,m:eoin.dickson@microchip.com,m:chiawei_wang@aspeedtech.com,m:lukma@denx.de,m:christophe.leroy@csgroup.eu,m:hal.feng@starfivetech.com,m:marcofrk@gmai
  l.com,m:n-francis@ti.com,m:rfried.dev@gmail.com,m:viorel.suman@nxp.com,m:s-vadapalli@ti.com,m:treding@nvidia.com,m:Eugeniy.Paltsev@synopsys.com,m:marek.vasut+renesas@mailbox.org,m:ye.li@nxp.com,m:e@freeshell.de,m:semen.protsenko@linaro.org,m:kojima.masahisa@socionext.com,m:t.remmet@phytec.de,m:B.Hahn@phytec.de,m:francesco@valla.it,m:lukas@mntre.com,m:hs@nabladev.com,m:paul.geurts@prodrive-technologies.com,m:tingting.meng@altera.com,m:t.preissl@proton.me,m:ilias.apalodimas@linaro.org,m:gilles.talis@gmail.com,m:kamil.lulko@gmail.com,m:chf.fritz@googlemail.com,m:l.anderweit@phytec.de,m:sbabic@nabladev.com,m:fenghua@phytium.com.cn,m:bb@ti.com,m:alice.guo@nxp.com,m:stefan.roese@mailbox.org,m:alexey.brodkin@synopsys.com,m:kever.yang@rock-chips.com,m:lucienzx159@gmail.com,m:stefan_b@posteo.net,m:jcmvbkbc@gmail.com,m:gabriel.dalimonte@gmail.com,m:paul.liu@linaro.org,m:dario.binacchi@amarulasolutions.com,m:mateusz.kulikowski@gmail.com,m:vicooodin@gmail.com,m:kettenis@openbsd.org,m:jerome@for
@@ -349,389 +346,84 @@ X-Spamd-Result: default: False [4.39 / 15.00];
 	FROM_NEQ_ENVFROM(0.00)[peng.fan@oss.nxp.com,uboot-stm32-bounces@st-md-mailman.stormreply.com];
 	FREEMAIL_CC(0.00)[arm.com,sntech.de,kernel.org,akkea.ca,foss.st.com,gehealthcare.com,ventanamicro.com,pqrs.dk,rock-chips.com,hifiphile.com,toradex.com,gmail.com,microchip.com,samsung.com,ti.com,aspeedtech.com,denx.de,csgroup.eu,starfivetech.com,nxp.com,nvidia.com,synopsys.com,mailbox.org,freeshell.de,linaro.org,socionext.com,phytec.de,valla.it,mntre.com,nabladev.com,prodrive-technologies.com,altera.com,proton.me,googlemail.com,phytium.com.cn,posteo.net,amarulasolutions.com,openbsd.org,forissier.org,mediatek.com,bootlin.com,kontron.de,norik.com,cortina-access.com,nigauri.org,prevas.dk,vrull.eu,amd.com,analog.com,andestech.com,timesys.com,chromium.org,csgraf.de,gdsys.cc,gmx.de,quicinc.com,foss.arm.com,ew.tq-group.com,cherry.de,collabora.com,konsulko.com,wytron.com.tw,at.abb.com,gerhold.net,kwiboo.se,ni.com,marvell.com,intel.com,ziyao.cc,siemens.com,oss.qualcomm.com,baylibre.com,renesas.com,epam.com,mentallysanemainliners.org,ronetix.at,engicam.com,kococonnector.com,blueri.se,postmarke
  tos.org];
-	NEURAL_HAM(-0.00)[-1.000];
+	NEURAL_HAM(-0.00)[-0.998];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	MID_RHS_MATCH_FROMTLD(0.00)[];
 	ASN(0.00)[asn:16509, ipnet:52.208.0.0/13, country:US];
 	TAGGED_RCPT(0.00)[uboot-stm32,renesas];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[stm-ict-prod-mailman-01.stormreply.prv:helo,stormreply.com:url,stormreply.com:email,lpc.events:url,nxp.com:mid,nxp.com:email,st-md-mailman.stormreply.com:rdns,denx.de:url]
-X-Rspamd-Queue-Id: 634FCD7EE5
+	DBL_BLOCKED_OPENRESOLVER(0.00)[stm-ict-prod-mailman-01.stormreply.prv:helo,nxp.com:mid,nxp.com:email,stormreply.com:url,stormreply.com:email,st-md-mailman.stormreply.com:rdns]
+X-Rspamd-Queue-Id: 637EFD7EE6
 X-Rspamd-Action: no action
 
-This patch set primarily removes unused DECLARE_GLOBAL_DATA_PTR
-instances.
+From: Peng Fan <peng.fan@nxp.com>
 
-Many files declare DECLARE_GLOBAL_DATA_PTR and include
-asm/global_data.h even though gd is never used. In these cases,
-asm/global_data.h is effectively treated as a proxy header, which is
-not a good practice.
-
-Following the Include What You Use principle, files should include
-only the headers they actually depend on, rather than relying on
-global_data.h indirectly. This approach is also adopted in Linux kernel
-[1].
-
-The first few patches are prepartion to avoid building break after
-remove the including of global_data.h.
-
-A script is for filtering the files:
-list=`find . -name "*.[ch]"`
-for source in ${list}
-do
-        result=`sed -n '/DECLARE_GLOBAL_DATA_PTR/p' ${source}`
-        if [ "${result}" == "DECLARE_GLOBAL_DATA_PTR;" ]; then
-                echo "Found in ${source}"
-
-                result=`sed -n '/\<gd\>/p' ${source}`
-                result2=`sed -n '/\<gd_/p' ${source}`
-                result3=`sed -n '/\<gd->/p' ${source}`
-                if [ "${result}" == "" ] && [ "${result2}" == "" ] && [ "${result3}" == "" ];then
-                        echo "Cleanup ${source}"
-                        sed -i '/DECLARE_GLOBAL_DATA_PTR/{N;/\n[[:space:]]*$/d;s/.*\n//;}' ${source}
-                        sed -i '/DECLARE_GLOBAL_DATA_PTR/d' ${source}
-                        sed -i '/global_data.h/d' ${source}
-                        git add ${source}
-                fi
-        fi
-done
-
-[1] https://lpc.events/event/17/contributions/1620/attachments/1228/2520/Linux%20Kernel%20Header%20Optimization.pdf
-
-CI: https://source.denx.de/u-boot/custodians/u-boot-mmc/-/pipelines/29177
+No functions except reserving gd in the board files. The files are
+useless, remove them.
 
 Signed-off-by: Peng Fan <peng.fan@nxp.com>
 ---
-Peng Fan (14):
-      beacon: imx8mm/n: Drop useless files
-      mediatek: mt7622: Drop useless board files
-      common: cli_hush: Include vsprintf.h
-      cmd: mem: Include vsprintf.h
-      test: log_filter: Include vsprintf.h
-      xtensa: relocate: Add missing headers
-      toradex: common: Add missing headers
-      tegra: pmc: Cleanup headers
-      rockchip: evk_rk3308: Cleanup headers
-      nxp: emc2305: Cleanup headers
-      pci: layerspace: Add missing header files
-      renesas: common: Include asm-generic/u-boot.h
-      socfpga: clock_manager_s10: Add missing header files
-      treewide: Clean up DECLARE_GLOBAL_DATA_PTR usage
+ board/beacon/imx8mm/Makefile        | 1 -
+ board/beacon/imx8mm/imx8mm_beacon.c | 8 --------
+ board/beacon/imx8mn/Makefile        | 1 -
+ board/beacon/imx8mn/imx8mn_beacon.c | 8 --------
+ 4 files changed, 18 deletions(-)
 
- arch/arc/lib/bootm.c                                        |  3 ---
- arch/arm/cpu/armv7/s5p4418/cpu.c                            |  3 ---
- arch/arm/mach-aspeed/ast2600/spl.c                          |  3 ---
- arch/arm/mach-imx/imx8/clock.c                              |  3 ---
- arch/arm/mach-imx/imx8/fdt.c                                |  3 ---
- arch/arm/mach-imx/imx8/iomux.c                              |  3 ---
- arch/arm/mach-imx/imx8m/clock_imx8mm.c                      |  3 ---
- arch/arm/mach-imx/imx8ulp/cgc.c                             |  3 ---
- arch/arm/mach-imx/imx8ulp/clock.c                           |  3 ---
- arch/arm/mach-imx/imx9/clock.c                              |  3 ---
- arch/arm/mach-imx/imx9/clock_root.c                         |  3 ---
- arch/arm/mach-imx/misc.c                                    |  3 ---
- arch/arm/mach-imx/spl_imx_romapi.c                          |  3 ---
- arch/arm/mach-meson/board-axg.c                             |  3 ---
- arch/arm/mach-meson/board-g12a.c                            |  3 ---
- arch/arm/mach-meson/board-gx.c                              |  3 ---
- arch/arm/mach-socfpga/clock_manager_agilex.c                |  3 ---
- arch/arm/mach-socfpga/clock_manager_agilex5.c               |  3 ---
- arch/arm/mach-socfpga/clock_manager_n5x.c                   |  3 ---
- arch/arm/mach-socfpga/clock_manager_s10.c                   |  5 ++---
- arch/arm/mach-socfpga/mailbox_s10.c                         |  3 ---
- arch/arm/mach-socfpga/misc_gen5.c                           |  3 ---
- arch/arm/mach-socfpga/misc_soc64.c                          |  3 ---
- arch/arm/mach-socfpga/mmu-arm64_s10.c                       |  3 ---
- arch/arm/mach-socfpga/reset_manager_s10.c                   |  3 ---
- arch/arm/mach-socfpga/spl_agilex.c                          |  3 ---
- arch/arm/mach-socfpga/spl_agilex5.c                         |  3 ---
- arch/arm/mach-socfpga/spl_agilex7m.c                        |  3 ---
- arch/arm/mach-socfpga/spl_gen5.c                            |  3 ---
- arch/arm/mach-socfpga/spl_n5x.c                             |  3 ---
- arch/arm/mach-socfpga/spl_s10.c                             |  3 ---
- arch/arm/mach-socfpga/system_manager_soc64.c                |  3 ---
- arch/arm/mach-tegra/pmc.c                                   |  4 +---
- arch/microblaze/lib/bootm.c                                 |  3 ---
- arch/mips/mach-ath79/qca956x/ddr.c                          |  3 ---
- arch/mips/mach-mscc/cpu.c                                   |  3 ---
- arch/mips/mach-mtmips/ddr_cal.c                             |  3 ---
- arch/mips/mach-octeon/cvmx-pko.c                            |  2 --
- arch/nios2/lib/bootm.c                                      |  3 ---
- arch/riscv/cpu/andes/spl.c                                  |  3 ---
- arch/riscv/cpu/cv1800b/dram.c                               |  3 ---
- arch/riscv/cpu/generic/dram.c                               |  3 ---
- arch/riscv/cpu/k230/dram.c                                  |  3 ---
- arch/riscv/cpu/th1520/spl.c                                 |  2 --
- arch/sh/lib/bootm.c                                         |  3 ---
- arch/x86/cpu/ivybridge/model_206ax.c                        |  3 ---
- arch/x86/lib/init_helpers.c                                 |  3 ---
- arch/x86/lib/zimage.c                                       |  3 ---
- arch/xtensa/lib/relocate.c                                  |  2 ++
- arch/xtensa/lib/time.c                                      |  3 ---
- board/BuR/brsmarc1/board.c                                  |  3 ---
- board/BuR/common/common.c                                   |  3 ---
- board/Marvell/octeontx/smc.c                                |  3 ---
- board/Marvell/octeontx2/smc.c                               |  3 ---
- board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c         |  2 --
- board/advantech/imx8mp_rsb3720a1/spl.c                      |  2 --
- board/advantech/imx8qm_dmsse20_a1/imx8qm_dmsse20_a1.c       |  2 --
- board/advantech/imx8qm_rom7720_a1/imx8qm_rom7720_a1.c       |  3 ---
- board/andestech/voyager/voyager.c                           |  3 ---
- board/armltd/vexpress64/vexpress64.c                        |  3 ---
- board/beacon/imx8mm/Makefile                                |  1 -
- board/beacon/imx8mm/imx8mm_beacon.c                         |  8 --------
- board/beacon/imx8mm/spl.c                                   |  3 ---
- board/beacon/imx8mn/Makefile                                |  1 -
- board/beacon/imx8mn/imx8mn_beacon.c                         |  8 --------
- board/beacon/imx8mn/spl.c                                   |  3 ---
- board/beacon/imx8mp/spl.c                                   |  3 ---
- board/beagle/beagleboneai64/beagleboneai64.c                |  2 --
- board/beagle/beagleplay/beagleplay.c                        |  2 --
- board/broadcom/bcmns/ns.c                                   |  3 ---
- board/cloos/imx8mm_phg/imx8mm_phg.c                         |  3 ---
- board/cloos/imx8mm_phg/spl.c                                |  3 ---
- board/compulab/imx8mm-cl-iot-gate/spl.c                     |  2 --
- board/coreboot/coreboot/coreboot.c                          |  3 ---
- board/cssi/cmpc885/cmpc885.c                                |  2 --
- board/data_modul/imx8mm_edm_sbc/imx8mm_data_modul_edm_sbc.c |  2 --
- board/data_modul/imx8mm_edm_sbc/spl.c                       |  2 --
- board/data_modul/imx8mp_edm_sbc/imx8mp_data_modul_edm_sbc.c |  2 --
- board/data_modul/imx8mp_edm_sbc/spl.c                       |  2 --
- board/dhelectronics/dh_imx8mp/common.c                      |  2 --
- board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c           |  2 --
- board/dhelectronics/dh_imx8mp/spl.c                         |  2 --
- board/emcraft/imx8mp_navqp/spl.c                            |  3 ---
- board/emulation/qemu-riscv/qemu-riscv.c                     |  2 --
- board/engicam/imx8mm/icore_mx8mm.c                          |  2 --
- board/engicam/imx8mm/spl.c                                  |  2 --
- board/engicam/imx8mp/icore_mx8mp.c                          |  3 ---
- board/engicam/imx8mp/spl.c                                  |  3 ---
- board/gdsys/mpc8308/gazerbeam.c                             |  3 ---
- board/google/imx8mq_phanbell/imx8mq_phanbell.c              |  3 ---
- board/highbank/highbank.c                                   |  3 ---
- board/kontron/osm-s-mx8mp/osm-s-mx8mp.c                     |  3 ---
- board/kontron/osm-s-mx93/osm-s-mx93.c                       |  3 ---
- board/kontron/pitx_imx8m/pitx_imx8m.c                       |  2 --
- board/mediatek/mt7622/Makefile                              |  2 +-
- board/mediatek/mt7622/mt7622_rfb.c                          | 12 ------------
- board/mntre/imx8mq_reform2/imx8mq_reform2.c                 |  3 ---
- board/msc/sm2s_imx8mp/sm2s_imx8mp.c                         |  2 --
- board/msc/sm2s_imx8mp/spl.c                                 |  3 ---
- board/nxp/common/emc2305.c                                  |  4 +---
- board/nxp/imx8mm_evk/imx8mm_evk.c                           |  3 ---
- board/nxp/imx8mm_evk/spl.c                                  |  3 ---
- board/nxp/imx8mn_evk/spl.c                                  |  3 ---
- board/nxp/imx8mp_evk/spl.c                                  |  3 ---
- board/nxp/imx8qm_mek/imx8qm_mek.c                           |  3 ---
- board/nxp/imx8qxp_mek/imx8qxp_mek.c                         |  3 ---
- board/nxp/imx8ulp_evk/imx8ulp_evk.c                         |  2 --
- board/nxp/imx8ulp_evk/spl.c                                 |  2 --
- board/nxp/imx93_frdm/imx93_frdm.c                           |  3 ---
- board/phytec/imx8mp-libra-fpsc/spl.c                        |  3 ---
- board/phytec/phycore_imx8mm/phycore-imx8mm.c                |  3 ---
- board/phytec/phycore_imx8mm/spl.c                           |  3 ---
- board/phytec/phycore_imx8mp/phycore-imx8mp.c                |  3 ---
- board/phytec/phycore_imx8mp/spl.c                           |  3 ---
- board/phytec/phycore_imx93/phycore-imx93.c                  |  3 ---
- board/polyhex/imx8mp_debix_model_a/imx8mp_debix_model_a.c   |  3 ---
- board/polyhex/imx8mp_debix_model_a/spl.c                    |  3 ---
- board/purism/librem5/librem5.c                              |  2 --
- board/purism/librem5/spl.c                                  |  2 --
- board/qualcomm/dragonboard410c/dragonboard410c.c            |  3 ---
- board/qualcomm/dragonboard820c/dragonboard820c.c            |  3 ---
- board/renesas/common/gen3-common.c                          |  4 +---
- board/renesas/common/gen4-common.c                          |  4 +---
- board/renesas/common/gen5-common.c                          |  4 +---
- board/rockchip/evb_rk3308/evb_rk3308.c                      |  5 ++---
- board/ronetix/imx8mq-cm/imx8mq_cm.c                         |  2 --
- board/samsung/common/exynos5-dt.c                           |  3 ---
- board/samsung/common/misc.c                                 |  3 ---
- board/st/stm32f429-discovery/stm32f429-discovery.c          |  3 ---
- board/st/stm32f429-evaluation/stm32f429-evaluation.c        |  3 ---
- board/st/stm32f469-discovery/stm32f469-discovery.c          |  3 ---
- board/st/stm32f746-disco/stm32f746-disco.c                  |  3 ---
- board/st/stm32h743-disco/stm32h743-disco.c                  |  3 ---
- board/st/stm32h743-eval/stm32h743-eval.c                    |  3 ---
- board/st/stm32h747-disco/stm32h747-disco.c                  |  3 ---
- board/st/stm32h750-art-pi/stm32h750-art-pi.c                |  3 ---
- board/technexion/pico-imx8mq/pico-imx8mq.c                  |  3 ---
- board/ti/am62x/evm.c                                        |  2 --
- board/ti/am64x/evm.c                                        |  2 --
- board/ti/j784s4/evm.c                                       |  2 --
- board/toradex/apalis-imx8/apalis-imx8.c                     |  3 ---
- board/toradex/apalis_t30/apalis_t30.c                       |  3 ---
- board/toradex/colibri-imx8x/colibri-imx8x.c                 |  3 ---
- board/toradex/colibri_t20/colibri_t20.c                     |  3 ---
- board/toradex/common/tdx-cfg-block.c                        |  3 ---
- board/toradex/common/tdx-cfg-block.h                        |  2 ++
- board/toradex/common/tdx-common.h                           |  2 ++
- board/toradex/smarc-imx8mp/smarc-imx8mp.c                   |  3 ---
- board/toradex/smarc-imx8mp/spl.c                            |  3 ---
- board/toradex/verdin-imx8mm/spl.c                           |  3 ---
- board/toradex/verdin-imx8mm/verdin-imx8mm.c                 |  3 ---
- board/toradex/verdin-imx8mp/spl.c                           |  3 ---
- board/toradex/verdin-imx8mp/verdin-imx8mp.c                 |  3 ---
- board/xilinx/zynq/bootimg.c                                 |  3 ---
- boot/bootmeth-uclass.c                                      |  2 --
- boot/fdt_simplefb.c                                         |  3 ---
- boot/image-sig.c                                            |  2 --
- boot/image.c                                                |  3 ---
- cmd/bloblist.c                                              |  3 ---
- cmd/bootefi.c                                               |  3 ---
- cmd/bootm.c                                                 |  3 ---
- cmd/date.c                                                  |  3 ---
- cmd/mem.c                                                   |  4 +---
- cmd/sound.c                                                 |  3 ---
- cmd/spl.c                                                   |  3 ---
- common/cli_hush.c                                           |  4 +---
- common/stdio.c                                              |  3 ---
- drivers/block/sandbox.c                                     |  3 ---
- drivers/bootcount/pmic_pfuze100.c                           |  2 --
- drivers/cache/sandbox_cache.c                               |  3 ---
- drivers/clk/altera/clk-agilex.c                             |  3 ---
- drivers/clk/altera/clk-agilex5.c                            |  3 ---
- drivers/clk/altera/clk-mem-n5x.c                            |  3 ---
- drivers/clk/altera/clk-n5x.c                                |  3 ---
- drivers/clk/rockchip/clk_px30.c                             |  3 ---
- drivers/clk/rockchip/clk_rk3308.c                           |  3 ---
- drivers/clk/rockchip/clk_rk3528.c                           |  2 --
- drivers/clk/rockchip/clk_rk3568.c                           |  2 --
- drivers/clk/rockchip/clk_rk3576.c                           |  2 --
- drivers/clk/rockchip/clk_rk3588.c                           |  2 --
- drivers/clk/rockchip/clk_rv1108.c                           |  3 ---
- drivers/clk/rockchip/clk_rv1126.c                           |  2 --
- drivers/cpu/bcm283x_cpu.c                                   |  3 ---
- drivers/cpu/cpu-uclass.c                                    |  2 --
- drivers/cpu/imx8_cpu.c                                      |  3 ---
- drivers/cpu/mtk_cpu.c                                       |  3 ---
- drivers/firmware/arm-ffa/arm-ffa-uclass.c                   |  3 ---
- drivers/firmware/arm-ffa/arm-ffa.c                          |  3 ---
- drivers/firmware/arm-ffa/ffa-emul-uclass.c                  |  3 ---
- drivers/firmware/arm-ffa/sandbox_ffa.c                      |  3 ---
- drivers/gpio/gpio-uclass.c                                  |  3 ---
- drivers/gpio/nx_gpio.c                                      |  3 ---
- drivers/i2c/mxc_i2c.c                                       |  3 ---
- drivers/i2c/nx_i2c.c                                        |  3 ---
- drivers/i2c/ocores_i2c.c                                    |  3 ---
- drivers/i2c/soft_i2c.c                                      |  3 ---
- drivers/i2c/synquacer_i2c.c                                 |  2 --
- drivers/mailbox/imx-mailbox.c                               |  2 --
- drivers/misc/atsha204a-i2c.c                                |  3 ---
- drivers/misc/fs_loader.c                                    |  3 ---
- drivers/misc/imx8/fuse.c                                    |  3 ---
- drivers/mmc/ca_dw_mmc.c                                     |  3 ---
- drivers/mmc/f_sdh30.c                                       |  2 --
- drivers/mmc/jz_mmc.c                                        |  3 ---
- drivers/mmc/msm_sdhci.c                                     |  3 ---
- drivers/mmc/mv_sdhci.c                                      |  3 ---
- drivers/mtd/nand/raw/pxa3xx_nand.c                          |  3 ---
- drivers/mtd/nand/raw/tegra_nand.c                           |  3 ---
- drivers/mtd/nvmxip/nvmxip_qspi.c                            |  3 ---
- drivers/mtd/spi/sf-uclass.c                                 |  3 ---
- drivers/net/dwmac_s700.c                                    |  3 ---
- drivers/net/fec_mxc.c                                       |  3 ---
- drivers/net/gmac_rockchip.c                                 |  2 --
- drivers/net/mvneta.c                                        |  3 ---
- drivers/net/octeontx/smi.c                                  |  3 ---
- drivers/net/phy/fixed.c                                     |  3 ---
- drivers/net/phy/phy.c                                       |  3 ---
- drivers/net/phy/xilinx_gmii2rgmii.c                         |  3 ---
- drivers/net/sandbox-raw.c                                   |  3 ---
- drivers/net/sandbox.c                                       |  3 ---
- drivers/net/ti/keystone_net.c                               |  3 ---
- drivers/net/xilinx_axi_emac.c                               |  3 ---
- drivers/pci/pci_octeontx.c                                  |  3 ---
- drivers/pci/pcie_dw_meson.c                                 |  3 ---
- drivers/pci/pcie_dw_qcom.c                                  |  3 ---
- drivers/pci/pcie_dw_rockchip.c                              |  3 ---
- drivers/pci/pcie_dw_ti.c                                    |  3 ---
- drivers/pci/pcie_layerscape.c                               |  3 ---
- drivers/pci/pcie_layerscape.h                               |  4 +++-
- drivers/pci/pcie_starfive_jh7110.c                          |  3 ---
- drivers/pci_endpoint/pci_ep-uclass.c                        |  3 ---
- drivers/phy/marvell/comphy_core.c                           |  3 ---
- drivers/phy/omap-usb2-phy.c                                 |  3 ---
- drivers/phy/rockchip/phy-rockchip-pcie.c                    |  3 ---
- drivers/phy/rockchip/phy-rockchip-typec.c                   |  3 ---
- drivers/pinctrl/mtmips/pinctrl-mt7628.c                     |  3 ---
- drivers/pinctrl/nexell/pinctrl-nexell.c                     |  3 ---
- drivers/pinctrl/nexell/pinctrl-s5pxx18.c                    |  3 ---
- drivers/pinctrl/nxp/pinctrl-imx-mmio.c                      |  3 ---
- drivers/pinctrl/nxp/pinctrl-imx.c                           |  3 ---
- drivers/pinctrl/nxp/pinctrl-imx8.c                          |  3 ---
- drivers/pinctrl/nxp/pinctrl-mxs.c                           |  3 ---
- drivers/power/domain/imx8m-power-domain.c                   |  3 ---
- drivers/power/pmic/bd71837.c                                |  3 ---
- drivers/power/pmic/mc34708.c                                |  3 ---
- drivers/power/pmic/mp5416.c                                 |  3 ---
- drivers/power/pmic/pca9450.c                                |  3 ---
- drivers/power/regulator/pwm_regulator.c                     |  3 ---
- drivers/pwm/pwm-sifive.c                                    |  3 ---
- drivers/pwm/rk_pwm.c                                        |  3 ---
- drivers/pwm/sunxi_pwm.c                                     |  3 ---
- drivers/ram/stm32mp1/stm32mp1_tests.c                       |  3 ---
- drivers/reboot-mode/reboot-mode-gpio.c                      |  2 --
- drivers/reboot-mode/reboot-mode-rtc.c                       |  2 --
- drivers/remoteproc/rproc-uclass.c                           |  2 --
- drivers/serial/ns16550.c                                    |  3 ---
- drivers/serial/sandbox.c                                    |  3 ---
- drivers/serial/serial_adi_uart4.c                           |  2 --
- drivers/serial/serial_htif.c                                |  3 ---
- drivers/serial/serial_xen.c                                 |  3 ---
- drivers/smem/msm_smem.c                                     |  3 ---
- drivers/spi/ca_sflash.c                                     |  3 ---
- drivers/spi/microchip_coreqspi.c                            |  2 --
- drivers/spi/mvebu_a3700_spi.c                               |  3 ---
- drivers/spi/omap3_spi.c                                     |  3 ---
- drivers/spi/spi-sunxi.c                                     |  3 ---
- drivers/spi/spi-synquacer.c                                 |  2 --
- drivers/spi/spi-uclass.c                                    |  3 ---
- drivers/spi/tegra210_qspi.c                                 |  3 ---
- drivers/spmi/spmi-msm.c                                     |  3 ---
- drivers/thermal/imx_tmu.c                                   |  3 ---
- drivers/timer/ostm_timer.c                                  |  3 ---
- drivers/timer/sp804_timer.c                                 |  3 ---
- drivers/usb/common/common.c                                 |  3 ---
- drivers/usb/phy/rockchip_usb2_phy.c                         |  3 ---
- drivers/usb/tcpm/tcpm.c                                     |  2 --
- drivers/video/hx8238d.c                                     |  2 --
- drivers/video/imx/mxc_ipuv3_fb.c                            |  3 ---
- drivers/video/nexell_display.c                              |  3 ---
- drivers/video/rockchip/rk_lvds.c                            |  3 ---
- drivers/video/rockchip/rk_mipi.c                            |  3 ---
- drivers/video/sandbox_sdl.c                                 |  3 ---
- drivers/video/tidss/tidss_drv.c                             |  2 --
- drivers/video/zynqmp/zynqmp_dpsub.c                         |  3 ---
- drivers/watchdog/armada-37xx-wdt.c                          |  3 ---
- drivers/watchdog/at91sam9_wdt.c                             |  3 ---
- drivers/watchdog/mt7621_wdt.c                               |  3 ---
- drivers/watchdog/orion_wdt.c                                |  3 ---
- drivers/watchdog/sbsa_gwdt.c                                |  3 ---
- drivers/watchdog/wdt-uclass.c                               |  3 ---
- fs/fs.c                                                     |  3 ---
- fs/ubifs/ubifs.c                                            |  3 ---
- include/relocate.h                                          |  2 --
- lib/efi_loader/efi_capsule.c                                |  3 ---
- lib/efi_loader/efi_gop.c                                    |  3 ---
- lib/efi_loader/efi_rng.c                                    |  3 ---
- net/eth-uclass.c                                            |  3 ---
- net/tftp.c                                                  |  3 ---
- net/wget.c                                                  |  3 ---
- test/cmd/exit.c                                             |  3 ---
- test/cmd/test_echo.c                                        |  3 ---
- test/cmd/test_pause.c                                       |  3 ---
- test/dm/blk.c                                               |  3 ---
- test/dm/i3c.c                                               |  2 --
- test/lib/test_print.c                                       |  3 ---
- test/log/log_filter.c                                       |  4 +---
- 306 files changed, 22 insertions(+), 867 deletions(-)
----
-base-commit: 1de103fc29761fa729dffaa15d0cfb2766be05e4
-change-id: 20260202-cleanup-560c900f7bc3
+diff --git a/board/beacon/imx8mm/Makefile b/board/beacon/imx8mm/Makefile
+index 8484b85ae1268b2699e442975a4e476ed31f2283..eb762504266de80bad014dba0868c231f63c9ba1 100644
+--- a/board/beacon/imx8mm/Makefile
++++ b/board/beacon/imx8mm/Makefile
+@@ -4,7 +4,6 @@
+ # SPDX-License-Identifier:      GPL-2.0+
+ #
+ 
+-obj-y += imx8mm_beacon.o
+ obj-y += ../../nxp/common/
+ 
+ ifdef CONFIG_XPL_BUILD
+diff --git a/board/beacon/imx8mm/imx8mm_beacon.c b/board/beacon/imx8mm/imx8mm_beacon.c
+deleted file mode 100644
+index 6459a99cb9d72a00316ccba63daf8414551bdfca..0000000000000000000000000000000000000000
+--- a/board/beacon/imx8mm/imx8mm_beacon.c
++++ /dev/null
+@@ -1,8 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * Copyright 2022 Logic PD, Inc. dba Beacon EmbeddedWorks
+- */
+-
+-#include <asm/global_data.h>
+-
+-DECLARE_GLOBAL_DATA_PTR;
+diff --git a/board/beacon/imx8mn/Makefile b/board/beacon/imx8mn/Makefile
+index 54735792b9340aba0cd02a53fe2be22e5bda498e..e8fe9f1822e802a9889d3b93291d911f2e555e5f 100644
+--- a/board/beacon/imx8mn/Makefile
++++ b/board/beacon/imx8mn/Makefile
+@@ -4,7 +4,6 @@
+ # SPDX-License-Identifier:      GPL-2.0+
+ #
+ 
+-obj-y += imx8mn_beacon.o
+ obj-y += ../../nxp/common/
+ ifdef CONFIG_XPL_BUILD
+ obj-y += spl.o
+diff --git a/board/beacon/imx8mn/imx8mn_beacon.c b/board/beacon/imx8mn/imx8mn_beacon.c
+deleted file mode 100644
+index 6459a99cb9d72a00316ccba63daf8414551bdfca..0000000000000000000000000000000000000000
+--- a/board/beacon/imx8mn/imx8mn_beacon.c
++++ /dev/null
+@@ -1,8 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * Copyright 2022 Logic PD, Inc. dba Beacon EmbeddedWorks
+- */
+-
+-#include <asm/global_data.h>
+-
+-DECLARE_GLOBAL_DATA_PTR;
 
-Best regards,
 -- 
-Peng Fan <peng.fan@nxp.com>
+2.37.1
 
 _______________________________________________
 Uboot-stm32 mailing list

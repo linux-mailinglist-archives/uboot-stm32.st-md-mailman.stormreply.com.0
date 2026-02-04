@@ -2,149 +2,187 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id iPTVNIkdg2nehwMAu9opvQ
+	id eKGJNOU2g2kwjAMAu9opvQ
 	(envelope-from <uboot-stm32-bounces@st-md-mailman.stormreply.com>)
-	for <lists+uboot-stm32@lfdr.de>; Wed, 04 Feb 2026 11:20:57 +0100
+	for <lists+uboot-stm32@lfdr.de>; Wed, 04 Feb 2026 13:09:09 +0100
 X-Original-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id C1D8AE467B
-	for <lists+uboot-stm32@lfdr.de>; Wed, 04 Feb 2026 11:20:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 06C53E5971
+	for <lists+uboot-stm32@lfdr.de>; Wed, 04 Feb 2026 13:09:08 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 75A9EC87ED1;
-	Wed,  4 Feb 2026 10:20:57 +0000 (UTC)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazon11012011.outbound.protection.outlook.com [52.101.66.11])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9ED96C87ECA;
+	Wed,  4 Feb 2026 12:09:08 +0000 (UTC)
+Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9B480C87EC9
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 66E0CC87EC9
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  4 Feb 2026 10:20:56 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=vIZ4XgEtvZCQWYs8tRZ6b4CoNi2i71vEcgwZTptBGevbtTQC3D5J6+Fou44LuJFwbC/mGHkx/2bTCDvDGAXKXI7EBL0tiSA29UBSitWXtAv1hqjhLa0ILyZpvcoMmou/bwJo9vqGV+84smQN4O33otjLg4dQxWS1pvemkQGt86SnA90rMDSj4zGk7gFtXc+cEND58FEQ1wSfSctk5RCPe4+NCvC/4G2ETUsuMl89slI0NJ5W2tFiDaGKpMm9gPwlhIZF5RGZaItK03qw0a6ypVyJm92ZGTgTnVa3feAYF/rnaN3rUkfuqw50uPBMjpM/QZgIJvnM9e4nvVFSZTxP1A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=llIX5AJ/5kdZW8LVdreCnWOedRCOEO/edAuBOaq4wx0=;
- b=A0clVUo1vwQ4hTQOMbmZ4rGnNcRTsfM2iefaH815Aif0epHFcb0UeMYtaF9YtUtpgZFv/RHJND07+5bv5Rv2F4WC7LzyDiVQit+Go1UohmJF9OYSGmplmhFmKZKfXTFQIjScOIEiDz9MsfsCJue5IXhVlKM7cll7BqBbrHq0274ZJZbwXDexygXIBI/DiNNFoaiOdWdq8MkQ3BFLduwRQ5R2alLK1F4hFAyhUeJ5ywr8jXwjmAt8THDWr97sIyuPnI8BByE5OiEWERXLmrbSH5Zz/zDhIDbFSMkt6+/HunoTKx81bQ2Uva14b5m0l7QUo3aYDMQcCMZ/UOWS/wcQQw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.59) smtp.rcpttodomain=st-md-mailman.stormreply.com
- smtp.mailfrom=foss.st.com; dmarc=fail (p=none sp=none pct=100) action=none
- header.from=foss.st.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=llIX5AJ/5kdZW8LVdreCnWOedRCOEO/edAuBOaq4wx0=;
- b=cZBo4kdt9PvGhZnWULUU5IwILokiDOn/1y4sfqLtnAoqOf2euCbGJ7nmSCdtLveAosEeLUPWLQY1+CssYdCcwPgUxE5pn6hXZPiP/VkoTccCfLVv52WK9+qQPIuX56BcuZaLMixX8OCGbD0ULNOSpSouU7+ThSTW86CahtvuGFhZ3Ou32Y3UmAhxyHGDQQjNNwvZabF9ZUgLbMQmhXwZVfV4GtcchsNUESsZR3tmKvfu4MdymRQChpRtNRkB9yFERu2XWL3LGnTkFGULBFVmECq0u0hwPNUKnWeP0hqoXRu/DIvH/JK+VkIG6CNP8zkvyV1RIuG2neDEpdoHRggjHA==
-Received: from DB3PR08CA0009.eurprd08.prod.outlook.com (2603:10a6:8::22) by
- DU0PR10MB7924.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:314::13) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9587.13; Wed, 4 Feb 2026 10:20:53 +0000
-Received: from DB3PEPF0000885E.eurprd02.prod.outlook.com
- (2603:10a6:8:0:cafe::19) by DB3PR08CA0009.outlook.office365.com
- (2603:10a6:8::22) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9587.12 via Frontend Transport; Wed,
- 4 Feb 2026 10:20:53 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.59; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.59) by
- DB3PEPF0000885E.mail.protection.outlook.com (10.167.242.9) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9587.10 via Frontend Transport; Wed, 4 Feb 2026 10:20:53 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
- (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Wed, 4 Feb
- 2026 11:22:39 +0100
-Received: from localhost (10.48.87.93) by STKDAG1NODE1.st.com (10.75.128.132)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Wed, 4 Feb
- 2026 11:20:52 +0100
-From: Patrice Chotard <patrice.chotard@foss.st.com>
-Date: Wed, 4 Feb 2026 11:20:51 +0100
+ Wed,  4 Feb 2026 12:09:07 +0000 (UTC)
+Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
+ by mail11.truemail.it (Postfix) with ESMTPA id E330B20200;
+ Wed,  4 Feb 2026 13:08:59 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
+ s=default; t=1770206946;
+ bh=rV8MugSWJElUnNJsq7kkw6TNF2UDbsneM9RTfewRwN4=; h=From:To:Subject;
+ b=to4PK8VovRxkk4HB3VrCibnTpWSWGzhQbGd4ORVcP57KdqtI0qRD0zzbFovs2X4Q0
+ 6KZu3W912iZZ8/mxZk0q9kb+UTXOQu6JfaioZP6ebtdVmsNjPY3t0e3TIQefpATbw6
+ rTvIZ6rKf5IyplVUs7HTfJ8YxgxuucqYdKBJpx8FeDpgvaa4rpw3Bpq5vaY8ARDc82
+ +8j56kzaId6Ji+iIzNkUQuV1NbQX/CI6YmFqy1zoI4VeymMCNSG0JZjZcMItpo3HPn
+ 7bj1eqAnVkr8zwEGT4mVYVRbJZisT8AbyhvrYlp5dVZaTh6HZR0JojXICbdxqNb37j
+ pQ5uU8Ik++fyA==
+Date: Wed, 4 Feb 2026 13:08:55 +0100
+From: Francesco Dolcini <francesco@dolcini.it>
+To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
+Message-ID: <20260204120855.GA30917@francesco-nb>
+References: <20260203-cleanup-v1-0-4221c13e7558@nxp.com>
+ <20260203-cleanup-v1-7-4221c13e7558@nxp.com>
 MIME-Version: 1.0
-Message-ID: <20260204-upstream_update_stm32_cmdkey-c-v1-6-d95374395840@foss.st.com>
-References: <20260204-upstream_update_stm32_cmdkey-c-v1-0-d95374395840@foss.st.com>
-In-Reply-To: <20260204-upstream_update_stm32_cmdkey-c-v1-0-d95374395840@foss.st.com>
-To: <uboot-stm32@st-md-mailman.stormreply.com>, <u-boot@lists.denx.de>
-X-Mailer: b4 0.14.3
-X-Originating-IP: [10.48.87.93]
-X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
- (10.75.128.132)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB3PEPF0000885E:EE_|DU0PR10MB7924:EE_
-X-MS-Office365-Filtering-Correlation-Id: f23cfd88-69fd-473f-c74b-08de63d71411
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|82310400026|36860700013|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?TTZkZkFBNVY0bll6QU1XV09HZEpaVThXalBFU2RoZ2NZOUxBOElWckJVRTgy?=
- =?utf-8?B?Vm1NQ0QwZzZFYVpPeEJoTC82MmhjRzJRWUszNHBueWpoNlNQazNYYzYzL1ZX?=
- =?utf-8?B?OXlxRXRpMm9jZ2h3bUNDUG96OXFMK3YwWjE3ZGFXMHBjMFg5dWRiTS9WUWs0?=
- =?utf-8?B?VDEvOTIvV2psQmxHUU1Iay9EdUhINW85d0JDREZ3VGtKZm1nUDV6blhJL3p0?=
- =?utf-8?B?VVFzbHBIaTBBL1FxMmtnTktoMU0vMUN0NWlBMFU3dTI2ZmJLNkF0cmdnZ1Zm?=
- =?utf-8?B?c2luY0t6V0FWdUdOcTRlQkZvL3U0aVdtYUg5bFo5R0tOTU9TemI2WFdKcFNh?=
- =?utf-8?B?b0xMTk0yU2I4bFFVLzJVN3hWNUkzRzc3L3NmU0hBL0RKMEsxalV3TTlLUGFT?=
- =?utf-8?B?QjdmMkNtVGJUMzdnTnhQMWp2Q2tPajlkRUdIYllEZHl0TXpYVC9BTTd3QkJr?=
- =?utf-8?B?UFhwNGVuTVlCN09zS1VzaUs2elZTSUtteXhYUDI0dmVYSVVFR0RCcE9HQTFi?=
- =?utf-8?B?QTdzeDZZLzFpd3BRVy9rMFVzZ0ZjbjFDSS9DTHJRZUhsZ29tMjljd2UwMUlt?=
- =?utf-8?B?dWhxODlVMzRpSEtHb3dEb1VneXFlTSs1Z3FpY0VrWWRsYUVyQW1ub3Z5ZkZO?=
- =?utf-8?B?dnpuaWpSL01MajJtVEU3cisvYUsxdzc0djhJOVVRSHV4bldMQ3dzRGhaRzYx?=
- =?utf-8?B?Z05qQlBFSUZseks3amo0bVZacmVsMkFyUlI0R0pWOFByRERGQmRnMmxtalRw?=
- =?utf-8?B?WDdhWlBQT0NicUN6bk9BSzNoTWczOEFRZXFpak9sUVowTTQ2bHhIdmRBOHZl?=
- =?utf-8?B?WlN2VndXNklCeXpWQ0pCMVdOMEpTbE43OG9WcHlZQUYzMFEvOEFZZ2tGZnJ2?=
- =?utf-8?B?aEtha29PeFc5V3RVbmQyR0dnb3ZIM0poQSt6ZDY5SXFObjNjUC9CZEVhaDhT?=
- =?utf-8?B?bFhYZ1JCc0FsRkZSclB1dWZVcG9MYVhIOFZSWERDZUt0ZEdnd2dsaU91U1dL?=
- =?utf-8?B?NjUwNWo1RU0wUFA3YmE4M202a3owM1dxeUk1L0w1QkNpMFNnc2tJb0pvaThk?=
- =?utf-8?B?V216eDBMeWVLN2NvVGd0ZWgyV002dXpJUFlnWlc0eVkxU3gxdUhsOGtMYUdt?=
- =?utf-8?B?T2pXYit3ZUlyWmhuR09lZStYUU9HdGIraGdQOC92Qnc5cGk4Nzd4dDBMU3NQ?=
- =?utf-8?B?S3hTK1I4Wm9zWHpOeUJ5OEtKL2sxN2J4YTNGRWh3VWxNVjJBVzJhSGp4UVBX?=
- =?utf-8?B?MHcyaUV3TWlXaE5wd0pLYXBaUFdpM04xZjlJQXVGT1BBWTRpRi84dkJ6TERP?=
- =?utf-8?B?S0cydjJDU0dJWDgrVUFDWUN0dWFxYTluT3UrdHA4N0lPY0dsMFZFSUxnVnJE?=
- =?utf-8?B?TU02THFtR1lacGpQSFN0WVpsbUdhaW0vYmJKaEQySENZbVVpV29yb2kvUGMx?=
- =?utf-8?B?ZUNFR2o4c2ZUVG1mOGZmRkN3OTlnYld4K0VsOXBoSWJVMnF2b3lDMUlWRU92?=
- =?utf-8?B?SU5BQVJTZ2xuanBHM2ZuMm9pRXV6Y2QrZjhoUDkvM2dBRUZQMzdTaE4xRFZG?=
- =?utf-8?B?TWZRZVpNakNUa1pNQlZNWUhnYUY2ZHMxclRzUUNOTVhrM2VhKzJRd3RheXNL?=
- =?utf-8?B?QzNsQkVSRTludFdjZ2hhOGoxZEU5N1pYb2ZpaS92eXJ3b3BHSFlVVjZuQmsw?=
- =?utf-8?B?ek5JZ1U1WXNvbFM5TW54SzRkQnZoc21vWWltMWdocnN3aFRmUE1Ha3Y4Unhw?=
- =?utf-8?B?Sk04L2ZaQllhaXdVeWxLRDdWYzdDS0d1cDgwZXBnVmxCWEc4eU96ZkZ0Z3JO?=
- =?utf-8?B?ZjJpbkFhWUlQREhqaHJTODkvYVpickdBQmtTek5zMXQrZ0h0VjFCeEN4OElK?=
- =?utf-8?B?alRIN3Y1QmJGSGFlV3VMV0tFZzdYNUVPQTU4N2ZGQlFIWmNXUzlVdkltc0tu?=
- =?utf-8?B?ZEoyWVFKRWRJT3NTWnVFbkFFTHVmMHlVS08rY3hlRGlNSmJZS215WlpjZ2xE?=
- =?utf-8?B?dVB3ZEp0cXZsNFdjMG1sWDlxYWYxNzJzUWZsbW52b3NVbW5aQUF2Z0tJOWUv?=
- =?utf-8?B?eXZVKzlQVEpicFpyZkVzUjBlUGdCaEszc2d0ZWlRVkhVaUZuWnJSN2tKcmVF?=
- =?utf-8?B?bnJTbUZ4aW42MGVwZmNkTGpsWEJIRGhUZ01FbWxvbXNnRkdlUFBhWXRUMzlN?=
- =?utf-8?B?L2gxM2FxeGZlejNVV2N5UExHY2hVaUFxWCtmcUF3UWlhcUl0a1N1Z3hINWRM?=
- =?utf-8?B?M3pkQUduVkZsR2VjYzZFbm5tNkVnPT0=?=
-X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 13EATSf16XZCGT1quT+DH4orHF2jzAXe6Pfg44BQ/iPnY1yELJupT/WZ6WqrGBBJeH9lm4x/w7ytAnw336shM3CDkNNL/E1xO2oeVLhTltzKpE/HcxZfMrybZKIF8EETb/ozJh+BFgfwJf9sl8i1JnDJDaRTfDvQoeDf0KDjRLcihwKpb9Fb2s33ughO6gg/nEXFxfGKIVk2clh8FhSUGJfrwb6w7pRgrV55qUAFpbceAMQpKwsyJtYTHoPXa11IOFuGnk6kEYadY3bloLt7+XopanjaJDoW7P2Pnf9NXcapAi9s1fn35AGdN2zqNkJhpq7RHZvndVe6C4rCZCG+eGvnbiCTXyg5mYqm6tBGkd7NPl3t/gShBHcTrMYmjChIEz8TR5tNCePhnsOvdywFeLaznHYMMROdy3syOFc5Pbmof8uf2WeTLrnxq6f8p6/b
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Feb 2026 10:20:53.7886 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f23cfd88-69fd-473f-c74b-08de63d71411
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: DB3PEPF0000885E.eurprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR10MB7924
-Cc: Tom Rini <trini@konsulko.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
+Content-Disposition: inline
+In-Reply-To: <20260203-cleanup-v1-7-4221c13e7558@nxp.com>
+Cc: Debbie Horsfall <debbie.horsfall@arm.com>, Heiko Stuebner <heiko@sntech.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, Angus Ainslie <angus@akkea.ca>,
+ Antonio Borneo <antonio.borneo@foss.st.com>,
+ Ian Ray <ian.ray@gehealthcare.com>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Alvin =?utf-8?Q?=C5=A0ipraga?= <alvin@pqrs.dk>,
+ Finley Xiao <finley.xiao@rock-chips.com>, Zixun LI <admin@hifiphile.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>, Peng Fan <peng.fan@nxp.com>,
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
+ Horatiu Vultur <horatiu.vultur@microchip.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Swamil Jain <s-jain1@ti.com>,
+ Peter Hoyes <Peter.Hoyes@arm.com>, Eoin Dickson <eoin.dickson@microchip.com>,
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
+ Dillon Min <dillon.minfei@gmail.com>, Lukasz Majewski <lukma@denx.de>,
+ Christophe Leroy <christophe.leroy@csgroup.eu>,
+ Hal Feng <hal.feng@starfivetech.com>, u-boot-qcom@groups.io,
+ Marco Franchi <marcofrk@gmail.com>, Tudor Ambarus <tudor.ambarus@linaro.org>,
+ Neha Malcom Francis <n-francis@ti.com>, Michal Simek <michal.simek@amd.com>,
+ Viorel Suman <viorel.suman@nxp.com>, Siddharth Vadapalli <s-vadapalli@ti.com>,
+ Thierry Reding <treding@nvidia.com>,
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Ye Li <ye.li@nxp.com>,
+ E Shattow <e@freeshell.de>, Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Teresa Remmet <t.remmet@phytec.de>, Benjamin Hahn <B.Hahn@phytec.de>,
+ Patrick Wildt <patrick@blueri.se>, "Lukas F. Hartmann" <lukas@mntre.com>,
+ Heiko Schocher <hs@nabladev.com>, Aspeed BMC SW team <BMC-SW@aspeedtech.com>,
+ Paul Geurts <paul.geurts@prodrive-technologies.com>,
+ Tingting Meng <tingting.meng@altera.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Timo tp =?iso-8859-1?Q?Prei=DFl?= <t.preissl@proton.me>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Gilles Talis <gilles.talis@gmail.com>, Kamil Lulko <kamil.lulko@gmail.com>,
+ Christoph Fritz <chf.fritz@googlemail.com>,
+ Leonard Anderweit <l.anderweit@phytec.de>, Stefano Babic <sbabic@nabladev.com>,
+ adsp-linux@analog.com, David Feng <fenghua@phytium.com.cn>,
+ Bryan Brattlof <bb@ti.com>, Alice Guo <alice.guo@nxp.com>,
+ Stefan Roese <stefan.roese@mailbox.org>,
+ Alexey Brodkin <alexey.brodkin@synopsys.com>,
+ Kever Yang <kever.yang@rock-chips.com>, "Lucien.Jheng" <lucienzx159@gmail.com>,
+ Stefan Bosch <stefan_b@posteo.net>, u-boot@lists.denx.de,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Gabriel Dalimonte <gabriel.dalimonte@gmail.com>,
+ "Ying-Chun Liu \(PaulLiu\)" <paul.liu@linaro.org>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
+ Anastasiia Lukianenko <vicooodin@gmail.com>,
+ Mark Kettenis <kettenis@openbsd.org>, Jerome Forissier <jerome@forissier.org>,
+ Sky Huang <SkyLake.Huang@mediatek.com>,
+ Gregory CLEMENT <gregory.clement@bootlin.com>, upstream@lists.phytec.de,
+ Frieder Schrempf <frieder.schrempf@kontron.de>, u-boot-amlogic@groups.io,
+ Primoz Fiser <primoz.fiser@norik.com>, Jagan Teki <jagan@amarulasolutions.com>,
+ Alex Nemirovsky <alex.nemirovsky@cortina-access.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Joseph Chen <chenjh@rock-chips.com>, Elaine Zhang <zhangqing@rock-chips.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Sam Shih <sam.shih@mediatek.com>,
+ Rasmus Villemoes <ravi@prevas.dk>, Mathieu Othacehe <m.othacehe@gmail.com>,
+ Minda Chen <minda.chen@starfivetech.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Anton Moryakov <ant.v.moryakov@gmail.com>, Mahesh Rao <mahesh.rao@altera.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Alifer Moraes <alifer.wsdm@gmail.com>,
+ Utsav Agarwal <utsav.agarwal@analog.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Brian Sune <briansune@gmail.com>,
+ Leo <ycliang@andestech.com>, Greg Malysa <malysagreg@gmail.com>,
+ David Zang <davidzangcs@gmail.com>, Ian Roberts <ian.roberts@timesys.com>,
+ Simon Glass <sjg@chromium.org>, Osama Abdelkader <osama.abdelkader@gmail.com>,
+ Alexander Graf <agraf@csgraf.de>, Mario Six <mario.six@gdsys.cc>,
+ Ryan Chen <ryan_chen@aspeedtech.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Andy Yan <andy.yan@rock-chips.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Apurva Nandan <a-nandan@ti.com>, Yannic Moog <y.moog@phytec.de>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Liviu Dudau <liviu.dudau@foss.arm.com>, Dhruva Gole <d-gole@ti.com>,
+ Alexander Stein <alexander.stein@ew.tq-group.com>,
  Quentin Schulz <quentin.schulz@cherry.de>,
- Gwenael Treuveur <gwenael.treuveur@foss.st.com>,
- Nicolas Le Bayon <nicolas.le.bayon@st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Cheick Traore <cheick.traore@foss.st.com>,
- Lionel Debieve <lionel.debieve@foss.st.com>,
- Yannick Fertre <yannick.fertre@foss.st.com>
-Subject: [Uboot-stm32] [PATCH 6/6] configs: stm32mp25: Enable CMD_STM32KEY
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Jonathan Humphreys <j-humphreys@ti.com>, uboot-snps-arc@synopsys.com,
+ Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>,
+ Fabio Estevam <festevam@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Robert Nelson <robertcnelson@gmail.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Joel Stanley <joel@jms.id.au>, Ramon Fried <rfried.dev@gmail.com>,
+ Thomas Chou <thomas@wytron.com.tw>,
+ Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
+ Bernhard Messerklinger <bernhard.messerklinger@at.abb.com>,
+ Stephan Gerhold <stephan@gerhold.net>, Jonas Karlman <jonas@kwiboo.se>,
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Vitor Soares <vitor.soares@toradex.com>,
+ Muhammad Hazim Izzat Zamri <muhammad.hazim.izzat.zamri@altera.com>,
+ Adam Ford <aford173@gmail.com>,
+ Sai Varun Venkatapuram <saivarun.venkatapuram@amd.com>,
+ Wadim Egorov <w.egorov@phytec.de>,
+ Varadarajan Narayanan <quic_varada@quicinc.com>,
+ Max Filippov <jcmvbkbc@gmail.com>, Linus Walleij <linusw@kernel.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Harrison Mutai <harrison.mutai@arm.com>,
+ Aaron Williams <awilliams@marvell.com>, Boon Khai Ng <boon.khai.ng@altera.com>,
+ Francesco Valla <francesco@valla.it>, Nishanth Menon <nm@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>,
+ Jeremy Compostella <jeremy.compostella@intel.com>,
+ Casey Connolly <casey.connolly@linaro.org>, Yao Zi <me@ziyao.cc>,
+ Sam Day <me@samcday.com>, Rick Chen <rick@andestech.com>,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ "Guillaume La Roque \(TI.com\)" <glaroque@baylibre.com>,
+ uboot-stm32@st-md-mailman.stormreply.com,
+ Heiko Thiery <heiko.thiery@gmail.com>,
+ Brian Ruley <brian.ruley@gehealthcare.com>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>,
+ Marek Vasut <marex@denx.de>, Hai Pham <hai.pham.ud@renesas.com>,
+ Ryder Lee <ryder.lee@mediatek.com>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Weijie Gao <weijie.gao@mediatek.com>, Randolph <randolph@andestech.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ Vishal Mahaveer <vishalm@ti.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Christoph Stoidner <c.stoidner@phytec.de>, Ilko Iliev <iliev@ronetix.at>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Matteo Lisi <matteo.lisi@engicam.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Oliver Graute <oliver.graute@kococonnector.com>,
+ Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>,
+ Alexander Feilke <alexander.feilke@ew.tq-group.com>,
+ Markus Niebel <Markus.Niebel@ew.tq-group.com>,
+ Sumit Garg <sumit.garg@kernel.org>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
+ Lars Povlsen <lars.povlsen@microchip.com>,
+ =?iso-8859-1?Q?J=2E_Neusch=E4fer?= <j.ne@posteo.net>,
+ u-boot@dh-electronics.com, kernel@puri.sm,
+ Adriano Cordova <adrianox@gmail.com>,
+ Martyn Welch <martyn.welch@collabora.com>, Keerthy <j-keerthy@ti.com>,
+ Loic Poulain <loic.poulain@oss.qualcomm.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Ferass El Hafidi <funderscore@postmarketos.org>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Anatolij Gustschin <ag.dev.uboot@gmail.com>, Anshul Dalal <anshuld@ti.com>
+Subject: Re: [Uboot-stm32] [PATCH 07/14] toradex: common: Add missing headers
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -161,63 +199,89 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [4.39 / 15.00];
+X-Spamd-Result: default: False [3.89 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_REJECT(1.00)[foss.st.com:s=selector2];
+	R_DKIM_REJECT(1.00)[dolcini.it:s=default];
 	HFILTER_HELO_IP_A(1.00)[stm-ict-prod-mailman-01.stormreply.prv];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
+	MID_RHS_NOT_FQDN(0.50)[];
 	HFILTER_HELO_NORES_A_OR_MX(0.30)[stm-ict-prod-mailman-01.stormreply.prv];
 	R_SPF_ALLOW(-0.20)[+ip4:52.209.6.89:c];
 	MAILLIST(-0.20)[mailman];
-	DMARC_POLICY_SOFTFAIL(0.10)[foss.st.com : SPF not aligned (relaxed),none];
+	DMARC_POLICY_SOFTFAIL(0.10)[dolcini.it : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	GREYLIST(0.00)[pass,meta];
 	RCVD_TLS_LAST(0.00)[];
-	SUSPICIOUS_AUTH_ORIGIN(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	DKIM_TRACE(0.00)[foss.st.com:-];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[st-md-mailman.stormreply.com:rdns,st.com:email,stm-ict-prod-mailman-01.stormreply.prv:helo,stormreply.com:url,stormreply.com:email,foss.st.com:mid];
+	FORGED_RECIPIENTS(0.00)[m:peng.fan@oss.nxp.com,m:debbie.horsfall@arm.com,m:heiko@sntech.de,m:mkorpershoek@kernel.org,m:angus@akkea.ca,m:antonio.borneo@foss.st.com,m:ian.ray@gehealthcare.com,m:mchitale@ventanamicro.com,m:alvin@pqrs.dk,m:finley.xiao@rock-chips.com,m:admin@hifiphile.com,m:francesco.dolcini@toradex.com,m:peng.fan@nxp.com,m:jorge.ramirez.ortiz@gmail.com,m:horatiu.vultur@microchip.com,m:jh80.chung@samsung.com,m:s-jain1@ti.com,m:Peter.Hoyes@arm.com,m:eoin.dickson@microchip.com,m:chiawei_wang@aspeedtech.com,m:dillon.minfei@gmail.com,m:lukma@denx.de,m:christophe.leroy@csgroup.eu,m:hal.feng@starfivetech.com,m:u-boot-qcom@groups.io,m:marcofrk@gmail.com,m:tudor.ambarus@linaro.org,m:n-francis@ti.com,m:michal.simek@amd.com,m:viorel.suman@nxp.com,m:s-vadapalli@ti.com,m:treding@nvidia.com,m:Eugeniy.Paltsev@synopsys.com,m:marek.vasut+renesas@mailbox.org,m:ye.li@nxp.com,m:e@freeshell.de,m:kojima.masahisa@socionext.com,m:t.remmet@phytec.de,m:B.Hahn@phytec.de,m:patrick@blueri.se,m:luka
+ s@mntre.com,m:hs@nabladev.com,m:BMC-SW@aspeedtech.com,m:paul.geurts@prodrive-technologies.com,m:tingting.meng@altera.com,m:joe.hershberger@ni.com,m:t.preissl@proton.me,m:ilias.apalodimas@linaro.org,m:gilles.talis@gmail.com,m:kamil.lulko@gmail.com,m:chf.fritz@googlemail.com,m:l.anderweit@phytec.de,m:sbabic@nabladev.com,m:adsp-linux@analog.com,m:fenghua@phytium.com.cn,m:bb@ti.com,m:alice.guo@nxp.com,m:stefan.roese@mailbox.org,m:alexey.brodkin@synopsys.com,m:kever.yang@rock-chips.com,m:lucienzx159@gmail.com,m:stefan_b@posteo.net,m:u-boot@lists.denx.de,m:uboot-imx@nxp.com,m:gabriel.dalimonte@gmail.com,m:paul.liu@linaro.org,m:dario.binacchi@amarulasolutions.com,m:mateusz.kulikowski@gmail.com,m:vicooodin@gmail.com,m:kettenis@openbsd.org,m:jerome@forissier.org,m:SkyLake.Huang@mediatek.com,m:gregory.clement@bootlin.com,m:upstream@lists.phytec.de,m:frieder.schrempf@kontron.de,m:u-boot-amlogic@groups.io,m:primoz.fiser@norik.com,m:jagan@amarulasolutions.com,m:alex.nemirovsky@cortina-access.com
+ ,m:michael@amarulasolutions.com,m:chenjh@rock-chips.com,m:zhangqing@rock-chips.com,m:tien.fong.chee@altera.com,m:iwamatsu@nigauri.org,m:sam.shih@mediatek.com,m:ravi@prevas.dk,m:m.othacehe@gmail.com,m:minda.chen@starfivetech.com,m:philipp.tomsich@vrull.eu,m:ant.v.moryakov@gmail.com,m:mahesh.rao@altera.com,m:sughosh.ganu@linaro.org,m:semen.protsenko@linaro.org,m:andrew.goodbody@linaro.org,m:alifer.wsdm@gmail.com,m:utsav.agarwal@analog.com,m:neil.armstrong@linaro.org,m:briansune@gmail.com,m:ycliang@andestech.com,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[francesco@dolcini.it,uboot-stm32-bounces@st-md-mailman.stormreply.com];
 	TO_DN_SOME(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[uboot-stm32@st-md-mailman.stormreply.com];
-	HAS_XOIP(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[patrice.chotard@foss.st.com,uboot-stm32-bounces@st-md-mailman.stormreply.com];
+	RCVD_COUNT_THREE(0.00)[3];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	FORWARDED(0.00)[uboot-stm32@st-md-mailman.stormreply.com];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.997];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:16509, ipnet:52.208.0.0/13, country:US];
+	DKIM_TRACE(0.00)[dolcini.it:-];
+	RCPT_COUNT_GT_50(0.00)[200];
+	NEURAL_HAM(-0.00)[-1.000];
+	PREVIOUSLY_DELIVERED(0.00)[uboot-stm32@st-md-mailman.stormreply.com];
+	FROM_NEQ_ENVFROM(0.00)[francesco@dolcini.it,uboot-stm32-bounces@st-md-mailman.stormreply.com];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FREEMAIL_CC(0.00)[arm.com,sntech.de,kernel.org,akkea.ca,foss.st.com,gehealthcare.com,ventanamicro.com,pqrs.dk,rock-chips.com,hifiphile.com,toradex.com,nxp.com,gmail.com,microchip.com,samsung.com,ti.com,aspeedtech.com,denx.de,csgroup.eu,starfivetech.com,groups.io,linaro.org,amd.com,nvidia.com,synopsys.com,mailbox.org,freeshell.de,socionext.com,phytec.de,blueri.se,mntre.com,nabladev.com,prodrive-technologies.com,altera.com,ni.com,proton.me,googlemail.com,analog.com,phytium.com.cn,posteo.net,lists.denx.de,amarulasolutions.com,openbsd.org,forissier.org,mediatek.com,bootlin.com,lists.phytec.de,kontron.de,norik.com,cortina-access.com,nigauri.org,prevas.dk,vrull.eu,andestech.com,timesys.com,chromium.org,csgraf.de,gdsys.cc,gmx.de,foss.arm.com,ew.tq-group.com,cherry.de,konsulko.com,jms.id.au,wytron.com.tw,at.abb.com,gerhold.net,kwiboo.se,quicinc.com,marvell.com,valla.it,intel.com,ziyao.cc,samcday.com,siemens.com,oss.qualcomm.com,baylibre.com,st-md-mailman.stormreply.com,collabora.com,renesas
+ .com,epam.com,mentallysanemainliners.org,ronetix.at,engicam.com,kococonnector.com,dh-electronics.com,puri.sm,postmarketos.org];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	TAGGED_RCPT(0.00)[uboot-stm32,renesas];
-	RCVD_COUNT_SEVEN(0.00)[7]
-X-Rspamd-Queue-Id: C1D8AE467B
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:16509, ipnet:52.208.0.0/13, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[st-md-mailman.stormreply.com:rdns,stm-ict-prod-mailman-01.stormreply.prv:helo,nxp.com:email]
+X-Rspamd-Queue-Id: 06C53E5971
 X-Rspamd-Action: no action
 
-Enable CONFIG_CMD_STM32KEY flag to enable usage of command
-stm32key.
+On Tue, Feb 03, 2026 at 06:41:38PM +0800, Peng Fan (OSS) wrote:
+> From: Peng Fan <peng.fan@nxp.com>
+> 
+> Include linux/types.h and asm-generic/u-boot.h. Missing the two header
+> files will cause building error after cleaning up usage of
+> asm/global_data.h.
+> 
+> Signed-off-by: Peng Fan <peng.fan@nxp.com>
+> ---
+>  board/toradex/common/tdx-cfg-block.h | 2 ++
+>  board/toradex/common/tdx-common.h    | 2 ++
+>  2 files changed, 4 insertions(+)
+> 
+> diff --git a/board/toradex/common/tdx-cfg-block.h b/board/toradex/common/tdx-cfg-block.h
+> index b28033d8332e09d063a6a8ad1d4e334703077f00..067daec0d776070b0b53fc26d1043d6eb781a527 100644
+> --- a/board/toradex/common/tdx-cfg-block.h
+> +++ b/board/toradex/common/tdx-cfg-block.h
+> @@ -6,6 +6,8 @@
+>  #ifndef _TDX_CFG_BLOCK_H
+>  #define _TDX_CFG_BLOCK_H
+>  
+> +#include <linux/types.h>
+> +
+>  #include "tdx-common.h"
+>  
+>  struct toradex_hw {
+> diff --git a/board/toradex/common/tdx-common.h b/board/toradex/common/tdx-common.h
+> index d446e9f1d5ca7d3d5a1318b389393d28854e2263..db3369a8f9ef9b409c53c45e94aa5f22933a44fa 100644
+> --- a/board/toradex/common/tdx-common.h
+> +++ b/board/toradex/common/tdx-common.h
+> @@ -6,6 +6,8 @@
+>  #ifndef _TDX_COMMON_H
+>  #define _TDX_COMMON_H
+>  
+> +#include <asm-generic/u-boot.h>
+> +
 
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
----
- configs/stm32mp25_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+maybe just have the forward declaration?
 
-diff --git a/configs/stm32mp25_defconfig b/configs/stm32mp25_defconfig
-index 234a6a8abdc..99b22a68fda 100644
---- a/configs/stm32mp25_defconfig
-+++ b/configs/stm32mp25_defconfig
-@@ -9,6 +9,7 @@ CONFIG_SYS_BOOTM_LEN=0x2000000
- CONFIG_SYS_LOAD_ADDR=0x84000000
- CONFIG_STM32MP25X=y
- CONFIG_DDR_CACHEABLE_SIZE=0x10000000
-+CONFIG_CMD_STM32KEY=y
- CONFIG_MFD_STM32_TIMERS=y
- CONFIG_ENV_OFFSET_REDUND=0x940000
- CONFIG_TARGET_ST_STM32MP25X=y
+  struct bd_info;
 
--- 
-2.43.0
+and that's it?
 
 _______________________________________________
 Uboot-stm32 mailing list

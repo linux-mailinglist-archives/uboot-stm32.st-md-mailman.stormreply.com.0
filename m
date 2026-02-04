@@ -2,187 +2,98 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id eKGJNOU2g2kwjAMAu9opvQ
+	id kFSGOufXg2lbuwMAu9opvQ
 	(envelope-from <uboot-stm32-bounces@st-md-mailman.stormreply.com>)
-	for <lists+uboot-stm32@lfdr.de>; Wed, 04 Feb 2026 13:09:09 +0100
+	for <lists+uboot-stm32@lfdr.de>; Thu, 05 Feb 2026 00:36:07 +0100
 X-Original-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 06C53E5971
-	for <lists+uboot-stm32@lfdr.de>; Wed, 04 Feb 2026 13:09:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 85A3FED4DE
+	for <lists+uboot-stm32@lfdr.de>; Thu, 05 Feb 2026 00:36:07 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9ED96C87ECA;
-	Wed,  4 Feb 2026 12:09:08 +0000 (UTC)
-Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2C41DC87ECD;
+	Wed,  4 Feb 2026 23:36:07 +0000 (UTC)
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com
+ [209.85.128.46])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 66E0CC87EC9
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 49498C87EC9
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  4 Feb 2026 12:09:07 +0000 (UTC)
-Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
- by mail11.truemail.it (Postfix) with ESMTPA id E330B20200;
- Wed,  4 Feb 2026 13:08:59 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1770206946;
- bh=rV8MugSWJElUnNJsq7kkw6TNF2UDbsneM9RTfewRwN4=; h=From:To:Subject;
- b=to4PK8VovRxkk4HB3VrCibnTpWSWGzhQbGd4ORVcP57KdqtI0qRD0zzbFovs2X4Q0
- 6KZu3W912iZZ8/mxZk0q9kb+UTXOQu6JfaioZP6ebtdVmsNjPY3t0e3TIQefpATbw6
- rTvIZ6rKf5IyplVUs7HTfJ8YxgxuucqYdKBJpx8FeDpgvaa4rpw3Bpq5vaY8ARDc82
- +8j56kzaId6Ji+iIzNkUQuV1NbQX/CI6YmFqy1zoI4VeymMCNSG0JZjZcMItpo3HPn
- 7bj1eqAnVkr8zwEGT4mVYVRbJZisT8AbyhvrYlp5dVZaTh6HZR0JojXICbdxqNb37j
- pQ5uU8Ik++fyA==
-Date: Wed, 4 Feb 2026 13:08:55 +0100
-From: Francesco Dolcini <francesco@dolcini.it>
-To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Message-ID: <20260204120855.GA30917@francesco-nb>
-References: <20260203-cleanup-v1-0-4221c13e7558@nxp.com>
- <20260203-cleanup-v1-7-4221c13e7558@nxp.com>
+ Wed,  4 Feb 2026 23:36:05 +0000 (UTC)
+Received: by mail-wm1-f46.google.com with SMTP id
+ 5b1f17b1804b1-481188b7760so2599125e9.0
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Wed, 04 Feb 2026 15:36:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1770248164; x=1770852964;
+ darn=st-md-mailman.stormreply.com; 
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=vTotPwPeX7mDUfiL+iy6WaKCa5xiJdrE7pgMGB1LwSM=;
+ b=C7akyVRpRQkXeB3+a1rrQi3pHxjst3AUh4ri7y/sDB//kgnbE3wjUBfq6ezFrxVSwE
+ SrtooXYM1Ns/llEG+0p80zcwP3pInC8mDUpknsrj3XYFDXUKW75ePXlr9b/ecV0/cuxb
+ 6HaMyhT7CqjvWhlOQG3yl/cGyz6XcHl1Exo2KjLTGSo0B+sZGFgyKyf+TRfTz0gXJB24
+ W36ju9UmWvCSPNuaND+WADVayQL9Zy08TnbUgBTIA97tXp4+j7ui9DlaOUnneMlWM1x1
+ sfxGdcFsR+xIdhGpuZuWT8ceJ76DKlToGz7wFwPJMtq0MuK8KtYvA+/PY9M8He+WI4cf
+ ehSQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1770248164; x=1770852964;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=vTotPwPeX7mDUfiL+iy6WaKCa5xiJdrE7pgMGB1LwSM=;
+ b=u04rv2zcEepfS7+SXIW8u1jROrjk1cueSWVsUVKrqUw7b2p8Q9nOQinx+l3iQw3LgF
+ LrqhIiR4vQ3LQ1DO7/caMY8pKE9yWKPNdg//p//xxlEk68oeEj72Y7ZYsYvk5CMQ1vlQ
+ ZApfQnhULse4woifQJNVs9LYIejBk0MCu/4xJcZ1AjIpNrW+NldPnBbAU3hN/osYD2xv
+ gIPj+j0XC/M4E6nm+YX0HtLWkpgHbpnJ57eoH+bjbs2D0Y2u4ce0FWEP+fSpmbIjQMhC
+ zaD63XkgBzhMCam5ufBat1lHiRftP+8zk/mjvS94GrSRJbb0HprwyicWk0ESQbECM/Az
+ kzZg==
+X-Gm-Message-State: AOJu0YyXnNnlPN3rYyVGS9WgFDEdOBGjDixqAFmWC6Z5zbC9JUovqC5e
+ bG/J0HgPqU6QgXFVo7IrnG4kuPx+I/h3Mw2i7VdWIlDor0+m9E/WcK3P
+X-Gm-Gg: AZuq6aKsLPlrJVCmuhaz7+kTXe9IstjUh2zDdg6UvVOKC0kRYOuK9UrpZdPYbkJbIMe
+ jY6j21zLOrAzhOP8IOkhwv9oGxFGTnpMg/g8RJKOegWuIUhVjh++KbBzwcVrw5sKX7WvFjxRCAE
+ Afsol2AuQWLyu2YmuShEWf6U3BZ9jYFu2vsDphBm6EnW7KyQRcTVDu1B0gpojTApThXVUXMQYJs
+ oIoMpowQc5WlS6R+gXVqM1YS5y8BDH94qN36FNcVhVlWGPfGD2vQwK/GXtj8n++DQpen34yebFp
+ RKmjrT4p9BrGwpalcRM7hboGdAxcPYSoQ3rVfEowD1kt4rotI5V2WvA1AiLR1m0ZK1jjUe6UTP4
+ AGYCtVSo0a+PZFJobEfjOhz/dFnF34ZvkfYTblv1zZLN9VVGAFiWZ76EoHeyrUkBBQcw5B+SpW1
+ giMF+2ytG+udbqc8t3day57FU=
+X-Received: by 2002:a05:600c:1546:b0:477:7f4a:44b4 with SMTP id
+ 5b1f17b1804b1-4830e92450cmr63869495e9.1.1770248164261; 
+ Wed, 04 Feb 2026 15:36:04 -0800 (PST)
+Received: from localhost ([2001:861:3385:e20:f99c:d6cf:27e6:2b03])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-48317d2ba61sm26610585e9.1.2026.02.04.15.36.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 04 Feb 2026 15:36:03 -0800 (PST)
+From: Raphael Gallais-Pou <rgallaispou@gmail.com>
+Date: Thu, 05 Feb 2026 00:35:40 +0100
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20260203-cleanup-v1-7-4221c13e7558@nxp.com>
-Cc: Debbie Horsfall <debbie.horsfall@arm.com>, Heiko Stuebner <heiko@sntech.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Angus Ainslie <angus@akkea.ca>,
- Antonio Borneo <antonio.borneo@foss.st.com>,
- Ian Ray <ian.ray@gehealthcare.com>,
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Alvin =?utf-8?Q?=C5=A0ipraga?= <alvin@pqrs.dk>,
- Finley Xiao <finley.xiao@rock-chips.com>, Zixun LI <admin@hifiphile.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>, Peng Fan <peng.fan@nxp.com>,
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
- Horatiu Vultur <horatiu.vultur@microchip.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Swamil Jain <s-jain1@ti.com>,
- Peter Hoyes <Peter.Hoyes@arm.com>, Eoin Dickson <eoin.dickson@microchip.com>,
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
- Dillon Min <dillon.minfei@gmail.com>, Lukasz Majewski <lukma@denx.de>,
- Christophe Leroy <christophe.leroy@csgroup.eu>,
- Hal Feng <hal.feng@starfivetech.com>, u-boot-qcom@groups.io,
- Marco Franchi <marcofrk@gmail.com>, Tudor Ambarus <tudor.ambarus@linaro.org>,
- Neha Malcom Francis <n-francis@ti.com>, Michal Simek <michal.simek@amd.com>,
- Viorel Suman <viorel.suman@nxp.com>, Siddharth Vadapalli <s-vadapalli@ti.com>,
- Thierry Reding <treding@nvidia.com>,
- Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Ye Li <ye.li@nxp.com>,
- E Shattow <e@freeshell.de>, Masahisa Kojima <kojima.masahisa@socionext.com>,
- Teresa Remmet <t.remmet@phytec.de>, Benjamin Hahn <B.Hahn@phytec.de>,
- Patrick Wildt <patrick@blueri.se>, "Lukas F. Hartmann" <lukas@mntre.com>,
- Heiko Schocher <hs@nabladev.com>, Aspeed BMC SW team <BMC-SW@aspeedtech.com>,
- Paul Geurts <paul.geurts@prodrive-technologies.com>,
- Tingting Meng <tingting.meng@altera.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Timo tp =?iso-8859-1?Q?Prei=DFl?= <t.preissl@proton.me>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Gilles Talis <gilles.talis@gmail.com>, Kamil Lulko <kamil.lulko@gmail.com>,
- Christoph Fritz <chf.fritz@googlemail.com>,
- Leonard Anderweit <l.anderweit@phytec.de>, Stefano Babic <sbabic@nabladev.com>,
- adsp-linux@analog.com, David Feng <fenghua@phytium.com.cn>,
- Bryan Brattlof <bb@ti.com>, Alice Guo <alice.guo@nxp.com>,
- Stefan Roese <stefan.roese@mailbox.org>,
- Alexey Brodkin <alexey.brodkin@synopsys.com>,
- Kever Yang <kever.yang@rock-chips.com>, "Lucien.Jheng" <lucienzx159@gmail.com>,
- Stefan Bosch <stefan_b@posteo.net>, u-boot@lists.denx.de,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Gabriel Dalimonte <gabriel.dalimonte@gmail.com>,
- "Ying-Chun Liu \(PaulLiu\)" <paul.liu@linaro.org>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
- Anastasiia Lukianenko <vicooodin@gmail.com>,
- Mark Kettenis <kettenis@openbsd.org>, Jerome Forissier <jerome@forissier.org>,
- Sky Huang <SkyLake.Huang@mediatek.com>,
- Gregory CLEMENT <gregory.clement@bootlin.com>, upstream@lists.phytec.de,
- Frieder Schrempf <frieder.schrempf@kontron.de>, u-boot-amlogic@groups.io,
- Primoz Fiser <primoz.fiser@norik.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Alex Nemirovsky <alex.nemirovsky@cortina-access.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Joseph Chen <chenjh@rock-chips.com>, Elaine Zhang <zhangqing@rock-chips.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Sam Shih <sam.shih@mediatek.com>,
- Rasmus Villemoes <ravi@prevas.dk>, Mathieu Othacehe <m.othacehe@gmail.com>,
- Minda Chen <minda.chen@starfivetech.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Anton Moryakov <ant.v.moryakov@gmail.com>, Mahesh Rao <mahesh.rao@altera.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Alifer Moraes <alifer.wsdm@gmail.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Brian Sune <briansune@gmail.com>,
- Leo <ycliang@andestech.com>, Greg Malysa <malysagreg@gmail.com>,
- David Zang <davidzangcs@gmail.com>, Ian Roberts <ian.roberts@timesys.com>,
- Simon Glass <sjg@chromium.org>, Osama Abdelkader <osama.abdelkader@gmail.com>,
- Alexander Graf <agraf@csgraf.de>, Mario Six <mario.six@gdsys.cc>,
- Ryan Chen <ryan_chen@aspeedtech.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Andy Yan <andy.yan@rock-chips.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Apurva Nandan <a-nandan@ti.com>, Yannic Moog <y.moog@phytec.de>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Liviu Dudau <liviu.dudau@foss.arm.com>, Dhruva Gole <d-gole@ti.com>,
- Alexander Stein <alexander.stein@ew.tq-group.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Jonathan Humphreys <j-humphreys@ti.com>, uboot-snps-arc@synopsys.com,
- Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>,
- Fabio Estevam <festevam@gmail.com>, Tom Rini <trini@konsulko.com>,
- Robert Nelson <robertcnelson@gmail.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Joel Stanley <joel@jms.id.au>, Ramon Fried <rfried.dev@gmail.com>,
- Thomas Chou <thomas@wytron.com.tw>,
- Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
- Bernhard Messerklinger <bernhard.messerklinger@at.abb.com>,
- Stephan Gerhold <stephan@gerhold.net>, Jonas Karlman <jonas@kwiboo.se>,
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Vitor Soares <vitor.soares@toradex.com>,
- Muhammad Hazim Izzat Zamri <muhammad.hazim.izzat.zamri@altera.com>,
- Adam Ford <aford173@gmail.com>,
- Sai Varun Venkatapuram <saivarun.venkatapuram@amd.com>,
- Wadim Egorov <w.egorov@phytec.de>,
- Varadarajan Narayanan <quic_varada@quicinc.com>,
- Max Filippov <jcmvbkbc@gmail.com>, Linus Walleij <linusw@kernel.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Harrison Mutai <harrison.mutai@arm.com>,
- Aaron Williams <awilliams@marvell.com>, Boon Khai Ng <boon.khai.ng@altera.com>,
- Francesco Valla <francesco@valla.it>, Nishanth Menon <nm@ti.com>,
- Vignesh Raghavendra <vigneshr@ti.com>,
- Jeremy Compostella <jeremy.compostella@intel.com>,
- Casey Connolly <casey.connolly@linaro.org>, Yao Zi <me@ziyao.cc>,
- Sam Day <me@samcday.com>, Rick Chen <rick@andestech.com>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- "Guillaume La Roque \(TI.com\)" <glaroque@baylibre.com>,
- uboot-stm32@st-md-mailman.stormreply.com,
- Heiko Thiery <heiko.thiery@gmail.com>,
- Brian Ruley <brian.ruley@gehealthcare.com>,
- Sebastian Reichel <sebastian.reichel@collabora.com>,
- Marek Vasut <marex@denx.de>, Hai Pham <hai.pham.ud@renesas.com>,
- Ryder Lee <ryder.lee@mediatek.com>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Weijie Gao <weijie.gao@mediatek.com>, Randolph <randolph@andestech.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- Vishal Mahaveer <vishalm@ti.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Christoph Stoidner <c.stoidner@phytec.de>, Ilko Iliev <iliev@ronetix.at>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Matteo Lisi <matteo.lisi@engicam.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Oliver Graute <oliver.graute@kococonnector.com>,
- Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>,
- Maxim Moskalets <maximmosk4@gmail.com>,
- Alexander Feilke <alexander.feilke@ew.tq-group.com>,
- Markus Niebel <Markus.Niebel@ew.tq-group.com>,
- Sumit Garg <sumit.garg@kernel.org>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
- Lars Povlsen <lars.povlsen@microchip.com>,
- =?iso-8859-1?Q?J=2E_Neusch=E4fer?= <j.ne@posteo.net>,
- u-boot@dh-electronics.com, kernel@puri.sm,
- Adriano Cordova <adrianox@gmail.com>,
- Martyn Welch <martyn.welch@collabora.com>, Keerthy <j-keerthy@ti.com>,
- Loic Poulain <loic.poulain@oss.qualcomm.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Ferass El Hafidi <funderscore@postmarketos.org>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Bin Meng <bmeng.cn@gmail.com>,
- Anatolij Gustschin <ag.dev.uboot@gmail.com>, Anshul Dalal <anshuld@ti.com>
-Subject: Re: [Uboot-stm32] [PATCH 07/14] toradex: common: Add missing headers
+Message-Id: <20260205-dsi-v1-1-eb5805068e97@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAMvXg2kC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDIwNT3ZTiTF1L8+RUAwuj5DQDIyMloMqCotS0zAqwKdGxtbUAl7QF8lU
+ AAAA=
+X-Change-ID: 20260205-dsi-97ce082cf022
+To: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=13421;
+ i=rgallaispou@gmail.com; h=from:subject:message-id;
+ bh=onGNU2V51ImqsJ2YhwA44Tl7HT6C0hJHCW6JQaRh0d0=;
+ b=owEBbQKS/ZANAwAKAechimjUEsK1AcsmYgBpg9fQZQEoAb2Fv4juAOWzH/31+XzRigVKfkT/f
+ NnpYvJSda2JAjMEAAEKAB0WIQQgmXv2E+fvbV/9ui/nIYpo1BLCtQUCaYPX0AAKCRDnIYpo1BLC
+ tSAmD/9bpE1ef5GszDnbJ0wbBxRbrZ8COEWYixc80OrX84Mg3wCjDo30WO2jk1to3uaffg6U57/
+ 5qxliK2Q57knitOUI0+5E9dnrK5DYHSHSetKE/7hLXU1ZqVd0M8tW3Jx8DZodrH+3uwL6SIx1I/
+ 6XIFxa8oMRmgw2rOQCjRfre0RHis6IqmLNxCv6PAk/V0YuPcVlHuG+IE2EZIXgRdI1aODj3+Da+
+ k/lst6hNSvqKCvo4jETFEyr5I2igkyZ/IE/9QezD11/4TsLxpJqygVs7NN/UJCsR+JSOtC/UbuF
+ yzmHt3gSkUY1cqHF2/NUp7f8O5tbtTPE3wZnQ1aDGuyTYhfbK/KRIPOCzOETWXYYmy9ltmLClIW
+ 0D7K85F6j4k52xzUrucB+6gotbT6fyZE+0Wmi2HCGQuE71H/YhFcTE04CsLzQPiPyQ1aWImId0X
+ vNiC7KDccsKwaiWc/zr5/2ggmpPaxu4cuNzRqIwvXkVqnVairc7YTA6oWOtWJd4lYhsWQx8knOb
+ 7oLA48Y267GrzZC5/sjoFcInfsjmUOGgNj63XbGAOfa/EZipJbBBk2qidDpOy5JQa6WYZAaSBUz
+ OUZ6p4reZGs5xRLGRyyBvppMbo3tN20siChGtVZCbP56u+nQ6BYpCXnWYMVMkIEQcVPLGHc4WyI
+ YjKA5SBhhDz4Fvw==
+X-Developer-Key: i=rgallaispou@gmail.com; a=openpgp;
+ fpr=20997BF613E7EF6D5FFDBA2FE7218A68D412C2B5
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Tom Rini <trini@konsulko.com>, Anatolij Gustschin <ag.dev.uboot@gmail.com>
+Subject: [Uboot-stm32] [PATCH] video: stm32: dsi: add .of_to_plat callback
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -199,89 +110,449 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [3.89 / 15.00];
+X-Spamd-Result: default: False [3.39 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_REJECT(1.00)[dolcini.it:s=default];
+	R_DKIM_REJECT(1.00)[gmail.com:s=20230601];
 	HFILTER_HELO_IP_A(1.00)[stm-ict-prod-mailman-01.stormreply.prv];
-	MID_RHS_NOT_FQDN(0.50)[];
 	HFILTER_HELO_NORES_A_OR_MX(0.30)[stm-ict-prod-mailman-01.stormreply.prv];
-	R_SPF_ALLOW(-0.20)[+ip4:52.209.6.89:c];
+	R_SPF_ALLOW(-0.20)[+ip4:52.209.6.89];
 	MAILLIST(-0.20)[mailman];
-	DMARC_POLICY_SOFTFAIL(0.10)[dolcini.it : SPF not aligned (relaxed),none];
+	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:peng.fan@oss.nxp.com,m:debbie.horsfall@arm.com,m:heiko@sntech.de,m:mkorpershoek@kernel.org,m:angus@akkea.ca,m:antonio.borneo@foss.st.com,m:ian.ray@gehealthcare.com,m:mchitale@ventanamicro.com,m:alvin@pqrs.dk,m:finley.xiao@rock-chips.com,m:admin@hifiphile.com,m:francesco.dolcini@toradex.com,m:peng.fan@nxp.com,m:jorge.ramirez.ortiz@gmail.com,m:horatiu.vultur@microchip.com,m:jh80.chung@samsung.com,m:s-jain1@ti.com,m:Peter.Hoyes@arm.com,m:eoin.dickson@microchip.com,m:chiawei_wang@aspeedtech.com,m:dillon.minfei@gmail.com,m:lukma@denx.de,m:christophe.leroy@csgroup.eu,m:hal.feng@starfivetech.com,m:u-boot-qcom@groups.io,m:marcofrk@gmail.com,m:tudor.ambarus@linaro.org,m:n-francis@ti.com,m:michal.simek@amd.com,m:viorel.suman@nxp.com,m:s-vadapalli@ti.com,m:treding@nvidia.com,m:Eugeniy.Paltsev@synopsys.com,m:marek.vasut+renesas@mailbox.org,m:ye.li@nxp.com,m:e@freeshell.de,m:kojima.masahisa@socionext.com,m:t.remmet@phytec.de,m:B.Hahn@phytec.de,m:patrick@blueri.se,m:luka
- s@mntre.com,m:hs@nabladev.com,m:BMC-SW@aspeedtech.com,m:paul.geurts@prodrive-technologies.com,m:tingting.meng@altera.com,m:joe.hershberger@ni.com,m:t.preissl@proton.me,m:ilias.apalodimas@linaro.org,m:gilles.talis@gmail.com,m:kamil.lulko@gmail.com,m:chf.fritz@googlemail.com,m:l.anderweit@phytec.de,m:sbabic@nabladev.com,m:adsp-linux@analog.com,m:fenghua@phytium.com.cn,m:bb@ti.com,m:alice.guo@nxp.com,m:stefan.roese@mailbox.org,m:alexey.brodkin@synopsys.com,m:kever.yang@rock-chips.com,m:lucienzx159@gmail.com,m:stefan_b@posteo.net,m:u-boot@lists.denx.de,m:uboot-imx@nxp.com,m:gabriel.dalimonte@gmail.com,m:paul.liu@linaro.org,m:dario.binacchi@amarulasolutions.com,m:mateusz.kulikowski@gmail.com,m:vicooodin@gmail.com,m:kettenis@openbsd.org,m:jerome@forissier.org,m:SkyLake.Huang@mediatek.com,m:gregory.clement@bootlin.com,m:upstream@lists.phytec.de,m:frieder.schrempf@kontron.de,m:u-boot-amlogic@groups.io,m:primoz.fiser@norik.com,m:jagan@amarulasolutions.com,m:alex.nemirovsky@cortina-access.com
- ,m:michael@amarulasolutions.com,m:chenjh@rock-chips.com,m:zhangqing@rock-chips.com,m:tien.fong.chee@altera.com,m:iwamatsu@nigauri.org,m:sam.shih@mediatek.com,m:ravi@prevas.dk,m:m.othacehe@gmail.com,m:minda.chen@starfivetech.com,m:philipp.tomsich@vrull.eu,m:ant.v.moryakov@gmail.com,m:mahesh.rao@altera.com,m:sughosh.ganu@linaro.org,m:semen.protsenko@linaro.org,m:andrew.goodbody@linaro.org,m:alifer.wsdm@gmail.com,m:utsav.agarwal@analog.com,m:neil.armstrong@linaro.org,m:briansune@gmail.com,m:ycliang@andestech.com,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[francesco@dolcini.it,uboot-stm32-bounces@st-md-mailman.stormreply.com];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_FROM(0.00)[gmail.com];
 	ARC_NA(0.00)[];
-	FORWARDED(0.00)[uboot-stm32@st-md-mailman.stormreply.com];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+];
+	TO_DN_SOME(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[dolcini.it:-];
-	RCPT_COUNT_GT_50(0.00)[200];
+	DKIM_TRACE(0.00)[gmail.com:-];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	PREVIOUSLY_DELIVERED(0.00)[uboot-stm32@st-md-mailman.stormreply.com];
-	FROM_NEQ_ENVFROM(0.00)[francesco@dolcini.it,uboot-stm32-bounces@st-md-mailman.stormreply.com];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FREEMAIL_CC(0.00)[arm.com,sntech.de,kernel.org,akkea.ca,foss.st.com,gehealthcare.com,ventanamicro.com,pqrs.dk,rock-chips.com,hifiphile.com,toradex.com,nxp.com,gmail.com,microchip.com,samsung.com,ti.com,aspeedtech.com,denx.de,csgroup.eu,starfivetech.com,groups.io,linaro.org,amd.com,nvidia.com,synopsys.com,mailbox.org,freeshell.de,socionext.com,phytec.de,blueri.se,mntre.com,nabladev.com,prodrive-technologies.com,altera.com,ni.com,proton.me,googlemail.com,analog.com,phytium.com.cn,posteo.net,lists.denx.de,amarulasolutions.com,openbsd.org,forissier.org,mediatek.com,bootlin.com,lists.phytec.de,kontron.de,norik.com,cortina-access.com,nigauri.org,prevas.dk,vrull.eu,andestech.com,timesys.com,chromium.org,csgraf.de,gdsys.cc,gmx.de,foss.arm.com,ew.tq-group.com,cherry.de,konsulko.com,jms.id.au,wytron.com.tw,at.abb.com,gerhold.net,kwiboo.se,quicinc.com,marvell.com,valla.it,intel.com,ziyao.cc,samcday.com,siemens.com,oss.qualcomm.com,baylibre.com,st-md-mailman.stormreply.com,collabora.com,renesas
- .com,epam.com,mentallysanemainliners.org,ronetix.at,engicam.com,kococonnector.com,dh-electronics.com,puri.sm,postmarketos.org];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[rgallaispou@gmail.com,uboot-stm32-bounces@st-md-mailman.stormreply.com];
+	FREEMAIL_CC(0.00)[foss.st.com,konsulko.com,gmail.com];
+	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_RCPT(0.00)[uboot-stm32,renesas];
-	MISSING_XM_UA(0.00)[];
+	TAGGED_RCPT(0.00)[uboot-stm32];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ASN(0.00)[asn:16509, ipnet:52.208.0.0/13, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[st-md-mailman.stormreply.com:rdns,stm-ict-prod-mailman-01.stormreply.prv:helo,nxp.com:email]
-X-Rspamd-Queue-Id: 06C53E5971
+	RCPT_COUNT_FIVE(0.00)[5]
+X-Rspamd-Queue-Id: 85A3FED4DE
 X-Rspamd-Action: no action
 
-On Tue, Feb 03, 2026 at 06:41:38PM +0800, Peng Fan (OSS) wrote:
-> From: Peng Fan <peng.fan@nxp.com>
-> 
-> Include linux/types.h and asm-generic/u-boot.h. Missing the two header
-> files will cause building error after cleaning up usage of
-> asm/global_data.h.
-> 
-> Signed-off-by: Peng Fan <peng.fan@nxp.com>
-> ---
->  board/toradex/common/tdx-cfg-block.h | 2 ++
->  board/toradex/common/tdx-common.h    | 2 ++
->  2 files changed, 4 insertions(+)
-> 
-> diff --git a/board/toradex/common/tdx-cfg-block.h b/board/toradex/common/tdx-cfg-block.h
-> index b28033d8332e09d063a6a8ad1d4e334703077f00..067daec0d776070b0b53fc26d1043d6eb781a527 100644
-> --- a/board/toradex/common/tdx-cfg-block.h
-> +++ b/board/toradex/common/tdx-cfg-block.h
-> @@ -6,6 +6,8 @@
->  #ifndef _TDX_CFG_BLOCK_H
->  #define _TDX_CFG_BLOCK_H
->  
-> +#include <linux/types.h>
-> +
->  #include "tdx-common.h"
->  
->  struct toradex_hw {
-> diff --git a/board/toradex/common/tdx-common.h b/board/toradex/common/tdx-common.h
-> index d446e9f1d5ca7d3d5a1318b389393d28854e2263..db3369a8f9ef9b409c53c45e94aa5f22933a44fa 100644
-> --- a/board/toradex/common/tdx-common.h
-> +++ b/board/toradex/common/tdx-common.h
-> @@ -6,6 +6,8 @@
->  #ifndef _TDX_COMMON_H
->  #define _TDX_COMMON_H
->  
-> +#include <asm-generic/u-boot.h>
-> +
+Drivers should extract device-tree data before probing via the
+.of_to_plat hook.
 
-maybe just have the forward declaration?
+Implement it for stm32_dsi driver.  By doing so, it also solve a
+variable shadowing in stm32_dsi_probe() where &clk was used as
+peripheral clock and ref clock.
 
-  struct bd_info;
+For readability some struct have been renamed such as:
 
-and that's it?
+  * struct stm32_dsi_priv *dsi -> struct stm32_dsi_priv *priv
+  * struct clk clk -> struct clk pclk
+
+Signed-off-by: Raphael Gallais-Pou <rgallaispou@gmail.com>
+---
+This patch has been tested on stm32mp157c-dk2 board.
+---
+ drivers/video/stm32/stm32_dsi.c | 168 ++++++++++++++++++++++------------------
+ 1 file changed, 91 insertions(+), 77 deletions(-)
+
+diff --git a/drivers/video/stm32/stm32_dsi.c b/drivers/video/stm32/stm32_dsi.c
+index 438ed41e8d5f..65a91f5cff7a 100644
+--- a/drivers/video/stm32/stm32_dsi.c
++++ b/drivers/video/stm32/stm32_dsi.c
+@@ -84,42 +84,48 @@ enum dsi_color {
+ /* Timeout for regulator on/off, pll lock/unlock & fifo empty */
+ #define TIMEOUT_US	200000
+ 
+-struct stm32_dsi_priv {
++struct stm32_dsi_plat {
+ 	struct mipi_dsi_device device;
+ 	void __iomem *base;
+ 	struct udevice *panel;
++	struct udevice *vdd_reg;
++	struct udevice *dsi_host;
++	struct reset_ctl rst;
++	struct clk pclk;
++	struct clk refclk;
++};
++
++struct stm32_dsi_priv {
+ 	u32 pllref_clk;
+ 	u32 hw_version;
+ 	int lane_min_kbps;
+ 	int lane_max_kbps;
+-	struct udevice *vdd_reg;
+-	struct udevice *dsi_host;
+ };
+ 
+-static inline void dsi_write(struct stm32_dsi_priv *dsi, u32 reg, u32 val)
++static inline void dsi_write(void __iomem *base, u32 reg, u32 val)
+ {
+-	writel(val, dsi->base + reg);
++	writel(val, base + reg);
+ }
+ 
+-static inline u32 dsi_read(struct stm32_dsi_priv *dsi, u32 reg)
++static inline u32 dsi_read(void __iomem *base, u32 reg)
+ {
+-	return readl(dsi->base + reg);
++	return readl(base + reg);
+ }
+ 
+-static inline void dsi_set(struct stm32_dsi_priv *dsi, u32 reg, u32 mask)
++static inline void dsi_set(void __iomem *base, u32 reg, u32 mask)
+ {
+-	dsi_write(dsi, reg, dsi_read(dsi, reg) | mask);
++	dsi_write(base, reg, dsi_read(base, reg) | mask);
+ }
+ 
+-static inline void dsi_clear(struct stm32_dsi_priv *dsi, u32 reg, u32 mask)
++static inline void dsi_clear(void __iomem *base, u32 reg, u32 mask)
+ {
+-	dsi_write(dsi, reg, dsi_read(dsi, reg) & ~mask);
++	dsi_write(base, reg, dsi_read(base, reg) & ~mask);
+ }
+ 
+-static inline void dsi_update_bits(struct stm32_dsi_priv *dsi, u32 reg,
++static inline void dsi_update_bits(void __iomem *base, u32 reg,
+ 				   u32 mask, u32 val)
+ {
+-	dsi_write(dsi, reg, (dsi_read(dsi, reg) & ~mask) | val);
++	dsi_write(base, reg, (dsi_read(base, reg) & ~mask) | val);
+ }
+ 
+ static enum dsi_color dsi_color_from_mipi(u32 fmt)
+@@ -210,14 +216,14 @@ static int dsi_phy_init(void *priv_data)
+ {
+ 	struct mipi_dsi_device *device = priv_data;
+ 	struct udevice *dev = device->dev;
+-	struct stm32_dsi_priv *dsi = dev_get_priv(dev);
++	struct stm32_dsi_plat *dsi = dev_get_plat(dev);
+ 	u32 val;
+ 	int ret;
+ 
+ 	dev_dbg(dev, "Initialize DSI physical layer\n");
+ 
+ 	/* Enable the regulator */
+-	dsi_set(dsi, DSI_WRPCR, WRPCR_REGEN | WRPCR_BGREN);
++	dsi_set(dsi->base, DSI_WRPCR, WRPCR_REGEN | WRPCR_BGREN);
+ 	ret = readl_poll_timeout(dsi->base + DSI_WISR, val, val & WISR_RRS,
+ 				 TIMEOUT_US);
+ 	if (ret) {
+@@ -226,7 +232,7 @@ static int dsi_phy_init(void *priv_data)
+ 	}
+ 
+ 	/* Enable the DSI PLL & wait for its lock */
+-	dsi_set(dsi, DSI_WRPCR, WRPCR_PLLEN);
++	dsi_set(dsi->base, DSI_WRPCR, WRPCR_PLLEN);
+ 	ret = readl_poll_timeout(dsi->base + DSI_WISR, val, val & WISR_PLLLS,
+ 				 TIMEOUT_US);
+ 	if (ret) {
+@@ -241,7 +247,7 @@ static void dsi_phy_post_set_mode(void *priv_data, unsigned long mode_flags)
+ {
+ 	struct mipi_dsi_device *device = priv_data;
+ 	struct udevice *dev = device->dev;
+-	struct stm32_dsi_priv *dsi = dev_get_priv(dev);
++	struct stm32_dsi_plat *dsi = dev_get_plat(dev);
+ 
+ 	dev_dbg(dev, "Set mode %p enable %ld\n", dsi,
+ 		mode_flags & MIPI_DSI_MODE_VIDEO);
+@@ -256,9 +262,9 @@ static void dsi_phy_post_set_mode(void *priv_data, unsigned long mode_flags)
+ 	 */
+ 
+ 	if (mode_flags & MIPI_DSI_MODE_VIDEO)
+-		dsi_set(dsi, DSI_WCR, WCR_DSIEN);
++		dsi_set(dsi->base, DSI_WCR, WCR_DSIEN);
+ 	else
+-		dsi_clear(dsi, DSI_WCR, WCR_DSIEN);
++		dsi_clear(dsi->base, DSI_WCR, WCR_DSIEN);
+ }
+ 
+ static int dsi_get_lane_mbps(void *priv_data, struct display_timing *timings,
+@@ -266,32 +272,33 @@ static int dsi_get_lane_mbps(void *priv_data, struct display_timing *timings,
+ {
+ 	struct mipi_dsi_device *device = priv_data;
+ 	struct udevice *dev = device->dev;
+-	struct stm32_dsi_priv *dsi = dev_get_priv(dev);
++	struct stm32_dsi_plat *plat = dev_get_plat(dev);
++	struct stm32_dsi_priv *priv = dev_get_priv(dev);
+ 	int idf, ndiv, odf, pll_in_khz, pll_out_khz;
+ 	int ret, bpp;
+ 	u32 val;
+ 
+ 	/* Update lane capabilities according to hw version */
+-	dsi->lane_min_kbps = LANE_MIN_KBPS;
+-	dsi->lane_max_kbps = LANE_MAX_KBPS;
+-	if (dsi->hw_version == HWVER_131) {
+-		dsi->lane_min_kbps *= 2;
+-		dsi->lane_max_kbps *= 2;
++	priv->lane_min_kbps = LANE_MIN_KBPS;
++	priv->lane_max_kbps = LANE_MAX_KBPS;
++	if (priv->hw_version == HWVER_131) {
++		priv->lane_min_kbps *= 2;
++		priv->lane_max_kbps *= 2;
+ 	}
+ 
+-	pll_in_khz = dsi->pllref_clk / 1000;
++	pll_in_khz = priv->pllref_clk / 1000;
+ 
+ 	/* Compute requested pll out */
+ 	bpp = mipi_dsi_pixel_format_to_bpp(format);
+ 	pll_out_khz = (timings->pixelclock.typ / 1000) * bpp / lanes;
+ 	/* Add 20% to pll out to be higher than pixel bw (burst mode only) */
+ 	pll_out_khz = (pll_out_khz * 12) / 10;
+-	if (pll_out_khz > dsi->lane_max_kbps) {
+-		pll_out_khz = dsi->lane_max_kbps;
++	if (pll_out_khz > priv->lane_max_kbps) {
++		pll_out_khz = priv->lane_max_kbps;
+ 		dev_warn(dev, "Warning max phy mbps is used\n");
+ 	}
+-	if (pll_out_khz < dsi->lane_min_kbps) {
+-		pll_out_khz = dsi->lane_min_kbps;
++	if (pll_out_khz < priv->lane_min_kbps) {
++		pll_out_khz = priv->lane_min_kbps;
+ 		dev_warn(dev, "Warning min phy mbps is used\n");
+ 	}
+ 
+@@ -299,7 +306,7 @@ static int dsi_get_lane_mbps(void *priv_data, struct display_timing *timings,
+ 	idf = 0;
+ 	ndiv = 0;
+ 	odf = 0;
+-	ret = dsi_pll_get_params(dsi, pll_in_khz, pll_out_khz,
++	ret = dsi_pll_get_params(priv, pll_in_khz, pll_out_khz,
+ 				 &idf, &ndiv, &odf);
+ 	if (ret) {
+ 		dev_err(dev, "Warning dsi_pll_get_params(): bad params\n");
+@@ -310,18 +317,18 @@ static int dsi_get_lane_mbps(void *priv_data, struct display_timing *timings,
+ 	pll_out_khz = dsi_pll_get_clkout_khz(pll_in_khz, idf, ndiv, odf);
+ 
+ 	/* Set the PLL division factors */
+-	dsi_update_bits(dsi, DSI_WRPCR,	WRPCR_NDIV | WRPCR_IDF | WRPCR_ODF,
++	dsi_update_bits(plat->base, DSI_WRPCR, WRPCR_NDIV | WRPCR_IDF | WRPCR_ODF,
+ 			(ndiv << 2) | (idf << 11) | ((ffs(odf) - 1) << 16));
+ 
+ 	/* Compute uix4 & set the bit period in high-speed mode */
+ 	val = 4000000 / pll_out_khz;
+-	dsi_update_bits(dsi, DSI_WPCR0, WPCR0_UIX4, val);
++	dsi_update_bits(plat->base, DSI_WPCR0, WPCR0_UIX4, val);
+ 
+ 	/* Select video mode by resetting DSIM bit */
+-	dsi_clear(dsi, DSI_WCFGR, WCFGR_DSIM);
++	dsi_clear(plat->base, DSI_WCFGR, WCFGR_DSIM);
+ 
+ 	/* Select the color coding */
+-	dsi_update_bits(dsi, DSI_WCFGR, WCFGR_COLMUX,
++	dsi_update_bits(plat->base, DSI_WCFGR, WCFGR_COLMUX,
+ 			dsi_color_from_mipi(format) << 1);
+ 
+ 	*lane_mbps = pll_out_khz / 1000;
+@@ -340,27 +347,27 @@ static const struct mipi_dsi_phy_ops dsi_stm_phy_ops = {
+ 
+ static int stm32_dsi_attach(struct udevice *dev)
+ {
+-	struct stm32_dsi_priv *priv = dev_get_priv(dev);
+-	struct mipi_dsi_device *device = &priv->device;
++	struct stm32_dsi_plat *plat = dev_get_plat(dev);
++	struct mipi_dsi_device *device = &plat->device;
+ 	struct mipi_dsi_panel_plat *mplat;
+ 	struct display_timing timings;
+ 	int ret;
+ 
+-	ret = uclass_first_device_err(UCLASS_PANEL, &priv->panel);
++	ret = uclass_first_device_err(UCLASS_PANEL, &plat->panel);
+ 	if (ret) {
+ 		dev_err(dev, "panel device error %d\n", ret);
+ 		return ret;
+ 	}
+ 
+-	mplat = dev_get_plat(priv->panel);
+-	mplat->device = &priv->device;
++	mplat = dev_get_plat(plat->panel);
++	mplat->device = &plat->device;
+ 	device->lanes = mplat->lanes;
+ 	device->format = mplat->format;
+ 	device->mode_flags = mplat->mode_flags;
+ 
+-	ret = panel_get_display_timing(priv->panel, &timings);
++	ret = panel_get_display_timing(plat->panel, &timings);
+ 	if (ret) {
+-		ret = ofnode_decode_display_timing(dev_ofnode(priv->panel),
++		ret = ofnode_decode_display_timing(dev_ofnode(plat->panel),
+ 						   0, &timings);
+ 		if (ret) {
+ 			dev_err(dev, "decode display timing error %d\n", ret);
+@@ -368,13 +375,13 @@ static int stm32_dsi_attach(struct udevice *dev)
+ 		}
+ 	}
+ 
+-	ret = uclass_get_device(UCLASS_DSI_HOST, 0, &priv->dsi_host);
++	ret = uclass_get_device(UCLASS_DSI_HOST, 0, &plat->dsi_host);
+ 	if (ret) {
+ 		dev_err(dev, "No video dsi host detected %d\n", ret);
+ 		return ret;
+ 	}
+ 
+-	ret = dsi_host_init(priv->dsi_host, device, &timings, 2,
++	ret = dsi_host_init(plat->dsi_host, device, &timings, 2,
+ 			    &dsi_stm_phy_ops);
+ 	if (ret) {
+ 		dev_err(dev, "failed to initialize mipi dsi host\n");
+@@ -386,17 +393,17 @@ static int stm32_dsi_attach(struct udevice *dev)
+ 
+ static int stm32_dsi_set_backlight(struct udevice *dev, int percent)
+ {
+-	struct stm32_dsi_priv *priv = dev_get_priv(dev);
++	struct stm32_dsi_plat *plat = dev_get_plat(dev);
+ 	int ret;
+ 
+-	ret = panel_enable_backlight(priv->panel);
++	ret = panel_enable_backlight(plat->panel);
+ 	if (ret) {
+ 		dev_err(dev, "panel %s enable backlight error %d\n",
+-			priv->panel->name, ret);
++			plat->panel->name, ret);
+ 		return ret;
+ 	}
+ 
+-	ret = dsi_host_enable(priv->dsi_host);
++	ret = dsi_host_enable(plat->dsi_host);
+ 	if (ret) {
+ 		dev_err(dev, "failed to enable mipi dsi host\n");
+ 		return ret;
+@@ -417,66 +424,71 @@ static int stm32_dsi_bind(struct udevice *dev)
+ 	return dm_scan_fdt_dev(dev);
+ }
+ 
+-static int stm32_dsi_probe(struct udevice *dev)
++static int stm32_dsi_of_to_plat(struct udevice *dev)
+ {
+-	struct stm32_dsi_priv *priv = dev_get_priv(dev);
+-	struct mipi_dsi_device *device = &priv->device;
+-	struct reset_ctl rst;
+-	struct clk clk;
++	struct stm32_dsi_plat *plat = dev_get_plat(dev);
++	struct mipi_dsi_device *device = &plat->device;
+ 	int ret;
+ 
+ 	device->dev = dev;
+ 
+-	priv->base = dev_read_addr_ptr(dev);
+-	if (!priv->base) {
++	plat->base = dev_read_addr_ptr(dev);
++	if (!plat->base) {
+ 		dev_err(dev, "dsi dt register address error\n");
+ 		return -EINVAL;
+ 	}
+ 
+ 	ret =  device_get_supply_regulator(dev, "phy-dsi-supply",
+-					   &priv->vdd_reg);
++					   &plat->vdd_reg);
+ 	if (ret && ret != -ENOENT) {
+ 		dev_err(dev, "Warning: cannot get phy dsi supply\n");
+ 		return -ENODEV;
+ 	}
+ 
+ 	if (ret != -ENOENT) {
+-		ret = regulator_set_enable(priv->vdd_reg, true);
++		ret = regulator_set_enable(plat->vdd_reg, true);
+ 		if (ret)
+ 			return ret;
+ 	}
+ 
+-	ret = clk_get_by_name(device->dev, "pclk", &clk);
++	ret = clk_get_by_name(device->dev, "pclk", &plat->pclk);
+ 	if (ret) {
+ 		dev_err(dev, "peripheral clock get error %d\n", ret);
+-		goto err_reg;
++		return ret;
+ 	}
+ 
+-	ret = clk_enable(&clk);
++	ret = clk_get_by_name(dev, "ref", &plat->refclk);
++	if (ret) {
++		dev_err(dev, "pll reference clock get error %d\n", ret);
++		return ret;
++	}
++
++	ret = reset_get_by_index(device->dev, 0, &plat->rst);
++	if (ret)
++		dev_err(dev, "missing dsi hardware reset\n");
++
++	return ret;
++}
++
++static int stm32_dsi_probe(struct udevice *dev)
++{
++	struct stm32_dsi_plat *plat = dev_get_plat(dev);
++	struct stm32_dsi_priv *priv = dev_get_priv(dev);
++	int ret;
++
++	ret = clk_enable(&plat->pclk);
+ 	if (ret) {
+ 		dev_err(dev, "peripheral clock enable error %d\n", ret);
+ 		goto err_reg;
+ 	}
+ 
+-	ret = clk_get_by_name(dev, "ref", &clk);
+-	if (ret) {
+-		dev_err(dev, "pll reference clock get error %d\n", ret);
+-		goto err_clk;
+-	}
+-
+-	priv->pllref_clk = (unsigned int)clk_get_rate(&clk);
+-
+-	ret = reset_get_by_index(device->dev, 0, &rst);
+-	if (ret) {
+-		dev_err(dev, "missing dsi hardware reset\n");
+-		goto err_clk;
+-	}
++	priv->pllref_clk = (unsigned int)clk_get_rate(&plat->refclk);
+ 
+ 	/* Reset */
+-	reset_deassert(&rst);
++	reset_deassert(&plat->rst);
+ 
+ 	/* check hardware version */
+-	priv->hw_version = dsi_read(priv, DSI_VERSION) & VERSION;
++	priv->hw_version = dsi_read(plat->base, DSI_VERSION) & VERSION;
+ 	if (priv->hw_version != HWVER_130 &&
+ 	    priv->hw_version != HWVER_131) {
+ 		dev_err(dev, "DSI version 0x%x not supported\n", priv->hw_version);
+@@ -489,9 +501,9 @@ static int stm32_dsi_probe(struct udevice *dev)
+ 
+ 	return 0;
+ err_clk:
+-	clk_disable(&clk);
++	clk_disable(&plat->pclk);
+ err_reg:
+-	regulator_set_enable(priv->vdd_reg, false);
++	regulator_set_enable(plat->vdd_reg, false);
+ 
+ 	return ret;
+ }
+@@ -512,6 +524,8 @@ U_BOOT_DRIVER(stm32_dsi) = {
+ 	.of_match			= stm32_dsi_ids,
+ 	.bind				= stm32_dsi_bind,
+ 	.probe				= stm32_dsi_probe,
++	.of_to_plat			= stm32_dsi_of_to_plat,
+ 	.ops				= &stm32_dsi_ops,
++	.plat_auto		= sizeof(struct stm32_dsi_plat),
+ 	.priv_auto		= sizeof(struct stm32_dsi_priv),
+ };
+
+---
+base-commit: b5213bbfdcb1812be510427857827ee8becb9f8f
+change-id: 20260205-dsi-97ce082cf022
+
+Best regards,
+-- 
+Raphael Gallais-Pou <rgallaispou@gmail.com>
 
 _______________________________________________
 Uboot-stm32 mailing list

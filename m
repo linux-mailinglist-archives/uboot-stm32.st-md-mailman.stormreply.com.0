@@ -2,71 +2,71 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id KGvEB3Ecg2l/hwMAu9opvQ
+	id WPbSC3Ecg2l/hwMAu9opvQ
 	(envelope-from <uboot-stm32-bounces@st-md-mailman.stormreply.com>)
 	for <lists+uboot-stm32@lfdr.de>; Wed, 04 Feb 2026 11:16:17 +0100
 X-Original-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 06D0FE45B3
-	for <lists+uboot-stm32@lfdr.de>; Wed, 04 Feb 2026 11:16:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 18684E45B4
+	for <lists+uboot-stm32@lfdr.de>; Wed, 04 Feb 2026 11:16:17 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id AAE5BC87ECC;
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B99E9C87ECE;
 	Wed,  4 Feb 2026 10:16:16 +0000 (UTC)
-Received: from AM0PR02CU008.outbound.protection.outlook.com
- (mail-westeuropeazon11013033.outbound.protection.outlook.com [52.101.72.33])
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazon11010023.outbound.protection.outlook.com [52.101.69.23])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 66EE7C87EC9
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 29AA7C87ECB
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  4 Feb 2026 10:16:15 +0000 (UTC)
+ Wed,  4 Feb 2026 10:16:16 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=eXB025CE75sOcctZa+up7nridY0U01S37mPYfqHF0ywJ0eguaF8oDe1cjlWrQizArgq9gsVFBr5OdhfrMaEN03qeZgERrgOVLjKnsA1u3CQd82wajN6lYLKc+lTIvi857IS3fcMt+cg4D4jIjREBhhOwbnOTMKprAclXgKAgLd5vFzTGnrwusYI5Vu3f9DKbsycGfy98SDYtzqlrnoFftNDYL6l3eW1qLTfXJirOKe6wC6c/42WGeT1R628bevIQL12DRNJRg5EFaHzFiPvNZ264RyfouuHf+c7L/MeIEYyKl/1vsUIUyzbwuoNxo7HJnkSnXFt4rkkdgYEAfsvkkg==
+ b=oULUea/0eirec8O8OkFd8B/hwf/AbPn89w0AiVV1UHrDB3DHjKY3f4Om1tCRhlp5F7sQPybVYt/gRTiQEMitlL68hCNqQ6FSu3v+q9s3UgWAiai+k5QX8SCGKOnWGWulI1Mn9gqDAe6FthxYNbZnnhwrp2WPm9Y71ku4nAW7NtAnS5t4o+pMODHX8/i0inrnXJmBILnFfjYJE3EU933Mys4Hcc5yT8IKU+XLq0o1HZHOyep0dwd8baB3BhzOLqFOlYTWA9/9eZDzULK6fH7foKuEWDCrSwLMdxxfpRPZnflnXgH2dovAzCFeo5TiNz+f/ZoDGAmLwwf2l5YBK0Y/7A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1Oz96AZaoUaHNBnOezgeIAW8MOvzOiEqM/HSZ7SQKKE=;
- b=NS8brJCZtyAc5GoeX224RhZWdDEdHJVX2fRXROf+T8XALZel24lh4pW9zfuEn4J7OjiKl7Q4wchEzLC5oqkF6cnobrwzcVdtgq0tUFQxPqF7hiGn4seHewN82YpMvcntJLXCfvtc6EIP6/8c3RzyT7Wymxy/CKTwr6PoJ+UX0LrgrpzHE6FdTh8coFr1kho3rDMHA2aJTNwW7qwlQtaclfVtFKCV16aNLDpYvCY4XpTxnSmUu0Hk1uTrXNam6CocMjFDrvKYha/w/q/iErzSJoFFtnHfYDRnSje/q4QBv81/9o6GCizGCYTQ8Nz97tWrPEDYmnGuSLvmB7FE8n4mzg==
+ bh=xik5PlG2RAFwx7lt28rcXL804EY0t5evfTapgzGppGs=;
+ b=Kqxy/DVELBwgnqht8oLHnfDo3jQSWBLiSU/dvwVuZte7WhysbGROgA3+8FSIpFYjt/6MBDqVpwoA87eMSHG2fKLFbjcg/iidXjmX018NP84Xq04LH3+rzwVE0BtAmClCBzgrFtct393HBQGE2PkOVH33QOZi3IgxcwOYiO6pJVEbry53t4C/RAr03vnBjRxqTPf5vZeOCHvZOBORllwHUjq7uI6sAP+LZbZfxDpm35bsJXl2hfYOfenpglo90bOCRhIm1eqUxsibCRkr58stVxMhJd4PWXYWYUMvLNHp5uVbD3PcOtvnutbiLLokf9/Q3/pq1p7LgbmoWW7O1Mwf2g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.59) smtp.rcpttodomain=mailbox.org smtp.mailfrom=foss.st.com;
+ 164.130.1.60) smtp.rcpttodomain=mailbox.org smtp.mailfrom=foss.st.com;
  dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1Oz96AZaoUaHNBnOezgeIAW8MOvzOiEqM/HSZ7SQKKE=;
- b=YaTNOHMR3wqYwTW2XMiAgOi0SAEgY38yoEDg2Qi2Qwc1forcEp7/AfSmIVL+5ZVWRpedis2eejRucbmlnCCBdCZ5I2Pk7dotHb9PneMQirltFlsSjbtkKEdhmN4nDZL+eozwY2zGvFNzYvPVnc1wOfAhoUqdkMRRt8EemTbBOqFMRr+ctXUk2l6OA3GdXnZRCU3cugM48oTopsHGzNseUojKIRuvMBZEb5bvBaCu9Nw4jBzBjprwRaZZbkPQdJFO+UT8UE2Ssf6JqJiuClQRtaikuSJBwNUBbSEGFFbuEn+fs9IQG1kHdlzDhD55VLn36kvOan9FYZhquJQc3tFUlQ==
-Received: from DUZPR01CA0198.eurprd01.prod.exchangelabs.com
- (2603:10a6:10:4b6::29) by AM7PR10MB3608.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:134::23) with Microsoft SMTP Server (version=TLS1_2,
+ bh=xik5PlG2RAFwx7lt28rcXL804EY0t5evfTapgzGppGs=;
+ b=CMVTNMg2gM9r3Wb20umN66XVnwbo4i7md1CQLiOrpI8F9gpxar7c5uK6kt3qi2LfI8S0E7uUkZlJPrjd267GNaYFPBA3h5UUbdxtWrKE8SdNo7Dtf7YfaC4oQEFZVaPB2ZjbaMVsiEZ+DlOLS47YCHoxkAWDIsAOym4ApQZNEwOEojA4ZMc29ghncYbNueAmvTfspEI4kla6H1AgXraREOzHU5Z79XEYnoVTDi/CBR6jywYYASPSE79/fmnGBrhMDYs+/VgpocWurlp8uGMRpbwVRqI71vTSHGZ0mZ2TNljKH9Kes/H8wAQElKeYpF+SoiT0papQJ2X2dksh6MgWkA==
+Received: from AS4P190CA0057.EURP190.PROD.OUTLOOK.COM (2603:10a6:20b:656::6)
+ by AS2PR10MB6711.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:55f::21) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.12; Wed, 4 Feb
- 2026 10:16:09 +0000
-Received: from DB1PEPF000509FF.eurprd03.prod.outlook.com
- (2603:10a6:10:4b6:cafe::d2) by DUZPR01CA0198.outlook.office365.com
- (2603:10a6:10:4b6::29) with Microsoft SMTP Server (version=TLS1_3,
+ 2026 10:16:11 +0000
+Received: from AM3PEPF00009BA0.eurprd04.prod.outlook.com
+ (2603:10a6:20b:656:cafe::b0) by AS4P190CA0057.outlook.office365.com
+ (2603:10a6:20b:656::6) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9587.13 via Frontend Transport; Wed,
- 4 Feb 2026 10:16:09 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
+ 4 Feb 2026 10:16:11 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
  smtp.mailfrom=foss.st.com; dkim=none (message not signed)
  header.d=none;dmarc=fail action=none header.from=foss.st.com;
 Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.59; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.59) by
- DB1PEPF000509FF.mail.protection.outlook.com (10.167.242.41) with Microsoft
+ designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.60; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.60) by
+ AM3PEPF00009BA0.mail.protection.outlook.com (10.167.16.25) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9587.10 via Frontend Transport; Wed, 4 Feb 2026 10:16:09 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
- (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9587.10 via Frontend Transport; Wed, 4 Feb 2026 10:16:11 +0000
+Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
+ (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Wed, 4 Feb
- 2026 11:17:55 +0100
+ 2026 11:17:48 +0100
 Received: from localhost (10.48.87.93) by STKDAG1NODE1.st.com (10.75.128.132)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Wed, 4 Feb
- 2026 11:16:08 +0100
+ 2026 11:16:09 +0100
 From: Patrice Chotard <patrice.chotard@foss.st.com>
-Date: Wed, 4 Feb 2026 11:16:06 +0100
+Date: Wed, 4 Feb 2026 11:16:07 +0100
 MIME-Version: 1.0
-Message-ID: <20260204-upstream_factorize_and_update_read_idc-v2-1-7f0baa41d2f1@foss.st.com>
+Message-ID: <20260204-upstream_factorize_and_update_read_idc-v2-2-7f0baa41d2f1@foss.st.com>
 References: <20260204-upstream_factorize_and_update_read_idc-v2-0-7f0baa41d2f1@foss.st.com>
 In-Reply-To: <20260204-upstream_factorize_and_update_read_idc-v2-0-7f0baa41d2f1@foss.st.com>
 To: <uboot-stm32@st-md-mailman.stormreply.com>, <u-boot@lists.denx.de>
@@ -76,72 +76,72 @@ X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
  (10.75.128.132)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB1PEPF000509FF:EE_|AM7PR10MB3608:EE_
-X-MS-Office365-Filtering-Correlation-Id: 20648739-97e5-4d7f-b1ca-08de63d66a72
+X-MS-TrafficTypeDiagnostic: AM3PEPF00009BA0:EE_|AS2PR10MB6711:EE_
+X-MS-Office365-Filtering-Correlation-Id: fbc6ff24-5e12-4e4f-ac86-08de63d66c06
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|36860700013|1800799024|376014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?MUlVWG9UNDNTcEtBaitqM0FTWm9XTkFHK0RiSkQ0ZTYvZCsyT0xTeUplUHR2?=
- =?utf-8?B?R2RQbUkxSVNxMFpzSllzc3N5MFZhVWxYNHNpbUxIU1JBUkpUQ2hZemlpYldI?=
- =?utf-8?B?YjZNblJDN29UdkJVRFMwSnl1dzFRUk5URVdDMXN0TlpYMzBnVDhTS3Y4eVRO?=
- =?utf-8?B?dFVMRFlzOHF3R0NRaUtIaTM0SFUwUy9rSGFQR2VmVktoWCtqU085WC9lbFFp?=
- =?utf-8?B?Q29LVzVKeU1HQzExQXRQR2dFdGw5M29aMFpxNkhLUmZOcmpIbnR2WUFocGZ2?=
- =?utf-8?B?Y0xiZ1crNEIraXc2Zy9pTFMrRmNOeWpQQ2w3b3d1NS9TejE1bmNCZ2VuTFEz?=
- =?utf-8?B?ZzFQOHFZSG5kNGJCdGh5cGRvaXMxTjBHMjVpZXlYRXF0eWlnUUVuNS8yZzlo?=
- =?utf-8?B?OTdqMHpDZ3ZTazgyVW1IbnhPTlI2TnVnQ0c1MVpnbjFHelJXdEg3R3NXcHVB?=
- =?utf-8?B?ZFZPS0xoWGZrdm9Ub3dkbVU2b0F4N3p1VzVhc0tUSlZNeUpkbkJGTDF4TDBr?=
- =?utf-8?B?YUZBYXhxU0E1MGN0YTc3Z0dKdW90L0VPNkFrWVlneW4yS2JIaW1rQklMUG0v?=
- =?utf-8?B?LzlMUEZvdHlNdEFtZ3JRbWFNWjNTRjhUUFNadFNQSWJocWUrRk9aVERhdVJI?=
- =?utf-8?B?d1RRd0JheDhqZThCK2R1OGRnelhHTFUxR0svbHJBQjJZUTRPczRlQlJKWnoy?=
- =?utf-8?B?elI4SUI5SjNGU3JNLzVGRGZxWjh2L080YlVCeUJ0RUFvWGFGSUhnVmRBTEl6?=
- =?utf-8?B?QWhpU0l2eEU3bGdtbjBERFBoczFFaHJVYW15Wlp2K3ViUEd1RmRBNys3NGI4?=
- =?utf-8?B?a1l6cWx6T2NWQ0ZPeUY5QWJIdjV5L0d5YjJRc0VSNUJQUFZUaWRjeWlIOTc1?=
- =?utf-8?B?S2pUZ3B0MVNtYmoxbkl5VlNQYmlDSnMvZ1NHYi82K1IrREJBQlFZVW85MkNI?=
- =?utf-8?B?a2J4ZUk1Uzk3czMrblNlRjZTa1E4aS8wUXB4SnFSQXdiMkMydGduUkl6UjR0?=
- =?utf-8?B?Y1g0QzVVOUttazB5cDlxb0Jkc1FGTW0xeHdBOHBKdG1YSStmY2hjTFdJdm43?=
- =?utf-8?B?YXJhSkovQklmbThTcDRtTkpkejd6SVYyNERqZGRHOUE2cHlaVE9weHhJdjhE?=
- =?utf-8?B?RXI1V2lUWEFyM0llSjNyM0k3NVlTVjFUaGVxR21ZNEpyRGpKcVJtTENlcHg1?=
- =?utf-8?B?Mk96clh2ZEVCK0ViNzZxcmZ3YUZuSUhOZUY4QXJoTit3ZnpNSjMwUHh2ODJI?=
- =?utf-8?B?cVIyNitlL3kvUkIzQVFNZTdlcFgrWXNDdlFqNDlwNTVHR0o1ZWhMZUVlT2NB?=
- =?utf-8?B?Z3E2Wm5EQUhGdWpCeDdVWCtKc0UzOUhwN2JBWHpPdUp6c0JGZWNrN0M4UDFL?=
- =?utf-8?B?VHlXMmZPSXpqSTdwWWFxUzlsQkc2SFVCWEprTXg0eFV6bCtobjR6QzN0YXJp?=
- =?utf-8?B?TzNlL2E0bks0VDRadVVzODhGNUI2eURUQmpFSWFEUGVZcXFEOHJHelIvbm5P?=
- =?utf-8?B?N3VTZ3NVbzViS3VsV3VpU1crZ3M2Zzg3d3RWSGNJem1FbjBpdjFoMENtdUlw?=
- =?utf-8?B?NWhyR1MvVnNpT1B4RDMvTFlMSWNYalR0Vkl4YkY0c1p3d1l2UVNkcjN5RlpN?=
- =?utf-8?B?NXVVUEgvYkIyZVZTZjAvQWxhSUFxcFhMc0FzU25vWWlCOGh4dFNiaFk0d2tN?=
- =?utf-8?B?Z3VTc24wbjVubnZ6d2xGcDloU2l0aHRaRjk0MzQ5ckhFVytPRG9tRjVRVHN3?=
- =?utf-8?B?OWFneEZibUp2VDJVNjZRd1JYUjlVNHdJRldTWGR1RXlOalJkcXYzY3VkT0ts?=
- =?utf-8?B?dVN4RWIraTRaMGhBc1hneGRzN1padzF0Sk9rNlpNaFZzMUdYR2Zmc1RZcnBY?=
- =?utf-8?B?K2RUTTlWbnJORFR5YUpETTFnUHlGVVRqVHBPSk1pQTVJUTBKRHo2eERFYlZ1?=
- =?utf-8?B?V0VPOHNybzd3Y1F5WDZqMFVva2xwZXkySi9MT1lYZDhSMUZJUE1DL2lzaDBR?=
- =?utf-8?B?MVZESzloL0t4bUQ4TU1odkJnN2kza0xMS0FWZGcwK2NyaWVrL1ZkR0kzTEs5?=
- =?utf-8?B?bEdsTUZ3QytQWVgzUy83RGxLaS9wTVNWNEhQSG9MMzhId0tJNWE0M3QvcWFM?=
- =?utf-8?B?Y2E2a2tLNFRQUTVOTFFYN3RlQ1BGMFI0MzBRd2VjeThIQlYrN012Mit6ZlZN?=
- =?utf-8?B?T25oaGJPOWxWNnZhNzZnNmY3YTB2RG1ZUWd6Y0dvNGt5WkFxUWtHRHhwTkVq?=
- =?utf-8?B?KzFzcXc2MHlQbkZYL3l6MnZmMml3PT0=?=
-X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
+ ARA:13230040|82310400026|376014|36860700013|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?eWFBMUVSbEp2WEVNaTRFNmdpL2NSQ01UZkIxTGI0SzJyVWhZb2hFc1BQbkNw?=
+ =?utf-8?B?ZWlsR1pnTzZGQjd5UUUvNEZOV1lYMWk3dG9jeTdJMHFUR21zTlMxN2labk9E?=
+ =?utf-8?B?aTZrejZiM0duZ2RkRVBsVkI0WERHaEtJODNpUCtXZndhSytyTEhjUDFaUFpU?=
+ =?utf-8?B?OWJGTGtXYWNzaGFmaXFHci9MM1hOVE0zQ3JRRU8vMWJCMjA1N1EyNkJFdktY?=
+ =?utf-8?B?TEpSWU56RU9TbUJmOUpmcW9ZbDAxYnhuVXJkUjBaNnQwb3RxTUxsaDJPL3RN?=
+ =?utf-8?B?cFFhWnlkR1dscGExdytSdzhHMmpwZ09CbHdTTTJUZWdYZlRRUFZlSE9jSWdr?=
+ =?utf-8?B?U2NKK25IeU4yaTNKR3hPbTZvellzenRKNGlSV1pkdk5hZXNzOWF4RERUUEpS?=
+ =?utf-8?B?TE1Md3BEWlpLSmgzOUg4cVNhSHFDaHdLSTc2dXgrWTN6d3FhN0oxb2puTEZh?=
+ =?utf-8?B?bTduNVJ1c2I3MFE5OGNTdTlCVnhXYitJS2NLZUxyQVIyVDR5WVpadTA1TFJv?=
+ =?utf-8?B?Z0JISkwraEwxRmhrVWI0Qll6VEZlS1NnM0xOb2NPUG9iQXNaZEJyREJiUmJB?=
+ =?utf-8?B?b3Q2OUwxLzJuUmQ0UkRFTVp0SFFGb1lnb3ladTFIbWpPU1YwZGdaL2tZU1VK?=
+ =?utf-8?B?N1orUkdpUHpldVh1LzYxQXV4cmZreFBQNEgyVlFjS3F1Tnh2a2VNd2dLZXd5?=
+ =?utf-8?B?MStYSitVWXgramZybkJGanFLaWFnYjA5bWpGSG93ZWxTSDllTEVpY2VLckZm?=
+ =?utf-8?B?cm5hNjJ3RHR4SEdPSDRUcWVpb0dPdTRCQ2J0U3U1UnRpSXRNSHk1bVYrTEI3?=
+ =?utf-8?B?b2RQZVRab0ZVckt0NHlhaUtUZHVPOEdaL1RkVkRDeXN5QVhpb2pEaWtFWER4?=
+ =?utf-8?B?NHFUNStuM1ArWkN3ZlJmdlVRK0NZQ2QvajUwYVhCYlc2YU9raStlSk14WTkz?=
+ =?utf-8?B?dUlWWTZ0VDNCV0JubnBkb0Vkb1hKbjJXSVk0Vi9xb2RKdHUrUSt6OUFCaGlt?=
+ =?utf-8?B?ZUxTZHQrTHhiUzY0eENpS0dCSTVLcWhEVFk0UGNIWFRZMDRnTUFSQS91Q1dz?=
+ =?utf-8?B?VzlqV1lXVDBGNHgzeVByYkMxV3NxZW54TEJ1SWxkVVpWQ2pReXVTOE8wOG04?=
+ =?utf-8?B?dHRXSU1qMC9EMzZGWHIwODR6WGFGdTlqWXdlYTZJdzZNbmM3TGtPNkdwRU1D?=
+ =?utf-8?B?Z1JlOVRUL2xNL3ZsRlkxZXhWRXFySUVxT2NWaDlKemZJUFJDTGtURTR5NER5?=
+ =?utf-8?B?Q2w4T2dtNmNjckFKVXFHRnBtVGdkR2lpNlJ5Y0l6aTd2eHpZQVFzcVhwakZP?=
+ =?utf-8?B?ZmxRYU94clRNRy9aUnBRbHBVYXBpN1ZFQU9GZlZiOHBZbEZId2tZZktIUWt5?=
+ =?utf-8?B?MTR3NTJ6cmlHcUtHaVRuajJ0L1NxdlVMY21mZ2ZlLzlFZ1MxdHphVzRVS00y?=
+ =?utf-8?B?NGFnd1RhL2VYcmtmeFBMY1VuS1AzeCtyd1dZSkRUbFRLNS9PNWpSOTdxMlBa?=
+ =?utf-8?B?YzZVM1UrV2Qrb29SUGtVU2xsSThqUlZXcWd3NUFUQUNvSGRRVTVnUitsT080?=
+ =?utf-8?B?WmI0REEvNFVuWlRMWXFCdm80UmlJNldIbmJ1OGRZSkRESmlVQzBENjBYRjdt?=
+ =?utf-8?B?eERHZ2FyNEZqZ1ZRRityZlBDek4rSitPNzBsNXBFdWpwWTFoalhyWjQxZVFs?=
+ =?utf-8?B?alBBWkZpS0UyZ1FrMit1Y0hqUm9id3JqRDdxYzRibUpmaWdNTC8zNkVISTVy?=
+ =?utf-8?B?dVdZVkNDMUxhUGZGaDA0RnBaNndEblJvYnora0dwVzhDWERReUM5SnZSRUYw?=
+ =?utf-8?B?RmpMbEVIZEhqc01BdWtJY0xqR05xZldsWlkxYnVQbEdvL2JBWVVzTWM5R1Zo?=
+ =?utf-8?B?LzliRlJRamVNSnFaWnB0Y2pRRW1yZGt5eGpZMjdqejJZTk1QeUxuVEhlVTBE?=
+ =?utf-8?B?U0ZCeUlNTTRaZGl1NGNhOWFlSnhlMjh6aWsrc1hPdFVKWS9hWHNsaVNyWHcr?=
+ =?utf-8?B?Mk01enZTUDhGakxQQmRQdVBDVEFJMGw0em5JZExMR1lQa1JiNUdjZE1EbTBj?=
+ =?utf-8?B?WTQ0dGV6QkNjeEgvM0k4MXZUem9XYXBEblVRTGVuWkJPTzB5NE1oMTlIL0pw?=
+ =?utf-8?B?S3Jid2dGUjZFNStMTmd4SHpSZFlrbGM3RFRsUWhXRXc5Yk9wMXBEdVI1VlNJ?=
+ =?utf-8?B?ZnNuQ0N5QXY5SHVxK2o4M1kyejRieTBoRlc5WE1wdGZoQWRnVW9YQ01iVlFI?=
+ =?utf-8?B?VkNIdkd2T24rT25pZUJsbkhzR3p3PT0=?=
+X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(36860700013)(1800799024)(376014); DIR:OUT;
+ SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024); DIR:OUT;
  SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: CINPsNiKiA1KSIeoISNBMLst3hVkz+0LPz+TwG0/LBmgWZTbEoyHkN917uduoheNzL6v94QfcYHM0JqygyiLmzEjUiSkl6j6CnFD3GISzqyK2v4q5zN+JKgjVbSJpwpSlN7xrGyMvrnePYtA79JyYjmI4U6DpysgVm1RN8CBYD+jznzffljDf4DgXBs8tK6nFUKcxvJU6p8lHpV0sgehjN/G0bCt5IccAm9DJJ2h9IFJgtyat4aVwsl1yf6Fhn0pnQDNDBDq38qflIg2NqymfIo3UdCP8ZJ9HAXMdFe5K/qFLTJNXFGqySPZuMgQWzcSj9xMnxy2v1EwdUJTfDm9sFR8id8NbKrQjf3GBmNdT8RTyVDoa0QXoy6OMM/D5pilVD5Pi9BNJFupEuzqVb3GP6e6fQd8pyTMAKnh+w35keK1+kI5kpyp9hPeHX0zMMXC
+X-MS-Exchange-AntiSpam-MessageData-0: Wr9p4VOwr/XMJhic3EED7FHNvyx+9myFAsm2afB3SjzbCT/gPaISYxmr6Tt6Y/4wd6gKpXBgFteuObJhsWUNOR169JYc/Zn1ARyxTc+sVN5s9nrF6POSfyyYPMlleajr5Aehg7gI/GrkNpcb6foeyq0hQYkQNQX7FsWD5zGHxA/dCfQiu+SIRMHRgkowySDWp5iHCWDMAoISeriO2Kx2C42iQLvMk/es75rbNN/UKhtljcTQuaZ4zvJFNb9cOiR5Fk8+7mOejJM09sMCLfhvr1B6BWsnj3a7mHNy7qyR7MhUHBCSpW9GiwrIZE7FINwzaXRRfcKCWaMlSSM8EuQSQ9snRQpjnzLkyDaTDkliXpcWZtSx/LkLYSBOWehZ2sW4HUGgC4YE/nXROvvp+bF4JChfrxpWZGXEcY9hJ2LxUnmeSq4IETBq7+4ylUwigrXq
 X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Feb 2026 10:16:09.2063 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 20648739-97e5-4d7f-b1ca-08de63d66a72
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Feb 2026 10:16:11.8910 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: fbc6ff24-5e12-4e4f-ac86-08de63d66c06
 X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
  Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: DB1PEPF000509FF.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: AM3PEPF00009BA0.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR10MB3608
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR10MB6711
 Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marek.vasut@mailbox.org>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Gatien Chevallier <gatien.chevallier@foss.st.com>,
  Asadeds <md.asadullah@eds-india.com>
-Subject: [Uboot-stm32] [PATCH v2 1/3] stm32mp2: Migrate duplicated code into
-	stm32mp2x.c
+Subject: [Uboot-stm32] [PATCH v2 2/3] stm32mp2: Add check on
+ syscon_get_first_range() return value
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -169,7 +169,7 @@ X-Spamd-Result: default: False [2.89 / 15.00];
 	DMARC_POLICY_SOFTFAIL(0.10)[foss.st.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[st-md-mailman.stormreply.com:rdns,stormreply.com:url,stormreply.com:email,stm-ict-prod-mailman-01.stormreply.prv:helo,foss.st.com:mid];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[st-md-mailman.stormreply.com:rdns,stm-ict-prod-mailman-01.stormreply.prv:helo,foss.st.com:mid,stormreply.com:url,stormreply.com:email];
 	SUSPICIOUS_AUTH_ORIGIN(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
@@ -187,288 +187,46 @@ X-Spamd-Result: default: False [2.89 / 15.00];
 	TAGGED_RCPT(0.00)[uboot-stm32];
 	RCPT_COUNT_SEVEN(0.00)[7];
 	RCVD_COUNT_SEVEN(0.00)[7]
-X-Rspamd-Queue-Id: 06D0FE45B3
+X-Rspamd-Queue-Id: 18684E45B4
 X-Rspamd-Action: no action
 
-Same code is duplicated into stm32mp25x.c, stm32mp23x.c and stm32mp21x.c.
+syscon_get_first_range()'s return value is used as base address to perform
+a read, without any checks.
+In case stmp32mp_syscon is not binded, syscon_get_first_range() returns
+-ENODEV which leads to a "Synchronous abort".
 
-Migrate read_deviceid(), get_cpu_dev(), get_cpu_rev(), get_cpu_type() and
-get_cpu_package() into new stm32mp2x.c.
+Add syscon_get_first_range() check on return value.
 
 Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 ---
- arch/arm/mach-stm32mp/stm32mp2/Makefile     |  1 +
- arch/arm/mach-stm32mp/stm32mp2/stm32mp21x.c | 44 -----------------------
- arch/arm/mach-stm32mp/stm32mp2/stm32mp23x.c | 44 -----------------------
- arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c | 46 ------------------------
- arch/arm/mach-stm32mp/stm32mp2/stm32mp2x.c  | 56 +++++++++++++++++++++++++++++
- 5 files changed, 57 insertions(+), 134 deletions(-)
+ arch/arm/mach-stm32mp/stm32mp2/stm32mp2x.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/arch/arm/mach-stm32mp/stm32mp2/Makefile b/arch/arm/mach-stm32mp/stm32mp2/Makefile
-index b25af2e8934..8f2e641dcab 100644
---- a/arch/arm/mach-stm32mp/stm32mp2/Makefile
-+++ b/arch/arm/mach-stm32mp/stm32mp2/Makefile
-@@ -6,6 +6,7 @@
- obj-y += cpu.o
- obj-y += arm64-mmu.o
- obj-y += rifsc.o
-+obj-y += stm32mp2x.o
- obj-$(CONFIG_OF_SYSTEM_SETUP) += fdt.o
- obj-$(CONFIG_STM32MP21X) += stm32mp21x.o
- obj-$(CONFIG_STM32MP23X) += stm32mp23x.o
-diff --git a/arch/arm/mach-stm32mp/stm32mp2/stm32mp21x.c b/arch/arm/mach-stm32mp/stm32mp2/stm32mp21x.c
-index 40d0f329496..7b5d79d3497 100644
---- a/arch/arm/mach-stm32mp/stm32mp2/stm32mp21x.c
-+++ b/arch/arm/mach-stm32mp/stm32mp2/stm32mp21x.c
-@@ -11,19 +11,6 @@
- #include <asm/arch/stm32.h>
- #include <asm/arch/sys_proto.h>
- 
--/* SYSCFG register */
--#define SYSCFG_DEVICEID_OFFSET		0x6400
--#define SYSCFG_DEVICEID_DEV_ID_MASK	GENMASK(11, 0)
--#define SYSCFG_DEVICEID_DEV_ID_SHIFT	0
--
--/* Revision ID = OTP102[5:0] 6 bits : 3 for Major / 3 for Minor*/
--#define REVID_SHIFT	0
--#define REVID_MASK	GENMASK(5, 0)
--
--/* Device Part Number (RPN) = OTP9 */
--#define RPN_SHIFT	0
--#define RPN_MASK	GENMASK(31, 0)
--
- /* Package = bit 0:2 of OTP122 => STM32MP21_PKG defines
-  * - 000: Custom package
-  * - 001: VFBGA361 => AL = 10x10, 361 balls pith 0.5mm
-@@ -32,37 +19,6 @@
-  * - 101: TFBGA289 => AM = 14x14, 289 balls pith 0.8mm
-  * - others: Reserved
-  */
--#define PKG_SHIFT	0
--#define PKG_MASK	GENMASK(2, 0)
--
--static u32 read_deviceid(void)
--{
--	void *syscfg = syscon_get_first_range(STM32MP_SYSCON_SYSCFG);
--
--	return readl(syscfg + SYSCFG_DEVICEID_OFFSET);
--}
--
--u32 get_cpu_dev(void)
--{
--	return (read_deviceid() & SYSCFG_DEVICEID_DEV_ID_MASK) >> SYSCFG_DEVICEID_DEV_ID_SHIFT;
--}
--
--u32 get_cpu_rev(void)
--{
--	return get_otp(BSEC_OTP_REVID, REVID_SHIFT, REVID_MASK);
--}
--
--/* Get Device Part Number (RPN) from OTP */
--u32 get_cpu_type(void)
--{
--	return get_otp(BSEC_OTP_RPN, RPN_SHIFT, RPN_MASK);
--}
--
--/* Get Package options from OTP */
--u32 get_cpu_package(void)
--{
--	return get_otp(BSEC_OTP_PKG, PKG_SHIFT, PKG_MASK);
--}
- 
- int get_eth_nb(void)
- {
-diff --git a/arch/arm/mach-stm32mp/stm32mp2/stm32mp23x.c b/arch/arm/mach-stm32mp/stm32mp2/stm32mp23x.c
-index 022db60811a..e4e5812760c 100644
---- a/arch/arm/mach-stm32mp/stm32mp2/stm32mp23x.c
-+++ b/arch/arm/mach-stm32mp/stm32mp2/stm32mp23x.c
-@@ -11,19 +11,6 @@
- #include <asm/arch/stm32.h>
- #include <asm/arch/sys_proto.h>
- 
--/* SYSCFG register */
--#define SYSCFG_DEVICEID_OFFSET		0x6400
--#define SYSCFG_DEVICEID_DEV_ID_MASK	GENMASK(11, 0)
--#define SYSCFG_DEVICEID_DEV_ID_SHIFT	0
--
--/* Revision ID = OTP102[5:0] 6 bits : 3 for Major / 3 for Minor*/
--#define REVID_SHIFT	0
--#define REVID_MASK	GENMASK(5, 0)
--
--/* Device Part Number (RPN) = OTP9 */
--#define RPN_SHIFT	0
--#define RPN_MASK	GENMASK(31, 0)
--
- /* Package = bit 0:2 of OTP122 => STM32MP23_PKG defines
-  * - 000: Custom package
-  * - 011: TFBGA361 => AL = 10x10, 361 balls pith 0.5mm
-@@ -31,37 +18,6 @@
-  * - 101: TFBGA436 => AI = 18x18, 436 balls pith 0.5mm
-  * - others: Reserved
-  */
--#define PKG_SHIFT	0
--#define PKG_MASK	GENMASK(2, 0)
--
--static u32 read_deviceid(void)
--{
--	void *syscfg = syscon_get_first_range(STM32MP_SYSCON_SYSCFG);
--
--	return readl(syscfg + SYSCFG_DEVICEID_OFFSET);
--}
--
--u32 get_cpu_dev(void)
--{
--	return (read_deviceid() & SYSCFG_DEVICEID_DEV_ID_MASK) >> SYSCFG_DEVICEID_DEV_ID_SHIFT;
--}
--
--u32 get_cpu_rev(void)
--{
--	return get_otp(BSEC_OTP_REVID, REVID_SHIFT, REVID_MASK);
--}
--
--/* Get Device Part Number (RPN) from OTP */
--u32 get_cpu_type(void)
--{
--	return get_otp(BSEC_OTP_RPN, RPN_SHIFT, RPN_MASK);
--}
--
--/* Get Package options from OTP */
--u32 get_cpu_package(void)
--{
--	return get_otp(BSEC_OTP_PKG, PKG_SHIFT, PKG_MASK);
--}
- 
- int get_eth_nb(void)
- {
-diff --git a/arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c b/arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c
-index bf1f3d3c5a7..e0d54f4ecc8 100644
---- a/arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c
-+++ b/arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c
-@@ -6,24 +6,9 @@
- #define LOG_CATEGORY LOGC_ARCH
- 
- #include <log.h>
--#include <syscon.h>
- #include <asm/io.h>
--#include <asm/arch/stm32.h>
- #include <asm/arch/sys_proto.h>
- 
--/* SYSCFG register */
--#define SYSCFG_DEVICEID_OFFSET		0x6400
--#define SYSCFG_DEVICEID_DEV_ID_MASK	GENMASK(11, 0)
--#define SYSCFG_DEVICEID_DEV_ID_SHIFT	0
--
--/* Revision ID = OTP102[5:0] 6 bits : 3 for Major / 3 for Minor*/
--#define REVID_SHIFT	0
--#define REVID_MASK	GENMASK(5, 0)
--
--/* Device Part Number (RPN) = OTP9 */
--#define RPN_SHIFT	0
--#define RPN_MASK	GENMASK(31, 0)
--
- /* Package = bit 0:2 of OTP122 => STM32MP25_PKG defines
-  * - 000: Custom package
-  * - 001: VFBGA361 => AL = 10x10, 361 balls pith 0.5mm
-@@ -31,37 +16,6 @@
-  * - 101: TFBGA436 => AI = 18x18, 436 balls pith 0.5mm
-  * - others: Reserved
-  */
--#define PKG_SHIFT	0
--#define PKG_MASK	GENMASK(2, 0)
--
--static u32 read_deviceid(void)
--{
--	void *syscfg = syscon_get_first_range(STM32MP_SYSCON_SYSCFG);
--
--	return readl(syscfg + SYSCFG_DEVICEID_OFFSET);
--}
--
--u32 get_cpu_dev(void)
--{
--	return (read_deviceid() & SYSCFG_DEVICEID_DEV_ID_MASK) >> SYSCFG_DEVICEID_DEV_ID_SHIFT;
--}
--
--u32 get_cpu_rev(void)
--{
--	return get_otp(BSEC_OTP_REVID, REVID_SHIFT, REVID_MASK);
--}
--
--/* Get Device Part Number (RPN) from OTP */
--u32 get_cpu_type(void)
--{
--	return get_otp(BSEC_OTP_RPN, RPN_SHIFT, RPN_MASK);
--}
--
--/* Get Package options from OTP */
--u32 get_cpu_package(void)
--{
--	return get_otp(BSEC_OTP_PKG, PKG_SHIFT, PKG_MASK);
--}
- 
- int get_eth_nb(void)
- {
 diff --git a/arch/arm/mach-stm32mp/stm32mp2/stm32mp2x.c b/arch/arm/mach-stm32mp/stm32mp2/stm32mp2x.c
-new file mode 100644
-index 00000000000..551601a12a9
---- /dev/null
+index 551601a12a9..40fceac402c 100644
+--- a/arch/arm/mach-stm32mp/stm32mp2/stm32mp2x.c
 +++ b/arch/arm/mach-stm32mp/stm32mp2/stm32mp2x.c
-@@ -0,0 +1,56 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
-+/*
-+ * Copyright (C) 2026, STMicroelectronics - All Rights Reserved
-+ */
+@@ -9,6 +9,7 @@
+ #include <syscon.h>
+ #include <asm/io.h>
+ #include <asm/arch/sys_proto.h>
++#include <linux/err.h>
+ 
+ /* SYSCFG register */
+ #define SYSCFG_DEVICEID_OFFSET		0x6400
+@@ -30,6 +31,12 @@ static u32 read_deviceid(void)
+ {
+ 	void *syscfg = syscon_get_first_range(STM32MP_SYSCON_SYSCFG);
+ 
++	if (IS_ERR(syscfg)) {
++		pr_err("Error, can't get SYSCON range (%ld)\n", PTR_ERR(syscfg));
 +
-+#define LOG_CATEGORY LOGC_ARCH
++		return PTR_ERR(syscfg);
++	}
 +
-+#include <log.h>
-+#include <syscon.h>
-+#include <asm/io.h>
-+#include <asm/arch/sys_proto.h>
-+
-+/* SYSCFG register */
-+#define SYSCFG_DEVICEID_OFFSET		0x6400
-+#define SYSCFG_DEVICEID_DEV_ID_MASK	GENMASK(11, 0)
-+#define SYSCFG_DEVICEID_DEV_ID_SHIFT	0
-+
-+/* Revision ID = OTP102[5:0] 6 bits : 3 for Major / 3 for Minor*/
-+#define REVID_SHIFT	0
-+#define REVID_MASK	GENMASK(5, 0)
-+
-+/* Device Part Number (RPN) = OTP9 */
-+#define RPN_SHIFT	0
-+#define RPN_MASK	GENMASK(31, 0)
-+
-+#define PKG_SHIFT	0
-+#define PKG_MASK	GENMASK(2, 0)
-+
-+static u32 read_deviceid(void)
-+{
-+	void *syscfg = syscon_get_first_range(STM32MP_SYSCON_SYSCFG);
-+
-+	return readl(syscfg + SYSCFG_DEVICEID_OFFSET);
-+}
-+
-+u32 get_cpu_dev(void)
-+{
-+	return (read_deviceid() & SYSCFG_DEVICEID_DEV_ID_MASK) >> SYSCFG_DEVICEID_DEV_ID_SHIFT;
-+}
-+
-+u32 get_cpu_rev(void)
-+{
-+	return get_otp(BSEC_OTP_REVID, REVID_SHIFT, REVID_MASK);
-+}
-+
-+/* Get Device Part Number (RPN) from OTP */
-+u32 get_cpu_type(void)
-+{
-+	return get_otp(BSEC_OTP_RPN, RPN_SHIFT, RPN_MASK);
-+}
-+
-+/* Get Package options from OTP */
-+u32 get_cpu_package(void)
-+{
-+	return get_otp(BSEC_OTP_PKG, PKG_SHIFT, PKG_MASK);
-+}
+ 	return readl(syscfg + SYSCFG_DEVICEID_OFFSET);
+ }
+ 
 
 -- 
 2.43.0

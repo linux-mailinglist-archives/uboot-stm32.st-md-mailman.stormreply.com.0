@@ -2,98 +2,146 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id kFSGOufXg2lbuwMAu9opvQ
+	id VKy1Lt1PhGkc2gMAu9opvQ
 	(envelope-from <uboot-stm32-bounces@st-md-mailman.stormreply.com>)
-	for <lists+uboot-stm32@lfdr.de>; Thu, 05 Feb 2026 00:36:07 +0100
+	for <lists+uboot-stm32@lfdr.de>; Thu, 05 Feb 2026 09:07:57 +0100
 X-Original-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 85A3FED4DE
-	for <lists+uboot-stm32@lfdr.de>; Thu, 05 Feb 2026 00:36:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D267AEFBA0
+	for <lists+uboot-stm32@lfdr.de>; Thu, 05 Feb 2026 09:07:56 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2C41DC87ECD;
-	Wed,  4 Feb 2026 23:36:07 +0000 (UTC)
-Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com
- [209.85.128.46])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6E07AC87ED8;
+	Thu,  5 Feb 2026 08:07:56 +0000 (UTC)
+Received: from DB3PR0202CU003.outbound.protection.outlook.com
+ (mail-northeuropeazon11010015.outbound.protection.outlook.com [52.101.84.15])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 49498C87EC9
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 4BBAAC87ECF
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  4 Feb 2026 23:36:05 +0000 (UTC)
-Received: by mail-wm1-f46.google.com with SMTP id
- 5b1f17b1804b1-481188b7760so2599125e9.0
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 04 Feb 2026 15:36:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1770248164; x=1770852964;
- darn=st-md-mailman.stormreply.com; 
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=vTotPwPeX7mDUfiL+iy6WaKCa5xiJdrE7pgMGB1LwSM=;
- b=C7akyVRpRQkXeB3+a1rrQi3pHxjst3AUh4ri7y/sDB//kgnbE3wjUBfq6ezFrxVSwE
- SrtooXYM1Ns/llEG+0p80zcwP3pInC8mDUpknsrj3XYFDXUKW75ePXlr9b/ecV0/cuxb
- 6HaMyhT7CqjvWhlOQG3yl/cGyz6XcHl1Exo2KjLTGSo0B+sZGFgyKyf+TRfTz0gXJB24
- W36ju9UmWvCSPNuaND+WADVayQL9Zy08TnbUgBTIA97tXp4+j7ui9DlaOUnneMlWM1x1
- sfxGdcFsR+xIdhGpuZuWT8ceJ76DKlToGz7wFwPJMtq0MuK8KtYvA+/PY9M8He+WI4cf
- ehSQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770248164; x=1770852964;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=vTotPwPeX7mDUfiL+iy6WaKCa5xiJdrE7pgMGB1LwSM=;
- b=u04rv2zcEepfS7+SXIW8u1jROrjk1cueSWVsUVKrqUw7b2p8Q9nOQinx+l3iQw3LgF
- LrqhIiR4vQ3LQ1DO7/caMY8pKE9yWKPNdg//p//xxlEk68oeEj72Y7ZYsYvk5CMQ1vlQ
- ZApfQnhULse4woifQJNVs9LYIejBk0MCu/4xJcZ1AjIpNrW+NldPnBbAU3hN/osYD2xv
- gIPj+j0XC/M4E6nm+YX0HtLWkpgHbpnJ57eoH+bjbs2D0Y2u4ce0FWEP+fSpmbIjQMhC
- zaD63XkgBzhMCam5ufBat1lHiRftP+8zk/mjvS94GrSRJbb0HprwyicWk0ESQbECM/Az
- kzZg==
-X-Gm-Message-State: AOJu0YyXnNnlPN3rYyVGS9WgFDEdOBGjDixqAFmWC6Z5zbC9JUovqC5e
- bG/J0HgPqU6QgXFVo7IrnG4kuPx+I/h3Mw2i7VdWIlDor0+m9E/WcK3P
-X-Gm-Gg: AZuq6aKsLPlrJVCmuhaz7+kTXe9IstjUh2zDdg6UvVOKC0kRYOuK9UrpZdPYbkJbIMe
- jY6j21zLOrAzhOP8IOkhwv9oGxFGTnpMg/g8RJKOegWuIUhVjh++KbBzwcVrw5sKX7WvFjxRCAE
- Afsol2AuQWLyu2YmuShEWf6U3BZ9jYFu2vsDphBm6EnW7KyQRcTVDu1B0gpojTApThXVUXMQYJs
- oIoMpowQc5WlS6R+gXVqM1YS5y8BDH94qN36FNcVhVlWGPfGD2vQwK/GXtj8n++DQpen34yebFp
- RKmjrT4p9BrGwpalcRM7hboGdAxcPYSoQ3rVfEowD1kt4rotI5V2WvA1AiLR1m0ZK1jjUe6UTP4
- AGYCtVSo0a+PZFJobEfjOhz/dFnF34ZvkfYTblv1zZLN9VVGAFiWZ76EoHeyrUkBBQcw5B+SpW1
- giMF+2ytG+udbqc8t3day57FU=
-X-Received: by 2002:a05:600c:1546:b0:477:7f4a:44b4 with SMTP id
- 5b1f17b1804b1-4830e92450cmr63869495e9.1.1770248164261; 
- Wed, 04 Feb 2026 15:36:04 -0800 (PST)
-Received: from localhost ([2001:861:3385:e20:f99c:d6cf:27e6:2b03])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48317d2ba61sm26610585e9.1.2026.02.04.15.36.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Feb 2026 15:36:03 -0800 (PST)
-From: Raphael Gallais-Pou <rgallaispou@gmail.com>
-Date: Thu, 05 Feb 2026 00:35:40 +0100
+ Thu,  5 Feb 2026 08:07:54 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=EXMh/8BM+k2/d4EgS/xEzvq4pQrwumoNrzZLoXws7MOMW24LEufm8mjHQy7FY4sgp8qgkBAMizfH8d8WnuFLP4SXfAOcLJyRM5uT7eRU0iUbdTXylCtnpfpT/oFDX0KoD0avOzOlC4Nno4bYAzGSHoh2iITgFcb7frtMXdw9yu0TThBNZx+WaLdahn3m8ksEEjnYlNbRLHCy7Ln1mGh/WT50VDHvT5aonvRgWPqfJ9lTPMJ1fSZfGfyeffcUrS2VvkkJKSfEKRN6MF42lVQtCk9pI6EwNxp5L5pTKGj9S5a88GLXKyzj5zYpfFzAilPkhfZdvF02+J//qGRnSRUuEg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=9fvUylgSo8FjQEwpEvneJDcp02KnnQ+IFI3kq7eKXHA=;
+ b=FD2hrrxDbBiaUMVxRmAcNzWrPRRSKfkL0Ay5qAUAd2l2KOI9uPLXGQ0TM1TeVPq6VZac1KZWo9slzCW+C+AmSDa9sB2fqhYiOdilI2pGJyNdvU0J0wDgZqT5dLICAaT+th/BfJNSd4TlC030/+iaR9wocyrwOihPzklHG9jWOD84pJHKJVDHb8PNxOtPeWnW5CIf+MCucZx1Gj73iaJgxzbpk0DCtStIMKOkkCyqxbV+6TwOQblF5itWYNi/r1LPde2zQRlpuzO65o6XvhQ+ImMX3PayHSSSq93OyAJC9u6EkKP1TcAl1tZY66aHDtM0P4Yyn4sg7JiZtQmVgv01xQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 164.130.1.59) smtp.rcpttodomain=st-md-mailman.stormreply.com
+ smtp.mailfrom=foss.st.com; dmarc=fail (p=none sp=none pct=100) action=none
+ header.from=foss.st.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=9fvUylgSo8FjQEwpEvneJDcp02KnnQ+IFI3kq7eKXHA=;
+ b=b80+hQ4W6X3Ynx06EUlPRVnxzSJKdqDwbwVOl9u/i4SHYP5QUfHv0VrKH85Zau5s2Z3CEr9IsB9105WYrH6KHBW1twa6vVzfCokUmSP7VAyssu2LwpOVSx/kRiBsaTMCeaLbs0C4l4/jFbbdPtcJu5Vn7D4E9Z2Lhx23cbWL5YSswuTr9UfIK97seDQlosaVo/k/kbbogUUIb73PxMaI3EdrgvuAmDctOyt82UD2gFq+OX9BBhteEDqBIVQTnyQuZgmAvYpb+albtroMUw628ciOMzGFNJZTZkD1qmcy81Yj+tYsOKcaKwX9N3hRbvWYdGRs4lYLni1+/a/pta+S6g==
+Received: from DUZPR01CA0047.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:469::16) by GV1PR10MB8859.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:150:1d7::5) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.16; Thu, 5 Feb
+ 2026 08:07:51 +0000
+Received: from DB1PEPF000509FA.eurprd03.prod.outlook.com
+ (2603:10a6:10:469:cafe::1f) by DUZPR01CA0047.outlook.office365.com
+ (2603:10a6:10:469::16) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9587.15 via Frontend Transport; Thu,
+ 5 Feb 2026 08:07:49 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
+ smtp.mailfrom=foss.st.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=none header.from=foss.st.com;
+Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
+ designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.59; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.59) by
+ DB1PEPF000509FA.mail.protection.outlook.com (10.167.242.36) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9587.10 via Frontend Transport; Thu, 5 Feb 2026 08:07:50 +0000
+Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
+ (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Thu, 5 Feb
+ 2026 09:09:37 +0100
+Received: from localhost (10.48.87.93) by STKDAG1NODE1.st.com (10.75.128.132)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Thu, 5 Feb
+ 2026 09:07:49 +0100
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+Date: Thu, 5 Feb 2026 09:07:48 +0100
+Message-ID: <20260205-upstream_pinctrl_stm32_update-v1-0-3a3797af498d@foss.st.com>
 MIME-Version: 1.0
-Message-Id: <20260205-dsi-v1-1-eb5805068e97@gmail.com>
-X-B4-Tracking: v=1; b=H4sIAMvXg2kC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzMDIwNT3ZTiTF1L8+RUAwuj5DQDIyMloMqCotS0zAqwKdGxtbUAl7QF8lU
- AAAA=
-X-Change-ID: 20260205-dsi-97ce082cf022
-To: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de
+X-B4-Tracking: v=1; b=H4sIANVPhGkC/x3MQQqDMBAAwK/InhuIaRT1K6WEoJt2QWPYTUpB/
+ LvB41zmAEEmFJiaAxh/JLTHivbRwPz18YOKlmow2vTaaKtKkszoN5cozplXJ3l7GlfS4jOqzo6
+ DDp21ffBQj8QY6H//r/d5XmOMSrBvAAAA
+X-Change-ID: 20260204-upstream_pinctrl_stm32_update-54980f5446fa
+To: <uboot-stm32@st-md-mailman.stormreply.com>, <u-boot@lists.denx.de>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=13421;
- i=rgallaispou@gmail.com; h=from:subject:message-id;
- bh=onGNU2V51ImqsJ2YhwA44Tl7HT6C0hJHCW6JQaRh0d0=;
- b=owEBbQKS/ZANAwAKAechimjUEsK1AcsmYgBpg9fQZQEoAb2Fv4juAOWzH/31+XzRigVKfkT/f
- NnpYvJSda2JAjMEAAEKAB0WIQQgmXv2E+fvbV/9ui/nIYpo1BLCtQUCaYPX0AAKCRDnIYpo1BLC
- tSAmD/9bpE1ef5GszDnbJ0wbBxRbrZ8COEWYixc80OrX84Mg3wCjDo30WO2jk1to3uaffg6U57/
- 5qxliK2Q57knitOUI0+5E9dnrK5DYHSHSetKE/7hLXU1ZqVd0M8tW3Jx8DZodrH+3uwL6SIx1I/
- 6XIFxa8oMRmgw2rOQCjRfre0RHis6IqmLNxCv6PAk/V0YuPcVlHuG+IE2EZIXgRdI1aODj3+Da+
- k/lst6hNSvqKCvo4jETFEyr5I2igkyZ/IE/9QezD11/4TsLxpJqygVs7NN/UJCsR+JSOtC/UbuF
- yzmHt3gSkUY1cqHF2/NUp7f8O5tbtTPE3wZnQ1aDGuyTYhfbK/KRIPOCzOETWXYYmy9ltmLClIW
- 0D7K85F6j4k52xzUrucB+6gotbT6fyZE+0Wmi2HCGQuE71H/YhFcTE04CsLzQPiPyQ1aWImId0X
- vNiC7KDccsKwaiWc/zr5/2ggmpPaxu4cuNzRqIwvXkVqnVairc7YTA6oWOtWJd4lYhsWQx8knOb
- 7oLA48Y267GrzZC5/sjoFcInfsjmUOGgNj63XbGAOfa/EZipJbBBk2qidDpOy5JQa6WYZAaSBUz
- OUZ6p4reZGs5xRLGRyyBvppMbo3tN20siChGtVZCbP56u+nQ6BYpCXnWYMVMkIEQcVPLGHc4WyI
- YjKA5SBhhDz4Fvw==
-X-Developer-Key: i=rgallaispou@gmail.com; a=openpgp;
- fpr=20997BF613E7EF6D5FFDBA2FE7218A68D412C2B5
+X-Originating-IP: [10.48.87.93]
+X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
+ (10.75.128.132)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB1PEPF000509FA:EE_|GV1PR10MB8859:EE_
+X-MS-Office365-Filtering-Correlation-Id: 989d45a5-70ac-4198-edbf-08de648da83b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|36860700013|82310400026|376014; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?cUE2bmZmNGhIbWtlUVZicmdNRUlEWngrMUk2WUxrZGJWVDFwVEwxbWlDVnFX?=
+ =?utf-8?B?OEhiM1dBTGo0cGpVNWFrcmFPeFRxazZ3WGN4Rlg2bzJyQ1EyRGRqem1vQURi?=
+ =?utf-8?B?ZHpCYzJvSFFTZ05QeGtyeHNuQUdyekpYZ2VFblZiQ3hlUStseUsvMDduWjBO?=
+ =?utf-8?B?NElxZlZiYVEwYlY0Mm1VdTEyc21wK3doNHRZWnVtSUFIVGJkaGJHQzdrcld1?=
+ =?utf-8?B?eGZFOGpRZ0h1TlpFV0NZekVrV2RGTG01R2VmWW5aREo1RW5sYTRPZjJBTk53?=
+ =?utf-8?B?c0ZSY0FleWxHRUlZVFViV3o2cjlpdWt3R3dvc3k5aHpHbTNXbmZnRGNEc0sz?=
+ =?utf-8?B?MEdtcDAvTHluSk92Zjk5R3hXSkQwbmlLN0FUbldTakFEeHJLZGdNRGNWblcy?=
+ =?utf-8?B?Y1p1enpUQkZLU2xaZDM4MURCQWQ1MTBPQ01BVnJwYmVuRjEvYnFsWWxPcmlj?=
+ =?utf-8?B?SitVcnNWeVpqTWJQNFNqSjVzWFdZMzJndWZScHpOY09qeTcwZ256c2xUb3k3?=
+ =?utf-8?B?UUFOS2FwKzdVRE82MjRLZ2hnbHUwVFJ2NE81V1dFR0MreEdnSVVHSG1HNGky?=
+ =?utf-8?B?TjFFYjUxNFNPdmhFNzQxeE4wa3djSTFVVU9QcUUwZFRxN1BDekVka3YyTVIx?=
+ =?utf-8?B?YkxmcjlQVWxISnRPU2hjOEYrem5vdEtIbVpseUhKcUgraVBCN05QQWk2RnJm?=
+ =?utf-8?B?TzQrY0pIalVkWEU1MTE3Snd3OSs1WlJTZTlISUt3RjRYV29KY3dPdHVodi9J?=
+ =?utf-8?B?dEpqcXFUc0tBeDhkR2w2WG43QTRrWVIxYUhNQTVqT2N5TnJiT05MRk1DSWFT?=
+ =?utf-8?B?WUgvN2dPRldMZVI0eHVwY2tpZjJKTkRPNEttNWtJQkcvTWNHY1RpQlZLQXlQ?=
+ =?utf-8?B?djlINCswOGhBWDhjS0MzQmhPMkRjYlJZVWk4a1BMT0tabXV5NGdqTmdFRVYr?=
+ =?utf-8?B?UGd5QkI2aENpRWlPb0RCQU55UGt2VFA0MVhaSEIwb3hZM3M1aGkyZzJFOXo4?=
+ =?utf-8?B?bGltNm1MTVNYbUE0MitlZmhIVzYwWVhOWlhIQ3M1QUJTVFZtS0hLc2s5Q3ls?=
+ =?utf-8?B?RVo0T21ieDRZWngvUnpER3p1eUdyVU5nVmdGNk5DYXJ4Y0VtUWFMZXI4ZGhp?=
+ =?utf-8?B?S2Nsb2xxQUd0cFQ5TUhEZUNhRWVpN0c3SlZBSzlYWE9YVVF5S0hZaWFVWUNP?=
+ =?utf-8?B?bFFMQ1hOWVhMWjdXVU5jejRtOFZiQmQ4YzJsTTFrSll5MzN4NTRaQk5KYXRu?=
+ =?utf-8?B?TnFPelFIZlZKajcyTGlKNFV4S2M1eTh5TlJDWDdVMU9oWkNRSXNMUUlYNkFK?=
+ =?utf-8?B?ZFluYW9NajdFZjRqZDFweTkxN1ZnajNIdnJ1UCsrM2hHSVBMS1ZCRms0T0dx?=
+ =?utf-8?B?RHl2eTdvNWk3R3BtZU13Ky9oU0N4QzFoUUt6MUJQNXIrTElTeWR4eDNpc0xk?=
+ =?utf-8?B?NUc1WmlkUVlRZmdaVS9TMlFmY2NlQ2IwblJkL2MwUkdySzdWbmUvb2FNMTJY?=
+ =?utf-8?B?cm1HcWlSdjNNM1B6UVowK3NXTlJpTkxYOUd0VWhML2FpVnkwMTZpVktGRjVn?=
+ =?utf-8?B?YnA2ZzdGQ2YzL3dlbkZ5dGd5dHFPUmhpeG9xamxoME1naE83NTlIMS9aTWVa?=
+ =?utf-8?B?Mzk0L0dmaHozb1VHbTFJR0UzUjYwRW5KMzd5aUJMY1I2dTVwbkNjcEF2NE1q?=
+ =?utf-8?B?VE4rM1pUZmFoL3c0aVFNVVU2RUNTemR5dU45TFdjTk1xaWFDOFZUM3dDVzFu?=
+ =?utf-8?B?Vy9rRXJIWmNIcXRZSmNZREErNUpFaEk1ZTd4ZEh4U0J5N0g3YWRSamhqSUNs?=
+ =?utf-8?B?cWdyZmxjd09TWmx1dEFsei82bUFhUUl6K0JnWS9YM3hHVXBGSzFKYVVTcmFL?=
+ =?utf-8?B?a1JUdzVXQUNBbjJuR3lsbUlJMERGQ1pXeTJFMS9kWFkyWFRrM2NNU3NQbVFu?=
+ =?utf-8?B?VERhMW1lMmF1VWMrZWZIKzRZczd2dVowSFI2dVAvalRybjlkUENaaDJnWjhy?=
+ =?utf-8?B?S2JIZVphckNGTG1XWnZHK1lEUjVWcXk1dExyRWVTSjNNUDhZUzhvN1VYaHBT?=
+ =?utf-8?B?bU5YQkZrK2FVdmE2RjRSRzZhYnpuWTFocEtDdkQwVVRnaktIWVRuc29wY0xE?=
+ =?utf-8?B?ZHBjNGl4eE9SN3c3RE9zcitoNUdyNlV3Y09VVXhYb3RYSnIrbHFRRmxubDV1?=
+ =?utf-8?B?TmFvNjBjRzI1NUkrK0JxdnM4MUFEMmNMKzZYS1dlVlpvbXhzYUQzWGtNL0dh?=
+ =?utf-8?B?OWU5TVMvd3p3eE50elZxUUZKbkdBPT0=?=
+X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(36860700013)(82310400026)(376014); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: itYMUQNY/3PrmvjecgkQfS/B2HSa0f8sVQWI6xnKlAHBb3tE+qaRInjfg/Y/ZsoWSm6Q/V2gWJQ+V02jbyb135A3g3UG9xIascrTeqhm846eFk9munPZ1LPreSbzp8MJRr63snkhd8u9WgUtmSb5KhkHAEU5joaurzjBZSEbK4yV8AOdW+eUWY9rfuQJQfELfbzL3V3lCzbuf1pYils2C11bRzb2GJzG4Tu3IWmMCCuWGdK5MbqPGwT8TsW8ZjROmX5+UpMy+Bi22V83V+Qgfe6mMcsAOU1eDraTkkjFc2CZ2wK0/++2FfId16gz8BvG/2+jOi8pMZSG1Hw1NU7e9FJQhga0LFkgChlyadqsj2U4f2hU2+3gXQVSAxwNZ5NFUFkyftqkewsJyqByLJd17DAXn9OmFy4SSykFpzT6A1HKllOL1TQFSVMIIu9LH09V
+X-OriginatorOrg: foss.st.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Feb 2026 08:07:50.7805 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 989d45a5-70ac-4198-edbf-08de648da83b
+X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
+ Helo=[smtpO365.st.com]
+X-MS-Exchange-CrossTenant-AuthSource: DB1PEPF000509FA.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR10MB8859
 Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Tom Rini <trini@konsulko.com>, Anatolij Gustschin <ag.dev.uboot@gmail.com>
-Subject: [Uboot-stm32] [PATCH] video: stm32: dsi: add .of_to_plat callback
+ Tom Rini <trini@konsulko.com>, Valentin Caron <valentin.caron@foss.st.com>,
+ Fabien Dessenne <fabien.dessenne@foss.st.com>
+Subject: [Uboot-stm32] [PATCH 0/3] pinctrl: stm32: various update
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -110,449 +158,61 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [3.39 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_REJECT(1.00)[gmail.com:s=20230601];
+X-Spamd-Result: default: False [2.89 / 15.00];
 	HFILTER_HELO_IP_A(1.00)[stm-ict-prod-mailman-01.stormreply.prv];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
+	R_DKIM_REJECT(1.00)[foss.st.com:s=selector2];
 	HFILTER_HELO_NORES_A_OR_MX(0.30)[stm-ict-prod-mailman-01.stormreply.prv];
 	R_SPF_ALLOW(-0.20)[+ip4:52.209.6.89];
 	MAILLIST(-0.20)[mailman];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[foss.st.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	ARC_NA(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	MIME_TRACE(0.00)[0:+];
 	TO_DN_SOME(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:-];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	SUSPICIOUS_AUTH_ORIGIN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
+	DKIM_TRACE(0.00)[foss.st.com:-];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[stm-ict-prod-mailman-01.stormreply.prv:helo,stormreply.com:url,stormreply.com:email,st-md-mailman.stormreply.com:rdns,st.com:email];
+	RCPT_COUNT_FIVE(0.00)[6];
 	PREVIOUSLY_DELIVERED(0.00)[uboot-stm32@st-md-mailman.stormreply.com];
-	FROM_NEQ_ENVFROM(0.00)[rgallaispou@gmail.com,uboot-stm32-bounces@st-md-mailman.stormreply.com];
-	FREEMAIL_CC(0.00)[foss.st.com,konsulko.com,gmail.com];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[uboot-stm32];
+	HAS_XOIP(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[patrice.chotard@foss.st.com,uboot-stm32-bounces@st-md-mailman.stormreply.com];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-0.997];
+	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2603:10a6:10:469:cafe::1f:received,10.48.87.93:received,164.130.1.59:received];
+	MID_RHS_MATCH_FROM(0.00)[];
 	ASN(0.00)[asn:16509, ipnet:52.208.0.0/13, country:US];
-	RCPT_COUNT_FIVE(0.00)[5]
-X-Rspamd-Queue-Id: 85A3FED4DE
+	TAGGED_RCPT(0.00)[uboot-stm32];
+	RCVD_COUNT_SEVEN(0.00)[7]
+X-Rspamd-Queue-Id: D267AEFBA0
 X-Rspamd-Action: no action
 
-Drivers should extract device-tree data before probing via the
-.of_to_plat hook.
+This series is adding:
+  _ Usage prevention of protected pins for gpio and pinctrl drivers
+  _ IO synchronization parameter support
 
-Implement it for stm32_dsi driver.  By doing so, it also solve a
-variable shadowing in stm32_dsi_probe() where &clk was used as
-peripheral clock and ref clock.
-
-For readability some struct have been renamed such as:
-
-  * struct stm32_dsi_priv *dsi -> struct stm32_dsi_priv *priv
-  * struct clk clk -> struct clk pclk
-
-Signed-off-by: Raphael Gallais-Pou <rgallaispou@gmail.com>
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 ---
-This patch has been tested on stm32mp157c-dk2 board.
----
- drivers/video/stm32/stm32_dsi.c | 168 ++++++++++++++++++++++------------------
- 1 file changed, 91 insertions(+), 77 deletions(-)
+Fabien Dessenne (3):
+      gpio: stm32-gpio: prevent the use of the secure protected pins
+      pinctrl: pinctrl_stm32: prevent the use of the secure protected pins
+      pinctrl: pinctrl_stm32: support IO synchronization parameters
 
-diff --git a/drivers/video/stm32/stm32_dsi.c b/drivers/video/stm32/stm32_dsi.c
-index 438ed41e8d5f..65a91f5cff7a 100644
---- a/drivers/video/stm32/stm32_dsi.c
-+++ b/drivers/video/stm32/stm32_dsi.c
-@@ -84,42 +84,48 @@ enum dsi_color {
- /* Timeout for regulator on/off, pll lock/unlock & fifo empty */
- #define TIMEOUT_US	200000
- 
--struct stm32_dsi_priv {
-+struct stm32_dsi_plat {
- 	struct mipi_dsi_device device;
- 	void __iomem *base;
- 	struct udevice *panel;
-+	struct udevice *vdd_reg;
-+	struct udevice *dsi_host;
-+	struct reset_ctl rst;
-+	struct clk pclk;
-+	struct clk refclk;
-+};
-+
-+struct stm32_dsi_priv {
- 	u32 pllref_clk;
- 	u32 hw_version;
- 	int lane_min_kbps;
- 	int lane_max_kbps;
--	struct udevice *vdd_reg;
--	struct udevice *dsi_host;
- };
- 
--static inline void dsi_write(struct stm32_dsi_priv *dsi, u32 reg, u32 val)
-+static inline void dsi_write(void __iomem *base, u32 reg, u32 val)
- {
--	writel(val, dsi->base + reg);
-+	writel(val, base + reg);
- }
- 
--static inline u32 dsi_read(struct stm32_dsi_priv *dsi, u32 reg)
-+static inline u32 dsi_read(void __iomem *base, u32 reg)
- {
--	return readl(dsi->base + reg);
-+	return readl(base + reg);
- }
- 
--static inline void dsi_set(struct stm32_dsi_priv *dsi, u32 reg, u32 mask)
-+static inline void dsi_set(void __iomem *base, u32 reg, u32 mask)
- {
--	dsi_write(dsi, reg, dsi_read(dsi, reg) | mask);
-+	dsi_write(base, reg, dsi_read(base, reg) | mask);
- }
- 
--static inline void dsi_clear(struct stm32_dsi_priv *dsi, u32 reg, u32 mask)
-+static inline void dsi_clear(void __iomem *base, u32 reg, u32 mask)
- {
--	dsi_write(dsi, reg, dsi_read(dsi, reg) & ~mask);
-+	dsi_write(base, reg, dsi_read(base, reg) & ~mask);
- }
- 
--static inline void dsi_update_bits(struct stm32_dsi_priv *dsi, u32 reg,
-+static inline void dsi_update_bits(void __iomem *base, u32 reg,
- 				   u32 mask, u32 val)
- {
--	dsi_write(dsi, reg, (dsi_read(dsi, reg) & ~mask) | val);
-+	dsi_write(base, reg, (dsi_read(base, reg) & ~mask) | val);
- }
- 
- static enum dsi_color dsi_color_from_mipi(u32 fmt)
-@@ -210,14 +216,14 @@ static int dsi_phy_init(void *priv_data)
- {
- 	struct mipi_dsi_device *device = priv_data;
- 	struct udevice *dev = device->dev;
--	struct stm32_dsi_priv *dsi = dev_get_priv(dev);
-+	struct stm32_dsi_plat *dsi = dev_get_plat(dev);
- 	u32 val;
- 	int ret;
- 
- 	dev_dbg(dev, "Initialize DSI physical layer\n");
- 
- 	/* Enable the regulator */
--	dsi_set(dsi, DSI_WRPCR, WRPCR_REGEN | WRPCR_BGREN);
-+	dsi_set(dsi->base, DSI_WRPCR, WRPCR_REGEN | WRPCR_BGREN);
- 	ret = readl_poll_timeout(dsi->base + DSI_WISR, val, val & WISR_RRS,
- 				 TIMEOUT_US);
- 	if (ret) {
-@@ -226,7 +232,7 @@ static int dsi_phy_init(void *priv_data)
- 	}
- 
- 	/* Enable the DSI PLL & wait for its lock */
--	dsi_set(dsi, DSI_WRPCR, WRPCR_PLLEN);
-+	dsi_set(dsi->base, DSI_WRPCR, WRPCR_PLLEN);
- 	ret = readl_poll_timeout(dsi->base + DSI_WISR, val, val & WISR_PLLLS,
- 				 TIMEOUT_US);
- 	if (ret) {
-@@ -241,7 +247,7 @@ static void dsi_phy_post_set_mode(void *priv_data, unsigned long mode_flags)
- {
- 	struct mipi_dsi_device *device = priv_data;
- 	struct udevice *dev = device->dev;
--	struct stm32_dsi_priv *dsi = dev_get_priv(dev);
-+	struct stm32_dsi_plat *dsi = dev_get_plat(dev);
- 
- 	dev_dbg(dev, "Set mode %p enable %ld\n", dsi,
- 		mode_flags & MIPI_DSI_MODE_VIDEO);
-@@ -256,9 +262,9 @@ static void dsi_phy_post_set_mode(void *priv_data, unsigned long mode_flags)
- 	 */
- 
- 	if (mode_flags & MIPI_DSI_MODE_VIDEO)
--		dsi_set(dsi, DSI_WCR, WCR_DSIEN);
-+		dsi_set(dsi->base, DSI_WCR, WCR_DSIEN);
- 	else
--		dsi_clear(dsi, DSI_WCR, WCR_DSIEN);
-+		dsi_clear(dsi->base, DSI_WCR, WCR_DSIEN);
- }
- 
- static int dsi_get_lane_mbps(void *priv_data, struct display_timing *timings,
-@@ -266,32 +272,33 @@ static int dsi_get_lane_mbps(void *priv_data, struct display_timing *timings,
- {
- 	struct mipi_dsi_device *device = priv_data;
- 	struct udevice *dev = device->dev;
--	struct stm32_dsi_priv *dsi = dev_get_priv(dev);
-+	struct stm32_dsi_plat *plat = dev_get_plat(dev);
-+	struct stm32_dsi_priv *priv = dev_get_priv(dev);
- 	int idf, ndiv, odf, pll_in_khz, pll_out_khz;
- 	int ret, bpp;
- 	u32 val;
- 
- 	/* Update lane capabilities according to hw version */
--	dsi->lane_min_kbps = LANE_MIN_KBPS;
--	dsi->lane_max_kbps = LANE_MAX_KBPS;
--	if (dsi->hw_version == HWVER_131) {
--		dsi->lane_min_kbps *= 2;
--		dsi->lane_max_kbps *= 2;
-+	priv->lane_min_kbps = LANE_MIN_KBPS;
-+	priv->lane_max_kbps = LANE_MAX_KBPS;
-+	if (priv->hw_version == HWVER_131) {
-+		priv->lane_min_kbps *= 2;
-+		priv->lane_max_kbps *= 2;
- 	}
- 
--	pll_in_khz = dsi->pllref_clk / 1000;
-+	pll_in_khz = priv->pllref_clk / 1000;
- 
- 	/* Compute requested pll out */
- 	bpp = mipi_dsi_pixel_format_to_bpp(format);
- 	pll_out_khz = (timings->pixelclock.typ / 1000) * bpp / lanes;
- 	/* Add 20% to pll out to be higher than pixel bw (burst mode only) */
- 	pll_out_khz = (pll_out_khz * 12) / 10;
--	if (pll_out_khz > dsi->lane_max_kbps) {
--		pll_out_khz = dsi->lane_max_kbps;
-+	if (pll_out_khz > priv->lane_max_kbps) {
-+		pll_out_khz = priv->lane_max_kbps;
- 		dev_warn(dev, "Warning max phy mbps is used\n");
- 	}
--	if (pll_out_khz < dsi->lane_min_kbps) {
--		pll_out_khz = dsi->lane_min_kbps;
-+	if (pll_out_khz < priv->lane_min_kbps) {
-+		pll_out_khz = priv->lane_min_kbps;
- 		dev_warn(dev, "Warning min phy mbps is used\n");
- 	}
- 
-@@ -299,7 +306,7 @@ static int dsi_get_lane_mbps(void *priv_data, struct display_timing *timings,
- 	idf = 0;
- 	ndiv = 0;
- 	odf = 0;
--	ret = dsi_pll_get_params(dsi, pll_in_khz, pll_out_khz,
-+	ret = dsi_pll_get_params(priv, pll_in_khz, pll_out_khz,
- 				 &idf, &ndiv, &odf);
- 	if (ret) {
- 		dev_err(dev, "Warning dsi_pll_get_params(): bad params\n");
-@@ -310,18 +317,18 @@ static int dsi_get_lane_mbps(void *priv_data, struct display_timing *timings,
- 	pll_out_khz = dsi_pll_get_clkout_khz(pll_in_khz, idf, ndiv, odf);
- 
- 	/* Set the PLL division factors */
--	dsi_update_bits(dsi, DSI_WRPCR,	WRPCR_NDIV | WRPCR_IDF | WRPCR_ODF,
-+	dsi_update_bits(plat->base, DSI_WRPCR, WRPCR_NDIV | WRPCR_IDF | WRPCR_ODF,
- 			(ndiv << 2) | (idf << 11) | ((ffs(odf) - 1) << 16));
- 
- 	/* Compute uix4 & set the bit period in high-speed mode */
- 	val = 4000000 / pll_out_khz;
--	dsi_update_bits(dsi, DSI_WPCR0, WPCR0_UIX4, val);
-+	dsi_update_bits(plat->base, DSI_WPCR0, WPCR0_UIX4, val);
- 
- 	/* Select video mode by resetting DSIM bit */
--	dsi_clear(dsi, DSI_WCFGR, WCFGR_DSIM);
-+	dsi_clear(plat->base, DSI_WCFGR, WCFGR_DSIM);
- 
- 	/* Select the color coding */
--	dsi_update_bits(dsi, DSI_WCFGR, WCFGR_COLMUX,
-+	dsi_update_bits(plat->base, DSI_WCFGR, WCFGR_COLMUX,
- 			dsi_color_from_mipi(format) << 1);
- 
- 	*lane_mbps = pll_out_khz / 1000;
-@@ -340,27 +347,27 @@ static const struct mipi_dsi_phy_ops dsi_stm_phy_ops = {
- 
- static int stm32_dsi_attach(struct udevice *dev)
- {
--	struct stm32_dsi_priv *priv = dev_get_priv(dev);
--	struct mipi_dsi_device *device = &priv->device;
-+	struct stm32_dsi_plat *plat = dev_get_plat(dev);
-+	struct mipi_dsi_device *device = &plat->device;
- 	struct mipi_dsi_panel_plat *mplat;
- 	struct display_timing timings;
- 	int ret;
- 
--	ret = uclass_first_device_err(UCLASS_PANEL, &priv->panel);
-+	ret = uclass_first_device_err(UCLASS_PANEL, &plat->panel);
- 	if (ret) {
- 		dev_err(dev, "panel device error %d\n", ret);
- 		return ret;
- 	}
- 
--	mplat = dev_get_plat(priv->panel);
--	mplat->device = &priv->device;
-+	mplat = dev_get_plat(plat->panel);
-+	mplat->device = &plat->device;
- 	device->lanes = mplat->lanes;
- 	device->format = mplat->format;
- 	device->mode_flags = mplat->mode_flags;
- 
--	ret = panel_get_display_timing(priv->panel, &timings);
-+	ret = panel_get_display_timing(plat->panel, &timings);
- 	if (ret) {
--		ret = ofnode_decode_display_timing(dev_ofnode(priv->panel),
-+		ret = ofnode_decode_display_timing(dev_ofnode(plat->panel),
- 						   0, &timings);
- 		if (ret) {
- 			dev_err(dev, "decode display timing error %d\n", ret);
-@@ -368,13 +375,13 @@ static int stm32_dsi_attach(struct udevice *dev)
- 		}
- 	}
- 
--	ret = uclass_get_device(UCLASS_DSI_HOST, 0, &priv->dsi_host);
-+	ret = uclass_get_device(UCLASS_DSI_HOST, 0, &plat->dsi_host);
- 	if (ret) {
- 		dev_err(dev, "No video dsi host detected %d\n", ret);
- 		return ret;
- 	}
- 
--	ret = dsi_host_init(priv->dsi_host, device, &timings, 2,
-+	ret = dsi_host_init(plat->dsi_host, device, &timings, 2,
- 			    &dsi_stm_phy_ops);
- 	if (ret) {
- 		dev_err(dev, "failed to initialize mipi dsi host\n");
-@@ -386,17 +393,17 @@ static int stm32_dsi_attach(struct udevice *dev)
- 
- static int stm32_dsi_set_backlight(struct udevice *dev, int percent)
- {
--	struct stm32_dsi_priv *priv = dev_get_priv(dev);
-+	struct stm32_dsi_plat *plat = dev_get_plat(dev);
- 	int ret;
- 
--	ret = panel_enable_backlight(priv->panel);
-+	ret = panel_enable_backlight(plat->panel);
- 	if (ret) {
- 		dev_err(dev, "panel %s enable backlight error %d\n",
--			priv->panel->name, ret);
-+			plat->panel->name, ret);
- 		return ret;
- 	}
- 
--	ret = dsi_host_enable(priv->dsi_host);
-+	ret = dsi_host_enable(plat->dsi_host);
- 	if (ret) {
- 		dev_err(dev, "failed to enable mipi dsi host\n");
- 		return ret;
-@@ -417,66 +424,71 @@ static int stm32_dsi_bind(struct udevice *dev)
- 	return dm_scan_fdt_dev(dev);
- }
- 
--static int stm32_dsi_probe(struct udevice *dev)
-+static int stm32_dsi_of_to_plat(struct udevice *dev)
- {
--	struct stm32_dsi_priv *priv = dev_get_priv(dev);
--	struct mipi_dsi_device *device = &priv->device;
--	struct reset_ctl rst;
--	struct clk clk;
-+	struct stm32_dsi_plat *plat = dev_get_plat(dev);
-+	struct mipi_dsi_device *device = &plat->device;
- 	int ret;
- 
- 	device->dev = dev;
- 
--	priv->base = dev_read_addr_ptr(dev);
--	if (!priv->base) {
-+	plat->base = dev_read_addr_ptr(dev);
-+	if (!plat->base) {
- 		dev_err(dev, "dsi dt register address error\n");
- 		return -EINVAL;
- 	}
- 
- 	ret =  device_get_supply_regulator(dev, "phy-dsi-supply",
--					   &priv->vdd_reg);
-+					   &plat->vdd_reg);
- 	if (ret && ret != -ENOENT) {
- 		dev_err(dev, "Warning: cannot get phy dsi supply\n");
- 		return -ENODEV;
- 	}
- 
- 	if (ret != -ENOENT) {
--		ret = regulator_set_enable(priv->vdd_reg, true);
-+		ret = regulator_set_enable(plat->vdd_reg, true);
- 		if (ret)
- 			return ret;
- 	}
- 
--	ret = clk_get_by_name(device->dev, "pclk", &clk);
-+	ret = clk_get_by_name(device->dev, "pclk", &plat->pclk);
- 	if (ret) {
- 		dev_err(dev, "peripheral clock get error %d\n", ret);
--		goto err_reg;
-+		return ret;
- 	}
- 
--	ret = clk_enable(&clk);
-+	ret = clk_get_by_name(dev, "ref", &plat->refclk);
-+	if (ret) {
-+		dev_err(dev, "pll reference clock get error %d\n", ret);
-+		return ret;
-+	}
-+
-+	ret = reset_get_by_index(device->dev, 0, &plat->rst);
-+	if (ret)
-+		dev_err(dev, "missing dsi hardware reset\n");
-+
-+	return ret;
-+}
-+
-+static int stm32_dsi_probe(struct udevice *dev)
-+{
-+	struct stm32_dsi_plat *plat = dev_get_plat(dev);
-+	struct stm32_dsi_priv *priv = dev_get_priv(dev);
-+	int ret;
-+
-+	ret = clk_enable(&plat->pclk);
- 	if (ret) {
- 		dev_err(dev, "peripheral clock enable error %d\n", ret);
- 		goto err_reg;
- 	}
- 
--	ret = clk_get_by_name(dev, "ref", &clk);
--	if (ret) {
--		dev_err(dev, "pll reference clock get error %d\n", ret);
--		goto err_clk;
--	}
--
--	priv->pllref_clk = (unsigned int)clk_get_rate(&clk);
--
--	ret = reset_get_by_index(device->dev, 0, &rst);
--	if (ret) {
--		dev_err(dev, "missing dsi hardware reset\n");
--		goto err_clk;
--	}
-+	priv->pllref_clk = (unsigned int)clk_get_rate(&plat->refclk);
- 
- 	/* Reset */
--	reset_deassert(&rst);
-+	reset_deassert(&plat->rst);
- 
- 	/* check hardware version */
--	priv->hw_version = dsi_read(priv, DSI_VERSION) & VERSION;
-+	priv->hw_version = dsi_read(plat->base, DSI_VERSION) & VERSION;
- 	if (priv->hw_version != HWVER_130 &&
- 	    priv->hw_version != HWVER_131) {
- 		dev_err(dev, "DSI version 0x%x not supported\n", priv->hw_version);
-@@ -489,9 +501,9 @@ static int stm32_dsi_probe(struct udevice *dev)
- 
- 	return 0;
- err_clk:
--	clk_disable(&clk);
-+	clk_disable(&plat->pclk);
- err_reg:
--	regulator_set_enable(priv->vdd_reg, false);
-+	regulator_set_enable(plat->vdd_reg, false);
- 
- 	return ret;
- }
-@@ -512,6 +524,8 @@ U_BOOT_DRIVER(stm32_dsi) = {
- 	.of_match			= stm32_dsi_ids,
- 	.bind				= stm32_dsi_bind,
- 	.probe				= stm32_dsi_probe,
-+	.of_to_plat			= stm32_dsi_of_to_plat,
- 	.ops				= &stm32_dsi_ops,
-+	.plat_auto		= sizeof(struct stm32_dsi_plat),
- 	.priv_auto		= sizeof(struct stm32_dsi_priv),
- };
-
+ drivers/gpio/stm32_gpio.c       |  25 ++++++++
+ drivers/gpio/stm32_gpio_priv.h  |  63 ++++++++++++++++--
+ drivers/pinctrl/pinctrl_stm32.c | 137 ++++++++++++++++++++++++++++++++++++----
+ 3 files changed, 207 insertions(+), 18 deletions(-)
 ---
-base-commit: b5213bbfdcb1812be510427857827ee8becb9f8f
-change-id: 20260205-dsi-97ce082cf022
+base-commit: dd65d8a1f02684d72e3fcf9b3efe2ac1768e2098
+change-id: 20260204-upstream_pinctrl_stm32_update-54980f5446fa
 
 Best regards,
 -- 
-Raphael Gallais-Pou <rgallaispou@gmail.com>
+Patrice Chotard <patrice.chotard@foss.st.com>
 
 _______________________________________________
 Uboot-stm32 mailing list

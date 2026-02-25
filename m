@@ -2,111 +2,112 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wByIOzbGnmkuXQQAu9opvQ
+	id eLX5BaHKnmm0XQQAu9opvQ
 	(envelope-from <uboot-stm32-bounces@st-md-mailman.stormreply.com>)
-	for <lists+uboot-stm32@lfdr.de>; Wed, 25 Feb 2026 10:51:51 +0100
+	for <lists+uboot-stm32@lfdr.de>; Wed, 25 Feb 2026 11:10:41 +0100
 X-Original-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 613F0195516
-	for <lists+uboot-stm32@lfdr.de>; Wed, 25 Feb 2026 10:51:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8FCD819587C
+	for <lists+uboot-stm32@lfdr.de>; Wed, 25 Feb 2026 11:10:40 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D7CA5C8F284;
-	Wed, 25 Feb 2026 09:51:49 +0000 (UTC)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazon11012057.outbound.protection.outlook.com [52.101.66.57])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 44672C8F281;
+	Wed, 25 Feb 2026 10:10:40 +0000 (UTC)
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazon11013013.outbound.protection.outlook.com
+ [40.107.162.13])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id DD6E9C8F281
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 64021CFAC40
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 25 Feb 2026 09:51:48 +0000 (UTC)
+ Wed, 25 Feb 2026 10:10:38 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=AQKFoGZ22mMWc34fmk9hbYwPT8x9masRtyz+RAkN+9Cj7ILsmTY6q83c68WabQcKzPQ2mGDR1rzUxeL+iv21lQQOp76wHkuWwJ0dCVyCk0WACwQSQPocuvHQflVFzVBEzTJMdcqtSmvfusBymKkFwDJnrGPEeBHomXbXsgpBjwNTl6odzJyfgDO/NxYMXnhlkCMFWFoyW1sKuaxXFyJqODUwRtDqrh0aM9124OqCUfbafYd226pW/avJ6fk9NjfSQxMphP0DPG1Fb9HDWJQbty0sSD/PGwhLrUF4dDjWtn4FqdG5fDFKp61JtbO2mavYepw0ggk7Bml2PiRHSJvvcA==
+ b=gZhh5LKajqHjFiOZ2zOpzfrTAfuMoVx1qF2qmoJqpALfg3F4hL5HGOww22CHk0zS16PFTDJ0KB/5CoFuV9XFVGaL54lVnkVjZRBhsGLRLJiqdBSCyUDVFOHOCT29UkXLJhyEA16prYQQiHzK78koaM8e0gkhQDNZbohqbnzUsuuviv3wJPVLnZaQ8qr+RJgTbHF0nw5ZqvkR/N1Ufg8aLIqH1scBan6L+XLMDH1YXFBM2RxpTXkgBIX1yB5kKiD++N9EBYhQ79UTmqiJqCUZkuqOXWr9qJ2CF/6uUl7ZJoTMrsC4Qa3dBMCGFYe1HhDdb4cXmbgFQikezDZy/P6Low==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=q8eoyHwT8/TNIRAZNG3Ud+fG/+x+mXsOj/vAnxcSmU4=;
- b=d2VmpTW8uft7B4LzWRfzZVH/tValZlk05yBjq443ctwY0SEBlMC22riqapeMdnRlLMuRxnC1ikrjJpFZk4uawQBue30QtbUeOEA82XBUHeghlHtDk+DNeOmiy8ftmhI7elzX24hH0QokUzjCqmhXG69hoL+gfs5e+IPm+S+14dT9gN6oIVYYkYWCPQ/7RY+Kfj8Ql74OtED1QMRhx5PCXxCnOvDYUAWrNdsq9g9Ll3BpUw/OVr9uF72UkEKMLCuyRpX31FV5kcWq+Ny7Ayk4y0LhALKsHifMUbzE421Z0qyCZD8fVBk74baxHgOdTZGZKWV/C4KlL9lfo3FznYFauw==
+ bh=Ph5xlmnAV04AhiNMSkTvnnpVbdzTXNqPkjTHEsienWg=;
+ b=J5/Yu/42KiVTnhwmpDlt1PfAcsUQ9gvx8n8+/JfLWjx0xQvnSgeTyD1JJJIRVqqG6bApHQBOGGQzpgVjLxDEzihhLtoxE/qquqG2cOzi5EzfZDdToKlpDICMHKeg6J7s54cCbwB7IOAEkwTWXFMqqM4cDkB3lrN7etiN/BrM5Lfd2EEvSizcNvGtv72Zbs9ktzKgXu1CS67MQ9VQV/+HqEI4XHDoSCI9RNwVxojDGUWtdq6Y6hu/0bWVBKpd+wBBs+3HuULoqMWm9+yMvarbXljEhroXOK+byRLTyTfC2mmqF5MfYqP9CR2JP2KN90fjLI/ds0T8fz3dUtwwMJIrqg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.60) smtp.rcpttodomain=amarulasolutions.com
+ 164.130.1.59) smtp.rcpttodomain=amarulasolutions.com
  smtp.mailfrom=foss.st.com; dmarc=fail (p=none sp=none pct=100) action=none
  header.from=foss.st.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=q8eoyHwT8/TNIRAZNG3Ud+fG/+x+mXsOj/vAnxcSmU4=;
- b=oOxtbWYs1JSrq4T3e2a6b5QMOekdsXJdCAafZgEJnY1wuINd9vCnHKTluq4MzzoCCuuSR8kOhyUzvLHoBlTHF0NEmEEru+NDnFD91wipCV7eASvYJ9Db5BwTO3GtJHTwnaeH16HIRY4rUowJTdL4jRZ/viec7ZUibwloqGkO1CShHQvXCG2na8RjOQGuSHrILnW8enjftPCjxjELEMWELT9Bf5ZIc/dciuPBZyf4kPJSuYYxqwSeCzPDdUeGcfsR8O10watOJdEuoSphH5Wli3i9aQn0YlH0lwmrGmRMWTDqY5f+8f5dSvL/ejyQ+F2iKDIxXJ9zNVjGjEiS4AY/0Q==
-Received: from AM8P191CA0002.EURP191.PROD.OUTLOOK.COM (2603:10a6:20b:21a::7)
- by AS2PR10MB7575.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:546::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.23; Wed, 25 Feb
- 2026 09:51:46 +0000
-Received: from AMS0EPF00000191.eurprd05.prod.outlook.com
- (2603:10a6:20b:21a:cafe::82) by AM8P191CA0002.outlook.office365.com
- (2603:10a6:20b:21a::7) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.23 via Frontend Transport; Wed,
- 25 Feb 2026 09:51:41 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
+ bh=Ph5xlmnAV04AhiNMSkTvnnpVbdzTXNqPkjTHEsienWg=;
+ b=hkduh5pMA6uxwaW/lIVZalamX9peBDYeUjswxNJYZ72/NhJiHiGTkH+rZqyevBp50fxarOt9zbtM01YgrjROLEfovuHBJWcnkUQWTGV0Z6Zymlgj57/6HwIY7OqmV82oIJIn1Eu9SWDEAIOt8HMj/MzkFNxG+cVrjbE4X49YgLQy0uqDe7qfw8RFM7oU4c9sjHWDhvBYbN1y9yQSDzP156MDrTgieATxq6hG9+65JbGySo6J2zOMIVOFDd53L4dwgi6dL9vOuNh30BtjECUUfjy4uZZ9i85iWCZBc8A0F4NqQ8ts8qsLouRVi6Z8mWcZyhk2MRfku4YDogCI1vZFwA==
+Received: from DUZPR01CA0057.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:469::6) by BESPR10MB9383.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:b10:e7::7) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.22; Wed, 25 Feb
+ 2026 10:10:33 +0000
+Received: from DB5PEPF00014B9B.eurprd02.prod.outlook.com
+ (2603:10a6:10:469:cafe::f0) by DUZPR01CA0057.outlook.office365.com
+ (2603:10a6:10:469::6) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.24 via Frontend Transport; Wed,
+ 25 Feb 2026 10:10:35 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
  smtp.mailfrom=foss.st.com; dkim=none (message not signed)
  header.d=none;dmarc=fail action=none header.from=foss.st.com;
 Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.60; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.60) by
- AMS0EPF00000191.mail.protection.outlook.com (10.167.16.216) with Microsoft
+ designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.59; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.59) by
+ DB5PEPF00014B9B.mail.protection.outlook.com (10.167.8.168) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9632.12 via Frontend Transport; Wed, 25 Feb 2026 09:51:45 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
- (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9632.12 via Frontend Transport; Wed, 25 Feb 2026 10:10:32 +0000
+Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
+ (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Wed, 25 Feb
- 2026 10:53:52 +0100
+ 2026 11:12:39 +0100
 Received: from [10.48.87.93] (10.48.87.93) by STKDAG1NODE1.st.com
  (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Wed, 25 Feb
- 2026 10:51:44 +0100
-Message-ID: <bc144e1f-deb6-4f38-b730-6923bcc6ad18@foss.st.com>
-Date: Wed, 25 Feb 2026 10:51:44 +0100
+ 2026 11:09:52 +0100
+Message-ID: <278654f3-b24e-4c2b-8144-220c4a92355e@foss.st.com>
+Date: Wed, 25 Feb 2026 11:09:52 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
  <u-boot@lists.denx.de>
 References: <20260221094252.3103034-1-dario.binacchi@amarulasolutions.com>
- <20260221094252.3103034-6-dario.binacchi@amarulasolutions.com>
+ <20260221094252.3103034-7-dario.binacchi@amarulasolutions.com>
 Content-Language: en-US
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20260221094252.3103034-6-dario.binacchi@amarulasolutions.com>
+In-Reply-To: <20260221094252.3103034-7-dario.binacchi@amarulasolutions.com>
 X-Originating-IP: [10.48.87.93]
 X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
  (10.75.128.132)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AMS0EPF00000191:EE_|AS2PR10MB7575:EE_
-X-MS-Office365-Filtering-Correlation-Id: 45b1a72f-8b6a-4335-f617-08de74537cb7
+X-MS-TrafficTypeDiagnostic: DB5PEPF00014B9B:EE_|BESPR10MB9383:EE_
+X-MS-Office365-Filtering-Correlation-Id: a0d2e55b-accc-4570-66a5-08de74561cab
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|376014|1800799024|82310400026|7053199007; 
-X-Microsoft-Antispam-Message-Info: /2Gtyno/doIjK9A7BHJTcf1J47blUgCT1yuTqhtP+EoBf+4b9eShCVLECDmkTZ4HMIkLppdySG2tfHqN8JM2/JCltNzRTJOiVMq6X+XOCGxun3YuroFOTvpfAdOl06e2EDZxg4/4A/quViM8fa3S4cxo88/Di+wPAbxIiykEca+oQNZEljdutssi5vM6pH+sX9WWUAHCRAMKckm6fy8Q4qsOdx5SO4Ku/ahtVseCrKsN8mqhpJGKh0D50mqPXyXhOjCtPzInJtoVrd8gtzFZzENTEZ9rJjbV4GkS92YqvknPI5DveKw1A5v0QZzi9rj/TOCCkZaK8J4UbfSmvQ4dBGAH21djB2H5Ks76LHvQJgvqBhshZAXzQeluG4Ajw8lOExLUMl7JPb6ycIx9FskXPl1em8RdYooXqKXbOor/PF/xLNlB6JDL+08oKshf3mXdWD5Cprxc27wkA7+6a0A8HjyRP6dHym/p+T9Op/XQon77QM+jzTWSRUP6WcQPdzzjphPOcjEYM/ReMzm9VmHiuTj6I3tVZzUgVkd3Gkef2vwmjFBWaIhMz0Z4lbwv4TZRA9IxVcBfxzYyvpQTiFUNB2CHP2l6biTHOvvQaoUXhCOMGI/mivI25OcnSQKljQif01SQ0Jibatb5VWeUhyjc6rmPzaaCTw0o3WlALhNE01ir8he8U+QPqc30oEwSNh+aI8TKHIxZtes0d48HsCQ98VWworoXjZWA0EYKk2KDaML/zmpX0zIR75zHRqZDp0sZDlGQbV8vZroS+wY7B9CjtlqAggnaU2qMMeFfrcxlt6AemIjquSS7BqoXoXZF6wq7y/p5lJh/+5GBeGulipV8ig==
-X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
+ ARA:13230040|1800799024|376014|36860700013|82310400026|7053199007; 
+X-Microsoft-Antispam-Message-Info: OJD+KS1jH5jXnD6pMb+NSQJT08/cETkIOml2RV5kLdc7n9pjhNr8i+kYx4mfj41SkOrQicqGK+Acu9WC6w38Gx2eXdrCD89pTYQiHMz7sDfi3hOGUU5bN2uyRDM9BjNiCF9Gr3jg7zlR4ijloNN44dOtrwu0FWNEVXvZeCbydtCdX7/OL/G+g/J7weLwXfs//sONWMoWqRomet0RiUXlKX7j4nFFJoo1YUCOvygLMSRGGf9KeT7dWhsVd2T/aSbBbKBR85VHawsWJfZXrlNxjP6brMZu6aDEZKd4syKVKmHZ5vO3mfMbF26Xmut9/qlSIK2GIzW9piKDzH3Fuel9f6/dm0bbcWFQ/uLleEZlSKuaytSdnPYDHVQQVx+VN63LKx25vwp6Abn8KsTpOY0qc9oLuMYUG07O0WARyj6C3uGKVCeJM+zIqOupn2pZZwkbOTBMhA7ftWDi49T9H4Ei56k6rkdvZuA/GU6lAxCSPBMs51Ksl7zM9FBsYy0k2i44HetoNNBJ06ddaf1p9katnH5MnyTT/Zu5BzvJ1LIJwrN5MAokftoAjePH6Voj/aqlyyNyXTHAgKcN2N3zK0z6vRoLNNafKwwTRhcSF21LT5SaeWaR+Z2IPJSmRnI/LZy8GCAY6M/zQLKkZaqYNDasc4X856VFO6BqJYyIj3qqnOITHLcpHXEfOUlbB4O+MoFqjgE4dQ4agPJpVLKezmXlhbd65wCkKTJZ7mTIzNW0dvC9g2M9fcfqRKff9eyaQ//6l749qMCIw8Wsty7HgFQ+tjZ+/zXBKr474UYIYT59VlskqxeT0rC5v61ZMS5DXHmXlh0qgktFqFryC4TycuoNHQ==
+X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(376014)(1800799024)(82310400026)(7053199007);
+ SFS:(13230040)(1800799024)(376014)(36860700013)(82310400026)(7053199007);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: FbxiRa6hV2b8Qg+bD50qcRrI2tl4suuyLI0IpM2X5NODIetFbmshbqAGhKhE/ighUdeOvPv1T35FjmoYdkB/EpW+ZTNjJcJxJo+vli+IlzhLty7AdAYKMdI/qVQlliNS0oZ9+IAqhr7hQe+as1Bx5n6H7MloWcPhqQcBys43U29rySgTyMLVcssrJKybOjsptjrnv05hU1UDrvXl59JKVQmFIQJXZtr6V1lSRxPsWBPlHt6783/XSScX/JzCvs8EdpAzkDH/U9qfDuh8hXbyfRQIgqekjMAuvo2/Uj0xlgXeAh0l7UFQ9xvzUGqnZv0RQRXp88413eOQouCDWCXIWDcjDKxX7SFniLa8TxTfVLkkuzaqp7KDjPYZd7DKrACJY7i4hNYWyZqJnFZSArZ9ywSoV/821qrQxXwWcUdgjeN+JnanXH1DfzKD5XyqVln2
+X-MS-Exchange-AntiSpam-MessageData-0: 2UwWapZ7uYAn7cIX8bn2Z1T/yeOol3NMD4rMsTXa+1TGjGzQ+rPZFpH84kl4ElAL1K+s5wnGcES8EgDKuYu1U+KYX+JWWX6lzo8kp5AKEBIc9MxDkYwOqv4jZV8AD3HsXkL07u/p9VJF3XQ73J8HZoUWtf7xxmzbW4CKWgINdNwDJDTldGsyPOiS6qMoNtYrocV49ejRLkqy9mhqcCI32qQsGHzRJVKUcXxmBzHKyC324yxOJO0XFelBHDbYvUQurRgDECwVXjp+bNvq/SIUgUBNXAmMTdsETF03Od7Pf3GpzGtXukvURKQ/JXVRfStmN/Xh9cL1RsKxAyqcEgpvYXcb3ZzwnxUxyqEqTwm9rZkinDgvS4PXwcP7KuaAdRduosAITnKIe+15EvSikBLbR8VRTeEMjr0EDm6PmrJq6389hFNVclfoLHcl0HWQ9EL+
 X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Feb 2026 09:51:45.5977 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 45b1a72f-8b6a-4335-f617-08de74537cb7
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Feb 2026 10:10:32.9030 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a0d2e55b-accc-4570-66a5-08de74561cab
 X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
  Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: AMS0EPF00000191.eurprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: DB5PEPF00014B9B.eurprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR10MB7575
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BESPR10MB9383
 Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Tom Rini <trini@konsulko.com>, uboot-stm32@st-md-mailman.stormreply.com,
  linux-amarula@amarulasolutions.com, Jagan Teki <jagan@amarulasolutions.com>
-Subject: Re: [Uboot-stm32] [PATCH v2 5/8] spi: stm32: clean up buffer length
-	assignment
+Subject: Re: [Uboot-stm32] [PATCH v2 6/8] spi: stm32: add support for
+	bits-per-word setting
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -134,7 +135,7 @@ X-Spamd-Result: default: False [2.89 / 15.00];
 	DMARC_POLICY_SOFTFAIL(0.10)[foss.st.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[st.com:email,stm-ict-prod-mailman-01.stormreply.prv:helo,st-md-mailman.stormreply.com:rdns];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[st-md-mailman.stormreply.com:rdns,stm-ict-prod-mailman-01.stormreply.prv:helo,stormreply.com:url,stormreply.com:email,foss.st.com:mid];
 	SUSPICIOUS_AUTH_ORIGIN(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_RECIPIENTS(0.00)[m:dario.binacchi@amarulasolutions.com,m:u-boot@lists.denx.de,m:patrick.delaunay@foss.st.com,m:trini@konsulko.com,m:uboot-stm32@st-md-mailman.stormreply.com,m:linux-amarula@amarulasolutions.com,m:jagan@amarulasolutions.com,s:lists@lfdr.de];
@@ -152,49 +153,160 @@ X-Spamd-Result: default: False [2.89 / 15.00];
 	HAS_XOIP(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[uboot-stm32];
-	NEURAL_HAM(-0.00)[-0.808];
+	NEURAL_HAM(-0.00)[-0.804];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	RCPT_COUNT_SEVEN(0.00)[7];
 	RCVD_COUNT_SEVEN(0.00)[7]
-X-Rspamd-Queue-Id: 613F0195516
+X-Rspamd-Queue-Id: 8FCD819587C
 X-Rspamd-Action: no action
 
 
 
 On 2/21/26 10:42, Dario Binacchi wrote:
-> Remove redundant divisions by using the already available xferlen
-> variable for setting the rx/tx buffer lengths.
+> Implement the set_wordlen operation to allow dynamic bus width
+> configuration. This is required for peripherals with non-standard
+> requirements, such as display panels that need 9-bit word transfers
+> during the initialization and setup phase.
 > 
 > Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 > ---
 > 
 > (no changes since v1)
 > 
->  drivers/spi/stm32_spi.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+>  drivers/spi/stm32_spi.c | 62 +++++++++++++++++++++++++++++++++++++----
+>  1 file changed, 57 insertions(+), 5 deletions(-)
 > 
 > diff --git a/drivers/spi/stm32_spi.c b/drivers/spi/stm32_spi.c
-> index a1f31cf653c7..adba97915cd3 100644
+> index adba97915cd3..39ea69c68174 100644
 > --- a/drivers/spi/stm32_spi.c
 > +++ b/drivers/spi/stm32_spi.c
-> @@ -404,8 +404,8 @@ static int stm32_spi_xfer(struct udevice *slave, unsigned int bitlen,
+> @@ -192,6 +192,11 @@ static void stm32_spi_read_rxfifo(struct udevice *bus)
+>  	log_debug("%d bytes left\n", priv->rx_len);
+>  }
 >  
->  	priv->tx_buf = dout;
+> +static bool stm32_spi_is_enabled(void __iomem *base)
+> +{
+> +	return !!(readl(base + STM32_SPI_CR1) & SPI_CR1_SPE);
+> +}
+> +
+
+
+In stm32_spi_stopxfer(), we first check if SPI is enabled, stm32_spi_is_enabled() can be used
+to replace the existing code:
+
+static void stm32_spi_stopxfer(struct udevice *dev)
+{
+	struct stm32_spi_plat *plat = dev_get_plat(dev);
+	void __iomem *base = plat->base;
+	u32 cr1, sr;
+	int ret;
+
+	dev_dbg(dev, "\n");
+
+	cr1 = readl(base + STM32_SPI_CR1);
+
+	if (!(cr1 & SPI_CR1_SPE))
+		return;
+
+>  static int stm32_spi_enable(void __iomem *base)
+>  {
+>  	log_debug("\n");
+> @@ -381,6 +386,44 @@ static int stm32_spi_set_speed(struct udevice *bus, uint hz)
+>  	return 0;
+>  }
+>  
+> +static int _stm32_spi_set_wordlen(struct udevice *bus, unsigned int wordlen)
+> +{
+> +	struct stm32_spi_priv *priv = dev_get_priv(bus);
+> +	struct stm32_spi_plat *plat = dev_get_plat(bus);
+> +	void __iomem *base = plat->base;
+> +	bool spi_enabled;
+> +
+> +	if ((wordlen - 1) < SPI_CFG1_DSIZE_MIN ||
+> +	    (wordlen - 1) > SPI_CFG1_DSIZE) {
+> +		dev_err(bus, "Cannot set wordlen to %u [%d - %d]\n",
+> +			wordlen, SPI_CFG1_DSIZE_MIN + 1,
+> +			SPI_CFG1_DSIZE + 1);
+> +		return -EINVAL;
+> +	}
+> +
+> +	spi_enabled = stm32_spi_is_enabled(plat->base);
+> +	if (spi_enabled)
+> +		stm32_spi_disable(plat->base);
+> +
+> +	dev_dbg(bus, "bits_per_word=%d\n", wordlen);
+> +
+> +	priv->cur_bpw = wordlen;
+> +	clrsetbits_le32(base + STM32_SPI_CFG1, SPI_CFG1_DSIZE,
+> +			priv->cur_bpw - 1);
+> +
+> +	if (spi_enabled)
+> +		stm32_spi_enable(plat->base);
+> +
+> +	return 0;
+> +}
+> +
+> +static int stm32_spi_set_wordlen(struct udevice *slave, unsigned int wordlen)
+> +{
+> +	struct udevice *bus = dev_get_parent(slave);
+> +
+> +	return _stm32_spi_set_wordlen(bus, wordlen);
+> +}
+> +
+>  static int stm32_spi_xfer(struct udevice *slave, unsigned int bitlen,
+>  			  const void *dout, void *din, unsigned long flags)
+>  {
+> @@ -394,11 +437,19 @@ static int stm32_spi_xfer(struct udevice *slave, unsigned int bitlen,
+>  	u32 xferlen;
+>  	u32 mode;
+>  	int xfer_status = 0;
+> +	int nb_words;
+>  
+>  	xferlen = bitlen / 8;
+>  
+> -	if (xferlen <= SPI_CR2_TSIZE)
+> -		writel(xferlen, base + STM32_SPI_CR2);
+> +	if (priv->cur_bpw <= 8)
+> +		nb_words = xferlen;
+> +	else if (priv->cur_bpw <= 16)
+> +		nb_words = DIV_ROUND_UP(xferlen * 8, 16);
+> +	else
+> +		nb_words = DIV_ROUND_UP(xferlen * 8, 32);
+> +
+> +	if (nb_words <= SPI_CR2_TSIZE)
+> +		writel(nb_words, base + STM32_SPI_CR2);
+>  	else
+>  		return -EMSGSIZE;
+>  
+> @@ -406,6 +457,8 @@ static int stm32_spi_xfer(struct udevice *slave, unsigned int bitlen,
 >  	priv->rx_buf = din;
-> -	priv->tx_len = priv->tx_buf ? bitlen / 8 : 0;
-> -	priv->rx_len = priv->rx_buf ? bitlen / 8 : 0;
-> +	priv->tx_len = priv->tx_buf ? xferlen : 0;
-> +	priv->rx_len = priv->rx_buf ? xferlen : 0;
+>  	priv->tx_len = priv->tx_buf ? xferlen : 0;
+>  	priv->rx_len = priv->rx_buf ? xferlen : 0;
+> +	dev_dbg(bus, "bitlen: %d, xferlen: %d, nb_words: %d\n",
+> +		bitlen, xferlen, nb_words);
 >  
 >  	mode = SPI_FULL_DUPLEX;
 >  	if (!priv->tx_buf)
+> @@ -567,9 +620,7 @@ static int stm32_spi_probe(struct udevice *dev)
+>  	priv->fifo_size = stm32_spi_get_fifo_size(dev);
+>  	priv->cur_mode = SPI_FULL_DUPLEX;
+>  	priv->cur_xferlen = 0;
+> -	priv->cur_bpw = SPI_DEFAULT_WORDLEN;
+> -	clrsetbits_le32(base + STM32_SPI_CFG1, SPI_CFG1_DSIZE,
+> -			priv->cur_bpw - 1);
+> +	_stm32_spi_set_wordlen(dev, SPI_DEFAULT_WORDLEN);
+>  
+>  	for (i = 0; i < ARRAY_SIZE(plat->cs_gpios); i++) {
+>  		if (!dm_gpio_is_valid(&plat->cs_gpios[i]))
+> @@ -630,6 +681,7 @@ static const struct dm_spi_ops stm32_spi_ops = {
+>  	.release_bus	= stm32_spi_release_bus,
+>  	.set_mode	= stm32_spi_set_mode,
+>  	.set_speed	= stm32_spi_set_speed,
+> +	.set_wordlen    = stm32_spi_set_wordlen,
+>  	.xfer		= stm32_spi_xfer,
+>  };
+>  
 
-Hi Dario
-
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-
-Thanks
-Patrice
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

@@ -2,73 +2,73 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id qLx2EPogn2lcZAQAu9opvQ
+	id 2LUmBfwgn2lcZAQAu9opvQ
 	(envelope-from <uboot-stm32-bounces@st-md-mailman.stormreply.com>)
-	for <lists+uboot-stm32@lfdr.de>; Wed, 25 Feb 2026 17:19:06 +0100
+	for <lists+uboot-stm32@lfdr.de>; Wed, 25 Feb 2026 17:19:08 +0100
 X-Original-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id DE52419A6D6
-	for <lists+uboot-stm32@lfdr.de>; Wed, 25 Feb 2026 17:19:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EA68D19A6DD
+	for <lists+uboot-stm32@lfdr.de>; Wed, 25 Feb 2026 17:19:07 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A750CC87EC3;
-	Wed, 25 Feb 2026 16:19:05 +0000 (UTC)
-Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
- [209.85.128.68])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B2CB7C87EC4;
+	Wed, 25 Feb 2026 16:19:07 +0000 (UTC)
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com
+ [209.85.128.53])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A2A36C87EC1
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 23C56C87EC4
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 25 Feb 2026 16:19:04 +0000 (UTC)
-Received: by mail-wm1-f68.google.com with SMTP id
- 5b1f17b1804b1-48370174e18so38282205e9.2
+ Wed, 25 Feb 2026 16:19:06 +0000 (UTC)
+Received: by mail-wm1-f53.google.com with SMTP id
+ 5b1f17b1804b1-48374014a77so72686715e9.3
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 25 Feb 2026 08:19:04 -0800 (PST)
+ Wed, 25 Feb 2026 08:19:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1772036344; x=1772641144;
+ d=amarulasolutions.com; s=google; t=1772036345; x=1772641145;
  darn=st-md-mailman.stormreply.com; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Pcxa8RuAuQ0nAmPNS8KBumLjBig8XfBZxlRBMDFBXrY=;
- b=gLTw/5MaLTo/hqMjswhmE6XC/mG2ZAFmy9pdiWUHMn9P7ybXkFsN+nM7lvF1q7PXsE
- X1/eQ2HBjnqRSyh40nydk9wbFIAFg+wBEKkYkxD3RwurN1STi0XUTKoNyn7n910ww5PJ
- 8NVVfQdbEv1FMN48HaXIryZvZiEKaxSZGFFdo=
+ bh=GkJhvi1974w4+hMGdr7GktoYxy4wpW/zeqmFApZg+vA=;
+ b=QYy1GHCCbe584ycseMukNN9Yh7vpPJyu6fGTLY7N9ihP0bry1z4l0TnBp2kfvkLo9N
+ tbx3ou9bEdsCvsZMHM2ZshqkYEmcM+1F911ct7zvdqltBXnB73PVx68ffAg5pZp/SL60
+ hyuNGMajUpH9/bY7aXhHu7nZ4R6zU4gFr3uGg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772036344; x=1772641144;
+ d=1e100.net; s=20230601; t=1772036345; x=1772641145;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=Pcxa8RuAuQ0nAmPNS8KBumLjBig8XfBZxlRBMDFBXrY=;
- b=fOcbFhZ7WeXxjHbludAm1d1HNs5CUoV3XxtxAC7qR3a2SxuL/Q7ux+GnUT0wNSRPmv
- MJqLA/0l+x4pTy5rOgIuHcv1GpqGAwHYoEEJj+Nw0H72KbZedtEFGXQhiTYT1B/XgjuT
- dYqH8kgMRXt2Tmw0aP2WzBHcnY1ieIJq/aeF5fhCjExFA9GQpJhZuJKJeVYGjGR4iboq
- tQeJYsWhjDGrehvaOKI9b56Tw5rCk/1SoKuH1pHHNGD6eoOO3Msnb1nDvd68yG904bmn
- KyspZsQ+Jkq/bhXbh4dsvdX1FB//EMdV4F/spO05oqzRQ3yr2Jrlehyi6oRqm6+CQQlY
- AwiQ==
+ bh=GkJhvi1974w4+hMGdr7GktoYxy4wpW/zeqmFApZg+vA=;
+ b=E3EMOc6iSSPZvZhmUvDziTKubcpvVA4XKeGqyEU8/27B7+Yc0yW4/SnktJqOa2oSCS
+ Pk8kLMqcqiyyci6KzKJVP5Dz6vGFv9MVhbesXnxH4zIHuEFe05A+hMEbJ+mWOesa+aQW
+ 6+ldFMVYDiz1l6J3vZlVUP4D5qblaNg5ggcHL36hhCXVAxIcIL4gpApLLnHVIkj3C2kx
+ aB18CmB143VFCS2AawZB4VstOqXgEklkSzhzzBQRRW5XIgC9nyd+QSzZOH3VjThI8ddQ
+ LNx8/DN5feY/brChTsTfnKc/G/wuRHD/RezIwo9CAkLI8OhZbTxrpGKCvfhfS0gHwU9k
+ p4gg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUZDB7o88pFzGUls94crXlUwVhziAIRvke27HMc4cGVuNTv5vqAwaS7/r/N9GkESWFctAe6WvHilX8qiA==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0YzGFpfSmWLJLTZJ5jv7z7OIwabflsASoGSpflyXHm2UG2mqqCzG
- aJQUjvJsX70of066jlo0vQvORb6Fxwz25KBufHjExL+2WO+Z/45I74NvbgyWbroN2+E=
-X-Gm-Gg: ATEYQzxomtSAB0PSJEukGNnYxbvzkXShInIyXtmvP/zGK4uraxYdbiobX1w12s2+nyB
- hyOpHcKog+QtOyfOiaSyewiDh3HNPweC0+rClAQveMfQsaoijM8oR0XgQ+H8+R4dZiXqxEngWCy
- gYegQ9uDao//DvUW6Gp7gwFiUAmnT3TWUdT4dgU8n0gthehKP93KFy0qL4Ug24r0P+SFtWMJGJ7
- msNB+maeV1zRc8//bEjKLNORghyjTIeQ4GsmrCaDGcwtv4GXRzHWd1j/izO7QOUlPUdmd+rFcWT
- cPLPJxJP6odFw5Wt5qhdOCd+LN1zPwqWHrWNJ2Rgq9tqpkdk/GgySc5+bTQFSNZA/NuBFQSaFjd
- 37TaJ71NGMCHguGw1So3J6dtGHZuFz2PPFWcH5wsSmiid+9LIe6ILtQ+m+L9dSPjtoPG5bTtweS
- rmLRDEQIulo17m22Kj7SkzHhVbaKk0tP159HerTIEC7sCHd6eEJW//FYfqfAh5JT2zYr0huN3jH
- g+WwCDkEZ+bZgUumH6Ph6TwPtZTMBfMJKUDdCDT6Mcb1Otg
-X-Received: by 2002:a05:600c:c172:b0:47e:e779:36d with SMTP id
- 5b1f17b1804b1-483c219fcd7mr14401395e9.23.1772036343971; 
- Wed, 25 Feb 2026 08:19:03 -0800 (PST)
+ AJvYcCVt5nH7co8AztfFfDtek+NlpE0oUQSMFB69+GaCKLAKZscwalLYs5eX8hL9Ba/eBoOUAqAf4Kc2agQpRA==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0Yx9ZZn9mK3UUH50sKakeMLMyXbYGoQWXd5X2aSfhYHaU/B/8UqE
+ jQL1srJYLF7idjlt43xWciov37u/miXGr55zWuEctJtKSxnZ3Jea9AMFsLUwCWNqqeI=
+X-Gm-Gg: ATEYQzyv35OYZJ9YHY3c+I9jbcEgCLuGRqyhhb5pAeWp0y6MPWNMQn5nULU2omN7PZB
+ 9t5ouJ5paVSWygIPKQwdlJ53X3chhc04SKrOZZSSizEMzytr4Xseq5+FLrJsUPWwkil3lSAmDGQ
+ 4ap5jyNNfJdCucGBcttgiyWmJ27T3YOFHVnzvWckflNXDpfd6LNHsbqI8qRdWT8WjrI5nxCIf+V
+ uQ9tpyZziet+QeoqKTc0GYkrBnatgEs87edp4sVt+4mTOkTb744Ji1B6+NpWTOk1ufIvSfP5CWi
+ S/yxMh8Lx/I83Jqfpix1KfSFXHMzZRaBXk2VNQZN93bT/X7ZWSthTpnlpYnTBdbnrqJ+oDGKZBt
+ XhDzyjkyoUfxbjelnspLDm6HkDfIXsraOonDdeOgSrQr/FeIbI9Idft/dL+bhX2IfSlqxpj2/yU
+ 16AnyVSTMwtEwP8picib5u8NgmiSNnVlwYWkkKQcu5jOZ0OkteVKThlvS3xi23bz4zfJSm7FAlB
+ OfWX7U/+LjM3Rf1Wa+4BXIyEklaCV7aqNtDF0RTOx+unOKx
+X-Received: by 2002:a05:600c:4f4b:b0:477:a54a:acba with SMTP id
+ 5b1f17b1804b1-483a95e1f34mr292230325e9.17.1772036345446; 
+ Wed, 25 Feb 2026 08:19:05 -0800 (PST)
 Received: from dario-ThinkPad-P14s-Gen-5.amarulasolutions.com ([2.196.43.111])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-483bd6f19f5sm186562265e9.1.2026.02.25.08.19.02
+ 5b1f17b1804b1-483bd6f19f5sm186562265e9.1.2026.02.25.08.19.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Feb 2026 08:19:03 -0800 (PST)
+ Wed, 25 Feb 2026 08:19:05 -0800 (PST)
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: u-boot@lists.denx.de
-Date: Wed, 25 Feb 2026 17:16:56 +0100
-Message-ID: <20260225161851.2475274-6-dario.binacchi@amarulasolutions.com>
+Date: Wed, 25 Feb 2026 17:16:57 +0100
+Message-ID: <20260225161851.2475274-7-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260225161851.2475274-1-dario.binacchi@amarulasolutions.com>
 References: <20260225161851.2475274-1-dario.binacchi@amarulasolutions.com>
@@ -78,8 +78,8 @@ Cc: Tom Rini <trini@konsulko.com>, uboot-stm32@st-md-mailman.stormreply.com,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
  linux-amarula@amarulasolutions.com
-Subject: [Uboot-stm32] [PATCH v3 5/9] spi: stm32: clean up buffer length
-	assignment
+Subject: [Uboot-stm32] [PATCH v3 6/9] spi: stm32: add stm32_spi_is_enabled()
+	helper
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -118,7 +118,7 @@ X-Spamd-Result: default: False [2.89 / 15.00];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	PREVIOUSLY_DELIVERED(0.00)[uboot-stm32@st-md-mailman.stormreply.com];
-	NEURAL_HAM(-0.00)[-0.986];
+	NEURAL_HAM(-0.00)[-0.987];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[dario.binacchi@amarulasolutions.com,uboot-stm32-bounces@st-md-mailman.stormreply.com];
 	DKIM_TRACE(0.00)[amarulasolutions.com:-];
@@ -127,39 +127,52 @@ X-Spamd-Result: default: False [2.89 / 15.00];
 	RCPT_COUNT_SEVEN(0.00)[7];
 	ASN(0.00)[asn:16509, ipnet:52.208.0.0/13, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[st.com:email,stm-ict-prod-mailman-01.stormreply.prv:helo,stormreply.com:url,stormreply.com:email,st-md-mailman.stormreply.com:rdns]
-X-Rspamd-Queue-Id: DE52419A6D6
+	DBL_BLOCKED_OPENRESOLVER(0.00)[st-md-mailman.stormreply.com:rdns,stormreply.com:url,stormreply.com:email,stm-ict-prod-mailman-01.stormreply.prv:helo,amarulasolutions.com:mid,amarulasolutions.com:email]
+X-Rspamd-Queue-Id: EA68D19A6DD
 X-Rspamd-Action: no action
 
-Remove redundant divisions by using the already available xferlen
-variable for setting the rx/tx buffer lengths.
+Add a helper to check the SPE (SPI Enable) bit and replace the
+open-coded bitwise check in stm32_spi_stopxfer() with this helper to
+improve readability and consistency.
+
+This is also a preparatory step for future driver updates that require
+checking the SPI enable state across different code paths.
 
 Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-
 ---
 
-Changes in v3:
-- Add Reviewed-by tag of Patrice Chotard
+(Added in v3)
 
- drivers/spi/stm32_spi.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ drivers/spi/stm32_spi.c | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
 
 diff --git a/drivers/spi/stm32_spi.c b/drivers/spi/stm32_spi.c
-index a1f31cf653c7..adba97915cd3 100644
+index adba97915cd3..70eb8735e03d 100644
 --- a/drivers/spi/stm32_spi.c
 +++ b/drivers/spi/stm32_spi.c
-@@ -404,8 +404,8 @@ static int stm32_spi_xfer(struct udevice *slave, unsigned int bitlen,
+@@ -192,6 +192,11 @@ static void stm32_spi_read_rxfifo(struct udevice *bus)
+ 	log_debug("%d bytes left\n", priv->rx_len);
+ }
  
- 	priv->tx_buf = dout;
- 	priv->rx_buf = din;
--	priv->tx_len = priv->tx_buf ? bitlen / 8 : 0;
--	priv->rx_len = priv->rx_buf ? bitlen / 8 : 0;
-+	priv->tx_len = priv->tx_buf ? xferlen : 0;
-+	priv->rx_len = priv->rx_buf ? xferlen : 0;
++static bool stm32_spi_is_enabled(void __iomem *base)
++{
++	return !!(readl(base + STM32_SPI_CR1) & SPI_CR1_SPE);
++}
++
+ static int stm32_spi_enable(void __iomem *base)
+ {
+ 	log_debug("\n");
+@@ -245,9 +250,7 @@ static void stm32_spi_stopxfer(struct udevice *dev)
  
- 	mode = SPI_FULL_DUPLEX;
- 	if (!priv->tx_buf)
+ 	dev_dbg(dev, "\n");
+ 
+-	cr1 = readl(base + STM32_SPI_CR1);
+-
+-	if (!(cr1 & SPI_CR1_SPE))
++	if (!stm32_spi_is_enabled(base))
+ 		return;
+ 
+ 	/* Wait on EOT or suspend the flow */
 -- 
 2.43.0
 

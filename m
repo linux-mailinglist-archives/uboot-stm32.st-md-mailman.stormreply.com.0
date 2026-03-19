@@ -2,74 +2,74 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sE8+MMQXwWmZQgQAu9opvQ
+	id EMfNCsUXwWmbQgQAu9opvQ
 	(envelope-from <uboot-stm32-bounces@st-md-mailman.stormreply.com>)
-	for <lists+uboot-stm32@lfdr.de>; Mon, 23 Mar 2026 11:36:52 +0100
+	for <lists+uboot-stm32@lfdr.de>; Mon, 23 Mar 2026 11:36:53 +0100
 X-Original-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id A7C5E2F03C1
+	by mail.lfdr.de (Postfix) with ESMTPS id BFCC82F03C3
 	for <lists+uboot-stm32@lfdr.de>; Mon, 23 Mar 2026 11:36:52 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 188F6C8F264;
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 34F8EC8F266;
 	Mon, 23 Mar 2026 10:36:52 +0000 (UTC)
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com
- [209.85.221.51])
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com
+ [209.85.128.45])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id DB563C87EC9
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CA7CAC87EC9
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 19 Mar 2026 20:57:14 +0000 (UTC)
-Received: by mail-wr1-f51.google.com with SMTP id
- ffacd0b85a97d-43b4f48c47cso1060696f8f.0
+ Thu, 19 Mar 2026 20:57:18 +0000 (UTC)
+Received: by mail-wm1-f45.google.com with SMTP id
+ 5b1f17b1804b1-486fb14227cso12326605e9.3
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 19 Mar 2026 13:57:14 -0700 (PDT)
+ Thu, 19 Mar 2026 13:57:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1773953834; x=1774558634;
+ d=linaro.org; s=google; t=1773953838; x=1774558638;
  darn=st-md-mailman.stormreply.com; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=OJvm8hJq5dvTL5t+nuiKKxZ20+5uLhO/dmppj5+JcmU=;
- b=F/ObSq45B2aUh1ZgXoC2wjki4m/J/yfC40SPpqdcKcfPUGAGDzEW+smEhLpVaySvjN
- GbdoIWfAlygClcshnyogISbG+zVFdJ8OK+5lHRo0kKc9OMAYwpGPP4bwQ386cOx968j3
- GabejHKv6SHg1SnW5NB2yb/fv018iYqZggcbULxKeaUI3tyr2bf9YkYAl6w2KZyhDMC/
- Te6ipNTVz0jZnOd9pTJ82FAY9FL4ZM9B49gt6p11u57Lr/HgPQGvy8ONxYixYS9i4233
- vezV1kCTukDWH4+/J+EbtY6oPyTo0CnnDmtyhHsDoFVqqqvLevIBJJYU1NnbHlhQJCeX
- Ofvw==
+ :reply-to; bh=ygNuSeQGX7Q2b/F+EBUD44n+zE24EFeQxx8wjWtK2jE=;
+ b=I/YgaSZYEqnZO70IGxcDgwwyiLSylk0FQGMaTO4JtRQeW49HkG2n1jQEn38RaoLqUm
+ vaRk8Z0ilYk4ATPLJhMl9srcVgjESsitzen8kPFBrSHxL7J5iNJ03p4GJWLhRm3+OHrq
+ wl/XJMLCQFdrGmFx2MijqWn+6PCn7KH+xWruGwpTHSVQIZXjAVaqOc3/OPT1fy2H3rNy
+ G5x9LqSpuZAxkdNYclNJBBFWSlb5HWX7gu7fZbmiuAChxPjnKJISocUKEQjNMK0+NmcY
+ F/iPqmu/BY1XpFMMyNF8YKRMm2jDWUCXEfhHtSWsdpwFxKLPI+Sf3KKuY94VjFOsxJeR
+ 8tHw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773953834; x=1774558634;
+ d=1e100.net; s=20251104; t=1773953838; x=1774558638;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=OJvm8hJq5dvTL5t+nuiKKxZ20+5uLhO/dmppj5+JcmU=;
- b=fjiNf9xYauRWPItrk65lvplddStr2sko3W96o/9zwm0dnDL9Np+BIiu3uTSCBRnLu6
- jwOJ3rrwJl3ZffRFjp4E54tYsAEbOuMgXrr6aYaXrJZe5TYLAs6vHU+udggBWKR7IlXf
- kTyIuCJyX2mJ88OKcAiq6JfuhlhrXOJZY6/S0t6Awwd3Xrybf7kppGkS5zLKUWV7EMUA
- /0dy6ggDKPerxQsbheGjAf34Wl028gQWuXWnQhaR7PgEqj36DqTSZEWwkieCUxVXZajt
- RfvL8fbgs7tl/1Eal02gmJ92RmjQ/7CfFhbdK6hY9v2js4HZczt32sXF8ehB46BDBh+y
- ypug==
+ bh=ygNuSeQGX7Q2b/F+EBUD44n+zE24EFeQxx8wjWtK2jE=;
+ b=SyCXW+JTHNhcH0g8PfjDncAA7gf50Fhf3GSUL9Tvzbi1xdNrVWHNgHDUm9uLqTZbWV
+ u1QmUImVtqK7jt477fOr98IS+5nxbvJRMEoH8ca545yC8LZ+RWlX0SptGhAw1CmmcQmi
+ sYOw1QYAHkrqlFHiHgeyWKKcdh+ibZnYeDQUN0gfEl63TKH6nZS8fc6Yz4gJda1/1d0g
+ E31+J9KgmphoF7dV6TCKI92NOBkh74rsSwcE28VIBB2zmCgcjFdsL2TeG8PMdHAYfwOB
+ kVrSWW+u/dkJ2r6SL4IKejCGhyxZlAFhMKvZ7nBjg4Sr8kmW2tVT5P1hfG8K5D1nZ7im
+ TkkQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWT/9maH9Wdbx3f0bB+KWM97abSyeGUU48UB4vhVYZb6cexhzZmKj7sOAiLj/NHvXjwphla/N9fpRfxyg==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0YxUNRxoDrWifwy3nsoCL0ha6mPZ/bNlezkpA8+PC4jC7bcJzrGB
- D3Ttr9Ia3h2WY9UULMXRyGQiAg+BXZAmRcsJtiIH3OvcZXgyDjnKKPRxGgptE9zFcwk=
-X-Gm-Gg: ATEYQzzjYCGK46++anZqstqWjV+Mz/CbU80dDhUgEHKhm73MryYh8Mc+oQ6505ZAl5j
- FzOUBjjE0pEfffFmFwZA727oGhtWa50vGjTIXXMPUqfUUBXJUt+MbEwEmRvvtxo1s3FrDNcT58l
- LXa7SfYaaRIqubtypN4+DFP49qddgsI/F0i0uPwV6+w4e8hiE2IFEAUevPzazv1uxg+uTr3viZF
- h7m6/TW/TyjW1TWpbN4HuIoEWJDaY4nGz2X6+qFNAy7JDwOI8Npoc1o5focrOVP8XwpP0g1l74E
- p6335A0M2Wpu7CpgEL/jOAJj55aH0co3spfe/1pGauZ23nJQrXgX4OsOk71O+u0aW6xD0kGt06V
- s+zahr6+u62UmQgJ7mevM9+QxGsShs+cL5Mb7wqXysJVj8feMJHUxaYbQipCe1pxemvcDugps2c
- fwmnLKGgdb+Q9JvcxmAQvbrnqWhBfbqYddEV8bauq2N9AzaEMof1KXaR9B5lTUkE2ICzI=
-X-Received: by 2002:a05:6000:22c7:b0:437:745f:a6b8 with SMTP id
- ffacd0b85a97d-43b642432d7mr1437628f8f.9.1773953834211; 
- Thu, 19 Mar 2026 13:57:14 -0700 (PDT)
+ AJvYcCWyRC4zDdR7uATExHdEJ8dBpJZzcPQAUzB81ygtd0IsyZsyfyprdor/gzthY+iNLBqubKFgBiZD0Phy3g==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0YwVhR4B3fYVUjffVfJI1zatICHz09OojNPIh9aW07oJ226It+Vw
+ 6ECYu+1HWX+IEaTUc8djYMFejwInOi0i0Awfkih1XAH92cK52oHMjy8P8z3OvcfAB/o=
+X-Gm-Gg: ATEYQzyTgjnO9d1EQ6b71xxipnGm6HpUJxOy1FxvFCY3nKDGIVD07eEzU4cae/yJVgr
+ Jdelk27qu9L0NosccYhN+O3iqxdjEYqACNwQ9HaKoSa8mAcT9EtX8QPyEz1kwXE4YXdNB80+Xvx
+ aSvUKnSW9WAirnzorY4XwJgApSg9YOko9EgNhLleyfH4+KZc5JSEyYRbvseLUp+ernRt7rBMGKB
+ kzEhLNcKG6tI/Y9WBOnCUekzO44qnfCsq3wwZDdyfa9t1MIrP9d8TjaIE8gFaI77y5awXfR8GC4
+ mq/iDrgMmKsCO+TXQ2CpPnNODjbBow8Fmkh8nrIWWEqM0KAIg1LSTHI45hrj8MLT5GM7kvaSIMP
+ ib89IeEME0EvMEQbe1O3QOqSYPSj56nnBpbqwfYEexzIZunnb9AU1Fi4K+TSlMLqeAGvHQXfdBW
+ tXZ6QwGtfOhcyFPnXoCXD2lT0ER4qiyNhJQmXyvEb3gY+TTjZvnftS+0ngI+cKXTq1DwI=
+X-Received: by 2002:a05:600c:3b07:b0:485:3aa1:a7f1 with SMTP id
+ 5b1f17b1804b1-486fedab4bdmr8055315e9.7.1773953838012; 
+ Thu, 19 Mar 2026 13:57:18 -0700 (PDT)
 Received: from lion.localdomain (p4fc3dd39.dip0.t-ipconnect.de.
  [79.195.221.57]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43b64714e2esm1191396f8f.32.2026.03.19.13.57.10
+ ffacd0b85a97d-43b64714e2esm1191396f8f.32.2026.03.19.13.57.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Mar 2026 13:57:13 -0700 (PDT)
+ Thu, 19 Mar 2026 13:57:17 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-Date: Thu, 19 Mar 2026 21:56:27 +0100
+Date: Thu, 19 Mar 2026 21:56:28 +0100
 MIME-Version: 1.0
-Message-Id: <20260319-casey-ccf-upstream-v1-5-4df2ee2226da@linaro.org>
+Message-Id: <20260319-casey-ccf-upstream-v1-6-4df2ee2226da@linaro.org>
 References: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
 In-Reply-To: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
 To: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>, 
@@ -81,13 +81,13 @@ To: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>,
  uboot-stm32@st-md-mailman.stormreply.com, 
  Sumit Garg <sumit.garg@kernel.org>
 X-Mailer: b4 0.15-dev-47773
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4099;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=11186;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=5jwUMh0k+N1QnC8WW0D/qoE/XYGivWXyZ6pP2y+2UGs=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw9ybwvjA6WOG9Zav4uzHiHZUrt3R5/MXmRHfcuf3j/9
- PjO69qHO0pZGAQ5GGTFFFnETyyzbFp72V5j+4ILMHNYmUCGMHBxCsBEFvEx/I/dz8bzxldfs27O
- qQ2/hFumnf/aclE7+bkQ36TMJw+al9Qx/DPkeqQ52V3YdcNpqzPhCc8VzhsHf3tx5ejPwB4t97m
- e94IB
+ bh=4U4486dk/kYnPVEPw0EBh1G48lAL739YPPX7748xid0=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw9yXw8Qh9ERZdlZ/wUX8sWa3zppmptxa5fHxuczKx41
+ x+rDzbvKGVhEORgkBVTZBE/scyyae1le43tCy7AzGFlAhnCwMUpABM5d4fhf4lG/6fcBe/yLt67
+ tDt/vrZNTcOhG3JsWxReZqs9ePLMIZbhr8RcMS9tt70pfIx9utNa3C065L0cNs9yf2b9vihqGce
+ SjwA=
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-Mailman-Approved-At: Mon, 23 Mar 2026 10:36:50 +0000
@@ -160,8 +160,8 @@ Cc: Peng Fan <peng.fan@nxp.com>, Heiko Stuebner <heiko@sntech.de>,
  Rui Miguel Silva <rui.silva@linaro.org>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Manorit Chawdhry <m-chawdhry@ti.com>
-Subject: [Uboot-stm32] [PATCH RFC 05/40] string: add strdup_const and
-	kstrdup_const
+Subject: [Uboot-stm32] [PATCH RFC 06/40] ofnode: add read_u64_array and
+ count_elems_of_size
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -212,152 +212,343 @@ X-Spamd-Result: default: False [2.89 / 15.00];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[uboot-stm32];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[stm-ict-prod-mailman-01.stormreply.prv:helo,stormreply.com:email,stormreply.com:url,linaro.org:email,linaro.org:mid,st-md-mailman.stormreply.com:rdns]
-X-Rspamd-Queue-Id: A7C5E2F03C1
+	DBL_BLOCKED_OPENRESOLVER(0.00)[stormreply.com:email,stormreply.com:url,st-md-mailman.stormreply.com:rdns,stm-ict-prod-mailman-01.stormreply.prv:helo,linaro.org:email,linaro.org:mid]
+X-Rspamd-Queue-Id: BFCC82F03C3
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Extend Linux compat by adding kstrdup_const(), backed by lib/string.c.
-This leverages U-Boots .rodata section on ARM64 to avoid pointlessly
-duplicating const strings.
-
-This is used by the Linux CCF_FULL port and may be useful elsewhere
-in U-Boot.
+These are similar to their Linux counterparts, adding helpers
+for reading arrays of 64-bit values with of_access and fdtdec
+implementations.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- include/asm-generic/sections.h | 19 +++++++++++++++++++
- include/linux/compat.h         | 13 +++++++++++++
- include/linux/string.h         |  2 ++
- lib/string.c                   | 31 +++++++++++++++++++++++++++++++
- 4 files changed, 65 insertions(+)
+ drivers/core/of_access.c | 52 ++++++++++++++++++++++++++++++++++++++++++++++++
+ drivers/core/ofnode.c    | 48 ++++++++++++++++++++++++++++++++++++++++++++
+ include/dm/of_access.h   | 20 +++++++++++++++++++
+ include/dm/ofnode.h      | 50 ++++++++++++++++++++++++++++++++++++++++++++++
+ include/fdtdec.h         | 16 +++++++++++++++
+ lib/fdtdec.c             | 18 +++++++++++++++++
+ 6 files changed, 204 insertions(+)
 
-diff --git a/include/asm-generic/sections.h b/include/asm-generic/sections.h
-index d59787948fd1..48bd4fa86043 100644
---- a/include/asm-generic/sections.h
-+++ b/include/asm-generic/sections.h
-@@ -8,8 +8,9 @@
- #ifndef _ASM_GENERIC_SECTIONS_H_
- #define _ASM_GENERIC_SECTIONS_H_
- 
- #include <linux/types.h>
-+#include <stdbool.h>
- 
- /* References to section boundaries */
- 
- extern char _text[], _stext[], _etext[];
-@@ -61,8 +62,26 @@ static inline int arch_is_kernel_data(unsigned long addr)
- 	return 0;
- }
- #endif
- 
-+/**
-+ * is_kernel_rodata - checks if the pointer address is located in the
-+ *                    .rodata section
-+ *
-+ * @addr: address to check
-+ *
-+ * Returns: true if the address is located in .rodata, false otherwise.
-+ */
-+static inline bool is_kernel_rodata(unsigned long addr)
-+{
-+#ifdef CONFIG_ARM64
-+	return addr >= (unsigned long)__start_rodata &&
-+	       addr < (unsigned long)__end_rodata;
-+#else
-+	return false;
-+#endif
-+}
-+
- /* U-Boot-specific things begin here */
- 
- /* Start of U-Boot text region */
- extern char __text_start[];
-diff --git a/include/linux/compat.h b/include/linux/compat.h
-index 623814516175..d4ba4d0088a0 100644
---- a/include/linux/compat.h
-+++ b/include/linux/compat.h
-@@ -66,8 +66,21 @@ static inline void vfree(const void *addr)
+diff --git a/drivers/core/of_access.c b/drivers/core/of_access.c
+index b11e36202c15..969492aae37c 100644
+--- a/drivers/core/of_access.c
++++ b/drivers/core/of_access.c
+@@ -597,8 +597,27 @@ int of_read_u64(const struct device_node *np, const char *propname, u64 *outp)
  {
- 	free((void *)addr);
+ 	return of_read_u64_index(np, propname, 0, outp);
+ }
+ 
++int of_read_u64_array(const struct device_node *np, const char *propname,
++		      u64 *out_values, size_t sz)
++{
++	const __be64 *val;
++
++	log_debug("%s: %s: ", __func__, propname);
++	val = of_find_property_value_of_size(np, propname,
++					     sz * sizeof(*out_values));
++
++	if (IS_ERR(val))
++		return PTR_ERR(val);
++
++	log_debug("size %zd\n", sz);
++	while (sz--)
++		*out_values++ = be64_to_cpup(val++);
++
++	return 0;
++}
++
+ int of_property_match_string(const struct device_node *np, const char *propname,
+ 			     const char *string)
+ {
+ 	int len = 0;
+@@ -844,8 +863,41 @@ int of_count_phandle_with_args(const struct device_node *np,
+ 	return of_root_count_phandle_with_args(NULL, np, list_name, cells_name,
+ 					       cell_count);
  }
  
 +/**
-+ * kstrdup_const - conditionally duplicate an existing const string
-+ * @s: the string to duplicate
-+ * @gfp: the GFP mask used in the kmalloc() call when allocating memory
++ * of_property_count_elems_of_size - Count the number of elements in a property
 + *
-+ * Note: Strings allocated by kstrdup_const should be freed by kfree_const and
-+ * must not be passed to krealloc().
++ * @np:		device node from which the property value is to be read.
++ * @propname:	name of the property to be searched.
++ * @elem_size:	size of the individual element
 + *
-+ * Return: source string if it is in .rodata section otherwise
-+ * fallback to kstrdup.
++ * Search for a property in a device node and count the number of elements of
++ * size elem_size in it.
++ *
++ * Return: The number of elements on sucess, -EINVAL if the property does not
++ * exist or its length does not match a multiple of elem_size and -ENODATA if
++ * the property does not have a value.
 + */
-+#define kstrdup_const(s, gfp) strdup_const(s)
++int of_property_count_elems_of_size(const struct device_node *np,
++				const char *propname, int elem_size)
++{
++	const struct property *prop = of_find_property(np, propname, NULL);
 +
- struct kmem_cache { int sz; };
- 
- struct kmem_cache *get_mem(int element_sz);
- #define kmem_cache_create(a, sz, c, d, e)	get_mem(sz)
-diff --git a/include/linux/string.h b/include/linux/string.h
-index d943fcce690c..a8a6cf4af505 100644
---- a/include/linux/string.h
-+++ b/include/linux/string.h
-@@ -103,8 +103,10 @@ size_t strcspn(const char *s, const char *reject);
- 
- #ifndef __HAVE_ARCH_STRDUP
- extern char * strdup(const char *);
- extern char * strndup(const char *, size_t);
-+extern const char *strdup_const(const char *s);
-+extern void kfree_const(const void *x);
- #endif
- #ifndef __HAVE_ARCH_STRSWAB
- extern char * strswab(const char *);
- #endif
-diff --git a/lib/string.c b/lib/string.c
-index d56f88d4a847..302efe048b07 100644
---- a/lib/string.c
-+++ b/lib/string.c
-@@ -378,8 +378,39 @@ char * strndup(const char *s, size_t n)
- 	new[len] = '\0';
- 
- 	return new;
++	if (!prop)
++		return -EINVAL;
++	if (!prop->value)
++		return -ENODATA;
++
++	if (prop->length % elem_size != 0) {
++		pr_err("size of %s in node %pOF is not a multiple of %d\n",
++		       propname, np, elem_size);
++		return -EINVAL;
++	}
++
++	return prop->length / elem_size;
++}
++
+ static void of_alias_add(struct alias_prop *ap, struct device_node *np,
+ 			 int id, const char *stem, int stem_len)
+ {
+ 	ap->np = np;
+diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
+index 3a36b6fdd031..d605c0f7b7c7 100644
+--- a/drivers/core/ofnode.c
++++ b/drivers/core/ofnode.c
+@@ -663,8 +663,56 @@ int ofnode_read_u32_array(ofnode node, const char *propname,
+ 		return ret;
+ 	}
  }
-+
-+/**
-+ * strdup_const - conditionally duplicate an existing const string
-+ * @s: the string to duplicate
-+ *
-+ * Note: Strings allocated by kstrdup_const should be freed by kfree_const and
-+ * must not be passed to krealloc().
-+ *
-+ * Return: source string if it is in .rodata section otherwise
-+ * fallback to kstrdup.
-+ */
-+const char *strdup_const(const char *s)
-+{
-+	if (is_kernel_rodata((unsigned long)s))
-+		return s;
-+
-+	return strdup(s);
-+}
-+
-+/**
-+ * kfree_const - conditionally free memory
-+ * @x: pointer to the memory
-+ *
-+ * Function calls kfree only if @x is not in .rodata section.
-+ */
-+void kfree_const(const void *x)
-+{
-+	if (!is_kernel_rodata((unsigned long)x))
-+		free((void *)x);
-+}
-+
- #endif
  
- #ifndef __HAVE_ARCH_STRSPN
++int ofnode_read_u64_array(ofnode node, const char *propname,
++			  u64 *out_values, size_t sz)
++{
++	assert(ofnode_valid(node));
++	log_debug("%s: %s: ", __func__, propname);
++
++	if (ofnode_is_np(node)) {
++		return of_read_u64_array(ofnode_to_np(node), propname,
++					 out_values, sz);
++	} else {
++		int ret;
++
++		ret = fdtdec_get_long_array(ofnode_to_fdt(node),
++					   ofnode_to_offset(node), propname,
++					   out_values, sz);
++
++		/* get the error right, but space is more important in SPL */
++		if (!IS_ENABLED(CONFIG_XPL_BUILD)) {
++			if (ret == -FDT_ERR_NOTFOUND)
++				return -EINVAL;
++			else if (ret == -FDT_ERR_BADLAYOUT)
++				return -EOVERFLOW;
++		}
++		return ret;
++	}
++}
++
++int ofnode_count_elems_of_size(ofnode node, const char *propname, int elem_size)
++{
++	const char *prop;
++	int len;
++	assert(ofnode_valid(node));
++
++	if (ofnode_is_np(node)) {
++		return of_property_count_elems_of_size(node.np, propname, elem_size);
++	} else {
++		prop = fdt_getprop(ofnode_to_fdt(node), ofnode_to_offset(node), propname, &len);
++		if (!prop)
++			return -ENOENT;
++		if (len % elem_size != 0) {
++			log_debug("size of %s in node %pOF is not a multiple of %d\n",
++			       propname, &node, elem_size);
++			return -EINVAL;
++		}
++		return len / elem_size;
++	}
++}
++
+ #if !CONFIG_IS_ENABLED(DM_INLINE_OFNODE)
+ bool ofnode_is_enabled(ofnode node)
+ {
+ 	if (ofnode_is_np(node)) {
+diff --git a/include/dm/of_access.h b/include/dm/of_access.h
+index 44143a5a3917..fe0de73d7e25 100644
+--- a/include/dm/of_access.h
++++ b/include/dm/of_access.h
+@@ -384,8 +384,25 @@ int of_read_u64(const struct device_node *np, const char *propname, u64 *outp);
+  */
+ int of_read_u32_array(const struct device_node *np, const char *propname,
+ 		      u32 *out_values, size_t sz);
+ 
++/**
++ * of_read_u64_array() - Find and read an array of 64 bit integers
++ *
++ * Search for a property in a device node and read 64-bit value(s) from
++ * it.
++ *
++ * @np:		device node from which the property value is to be read.
++ * @propname:	name of the property to be searched.
++ * @out_values:	pointer to return value, modified only if return value is 0.
++ * @sz:		number of array elements to read
++ * Return:
++ *   0 on success, -EINVAL if the property does not exist, or -EOVERFLOW if
++ *   longer than sz.
++ */
++int of_read_u64_array(const struct device_node *np, const char *propname,
++		      u64 *out_values, size_t sz);
++
  /**
+  * of_property_match_string() - Find string in a list and return index
+  *
+  * This function searches a string list property and returns the index
+@@ -615,8 +632,11 @@ int of_parse_phandle_with_args(const struct device_node *np,
+ int of_count_phandle_with_args(const struct device_node *np,
+ 			       const char *list_name, const char *cells_name,
+ 			       int cells_count);
+ 
++int of_property_count_elems_of_size(const struct device_node *np,
++				const char *propname, int elem_size);
++
+ /**
+  * of_alias_scan() - Scan all properties of the 'aliases' node
+  *
+  * The function scans all the properties of the 'aliases' node and populates
+diff --git a/include/dm/ofnode.h b/include/dm/ofnode.h
+index 120393426dbf..c905e86b2835 100644
+--- a/include/dm/ofnode.h
++++ b/include/dm/ofnode.h
+@@ -374,8 +374,15 @@ static inline oftree oftree_from_np(struct device_node *root)
+ 
+ 	return tree;
+ }
+ 
++/* Dummy put for Linux compat */
++static inline void ofnode_put(ofnode node)
++{
++	if (ofnode_is_np(node))
++		of_node_put(node.np);
++}
++
+ /**
+  * oftree_dispose() - Dispose of an oftree
+  *
+  * This can be used to dispose of a tree that has been created (other than
+@@ -587,8 +594,27 @@ const char *ofnode_read_string(ofnode node, const char *propname);
+  */
+ int ofnode_read_u32_array(ofnode node, const char *propname,
+ 			  u32 *out_values, size_t sz);
+ 
++/**
++ * ofnode_read_u64_array() - Find and read an array of 64 bit integers
++ *
++ * @node:	valid node reference to read property from
++ * @propname:	name of the property to read
++ * @out_values:	pointer to return value, modified only if return value is 0
++ * @sz:		number of array elements to read
++ * Return: 0 on success, -EINVAL if the property does not exist,
++ * -ENODATA if property does not have a value, and -EOVERFLOW if the
++ * property data isn't large enough
++ *
++ * Search for a property in a device node and read 64-bit value(s) from
++ * it.
++ *
++ * The out_values is modified only if a valid u64 value can be decoded.
++ */
++int ofnode_read_u64_array(ofnode node, const char *propname,
++			  u64 *out_values, size_t sz);
++
+ /**
+  * ofnode_read_bool() - read a boolean value from a property
+  *
+  * @node:	valid node reference to read property from
+@@ -651,8 +677,32 @@ static inline ofnode ofnode_next_subnode(ofnode node)
+ 	return offset_to_ofnode(
+ 		fdt_next_subnode(gd->fdt_blob, ofnode_to_offset(node)));
+ }
+ #else
++
++/**
++ * ofnode_count_elems_of_size() - count the number of elements of size @elem_size
++ * in the property @propname.
++ *
++ * @node: ofnode to check
++ * @propname: the name of the property to count
++ * @elem_size: the size of each element
++ *
++ * Returns: the number of elements or -EINVAL if the property size is not a
++ * multiple of elem_size.
++ */
++int ofnode_count_elems_of_size(ofnode node, const char *propname, int elem_size);
++
++static inline int ofnode_count_u32_elems(ofnode node, const char *propname)
++{
++	return ofnode_count_elems_of_size(node, propname, 4);
++}
++
++static inline int ofnode_count_u64_elems(ofnode node, const char *propname)
++{
++	return ofnode_count_elems_of_size(node, propname, 8);
++}
++
+ /**
+  * ofnode_is_enabled() - Checks whether a node is enabled.
+  * This looks for a 'status' property. If this exists, then returns true if
+  * the status is 'okay' and false otherwise. If there is no status property,
+diff --git a/include/fdtdec.h b/include/fdtdec.h
+index d9fcd037ed26..3d199e56b031 100644
+--- a/include/fdtdec.h
++++ b/include/fdtdec.h
+@@ -699,8 +699,24 @@ int fdtdec_lookup_phandle(const void *blob, int node, const char *prop_name);
+  */
+ int fdtdec_get_int_array(const void *blob, int node, const char *prop_name,
+ 		u32 *array, int count);
+ 
++/**
++ * Look up a property in a node and return its contents in a u64
++ * array of given length. The property must have at least enough data for
++ * the array (8*count bytes). It may have more, but this will be ignored.
++ *
++ * @param blob		FDT blob
++ * @param node		node to examine
++ * @param prop_name	name of property to find
++ * @param array		array to fill with data
++ * @param count		number of array elements
++ * Return: 0 if ok, or -FDT_ERR_NOTFOUND if the property is not found,
++ *		or -FDT_ERR_BADLAYOUT if not enough data
++ */
++int fdtdec_get_long_array(const void *blob, int node, const char *prop_name,
++		u64 *array, int count);
++
+ /**
+  * Look up a property in a node and return its contents in an integer
+  * array of given length. The property must exist but may have less data that
+  * expected (4*count bytes). It may have more, but this will be ignored.
+diff --git a/lib/fdtdec.c b/lib/fdtdec.c
+index c38738b48c79..e23e53f58f24 100644
+--- a/lib/fdtdec.c
++++ b/lib/fdtdec.c
+@@ -713,8 +713,26 @@ int fdtdec_get_int_array(const void *blob, int node, const char *prop_name,
+ 	}
+ 	return err;
+ }
+ 
++int fdtdec_get_long_array(const void *blob, int node, const char *prop_name,
++			 u64 *array, int count)
++{
++	const u64 *cell;
++	int err = 0;
++
++	debug("%s: %s\n", __func__, prop_name);
++	cell = get_prop_check_min_len(blob, node, prop_name,
++				      sizeof(u64) * count, &err);
++	if (!err) {
++		int i;
++
++		for (i = 0; i < count; i++)
++			array[i] = fdt64_to_cpu(cell[i]);
++	}
++	return err;
++}
++
+ int fdtdec_get_int_array_count(const void *blob, int node,
+ 			       const char *prop_name, u32 *array, int count)
+ {
+ 	const u32 *cell;
 
 -- 
 2.51.0

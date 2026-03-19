@@ -2,74 +2,74 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id eCtcI8QXwWmZQgQAu9opvQ
+	id 6BhjI8QXwWmcQgQAu9opvQ
 	(envelope-from <uboot-stm32-bounces@st-md-mailman.stormreply.com>)
 	for <lists+uboot-stm32@lfdr.de>; Mon, 23 Mar 2026 11:36:52 +0100
 X-Original-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5DC722F03AE
+	by mail.lfdr.de (Postfix) with ESMTPS id 66FA72F03AF
 	for <lists+uboot-stm32@lfdr.de>; Mon, 23 Mar 2026 11:36:52 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id DB3DDC87ED1;
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E7B3CC87ED4;
 	Mon, 23 Mar 2026 10:36:51 +0000 (UTC)
-Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com
- [209.85.221.54])
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com
+ [209.85.128.52])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A4B8AC87EC9
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7C122C87EC9
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 19 Mar 2026 20:57:02 +0000 (UTC)
-Received: by mail-wr1-f54.google.com with SMTP id
- ffacd0b85a97d-43b49819938so723551f8f.0
+ Thu, 19 Mar 2026 20:57:06 +0000 (UTC)
+Received: by mail-wm1-f52.google.com with SMTP id
+ 5b1f17b1804b1-4852b81c73aso12852045e9.3
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 19 Mar 2026 13:57:02 -0700 (PDT)
+ Thu, 19 Mar 2026 13:57:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1773953822; x=1774558622;
+ d=linaro.org; s=google; t=1773953826; x=1774558626;
  darn=st-md-mailman.stormreply.com; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=CQ+gm0zG3GJxN3n1mzflNTKMTeIaXJtAS2Va848P6kE=;
- b=pkCIz6G3bGir0PVjrq/qxaHsygY/sD2c6nAfdUxmknoRBx1VNNMpUg7u4B7qCdN7uc
- /AvfT6BtlJgU/BuVS1W+mAv9nT7oW7sO8T3I7krpSjepWQA9wIvv53lb/mTqjkbDHxRP
- W/2LcnfB/KQmcjo2kB9caumZSaDSaat6Mhosk13znxsYG0YO5/6Yk0FMGrR3aHEr55+a
- A4RvbMtimgkL8kkCG8ICE+GU0q4MbHurr0X2O5uSByFV/G73Ku3Z57PmtRytRFeBzSfx
- zpKRG8+oZ7UTAr4oEl0Q/+nBBJ4PWnD7k/mrgBLHTOSj0yQd/jbm+kT2q1/+d9LVZ8UM
- Xdvw==
+ :reply-to; bh=28KGNakbB5RYH+xSVqNRph/AVitAGahkTrakR0qSqz4=;
+ b=ZZxQFRcn/j6nibnye5SytD2+0l/I+bCTOHtURokJ8oRA4ddCY8IMt8x8on5wKJygR4
+ xE/58vdYv8l0hmZ7rOhVboMy9T0n3wBaOXvKRStdPGe+enB4J7lm/XNbVaotORNoQyT2
+ c5WCWJJrROPwW5+RlkZJZLkH+vAwOAJNTlBCDC1r2R2zzxrlfN+gq3Cl/6jffcEhxMpG
+ 72orAcPxkDHtgDD0GswWvLAnGOl7iJkD5h5Oss6MmlySEK5t8+QlDXNaIAU5AqQF5Kto
+ D5EGLMQTmQYdrqyfzwJPlpM7UKghjlOBb6uqAuGnKG3yf3z7ySjxP2Tg48LY/zN1Nce5
+ jyhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773953822; x=1774558622;
+ d=1e100.net; s=20251104; t=1773953826; x=1774558626;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=CQ+gm0zG3GJxN3n1mzflNTKMTeIaXJtAS2Va848P6kE=;
- b=HWuAbuz4HfBJrJsXTJi1h/ybzyMvUNtiLIxaSAN36DBwG38pxdYaWcZr5EPFlXyqKq
- Rrg/Wn3PU1tre91Y6kWdZ3yFlJVpQpyfrSw9mSd9RI563FrX2fJabIPeeTqEX0SGjhEj
- EJeid5XhYjQ8kOOwPdJQwgqvMC+xZXcsXTvFxuLWRT68iV662yYox+C5/oelavcVLrwp
- wlF+EbF6dgat49L0jw6qPwBdFWksPJKdTE2W5QD/TQWFv6ZuGfvMwVM/PZQB4c5Puq0I
- SvXGwsJQ9L16XdAqQiqXQznrXxRkXHDET2jWJ2KYmhXS/cFZL9fSqEzxJLx3sdBJdzcG
- nbng==
+ bh=28KGNakbB5RYH+xSVqNRph/AVitAGahkTrakR0qSqz4=;
+ b=dykFOs8Pj6a7QZ3w96Oae5AiJYQfHLOK3bEJHPDPaZpcVSNuELaWzt2csm3h8GZOis
+ UedvKF3lmEZm3P/pa5OL9EnRO2FnQx0StRVr/0tym5d3i0Naw/mARjw2Je0CWRhvAect
+ 89NJkb5F4eB411qhDQwTkCfeuzhzH1gkGsPVBl5c6wiqo47NrETv6581j6bxMxi2qSKE
+ ImAlyFASXe7FlNHKTBovgMx/szRErfcIAkjEFErigxvkRti0dmDCNF09gDOcK+3/Lg79
+ vfy1kSgHwj/G58kUw4WMcwQm1QLxapXVvVz6Le5XaFt8nx6X8LVBMKSDYRTSveU4huws
+ qxLw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU3EJjT+QoMZGzjIFGjWXeGv16Q32XCfFc2EU2xx5teMYKGRCYZHmXtBuyHEoTQi+b6909PSbAPxyKO7A==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0Yzkr0YZrK0ZzStjHuYIdpCkFYh8L03zWJ4lAhLXOERipJcYw8xB
- t20PvDBUiccAECYoSDoTdcxNWP2oP/Qb9cJ9abPCZ9Ss2EQuLwUZrj6Xe1/JYyWW+3M=
-X-Gm-Gg: ATEYQzyQj9DmurbxWFRfm3Yi0mSUS/6yTWscFeBF2MeI9OEsWesdBFXfwnctfTWHm2S
- sYKnR/ZX2uAx12KoqcbuQqStWbgebfzfQZXc5sZVujdbDjgAE8TCcxDd8Rn8seo/HQeklWDp/ql
- Pa/aIKHY9CfunK9FBLGcZZkst0QgvVLZkG3+gguwyMaWn4N/5c8xPPdX78CtSi7GS5lB9yPEpvJ
- xqff0xI6LTlyonYsZ8U5v5Lg+XjDPpkjAE4z5nkEdZgS3cKdHo4JuwAE9S5Hf0c2fl4hFd6/cs7
- CCl0QGtAQGhZCM/NsrjpNNVSPHPthFaEuSOr7wA5A6vabmL8DWq7QGaVn43Ayq5RLnEX5z9aKBy
- mEYRxLXD77YAplVY9FC5ewtU9UQ2NISnUCTCWrc7Dd9fbeMFNtAQLp36wwJijEw3BzqKVvjoueQ
- xk79t7wQeK2lGYhSaTDgRuObd/HjFJCVr1e/W4cx3T7+KMbJ4kdpepEm1Cxu3RRr+4QXk=
-X-Received: by 2002:a05:6000:24c7:b0:439:c799:dbfa with SMTP id
- ffacd0b85a97d-43b6423fb14mr1251715f8f.9.1773953821872; 
- Thu, 19 Mar 2026 13:57:01 -0700 (PDT)
+ AJvYcCU6PFDdSyjHXJhc+Q4RxffnUUyiMV+R/lzdbPkm4RRRCVKEz6XydVyeNLYKOtyn3/YBuk9ujxl4/jdNdg==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0Yz4pQm753dyHmx+wknsRfNV2si5Wtn53aXIg6TuCXgrnrK9C9Yg
+ TCI4aAHAF2ZnErfwyetDAxLYM9GwRcgZU6oTy5tAuTFkr+4J9u965G4FQdYmnQt8bJA=
+X-Gm-Gg: ATEYQzymv5FCmWvcjd+981bHNEkZwC3XW1+wRfVeWRNM5KywB2I28b+L7+y1/0Ai8P/
+ jb5Adpg2FkVS2IzGDnNHpWePyMXgbVrKBoJnenDW2FI7iPm6SCkSqYstvWYq5MqZCzaup0e799U
+ p0+nohTcMu2qXlK8xpu9oj7ng191U1axY8br/jGiWBycDG6CVuzCrkQk36Ubv6/s/Q5YjQ3dwyp
+ TqRENtiqsk4Kg4YFcUWfXXY/wZZ6AhnJRry86tyo7GpgGZGoBG7GFn9MODDJ2cvnDJfH9a3VIiC
+ vdTCngtjskNWryzfi8BLKCA/mV86dMpjXPcxQyhOR23C/JjPTbiJFzgkiIS6YpwqB87WRGnucRB
+ 89dN0/BKJFx23yLqLsMnt+xn1QCFZX+oDiLrZjxJG24BO6Z7N4LbSMRKw4aN3NoECWQc2ZIPODv
+ CI3gWZ2svSHOmRuCloH1kL8fFToFvPfq6pUffY7aSaSrJaqLsOBvtVHuAgiW6uW7w4SRY=
+X-Received: by 2002:a05:600c:c09c:b0:486:fcdf:c065 with SMTP id
+ 5b1f17b1804b1-486ff01caa3mr5557435e9.27.1773953825816; 
+ Thu, 19 Mar 2026 13:57:05 -0700 (PDT)
 Received: from lion.localdomain (p4fc3dd39.dip0.t-ipconnect.de.
  [79.195.221.57]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43b64714e2esm1191396f8f.32.2026.03.19.13.56.58
+ ffacd0b85a97d-43b64714e2esm1191396f8f.32.2026.03.19.13.57.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Mar 2026 13:57:01 -0700 (PDT)
+ Thu, 19 Mar 2026 13:57:05 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-Date: Thu, 19 Mar 2026 21:56:24 +0100
+Date: Thu, 19 Mar 2026 21:56:25 +0100
 MIME-Version: 1.0
-Message-Id: <20260319-casey-ccf-upstream-v1-2-4df2ee2226da@linaro.org>
+Message-Id: <20260319-casey-ccf-upstream-v1-3-4df2ee2226da@linaro.org>
 References: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
 In-Reply-To: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
 To: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>, 
@@ -81,13 +81,13 @@ To: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>,
  uboot-stm32@st-md-mailman.stormreply.com, 
  Sumit Garg <sumit.garg@kernel.org>
 X-Mailer: b4 0.15-dev-47773
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2449;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1729;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=BTSZ88kTLdi5mw8IXVoDVatMv6+okA8GUUaE3nA3lEw=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw9ybwBE+oufnqmZext/b77+xpekfdysrzTr4Qt8Ofae
- +PE7fScjlIWBkEOBlkxRRbxE8ssm9ZettfYvuACzBxWJpAhDFycAjCR99MY/vBeUv/Iv2ORsy2j
- rzjHXHcZ3z6jg1+LTH78mzy9kF/yZBLD/6LM9oU7l3PdD755erX6csmn559+t3/f+kaXQfuwH0u
- m7k4A
+ bh=7/r+622xulBFw7ksZmxxltq0sQqqtV5oui7FCVQq6rg=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw9ybxv7zToc8orPw09/KfrtaquUG7AhVcLrt7a8ivjw
+ an0u8G1HaUsDIIcDLJiiiziJ5ZZNq29bK+xfcEFmDmsTCBDGLg4BWAid5cx/C+oaHlSZfj5S+HL
+ d03ZMa6zO7/Z+s1r5o4W/1j+4K3dN0OG/4GGWoHPfmkdZ0jJzbY8fiWWNV/T//nVzA+WEWerYu9
+ U6AMA
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-Mailman-Approved-At: Mon, 23 Mar 2026 10:36:50 +0000
@@ -160,8 +160,8 @@ Cc: Peng Fan <peng.fan@nxp.com>, Heiko Stuebner <heiko@sntech.de>,
  Rui Miguel Silva <rui.silva@linaro.org>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Manorit Chawdhry <m-chawdhry@ti.com>
-Subject: [Uboot-stm32] [PATCH RFC 02/40] common: add an option to skip DM
-	pre-relocation
+Subject: [Uboot-stm32] [PATCH RFC 03/40] serial: msm-geni: allow invalid
+	clock
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -212,80 +212,68 @@ X-Spamd-Result: default: False [2.89 / 15.00];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[uboot-stm32];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,linaro.org:mid,stm-ict-prod-mailman-01.stormreply.prv:helo,stormreply.com:email,stormreply.com:url,st-md-mailman.stormreply.com:rdns]
-X-Rspamd-Queue-Id: 5DC722F03AE
+	DBL_BLOCKED_OPENRESOLVER(0.00)[stormreply.com:email,stormreply.com:url,stm-ict-prod-mailman-01.stormreply.prv:helo,linaro.org:email,linaro.org:mid,st-md-mailman.stormreply.com:rdns]
+X-Rspamd-Queue-Id: 66FA72F03AF
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-For some platforms like Qualcomm, it isn't necessary to perform a full
-DM init and scan prior to relocation, it's also particularly slow since
-it runs with dcache disabled and prior to building the livetree.
-
-The only device which needs to be probed pre-reloc is the serial
-port (otherwise U-Boot will panic), however this can be found through
-/chosen/stdout-path.
-
-Therefore we can avoid scanning the entire FDT and binding devices,
-instead just binding the serial port and clock driver on-demand.
-
-This decreases the total time from power on to reaching the interactive
-U-Boot shell be about 50% (from ~2.8s to 1.8s).
+Pre-relocation we probably won't have a clock but it's usually
+been enabled for us already, or worst case we will enable it after
+relocation.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- Kconfig          | 12 ++++++++++++
- common/board_f.c | 11 ++++++++++-
- 2 files changed, 22 insertions(+), 1 deletion(-)
+ drivers/serial/serial_msm_geni.c | 15 +++++----------
+ 1 file changed, 5 insertions(+), 10 deletions(-)
 
-diff --git a/Kconfig b/Kconfig
-index ce25ea24a60f..2f7677f47f16 100644
---- a/Kconfig
-+++ b/Kconfig
-@@ -473,8 +473,20 @@ config SKIP_RELOCATE
- 	help
- 	  Skips relocation of U-Boot allowing for systems that have extremely
- 	  limited RAM to run U-Boot.
+diff --git a/drivers/serial/serial_msm_geni.c b/drivers/serial/serial_msm_geni.c
+index bb5a2cb4d2cd..c37255f57d05 100644
+--- a/drivers/serial/serial_msm_geni.c
++++ b/drivers/serial/serial_msm_geni.c
+@@ -211,9 +211,9 @@ static int msm_serial_setbrg(struct udevice *dev, int baud)
+ 	}
+ 	ret = clk_set_rate(priv->se, clk_rate);
+ 	if (ret < 0) {
+ 		pr_err("%s: Couldn't set clock rate: %d\n", __func__, ret);
+-		return ret;
++		return 0;
+ 	}
+ 	geni_serial_baud(priv->base, clk_div, baud);
  
-+config SKIP_EARLY_DM
-+	bool "Skips initialising device model pre-relocation"
-+	help
-+	  Enable this option to skip scanning and probing devices prior to
-+	  U-Boot relocation (during board_f). Unless console support is disabled
-+	  a serial port is still required, however this can be found through
-+	  /chosen/stdout-path in FDT. If the serial port relies on other devices
-+	  like clocks these will also be bound and probed on demand.
-+
-+	  This can speed up time to interactive console by about 50%, particularly
-+	  when combined with OF_LIVE.
-+
- endif # EXPERT
+ 	return 0;
+@@ -516,15 +516,14 @@ static int msm_serial_probe(struct udevice *dev)
+ 	int ret;
+ 	u32 proto;
+ 	struct clk *clk;
  
- config PHYS_64BIT
- 	bool "64bit physical address support"
-diff --git a/common/board_f.c b/common/board_f.c
-index df2b0dc899bf..2713438cc18f 100644
---- a/common/board_f.c
-+++ b/common/board_f.c
-@@ -813,9 +813,18 @@ static int initf_dm(void)
- 	if (!CONFIG_IS_ENABLED(SYS_MALLOC_F))
- 		return 0;
+-	clk = devm_clk_get(dev, NULL);
+-	if (IS_ERR(clk))
+-		return PTR_ERR(clk);
+-	priv->se = clk;
++	clk = devm_clk_get_optional(dev, NULL);
++	if (!IS_ERR(clk))
++		priv->se = clk;
  
- 	bootstage_start(BOOTSTAGE_ID_ACCUM_DM_F, "dm_f");
--	ret = dm_init_and_scan(true);
-+
-+	/*
-+	 * If SKIP_EARLY_DM is set then we just create an empty device
-+	 * model, the serial port will still be bound later through
-+	 * serial_find_console_or_panic() via /chosen/stdout-path
-+	 */
-+	if (!CONFIG_IS_ENABLED(SKIP_EARLY_DM))
-+		ret = dm_init_and_scan(true);
-+	else
-+		ret = dm_init(false);
- 	if (ret)
+ 	/* Try enable clock */
+-	ret = clk_enable(clk);
++	clk_enable(clk);
+ 
+ 	/* Check if firmware loading is needed (BT UART) */
+ 	proto = readl(priv->base + GENI_FW_REVISION_RO);
+ 	proto &= FW_REV_PROTOCOL_MSK;
+@@ -546,12 +545,8 @@ static int msm_serial_probe(struct udevice *dev)
+ 	/* Don't actually probe non-debug UARTs */
+ 	if (ofnode_device_is_compatible(dev_ofnode(dev), "qcom,geni-uart"))
+ 		return -ENOENT;
+ 
+-	/* Now handle clock enable return value */
+-	if (ret)
+-		return ret;
+-
+ 	ret = geni_set_oversampling(dev);
+ 	if (ret < 0)
  		return ret;
  
- 	ret = dm_autoprobe();
 
 -- 
 2.51.0

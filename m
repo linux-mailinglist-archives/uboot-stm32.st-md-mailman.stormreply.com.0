@@ -2,74 +2,74 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 0JmCCcUXwWmZQgQAu9opvQ
+	id gCFnAcUXwWmbQgQAu9opvQ
 	(envelope-from <uboot-stm32-bounces@st-md-mailman.stormreply.com>)
 	for <lists+uboot-stm32@lfdr.de>; Mon, 23 Mar 2026 11:36:53 +0100
 X-Original-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id D2D022F03CC
+	by mail.lfdr.de (Postfix) with ESMTPS id D3C3F2F03CD
 	for <lists+uboot-stm32@lfdr.de>; Mon, 23 Mar 2026 11:36:52 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6F022C8F26E;
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8167CC8F270;
 	Mon, 23 Mar 2026 10:36:52 +0000 (UTC)
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com
- [209.85.221.43])
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com
+ [209.85.128.48])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E863CC87EC9
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A2EA7C87ED5
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 19 Mar 2026 20:57:30 +0000 (UTC)
-Received: by mail-wr1-f43.google.com with SMTP id
- ffacd0b85a97d-43b4121c40aso916534f8f.0
+ Thu, 19 Mar 2026 20:57:34 +0000 (UTC)
+Received: by mail-wm1-f48.google.com with SMTP id
+ 5b1f17b1804b1-486fd3a577eso6976495e9.1
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 19 Mar 2026 13:57:30 -0700 (PDT)
+ Thu, 19 Mar 2026 13:57:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1773953850; x=1774558650;
+ d=linaro.org; s=google; t=1773953854; x=1774558654;
  darn=st-md-mailman.stormreply.com; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=JxcERJ3UaiRl1vXO0KA5cEnHfc4xtMelhah9KPin2lI=;
- b=Ohekrg28M4X30AJjAFJA2jdHHLvmOpYTKDs84rrSNFxZFN7K1Hav6d5UTIHYskC+KA
- J7+tehUGY8E79/C6Y0jpCpc+7QJ6SwkIk7zoZPE2/Jm2L9/J0cYHVTEdjHg1XAGsiSCN
- q93PGQfTNt3pUYj72wTTaUjYEHqYAs6+lxiAOt9EB7bFxL85Rlehd2CE80R552MYsfOa
- 47Y1dUlo8k8hMuRNHh/jEYLQQ/PhqZSV4MgR9XTVwBCkbI4VX7is6KcB14mtCS2y0vwn
- DoA2YTjX0ALRRUH4Untyz4Yn1YdWrC2fqVuFvMV9fUkpDhGuQsMawmZmv9IbXQDFQrjx
- L5yQ==
+ :reply-to; bh=ta7Tj8NqXyER4Q7mkz0A0OEdacbDVtJaec0R0jQ3J34=;
+ b=w9bX3+NqMgMgtFs+GFkxKKBaEcK1InHvNEeS7FwUZN0EIXCXaV2Ms8EVGy43iRHcez
+ QAWPIC5t/YDRvuRByfmA+0/CsuV7+7Ww91wWyLIf3b98gWo0O0fpF+NRiUXR1v+RODCZ
+ 8RWpv4O+VzMSM+dW+thRWUvgHgU78X3RaqiI35Y8+gGiVkNvXb2fTpGF0E8xdxMK1D9D
+ OZWG2SWaR5DBWIxvSv/UNfPKdYFKdkC9+9ruK0FZ0SvJSqUt8gUqckkh8ekOhT8hZ/dD
+ ZZsLnwq+6Iqx6OOiFd5zHXislJwhJXNBRk/NwgaKhB9PxHbrTmgeGxOV2xj3NJttTv08
+ BjyA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773953850; x=1774558650;
+ d=1e100.net; s=20251104; t=1773953854; x=1774558654;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=JxcERJ3UaiRl1vXO0KA5cEnHfc4xtMelhah9KPin2lI=;
- b=Q8RWRCWJVsyiU7qQESVq6GXRVIrzLB/64NmY2vSmvj6MCjmxBvkFb2z3w2bsZvP9eG
- TGmrz9p+6//ftSIgXuOkkyvbnwu9UZxwJI088Urv4WHE5IR0vP4+m35f1S3ku3VePV9p
- B4HhQTgmwltPoFbRfPV55z/uIMCcC2QxObnhP0YUnDoB3CIYo3Po6PE3oXPJaaeVvUUJ
- 7H1TFffmA3WZY2YyD09AmH8jJmKD4vXhDtg0YpNN+mqdhxbjW4pIcE849qJhg7/0r+F9
- y1l70rkOvlSt0ZRZsUZzDrhbJcDe4J2XxCQai+LfWvMxGbYH+GqC3uvi0h/GKTejwZqE
- g1pw==
+ bh=ta7Tj8NqXyER4Q7mkz0A0OEdacbDVtJaec0R0jQ3J34=;
+ b=l2s+hXPi2b5x2oKexNjfsnvqlxsvm5DC9c6XCN32AAcbQkCzd3KS7+OH2n4j+DvYgM
+ hzOuHgkCu+vGdbO+NpLPTwh2wlMb5ELzugRq1NKuB4y2jyEeMkdKQALzCvIQSzyyUf+8
+ fSRmi/Dxt7wySAF378h8pB2NREQHKt5eEgx7J7EfXbRxW1eBBCuYP2dNSdb6rK/2+2I4
+ vtpjPOqRbwUXD37e/rra/r4D1EqPKLo1NRygKow9tbnS90v5bWSawhyxP94AUs7H9tzk
+ g6Qu64UkFD4QdyBqzQUDKpnYzIWirc60gE11jxrRFo8Wf524/gG82k4msj0+ObX3a8nP
+ uhag==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW6ffZ7HfAoRZRw7BFjRXVKVjJ0+V+ukpipTWWH4QYo1iTwa3kwzVS1AQQlsDqtwQpqKj4VlNqVjzAKkg==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0YzW4joOstUdY9aLxwoEEv4KlOcliM01fEHUIJGbARosLVOgHNqL
- o6a7sQeVgqcBHltSCg7hwu61ZrLgvseG7daoFkGeCVPH+Z/VtD6yUySj/Q5k/olcjiw=
-X-Gm-Gg: ATEYQzw1ZkQlu1axaqceVdeg/KySk8HskTsoSc8aev2RhIAYfT9SRPFhrkY/nxcsOay
- XXqYGmNFgz13wMeHt8aFGK6SGPIO07ti6sZKMjmnd4ixq3XCwdAfWFMBohCtBW1Emia0MMT7WA9
- al5enGYtDB3Yl+KNVSyw44Rhjz/ywrE7FWqhGDUrw4O3NfFDsT69UiKBVfyw/wa/9rKJmjkhmRE
- as0z4t9flsYxWDJ+xd/vwE/2muoze/seH7DQWZQ8l9aNlZq7un93pdjpbDwi7d3jN7bBtZ27QPD
- iQukPylL/R9Y/5Wzal9ERbrFOnmB+vJPW0G/6B1F6vaRxzFfrotrycCdbasEXA3KsCTIIqOXV3f
- DJXgqQr8fobdNdOF2adk7h4OpOqoSx8WcF7v6kdfIdiunwvZZkEWnPzPL1JP+1sy1q29ruoCxeR
- wMyM0WBAbRJChskXEdhj1LD9/ntk8of4MMBZfwoAWuSEZiXj8vehyCsMeZR1KPwUCothE=
-X-Received: by 2002:a05:6000:2203:b0:43b:45a0:9df8 with SMTP id
- ffacd0b85a97d-43b642781a8mr1365023f8f.35.1773953850186; 
- Thu, 19 Mar 2026 13:57:30 -0700 (PDT)
+ AJvYcCWsITHK2WgPox9EPDrzXHfN406wkHLP6THk91foZ/PXV0+g2ZK5b23wshxoC+XBfi7iM3zd7RAxekcXfw==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0YxVfXSxGcXbqIs6Up80Eue8E52CcX1peM44uRVhtIvtVJreogHO
+ +zXCe9MBC0ENyQiEIfrAnT+7G6fq3Y12MNbZOFMdoCHT2DQtIXC1C01L4HikPALrAog=
+X-Gm-Gg: ATEYQzw4As31oerHK6P1KGp4wjQsPisFEMpFb1hr4lHyepTWjW8uu0uPHXONrA7Hgyi
+ PwYAJz43mrqRssTSKnTIKRmIjLSqV23cL7mZPmk5x2ZS9h8mEPDNA9WAi8Vu7yPbzvL9nWyA9mQ
+ 0tdHOl6HIHqn8yl8C7IAVbM1mjo7jpM1emYTEbxYcTkGxQrTz5bg4cSsu8h7PPyDqqWxKLEU/8H
+ LHszo14G/C1oF4++IzhwfoPr4hYOv7MuKLD/3CtIsAehZzgvFQDdmrlqUoPLQ3+2Fb5xN01G6G3
+ qj/2ACifpRc76XEvdi9WtpUAnha+KGmxwQu+j3w65r3cTxTrO+n5JIP7yCpk0rawg4hR41iuAqS
+ NVKi0DuMY66yBsKLIUC4UbuTmNB/3kochlFRg/CHxcgedPGtjIoajw0aSoWR66Lj1YYHhcHUnM1
+ Vf6E2/r5Qn+aukbjj6VVBM+bvGbd4hdl7+9Y0YSkapCrZ1O+kPEo2JOHnLke1hCMymyg8=
+X-Received: by 2002:a05:600c:1d15:b0:485:2ce2:4c75 with SMTP id
+ 5b1f17b1804b1-486febbc648mr7851015e9.1.1773953853998; 
+ Thu, 19 Mar 2026 13:57:33 -0700 (PDT)
 Received: from lion.localdomain (p4fc3dd39.dip0.t-ipconnect.de.
  [79.195.221.57]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43b64714e2esm1191396f8f.32.2026.03.19.13.57.26
+ ffacd0b85a97d-43b64714e2esm1191396f8f.32.2026.03.19.13.57.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Mar 2026 13:57:29 -0700 (PDT)
+ Thu, 19 Mar 2026 13:57:33 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-Date: Thu, 19 Mar 2026 21:56:31 +0100
+Date: Thu, 19 Mar 2026 21:56:32 +0100
 MIME-Version: 1.0
-Message-Id: <20260319-casey-ccf-upstream-v1-9-4df2ee2226da@linaro.org>
+Message-Id: <20260319-casey-ccf-upstream-v1-10-4df2ee2226da@linaro.org>
 References: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
 In-Reply-To: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
 To: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>, 
@@ -81,13 +81,13 @@ To: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>,
  uboot-stm32@st-md-mailman.stormreply.com, 
  Sumit Garg <sumit.garg@kernel.org>
 X-Mailer: b4 0.15-dev-47773
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1165;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=517;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=1W3i+V3HK8nbQuiQS6Y9/UsTMCP1WFM11jOshCSCYko=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw9yXx++tcuZc354bJZ5Pj/dr+zG5dt4w62dlwpuo5rl
- 3bR1RVVHaUsDIIcDLJiiiziJ5ZZNq29bK+xfcEFmDmsTCBDGLg4BWAiu64x/BUvODnfNVK99+/t
- ZkVrppuKq1bcOvvY4k3fqZB59avVZ8Yz/LPNfb2uYPmCtYmlHa5W+y+J/K9Yd2TeicBrX2MXPrx
- SmnMDAA==
+ bh=NdKEp6PPPnqzQwS5HXhBfSnvR7crR5H9OW0VElgSIaM=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw9yXzROgpafHf79v4zv5Bw8Z/S98/5VzOC7rQUPXAvL
+ tp+6te0jlIWBkEOBlkxRRbxE8ssm9ZettfYvuACzBxWJpAhDFycAjCR0w8YGToquDZ/PDqRe45c
+ AKvO4XWncx7y55c7eKxw/XLu2TPus/wM/2M2SzBK1mvPUpByT2089qHwyc2WT2s05rTJMzNrF/+
+ 9FQ0A
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-Mailman-Approved-At: Mon, 23 Mar 2026 10:36:50 +0000
@@ -160,7 +160,7 @@ Cc: Peng Fan <peng.fan@nxp.com>, Heiko Stuebner <heiko@sntech.de>,
  Rui Miguel Silva <rui.silva@linaro.org>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Manorit Chawdhry <m-chawdhry@ti.com>
-Subject: [Uboot-stm32] [PATCH RFC 09/40] compat: add dev_name()
+Subject: [Uboot-stm32] [PATCH RFC 10/40] compat: add linux/regmap.h symlink
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -211,53 +211,28 @@ X-Spamd-Result: default: False [2.89 / 15.00];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[uboot-stm32];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:email,stormreply.com:email,stormreply.com:url,st-md-mailman.stormreply.com:rdns,stm-ict-prod-mailman-01.stormreply.prv:helo,linaro.org:email,linaro.org:mid,osdl.org:email]
-X-Rspamd-Queue-Id: D2D022F03CC
+	DBL_BLOCKED_OPENRESOLVER(0.00)[stormreply.com:email,stormreply.com:url,st-md-mailman.stormreply.com:rdns,linaro.org:email,linaro.org:mid,stm-ict-prod-mailman-01.stormreply.prv:helo]
+X-Rspamd-Queue-Id: D3C3F2F03CD
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-This function just wraps udevice->name.
+Add a symlink to the Linux regmap.h path so that drivers ported from
+Linux don't all need additional changes to include the U-Boot specific
+path.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- include/linux/device.h | 29 +++++++++++++++++++++++++++++
- 1 file changed, 29 insertions(+)
+ include/linux/regmap.h | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/include/linux/device.h b/include/linux/device.h
-new file mode 100644
-index 000000000000..e76635cfde9e
+diff --git a/include/linux/regmap.h b/include/linux/regmap.h
+new file mode 120000
+index 000000000000..8a3780b5cebd
 --- /dev/null
-+++ b/include/linux/device.h
-@@ -0,0 +1,29 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * device.h - generic, centralized driver model
-+ *
-+ * U-Boot: compat header derived from Linux
-+ *
-+ * Copyright (c) 2001-2003 Patrick Mochel <mochel@osdl.org>
-+ * Copyright (c) 2004-2009 Greg Kroah-Hartman <gregkh@suse.de>
-+ * Copyright (c) 2008-2009 Novell Inc.
-+ *
-+ * See Documentation/driver-api/driver-model/ for more information.
-+ */
-+
-+#ifndef _DEVICE_H_
-+#define _DEVICE_H_
-+
-+#include <dm/device.h>
-+
-+/**
-+ * dev_name - Return a device's name.
-+ * @dev: Device with name to get.
-+ * Return: The kobject name of the device, or its initial name if unavailable.
-+ */
-+static inline const char *dev_name(const struct udevice *dev)
-+{
-+	return dev->name;
-+}
-+
-+#endif /* _DEVICE_H_ */
++++ b/include/linux/regmap.h
+@@ -0,0 +1 @@
++../regmap.h
+\ No newline at end of file
 
 -- 
 2.51.0

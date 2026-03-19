@@ -2,74 +2,74 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id yO/vB8UXwWn5QQQAu9opvQ
+	id 0JmCCcUXwWmZQgQAu9opvQ
 	(envelope-from <uboot-stm32-bounces@st-md-mailman.stormreply.com>)
 	for <lists+uboot-stm32@lfdr.de>; Mon, 23 Mar 2026 11:36:53 +0100
 X-Original-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id D44BF2F03CE
+	by mail.lfdr.de (Postfix) with ESMTPS id D2D022F03CC
 	for <lists+uboot-stm32@lfdr.de>; Mon, 23 Mar 2026 11:36:52 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 60CB4C8F26A;
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6F022C8F26E;
 	Mon, 23 Mar 2026 10:36:52 +0000 (UTC)
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com
- [209.85.128.50])
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com
+ [209.85.221.43])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id BF994C87ED5
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E863CC87EC9
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 19 Mar 2026 20:57:26 +0000 (UTC)
-Received: by mail-wm1-f50.google.com with SMTP id
- 5b1f17b1804b1-486fe655187so3154805e9.2
+ Thu, 19 Mar 2026 20:57:30 +0000 (UTC)
+Received: by mail-wr1-f43.google.com with SMTP id
+ ffacd0b85a97d-43b4121c40aso916534f8f.0
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 19 Mar 2026 13:57:26 -0700 (PDT)
+ Thu, 19 Mar 2026 13:57:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1773953846; x=1774558646;
+ d=linaro.org; s=google; t=1773953850; x=1774558650;
  darn=st-md-mailman.stormreply.com; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=LclK/WFnKQsMrtdNvHDrf15plVujXWqfACmvsP31Zb4=;
- b=ZRBMgOJIz3zg7RS8V8vurOXwbDgPUeA0tus7RzIRhKd/mV80LzX1o2SmxVd3loamsc
- mOSeRIxf82wTI0ln9P1eUH/c+EX9DQO8B2uYbCamr39OFmnCP9/IbhqjoBZg2B7LGjL6
- 2B4YHtPYWtYyanIw09nhJBbjyvE2I00k4jkDCJDqHauDQ46zbZ0s4ERIK6FKS1mEUzJk
- gNJzeoVFsQ7y/On//RPSFCC6PYJiv29eevTLqjFoeyE3zf5dmIAI3x/2/d4NNae4jw7D
- pUFty7bImDLC/5IzClPs6TK714JS6tTN63so+siRSmREjZz9JAgLzr4r0wSnOzwJKA9u
- YnJw==
+ :reply-to; bh=JxcERJ3UaiRl1vXO0KA5cEnHfc4xtMelhah9KPin2lI=;
+ b=Ohekrg28M4X30AJjAFJA2jdHHLvmOpYTKDs84rrSNFxZFN7K1Hav6d5UTIHYskC+KA
+ J7+tehUGY8E79/C6Y0jpCpc+7QJ6SwkIk7zoZPE2/Jm2L9/J0cYHVTEdjHg1XAGsiSCN
+ q93PGQfTNt3pUYj72wTTaUjYEHqYAs6+lxiAOt9EB7bFxL85Rlehd2CE80R552MYsfOa
+ 47Y1dUlo8k8hMuRNHh/jEYLQQ/PhqZSV4MgR9XTVwBCkbI4VX7is6KcB14mtCS2y0vwn
+ DoA2YTjX0ALRRUH4Untyz4Yn1YdWrC2fqVuFvMV9fUkpDhGuQsMawmZmv9IbXQDFQrjx
+ L5yQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773953846; x=1774558646;
+ d=1e100.net; s=20251104; t=1773953850; x=1774558650;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=LclK/WFnKQsMrtdNvHDrf15plVujXWqfACmvsP31Zb4=;
- b=Hm77jK/jkmjUQXR2KUHGzCWAnCcMjkjR1b3rkIw2XeHM0UpAQbWzRnq/vSyCAj+BQv
- lyDxh6P6tXKwFy6qZdU/fGmzUQAadcIx7JpJ8CRnkyFzKueQs8wMn+dKPZu15PMzg07R
- Vpz0cLivmnwjydAC33wcris+fzWS61Rx/7Z43PVT557/SJZN3Gp5TKwqOOn5QdYQ294A
- 2QDKaAWKXkms2itG5cI1JQ026F01x79xvPR5GS8zU7iblXlxPo6qYidVw8vtqcH4ayt1
- LmRbSBCF89ikeq2j4vR4b4MZj6Tkzj68w+cTMskMDLymIagUqi4vsVjxQv8cYO8qgdwA
- VJ0g==
+ bh=JxcERJ3UaiRl1vXO0KA5cEnHfc4xtMelhah9KPin2lI=;
+ b=Q8RWRCWJVsyiU7qQESVq6GXRVIrzLB/64NmY2vSmvj6MCjmxBvkFb2z3w2bsZvP9eG
+ TGmrz9p+6//ftSIgXuOkkyvbnwu9UZxwJI088Urv4WHE5IR0vP4+m35f1S3ku3VePV9p
+ B4HhQTgmwltPoFbRfPV55z/uIMCcC2QxObnhP0YUnDoB3CIYo3Po6PE3oXPJaaeVvUUJ
+ 7H1TFffmA3WZY2YyD09AmH8jJmKD4vXhDtg0YpNN+mqdhxbjW4pIcE849qJhg7/0r+F9
+ y1l70rkOvlSt0ZRZsUZzDrhbJcDe4J2XxCQai+LfWvMxGbYH+GqC3uvi0h/GKTejwZqE
+ g1pw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVGgkyIIxmjgFxx+5nmQub7pBZDzrzgSiAkKI84/yBCTAKvgEGQkfa65NKfCv/9LdguBFkHuEqomZjhow==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0Ywwlo8b1c7PiImGt6Spdce+dRj2AWE38QkL+MG+85gzTk6m+6vf
- zNu+f35UrCWv+Kl4cWbRpvJkX/oEdZh0Q3TrSzsOZCGWDkNtqZDr0Fc1rULWMMzIzQ4=
-X-Gm-Gg: ATEYQzxXid+FQM9lwEkLZCeTTT/xzpxIIl6E5I58qNb/fEfrymRCBqRXi6g/fDIHuIZ
- xpyOx5UzzBfG7QIF+KZFhv0eyAUPpiPX49UwVvuuVucBYbBauOjvcFAcSUMHoqKDSq58tPYMWnA
- reF4D8tfZDK7khBI6L95tm7IFuVZ0Sqh2sHBm4hqGvZigJ8nZoLz3hl273Zzo6QqzoJtCl5VF+P
- Hr+1n0f2Ec0bv1v3o0W93qsg1x91NPJbNTEyHYaBBgFKCV6G4PCFJZDDQV2JSCKEna30BnZdpTB
- e4+rvhPx1yMjWTqQC1CU3RCgjpHQ144VBFZ+M1O/odKZFcepP4dG+EexG/Trp7KFKLvNgWmQnkw
- MRRloq5oPZ5QSQ4lPZ3IH+AMgiK5Kral6IFy9H0Ga3bqUahbn/lzjgNsevKylKb+zFjQtQvyPRm
- NbvSlu73wL/Ae70B4fj/vBa37tE847F2EGWBU7sd2hvffDDKADgABbTM83FjO1fJKzQ30=
-X-Received: by 2002:a05:600c:810c:b0:485:3e00:9440 with SMTP id
- 5b1f17b1804b1-486fee1af0bmr6999785e9.24.1773953846113; 
- Thu, 19 Mar 2026 13:57:26 -0700 (PDT)
+ AJvYcCW6ffZ7HfAoRZRw7BFjRXVKVjJ0+V+ukpipTWWH4QYo1iTwa3kwzVS1AQQlsDqtwQpqKj4VlNqVjzAKkg==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0YzW4joOstUdY9aLxwoEEv4KlOcliM01fEHUIJGbARosLVOgHNqL
+ o6a7sQeVgqcBHltSCg7hwu61ZrLgvseG7daoFkGeCVPH+Z/VtD6yUySj/Q5k/olcjiw=
+X-Gm-Gg: ATEYQzw1ZkQlu1axaqceVdeg/KySk8HskTsoSc8aev2RhIAYfT9SRPFhrkY/nxcsOay
+ XXqYGmNFgz13wMeHt8aFGK6SGPIO07ti6sZKMjmnd4ixq3XCwdAfWFMBohCtBW1Emia0MMT7WA9
+ al5enGYtDB3Yl+KNVSyw44Rhjz/ywrE7FWqhGDUrw4O3NfFDsT69UiKBVfyw/wa/9rKJmjkhmRE
+ as0z4t9flsYxWDJ+xd/vwE/2muoze/seH7DQWZQ8l9aNlZq7un93pdjpbDwi7d3jN7bBtZ27QPD
+ iQukPylL/R9Y/5Wzal9ERbrFOnmB+vJPW0G/6B1F6vaRxzFfrotrycCdbasEXA3KsCTIIqOXV3f
+ DJXgqQr8fobdNdOF2adk7h4OpOqoSx8WcF7v6kdfIdiunwvZZkEWnPzPL1JP+1sy1q29ruoCxeR
+ wMyM0WBAbRJChskXEdhj1LD9/ntk8of4MMBZfwoAWuSEZiXj8vehyCsMeZR1KPwUCothE=
+X-Received: by 2002:a05:6000:2203:b0:43b:45a0:9df8 with SMTP id
+ ffacd0b85a97d-43b642781a8mr1365023f8f.35.1773953850186; 
+ Thu, 19 Mar 2026 13:57:30 -0700 (PDT)
 Received: from lion.localdomain (p4fc3dd39.dip0.t-ipconnect.de.
  [79.195.221.57]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43b64714e2esm1191396f8f.32.2026.03.19.13.57.22
+ ffacd0b85a97d-43b64714e2esm1191396f8f.32.2026.03.19.13.57.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Mar 2026 13:57:25 -0700 (PDT)
+ Thu, 19 Mar 2026 13:57:29 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-Date: Thu, 19 Mar 2026 21:56:30 +0100
+Date: Thu, 19 Mar 2026 21:56:31 +0100
 MIME-Version: 1.0
-Message-Id: <20260319-casey-ccf-upstream-v1-8-4df2ee2226da@linaro.org>
+Message-Id: <20260319-casey-ccf-upstream-v1-9-4df2ee2226da@linaro.org>
 References: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
 In-Reply-To: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
 To: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>, 
@@ -81,13 +81,13 @@ To: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>,
  uboot-stm32@st-md-mailman.stormreply.com, 
  Sumit Garg <sumit.garg@kernel.org>
 X-Mailer: b4 0.15-dev-47773
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4465;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1165;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=IsUyr94uAbhBQSS9jsTFSHJPICURKHi5YxAKX4Vf8eI=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw9yXy5y5tOcrYem5L3KWG3osXTpDXskYqipYIBGazNl
- 66J/o/oKGVhEORgkBVTZBE/scyyae1le43tCy7AzGFlAhnCwMUpABPxuMnIsJjNYE1YT8rRht/B
- iaabPVzeHzxb8nBHy5roHxz3ItauPsbwV+QhZ1PalOcfmM99MD7zIHuKzKrIe+LcoT92tka6xfm
- 0JgAA
+ bh=1W3i+V3HK8nbQuiQS6Y9/UsTMCP1WFM11jOshCSCYko=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw9yXx++tcuZc354bJZ5Pj/dr+zG5dt4w62dlwpuo5rl
+ 3bR1RVVHaUsDIIcDLJiiiziJ5ZZNq29bK+xfcEFmDmsTCBDGLg4BWAiu64x/BUvODnfNVK99+/t
+ ZkVrppuKq1bcOvvY4k3fqZB59avVZ8Yz/LPNfb2uYPmCtYmlHa5W+y+J/K9Yd2TeicBrX2MXPrx
+ SmnMDAA==
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-Mailman-Approved-At: Mon, 23 Mar 2026 10:36:50 +0000
@@ -160,7 +160,7 @@ Cc: Peng Fan <peng.fan@nxp.com>, Heiko Stuebner <heiko@sntech.de>,
  Rui Miguel Silva <rui.silva@linaro.org>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Manorit Chawdhry <m-chawdhry@ti.com>
-Subject: [Uboot-stm32] [PATCH RFC 08/40] compat: add kref implementation
+Subject: [Uboot-stm32] [PATCH RFC 09/40] compat: add dev_name()
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -211,150 +211,53 @@ X-Spamd-Result: default: False [2.89 / 15.00];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[uboot-stm32];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[stormreply.com:email,stormreply.com:url,st-md-mailman.stormreply.com:rdns,linaro.org:email,linaro.org:mid,kroah.com:email,stm-ict-prod-mailman-01.stormreply.prv:helo,osdl.org:email]
-X-Rspamd-Queue-Id: D44BF2F03CE
+	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:email,stormreply.com:email,stormreply.com:url,st-md-mailman.stormreply.com:rdns,stm-ict-prod-mailman-01.stormreply.prv:helo,linaro.org:email,linaro.org:mid,osdl.org:email]
+X-Rspamd-Queue-Id: D2D022F03CC
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-This is a very basic port of Linux' kref, we don't actually need atomics
-so we just use a simple counter. This is used by CCF to free unused
-clocks.
+This function just wraps udevice->name.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- include/linux/kref.h | 124 +++++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 124 insertions(+)
+ include/linux/device.h | 29 +++++++++++++++++++++++++++++
+ 1 file changed, 29 insertions(+)
 
-diff --git a/include/linux/kref.h b/include/linux/kref.h
+diff --git a/include/linux/device.h b/include/linux/device.h
 new file mode 100644
-index 000000000000..30927047d549
+index 000000000000..e76635cfde9e
 --- /dev/null
-+++ b/include/linux/kref.h
-@@ -0,0 +1,124 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
++++ b/include/linux/device.h
+@@ -0,0 +1,29 @@
++// SPDX-License-Identifier: GPL-2.0
 +/*
-+ * kref.h - library routines for handling generic reference counted objects
++ * device.h - generic, centralized driver model
 + *
-+ * Copyright (C) 2004 Greg Kroah-Hartman <greg@kroah.com>
-+ * Copyright (C) 2004 IBM Corp.
++ * U-Boot: compat header derived from Linux
 + *
-+ * based on kobject.h which was:
-+ * Copyright (C) 2002-2003 Patrick Mochel <mochel@osdl.org>
-+ * Copyright (C) 2002-2003 Open Source Development Labs
++ * Copyright (c) 2001-2003 Patrick Mochel <mochel@osdl.org>
++ * Copyright (c) 2004-2009 Greg Kroah-Hartman <gregkh@suse.de>
++ * Copyright (c) 2008-2009 Novell Inc.
++ *
++ * See Documentation/driver-api/driver-model/ for more information.
 + */
 +
-+#ifndef _KREF_H_
-+#define _KREF_H_
++#ifndef _DEVICE_H_
++#define _DEVICE_H_
 +
-+#include <linux/compat.h>
-+
-+struct kref {
-+	long refcount;
-+};
-+
-+#define KREF_INIT(n)	{ .refcount = REFCOUNT_INIT(n), }
++#include <dm/device.h>
 +
 +/**
-+ * kref_init - initialize object.
-+ * @kref: object in question.
++ * dev_name - Return a device's name.
++ * @dev: Device with name to get.
++ * Return: The kobject name of the device, or its initial name if unavailable.
 + */
-+static inline void kref_init(struct kref *kref)
++static inline const char *dev_name(const struct udevice *dev)
 +{
-+	kref->refcount = 1;
++	return dev->name;
 +}
 +
-+static inline unsigned int kref_read(const struct kref *kref)
-+{
-+	return kref->refcount;
-+}
-+
-+/**
-+ * kref_get - increment refcount for object.
-+ * @kref: object.
-+ */
-+static inline void kref_get(struct kref *kref)
-+{
-+	kref->refcount++;
-+}
-+
-+/**
-+ * kref_put - Decrement refcount for object
-+ * @kref: Object
-+ * @release: Pointer to the function that will clean up the object when the
-+ *	     last reference to the object is released.
-+ *
-+ * Decrement the refcount, and if 0, call @release.  The caller may not
-+ * pass NULL or kfree() as the release function.
-+ *
-+ * Return: 1 if this call removed the object, otherwise return 0.  Beware,
-+ * if this function returns 0, another caller may have removed the object
-+ * by the time this function returns.  The return value is only certain
-+ * if you want to see if the object is definitely released.
-+ */
-+static inline int kref_put(struct kref *kref, void (*release)(struct kref *kref))
-+{
-+	if (--kref->refcount == 0) {
-+		release(kref);
-+		return 1;
-+	}
-+	return 0;
-+}
-+
-+/**
-+ * kref_put_mutex - Decrement refcount for object
-+ * @kref: Object
-+ * @release: Pointer to the function that will clean up the object when the
-+ *	     last reference to the object is released.
-+ * @mutex: Mutex which protects the release function.
-+ *
-+ * This variant of kref_lock() calls the @release function with the @mutex
-+ * held.  The @release function will release the mutex.
-+ */
-+static inline int kref_put_mutex(struct kref *kref,
-+				 void (*release)(struct kref *kref),
-+				 struct mutex *mutex)
-+{
-+	return kref_put(kref, release);
-+}
-+
-+/**
-+ * kref_put_lock - Decrement refcount for object
-+ * @kref: Object
-+ * @release: Pointer to the function that will clean up the object when the
-+ *	     last reference to the object is released.
-+ * @lock: Spinlock which protects the release function.
-+ *
-+ * This variant of kref_lock() calls the @release function with the @lock
-+ * held.  The @release function will release the lock.
-+ */
-+static inline int kref_put_lock(struct kref *kref,
-+				void (*release)(struct kref *kref),
-+				spinlock_t *lock)
-+{
-+	return kref_put(kref, release);
-+}
-+
-+/**
-+ * kref_get_unless_zero - Increment refcount for object unless it is zero.
-+ * @kref: object.
-+ *
-+ * This function is intended to simplify locking around refcounting for
-+ * objects that can be looked up from a lookup structure, and which are
-+ * removed from that lookup structure in the object destructor.
-+ * Operations on such objects require at least a read lock around
-+ * lookup + kref_get, and a write lock around kref_put + remove from lookup
-+ * structure. Furthermore, RCU implementations become extremely tricky.
-+ * With a lookup followed by a kref_get_unless_zero *with return value check*
-+ * locking in the kref_put path can be deferred to the actual removal from
-+ * the lookup structure and RCU lookups become trivial.
-+ *
-+ * Return: non-zero if the increment succeeded. Otherwise return 0.
-+ */
-+static inline int kref_get_unless_zero(struct kref *kref)
-+{
-+	return kref->refcount ? kref->refcount++ : 0;
-+}
-+#endif /* _KREF_H_ */
++#endif /* _DEVICE_H_ */
 
 -- 
 2.51.0

@@ -2,74 +2,74 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sH4dDsUXwWmcQgQAu9opvQ
+	id yEQmDsUXwWmZQgQAu9opvQ
 	(envelope-from <uboot-stm32-bounces@st-md-mailman.stormreply.com>)
 	for <lists+uboot-stm32@lfdr.de>; Mon, 23 Mar 2026 11:36:53 +0100
 X-Original-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0DAC12F03D2
-	for <lists+uboot-stm32@lfdr.de>; Mon, 23 Mar 2026 11:36:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1165C2F03D6
+	for <lists+uboot-stm32@lfdr.de>; Mon, 23 Mar 2026 11:36:53 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9F086C8F279;
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B0952C8F281;
 	Mon, 23 Mar 2026 10:36:52 +0000 (UTC)
-Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com
- [209.85.221.46])
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com
+ [209.85.128.44])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id BFC28C87EC9
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 5FB6BC87EC9
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 19 Mar 2026 20:57:42 +0000 (UTC)
-Received: by mail-wr1-f46.google.com with SMTP id
- ffacd0b85a97d-43b4915161fso1242475f8f.2
+ Thu, 19 Mar 2026 20:57:46 +0000 (UTC)
+Received: by mail-wm1-f44.google.com with SMTP id
+ 5b1f17b1804b1-48334ee0aeaso12015635e9.1
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 19 Mar 2026 13:57:42 -0700 (PDT)
+ Thu, 19 Mar 2026 13:57:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1773953862; x=1774558662;
+ d=linaro.org; s=google; t=1773953866; x=1774558666;
  darn=st-md-mailman.stormreply.com; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=D76RHHt3ck1rSasR55eeHf8+THJxMze9S85PZjvQ1eY=;
- b=PfD4ha3F0sTVjcRHtoJbcY/xL5khcp6a4x+1KNc41MngMwEAKEd44N0/JnOEFhXSUK
- TsTeDlvw1mGG6BE5BJMUaicBUNgG3vi/Ax+Ige6Pb2LAQk4r9Myocxy+UIATR0j1wOmC
- lY9yynIlzfM2f4886U7nd7tpeZMxeawC1001pem+N++WTiOv5dW/Rfo3opWtRc6ogRQm
- PJt4OVo06B0cT/wIk+TkUCBdqIR4wQVC5wwfaL8rXoAJqHe7dzQSXTClq25eawYL3WFo
- O8v68gJnlEwI8r+uRgSoFA82uSSH5h0y2pa/CuGbYNpYtuaI2QVsRg+j1tkeeqbTRpVx
- T8NQ==
+ :reply-to; bh=dZJd8jcJ2QufDdsWwRqWjudJvGT1Zn2bs8g3ffveHCw=;
+ b=bH7EgCNEYn4AWn0YxhhbtIlH1oZ7VZepGxnTzFRw4Rm+B6vHS/d2opx5ZZl9AGPBiE
+ wQxLMiPVj5AA3zyTDVTJG82SMai3v2nmL2QLU8mlOyA+OTl5UJMEIiZaXQKZpZgHa/nY
+ bXgmO3AXKy3kQR80+Z9hIP5fpPx5M8B8TjWq6mJU+FcSHID9J1nyPAdzw67lT60SqRfR
+ wKB7DfaD/YWD2dRTvT6yfezyEkUEd3c8m4DqLeD7L7/nni5k96Lo1PVAyAqHo/FJsYO2
+ kfwupbli1whhZJeTcAtHsLC1IgEtLnwh23pR4fK3ioBqdw8cHh0/GtQGGHtSlrFVTd5A
+ b/Zw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773953862; x=1774558662;
+ d=1e100.net; s=20251104; t=1773953866; x=1774558666;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=D76RHHt3ck1rSasR55eeHf8+THJxMze9S85PZjvQ1eY=;
- b=PN+S1yCnk+HLVvO6F2qjMzuztoWB8ThRkVLJQCwx6oqong6mMSeevqoaI98tRXTrJY
- 2gM0IngBmjhzcjpPxGzp/RQMpELqcw5ymoyQpiGq4Qmdee/ivD2vq9/pPiuwyjrurARX
- nEk1W72IDYHLbfzScMgT8HVZO+ihId/43+6GDOT0NUx4wrqbXhLUyMJozrRY7ScKzYZj
- 3suZCEjBoqXs84djb7W0pTgRARY9mJGK0r03O5sMT6pPEQO2Mv0obeoWCtT3y7r2HLwi
- YG7uu2i99WXIxgJF5s/qRA774mEZCDJSkDeYiVWv2maRLER4WqwMop6wEiSBoZkWOvRt
- YPWQ==
+ bh=dZJd8jcJ2QufDdsWwRqWjudJvGT1Zn2bs8g3ffveHCw=;
+ b=iStD9I2QPESB49omPV61qs+0CJC07MafmR/eXQ8RXJLrPmpkY6BeCqsTXDYNn6q4c4
+ eU1AvU9Wp6N47E/T0Fy7MVZef9JBvwu8o2oJIpK2+Ug27M8WHUULhGYuJviF5S5srv0p
+ Xj9gukbkP2zI5XGoVJIyxxYnkOk0pszMei0kSW2kVZ77KPkVSUbdCyf1SAN4gELZRe4B
+ bXOmF082kgqPnCmQyRpfYnCx4uEizXkf4ztYvl0CV2CegRASnL1CWx+Dv9w0hTi9iDfr
+ XSn7aLWc94O9XuDRIzOzfTLTC9MFwn8qoBo43K4sgAX4A3nS6iAC5Yzd8O92P5tI8S8K
+ 8RfA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVxaA7hLU0dypCApzbKoa/RTgSV/1nlE3QHR6B37r14GJD9dQb/lXtyBi/yy4lfNcf7E+EIqSNDYQNiXQ==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0YxxblugRBi1l+PKBZM2jrbFOCAgVVos9FZQVNSH6zk+9MRFUFca
- jYSCxPZJnrnSFmqRzXgELUseEoLvAHggnhdsWVB0CfnzSwwhdN/6CA/u+z5zjC+3Tng=
-X-Gm-Gg: ATEYQzxFqoDKn+rd7zj5KUU5cROfypvdv5VMlEhdif+pcKufcG71ZhydR5Bn0cp3xrP
- zT0VGS0j++MMTtcCXeHCryFSbRN5iYiaiH5UfbioXAROi8y7zmsbl7NQXUYYNJxOKz2ZZKX2GGV
- gytZo9ck/TzM9INdSjr++rE8kqkZr7wttg8c+IP9N00ithOA3nthAPQXcEm58UHnvLxJtLKAIsT
- aypbDBeMGFv1ml5lE9gIYI6RppjfKqj+ddYXlKMfgaFIaRuBgQ0pTnRtj02pp7uhZWA5HkzlGQ9
- Q4Qz9AqtSPL2Pqu7XsrK6Tq4lAnY9MOob7y4BvsRnHi7SEVkDn5xkFrvu7N0fM1FHKL7yLbKwFy
- SR/ZRX+hHf8W+XEJ+8WURNHvWmd5Ip9V477B5oZ8mLJPxoYEPaSVpSR4K737v0B9GRT+XvYDLOz
- jQ3RzABMTD1cHk7nswfjsmj04UXLu31iF2H/QPzZDpJP7ob8Cpgitg+y1YnWPVILXxp7c=
-X-Received: by 2002:a05:6000:26c3:b0:43b:3d44:662a with SMTP id
- ffacd0b85a97d-43b64233db1mr1315823f8f.3.1773953862112; 
- Thu, 19 Mar 2026 13:57:42 -0700 (PDT)
+ AJvYcCUzdNa/qIkiBtT0GjFggXOrAWuJ0TdBr8c0pOQ5LB4fdp+nAyvb4DJ3gJ5gr976mixxsFtqYMNnsmJK5w==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0YwuS6mSavh/ZDTynwuYw0NeSYjeL9LmQ4ORVtHyNHajnnDh0yJ2
+ jgKrPePVkMDjiRHnO29GgTy1d/vzT/eo6fK+HO4QJ/Fyw1PAsE4DKd/9sHAV7hLdL3M=
+X-Gm-Gg: ATEYQzzs6Q6AB2Or4bhBVPC4g+sYUsd/lYsrkhUNRS743/egUUUAX5/n8n8X5nR913E
+ SLoNMh5lRyLfnPuM4tXNxgVK2HN38NJsuYH3l+su9FbLd7otaRVK0BUBw3sW0GHwbX2CH0j+a4H
+ n8p95+is6XceUQJtZ2Dq/OK2u/NniuaVb8CoWtf2evUpshRdgWFc2s8NkFejrnrzY+AvlOKaW57
+ gfBjW+3zw++X3GFDrlamfZiTUkg8bfnzi4BcU6D5wEmITyDV2zaTQNcOGeD5+dmq6WGbRuvEJzL
+ KLqnxQX28PslL/+7FZ938+YepITHHSFM2tC3F+/n6KUCAz2qUR5Dx7B1f4IFs8q8dnnWC0NI4ba
+ F8V7hlSJ4UQh8K3dK2s4H1416mDeOC+vX0XvTWvuBWGoCGkhSu2orebI4KUq8U4i8JSXM1ha6fn
+ eCq9fVFcDzzvCFf9Rm5AY/LOQ0oJjWXXRzbGwV/bkAIt64mqyxe9PNAAla05duVpOgnwk=
+X-Received: by 2002:a05:600c:3b8c:b0:483:b505:9db7 with SMTP id
+ 5b1f17b1804b1-486ff03f4d3mr9099525e9.32.1773953865712; 
+ Thu, 19 Mar 2026 13:57:45 -0700 (PDT)
 Received: from lion.localdomain (p4fc3dd39.dip0.t-ipconnect.de.
  [79.195.221.57]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43b64714e2esm1191396f8f.32.2026.03.19.13.57.38
+ ffacd0b85a97d-43b64714e2esm1191396f8f.32.2026.03.19.13.57.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Mar 2026 13:57:41 -0700 (PDT)
+ Thu, 19 Mar 2026 13:57:45 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-Date: Thu, 19 Mar 2026 21:56:34 +0100
+Date: Thu, 19 Mar 2026 21:56:35 +0100
 MIME-Version: 1.0
-Message-Id: <20260319-casey-ccf-upstream-v1-12-4df2ee2226da@linaro.org>
+Message-Id: <20260319-casey-ccf-upstream-v1-13-4df2ee2226da@linaro.org>
 References: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
 In-Reply-To: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
 To: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>, 
@@ -81,13 +81,13 @@ To: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>,
  uboot-stm32@st-md-mailman.stormreply.com, 
  Sumit Garg <sumit.garg@kernel.org>
 X-Mailer: b4 0.15-dev-47773
-X-Developer-Signature: v=1; a=openpgp-sha256; l=959;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=850;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=R70v3bfUMa8es6EMn7gwODOUxcvSL29PsRM99C/5PHE=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw9yXx3DRP5WHuv7Ftr6rGGb23/b8P1G5cJ5u5Tj0ktO
- 77hp6FdRykLgyAHg6yYIov4iWWWTWsv22tsX3ABZg4rE8gQBi5OAZgI+11Ghq1tvl6x9z9qqTqs
- v31NV1oz7oVeVqW++Ssbu20K381sghn+h8wuKc33aBCb+179iHaPiYLOSxne+dc33DNpfaK0sD3
- zMgA=
+ bh=w43IAJ/GgxcdhAfepdgBnfs8T9pBTj4C8IelGrdXjr4=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw9yXx3d9WLR28weh6QZiNrfLJjt13W2W77ozGr5ebou
+ VQkvw/uKGVhEORgkBVTZBE/scyyae1le43tCy7AzGFlAhnCwMUpABPxjWX4n1D6qHqu97OLAmw3
+ hYs5j+tKWrozHuyWS3+v/OZC6xf+LQy/mH7bxl3I3+Mufnm/3a9OpbnObXM/sDzdHaQbeSN09ct
+ OfwA=
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-Mailman-Approved-At: Mon, 23 Mar 2026 10:36:50 +0000
@@ -160,7 +160,8 @@ Cc: Peng Fan <peng.fan@nxp.com>, Heiko Stuebner <heiko@sntech.de>,
  Rui Miguel Silva <rui.silva@linaro.org>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Manorit Chawdhry <m-chawdhry@ti.com>
-Subject: [Uboot-stm32] [PATCH RFC 12/40] regmap: add regmap_assign_bits
+Subject: [Uboot-stm32] [PATCH RFC 13/40] compat: regulator: add
+	enable/disable macros
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -211,41 +212,35 @@ X-Spamd-Result: default: False [2.89 / 15.00];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[uboot-stm32];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[stm-ict-prod-mailman-01.stormreply.prv:helo,stormreply.com:email,stormreply.com:url,linaro.org:email,linaro.org:mid,st-md-mailman.stormreply.com:rdns]
-X-Rspamd-Queue-Id: 0DAC12F03D2
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,linaro.org:mid,stormreply.com:email,stormreply.com:url,stm-ict-prod-mailman-01.stormreply.prv:helo,st-md-mailman.stormreply.com:rdns]
+X-Rspamd-Queue-Id: 1165C2F03D6
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-This is a simple wrapper around set/clear bits used by drivers in Linux.
-Add it here so it can be used by Qualcomm CCF clk drivers.
+These just wrap regulator_set_enable() and provide a closer analogue to
+the Linux API.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- include/regmap.h | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ include/power/regulator.h | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/include/regmap.h b/include/regmap.h
-index 8c6f7c1c9b1a..eeae843bfb74 100644
---- a/include/regmap.h
-+++ b/include/regmap.h
-@@ -388,8 +388,17 @@ static inline int regmap_clear_bits(struct regmap *map, uint offset, uint bits)
- {
- 	return regmap_update_bits(map, offset, bits, 0);
- }
+diff --git a/include/power/regulator.h b/include/power/regulator.h
+index 8a914dfc74f4..4011fb1d254b 100644
+--- a/include/power/regulator.h
++++ b/include/power/regulator.h
+@@ -358,8 +358,11 @@ int regulator_get_enable(struct udevice *dev);
+  * Return: - 0 on success or -errno val if fails
+  */
+ int regulator_set_enable(struct udevice *dev, bool enable);
  
-+static inline int regmap_assign_bits(struct regmap *map, unsigned int reg,
-+				     unsigned int bits, bool value)
-+{
-+	if (value)
-+		return regmap_set_bits(map, reg, bits);
-+	else
-+		return regmap_clear_bits(map, reg, bits);
-+}
++#define regulator_enable(dev) regulator_set_enable(dev, true)
++#define regulator_disable(dev) regulator_set_enable(dev, false)
 +
  /**
-  * regmap_init_mem() - Set up a new register map that uses memory access
+  * regulator_set_enable_if_allowed: set regulator enable state if allowed by
+  *					regulator
   *
-  * @node:	Device node that uses this map
 
 -- 
 2.51.0

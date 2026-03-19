@@ -2,74 +2,74 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id UIBgH8YXwWmbQgQAu9opvQ
+	id kDvQHcYXwWn5QQQAu9opvQ
 	(envelope-from <uboot-stm32-bounces@st-md-mailman.stormreply.com>)
 	for <lists+uboot-stm32@lfdr.de>; Mon, 23 Mar 2026 11:36:54 +0100
 X-Original-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 590EB2F0428
+	by mail.lfdr.de (Postfix) with ESMTPS id 592212F0429
 	for <lists+uboot-stm32@lfdr.de>; Mon, 23 Mar 2026 11:36:54 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id DF67FC8F298;
-	Mon, 23 Mar 2026 10:36:53 +0000 (UTC)
-Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com
- [209.85.221.54])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 09689C8F29A;
+	Mon, 23 Mar 2026 10:36:54 +0000 (UTC)
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com
+ [209.85.221.48])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 70E43C87EC9
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 184D1C87ED5
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 19 Mar 2026 20:58:35 +0000 (UTC)
-Received: by mail-wr1-f54.google.com with SMTP id
- ffacd0b85a97d-43b45bb7548so914129f8f.1
+ Thu, 19 Mar 2026 20:58:39 +0000 (UTC)
+Received: by mail-wr1-f48.google.com with SMTP id
+ ffacd0b85a97d-43b45bb7548so914161f8f.1
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 19 Mar 2026 13:58:35 -0700 (PDT)
+ Thu, 19 Mar 2026 13:58:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1773953915; x=1774558715;
+ d=linaro.org; s=google; t=1773953918; x=1774558718;
  darn=st-md-mailman.stormreply.com; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=LO9AczzwpW2mlPWdTEWqRurhDvGffr5v8pKAyKeCkS8=;
- b=a9lLWltuLZd1rJr2DTK4CflgAW17qw6Ud1EGRWv0TIo+DDdL6KRMRMwtTgZBnDquv7
- VQsJkoKK7ITsrhPXS8MXnf49VcALZFrktvUiw1KI3qsEGPT90CL+4YpGYc0LfVt45G3l
- 7vT5yqkNVwFWe/s5W89FAZS6jX/3FdF3rgnPxDLQxMeDOi1gF+YTTlLkNEetBXeJfj5Y
- CzaszxXen4R1Z1OuihshvMZ/HaG5FmvuHYfevaZnlXnj7N9lOkQS6aFIaXu00B+aXah2
- 07M23ni8wckQfE5gFtuyQ7/4T9hxsiIvAzuydIM7XiUEilF++JyzDBJ0AbQGdtqqurPb
- dC2g==
+ :reply-to; bh=hQumiPbp80hZWkFmcR45v5xw5x/cMV2c5oqDMRtP4WA=;
+ b=UZTkv/as7G4arA4GZbxKUx2ThS21ZrcOZPak3uBQx6BIJ61QKmFrRl+xVgLw74WAeh
+ PFJ751AR/RpCZhJR6J5EgcCSgsXaimUPvFtZbgPh6stcpJTLOQZS8VhgU1KGkHKtdZ13
+ nq4wZm2rPwc87HRIU+wHZH6wrrN5gxlg/7MF5CPrWti3W3+9EXVOe15UM/ZhY0UBoPpN
+ W056URQza282g6ebI9qng/HwVtkdo+Gby3sQYru7mBI/u253TiqDOlqCz8G34GDiRS1I
+ UNCTwl1AAdNCbg+WebByi4eSTUyZxclJcV6Frs7CmYohXKr2cKYijzuooEmJprksSxwK
+ BzQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773953915; x=1774558715;
+ d=1e100.net; s=20251104; t=1773953918; x=1774558718;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=LO9AczzwpW2mlPWdTEWqRurhDvGffr5v8pKAyKeCkS8=;
- b=bt7wmlziQhJlfxobgYIsiLPsq/nCz9OtSRMO+qRg7vR0eF4s7L198RSF3Z3wddjaRq
- bg6iK4RszG4OrRiEze2ZhzDRtp89bueLatfSssmr/FjwoPiwgrq12oHM6JJ8gZsO0fbh
- kCdQEO3uclq6nYuCRu6n0kw3BzD+nw/tW67+/WhiDLai8HbiaGet5b2FHNIxZDRDJzj+
- wxWhqZnHbsR1DhCaQfy1haDwzYFfILu4jAkCYZERlvqhPIqxE/jwMfIbP7e04i2ZhWA/
- ETTpxP6xhrIaanJa5azfiHiFj+gJ9Zn3oQDpMpqs2qdm3fj6FbybyNcaQMte6nHYYtG4
- Hn3A==
+ bh=hQumiPbp80hZWkFmcR45v5xw5x/cMV2c5oqDMRtP4WA=;
+ b=e4CqNjPxXoaXs4GhkwwilwBdux+8L/7PTOQ43TnvYU+lTk+Yh5gt/SwMqDlle37Ama
+ FCRsU8e/j5CWrccxYddNH0KVHWxJiFMCKr1UAniLFxAZCceblxvxuBjYDjayk46lpYIb
+ Jpo+17CoOlkGZLCnRI3hyK/TbnKuf5FMl8fS9IvQMN4o64emXd5EmekAcS0P76N/OqS/
+ O2P4Ce+kFqwz+nSXixpqS4ccgEF6dwnXyFQPDixnQ/By18DhvBjAgc/P1PN8Wh3qmduX
+ Z8y5b9Q0DQL2I6viTVQHme+H4vEO92UWTWyuo8pKyVQ2nVJomj3rWuPMnbHHd4J6DPDN
+ DmvQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUF3HLxLGn/2LOS+L90/M0TLd85fbYS6OTuuBOYb53V4UGDhDuAggOE17UC2toE9lz57RvkuTSukQ6JuA==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0YyJeCO0gunhVxmc9fQV37BEtKK3n4uilebxasF2V1l0k8YhSdg8
- pDJC1y89VUi3sHT4fOznSqSzKghz5Dm0GGUDhKU2NF/sXbG8UkPwjLchYfgD8VvSrj4=
-X-Gm-Gg: ATEYQzz2kVa37z4vHGaJTLBuYgd8j6LejPDd/WqwC1uetSJhwLY1+OxRYed3M6kQywK
- nrHBiopLZ5ChuJmvbCRp36cKZurS0gUV6U+lna7NV/9B8ixmnbFJlYtDvzTnQX800zjvbqdIvlh
- /LJ0hcvIHy2aoAvGHcDY86hYTT+UxBzahICn3RPauEGsPcC3qtoCdNpWgREHcfFXW2/3wPgh/5N
- 5poNXsxEGjXSBlPd+7R2Cvkxgyix3PLetTL9jiQSXkcR22UiG+7yJ7p0QpfiVgEiJW2pkHOtJGy
- PLxqix+k0AMXt5iKyCTtCv0RYupf4l8ifhOyEtHDwe9scGfu7ezlh81EthqRcN27JpGm0BEnAoC
- 4lodtISyqppeIxnsjoNMWiwPatPjsmelSkLIfw60Yu89ftJ08QI1PZUPXzBeBriWztoiXwVDTOg
- NWZb1w9Shn/0PLpaHTfrIT9IbDu84M709kXnHcV9cBugsIFZ+hIqnmsvxJk1AZ1UQzJBA=
-X-Received: by 2002:a05:6000:2007:b0:43b:4e13:2213 with SMTP id
- ffacd0b85a97d-43b6428baa5mr1395997f8f.51.1773953914418; 
- Thu, 19 Mar 2026 13:58:34 -0700 (PDT)
+ AJvYcCUfmtpyJ1vCt21hbBfkUUZjes5D77khHF36sNwfoUnn+vUL8es5/mpT2Mz4RBCSOiIJPlC87PAq6Z5KPQ==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0YyFlp+/ZWsVuseJ4MHwXLumZh+fvGLfooJF5J5/wIZOBU11Dnmb
+ NmZ9M+3LZZBewyDSxi8SBLhG5CcAF6KaQlMUQLEd+jopVU3/zEQ6DpcZuWcbj/jCL7o=
+X-Gm-Gg: ATEYQzyXeKGqIR99Ry+IcDej65dhAn68lzPfLrvO7pTTIRIcbV4VI+cxo1IMLU5PEbp
+ PIrVo/xrF8Nzhse4KKfx67JssJSLN4rpy0sckAfXotKEMv4cmMOaTg4MeF3Oby49qiiLCp43nre
+ mHsPzYRuUQafOpM30lWBAwA0413RP7XZ5iAFiRHOz0VI2mFyzOqY5Xavu5vjphplequIhpI5K6g
+ g6QJFQeVI++U6O69IlljvFCrOOU6tIHJF9RbhUTzJxUAm1QEmVX0PZyQO4jFKp4H/MwL48N8I75
+ sMPEyVIHJyerxNBXWQeILNoG1pmnKaMDvOqNoeD8HTlYc0ilodVb44THP+J8G9LKeGJI1cls1yZ
+ pXjimK4KOlqskeNK7eZJC/o6xpk/YjzXvRuFaMnMb3B2WwsZ+Yf0JrpKs9+gQIiJQVbhnz4XfPV
+ GO063sd+da78pjnm4fDKMGFjiVrQMDm5OkVGH4kuRt7Caa8kEvX5UbC90TCewC65Fq6HU=
+X-Received: by 2002:a05:6000:2203:b0:43b:45a0:9df8 with SMTP id
+ ffacd0b85a97d-43b642781a8mr1368024f8f.35.1773953918329; 
+ Thu, 19 Mar 2026 13:58:38 -0700 (PDT)
 Received: from lion.localdomain (p4fc3dd39.dip0.t-ipconnect.de.
  [79.195.221.57]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43b64714e2esm1191396f8f.32.2026.03.19.13.58.30
+ ffacd0b85a97d-43b64714e2esm1191396f8f.32.2026.03.19.13.58.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Mar 2026 13:58:33 -0700 (PDT)
+ Thu, 19 Mar 2026 13:58:37 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-Date: Thu, 19 Mar 2026 21:56:47 +0100
+Date: Thu, 19 Mar 2026 21:56:48 +0100
 MIME-Version: 1.0
-Message-Id: <20260319-casey-ccf-upstream-v1-25-4df2ee2226da@linaro.org>
+Message-Id: <20260319-casey-ccf-upstream-v1-26-4df2ee2226da@linaro.org>
 References: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
 In-Reply-To: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
 To: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>, 
@@ -81,13 +81,13 @@ To: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>,
  uboot-stm32@st-md-mailman.stormreply.com, 
  Sumit Garg <sumit.garg@kernel.org>
 X-Mailer: b4 0.15-dev-47773
-X-Developer-Signature: v=1; a=openpgp-sha256; l=34475;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=10143;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=N77OGl5Rha0k69ufHfd54/JUlWLygviMWvuLLa+fN9U=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw9yQITY+5K8Omvrl2S+fPj3bhw5Wquu4t/F2dXh+z5e
- kaxiPViRykLgyAHg6yYIov4iWWWTWsv22tsX3ABZg4rE8gQBi5OAZjI1h0M/zQeK9WHvjl9b0l2
- msKWB+erXvFntR4/0bh306tT2n+5OmYw/K9X2eU0h6k269D9soibr/6X7WQ5Wcd+zdyyzftunNt
- LuXsA
+ bh=VQ+UwRkFHsmDi4X2J1U5vDc1dvKFNcSZwLk2BRRq0g4=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw9yQKsz67p7ikwPL0wb62c2JLLgau+fbWKdv6W91TlO
+ P/rpmTDjlIWBkEOBlkxRRbxE8ssm9ZettfYvuACzBxWJpAhDFycAjCRLwsY/kd3RyZPDuZ4N3WN
+ uOJRwf0RfgIqHA/1vzVM25gsVlyUNo/hf12zKrelG0vhhn+nJvRs5v2y3d72wnGObcvv/7P8EbP
+ 0wHUA
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-Mailman-Approved-At: Mon, 23 Mar 2026 10:36:50 +0000
@@ -160,8 +160,7 @@ Cc: Peng Fan <peng.fan@nxp.com>, Heiko Stuebner <heiko@sntech.de>,
  Rui Miguel Silva <rui.silva@linaro.org>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Manorit Chawdhry <m-chawdhry@ti.com>
-Subject: [Uboot-stm32] [PATCH RFC 25/40] clk/ccf: adapt CCF generic clocks
-	for U-Boot
+Subject: [Uboot-stm32] [PATCH RFC 26/40] clk/clk-uclass: adapt for CCF_FULL
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -212,997 +211,433 @@ X-Spamd-Result: default: False [2.89 / 15.00];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[uboot-stm32];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[st-md-mailman.stormreply.com:rdns,pengutronix.de:email,linaro.org:email,linaro.org:mid,stm-ict-prod-mailman-01.stormreply.prv:helo,stormreply.com:email,stormreply.com:url]
-X-Rspamd-Queue-Id: 590EB2F0428
+	DBL_BLOCKED_OPENRESOLVER(0.00)[st-md-mailman.stormreply.com:rdns,stm-ict-prod-mailman-01.stormreply.prv:helo,linaro.org:email,linaro.org:mid,stormreply.com:email,stormreply.com:url]
+X-Rspamd-Queue-Id: 592212F0429
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Adjusted the generic clock drivers so that they build and work in
-U-Boot. These changes are fairly minimal, big endian support is dropped
-as it's unused anyway, and a small hack is added for sandbox tests which
-can't use readl/writel.
+When building U-Boot with CCF_FULL support, most clk operations
+are implemented in clk/ccf/clk.c, so we can remove the conflicting
+definitions in clk-uclass.c.
 
-The unused spinlock is removed from most function prototypes.
+Additionally, registering clock consumers works quite differently, so we
+adapt clk_get_by_name() and similar functions to call into CCF. Notably
+while in Linux the struct clk handle is allocated inside CCF (since
+it's an opaque cookie), in U-Boot struct clk is public and typically
+allocated by the consumer driver, so we need a small adjustment to allow
+CCF to populate an already-allocated struct clk.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- drivers/clk/ccf/clk-composite.c    |  21 +++---
- drivers/clk/ccf/clk-divider.c      |  45 +++++--------
- drivers/clk/ccf/clk-fixed-factor.c | 129 ++++++++++++++++---------------------
- drivers/clk/ccf/clk-fixed-rate.c   |  93 +++++++++++---------------
- drivers/clk/ccf/clk-gate.c         |  39 +++++------
- drivers/clk/ccf/clk-mux.c          |  31 ++++-----
- 6 files changed, 156 insertions(+), 202 deletions(-)
+ drivers/clk/clk-uclass.c | 297 +++++++++++++++++++++++++++--------------------
+ 1 file changed, 172 insertions(+), 125 deletions(-)
 
-diff --git a/drivers/clk/ccf/clk-composite.c b/drivers/clk/ccf/clk-composite.c
-index 66759fe28fad..90d8a18f8ce0 100644
---- a/drivers/clk/ccf/clk-composite.c
-+++ b/drivers/clk/ccf/clk-composite.c
-@@ -2,12 +2,15 @@
- /*
-  * Copyright (c) 2013 NVIDIA CORPORATION.  All rights reserved.
-  */
- 
-+#include <dm/device.h>
-+#include <dm/devres.h>
-+#include <linux/bug.h>
-+#include <linux/compat.h>
+diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
+index 095329e25f15..d54d76745560 100644
+--- a/drivers/clk/clk-uclass.c
++++ b/drivers/clk/clk-uclass.c
+@@ -23,8 +23,11 @@
+ #include <linux/bug.h>
  #include <linux/clk-provider.h>
- #include <linux/device.h>
  #include <linux/err.h>
--#include <linux/slab.h>
  
- static u8 clk_composite_get_parent(struct clk_hw *hw)
++#include <linux/clk/clk-conf.h>
++#include "ccf/clk.h"
++
+ static inline const struct clk_ops_uboot *clk_dev_ops(struct udevice *dev)
  {
- 	struct clk_composite *composite = to_clk_composite(hw);
-@@ -233,9 +236,9 @@ static void clk_composite_disable(struct clk_hw *hw)
+ 	return (const struct clk_ops_uboot *)dev->driver->ops;
+ }
+@@ -74,9 +77,9 @@ static int clk_of_xlate_default(struct clk *clk,
  
- 	gate_ops->disable(gate_hw);
+ 	return 0;
  }
  
--static struct clk_hw *__clk_hw_register_composite(struct device *dev,
-+static struct clk_hw *__clk_hw_register_composite(struct udevice *dev,
- 			const char *name, const char * const *parent_names,
- 			const struct clk_parent_data *pdata, int num_parents,
- 			struct clk_hw *mux_hw, const struct clk_ops *mux_ops,
- 			struct clk_hw *rate_hw, const struct clk_ops *rate_ops,
-@@ -350,9 +353,9 @@ err:
- 	kfree(composite);
- 	return hw;
- }
- 
--struct clk_hw *clk_hw_register_composite(struct device *dev, const char *name,
-+struct clk_hw *clk_hw_register_composite(struct udevice *dev, const char *name,
- 			const char * const *parent_names, int num_parents,
- 			struct clk_hw *mux_hw, const struct clk_ops *mux_ops,
- 			struct clk_hw *rate_hw, const struct clk_ops *rate_ops,
- 			struct clk_hw *gate_hw, const struct clk_ops *gate_ops,
-@@ -364,9 +367,9 @@ struct clk_hw *clk_hw_register_composite(struct device *dev, const char *name,
- 					   gate_ops, flags);
- }
- EXPORT_SYMBOL_GPL(clk_hw_register_composite);
- 
--struct clk_hw *clk_hw_register_composite_pdata(struct device *dev,
-+struct clk_hw *clk_hw_register_composite_pdata(struct udevice *dev,
- 			const char *name,
- 			const struct clk_parent_data *parent_data,
- 			int num_parents,
- 			struct clk_hw *mux_hw, const struct clk_ops *mux_ops,
-@@ -379,9 +382,9 @@ struct clk_hw *clk_hw_register_composite_pdata(struct device *dev,
- 					   rate_hw, rate_ops, gate_hw,
- 					   gate_ops, flags);
- }
- 
--struct clk *clk_register_composite(struct device *dev, const char *name,
-+struct clk *clk_register_composite(struct udevice *dev, const char *name,
- 			const char * const *parent_names, int num_parents,
- 			struct clk_hw *mux_hw, const struct clk_ops *mux_ops,
- 			struct clk_hw *rate_hw, const struct clk_ops *rate_ops,
- 			struct clk_hw *gate_hw, const struct clk_ops *gate_ops,
-@@ -397,9 +400,9 @@ struct clk *clk_register_composite(struct device *dev, const char *name,
- 	return hw->clk;
- }
- EXPORT_SYMBOL_GPL(clk_register_composite);
- 
--struct clk *clk_register_composite_pdata(struct device *dev, const char *name,
-+struct clk *clk_register_composite_pdata(struct udevice *dev, const char *name,
- 			const struct clk_parent_data *parent_data,
- 			int num_parents,
- 			struct clk_hw *mux_hw, const struct clk_ops *mux_ops,
- 			struct clk_hw *rate_hw, const struct clk_ops *rate_ops,
-@@ -441,14 +444,14 @@ void clk_hw_unregister_composite(struct clk_hw *hw)
- 	kfree(composite);
- }
- EXPORT_SYMBOL_GPL(clk_hw_unregister_composite);
- 
--static void devm_clk_hw_release_composite(struct device *dev, void *res)
-+static void devm_clk_hw_release_composite(struct udevice *dev, void *res)
+-static int clk_get_by_index_tail(int ret, ofnode node,
++static int __maybe_unused clk_get_by_index_tail(int ret, ofnode node,
+ 				 struct ofnode_phandle_args *args,
+ 				 const char *list_name, int index,
+ 				 struct clk *clk)
  {
- 	clk_hw_unregister_composite(*(struct clk_hw **)res);
+@@ -115,47 +118,30 @@ err:
+ 
+ 	return log_msg_ret("prop", ret);
  }
  
--static struct clk_hw *__devm_clk_hw_register_composite(struct device *dev,
-+static struct clk_hw *__devm_clk_hw_register_composite(struct udevice *dev,
- 			const char *name, const char * const *parent_names,
- 			const struct clk_parent_data *pdata, int num_parents,
- 			struct clk_hw *mux_hw, const struct clk_ops *mux_ops,
- 			struct clk_hw *rate_hw, const struct clk_ops *rate_ops,
-@@ -475,9 +478,9 @@ static struct clk_hw *__devm_clk_hw_register_composite(struct device *dev,
- 
- 	return hw;
- }
- 
--struct clk_hw *devm_clk_hw_register_composite_pdata(struct device *dev,
-+struct clk_hw *devm_clk_hw_register_composite_pdata(struct udevice *dev,
- 			const char *name,
- 			const struct clk_parent_data *parent_data,
- 			int num_parents,
- 			struct clk_hw *mux_hw, const struct clk_ops *mux_ops,
-diff --git a/drivers/clk/ccf/clk-divider.c b/drivers/clk/ccf/clk-divider.c
-index 2601b6155afb..111b025fbd45 100644
---- a/drivers/clk/ccf/clk-divider.c
-+++ b/drivers/clk/ccf/clk-divider.c
-@@ -6,12 +6,15 @@
-  *
-  * Adjustable divider clock implementation
-  */
- 
-+#include <dm/device.h>
-+#include <div64.h>
-+#include <linux/bug.h>
- #include <linux/clk-provider.h>
-+#include <dm/devres.h>
- #include <linux/device.h>
--#include <linux/module.h>
--#include <linux/slab.h>
-+#include <linux/kernel.h>
- #include <linux/io.h>
- #include <linux/err.h>
- #include <linux/string.h>
- #include <linux/log2.h>
-@@ -27,20 +30,18 @@
-  */
- 
- static inline u32 clk_div_readl(struct clk_divider *divider)
- {
--	if (divider->flags & CLK_DIVIDER_BIG_ENDIAN)
--		return ioread32be(divider->reg);
+-static int clk_get_by_indexed_prop(struct udevice *dev, const char *prop_name,
+-				   int index, struct clk *clk)
+-{
+-	int ret;
+-	struct ofnode_phandle_args args;
 -
-+#if CONFIG_IS_ENABLED(SANDBOX)
-+	return *(u32 *)divider->reg;
+-	debug("%s(dev=%s, index=%d, clk=%p)\n", __func__, dev_read_name(dev),
+-	      index, clk);
+-
+-	assert(clk);
+-	clk->dev = NULL;
+-
+-	ret = dev_read_phandle_with_args(dev, prop_name, "#clock-cells", 0,
+-					 index, &args);
+-	if (ret) {
+-		debug("%s: fdtdec_parse_phandle_with_args failed: err=%d\n",
+-		      __func__, ret);
+-		return log_ret(ret);
+-	}
+-
+-	return clk_get_by_index_tail(ret, dev_ofnode(dev), &args, "clocks",
+-				     index, clk);
+-}
+-
+ int clk_get_by_index(struct udevice *dev, int index, struct clk *clk)
+ {
+ 	return clk_get_by_index_nodev(dev_ofnode(dev), index, clk);
+ }
+ 
+ int clk_get_by_index_nodev(ofnode node, int index, struct clk *clk)
+ {
++#if CONFIG_IS_ENABLED(CLK_CCF_FULL)
++	struct clk_hw *hw;
++
++	hw = of_clk_get_hw(node, index, NULL);
++	return clk_hw_create_clk_uboot(clk, hw);
 +#else
- 	return readl(divider->reg);
+ 	struct ofnode_phandle_args args;
+ 	int ret;
+ 
+ 	ret = ofnode_parse_phandle_with_args(node, "clocks", "#clock-cells", 0,
+ 					     index, &args);
+ 
+ 	return clk_get_by_index_tail(ret, node, &args, "clocks",
+ 				     index, clk);
 +#endif
  }
  
- static inline void clk_div_writel(struct clk_divider *divider, u32 val)
+ int clk_get_bulk(struct udevice *dev, struct clk_bulk *bulk)
  {
--	if (divider->flags & CLK_DIVIDER_BIG_ENDIAN)
--		iowrite32be(val, divider->reg);
--	else
--		writel(val, divider->reg);
-+	writel(val, divider->reg);
+@@ -189,8 +175,86 @@ bulk_get_err:
+ 
+ 	return ret;
  }
  
- static unsigned int _get_table_maxdiv(const struct clk_div_table *table,
- 				      u8 width)
-@@ -473,21 +474,15 @@ static int clk_divider_set_rate(struct clk_hw *hw, unsigned long rate,
- 				unsigned long parent_rate)
- {
- 	struct clk_divider *divider = to_clk_divider(hw);
- 	int value;
--	unsigned long flags = 0;
- 	u32 val;
- 
- 	value = divider_get_val(rate, parent_rate, divider->table,
- 				divider->width, divider->flags);
- 	if (value < 0)
- 		return value;
- 
--	if (divider->lock)
--		spin_lock_irqsave(divider->lock, flags);
--	else
--		__acquire(divider->lock);
--
- 	if (divider->flags & CLK_DIVIDER_HIWORD_MASK) {
- 		val = clk_div_mask(divider->width) << (divider->shift + 16);
- 	} else {
- 		val = clk_div_readl(divider);
-@@ -495,13 +490,8 @@ static int clk_divider_set_rate(struct clk_hw *hw, unsigned long rate,
- 	}
- 	val |= (u32)value << divider->shift;
- 	clk_div_writel(divider, val);
- 
--	if (divider->lock)
--		spin_unlock_irqrestore(divider->lock, flags);
--	else
--		__release(divider->lock);
--
- 	return 0;
- }
- 
- const struct clk_ops clk_divider_ops = {
-@@ -516,10 +506,10 @@ const struct clk_ops clk_divider_ro_ops = {
- 	.determine_rate = clk_divider_determine_rate,
- };
- EXPORT_SYMBOL_GPL(clk_divider_ro_ops);
- 
--struct clk_hw *__clk_hw_register_divider(struct device *dev,
--		struct device_node *np, const char *name,
-+struct clk_hw *__clk_hw_register_divider(struct udevice *dev,
-+		ofnode np, const char *name,
- 		const char *parent_name, const struct clk_hw *parent_hw,
- 		const struct clk_parent_data *parent_data, unsigned long flags,
- 		void __iomem *reg, u8 shift, u8 width,
- 		unsigned long clk_divider_flags,
-@@ -560,9 +550,8 @@ struct clk_hw *__clk_hw_register_divider(struct device *dev,
- 	div->reg = reg;
- 	div->shift = shift;
- 	div->width = width;
- 	div->flags = clk_divider_flags;
--	div->lock = lock;
- 	div->hw.init = &init;
- 	div->table = table;
- 
- 	/* register the clock */
-@@ -590,17 +579,17 @@ EXPORT_SYMBOL_GPL(__clk_hw_register_divider);
-  * @clk_divider_flags: divider-specific flags for this clock
-  * @table: array of divider/value pairs ending with a div set to 0
-  * @lock: shared register lock for this clock
-  */
--struct clk *clk_register_divider_table(struct device *dev, const char *name,
-+struct clk *clk_register_divider_table(struct udevice *dev, const char *name,
- 		const char *parent_name, unsigned long flags,
- 		void __iomem *reg, u8 shift, u8 width,
- 		unsigned long clk_divider_flags,
- 		const struct clk_div_table *table, spinlock_t *lock)
- {
- 	struct clk_hw *hw;
- 
--	hw =  __clk_hw_register_divider(dev, NULL, name, parent_name, NULL,
-+	hw =  __clk_hw_register_divider(dev, dev_ofnode(dev), name, parent_name, NULL,
- 			NULL, flags, reg, shift, width, clk_divider_flags,
- 			table, lock);
- 	if (IS_ERR(hw))
- 		return ERR_CAST(hw);
-@@ -638,15 +627,15 @@ void clk_hw_unregister_divider(struct clk_hw *hw)
- 	kfree(div);
- }
- EXPORT_SYMBOL_GPL(clk_hw_unregister_divider);
- 
--static void devm_clk_hw_release_divider(struct device *dev, void *res)
-+static void devm_clk_hw_release_divider(struct udevice *dev, void *res)
- {
- 	clk_hw_unregister_divider(*(struct clk_hw **)res);
- }
- 
--struct clk_hw *__devm_clk_hw_register_divider(struct device *dev,
--		struct device_node *np, const char *name,
-+struct clk_hw *__devm_clk_hw_register_divider(struct udevice *dev,
-+		ofnode np, const char *name,
- 		const char *parent_name, const struct clk_hw *parent_hw,
- 		const struct clk_parent_data *parent_data, unsigned long flags,
- 		void __iomem *reg, u8 shift, u8 width,
- 		unsigned long clk_divider_flags,
-diff --git a/drivers/clk/ccf/clk-fixed-factor.c b/drivers/clk/ccf/clk-fixed-factor.c
-index de658c9e4c53..14ddeea348e7 100644
---- a/drivers/clk/ccf/clk-fixed-factor.c
-+++ b/drivers/clk/ccf/clk-fixed-factor.c
-@@ -1,14 +1,19 @@
- // SPDX-License-Identifier: GPL-2.0
- /*
-  * Copyright (C) 2011 Sascha Hauer, Pengutronix <s.hauer@pengutronix.de>
-  */
--#include <linux/module.h>
++int clk_get_by_name(struct udevice *dev, const char *name, struct clk *clk)
++{
++#if CONFIG_IS_ENABLED(CLK_CCF_FULL)
++	struct clk_hw *hw;
 +
-+#include <dm/ofnode.h>
-+#include <dm/device.h>
-+#include <dm/device-internal.h>
-+#include <dm/devres.h>
-+#include <div64.h>
-+#include <linux/compat.h>
- #include <linux/clk-provider.h>
--#include <linux/slab.h>
- #include <linux/err.h>
--#include <linux/of.h>
--#include <linux/platform_device.h>
++	hw = of_clk_get_hw(dev_ofnode(dev), 0, name);
++	return clk_hw_create_clk_uboot(clk, hw);
++#else
++	return clk_get_by_name_nodev(dev_ofnode(dev), name, clk);
++#endif
++}
++#endif /* OF_REAL */
 +
-+#include "clk.h"
- 
- /*
-  * DOC: basic fixed multiplier and divider clock that cannot gate
-  *
-@@ -77,9 +82,9 @@ const struct clk_ops clk_fixed_factor_ops = {
- 	.recalc_accuracy = clk_factor_recalc_accuracy,
- };
- EXPORT_SYMBOL_GPL(clk_fixed_factor_ops);
- 
--static void devm_clk_hw_register_fixed_factor_release(struct device *dev, void *res)
-+static void devm_clk_hw_register_fixed_factor_release(struct udevice *dev, void *res)
- {
- 	struct clk_fixed_factor *fix = res;
- 
- 	/*
-@@ -90,9 +95,9 @@ static void devm_clk_hw_register_fixed_factor_release(struct device *dev, void *
- 	clk_hw_unregister(&fix->hw);
- }
- 
- static struct clk_hw *
--__clk_hw_register_fixed_factor(struct device *dev, struct device_node *np,
-+__clk_hw_register_fixed_factor(struct udevice *dev, ofnode np,
- 		const char *name, const char *parent_name,
- 		const struct clk_hw *parent_hw, const struct clk_parent_data *pdata,
- 		unsigned long flags, unsigned int mult, unsigned int div,
- 		unsigned long acc, unsigned int fixflags, bool devm)
-@@ -161,15 +166,15 @@ __clk_hw_register_fixed_factor(struct device *dev, struct device_node *np,
-  *
-  * Return: Pointer to fixed factor clk_hw structure that was registered or
-  * an error pointer.
-  */
--struct clk_hw *devm_clk_hw_register_fixed_factor_index(struct device *dev,
-+struct clk_hw *devm_clk_hw_register_fixed_factor_index(struct udevice *dev,
- 		const char *name, unsigned int index, unsigned long flags,
- 		unsigned int mult, unsigned int div)
- {
- 	const struct clk_parent_data pdata = { .index = index };
- 
--	return __clk_hw_register_fixed_factor(dev, NULL, name, NULL, NULL, &pdata,
-+	return __clk_hw_register_fixed_factor(dev, dev_ofnode(dev), name, NULL, NULL, &pdata,
- 					      flags, mult, div, 0, 0, true);
- }
- EXPORT_SYMBOL_GPL(devm_clk_hw_register_fixed_factor_index);
- 
-@@ -185,43 +190,43 @@ EXPORT_SYMBOL_GPL(devm_clk_hw_register_fixed_factor_index);
-  *
-  * Return: Pointer to fixed factor clk_hw structure that was registered or
-  * an error pointer.
-  */
--struct clk_hw *devm_clk_hw_register_fixed_factor_parent_hw(struct device *dev,
-+struct clk_hw *devm_clk_hw_register_fixed_factor_parent_hw(struct udevice *dev,
- 		const char *name, const struct clk_hw *parent_hw,
- 		unsigned long flags, unsigned int mult, unsigned int div)
- {
- 	const struct clk_parent_data pdata = { .index = -1 };
- 
--	return __clk_hw_register_fixed_factor(dev, NULL, name, NULL, parent_hw,
-+	return __clk_hw_register_fixed_factor(dev, dev_ofnode(dev), name, NULL, parent_hw,
- 					      &pdata, flags, mult, div, 0, 0, true);
- }
- EXPORT_SYMBOL_GPL(devm_clk_hw_register_fixed_factor_parent_hw);
- 
--struct clk_hw *clk_hw_register_fixed_factor_parent_hw(struct device *dev,
-+struct clk_hw *clk_hw_register_fixed_factor_parent_hw(struct udevice *dev,
- 		const char *name, const struct clk_hw *parent_hw,
- 		unsigned long flags, unsigned int mult, unsigned int div)
- {
- 	const struct clk_parent_data pdata = { .index = -1 };
- 
--	return __clk_hw_register_fixed_factor(dev, NULL, name, NULL, parent_hw,
-+	return __clk_hw_register_fixed_factor(dev, dev_ofnode(dev), name, NULL, parent_hw,
- 					      &pdata, flags, mult, div, 0, 0, false);
- }
- EXPORT_SYMBOL_GPL(clk_hw_register_fixed_factor_parent_hw);
- 
--struct clk_hw *clk_hw_register_fixed_factor(struct device *dev,
-+struct clk_hw *clk_hw_register_fixed_factor(struct udevice *dev,
- 		const char *name, const char *parent_name, unsigned long flags,
- 		unsigned int mult, unsigned int div)
- {
- 	const struct clk_parent_data pdata = { .index = -1 };
- 
--	return __clk_hw_register_fixed_factor(dev, NULL, name, parent_name, NULL,
-+	return __clk_hw_register_fixed_factor(dev, dev_ofnode(dev), name, parent_name, NULL,
- 					      &pdata, flags, mult, div, 0, 0, false);
- }
- EXPORT_SYMBOL_GPL(clk_hw_register_fixed_factor);
- 
--struct clk_hw *clk_hw_register_fixed_factor_fwname(struct device *dev,
--		struct device_node *np, const char *name, const char *fw_name,
-+struct clk_hw *clk_hw_register_fixed_factor_fwname(struct udevice *dev,
-+		ofnode np, const char *name, const char *fw_name,
- 		unsigned long flags, unsigned int mult, unsigned int div)
- {
- 	const struct clk_parent_data pdata = { .index = -1, .fw_name = fw_name };
- 
-@@ -229,10 +234,10 @@ struct clk_hw *clk_hw_register_fixed_factor_fwname(struct device *dev,
- 			&pdata, flags, mult, div, 0, 0, false);
- }
- EXPORT_SYMBOL_GPL(clk_hw_register_fixed_factor_fwname);
- 
--struct clk_hw *clk_hw_register_fixed_factor_with_accuracy_fwname(struct device *dev,
--		struct device_node *np, const char *name, const char *fw_name,
-+struct clk_hw *clk_hw_register_fixed_factor_with_accuracy_fwname(struct udevice *dev,
-+		ofnode np, const char *name, const char *fw_name,
- 		unsigned long flags, unsigned int mult, unsigned int div,
- 		unsigned long acc)
- {
- 	const struct clk_parent_data pdata = { .index = -1, .fw_name = fw_name };
-@@ -242,20 +247,20 @@ struct clk_hw *clk_hw_register_fixed_factor_with_accuracy_fwname(struct device *
- 			CLK_FIXED_FACTOR_FIXED_ACCURACY, false);
- }
- EXPORT_SYMBOL_GPL(clk_hw_register_fixed_factor_with_accuracy_fwname);
- 
--struct clk_hw *clk_hw_register_fixed_factor_index(struct device *dev,
-+struct clk_hw *clk_hw_register_fixed_factor_index(struct udevice *dev,
- 		const char *name, unsigned int index, unsigned long flags,
- 		unsigned int mult, unsigned int div)
- {
- 	const struct clk_parent_data pdata = { .index = index };
- 
--	return __clk_hw_register_fixed_factor(dev, NULL, name, NULL, NULL, &pdata,
-+	return __clk_hw_register_fixed_factor(dev, dev_ofnode(dev), name, NULL, NULL, &pdata,
- 					      flags, mult, div, 0, 0, false);
- }
- EXPORT_SYMBOL_GPL(clk_hw_register_fixed_factor_index);
- 
--struct clk *clk_register_fixed_factor(struct device *dev, const char *name,
-+struct clk *clk_register_fixed_factor(struct udevice *dev, const char *name,
- 		const char *parent_name, unsigned long flags,
- 		unsigned int mult, unsigned int div)
- {
- 	struct clk_hw *hw;
-@@ -291,21 +296,21 @@ void clk_hw_unregister_fixed_factor(struct clk_hw *hw)
- 	kfree(fix);
- }
- EXPORT_SYMBOL_GPL(clk_hw_unregister_fixed_factor);
- 
--struct clk_hw *devm_clk_hw_register_fixed_factor(struct device *dev,
-+struct clk_hw *devm_clk_hw_register_fixed_factor(struct udevice *dev,
- 		const char *name, const char *parent_name, unsigned long flags,
- 		unsigned int mult, unsigned int div)
- {
- 	const struct clk_parent_data pdata = { .index = -1 };
- 
--	return __clk_hw_register_fixed_factor(dev, NULL, name, parent_name, NULL,
-+	return __clk_hw_register_fixed_factor(dev, dev_ofnode(dev), name, parent_name, NULL,
- 			&pdata, flags, mult, div, 0, 0, true);
- }
- EXPORT_SYMBOL_GPL(devm_clk_hw_register_fixed_factor);
- 
--struct clk_hw *devm_clk_hw_register_fixed_factor_fwname(struct device *dev,
--		struct device_node *np, const char *name, const char *fw_name,
-+struct clk_hw *devm_clk_hw_register_fixed_factor_fwname(struct udevice *dev,
-+		ofnode np, const char *name, const char *fw_name,
- 		unsigned long flags, unsigned int mult, unsigned int div)
- {
- 	const struct clk_parent_data pdata = { .index = -1, .fw_name = fw_name };
- 
-@@ -313,10 +318,10 @@ struct clk_hw *devm_clk_hw_register_fixed_factor_fwname(struct device *dev,
- 			&pdata, flags, mult, div, 0, 0, true);
- }
- EXPORT_SYMBOL_GPL(devm_clk_hw_register_fixed_factor_fwname);
- 
--struct clk_hw *devm_clk_hw_register_fixed_factor_with_accuracy_fwname(struct device *dev,
--		struct device_node *np, const char *name, const char *fw_name,
-+struct clk_hw *devm_clk_hw_register_fixed_factor_with_accuracy_fwname(struct udevice *dev,
-+		ofnode np, const char *name, const char *fw_name,
- 		unsigned long flags, unsigned int mult, unsigned int div,
- 		unsigned long acc)
- {
- 	const struct clk_parent_data pdata = { .index = -1, .fw_name = fw_name };
-@@ -325,40 +330,40 @@ struct clk_hw *devm_clk_hw_register_fixed_factor_with_accuracy_fwname(struct dev
- 			&pdata, flags, mult, div, acc,
- 			CLK_FIXED_FACTOR_FIXED_ACCURACY, true);
- }
- EXPORT_SYMBOL_GPL(devm_clk_hw_register_fixed_factor_with_accuracy_fwname);
--
--#ifdef CONFIG_OF
--static struct clk_hw *_of_fixed_factor_clk_setup(struct device_node *node)
-+static struct clk_hw *_of_fixed_factor_clk_setup(struct udevice *dev)
- {
- 	struct clk_hw *hw;
--	const char *clk_name = node->name;
-+	const char *clk_name;
-+	ofnode node = dev_ofnode(dev);
- 	const struct clk_parent_data pdata = { .index = 0 };
- 	u32 div, mult;
- 	int ret;
- 
--	if (of_property_read_u32(node, "clock-div", &div)) {
-+	if (ofnode_read_u32(node, "clock-div", &div)) {
- 		pr_err("%s Fixed factor clock <%pOFn> must have a clock-div property\n",
--			__func__, node);
-+			__func__, &node);
- 		return ERR_PTR(-EIO);
- 	}
- 
--	if (of_property_read_u32(node, "clock-mult", &mult)) {
-+	if (ofnode_read_u32(node, "clock-mult", &mult)) {
- 		pr_err("%s Fixed factor clock <%pOFn> must have a clock-mult property\n",
--			__func__, node);
-+			__func__, &node);
- 		return ERR_PTR(-EIO);
- 	}
- 
--	of_property_read_string(node, "clock-output-names", &clk_name);
-+	clk_name = ofnode_read_string(node, "clock-output-names");
-+	if (!clk_name)
-+		clk_name = ofnode_get_name(node);
- 
--	hw = __clk_hw_register_fixed_factor(NULL, node, clk_name, NULL, NULL,
-+	hw = __clk_hw_register_fixed_factor(dev, node, clk_name, NULL, NULL,
- 					    &pdata, 0, mult, div, 0, 0, false);
- 	if (IS_ERR(hw)) {
- 		/*
- 		 * Clear OF_POPULATED flag so that clock registration can be
- 		 * attempted again from probe function.
- 		 */
--		of_node_clear_flag(node, OF_POPULATED);
- 		return ERR_CAST(hw);
- 	}
- 
- 	ret = of_clk_add_hw_provider(node, of_clk_hw_simple_get, hw);
-@@ -369,56 +374,36 @@ static struct clk_hw *_of_fixed_factor_clk_setup(struct device_node *node)
- 
- 	return hw;
- }
- 
--/**
-- * of_fixed_factor_clk_setup() - Setup function for simple fixed factor clock
-- * @node:	device node for the clock
-- */
--void __init of_fixed_factor_clk_setup(struct device_node *node)
--{
--	_of_fixed_factor_clk_setup(node);
--}
--CLK_OF_DECLARE(fixed_factor_clk, "fixed-factor-clock",
--		of_fixed_factor_clk_setup);
--
--static void of_fixed_factor_clk_remove(struct platform_device *pdev)
--{
--	struct clk_hw *clk = platform_get_drvdata(pdev);
--
--	of_clk_del_provider(pdev->dev.of_node);
--	clk_hw_unregister_fixed_factor(clk);
--}
--
--static int of_fixed_factor_clk_probe(struct platform_device *pdev)
-+static int of_fixed_factor_clk_probe(struct udevice *dev)
- {
- 	struct clk_hw *clk;
- 
- 	/*
- 	 * This function is not executed when of_fixed_factor_clk_setup
- 	 * succeeded.
- 	 */
--	clk = _of_fixed_factor_clk_setup(pdev->dev.of_node);
--	if (IS_ERR(clk))
-+	clk = _of_fixed_factor_clk_setup(dev);
-+	if (IS_ERR(clk)) {
-+		printf("%s: %s: err %ld\n", __func__, dev->name, PTR_ERR(clk));
- 		return PTR_ERR(clk);
++int clk_get_by_name_nodev(ofnode node, const char *name, struct clk *clk)
++{
++	int index = 0;
++
++	debug("%s(node=%s, name=%s, clk=%p)\n", __func__,
++		ofnode_get_name(node), name, clk);
++	clk->dev = NULL;
++
++	if (name) {
++		index = ofnode_stringlist_search(node, "clock-names", name);
++		if (index < 0) {
++			debug("fdt_stringlist_search() failed: %d\n", index);
++			return index;
++		}
 +	}
- 
--	platform_set_drvdata(pdev, clk);
-+	dev_set_priv(dev, clk);
- 
- 	return 0;
- }
- 
--static const struct of_device_id of_fixed_factor_clk_ids[] = {
--	{ .compatible = "fixed-factor-clock" },
-+static const struct udevice_id clk_fixed_factor_match_table[] = {
-+	{
-+		.compatible = "fixed-factor-clock",
-+	},
- 	{ }
- };
--MODULE_DEVICE_TABLE(of, of_fixed_factor_clk_ids);
- 
--static struct platform_driver of_fixed_factor_clk_driver = {
--	.driver = {
--		.name = "of_fixed_factor_clk",
--		.of_match_table = of_fixed_factor_clk_ids,
--	},
-+U_BOOT_DRIVER(clk_fixed_factor) = {
-+	.name	= "clk-fixed-factor",
-+	.id	= UCLASS_NOP,
- 	.probe = of_fixed_factor_clk_probe,
--	.remove = of_fixed_factor_clk_remove,
-+	.of_match = clk_fixed_factor_match_table,
- };
--builtin_platform_driver(of_fixed_factor_clk_driver);
--#endif
-diff --git a/drivers/clk/ccf/clk-fixed-rate.c b/drivers/clk/ccf/clk-fixed-rate.c
-index 6b4f76b9c4da..da1f3d22e1ca 100644
---- a/drivers/clk/ccf/clk-fixed-rate.c
-+++ b/drivers/clk/ccf/clk-fixed-rate.c
-@@ -6,14 +6,16 @@
-  * Fixed rate clock implementation
-  */
- 
- #include <linux/clk-provider.h>
--#include <linux/module.h>
--#include <linux/slab.h>
-+#include <dm.h>
-+#include <dm/devres.h>
-+#include <log.h>
-+#include <dm/device-internal.h>
- #include <linux/io.h>
- #include <linux/err.h>
--#include <linux/of.h>
--#include <linux/platform_device.h>
 +
-+#include "clk.h"
- 
- /*
-  * DOC: basic fixed-rate clock that cannot gate
-  *
-@@ -48,9 +50,9 @@ const struct clk_ops clk_fixed_rate_ops = {
- 	.recalc_accuracy = clk_fixed_rate_recalc_accuracy,
- };
- EXPORT_SYMBOL_GPL(clk_fixed_rate_ops);
- 
--static void devm_clk_hw_register_fixed_rate_release(struct device *dev, void *res)
-+static void devm_clk_hw_register_fixed_rate_release(struct udevice *dev, void *res)
++	return clk_get_by_index_nodev(node, index, clk);
++}
++
++int clk_release_all(struct clk *clk, unsigned int count)
++{
++	unsigned int i;
++	int ret;
++
++	for (i = 0; i < count; i++) {
++		debug("%s(clk[%u]=%p)\n", __func__, i, &clk[i]);
++
++		/* check if clock has been previously requested */
++		if (!clk[i].dev)
++			continue;
++
++		ret = clk_disable(&clk[i]);
++		if (ret && ret != -ENOSYS)
++			return ret;
++	}
++
++	return 0;
++}
++
++/* Full CCF has its own versions of these functions */
++#if !CONFIG_IS_ENABLED(CLK_CCF_FULL)
++static int clk_get_by_indexed_prop(struct udevice *dev, const char *prop_name,
++				   int index, struct clk *clk)
++{
++	int ret;
++	struct ofnode_phandle_args args;
++
++	debug("%s(dev=%s, index=%d, clk=%p)\n", __func__, dev_read_name(dev),
++	      index, clk);
++
++	assert(clk);
++	clk->dev = NULL;
++
++	ret = dev_read_phandle_with_args(dev, prop_name, "#clock-cells", 0,
++					 index, &args);
++	if (ret) {
++		debug("%s: fdtdec_parse_phandle_with_args failed: err=%d\n",
++		      __func__, ret);
++		return log_ret(ret);
++	}
++
++	return clk_get_by_index_tail(ret, dev_ofnode(dev), &args, "clocks",
++				     index, clk);
++}
++
+ static struct clk *clk_set_default_get_by_id(struct clk *clk)
  {
- 	struct clk_fixed_rate *fix = res;
+ 	struct clk *c = clk;
  
- 	/*
-@@ -60,10 +62,10 @@ static void devm_clk_hw_register_fixed_rate_release(struct device *dev, void *re
- 	 */
- 	clk_hw_unregister(&fix->hw);
+@@ -371,62 +435,8 @@ fail:
+ 	free(rates);
+ 	return ret;
  }
  
--struct clk_hw *__clk_hw_register_fixed_rate(struct device *dev,
--		struct device_node *np, const char *name,
-+struct clk_hw *__clk_hw_register_fixed_rate(struct udevice *dev,
-+		ofnode np, const char *name,
- 		const char *parent_name, const struct clk_hw *parent_hw,
- 		const struct clk_parent_data *parent_data, unsigned long flags,
- 		unsigned long fixed_rate, unsigned long fixed_accuracy,
- 		unsigned long clk_fixed_flags, bool devm)
-@@ -100,9 +102,9 @@ struct clk_hw *__clk_hw_register_fixed_rate(struct device *dev,
- 	fixed->hw.init = &init;
- 
- 	/* register the clock */
- 	hw = &fixed->hw;
--	if (dev || !np)
-+	if (dev || !ofnode_valid(np))
- 		ret = clk_hw_register(dev, hw);
- 	else
- 		ret = of_clk_hw_register(np, hw);
- 	if (ret) {
-@@ -117,9 +119,9 @@ struct clk_hw *__clk_hw_register_fixed_rate(struct device *dev,
- 	return hw;
- }
- EXPORT_SYMBOL_GPL(__clk_hw_register_fixed_rate);
- 
--struct clk *clk_register_fixed_rate(struct device *dev, const char *name,
-+struct clk *clk_register_fixed_rate(struct udevice *dev, const char *name,
- 		const char *parent_name, unsigned long flags,
- 		unsigned long fixed_rate)
- {
- 	struct clk_hw *hw;
-@@ -155,25 +157,27 @@ void clk_hw_unregister_fixed_rate(struct clk_hw *hw)
- 	kfree(fixed);
- }
- EXPORT_SYMBOL_GPL(clk_hw_unregister_fixed_rate);
- 
--#ifdef CONFIG_OF
--static struct clk_hw *_of_fixed_clk_setup(struct device_node *node)
-+static struct clk_hw *_of_fixed_clk_setup(struct udevice *dev)
- {
- 	struct clk_hw *hw;
--	const char *clk_name = node->name;
-+	ofnode node = dev_ofnode(dev);
-+	const char *clk_name;
- 	u32 rate;
- 	u32 accuracy = 0;
- 	int ret;
- 
--	if (of_property_read_u32(node, "clock-frequency", &rate))
-+	if (ofnode_read_u32(node, "clock-frequency", &rate))
- 		return ERR_PTR(-EIO);
- 
--	of_property_read_u32(node, "clock-accuracy", &accuracy);
-+	ofnode_read_u32(node, "clock-accuracy", &accuracy);
- 
--	of_property_read_string(node, "clock-output-names", &clk_name);
-+	clk_name = ofnode_read_string(node, "clock-output-names");
-+	if (!clk_name)
-+		clk_name = ofnode_get_name(node);
- 
--	hw = clk_hw_register_fixed_rate_with_accuracy(NULL, clk_name, NULL,
-+	hw = clk_hw_register_fixed_rate_with_accuracy(dev, clk_name, NULL,
- 						    0, rate, accuracy);
- 	if (IS_ERR(hw))
- 		return hw;
- 
-@@ -185,54 +189,29 @@ static struct clk_hw *_of_fixed_clk_setup(struct device_node *node)
- 
- 	return hw;
- }
- 
--/**
-- * of_fixed_clk_setup() - Setup function for simple fixed rate clock
-- * @node:	device node for the clock
-- */
--void __init of_fixed_clk_setup(struct device_node *node)
-+static int clk_fixed_rate_probe(struct udevice *dev)
- {
--	_of_fixed_clk_setup(node);
--}
--CLK_OF_DECLARE(fixed_clk, "fixed-clock", of_fixed_clk_setup);
-+	struct clk_hw *hw = _of_fixed_clk_setup(dev);
- 
--static void of_fixed_clk_remove(struct platform_device *pdev)
+-int clk_set_defaults(struct udevice *dev, enum clk_defaults_stage stage)
 -{
--	struct clk_hw *hw = platform_get_drvdata(pdev);
+-	int ret;
 -
--	of_clk_del_provider(pdev->dev.of_node);
--	clk_hw_unregister_fixed_rate(hw);
--}
--
--static int of_fixed_clk_probe(struct platform_device *pdev)
--{
--	struct clk_hw *hw;
+-	if (!dev_has_ofnode(dev))
+-		return 0;
 -
 -	/*
--	 * This function is not executed when of_fixed_clk_setup
--	 * succeeded.
+-	 * To avoid setting defaults twice, don't set them before relocation.
+-	 * However, still set them for SPL. And still set them if explicitly
+-	 * asked.
 -	 */
--	hw = _of_fixed_clk_setup(pdev->dev.of_node);
--	if (IS_ERR(hw))
--		return PTR_ERR(hw);
+-	if (!(IS_ENABLED(CONFIG_XPL_BUILD) || (gd->flags & GD_FLG_RELOC)))
+-		if (stage != CLK_DEFAULTS_POST_FORCE)
+-			return 0;
 -
--	platform_set_drvdata(pdev, hw);
-+	if (!IS_ERR_OR_NULL(hw))
-+		dev_set_priv(dev, hw);
+-	debug("%s(%s)\n", __func__, dev_read_name(dev));
+-
+-	ret = clk_set_default_parents(dev, stage);
+-	if (ret)
+-		return ret;
+-
+-	ret = clk_set_default_rates(dev, stage);
+-	if (ret < 0)
+-		return ret;
+-
+-	return 0;
+-}
+-
+-int clk_get_by_name(struct udevice *dev, const char *name, struct clk *clk)
+-{
+-	return clk_get_by_name_nodev(dev_ofnode(dev), name, clk);
+-}
+-#endif /* OF_REAL */
+-
+-int clk_get_by_name_nodev(ofnode node, const char *name, struct clk *clk)
+-{
+-	int index = 0;
+-
+-	debug("%s(node=%s, name=%s, clk=%p)\n", __func__,
+-		ofnode_get_name(node), name, clk);
+-	clk->dev = NULL;
+-
+-	if (name) {
+-		index = ofnode_stringlist_search(node, "clock-names", name);
+-		if (index < 0) {
+-			debug("fdt_stringlist_search() failed: %d\n", index);
+-			return index;
+-		}
+-	}
+-
+-	return clk_get_by_index_nodev(node, index, clk);
+-}
+-
+ const char *
+ clk_resolve_parent_clk(struct udevice *dev, const char *name)
+ {
+ 	struct udevice *parent;
+@@ -443,28 +453,8 @@ clk_resolve_parent_clk(struct udevice *dev, const char *name)
+ 
+ 	return clk.dev->name;
+ }
+ 
+-int clk_release_all(struct clk *clk, unsigned int count)
+-{
+-	unsigned int i;
+-	int ret;
+-
+-	for (i = 0; i < count; i++) {
+-		debug("%s(clk[%u]=%p)\n", __func__, i, &clk[i]);
+-
+-		/* check if clock has been previously requested */
+-		if (!clk[i].dev)
+-			continue;
+-
+-		ret = clk_disable(&clk[i]);
+-		if (ret && ret != -ENOSYS)
+-			return ret;
+-	}
+-
+-	return 0;
+-}
+-
+ int clk_request(struct udevice *dev, struct clk *clk)
+ {
+ 	const struct clk_ops_uboot *ops;
+ 
+@@ -704,21 +694,8 @@ int clk_enable(struct clk *clk)
  
  	return 0;
  }
  
--static const struct of_device_id of_fixed_clk_ids[] = {
--	{ .compatible = "fixed-clock" },
--	{ }
-+static const struct udevice_id clk_fixed_rate_match[] = {
-+	{
-+		.compatible = "fixed-clock",
-+	},
-+	{ /* sentinel */ }
- };
- 
--static struct platform_driver of_fixed_clk_driver = {
--	.driver = {
--		.name = "of_fixed_clk",
--		.of_match_table = of_fixed_clk_ids,
--	},
--	.probe = of_fixed_clk_probe,
--	.remove = of_fixed_clk_remove,
-+U_BOOT_DRIVER(fixed_clock) = {
-+	.name = "fixed_clock",
-+	.id = UCLASS_NOP,
-+	.of_match = clk_fixed_rate_match,
-+	.probe = clk_fixed_rate_probe,
-+	.plat_auto	= sizeof(struct clk_fixed_rate),
-+	.flags = DM_FLAG_PRE_RELOC,
- };
--builtin_platform_driver(of_fixed_clk_driver);
--#endif
-diff --git a/drivers/clk/ccf/clk-gate.c b/drivers/clk/ccf/clk-gate.c
-index 4746f8219132..ec4bc6ca4724 100644
---- a/drivers/clk/ccf/clk-gate.c
-+++ b/drivers/clk/ccf/clk-gate.c
-@@ -5,12 +5,11 @@
-  *
-  * Gated clock implementation
-  */
- 
-+#include <dm/devres.h>
- #include <linux/clk-provider.h>
--#include <linux/device.h>
--#include <linux/module.h>
--#include <linux/slab.h>
-+#include <linux/compat.h>
- #include <linux/io.h>
- #include <linux/err.h>
- #include <linux/string.h>
- 
-@@ -25,20 +24,22 @@
-  */
- 
- static inline u32 clk_gate_readl(struct clk_gate *gate)
- {
--	if (gate->flags & CLK_GATE_BIG_ENDIAN)
--		return ioread32be(gate->reg);
+-int clk_enable_bulk(struct clk_bulk *bulk)
+-{
+-	int i, ret;
 -
-+#if CONFIG_IS_ENABLED(SANDBOX)
-+	return *(u32 *)gate->reg;
-+#else
- 	return readl(gate->reg);
-+#endif
- }
- 
- static inline void clk_gate_writel(struct clk_gate *gate, u32 val)
- {
--	if (gate->flags & CLK_GATE_BIG_ENDIAN)
--		iowrite32be(val, gate->reg);
--	else
--		writel(val, gate->reg);
-+#if IS_ENABLED(CONFIG_SANDBOX_CLK_CCF)
-+	*(u32 *)gate->reg = val;
-+#else
-+	writel(val, gate->reg);
-+#endif
- }
- 
- /*
-  * It works on following logic:
-@@ -123,10 +124,10 @@ const struct clk_ops clk_gate_ops = {
- 	.is_enabled = clk_gate_is_enabled,
- };
- EXPORT_SYMBOL_GPL(clk_gate_ops);
- 
--struct clk_hw *__clk_hw_register_gate(struct device *dev,
--		struct device_node *np, const char *name,
-+struct clk_hw *__clk_hw_register_gate(struct udevice *dev,
-+		ofnode np, const char *name,
- 		const char *parent_name, const struct clk_hw *parent_hw,
- 		const struct clk_parent_data *parent_data,
- 		unsigned long flags,
- 		void __iomem *reg, u8 bit_idx,
-@@ -167,11 +168,11 @@ struct clk_hw *__clk_hw_register_gate(struct device *dev,
- 	gate->lock = lock;
- 	gate->hw.init = &init;
- 
- 	hw = &gate->hw;
--	if (dev || !np)
-+	if (dev || !ofnode_valid(np))
- 		ret = clk_hw_register(dev, hw);
--	else if (np)
-+	else if (ofnode_valid(np))
- 		ret = of_clk_hw_register(np, hw);
- 	if (ret) {
- 		kfree(gate);
- 		hw = ERR_PTR(ret);
-@@ -181,17 +182,17 @@ struct clk_hw *__clk_hw_register_gate(struct device *dev,
- 
- }
- EXPORT_SYMBOL_GPL(__clk_hw_register_gate);
- 
--struct clk *clk_register_gate(struct device *dev, const char *name,
-+struct clk *clk_register_gate(struct udevice *dev, const char *name,
- 		const char *parent_name, unsigned long flags,
- 		void __iomem *reg, u8 bit_idx,
- 		u8 clk_gate_flags, spinlock_t *lock)
- {
- 	struct clk_hw *hw;
- 
- 	hw = clk_hw_register_gate(dev, name, parent_name, flags, reg,
--				  bit_idx, clk_gate_flags, lock);
-+				  bit_idx, clk_gate_flags);
- 	if (IS_ERR(hw))
- 		return ERR_CAST(hw);
- 	return hw->clk;
- }
-@@ -223,15 +224,15 @@ void clk_hw_unregister_gate(struct clk_hw *hw)
- 	kfree(gate);
- }
- EXPORT_SYMBOL_GPL(clk_hw_unregister_gate);
- 
--static void devm_clk_hw_release_gate(struct device *dev, void *res)
-+static void devm_clk_hw_release_gate(struct udevice *dev, void *res)
- {
- 	clk_hw_unregister_gate(*(struct clk_hw **)res);
- }
- 
--struct clk_hw *__devm_clk_hw_register_gate(struct device *dev,
--		struct device_node *np, const char *name,
-+struct clk_hw *__devm_clk_hw_register_gate(struct udevice *dev,
-+		ofnode np, const char *name,
- 		const char *parent_name, const struct clk_hw *parent_hw,
- 		const struct clk_parent_data *parent_data,
- 		unsigned long flags,
- 		void __iomem *reg, u8 bit_idx,
-diff --git a/drivers/clk/ccf/clk-mux.c b/drivers/clk/ccf/clk-mux.c
-index fa817c317c2a..2d84d389a3a1 100644
---- a/drivers/clk/ccf/clk-mux.c
-+++ b/drivers/clk/ccf/clk-mux.c
-@@ -6,12 +6,11 @@
-  *
-  * Simple multiplexer clock implementation
-  */
- 
-+#include <dm/devres.h>
- #include <linux/clk-provider.h>
--#include <linux/device.h>
--#include <linux/module.h>
--#include <linux/slab.h>
-+#include <linux/compat.h>
- #include <linux/io.h>
- #include <linux/err.h>
- 
- /*
-@@ -25,20 +24,18 @@
-  */
- 
- static inline u32 clk_mux_readl(struct clk_mux *mux)
- {
--	if (mux->flags & CLK_MUX_BIG_ENDIAN)
--		return ioread32be(mux->reg);
+-	for (i = 0; i < bulk->count; i++) {
+-		ret = clk_enable(&bulk->clks[i]);
+-		if (ret < 0 && ret != -ENOSYS)
+-			return ret;
+-	}
 -
-+#if CONFIG_IS_ENABLED(SANDBOX)
-+	return *(u32 *)mux->reg;
+-	return 0;
+-}
+-
+ int clk_disable(struct clk *clk)
+ {
+ 	const struct clk_ops_uboot *ops;
+ 	struct clk *clkp = NULL;
+@@ -769,21 +746,8 @@ int clk_disable(struct clk *clk)
+ 
+ 	return 0;
+ }
+ 
+-int clk_disable_bulk(struct clk_bulk *bulk)
+-{
+-	int i, ret;
+-
+-	for (i = 0; i < bulk->count; i++) {
+-		ret = clk_disable(&bulk->clks[i]);
+-		if (ret < 0 && ret != -ENOSYS)
+-			return ret;
+-	}
+-
+-	return 0;
+-}
+-
+ int clk_get_by_id(ulong id, struct clk **clkp)
+ {
+ 	struct udevice *dev;
+ 	struct uclass *uc;
+@@ -820,8 +784,65 @@ bool clk_is_match(const struct clk *p, const struct clk *q)
+ 		return true;
+ 
+ 	return false;
+ }
 +#else
- 	return readl(mux->reg);
++long clk_get_parent_rate(struct clk *clk)
++{
++	struct clk *pclk;
++
++	if (!clk)
++		return -EINVAL;
++
++	pclk = clk_get_parent(clk);
++	return clk_get_rate(pclk);
++}
++
++static int clk_set_default_parents(struct udevice *dev,
++				   enum clk_defaults_stage stage)
++{
++	return -ENOSYS;
++}
++
++static int clk_set_default_rates(struct udevice *dev,
++				 enum clk_defaults_stage stage)
++{
++	return -ENOSYS;
++}
 +#endif
- }
++
++int clk_set_defaults(struct udevice *dev, enum clk_defaults_stage stage)
++{
++	int ret;
++
++	if (!dev_has_ofnode(dev))
++		return 0;
++
++	/*
++	 * To avoid setting defaults twice, don't set them before relocation.
++	 * However, still set them for SPL. And still set them if explicitly
++	 * asked.
++	 */
++	if (!(IS_ENABLED(CONFIG_XPL_BUILD) || (gd->flags & GD_FLG_RELOC)))
++		if (stage != CLK_DEFAULTS_POST_FORCE)
++			return 0;
++
++	debug("%s(%s)\n", __func__, dev_read_name(dev));
++
++	if (CONFIG_IS_ENABLED(CLK_CCF_FULL)) {
++		return of_clk_set_defaults(dev_ofnode(dev), false);
++	} else {
++		ret = clk_set_default_parents(dev, stage);
++		if (ret)
++			return ret;
++
++		ret = clk_set_default_rates(dev, stage);
++		if (ret < 0)
++			return ret;
++	}
++
++	return 0;
++}
  
- static inline void clk_mux_writel(struct clk_mux *mux, u32 val)
+ struct clk *devm_clk_get(struct udevice *dev, const char *id)
  {
--	if (mux->flags & CLK_MUX_BIG_ENDIAN)
--		iowrite32be(val, mux->reg);
--	else
--		writel(val, mux->reg);
-+	writel(val, mux->reg);
+ 	int rc;
+@@ -837,8 +858,34 @@ struct clk *devm_clk_get(struct udevice *dev, const char *id)
+ 
+ 	return clk;
  }
  
- int clk_mux_val_to_index(struct clk_hw *hw, const u32 *table, unsigned int flags,
- 			 unsigned int val)
-@@ -145,9 +142,9 @@ const struct clk_ops clk_mux_ro_ops = {
- 	.get_parent = clk_mux_get_parent,
- };
- EXPORT_SYMBOL_GPL(clk_mux_ro_ops);
- 
--struct clk_hw *__clk_hw_register_mux(struct device *dev, struct device_node *np,
-+struct clk_hw *__clk_hw_register_mux(struct udevice *dev, ofnode np,
- 		const char *name, u8 num_parents,
- 		const char * const *parent_names,
- 		const struct clk_hw **parent_hws,
- 		const struct clk_parent_data *parent_data,
-@@ -193,11 +190,11 @@ struct clk_hw *__clk_hw_register_mux(struct device *dev, struct device_node *np,
- 	mux->table = table;
- 	mux->hw.init = &init;
- 
- 	hw = &mux->hw;
--	if (dev || !np)
-+	if (dev || !ofnode_valid(np))
- 		ret = clk_hw_register(dev, hw);
--	else if (np)
-+	else if (ofnode_valid(np))
- 		ret = of_clk_hw_register(np, hw);
- 	if (ret) {
- 		kfree(mux);
- 		hw = ERR_PTR(ret);
-@@ -206,14 +203,14 @@ struct clk_hw *__clk_hw_register_mux(struct device *dev, struct device_node *np,
- 	return hw;
- }
- EXPORT_SYMBOL_GPL(__clk_hw_register_mux);
- 
--static void devm_clk_hw_release_mux(struct device *dev, void *res)
-+static void devm_clk_hw_release_mux(struct udevice *dev, void *res)
++int clk_enable_bulk(struct clk_bulk *bulk)
++{
++	int i, ret;
++
++	for (i = 0; i < bulk->count; i++) {
++		ret = clk_enable(&bulk->clks[i]);
++		if (ret < 0 && ret != -ENOSYS)
++			return ret;
++	}
++
++	return 0;
++}
++
++int clk_disable_bulk(struct clk_bulk *bulk)
++{
++	int i, ret;
++
++	for (i = 0; i < bulk->count; i++) {
++		ret = clk_disable(&bulk->clks[i]);
++		if (ret < 0 && ret != -ENOSYS)
++			return ret;
++	}
++
++	return 0;
++}
++
+ int clk_uclass_post_probe(struct udevice *dev)
  {
- 	clk_hw_unregister_mux(*(struct clk_hw **)res);
- }
- 
--struct clk_hw *__devm_clk_hw_register_mux(struct device *dev, struct device_node *np,
-+struct clk_hw *__devm_clk_hw_register_mux(struct udevice *dev, ofnode np,
- 		const char *name, u8 num_parents,
- 		const char * const *parent_names,
- 		const struct clk_hw **parent_hws,
- 		const struct clk_parent_data *parent_data,
-@@ -240,18 +237,18 @@ struct clk_hw *__devm_clk_hw_register_mux(struct device *dev, struct device_node
- 	return hw;
- }
- EXPORT_SYMBOL_GPL(__devm_clk_hw_register_mux);
- 
--struct clk *clk_register_mux_table(struct device *dev, const char *name,
-+struct clk *clk_register_mux_table(struct udevice *dev, const char *name,
- 		const char * const *parent_names, u8 num_parents,
- 		unsigned long flags, void __iomem *reg, u8 shift, u32 mask,
- 		u8 clk_mux_flags, const u32 *table, spinlock_t *lock)
- {
- 	struct clk_hw *hw;
- 
- 	hw = clk_hw_register_mux_table(dev, name, parent_names,
- 				       num_parents, flags, reg, shift, mask,
--				       clk_mux_flags, table, lock);
-+				       clk_mux_flags, table);
- 	if (IS_ERR(hw))
- 		return ERR_CAST(hw);
- 	return hw->clk;
- }
+ 	/*
+ 	 * when a clock provider is probed. Call clk_set_defaults()
 
 -- 
 2.51.0

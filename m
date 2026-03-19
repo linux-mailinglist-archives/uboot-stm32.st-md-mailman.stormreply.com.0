@@ -2,74 +2,74 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id GI75CsYXwWn5QQQAu9opvQ
+	id SO7/FMYXwWn5QQQAu9opvQ
 	(envelope-from <uboot-stm32-bounces@st-md-mailman.stormreply.com>)
 	for <lists+uboot-stm32@lfdr.de>; Mon, 23 Mar 2026 11:36:54 +0100
 X-Original-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id EA1CD2F041D
+	by mail.lfdr.de (Postfix) with ESMTPS id 0529B2F0420
 	for <lists+uboot-stm32@lfdr.de>; Mon, 23 Mar 2026 11:36:53 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 92DF1C8F294;
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A6AEFC8F296;
 	Mon, 23 Mar 2026 10:36:53 +0000 (UTC)
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com
- [209.85.128.53])
+Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com
+ [209.85.221.50])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 39A61C87ED5
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1DF14C87EC9
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 19 Mar 2026 20:58:23 +0000 (UTC)
-Received: by mail-wm1-f53.google.com with SMTP id
- 5b1f17b1804b1-486b96760easo15182705e9.2
+ Thu, 19 Mar 2026 20:58:27 +0000 (UTC)
+Received: by mail-wr1-f50.google.com with SMTP id
+ ffacd0b85a97d-439d8df7620so797664f8f.0
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 19 Mar 2026 13:58:23 -0700 (PDT)
+ Thu, 19 Mar 2026 13:58:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1773953903; x=1774558703;
+ d=linaro.org; s=google; t=1773953906; x=1774558706;
  darn=st-md-mailman.stormreply.com; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=Y7YG64DnCuy2McZZ3OS1s5OitYK10LkBi72/Tt+MRRY=;
- b=PQACWixve0ZpxUBdeiG430NTWeDre4O1c6EsEpksS49dbujmlV6ua481NlY81GzxDF
- ZZzY2GUT3IIfTKlCNXMShTTL9HHNfRxQbG6U1zqggji4I5QpEEITD0k7zeGSJVKgly99
- M17dk89XkpRah2yNDImlKKbDGJI9diw+ksCuEnnywTKAFamqRfX10sqL0wlCpzYR08LD
- MTgENJrBsUQewGOqYvVR+H4T3u6DWcE7RNbGNyB3OKLD+USytr6KOTh7xS2eYcPdUQ4o
- 7+a/QEtyx7KApkI1/1KZH+L1qWkzbym3jmLW73vnDOiTa6GFieL5puTn9ntX/kmKUpSL
- E8wA==
+ :reply-to; bh=geeTFJxfIoKH4agH5iM4UtAr30/4Md9xbBZc/3+TNDE=;
+ b=RIeBP6TcuYVrfhpOMyslOVU+dmeWaFhw/2VaHkqziMqcBS7zpRSaQUHwfw6aBY4W22
+ dOtV8p6+4CcdrT+bfF9E4Uzcd7SfBRxzaa+IN96GZ7cuiXQKAH/3o60SC44bbLiAHWcv
+ wjRUtmx6zMUaE+hVB5FA1wBr/wAg/lKXaUqCsOqL7dZYGSSctTlWZHZcq/JKyJD3+fwb
+ R0biZqx9nS7f0iNWkhHrhXwcNbbDs4JNP8ApKi8Ei2dAZx6kmm3WiUE6m9Gwc6/tL4cH
+ hxvvvhTtT5b3fuC6Hj0x5gDoTZJHv4+fnzl/KzbjBba8vdXLtxf4hsv/nEtg4KhEjhvg
+ gH/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773953903; x=1774558703;
+ d=1e100.net; s=20251104; t=1773953906; x=1774558706;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=Y7YG64DnCuy2McZZ3OS1s5OitYK10LkBi72/Tt+MRRY=;
- b=mXPe+IOR7aqpvsu64EErsUsp4JGSRYmQTq/VGxMJg5rkzH4jiw+sxynD75AdhKoV2V
- 1DFXtu19famls1iFgVuQbvte/emrJ3U2Ms/AfOdXATRdFLMuhkf+wcgTlmkE3cT122AP
- W5PQPQ21yxzJQJJ1qltHepkbnxMVyxCeVDxJ2+sYOCiTGhWArA/UtfkzMTJjyVl450i0
- YF0I3xV5qLphaKokLUG7KSmy+FkesNy3kPJtYG51eCMP7jUO7T7ESiCNMdxtu6eIbBdu
- twX/p88J/AMI7xoYzBoWW5Qm9i7Ex5MxfC2VDeROCkneqYOvvpJIMoVsHtBzwa3Ky+ZZ
- rUGw==
+ bh=geeTFJxfIoKH4agH5iM4UtAr30/4Md9xbBZc/3+TNDE=;
+ b=GU34kPRmzvZE8ckxYXjRbQmzreKhvjcYJpxXSX3RSmSA80+oDmsx8/SvrohN00k0C5
+ 9dmKaxiIl8XJjp3PNIRjAjM5f9cKpZU0ZifzcpXzllLm0C/wqEbHwFuhyD8BIsdp/x34
+ +9dKOHxLzTddyA5OibLoVeYhihASU+qm41NBs1ylno1N/LTsH1GMEijrYLucCWmIDAkt
+ 0NkA3TSiQAE0codQ/D+QXgPiRzO1bvm1K55pQjsXOKtf2aqUR9PSsFDpDIz7HuzL+4yp
+ NXaLRTs/3sDkfcARurxFe0xjfyoslLe1dwtVr3Ua1QR0CGyA0hlBzrjE+JkVa0cqi5MV
+ U/+w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWYzB+yiImkGxv2++Qem77ntJ/dwZwxSzHXf6cK1Bjz5oqUO2/EpaQ/keg9fQjQ16r1F2enE2s1qsLtIQ==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0YzNqMOR+DRU+mQM7JSrqgyIWweTACV8UOUqiCOqsTzRXts8Kqve
- OcKlTvmhLufwF1JVWExlk6XHUY8XDlu7y20komX2BhSH7e17apybIboksoRLZHF1vcg=
-X-Gm-Gg: ATEYQzzm8eu/l2DftACTbA8cQAivcycflTAYZzbe8Cyyi60dzntufG7TBG/dcSLJsNm
- +r5gIRlL3nA2/Kwfal9YDLG541WwTs7GDnPM+4v+Y0AikaujBX58PoLuV3hXwQxcamoj2uuKWOY
- FQGnLMOViZTpw9nAq7Zi/VP2vLE8bU3V07jRWflwDDdfqmRRS38/vr9tWwmAyWOnPN+AXN/Bbs+
- Szqu97QG11oPamr5g9OZ5HrIBYJQLQSOBqIhWbdLH21bAX935sGJWpP8cjisMS6gGwNrQ8VXdyX
- FDyzP0hOo+gVjOhbJYqRnkv6xlBRSSxjfi1Nz7JPDFcLKkBBi9iXJKOFQYn8QzcgAQf6eYRtjTH
- 8l6+MxPs0JFEM6KG7P176hfslVGN2WHnbXt6nMbSewAYfgq1hJ2gJrtYc7mb0S8mO51M9I8PdtS
- Si3Ln6JYkrOdve+LwapbnJRvXN+6++Z0Ik5Gwe0o+MApRHgLRYIYPmxRQ4cW7tVj9v9gs=
-X-Received: by 2002:a05:600c:8b31:b0:485:9a50:3369 with SMTP id
- 5b1f17b1804b1-486fee304c4mr7491445e9.29.1773953902485; 
- Thu, 19 Mar 2026 13:58:22 -0700 (PDT)
+ AJvYcCUki+WnhnxuUOTySrc6ac3elA6fc5xy1W56dvw6TiVEXKdemzlRHvnO8F6h+6aj9ncLfQx1xLY26/ynWQ==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0YxEuPD2bvFY15qNmdr0Vih5WInF9akUxNEaVSySW7kxAnwRiUM8
+ BHMTNw3vMe6gx4YM3WqPNUqFohDI4Jgb1fz6Azof0DxCA2pfFB7DWooTOg8coNwCg/g=
+X-Gm-Gg: ATEYQzz0N49wJPIjEaL50dIFgTuyq92WJaVGTd7t3JFd9bdSFRd7h1gg+elliS1YpHd
+ ZCkNyhtb8gjhXJnCVb+0IcfZqknJNS6EIpPTowYiQoKTq+ORulP636zE3o1DdP7O3Gb8PljD8Sk
+ AdcSBLkIE6YTLpdwetyy6udchHJ2oYwN43rWsceWa3N0gGAGoeOsjQNq+LR/Pi3unrHkHfX3GI+
+ IO1td95g1TtsKaUXYRX/CnOd4J0GbbKI04YsgTweHtGRqJeWJBW2poFx+jHRNJx2GynBw2IxSsY
+ iY31Lf1wiLsu/bR9fSfgnAuB1VkgEzH4ihREBhpc0pJOXvVwhL/mw/E+D36F+HEvc9Z48cABTNh
+ p1ztYzME7imDUGhGWqY09QhQv39oKqPtrlNFleYs2log1gMgKmE2dZY8UjlozbIRc6plRh9fs7h
+ R09MS33454wxOogT+jNDkE7iwZOvi3Pb/6eFhjQBpvAddy5GOdGfwFXputVSTbYEdTh48=
+X-Received: by 2002:a05:6000:2f84:b0:43b:464a:28de with SMTP id
+ ffacd0b85a97d-43b64243b0dmr1202144f8f.14.1773953906364; 
+ Thu, 19 Mar 2026 13:58:26 -0700 (PDT)
 Received: from lion.localdomain (p4fc3dd39.dip0.t-ipconnect.de.
  [79.195.221.57]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43b64714e2esm1191396f8f.32.2026.03.19.13.58.18
+ ffacd0b85a97d-43b64714e2esm1191396f8f.32.2026.03.19.13.58.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Mar 2026 13:58:21 -0700 (PDT)
+ Thu, 19 Mar 2026 13:58:25 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-Date: Thu, 19 Mar 2026 21:56:44 +0100
+Date: Thu, 19 Mar 2026 21:56:45 +0100
 MIME-Version: 1.0
-Message-Id: <20260319-casey-ccf-upstream-v1-22-4df2ee2226da@linaro.org>
+Message-Id: <20260319-casey-ccf-upstream-v1-23-4df2ee2226da@linaro.org>
 References: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
 In-Reply-To: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
 To: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>, 
@@ -81,13 +81,13 @@ To: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>,
  uboot-stm32@st-md-mailman.stormreply.com, 
  Sumit Garg <sumit.garg@kernel.org>
 X-Mailer: b4 0.15-dev-47773
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5656;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=7465;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=pyXAUexLV67NxbGLlNdz7O544IZi4ffGh3W9T1xKaV0=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw9yfzx1pPc5kyeEqS2Ry9LVzppW71iUWWD4oLmxp0ln
- +2KysQ6SlkYBDkYZMUUWcRPLLNsWnvZXmP7ggswc1iZQIYwcHEKwESMKxh+MTksTxGIUHi72dUm
- 3aPboKi5sKs96wML69Jz3cl/J1qkMzLsevraySBDSj1gmsaX6iqr1oiimabzFXznXEq3avsw6Xo
- RAA==
+ bh=roeni2Z1q01ICrw8UsZIOklSexsFxp8L4nYGbj+0P6Q=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw9yQL2y51qVykGJ5bm/g4Oi571M+FvcbJunqhzq8T7q
+ 7u4nGU7SlkYBDkYZMUUWcRPLLNsWnvZXmP7ggswc1iZQIYwcHEKwESS1Rn+cLrdDCo7P60kp/yp
+ CP9lXbndodcNvK462bCuWLe3VPneJ4b/FanRnEUrFRU3t7zOVZ3OvVDU0onlrpL/R479X4If3da
+ YAQA=
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-Mailman-Approved-At: Mon, 23 Mar 2026 10:36:50 +0000
@@ -160,8 +160,7 @@ Cc: Peng Fan <peng.fan@nxp.com>, Heiko Stuebner <heiko@sntech.de>,
  Rui Miguel Silva <rui.silva@linaro.org>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Manorit Chawdhry <m-chawdhry@ti.com>
-Subject: [Uboot-stm32] [PATCH RFC 22/40] clk: move clock flags to common
-	clk-provider.h
+Subject: [Uboot-stm32] [PATCH RFC 23/40] clk/ccf: adapt clk-conf for U-Boot
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -212,132 +211,258 @@ X-Spamd-Result: default: False [2.89 / 15.00];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[uboot-stm32];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[st-md-mailman.stormreply.com:rdns,stm-ict-prod-mailman-01.stormreply.prv:helo,linaro.org:email,linaro.org:mid,stormreply.com:email,stormreply.com:url]
-X-Rspamd-Queue-Id: EA1CD2F041D
+	DBL_BLOCKED_OPENRESOLVER(0.00)[st-md-mailman.stormreply.com:rdns,stm-ict-prod-mailman-01.stormreply.prv:helo,linaro.org:email,linaro.org:mid,samsung.com:email,stormreply.com:email,stormreply.com:url]
+X-Rspamd-Queue-Id: 0529B2F0420
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-These are the same between uccf and ccf_full, move them out to
-clk-provider.h so we can ensure they stay in sync.
+Basic changes to adapt clk-conf to build properly on U-Boot
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- include/linux/clk-provider-ccf_full.h | 24 ------------------------
- include/linux/clk-provider-uccf.h     | 24 ------------------------
- include/linux/clk-provider.h          | 24 ++++++++++++++++++++++++
- 3 files changed, 24 insertions(+), 48 deletions(-)
+ drivers/clk/ccf/clk-conf.c   | 84 ++++++++++++++++++++++++--------------------
+ include/linux/clk/clk-conf.h | 12 +++----
+ 2 files changed, 50 insertions(+), 46 deletions(-)
 
-diff --git a/include/linux/clk-provider-ccf_full.h b/include/linux/clk-provider-ccf_full.h
-index dfc2049feee5..0e160b13b3b2 100644
---- a/include/linux/clk-provider-ccf_full.h
-+++ b/include/linux/clk-provider-ccf_full.h
-@@ -9,32 +9,8 @@
- #include <linux/bitops.h>
- #include <linux/err.h>
- #include <clk-uclass.h>
+diff --git a/drivers/clk/ccf/clk-conf.c b/drivers/clk/ccf/clk-conf.c
+index 303a0bb26e54..7b29562e297c 100644
+--- a/drivers/clk/ccf/clk-conf.c
++++ b/drivers/clk/ccf/clk-conf.c
+@@ -3,66 +3,65 @@
+  * Copyright (C) 2014 Samsung Electronics Co., Ltd.
+  * Sylwester Nawrocki <s.nawrocki@samsung.com>
+  */
  
--/*
-- * flags used across common struct clk.  these flags should only affect the
-- * top-level framework.  custom flags for dealing with hardware specifics
-- * belong in struct clk_foo
-- *
-- * Please update clk_flags[] in drivers/clk/clk.c when making changes here!
-- */
--#define CLK_SET_RATE_GATE	BIT(0) /* must be gated across rate change */
--#define CLK_SET_PARENT_GATE	BIT(1) /* must be gated across re-parent */
--#define CLK_SET_RATE_PARENT	BIT(2) /* propagate rate change up one level */
--#define CLK_IGNORE_UNUSED	BIT(3) /* do not gate even if unused */
--				/* unused */
--				/* unused */
--#define CLK_GET_RATE_NOCACHE	BIT(6) /* do not use the cached clk rate */
--#define CLK_SET_RATE_NO_REPARENT BIT(7) /* don't re-parent on rate change */
--#define CLK_GET_ACCURACY_NOCACHE BIT(8) /* do not use the cached clk accuracy */
--#define CLK_RECALC_NEW_RATES	BIT(9) /* recalc rates after notifications */
--#define CLK_SET_RATE_UNGATE	BIT(10) /* clock needs to run to set rate */
--#define CLK_IS_CRITICAL		BIT(11) /* do not gate, ever */
--/* parents need enable during gate/ungate, set rate and re-parent */
--#define CLK_OPS_PARENT_ENABLE	BIT(12)
--/* duty cycle call may be forwarded to the parent clock */
--#define CLK_DUTY_CYCLE_PARENT	BIT(13)
--
- struct clk;
- struct clk_hw;
- struct clk_core;
- struct dentry;
-diff --git a/include/linux/clk-provider-uccf.h b/include/linux/clk-provider-uccf.h
-index bfd16fbdfc67..63b8df663a7a 100644
---- a/include/linux/clk-provider-uccf.h
-+++ b/include/linux/clk-provider-uccf.h
-@@ -27,32 +27,8 @@ static inline void clk_dm(ulong id, struct clk *clk)
- 	if (!IS_ERR(clk))
- 		clk->id = CLK_ID(clk->dev, id);
+-#include <linux/clk.h>
++#include <dm/ofnode.h>
+ #include <linux/clk-provider.h>
+ #include <linux/clk/clk-conf.h>
++#include <linux/compat.h>
+ #include <linux/device.h>
+-#include <linux/of.h>
+ #include <linux/printk.h>
+-#include <linux/slab.h>
+ 
+-static int __set_clk_parents(struct device_node *node, bool clk_supplier)
++static int __set_clk_parents(ofnode node, bool clk_supplier)
+ {
+-	struct of_phandle_args clkspec;
++	struct ofnode_phandle_args clkspec;
+ 	int index, rc, num_parents;
+ 	struct clk *clk, *pclk;
+ 
+-	num_parents = of_count_phandle_with_args(node, "assigned-clock-parents",
+-						 "#clock-cells");
++	num_parents = ofnode_count_phandle_with_args(node, "assigned-clock-parents",
++						 "#clock-cells", 0);
+ 	if (num_parents == -EINVAL)
+ 		pr_err("clk: invalid value of clock-parents property at %pOF\n",
+-		       node);
++		       &node);
+ 
+ 	for (index = 0; index < num_parents; index++) {
+-		rc = of_parse_phandle_with_args(node, "assigned-clock-parents",
+-					"#clock-cells",	index, &clkspec);
++		rc = ofnode_parse_phandle_with_args(node, "assigned-clock-parents",
++					"#clock-cells", 0, index, &clkspec);
+ 		if (rc < 0) {
+ 			/* skip empty (null) phandles */
+ 			if (rc == -ENOENT)
+ 				continue;
+ 			else
+ 				return rc;
+ 		}
+-		if (clkspec.np == node && !clk_supplier) {
+-			of_node_put(clkspec.np);
++		if (ofnode_equal(clkspec.node, node) && !clk_supplier) {
++			ofnode_put(clkspec.node);
+ 			return 0;
+ 		}
+ 		pclk = of_clk_get_from_provider(&clkspec);
+-		of_node_put(clkspec.np);
++		ofnode_put(clkspec.node);
+ 		if (IS_ERR(pclk)) {
+ 			if (PTR_ERR(pclk) != -EPROBE_DEFER)
+ 				pr_warn("clk: couldn't get parent clock %d for %pOF\n",
+-					index, node);
++					index, &node);
+ 			return PTR_ERR(pclk);
+ 		}
+ 
+-		rc = of_parse_phandle_with_args(node, "assigned-clocks",
+-					"#clock-cells", index, &clkspec);
++		rc = ofnode_parse_phandle_with_args(node, "assigned-clocks",
++					"#clock-cells", 0, index, &clkspec);
+ 		if (rc < 0)
+ 			goto err;
+-		if (clkspec.np == node && !clk_supplier) {
+-			of_node_put(clkspec.np);
++		if (ofnode_equal(clkspec.node, node) && !clk_supplier) {
++			ofnode_put(clkspec.node);
+ 			rc = 0;
+ 			goto err;
+ 		}
+ 		clk = of_clk_get_from_provider(&clkspec);
+-		of_node_put(clkspec.np);
++		ofnode_put(clkspec.node);
+ 		if (IS_ERR(clk)) {
+ 			if (PTR_ERR(clk) != -EPROBE_DEFER)
+ 				pr_warn("clk: couldn't get assigned clock %d for %pOF\n",
+-					index, node);
++					index, &node);
+ 			rc = PTR_ERR(clk);
+ 			goto err;
+ 		}
+ 
+@@ -78,40 +77,40 @@ err:
+ 	clk_put(pclk);
+ 	return rc;
  }
  
--/*
-- * flags used across common struct clk.  these flags should only affect the
-- * top-level framework.  custom flags for dealing with hardware specifics
-- * belong in struct clk_foo
-- *
-- * Please update clk_flags[] in drivers/clk/clk.c when making changes here!
-- */
--#define CLK_SET_RATE_GATE	BIT(0) /* must be gated across rate change */
--#define CLK_SET_PARENT_GATE	BIT(1) /* must be gated across re-parent */
--#define CLK_SET_RATE_PARENT	BIT(2) /* propagate rate change up one level */
--#define CLK_IGNORE_UNUSED	BIT(3) /* do not gate even if unused */
--				/* unused */
--#define CLK_IS_BASIC		BIT(5) /* Basic clk, can't do a to_clk_foo() */
--#define CLK_GET_RATE_NOCACHE	BIT(6) /* do not use the cached clk rate */
--#define CLK_SET_RATE_NO_REPARENT BIT(7) /* don't re-parent on rate change */
--#define CLK_GET_ACCURACY_NOCACHE BIT(8) /* do not use the cached clk accuracy */
--#define CLK_RECALC_NEW_RATES	BIT(9) /* recalc rates after notifications */
--#define CLK_SET_RATE_UNGATE	BIT(10) /* clock needs to run to set rate */
--#define CLK_IS_CRITICAL		BIT(11) /* do not gate, ever */
--/* parents need enable during gate/ungate, set rate and re-parent */
--#define CLK_OPS_PARENT_ENABLE	BIT(12)
--/* duty cycle call may be forwarded to the parent clock */
--#define CLK_DUTY_CYCLE_PARENT	BIT(13)
--
- #define CLK_MUX_INDEX_ONE		BIT(0)
- #define CLK_MUX_INDEX_BIT		BIT(1)
- #define CLK_MUX_HIWORD_MASK		BIT(2)
- #define CLK_MUX_READ_ONLY		BIT(3) /* mux can't be changed */
-diff --git a/include/linux/clk-provider.h b/include/linux/clk-provider.h
-index 1140c2b10ac2..4fcdb5a86799 100644
---- a/include/linux/clk-provider.h
-+++ b/include/linux/clk-provider.h
-@@ -8,8 +8,32 @@
-  */
- #ifndef __LINUX_CLK_PROVIDER_H
- #define __LINUX_CLK_PROVIDER_H
+-static int __set_clk_rates(struct device_node *node, bool clk_supplier)
++static int __set_clk_rates(ofnode node, bool clk_supplier)
+ {
+-	struct of_phandle_args clkspec;
++	struct ofnode_phandle_args clkspec;
+ 	int rc, count, count_64, index;
+ 	struct clk *clk;
+-	u64 *rates_64 __free(kfree) = NULL;
+-	u32 *rates __free(kfree) = NULL;
++	u64 *rates_64 = NULL;
++	u32 *rates = NULL;
  
-+/*
-+ * flags used across common struct clk.  these flags should only affect the
-+ * top-level framework.  custom flags for dealing with hardware specifics
-+ * belong in struct clk_foo
-+ *
-+ * Please update clk_flags[] in drivers/clk/clk.c when making changes here!
-+ */
-+#define CLK_SET_RATE_GATE	BIT(0) /* must be gated across rate change */
-+#define CLK_SET_PARENT_GATE	BIT(1) /* must be gated across re-parent */
-+#define CLK_SET_RATE_PARENT	BIT(2) /* propagate rate change up one level */
-+#define CLK_IGNORE_UNUSED	BIT(3) /* do not gate even if unused */
-+				/* unused */
-+				/* unused */
-+#define CLK_GET_RATE_NOCACHE	BIT(6) /* do not use the cached clk rate */
-+#define CLK_SET_RATE_NO_REPARENT BIT(7) /* don't re-parent on rate change */
-+#define CLK_GET_ACCURACY_NOCACHE BIT(8) /* do not use the cached clk accuracy */
-+#define CLK_RECALC_NEW_RATES	BIT(9) /* recalc rates after notifications */
-+#define CLK_SET_RATE_UNGATE	BIT(10) /* clock needs to run to set rate */
-+#define CLK_IS_CRITICAL		BIT(11) /* do not gate, ever */
-+/* parents need enable during gate/ungate, set rate and re-parent */
-+#define CLK_OPS_PARENT_ENABLE	BIT(12)
-+/* duty cycle call may be forwarded to the parent clock */
-+#define CLK_DUTY_CYCLE_PARENT	BIT(13)
+-	count = of_property_count_u32_elems(node, "assigned-clock-rates");
+-	count_64 = of_property_count_u64_elems(node, "assigned-clock-rates-u64");
++	count = ofnode_count_u32_elems(node, "assigned-clock-rates");
++	count_64 = ofnode_count_u64_elems(node, "assigned-clock-rates-u64");
+ 	if (count_64 > 0) {
+ 		count = count_64;
+ 		rates_64 = kcalloc(count, sizeof(*rates_64), GFP_KERNEL);
+ 		if (!rates_64)
+ 			return -ENOMEM;
+ 
+-		rc = of_property_read_u64_array(node,
++		rc = ofnode_read_u64_array(node,
+ 						"assigned-clock-rates-u64",
+ 						rates_64, count);
+ 	} else if (count > 0) {
+ 		rates = kcalloc(count, sizeof(*rates), GFP_KERNEL);
+ 		if (!rates)
+ 			return -ENOMEM;
+ 
+-		rc = of_property_read_u32_array(node, "assigned-clock-rates",
++		rc = ofnode_read_u32_array(node, "assigned-clock-rates",
+ 						rates, count);
+ 	} else {
+ 		return 0;
+ 	}
+ 
+ 	if (rc)
+-		return rc;
++		goto out_free;
+ 
+ 	for (index = 0; index < count; index++) {
+ 		unsigned long rate;
+ 
+@@ -120,29 +119,30 @@ static int __set_clk_rates(struct device_node *node, bool clk_supplier)
+ 		else
+ 			rate = rates[index];
+ 
+ 		if (rate) {
+-			rc = of_parse_phandle_with_args(node, "assigned-clocks",
+-					"#clock-cells",	index, &clkspec);
++			rc = ofnode_parse_phandle_with_args(node, "assigned-clocks",
++					"#clock-cells", 0,	index, &clkspec);
+ 			if (rc < 0) {
+ 				/* skip empty (null) phandles */
+ 				if (rc == -ENOENT)
+ 					continue;
+ 				else
+-					return rc;
++					goto out_free;
+ 			}
+-			if (clkspec.np == node && !clk_supplier) {
+-				of_node_put(clkspec.np);
++			if (ofnode_equal(clkspec.node, node) && !clk_supplier) {
++				ofnode_put(clkspec.node);
+ 				return 0;
+ 			}
+ 
+ 			clk = of_clk_get_from_provider(&clkspec);
+-			of_node_put(clkspec.np);
++			ofnode_put(clkspec.node);
+ 			if (IS_ERR(clk)) {
+ 				if (PTR_ERR(clk) != -EPROBE_DEFER)
+ 					pr_warn("clk: couldn't get clock %d for %pOF\n",
+-						index, node);
+-				return PTR_ERR(clk);
++						index, &node);
++				rc = PTR_ERR(clk);
++				goto out_free;
+ 			}
+ 
+ 			rc = clk_set_rate(clk, rate);
+ 			if (rc < 0)
+@@ -152,8 +152,14 @@ static int __set_clk_rates(struct device_node *node, bool clk_supplier)
+ 			clk_put(clk);
+ 		}
+ 	}
+ 	return 0;
 +
- /*
-  * U-Boot: for compatibility include the correct clk-provider.h
-  * for either uccf (U-Boot CCF) or ccf_full (Linux CCF)
++out_free:
++	kfree(rates);
++	kfree(rates_64);
++
++	return rc;
+ }
+ 
+ /**
+  * of_clk_set_defaults() - parse and set assigned clocks configuration
+@@ -166,13 +172,13 @@ static int __set_clk_rates(struct device_node *node, bool clk_supplier)
+  * listed in its 'assigned-clocks' or 'assigned-clock-parents' properties.
+  * If @clk_supplier is false the function exits returning 0 as soon as it
+  * determines the @node is also a supplier of any of the clocks.
   */
+-int of_clk_set_defaults(struct device_node *node, bool clk_supplier)
++int of_clk_set_defaults(ofnode node, bool clk_supplier)
+ {
+ 	int rc;
+ 
+-	if (!node)
++	if (!ofnode_valid(node))
+ 		return 0;
+ 
+ 	rc = __set_clk_parents(node, clk_supplier);
+ 	if (rc < 0)
+diff --git a/include/linux/clk/clk-conf.h b/include/linux/clk/clk-conf.h
+index eae9652c70cd..93bb6c582b4e 100644
+--- a/include/linux/clk/clk-conf.h
++++ b/include/linux/clk/clk-conf.h
+@@ -6,19 +6,17 @@
+ 
+ #ifndef __CLK_CONF_H
+ #define __CLK_CONF_H
+ 
++#include <dm/ofnode.h>
+ #include <linux/types.h>
+ 
+-struct device_node;
+-
+-#if defined(CONFIG_OF) && defined(CONFIG_COMMON_CLK)
+-int of_clk_set_defaults(struct device_node *node, bool clk_supplier);
++#if CONFIG_IS_ENABLED(CLK_CCF_FULL)
++int of_clk_set_defaults(ofnode node, bool clk_supplier);
+ #else
+-static inline int of_clk_set_defaults(struct device_node *node,
+-				      bool clk_supplier)
++int of_clk_set_defaults(ofnode node, bool clk_supplier)
+ {
+-	return 0;
++	return -ENOSYS;
+ }
+ #endif
+ 
+ #endif /* __CLK_CONF_H */
 
 -- 
 2.51.0

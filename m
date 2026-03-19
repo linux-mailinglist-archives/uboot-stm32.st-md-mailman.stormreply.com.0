@@ -2,75 +2,74 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id gL5mI8QXwWn5QQQAu9opvQ
+	id sE8+MMQXwWmZQgQAu9opvQ
 	(envelope-from <uboot-stm32-bounces@st-md-mailman.stormreply.com>)
 	for <lists+uboot-stm32@lfdr.de>; Mon, 23 Mar 2026 11:36:52 +0100
 X-Original-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 761F62F03B1
+	by mail.lfdr.de (Postfix) with ESMTPS id A7C5E2F03C1
 	for <lists+uboot-stm32@lfdr.de>; Mon, 23 Mar 2026 11:36:52 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 035CEC8F260;
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 188F6C8F264;
 	Mon, 23 Mar 2026 10:36:52 +0000 (UTC)
 Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com
  [209.85.221.51])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id BCBCEC35E2B
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id DB563C87EC9
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 19 Mar 2026 20:57:10 +0000 (UTC)
+ Thu, 19 Mar 2026 20:57:14 +0000 (UTC)
 Received: by mail-wr1-f51.google.com with SMTP id
- ffacd0b85a97d-439b2965d4bso1031688f8f.2
+ ffacd0b85a97d-43b4f48c47cso1060696f8f.0
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 19 Mar 2026 13:57:10 -0700 (PDT)
+ Thu, 19 Mar 2026 13:57:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1773953830; x=1774558630;
+ d=linaro.org; s=google; t=1773953834; x=1774558634;
  darn=st-md-mailman.stormreply.com; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=+IfOdxKnO5d2gX0DJUSfHZyr0om0CN4y9Pd0XspF9Lg=;
- b=c6bdpgLkZoOJ4Ww66vbk0GXLOr5uxvKNIpqUBgi22ERDD3AuBz7tgx7Lr0OliSB200
- XmUgeVn0cxZ1wrmzU/oNpWU/249RHW+AcFhfhC+2OsO55m4SGk8iTvJqUmIaj9cesi0t
- Kx+ufd1ad3xDF9F5X5it8ejI4MfvdtT7yR/xQIoY+5wwQYDX4sLEL7sKLg0dZySn0BFQ
- wZH0ddKUfURQR0RQ/Z9MMM/uUcd1oNWctk0YpCQyD+RQAYp30i7JUNVwSvMDNFHeP6/c
- C9iODw+MLCQzzCw321C1PNXKNXZ1Rn9+uQQ/lCVpHzm97KRvhZPEBIg2eYI8AB3RJ7PU
- 2qdw==
+ :reply-to; bh=OJvm8hJq5dvTL5t+nuiKKxZ20+5uLhO/dmppj5+JcmU=;
+ b=F/ObSq45B2aUh1ZgXoC2wjki4m/J/yfC40SPpqdcKcfPUGAGDzEW+smEhLpVaySvjN
+ GbdoIWfAlygClcshnyogISbG+zVFdJ8OK+5lHRo0kKc9OMAYwpGPP4bwQ386cOx968j3
+ GabejHKv6SHg1SnW5NB2yb/fv018iYqZggcbULxKeaUI3tyr2bf9YkYAl6w2KZyhDMC/
+ Te6ipNTVz0jZnOd9pTJ82FAY9FL4ZM9B49gt6p11u57Lr/HgPQGvy8ONxYixYS9i4233
+ vezV1kCTukDWH4+/J+EbtY6oPyTo0CnnDmtyhHsDoFVqqqvLevIBJJYU1NnbHlhQJCeX
+ Ofvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773953830; x=1774558630;
+ d=1e100.net; s=20251104; t=1773953834; x=1774558634;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=+IfOdxKnO5d2gX0DJUSfHZyr0om0CN4y9Pd0XspF9Lg=;
- b=VLKyT2YZOKNdH1QAR/aDrsWxWse5yCOs1o0dz4BAstleZKTjYxayR8uO2SzS+ENMbs
- R2ddi2CO86sD+PmR47cxBJWD5eQLyNrQUMDGjm9BQ/r1faoc1i0yxXiVcbcPD5zqkH+B
- gdU7MeCV2wwSVQVJe+yIg5t69WjAFLPkZaBW5YLOffgsAUC3ec1NL78ptZlYfpK/tOPK
- ne+5wtIDBIadh2g8BoHiys30hVopKU7v021p9TMDVnGietnpxtehH5B+OJOzt9tHrckm
- VJOE/ZixdgvuoSA6VaqHThDTLVsVC9x433TuPieBQ9doorsojLAFqjyzvTgs2K2t3NcF
- vVjw==
+ bh=OJvm8hJq5dvTL5t+nuiKKxZ20+5uLhO/dmppj5+JcmU=;
+ b=fjiNf9xYauRWPItrk65lvplddStr2sko3W96o/9zwm0dnDL9Np+BIiu3uTSCBRnLu6
+ jwOJ3rrwJl3ZffRFjp4E54tYsAEbOuMgXrr6aYaXrJZe5TYLAs6vHU+udggBWKR7IlXf
+ kTyIuCJyX2mJ88OKcAiq6JfuhlhrXOJZY6/S0t6Awwd3Xrybf7kppGkS5zLKUWV7EMUA
+ /0dy6ggDKPerxQsbheGjAf34Wl028gQWuXWnQhaR7PgEqj36DqTSZEWwkieCUxVXZajt
+ RfvL8fbgs7tl/1Eal02gmJ92RmjQ/7CfFhbdK6hY9v2js4HZczt32sXF8ehB46BDBh+y
+ ypug==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWxUMBdNi3/1HOekzf3XXWk6OCyuT0JcoWzQqTrmpHWtBO2oUk/dCd8dmB1v+nlYgpAcrorE87BFcd2hA==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0Yy6Ot5ip/nQ+guOCOiizljmeAzbiFS16ges72VD8Gs3O+72BCJG
- Acltd8ghUwwV/JbBq9R5v12xpSTJ8F/dX7QzdkbBp1VplUek0McZqz+ECgbulwB7tFc=
-X-Gm-Gg: ATEYQzzNEOY1klfpeTt/xod9rhExSExsa979veX8y+mZzkjQvsFxGO/zZ7snROcADMq
- /R5HEj+uof38TnmJXa/1ZEZngv2v0t32ZsNqPybYS1ce4C6wH+sfXfCyEOjme2vZNCMipsM95MJ
- ZKf0hYO6BG1rxloUiRECGKSKdd080LBdafAicwAVOVYUmyw8HJp3si34sJFgVloxWKKTCmTCo0o
- Tlh8A8GYTBQyrSZQtZCVciasxQfdrO6XKPdodbdEzbSPXE0O0i0GXEy3t1H2PtCgBoksmAgvBKB
- iMgKqImV90PcxeWC2HEC0jZ3HAOika/vIOGDpBkrxtBdPwHTlwV8P1x11HIb0Y0W8XCjD0Ynb/6
- /bAw68b/kN39rpSkg0vxyXVNk4SKZhUIamTrKbxVIS8xb3zAB+/2BZ5qsVl3WXa8j+9iMcpR9gE
- YDvUKGLs+4rlDKIgnK5zmTupuUq4qBNhxd7O/T5613zR9Bc1loTrKFo+7k2aU+99Iw63O1CpP4Z
- 45bSQ==
-X-Received: by 2002:a05:6000:612:b0:439:c661:3245 with SMTP id
- ffacd0b85a97d-43b6427d39dmr1330209f8f.34.1773953830110; 
- Thu, 19 Mar 2026 13:57:10 -0700 (PDT)
+ AJvYcCWT/9maH9Wdbx3f0bB+KWM97abSyeGUU48UB4vhVYZb6cexhzZmKj7sOAiLj/NHvXjwphla/N9fpRfxyg==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0YxUNRxoDrWifwy3nsoCL0ha6mPZ/bNlezkpA8+PC4jC7bcJzrGB
+ D3Ttr9Ia3h2WY9UULMXRyGQiAg+BXZAmRcsJtiIH3OvcZXgyDjnKKPRxGgptE9zFcwk=
+X-Gm-Gg: ATEYQzzjYCGK46++anZqstqWjV+Mz/CbU80dDhUgEHKhm73MryYh8Mc+oQ6505ZAl5j
+ FzOUBjjE0pEfffFmFwZA727oGhtWa50vGjTIXXMPUqfUUBXJUt+MbEwEmRvvtxo1s3FrDNcT58l
+ LXa7SfYaaRIqubtypN4+DFP49qddgsI/F0i0uPwV6+w4e8hiE2IFEAUevPzazv1uxg+uTr3viZF
+ h7m6/TW/TyjW1TWpbN4HuIoEWJDaY4nGz2X6+qFNAy7JDwOI8Npoc1o5focrOVP8XwpP0g1l74E
+ p6335A0M2Wpu7CpgEL/jOAJj55aH0co3spfe/1pGauZ23nJQrXgX4OsOk71O+u0aW6xD0kGt06V
+ s+zahr6+u62UmQgJ7mevM9+QxGsShs+cL5Mb7wqXysJVj8feMJHUxaYbQipCe1pxemvcDugps2c
+ fwmnLKGgdb+Q9JvcxmAQvbrnqWhBfbqYddEV8bauq2N9AzaEMof1KXaR9B5lTUkE2ICzI=
+X-Received: by 2002:a05:6000:22c7:b0:437:745f:a6b8 with SMTP id
+ ffacd0b85a97d-43b642432d7mr1437628f8f.9.1773953834211; 
+ Thu, 19 Mar 2026 13:57:14 -0700 (PDT)
 Received: from lion.localdomain (p4fc3dd39.dip0.t-ipconnect.de.
  [79.195.221.57]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43b64714e2esm1191396f8f.32.2026.03.19.13.57.05
+ ffacd0b85a97d-43b64714e2esm1191396f8f.32.2026.03.19.13.57.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Mar 2026 13:57:09 -0700 (PDT)
+ Thu, 19 Mar 2026 13:57:13 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-Date: Thu, 19 Mar 2026 21:56:26 +0100
+Date: Thu, 19 Mar 2026 21:56:27 +0100
 MIME-Version: 1.0
-Message-Id: <20260319-casey-ccf-upstream-v1-4-4df2ee2226da@linaro.org>
+Message-Id: <20260319-casey-ccf-upstream-v1-5-4df2ee2226da@linaro.org>
 References: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
 In-Reply-To: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
 To: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>, 
@@ -82,13 +81,13 @@ To: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>,
  uboot-stm32@st-md-mailman.stormreply.com, 
  Sumit Garg <sumit.garg@kernel.org>
 X-Mailer: b4 0.15-dev-47773
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2066;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4099;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=EMYajq/tChEE6riKBZOgKjJcWcO1seCjnTJUt8+7XRc=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw9ybxWnsm6/Y/eMPq3n0radJUvOop9kQzHhH+HnnTp5
- qbrn9rSUcrCIMjBICumyCJ+Ypll09rL9hrbF1yAmcPKBDKEgYtTACYi5MLwP72ITZt57pM3y/9a
- 3Vq1c/7t7NM2Xzb+8vflVvc2Xq3yfBPD/1qzDXLxlm6PFHiMxH4/4ywILdwUOOO/+O9Db3+zXjl
- Q8RcA
+ bh=5jwUMh0k+N1QnC8WW0D/qoE/XYGivWXyZ6pP2y+2UGs=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw9ybwvjA6WOG9Zav4uzHiHZUrt3R5/MXmRHfcuf3j/9
+ PjO69qHO0pZGAQ5GGTFFFnETyyzbFp72V5j+4ILMHNYmUCGMHBxCsBEFvEx/I/dz8bzxldfs27O
+ qQ2/hFumnf/aclE7+bkQ36TMJw+al9Qx/DPkeqQ52V3YdcNpqzPhCc8VzhsHf3tx5ejPwB4t97m
+ e94IB
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-Mailman-Approved-At: Mon, 23 Mar 2026 10:36:50 +0000
@@ -161,8 +160,8 @@ Cc: Peng Fan <peng.fan@nxp.com>, Heiko Stuebner <heiko@sntech.de>,
  Rui Miguel Silva <rui.silva@linaro.org>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Manorit Chawdhry <m-chawdhry@ti.com>
-Subject: [Uboot-stm32] [PATCH RFC 04/40] qcom: rpmh: don't error for SLEEP
-	requests
+Subject: [Uboot-stm32] [PATCH RFC 05/40] string: add strdup_const and
+	kstrdup_const
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -213,68 +212,152 @@ X-Spamd-Result: default: False [2.89 / 15.00];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[uboot-stm32];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[stormreply.com:email,stormreply.com:url,linaro.org:email,linaro.org:mid,stm-ict-prod-mailman-01.stormreply.prv:helo,st-md-mailman.stormreply.com:rdns]
-X-Rspamd-Queue-Id: 761F62F03B1
+	DBL_BLOCKED_OPENRESOLVER(0.00)[stm-ict-prod-mailman-01.stormreply.prv:helo,stormreply.com:email,stormreply.com:url,linaro.org:email,linaro.org:mid,st-md-mailman.stormreply.com:rdns]
+X-Rspamd-Queue-Id: A7C5E2F03C1
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Just stub them out since the caller might also send active votes. Since
-we don't suspend there's no risk of missing votes here, we never enter
-the sleep state.
+Extend Linux compat by adding kstrdup_const(), backed by lib/string.c.
+This leverages U-Boots .rodata section on ARM64 to avoid pointlessly
+duplicating const strings.
+
+This is used by the Linux CCF_FULL port and may be useful elsewhere
+in U-Boot.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- drivers/soc/qcom/rpmh-rsc.c | 8 ++++----
- drivers/soc/qcom/rpmh.c     | 4 ++--
- 2 files changed, 6 insertions(+), 6 deletions(-)
+ include/asm-generic/sections.h | 19 +++++++++++++++++++
+ include/linux/compat.h         | 13 +++++++++++++
+ include/linux/string.h         |  2 ++
+ lib/string.c                   | 31 +++++++++++++++++++++++++++++++
+ 4 files changed, 65 insertions(+)
 
-diff --git a/drivers/soc/qcom/rpmh-rsc.c b/drivers/soc/qcom/rpmh-rsc.c
-index dce61f262292..51af5a2a686b 100644
---- a/drivers/soc/qcom/rpmh-rsc.c
-+++ b/drivers/soc/qcom/rpmh-rsc.c
-@@ -260,10 +260,10 @@ static struct tcs_group *get_tcs_for_msg(struct rsc_drv *drv,
- 	 * U-Boot: since we're single threaded and running synchronously we can
- 	 * just always used the first active TCS.
- 	 */
- 	if (msg->state != RPMH_ACTIVE_ONLY_STATE) {
--		log_err("WARN: only ACTIVE_ONLY state supported\n");
--		return ERR_PTR(-EINVAL);
-+		log_debug("WARN: only ACTIVE_ONLY state supported\n");
-+		return NULL;
- 	}
+diff --git a/include/asm-generic/sections.h b/include/asm-generic/sections.h
+index d59787948fd1..48bd4fa86043 100644
+--- a/include/asm-generic/sections.h
++++ b/include/asm-generic/sections.h
+@@ -8,8 +8,9 @@
+ #ifndef _ASM_GENERIC_SECTIONS_H_
+ #define _ASM_GENERIC_SECTIONS_H_
  
- 	return &drv->tcs[ACTIVE_TCS];
+ #include <linux/types.h>
++#include <stdbool.h>
+ 
+ /* References to section boundaries */
+ 
+ extern char _text[], _stext[], _etext[];
+@@ -61,8 +62,26 @@ static inline int arch_is_kernel_data(unsigned long addr)
+ 	return 0;
  }
-@@ -389,10 +389,10 @@ int rpmh_rsc_send_data(struct rsc_drv *drv, const struct tcs_request *msg)
- 	int tcs_id, i = 0;
- 	u32 val;
+ #endif
  
- 	tcs = get_tcs_for_msg(drv, msg);
--	if (IS_ERR(tcs))
--		return PTR_ERR(tcs);
-+	if (IS_ERR_OR_NULL(tcs))
-+		return PTR_ERR_OR_ZERO(tcs);
++/**
++ * is_kernel_rodata - checks if the pointer address is located in the
++ *                    .rodata section
++ *
++ * @addr: address to check
++ *
++ * Returns: true if the address is located in .rodata, false otherwise.
++ */
++static inline bool is_kernel_rodata(unsigned long addr)
++{
++#ifdef CONFIG_ARM64
++	return addr >= (unsigned long)__start_rodata &&
++	       addr < (unsigned long)__end_rodata;
++#else
++	return false;
++#endif
++}
++
+ /* U-Boot-specific things begin here */
  
- 	/* U-Boot is single-threaded, always use the first TCS as we'll never conflict */
- 	tcs_id = tcs->offset;
- 	if (!read_tcs_reg(drv, drv->regs[RSC_DRV_STATUS], tcs_id)) {
-diff --git a/drivers/soc/qcom/rpmh.c b/drivers/soc/qcom/rpmh.c
-index 8c222324c66d..b55e23c4417d 100644
---- a/drivers/soc/qcom/rpmh.c
-+++ b/drivers/soc/qcom/rpmh.c
-@@ -59,10 +59,10 @@ static int __rpmh_write(const struct udevice *dev, enum rpmh_state state,
+ /* Start of U-Boot text region */
+ extern char __text_start[];
+diff --git a/include/linux/compat.h b/include/linux/compat.h
+index 623814516175..d4ba4d0088a0 100644
+--- a/include/linux/compat.h
++++ b/include/linux/compat.h
+@@ -66,8 +66,21 @@ static inline void vfree(const void *addr)
  {
- 	struct rpmh_ctrlr *ctrlr = get_rpmh_ctrlr(dev);
- 
- 	if (state != RPMH_ACTIVE_ONLY_STATE) {
--		log_err("only ACTIVE_ONLY state supported\n");
--		return -EINVAL;
-+		log_debug("WARN: Only ACTIVE_ONLY state supported\n");
-+		return 0;
- 	}
- 
- 	return rpmh_rsc_send_data(ctrlr_to_drv(ctrlr), &rpm_msg->msg);
+ 	free((void *)addr);
  }
+ 
++/**
++ * kstrdup_const - conditionally duplicate an existing const string
++ * @s: the string to duplicate
++ * @gfp: the GFP mask used in the kmalloc() call when allocating memory
++ *
++ * Note: Strings allocated by kstrdup_const should be freed by kfree_const and
++ * must not be passed to krealloc().
++ *
++ * Return: source string if it is in .rodata section otherwise
++ * fallback to kstrdup.
++ */
++#define kstrdup_const(s, gfp) strdup_const(s)
++
+ struct kmem_cache { int sz; };
+ 
+ struct kmem_cache *get_mem(int element_sz);
+ #define kmem_cache_create(a, sz, c, d, e)	get_mem(sz)
+diff --git a/include/linux/string.h b/include/linux/string.h
+index d943fcce690c..a8a6cf4af505 100644
+--- a/include/linux/string.h
++++ b/include/linux/string.h
+@@ -103,8 +103,10 @@ size_t strcspn(const char *s, const char *reject);
+ 
+ #ifndef __HAVE_ARCH_STRDUP
+ extern char * strdup(const char *);
+ extern char * strndup(const char *, size_t);
++extern const char *strdup_const(const char *s);
++extern void kfree_const(const void *x);
+ #endif
+ #ifndef __HAVE_ARCH_STRSWAB
+ extern char * strswab(const char *);
+ #endif
+diff --git a/lib/string.c b/lib/string.c
+index d56f88d4a847..302efe048b07 100644
+--- a/lib/string.c
++++ b/lib/string.c
+@@ -378,8 +378,39 @@ char * strndup(const char *s, size_t n)
+ 	new[len] = '\0';
+ 
+ 	return new;
+ }
++
++/**
++ * strdup_const - conditionally duplicate an existing const string
++ * @s: the string to duplicate
++ *
++ * Note: Strings allocated by kstrdup_const should be freed by kfree_const and
++ * must not be passed to krealloc().
++ *
++ * Return: source string if it is in .rodata section otherwise
++ * fallback to kstrdup.
++ */
++const char *strdup_const(const char *s)
++{
++	if (is_kernel_rodata((unsigned long)s))
++		return s;
++
++	return strdup(s);
++}
++
++/**
++ * kfree_const - conditionally free memory
++ * @x: pointer to the memory
++ *
++ * Function calls kfree only if @x is not in .rodata section.
++ */
++void kfree_const(const void *x)
++{
++	if (!is_kernel_rodata((unsigned long)x))
++		free((void *)x);
++}
++
+ #endif
+ 
+ #ifndef __HAVE_ARCH_STRSPN
+ /**
 
 -- 
 2.51.0

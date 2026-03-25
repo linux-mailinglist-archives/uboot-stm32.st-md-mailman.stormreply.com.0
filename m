@@ -2,108 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wO16O9fMwmkBmQQAu9opvQ
+	id cK8bGtoBxWlZ5gQAu9opvQ
 	(envelope-from <uboot-stm32-bounces@st-md-mailman.stormreply.com>)
-	for <lists+uboot-stm32@lfdr.de>; Tue, 24 Mar 2026 18:41:44 +0100
+	for <lists+uboot-stm32@lfdr.de>; Thu, 26 Mar 2026 10:52:26 +0100
 X-Original-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1AEA031A2E9
-	for <lists+uboot-stm32@lfdr.de>; Tue, 24 Mar 2026 18:41:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 073E6332AE4
+	for <lists+uboot-stm32@lfdr.de>; Thu, 26 Mar 2026 10:52:25 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id BE706C87ECB;
-	Tue, 24 Mar 2026 17:41:42 +0000 (UTC)
-Received: from mail-ej1-f52.google.com (mail-ej1-f52.google.com
- [209.85.218.52])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id AC0A5C8F279;
+	Thu, 26 Mar 2026 09:52:25 +0000 (UTC)
+Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
+ (using TLSv1.2 with cipher ADH-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AA965C87EC5
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B6D03C87EC4
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 24 Mar 2026 17:41:41 +0000 (UTC)
-Received: by mail-ej1-f52.google.com with SMTP id
- a640c23a62f3a-b886fc047d5so958033266b.3
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 24 Mar 2026 10:41:41 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1774374101; cv=none;
- d=google.com; s=arc-20240605;
- b=jA6+DqOMSAFIUXVE5sxoJA7mafoBRGJcHMiWEVdhBbmcPYxcsWcHKUl8r7B9rLe1zG
- V0coGa7atdqOcIV44gQZM8wjRTEgIVCvTZIA5Vo1KS8Zl63jxHlQC54djAbLk3aNtYhH
- vEjsICoMW6W1wv6twGz9/iqYjR1OViXB8CfVLKwcGd9VdjeePm6B8ulgUQWrEgt4SpM4
- gAsKnVhebtqQ7O6HdoVw4IePVHx7GeBs9uNG23zsaoNwJ0SbNEo6VxgP92ueJqdUn0Ac
- PJ/AwK9xN6RX17FYTU0Lg2PHOQXDDZ1DNOuE2HKDAWmwLsv7gK7NOL3XJwy+5vq9oeBq
- hNzw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=f1ottSAtczohD1NRXdvebbjd0FdcbbwAYgrYaA1gVbo=;
- fh=cu/gAmlMAza+KLoHycJJsJRV5SqjK32AVhegzZwLKiU=;
- b=Jpp3sf6KgtZkTxIZpm/7H8QWgWvukpc1tr62GDxAMQ15g9B8n4f1fUhOUMyV6nJY0P
- mW1ySzp+5rTZNwBWRuc3QsaWwEcMGYZS8zw2OVmZz7bdODb0TuT4K9pzJ1RIiLhqrBlo
- yfq3l5cnsPP34FSisrPJuiwRxZTFf8T2w4KlPENLM/FypFsQPC/wlv1+kawexfDK0Y4y
- WpjFDPeDD6ou/X5as/VcxaY58jxUW8/NRD1FjznNTmM4cMYo6lwFbBObmcuTPmIeor29
- fPvESbeCoMy/foxAU7as8ropDfrfejkJYA+GX9wHchFuQpoxV+y0OK2D2/SuyhDzOLif
- /2BQ==; darn=st-md-mailman.stormreply.com
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1774374101; x=1774978901;
- darn=st-md-mailman.stormreply.com; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=f1ottSAtczohD1NRXdvebbjd0FdcbbwAYgrYaA1gVbo=;
- b=hwVJvwahW4Q04+QqtGvHNl8y+f35Nrj+dLc+eeox9TdY/GAE7bf7HGccul3c1R1xhi
- QwiJ3VyvXqWPuqIQvJIPp9IWNp5/hIdsRJvJEhEiEUIn5lYtFjSBq6nI4R5O9pS1Tdc0
- KIJP1mLUvxA2S45x4XhtqYMgypkqv1ZjNi6uo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774374101; x=1774978901;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=f1ottSAtczohD1NRXdvebbjd0FdcbbwAYgrYaA1gVbo=;
- b=noM1fr+n1RdPCvdrBMDhiqKJLmjx4yzq/1jRNlsM6i4BCK1c9FZiiAULIPB84IUoqY
- BRL4nUHq6oMsV59IDue/TlDVQr0g6Ir8TPTkWSyHd6sU1C1lrJstQV7VZ49YaZk0Uc35
- fWWCCMrSbuZ5O1LB82hd5no0l7ejUPUOOQM++x9JY95j/HGbMuzAWRBz3oBfy2nZbGpa
- wlE7FKgLmC3+Z+vh6KGt1Og3zhVztd0twgUf4NcuIEpxWpnazG9gJf8XFV2dvRU41leg
- 7eqMxKBC6jiPkvcZmXxgUuzRGJXZybnkFytSODsDeGUpozFxGtXv+23VxNb6rCoYCW7/
- sV9A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXeWEuJq/18raHA1rI47OUy3uUeqFNbfNe+THLSHEXuL0sgoPKmUdtD/UtY/5x8qZK0vUHvO95YRly73w==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0YwHw6y8R/Nkk4TwjreJk2ZVC9d5L4olj3XVFVHGX4Jr9xY6cBsS
- YkBY9t1AZBCnFeDPHe1RsgSy9H76MQYMrqSgoJOCua3BObMLVYjhEN6x7aHSchRmXRNXtyLbZGH
- yRrze6W6Rif0KIm5T/njLCQ86OrajvxNK1qUXDdrj
-X-Gm-Gg: ATEYQzxSRuOXF7rgbkeHEQ/F5J2AqOu+38tYvCz8nJm82Qhw5EQliH5CX+DHPfOp6ci
- YKTYgdHt4I7z6hmkQu9zZEh4GfBtfwF0+IurL6mRutZKk/occPniOdWqStepwmwU8jFdCx1dlPv
- sPMklzHFpK/3gOBBHrhQ22ElnsdtqoqmhlvtWnf+a++lDfv9qU43wjB4ZOCNUYR03VuLmRA1YyX
- taOSiO2TcQ2CJ0gAuqP3dLTEFO44MIZpHoKDUxuqh7Ys1l8qwIRayCOeUAyRe5ElRyZLkbB0nMl
- ofAecdM=
-X-Received: by 2002:a17:907:e11c:b0:b99:7697:76dc with SMTP id
- a640c23a62f3a-b9a3f1663d8mr18984566b.4.1774374100786; Tue, 24 Mar 2026
- 10:41:40 -0700 (PDT)
+ Wed, 25 Mar 2026 05:15:50 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 72AB81122C9; Wed, 25 Mar 2026 06:15:40 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1774415749;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=MOn1jMj8un72XbO7XQ4ykPHaiQh9RJHTF3LV7AhpioE=;
+ b=Y+7uP5QpRmypY3Hazmgz5r2r0F/Hm4/StUULEpN7kA3qvnX0qCpM+8ffj//+vpDttFDEki
+ fMvlXeVEKsy0cEeZF7Y48gtavFX8h/drIko5o9yOnSKxewboD6/9UWITsc8V+e7CtwLDLc
+ 1zQN77tWGtdgtn90KeCAx1Zff8NE8DwZVDpr9ysXRSnHpr69/z2cCRi6ijKujDB6I4aCtr
+ 17ajaLEIKOCOgG6KPX6JgJrRdeVJlUM2SUQJpNVw7xSRSFTsFiDjf1X8EihWjB5c0XOdjR
+ 1uU9EqDJQ5WuWQ+L5BHGElgB/0gbKAvJFeoqRemOV02CDe1rGBwYSJ9PXwmhcQ==
+Message-ID: <9b848de9-33c4-5eb1-38dc-22bf3e57847b@nabladev.com>
+Date: Wed, 25 Mar 2026 06:15:35 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 References: <20260323225537.896180-1-trini@konsulko.com>
+From: Heiko Schocher <hs@nabladev.com>
 In-Reply-To: <20260323225537.896180-1-trini@konsulko.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 24 Mar 2026 11:41:30 -0600
-X-Gm-Features: AQROBzDoBbiLnL-H8z3_ppKXN1rO1G4g0-_SU87GunPz7GS7SCrV8NIEQMmqpLQ
-Message-ID: <CAFLszTjN7ZSkc0vfT_KmN9um+v=--RRyV5OzJSWVirOT2fZWMA@mail.gmail.com>
-To: Tom Rini <trini@konsulko.com>
+X-Last-TLS-Session-Version: TLSv1.3
+X-Mailman-Approved-At: Thu, 26 Mar 2026 09:52:24 +0000
 Cc: Peng Fan <peng.fan@nxp.com>, Casey Connolly <casey.connolly@linaro.org>,
  Stefan Roese <stefan.roese@mailbox.org>,
  Kever Yang <kever.yang@rock-chips.com>,
  Masahisa Kojima <kojima.masahisa@socionext.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, u-boot-qcom@groups.io,
+ uboot-stm32@st-md-mailman.stormreply.com, u-boot-qcom@groups.io,
  Jerome Forissier <jerome.forissier@arm.com>,
  Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>, u-boot-amlogic@groups.io,
  Jaehoon Chung <jh80.chung@samsung.com>, Peter Robinson <pbrobinson@gmail.com>,
  Thierry Reding <treding@nvidia.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Tien Fong Chee <tien.fong.chee@altera.com>,
- =?UTF-8?Q?=C5=81ukasz_Majewski?= <lukma@nabladev.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Heiko Schocher <hs@nabladev.com>,
+ =?UTF-8?Q?=c5=81ukasz_Majewski?= <lukma@nabladev.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Neil Armstrong <neil.armstrong@linaro.org>,
- Matthias Brugger <mbrugger@suse.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
- linux@analog.com, Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Bin Meng <bmeng.cn@gmail.com>, Anatolij Gustschin <ag.dev.uboot@gmail.com>
+ Matthias Brugger <mbrugger@suse.com>, Simon Glass <sjg@chromium.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, linux@analog.com,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Anatolij Gustschin <ag.dev.uboot@gmail.com>
 Subject: Re: [Uboot-stm32] [PATCH] global: Correct duplicate U_BOOT_DRIVER
 	entry names
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
@@ -117,211 +73,128 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============7168145449926065689=="
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
-X-Spamd-Result: default: False [4.09 / 15.00];
+X-Spamd-Result: default: False [6.09 / 15.00];
+	DMARC_POLICY_REJECT(2.00)[nabladev.com : SPF not aligned (relaxed),reject];
 	SUSPICIOUS_RECIPS(1.50)[];
 	HFILTER_HELO_IP_A(1.00)[stm-ict-prod-mailman-01.stormreply.prv];
-	R_DKIM_REJECT(1.00)[chromium.org:s=google];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:google.com:reject}];
+	DATE_IN_PAST(1.00)[28];
+	R_DKIM_REJECT(1.00)[nabladev.com:s=dkim];
 	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+ip4:52.209.6.89];
-	MIME_GOOD(-0.10)[multipart/mixed,multipart/alternative,text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[chromium.org : SPF not aligned (relaxed),none];
+	MIME_GOOD(-0.10)[text/plain];
+	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[3];
-	FORGED_RECIPIENTS(0.00)[m:trini@konsulko.com,m:peng.fan@nxp.com,m:casey.connolly@linaro.org,m:stefan.roese@mailbox.org,m:kever.yang@rock-chips.com,m:kojima.masahisa@socionext.com,m:u-boot@lists.denx.de,m:uboot-stm32@st-md-mailman.stormreply.com,m:u-boot-qcom@groups.io,m:jerome.forissier@arm.com,m:simon.k.r.goldschmidt@gmail.com,m:u-boot-amlogic@groups.io,m:jh80.chung@samsung.com,m:pbrobinson@gmail.com,m:treding@nvidia.com,m:marek.vasut+renesas@mailbox.org,m:tien.fong.chee@altera.com,m:lukma@nabladev.com,m:philipp.tomsich@vrull.eu,m:hs@nabladev.com,m:neil.armstrong@linaro.org,m:mbrugger@suse.com,m:clamor95@gmail.com,m:linux@analog.com,m:patrick.delaunay@foss.st.com,m:bmeng.cn@gmail.com,m:ag.dev.uboot@gmail.com,m:simonkrgoldschmidt@gmail.com,m:marek.vasut@mailbox.org,m:bmengcn@gmail.com,m:agdevuboot@gmail.com,s:lists@lfdr.de];
-	GREYLIST(0.00)[pass,meta];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:trini@konsulko.com,m:u-boot@lists.denx.de,m:peng.fan@nxp.com,m:casey.connolly@linaro.org,m:stefan.roese@mailbox.org,m:kever.yang@rock-chips.com,m:kojima.masahisa@socionext.com,m:uboot-stm32@st-md-mailman.stormreply.com,m:u-boot-qcom@groups.io,m:jerome.forissier@arm.com,m:simon.k.r.goldschmidt@gmail.com,m:u-boot-amlogic@groups.io,m:jh80.chung@samsung.com,m:pbrobinson@gmail.com,m:treding@nvidia.com,m:marek.vasut+renesas@mailbox.org,m:tien.fong.chee@altera.com,m:lukma@nabladev.com,m:philipp.tomsich@vrull.eu,m:neil.armstrong@linaro.org,m:mbrugger@suse.com,m:sjg@chromium.org,m:clamor95@gmail.com,m:linux@analog.com,m:patrick.delaunay@foss.st.com,m:bmeng.cn@gmail.com,m:ag.dev.uboot@gmail.com,m:simonkrgoldschmidt@gmail.com,m:marek.vasut@mailbox.org,m:bmengcn@gmail.com,m:agdevuboot@gmail.com,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[hs@nabladev.com,uboot-stm32-bounces@st-md-mailman.stormreply.com];
 	RCPT_COUNT_TWELVE(0.00)[27];
-	FORGED_SENDER(0.00)[sjg@chromium.org,uboot-stm32-bounces@st-md-mailman.stormreply.com];
-	MIME_TRACE(0.00)[0:+,1:+,2:+,3:~,4:+];
+	GREYLIST(0.00)[pass,meta];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
 	FORWARDED(0.00)[uboot-stm32@st-md-mailman.stormreply.com];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[chromium.org:-];
+	FREEMAIL_CC(0.00)[nxp.com,linaro.org,mailbox.org,rock-chips.com,socionext.com,st-md-mailman.stormreply.com,groups.io,arm.com,gmail.com,samsung.com,nvidia.com,altera.com,nabladev.com,vrull.eu,suse.com,chromium.org,analog.com,foss.st.com];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	PREVIOUSLY_DELIVERED(0.00)[uboot-stm32@st-md-mailman.stormreply.com];
-	NEURAL_HAM(-0.00)[-0.219];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[sjg@chromium.org,uboot-stm32-bounces@st-md-mailman.stormreply.com];
-	FREEMAIL_CC(0.00)[nxp.com,linaro.org,mailbox.org,rock-chips.com,socionext.com,lists.denx.de,st-md-mailman.stormreply.com,groups.io,arm.com,gmail.com,samsung.com,nvidia.com,altera.com,nabladev.com,vrull.eu,suse.com,analog.com,foss.st.com];
+	FROM_HAS_DN(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[hs@nabladev.com,uboot-stm32-bounces@st-md-mailman.stormreply.com];
+	DKIM_TRACE(0.00)[nabladev.com:-];
+	NEURAL_HAM(-0.00)[-0.410];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ASN(0.00)[asn:16509, ipnet:52.208.0.0/13, country:US];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[uboot-stm32,renesas];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[st-md-mailman.stormreply.com:rdns,stm-ict-prod-mailman-01.stormreply.prv:helo]
-X-Rspamd-Queue-Id: 1AEA031A2E9
-X-Rspamd-Action: no action
+	DBL_BLOCKED_OPENRESOLVER(0.00)[st-md-mailman.stormreply.com:rdns]
+X-Rspamd-Queue-Id: 073E6332AE4
+X-Rspamd-Action: add header
 X-Rspamd-Server: lfdr
+X-Spam: Yes
 
---===============7168145449926065689==
-Content-Type: multipart/alternative; boundary="000000000000f9ed3a064dc8a97e"
-
---000000000000f9ed3a064dc8a97e
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, 23 Mar 2026 at 16:55, Tom Rini <trini@konsulko.com> wrote:
->
-> The U_BOOT_DRIVER macro creates a list of drivers used at link time, and
-> all entries here must be unique. This in turn means that all entries in
-> the code should also be unique in order to not lead to build failures
-> later with unexpected build combinations. Typically, the problem we have
-> here is when a driver is obviously based on another driver and didn't
-> update this particular field and so while the name field reflects
-> something unique the linker entry itself is not. In a few places this
-> provides a more suitable string name as well, however.
->
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>
-> Cc: Bin Meng <bmeng.cn@gmail.com>
-> Cc: Casey Connolly <casey.connolly@linaro.org>
-> Cc: Heiko Schocher <hs@nabladev.com>
-> Cc: Jaehoon Chung <jh80.chung@samsung.com>
-> Cc: Jerome Forissier <jerome.forissier@arm.com>
-> Cc: Kever Yang <kever.yang@rock-chips.com>
-> Cc: =C5=81ukasz Majewski <lukma@nabladev.com>
-> Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> Cc: Masahisa Kojima <kojima.masahisa@socionext.com>
-> Cc: Matthias Brugger <mbrugger@suse.com>
-> Cc: Neil Armstrong <neil.armstrong@linaro.org>
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: Peng Fan <peng.fan@nxp.com>
-> Cc: Peter Robinson <pbrobinson@gmail.com>
-> Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>
-> Cc: Stefan Roese <stefan.roese@mailbox.org>
-> Cc: Svyatoslav Ryhel <clamor95@gmail.com>
-> Cc: Thierry Reding <treding@nvidia.com>
-> Cc: Tien Fong Chee <tien.fong.chee@altera.com>
-> Cc: u-boot-amlogic@groups.io
-> Cc: uboot-stm32@st-md-mailman.stormreply.com
-> Cc: u-boot-qcom@groups.io
-> Cc: linux@analog.com
-> ---
->  arch/x86/cpu/broadwell/sdram.c             | 2 +-
->  arch/x86/cpu/ivybridge/early_me.c          | 2 +-
-[..]
-
-For x86:
-
-Reviewed-by: Simon Glass <sjg@chromium.org>
-
---000000000000f9ed3a064dc8a97e
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"auto">On Mon, 23 Mar 2026 at 16:55, Tom Rini &lt;<a href=3D"mai=
-lto:trini@konsulko.com" target=3D"_blank" rel=3D"noreferrer">trini@konsulko=
-.com</a>&gt; wrote:<br>
-&gt;<br>
-&gt; The U_BOOT_DRIVER macro creates a list of drivers used at link time, a=
-nd<br>
-&gt; all entries here must be unique. This in turn means that all entries i=
-n<br>
-&gt; the code should also be unique in order to not lead to build failures<=
-br>
-&gt; later with unexpected build combinations. Typically, the problem we ha=
-ve<br>
-&gt; here is when a driver is obviously based on another driver and didn&#3=
-9;t<br>
-&gt; update this particular field and so while the name field reflects<br>
-&gt; something unique the linker entry itself is not. In a few places this<=
-br>
-&gt; provides a more suitable string name as well, however.<br>
-&gt;<br>
-&gt; Signed-off-by: Tom Rini &lt;<a href=3D"mailto:trini@konsulko.com" targ=
-et=3D"_blank" rel=3D"noreferrer">trini@konsulko.com</a>&gt;<br>
-&gt; ---<br>
-&gt; Cc: Anatolij Gustschin &lt;<a href=3D"mailto:ag.dev.uboot@gmail.com" t=
-arget=3D"_blank" rel=3D"noreferrer">ag.dev.uboot@gmail.com</a>&gt;<br>
-&gt; Cc: Bin Meng &lt;<a href=3D"mailto:bmeng.cn@gmail.com" target=3D"_blan=
-k" rel=3D"noreferrer">bmeng.cn@gmail.com</a>&gt;<br>
-&gt; Cc: Casey Connolly &lt;<a href=3D"mailto:casey.connolly@linaro.org" ta=
-rget=3D"_blank" rel=3D"noreferrer">casey.connolly@linaro.org</a>&gt;<br>
-&gt; Cc: Heiko Schocher &lt;<a href=3D"mailto:hs@nabladev.com" target=3D"_b=
-lank" rel=3D"noreferrer">hs@nabladev.com</a>&gt;<br>
-&gt; Cc: Jaehoon Chung &lt;<a href=3D"mailto:jh80.chung@samsung.com" target=
-=3D"_blank" rel=3D"noreferrer">jh80.chung@samsung.com</a>&gt;<br>
-&gt; Cc: Jerome Forissier &lt;<a href=3D"mailto:jerome.forissier@arm.com" t=
-arget=3D"_blank" rel=3D"noreferrer">jerome.forissier@arm.com</a>&gt;<br>
-&gt; Cc: Kever Yang &lt;<a href=3D"mailto:kever.yang@rock-chips.com" target=
-=3D"_blank" rel=3D"noreferrer">kever.yang@rock-chips.com</a>&gt;<br>
-&gt; Cc: =C5=81ukasz Majewski &lt;<a href=3D"mailto:lukma@nabladev.com" tar=
-get=3D"_blank" rel=3D"noreferrer">lukma@nabladev.com</a>&gt;<br>
-&gt; Cc: Marek Vasut &lt;<a href=3D"mailto:marek.vasut%2Brenesas@mailbox.or=
-g" target=3D"_blank" rel=3D"noreferrer">marek.vasut+renesas@mailbox.org</a>=
-&gt;<br>
-&gt; Cc: Masahisa Kojima &lt;<a href=3D"mailto:kojima.masahisa@socionext.co=
-m" target=3D"_blank" rel=3D"noreferrer">kojima.masahisa@socionext.com</a>&g=
-t;<br>
-&gt; Cc: Matthias Brugger &lt;<a href=3D"mailto:mbrugger@suse.com" target=
-=3D"_blank" rel=3D"noreferrer">mbrugger@suse.com</a>&gt;<br>
-&gt; Cc: Neil Armstrong &lt;<a href=3D"mailto:neil.armstrong@linaro.org" ta=
-rget=3D"_blank" rel=3D"noreferrer">neil.armstrong@linaro.org</a>&gt;<br>
-&gt; Cc: Patrice Chotard &lt;<a href=3D"mailto:patrice.chotard@foss.st.com"=
- target=3D"_blank" rel=3D"noreferrer">patrice.chotard@foss.st.com</a>&gt;<b=
-r>
-&gt; Cc: Patrick Delaunay &lt;<a href=3D"mailto:patrick.delaunay@foss.st.co=
-m" target=3D"_blank" rel=3D"noreferrer">patrick.delaunay@foss.st.com</a>&gt=
-;<br>
-&gt; Cc: Peng Fan &lt;<a href=3D"mailto:peng.fan@nxp.com" target=3D"_blank"=
- rel=3D"noreferrer">peng.fan@nxp.com</a>&gt;<br>
-&gt; Cc: Peter Robinson &lt;<a href=3D"mailto:pbrobinson@gmail.com" target=
-=3D"_blank" rel=3D"noreferrer">pbrobinson@gmail.com</a>&gt;<br>
-&gt; Cc: Philipp Tomsich &lt;<a href=3D"mailto:philipp.tomsich@vrull.eu" ta=
-rget=3D"_blank" rel=3D"noreferrer">philipp.tomsich@vrull.eu</a>&gt;<br>
-&gt; Cc: Simon Glass &lt;<a href=3D"mailto:sjg@chromium.org" target=3D"_bla=
-nk" rel=3D"noreferrer">sjg@chromium.org</a>&gt;<br>
-&gt; Cc: Simon Goldschmidt &lt;<a href=3D"mailto:simon.k.r.goldschmidt@gmai=
-l.com" target=3D"_blank" rel=3D"noreferrer">simon.k.r.goldschmidt@gmail.com=
-</a>&gt;<br>
-&gt; Cc: Stefan Roese &lt;<a href=3D"mailto:stefan.roese@mailbox.org" targe=
-t=3D"_blank" rel=3D"noreferrer">stefan.roese@mailbox.org</a>&gt;<br>
-&gt; Cc: Svyatoslav Ryhel &lt;<a href=3D"mailto:clamor95@gmail.com" target=
-=3D"_blank" rel=3D"noreferrer">clamor95@gmail.com</a>&gt;<br>
-&gt; Cc: Thierry Reding &lt;<a href=3D"mailto:treding@nvidia.com" target=3D=
-"_blank" rel=3D"noreferrer">treding@nvidia.com</a>&gt;<br>
-&gt; Cc: Tien Fong Chee &lt;<a href=3D"mailto:tien.fong.chee@altera.com" ta=
-rget=3D"_blank" rel=3D"noreferrer">tien.fong.chee@altera.com</a>&gt;<br>
-&gt; Cc: <a href=3D"mailto:u-boot-amlogic@groups.io" target=3D"_blank" rel=
-=3D"noreferrer">u-boot-amlogic@groups.io</a><br>
-&gt; Cc: <a href=3D"mailto:uboot-stm32@st-md-mailman.stormreply.com" target=
-=3D"_blank" rel=3D"noreferrer">uboot-stm32@st-md-mailman.stormreply.com</a>=
-<br>
-&gt; Cc: <a href=3D"mailto:u-boot-qcom@groups.io" target=3D"_blank" rel=3D"=
-noreferrer">u-boot-qcom@groups.io</a><br>
-&gt; Cc: <a href=3D"mailto:linux@analog.com" target=3D"_blank" rel=3D"noref=
-errer">linux@analog.com</a><br>
-&gt; ---<br>
-&gt;=C2=A0 arch/x86/cpu/broadwell/sdram.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0| 2 +-<br>
-&gt;=C2=A0 arch/x86/cpu/ivybridge/early_me.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 | 2 +-<br>
-[..]<br>
-<br>
-For x86:<br>
-<br>
-Reviewed-by: Simon Glass &lt;<a href=3D"mailto:sjg@chromium.org" target=3D"=
-_blank" rel=3D"noreferrer">sjg@chromium.org</a>&gt;<br></div>
-
---000000000000f9ed3a064dc8a97e--
-
---===============7168145449926065689==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============7168145449926065689==--
+SGVsbG8gVG9tLAoKT24gMjMuMDMuMjYgMjM6NTUsIFRvbSBSaW5pIHdyb3RlOgo+IFRoZSBVX0JP
+T1RfRFJJVkVSIG1hY3JvIGNyZWF0ZXMgYSBsaXN0IG9mIGRyaXZlcnMgdXNlZCBhdCBsaW5rIHRp
+bWUsIGFuZAo+IGFsbCBlbnRyaWVzIGhlcmUgbXVzdCBiZSB1bmlxdWUuIFRoaXMgaW4gdHVybiBt
+ZWFucyB0aGF0IGFsbCBlbnRyaWVzIGluCj4gdGhlIGNvZGUgc2hvdWxkIGFsc28gYmUgdW5pcXVl
+IGluIG9yZGVyIHRvIG5vdCBsZWFkIHRvIGJ1aWxkIGZhaWx1cmVzCj4gbGF0ZXIgd2l0aCB1bmV4
+cGVjdGVkIGJ1aWxkIGNvbWJpbmF0aW9ucy4gVHlwaWNhbGx5LCB0aGUgcHJvYmxlbSB3ZSBoYXZl
+Cj4gaGVyZSBpcyB3aGVuIGEgZHJpdmVyIGlzIG9idmlvdXNseSBiYXNlZCBvbiBhbm90aGVyIGRy
+aXZlciBhbmQgZGlkbid0Cj4gdXBkYXRlIHRoaXMgcGFydGljdWxhciBmaWVsZCBhbmQgc28gd2hp
+bGUgdGhlIG5hbWUgZmllbGQgcmVmbGVjdHMKPiBzb21ldGhpbmcgdW5pcXVlIHRoZSBsaW5rZXIg
+ZW50cnkgaXRzZWxmIGlzIG5vdC4gSW4gYSBmZXcgcGxhY2VzIHRoaXMKPiBwcm92aWRlcyBhIG1v
+cmUgc3VpdGFibGUgc3RyaW5nIG5hbWUgYXMgd2VsbCwgaG93ZXZlci4KPiAKPiBTaWduZWQtb2Zm
+LWJ5OiBUb20gUmluaSA8dHJpbmlAa29uc3Vsa28uY29tPgo+IC0tLQo+IENjOiBBbmF0b2xpaiBH
+dXN0c2NoaW4gPGFnLmRldi51Ym9vdEBnbWFpbC5jb20+Cj4gQ2M6IEJpbiBNZW5nIDxibWVuZy5j
+bkBnbWFpbC5jb20+Cj4gQ2M6IENhc2V5IENvbm5vbGx5IDxjYXNleS5jb25ub2xseUBsaW5hcm8u
+b3JnPgo+IENjOiBIZWlrbyBTY2hvY2hlciA8aHNAbmFibGFkZXYuY29tPgo+IENjOiBKYWVob29u
+IENodW5nIDxqaDgwLmNodW5nQHNhbXN1bmcuY29tPgo+IENjOiBKZXJvbWUgRm9yaXNzaWVyIDxq
+ZXJvbWUuZm9yaXNzaWVyQGFybS5jb20+Cj4gQ2M6IEtldmVyIFlhbmcgPGtldmVyLnlhbmdAcm9j
+ay1jaGlwcy5jb20+Cj4gQ2M6IMWBdWthc3ogTWFqZXdza2kgPGx1a21hQG5hYmxhZGV2LmNvbT4K
+PiBDYzogTWFyZWsgVmFzdXQgPG1hcmVrLnZhc3V0K3JlbmVzYXNAbWFpbGJveC5vcmc+Cj4gQ2M6
+IE1hc2FoaXNhIEtvamltYSA8a29qaW1hLm1hc2FoaXNhQHNvY2lvbmV4dC5jb20+Cj4gQ2M6IE1h
+dHRoaWFzIEJydWdnZXIgPG1icnVnZ2VyQHN1c2UuY29tPgo+IENjOiBOZWlsIEFybXN0cm9uZyA8
+bmVpbC5hcm1zdHJvbmdAbGluYXJvLm9yZz4KPiBDYzogUGF0cmljZSBDaG90YXJkIDxwYXRyaWNl
+LmNob3RhcmRAZm9zcy5zdC5jb20+Cj4gQ2M6IFBhdHJpY2sgRGVsYXVuYXkgPHBhdHJpY2suZGVs
+YXVuYXlAZm9zcy5zdC5jb20+Cj4gQ2M6IFBlbmcgRmFuIDxwZW5nLmZhbkBueHAuY29tPgo+IENj
+OiBQZXRlciBSb2JpbnNvbiA8cGJyb2JpbnNvbkBnbWFpbC5jb20+Cj4gQ2M6IFBoaWxpcHAgVG9t
+c2ljaCA8cGhpbGlwcC50b21zaWNoQHZydWxsLmV1Pgo+IENjOiBTaW1vbiBHbGFzcyA8c2pnQGNo
+cm9taXVtLm9yZz4KPiBDYzogU2ltb24gR29sZHNjaG1pZHQgPHNpbW9uLmsuci5nb2xkc2NobWlk
+dEBnbWFpbC5jb20+Cj4gQ2M6IFN0ZWZhbiBSb2VzZSA8c3RlZmFuLnJvZXNlQG1haWxib3gub3Jn
+Pgo+IENjOiBTdnlhdG9zbGF2IFJ5aGVsIDxjbGFtb3I5NUBnbWFpbC5jb20+Cj4gQ2M6IFRoaWVy
+cnkgUmVkaW5nIDx0cmVkaW5nQG52aWRpYS5jb20+Cj4gQ2M6IFRpZW4gRm9uZyBDaGVlIDx0aWVu
+LmZvbmcuY2hlZUBhbHRlcmEuY29tPgo+IENjOiB1LWJvb3QtYW1sb2dpY0Bncm91cHMuaW8KPiBD
+YzogdWJvb3Qtc3RtMzJAc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbQo+IENjOiB1LWJvb3Qt
+cWNvbUBncm91cHMuaW8KPiBDYzogbGludXhAYW5hbG9nLmNvbQo+IC0tLQo+ICAgYXJjaC94ODYv
+Y3B1L2Jyb2Fkd2VsbC9zZHJhbS5jICAgICAgICAgICAgIHwgMiArLQo+ICAgYXJjaC94ODYvY3B1
+L2l2eWJyaWRnZS9lYXJseV9tZS5jICAgICAgICAgIHwgMiArLQo+ICAgYm9hcmQvbGllYmhlcnIv
+YnR0L2J0dC5jICAgICAgICAgICAgICAgICAgIHwgMiArLQo+ICAgYm9hcmQvbGllYmhlcnIveGVh
+L3hlYS5jICAgICAgICAgICAgICAgICAgIHwgMiArLQo+ICAgZHJpdmVycy9ibG9jay9lZmlfYmxr
+LmMgICAgICAgICAgICAgICAgICAgIHwgMiArLQo+ICAgZHJpdmVycy9jbGsvYXQ5MS9jb21wYXQu
+YyAgICAgICAgICAgICAgICAgIHwgNCArKy0tCj4gICBkcml2ZXJzL2Nsay9hdDkxL3Nja2MuYyAg
+ICAgICAgICAgICAgICAgICAgfCAyICstCj4gICBkcml2ZXJzL2Nsay9tZXNvbi9hMS5jICAgICAg
+ICAgICAgICAgICAgICAgfCAyICstCj4gICBkcml2ZXJzL2Nsay9tZXNvbi9neGJiLmMgICAgICAg
+ICAgICAgICAgICAgfCAyICstCj4gICBkcml2ZXJzL2Nsay9udXZvdG9uL2Nsa19ucGNtN3h4LmMg
+ICAgICAgICAgfCAyICstCj4gICBkcml2ZXJzL2Nsay9udXZvdG9uL2Nsa19ucGNtOHh4LmMgICAg
+ICAgICAgfCAyICstCj4gICBkcml2ZXJzL2Nsay9zdG0zMi9jbGstc3RtMzJtcDEzLmMgICAgICAg
+ICAgfCAyICstCj4gICBkcml2ZXJzL2RtYS90aS9rMy11ZG1hLmMgICAgICAgICAgICAgICAgICAg
+fCAyICstCj4gICBkcml2ZXJzL2kyYy90ZWdyYTE4Nl9icG1wX2kyYy5jICAgICAgICAgICAgfCAy
+ICstCj4gICBkcml2ZXJzL21tYy9iY20yODM1X3NkaGNpLmMgICAgICAgICAgICAgICAgfCAyICst
+Cj4gICBkcml2ZXJzL21tYy9mc2xfZXNkaGNfaW14LmMgICAgICAgICAgICAgICAgfCAyICstCj4g
+ICBkcml2ZXJzL21tYy9yb2NrY2hpcF9zZGhjaS5jICAgICAgICAgICAgICAgfCAyICstCj4gICBk
+cml2ZXJzL25ldC9jYWx4ZWRheGdtYWMuYyAgICAgICAgICAgICAgICAgfCAyICstCj4gICBkcml2
+ZXJzL25ldC9kd2NfZXRoX3hnbWFjLmMgICAgICAgICAgICAgICAgfCAyICstCj4gICBkcml2ZXJz
+L25ldC9xZS9kbV9xZV91ZWNfcGh5LmMgICAgICAgICAgICAgfCAyICstCj4gICBkcml2ZXJzL25l
+dC9zbmlfbmV0c2VjLmMgICAgICAgICAgICAgICAgICAgfCAyICstCj4gICBkcml2ZXJzL3BpbmN0
+cmwvbWVzb24vcGluY3RybC1tZXNvbi1nMTJhLmMgfCAyICstCj4gICBkcml2ZXJzL3BpbmN0cmwv
+dGVncmEvcGluY3RybC10ZWdyYTIwLmMgICAgfCA0ICsrLS0KPiAgIGRyaXZlcnMvcmVzZXQvc3Rt
+MzIvc3RtMzItcmVzZXQtbXAxLmMgICAgICB8IDIgKy0KPiAgIGRyaXZlcnMvc3BpL2tpcmt3b29k
+X3NwaS5jICAgICAgICAgICAgICAgICB8IDQgKystLQo+ICAgZHJpdmVycy9zcGkvbXZlYnVfYTM3
+MDBfc3BpLmMgICAgICAgICAgICAgIHwgNCArKy0tCj4gICBkcml2ZXJzL3N5c3Jlc2V0L3N5c3Jl
+c2V0X3NvY2ZwZ2Ffc29jNjQuYyAgfCAyICstCj4gICBkcml2ZXJzL3VzYi9kd2MzL2R3YzMtbWVz
+b24tZzEyYS5jICAgICAgICAgfCAyICstCj4gICBkcml2ZXJzL3VzYi9kd2MzL2R3YzMtbWVzb24t
+Z3hsLmMgICAgICAgICAgfCAyICstCj4gICBkcml2ZXJzL3VzYi9ob3N0L2VoY2ktZXh5bm9zLmMg
+ICAgICAgICAgICAgfCAyICstCj4gICBkcml2ZXJzL3VzYi9ob3N0L2VoY2ktbXNtLmMgICAgICAg
+ICAgICAgICAgfCAyICstCj4gICBkcml2ZXJzL3VzYi9ob3N0L2VoY2ktdGVncmEuYyAgICAgICAg
+ICAgICAgfCAyICstCj4gICBkcml2ZXJzL3VzYi9ob3N0L2VoY2ktdmYuYyAgICAgICAgICAgICAg
+ICAgfCAyICstCj4gICBkcml2ZXJzL3VzYi9ob3N0L29oY2ktZGE4eHguYyAgICAgICAgICAgICAg
+fCAyICstCj4gICBkcml2ZXJzL3VzYi9tdXNiLW5ldy9waWMzMi5jICAgICAgICAgICAgICAgfCAy
+ICstCj4gICBkcml2ZXJzL3VzYi9tdXNiLW5ldy9zYzV4eC5jICAgICAgICAgICAgICAgfCAyICst
+Cj4gICBkcml2ZXJzL3VzYi9tdXNiLW5ldy9zdW54aS5jICAgICAgICAgICAgICAgfCAyICstCj4g
+ICBkcml2ZXJzL3ZpZGVvL3JvY2tjaGlwL3JrMzI4OF9taXBpLmMgICAgICAgfCA0ICsrLS0KPiAg
+IGRyaXZlcnMvdmlkZW8vcm9ja2NoaXAvcmszMzk5X21pcGkuYyAgICAgICB8IDQgKystLQo+ICAg
+ZHJpdmVycy93YXRjaGRvZy9hcm1fc21jX3dkdC5jICAgICAgICAgICAgIHwgMiArLQo+ICAgNDAg
+ZmlsZXMgY2hhbmdlZCwgNDYgaW5zZXJ0aW9ucygrKSwgNDYgZGVsZXRpb25zKC0pCgpSZXZpZXdl
+ZC1ieTogSGVpa28gU2Nob2NoZXIgPGhzQG5hYmxhZGV2LmNvbT4KCmJ5ZSwKSGVpa28KLS0gCk5h
+YmxhIFNvZnR3YXJlIEVuZ2luZWVyaW5nCkhSQiA0MDUyMiBBdWdzYnVyZwpQaG9uZTogKzQ5IDgy
+MSA0NTU5MjU5NgpFLU1haWw6IG9mZmljZUBuYWJsYWRldi5jb20KR2VzY2jDpGZ0c2bDvGhyZXIg
+OiBTdGVmYW5vIEJhYmljCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fClVib290LXN0bTMyIG1haWxpbmcgbGlzdApVYm9vdC1zdG0zMkBzdC1tZC1tYWlsbWFu
+LnN0b3JtcmVwbHkuY29tCmh0dHBzOi8vc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbS9tYWls
+bWFuL2xpc3RpbmZvL3Vib290LXN0bTMyCg==

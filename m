@@ -2,111 +2,91 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id UA6eA5X/xGkz5gQAu9opvQ
+	id CLoMCUQPyGl+ggUAu9opvQ
 	(envelope-from <uboot-stm32-bounces@st-md-mailman.stormreply.com>)
-	for <lists+uboot-stm32@lfdr.de>; Thu, 26 Mar 2026 10:42:45 +0100
+	for <lists+uboot-stm32@lfdr.de>; Sat, 28 Mar 2026 18:26:28 +0100
 X-Original-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8AA663327FF
-	for <lists+uboot-stm32@lfdr.de>; Thu, 26 Mar 2026 10:42:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C2A6F34F560
+	for <lists+uboot-stm32@lfdr.de>; Sat, 28 Mar 2026 18:26:27 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id EF46DC8F279;
-	Thu, 26 Mar 2026 09:42:43 +0000 (UTC)
-Received: from GVXPR05CU001.outbound.protection.outlook.com
- (mail-swedencentralazon11013057.outbound.protection.outlook.com
- [52.101.83.57])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id F1F37C36B30;
+	Sat, 28 Mar 2026 17:16:48 +0000 (UTC)
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com
+ [209.85.128.49])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 187D8C8F273
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6D708C36B12
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 26 Mar 2026 09:42:42 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=qbzDK9LUMyHWJ+9zH2dNNxdTJL41z/uZenGofPo7RHXv1Sxb1CPjuPFrSAmzgd11vN3kJgH2Q1WKr+n59XLj1PgUi0fxPSG4XxFTmC/NmTkkot+OQPNurO3Wqh9hLM+rdxBZ1ozlzHddVJ307GTSTXX9lJoeEzqGY6090IkPryGHClQ5xep6S6EPK5CD5DkxP+mucspIEyyGP97T+7pavybFPfyoTQW6Q4842YPqpBJ1L726bUJbiyQADMzXdIm+kxemG83yc8GIiJmZP9LP+49ZbM1jmfudSMvKVQoub879FBTAlLEXRxYwaDPQc0kLn3NaA484JEpk8up/TIbV4A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ygpwNYxtPxr2cyaJDzp2OhaJUK1W4EdFBzMzC8FsPGs=;
- b=O7qAzF/IZRPGO+O4S+9adHl1GnQxEiMvzNi44Lg2G10jxLlg3fEeY/n4NrfQOsaZTwc4+mkh3k+Kh/reu9C+98UpSf2tlTINHBea4KDrOmfqMpGnW4kAy4RPw8/zuCN8bphOEobuA81hUSn2W4XUaiW9J/z+2X2gKE1jdrBLjOLMFfB/7NiYnEXKW4sqPUAJYykEW8IAHgEmBllzZqY++yNuf/R2+lqfuT5pT/pJY/SkRClQ5n6A/jN5PFQJMRW2am05WlsKlMvhdH2TWMrsXyUwOPTs/ITnMsvZpUhh0VKhVmUgyMV+MG4LncBMSsmcRH5nfYFmQkO5dZL7nqwWqQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.60) smtp.rcpttodomain=konsulko.com smtp.mailfrom=foss.st.com;
- dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ygpwNYxtPxr2cyaJDzp2OhaJUK1W4EdFBzMzC8FsPGs=;
- b=n5YLEukzQBz/MgEGuwq6TOEAKilcPf2QR+2bPA5oFlvx0gJHAA7ol6cYD4//I4hdqM0R4NzhVvEzuteVIdStIbQEJ1tQUr9Zy/qpyuXL6AJxQLd+KpG56DaRoszqTuhb8gbK2vFqpu4lTwUVAyqri4eiGpqMdDi1wVwLHmQF6AqWOgh+THSMOSNkXL1Epka+0vnuEOITQM+iJ6KsYGu50nbGHlOK2LsgWd3xPdZryJcxP3DCr8LGMLqOhoQzv6/nmIgYWf/OVNIW+COVhP0YqJZUwepRkiVAdGRZqsPr1SP8O+mG/SQ2pKGRVPv7fMTjLLmCd8TQ0QWa7d2jmQbx4g==
-Received: from AS9PR01CA0004.eurprd01.prod.exchangelabs.com
- (2603:10a6:20b:540::13) by AS8PR10MB5927.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:529::7) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.20; Thu, 26 Mar
- 2026 09:42:40 +0000
-Received: from AMS1EPF00000046.eurprd04.prod.outlook.com
- (2603:10a6:20b:540:cafe::ec) by AS9PR01CA0004.outlook.office365.com
- (2603:10a6:20b:540::13) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9723.31 via Frontend Transport; Thu,
- 26 Mar 2026 09:42:37 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.60; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.60) by
- AMS1EPF00000046.mail.protection.outlook.com (10.167.16.43) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9745.21 via Frontend Transport; Thu, 26 Mar 2026 09:42:40 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
- (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Thu, 26 Mar
- 2026 10:45:09 +0100
-Received: from [10.48.87.93] (10.48.87.93) by STKDAG1NODE1.st.com
- (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Thu, 26 Mar
- 2026 10:42:30 +0100
-Message-ID: <f6c27c74-1188-4062-9082-d0f3639d3ce0@foss.st.com>
-Date: Thu, 26 Mar 2026 10:42:13 +0100
+ Sat, 28 Mar 2026 17:16:48 +0000 (UTC)
+Received: by mail-wm1-f49.google.com with SMTP id
+ 5b1f17b1804b1-486fb439299so28884815e9.0
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Sat, 28 Mar 2026 10:16:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1774718208; x=1775323008;
+ darn=st-md-mailman.stormreply.com; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=n69iOfCx8r/tYYbLWbMgDiByJOAylNkX67zhneWbYew=;
+ b=Tk+Z/RP7nhxxHatdujQoENDNZorgvcp1s8GXlsg+RI7Bwu3/M2dGmfKN+DggqTN1SC
+ +VpjpaSfwxZaSjopsCgUaUzCx3Q6vXiub4ERFKFBqqMFVL+B3yDZDO7T7aLmW1yUNuJg
+ Q75Aa7lA5qaEX1P8L4su2GeVP4KwAX/CJpnlw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1774718208; x=1775323008;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=n69iOfCx8r/tYYbLWbMgDiByJOAylNkX67zhneWbYew=;
+ b=DJTS/bQSrSqQT+3ZtcvwcqmLbhY6TrbI2e7Q21b4J0YzegbmeiISmq4juurRzod/Sw
+ n11yfhGzTlvCrATJb+fWRwmJxyakRoEfILzfaJ7vQd7PhqCpB8FkFOD+fcAtf7C/NSP8
+ /0ujwMttbKRfSPxo3gsoatMUEBgr/1LNQGGCLZQSiVuWec7dv3yVI74aBSSKQCsawgGT
+ 44PEXoP94h3WCQ7x07/wQYdnGg1X+ca5Bi78nqfIoKhZQr1rUVIyrSjrzTzFdFPF1zjS
+ cjIMPZPfy1Ll9/5VJZzOnhhgceYESg5VdRu8pJ3KtTWX3YfGNfo4HwOni23rVkQpqC5w
+ 7FlQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVNw3qeCRgztcz4xD0Xsg1twc3KY2Y8nhV6XXj6Xc+a+aDYESUlkSO4p9LT7YuP1s6AARH+mYVTkOGBBQ==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0YwJtt0l5nhuVHXxMBgI3SQGO/Il4F1b2nPC2ePj12UAvfQW9epZ
+ h7jg5xx+2muyQsmaooARtyHpgbEoh/YT8EUP+J/nMqes6A3/pk5M0o4IlpFiaHUgEho=
+X-Gm-Gg: ATEYQzx9uZOmva2b/Gmud7uSu9ogBYO+qxGl9tZ2mt+Fd4zo1XVQ8uBOjUMAWYaMOYe
+ asV7C9TkocJ76n1SHwiVMOkDMD6fO6V9bQ/FY/CveCWJM2oUpCZQXfJAer3rq/nM4GKWOkcLjqq
+ KU4mk3UdL6YxSNBWGtEYOLV4hZkQGtrzMyJ5ISlZEdJCGVvdVssuY+yFc2dftn8nm53VdguFFMg
+ tmQgXK1D29dzhDXey/hfFo/1PSdvZ5bxgs0r12SZp1bFpPEj9VYdAbB3U3hAdHyIMRNUzAebPaA
+ WiDDnJt9gSPRa05zlJ/+11TZ7W2fRDmGdosTz/vklot5YOU+W1l54lv2ZC1unygVH4cXvctuTza
+ +q8UNhlyvhWie9GYI9MPbbi9vBuIo43p643SEGwNQZEnVsgZzK3u0fmvHFbPKM955AtlnnmwVuB
+ eqxlQwKZjHvTglr57HFPoxsSJqk992Gy3DulgrtJ3dSsufrCvkym2gznGmPz7vqD8Qv1wC+Bb4c
+ dXRgr9jpkilAONifhslpW21P3qhrw890fhpWfLZKnxY9kBQxMZZ7yHokPc9njvZOColgeWjR5FR
+ yBiwWlaA2UpBjRVsiCz5A0K+HJk8DA0TlSA=
+X-Received: by 2002:a05:600c:1d1e:b0:486:fc95:1a91 with SMTP id
+ 5b1f17b1804b1-48727f2373dmr111216915e9.12.1774718207528; 
+ Sat, 28 Mar 2026 10:16:47 -0700 (PDT)
+Received: from dario-ThinkPad-P14s-Gen-5.homenet.telecomitalia.it
+ (host-87-9-100-184.retail.telecomitalia.it. [87.9.100.184])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-48722c6b105sm332432465e9.1.2026.03.28.10.16.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 28 Mar 2026 10:16:46 -0700 (PDT)
+From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+To: u-boot@lists.denx.de
+Date: Sat, 28 Mar 2026 18:15:13 +0100
+Message-ID: <20260328171624.2377527-1-dario.binacchi@amarulasolutions.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>
-References: <20260325190027.3428596-1-trini@konsulko.com>
-Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20260325190027.3428596-1-trini@konsulko.com>
-X-Originating-IP: [10.48.87.93]
-X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
- (10.75.128.132)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AMS1EPF00000046:EE_|AS8PR10MB5927:EE_
-X-MS-Office365-Filtering-Correlation-Id: 63be5d94-39c2-45cf-a584-08de8b1c05da
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700016|376014|82310400026|1800799024|18002099003|22082099003|56012099003;
-X-Microsoft-Antispam-Message-Info: UxVrUfhj6jxeiGwnDXLBN155cKNTmsyPeXaRnWfvZLVqnWEbgd5jIG2NIlB6Tzbi0XBhMdzdEzalGqxfoWrIIqemw0fn3Avrc3iEQk3KaBy0TWa2t/0rSlU2VFeKRqQahdrG6r0YHeLKRDC1L4X5aL0/45Mzr1IbsSkWH9RM1Gzg4Bk8I7sXC+fCgHV+/WaFErLTT1mGDxVKTwbaFNhXc8DyDITWlnanOtR7BDErTH2j5oEoVllC91Vo+N31gS9QKmOc/UN/WaX9nl1usDaw9sHpZoBNjQD/lhavOzQ3/wv82qimY9aioHHwrk/4oSbcGkz35GPtrkCWFQzH0tddqsE3CkFCHJZbiGfkKeDVNv/RwCCWFT8YTNLs6wykHQBaTAPc8XAxs2pLZR9qyLxOi1p9bb+fVZ97U4ijhBpdI7BlmH+dRg8rfOECFEB3JUv/wVXUo1JpJyGNTQlvEUtHqQa8xs88b4ZammxiRIbsWu3qVn/9oPIfBNkicLUKlL2VmU3SF7uTn5MKkQQJGpAgnSb6sbaQ8CmQTSe99EIay/OovVQtPZQclDdCsrfVZ4W2jbHfOHI1ghG2e/CgF8zIcmMwCCdPkrhm9RaiDGlwah8sZPsUVM1KZRNgVtH0ZrNTOp/7L6Iw9G4cXDXZFgA8cHHslSpoIlXI/zOdWba9ALyZ1REvVP9RcMnhFIjdu1QX4k+4oqTELkIM+MN1OVatXMx7+HExvvrqWSBQfc4DKuAFjFvLdCMYvCfeRnJYSk9WHDjy0HKNqgNzEfOwBILGbg==
-X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700016)(376014)(82310400026)(1800799024)(18002099003)(22082099003)(56012099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: BveLg3Y9mcP2xh0I1ogodF0Mw1kamYmAmFWNYUuw74taYxpL4NDOuQyHu8sRGGYi+nWYIZk0osDOYA6HYZf3K3/bnFzkCaYyQH8wNGcIr7UkmCagnUfQLqWenb0uuP39KJqgwxgvOEReEfJh5xMfV7RjIj6pNNkrYkqz6in61sjKYjMlj0bqNj3b4hD2BFbr3wCjIFYINPY74UM8YzhkezvZq8mJya2Gc7cFouKCD8R7e4Q2+NTrE2k+hsIreq49uX80TeTYMxAIWdz0qlfuZoTu451Pf0CVZ0yBv7xZHqTql6MVYlVqBHmLYMG9b08SjKaUbmFXNuXW+la/hZb3dRdTWhZ7KAzH1FCytsZeLS09ZtQn2OPFqcqRfk0nJ1D7Pm3bqgclTCJEn8YZUMQCC/RNWD7MmogWrSd2qqvsHN0HABAJ3BEPZgd/2ByFOc++
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Mar 2026 09:42:40.5853 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 63be5d94-39c2-45cf-a584-08de8b1c05da
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: AMS1EPF00000046.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR10MB5927
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- uboot-stm32@st-md-mailman.stormreply.com, Dillon
- Min <dillon.minfei@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Matteo Lisi <matteo.lisi@engicam.com>
-Subject: Re: [Uboot-stm32] [PATCH] arm: stm32mp: Drop unnecessary
-	BOARD_EARLY_INIT_F usage
+Cc: Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Rasmus Villemoes <ravi@prevas.dk>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Martinez Canillas <javierm@redhat.com>,
+ Sughosh Ganu <sughosh.ganu@arm.com>, Padmarao Begari <padmarao.begari@amd.com>,
+ uboot-stm32@st-md-mailman.stormreply.com, Michal Simek <michal.simek@amd.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Simon Glass <sjg@chromium.org>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ linux-amarula@amarulasolutions.com
+Subject: [Uboot-stm32] [PATCH 0/4] Support metadata-driven A/B boot for
+	STM32MP25
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -124,148 +104,84 @@ Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Spamd-Result: default: False [4.39 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
-	R_DKIM_REJECT(1.00)[foss.st.com:s=selector2];
 	HFILTER_HELO_IP_A(1.00)[stm-ict-prod-mailman-01.stormreply.prv];
+	MID_CONTAINS_FROM(1.00)[];
+	R_DKIM_REJECT(1.00)[amarulasolutions.com:s=google];
 	HFILTER_HELO_NORES_A_OR_MX(0.30)[stm-ict-prod-mailman-01.stormreply.prv];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+ip4:52.209.6.89];
+	R_SPF_ALLOW(-0.20)[+ip4:52.209.6.89:c];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[foss.st.com : SPF not aligned (relaxed),none];
+	DMARC_POLICY_SOFTFAIL(0.10)[amarulasolutions.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[amarulasolutions.com:email,stormreply.com:email,stormreply.com:url,konsulko.com:email,st.com:email,st-md-mailman.stormreply.com:rdns];
-	GREYLIST(0.00)[pass,meta];
-	SUSPICIOUS_AUTH_ORIGIN(0.00)[];
+	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[17];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS(0.00)[m:trini@konsulko.com,m:u-boot@lists.denx.de,m:patrick.delaunay@foss.st.com,m:uboot-stm32@st-md-mailman.stormreply.com,m:dillon.minfei@gmail.com,m:jagan@amarulasolutions.com,m:matteo.lisi@engicam.com,m:dillonminfei@gmail.com,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
 	FORWARDED(0.00)[uboot-stm32@st-md-mailman.stormreply.com];
-	FORGED_SENDER(0.00)[patrice.chotard@foss.st.com,uboot-stm32-bounces@st-md-mailman.stormreply.com];
+	FREEMAIL_CC(0.00)[konsulko.com,mailbox.org,arm.com,gmx.de,prevas.dk,linaro.org,redhat.com,amd.com,st-md-mailman.stormreply.com,cherry.de,foss.st.com,chromium.org,amarulasolutions.com];
+	FORGED_RECIPIENTS(0.00)[m:u-boot@lists.denx.de,m:trini@konsulko.com,m:marek.vasut+renesas@mailbox.org,m:vincent.stehle@arm.com,m:xypron.glpk@gmx.de,m:ravi@prevas.dk,m:ilias.apalodimas@linaro.org,m:javierm@redhat.com,m:sughosh.ganu@arm.com,m:padmarao.begari@amd.com,m:uboot-stm32@st-md-mailman.stormreply.com,m:michal.simek@amd.com,m:quentin.schulz@cherry.de,m:patrick.delaunay@foss.st.com,m:sjg@chromium.org,m:dario.binacchi@amarulasolutions.com,m:linux-amarula@amarulasolutions.com,m:marek.vasut@mailbox.org,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[dario.binacchi@amarulasolutions.com,uboot-stm32-bounces@st-md-mailman.stormreply.com];
+	GREYLIST(0.00)[pass,body];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_CC(0.00)[foss.st.com,st-md-mailman.stormreply.com,gmail.com,amarulasolutions.com,engicam.com];
+	DKIM_TRACE(0.00)[amarulasolutions.com:-];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[uboot-stm32@st-md-mailman.stormreply.com];
-	HAS_XOIP(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[uboot-stm32@st-md-mailman.stormreply.com];
+	FROM_NEQ_ENVFROM(0.00)[dario.binacchi@amarulasolutions.com,uboot-stm32-bounces@st-md-mailman.stormreply.com];
 	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[patrice.chotard@foss.st.com,uboot-stm32-bounces@st-md-mailman.stormreply.com];
-	DKIM_TRACE(0.00)[foss.st.com:-];
-	NEURAL_HAM(-0.00)[-0.343];
-	RCPT_COUNT_SEVEN(0.00)[7];
-	ASN(0.00)[asn:16509, ipnet:52.208.0.0/13, country:US];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[uboot-stm32];
+	TO_DN_SOME(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_COUNT_SEVEN(0.00)[7]
-X-Rspamd-Queue-Id: 8AA663327FF
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[uboot-stm32,renesas];
+	NEURAL_SPAM(0.00)[0.956];
+	ASN(0.00)[asn:16509, ipnet:52.208.0.0/13, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[stormreply.com:email,stormreply.com:url,st-md-mailman.stormreply.com:rdns,amarulasolutions.com:mid,stm-ict-prod-mailman-01.stormreply.prv:helo]
+X-Rspamd-Queue-Id: C2A6F34F560
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
+This series, the mainline version of [1], provides the necessary changes
+in U-Boot to support the metadata-driven A/B update flow for STM32MP25
+boards. It implements the logic required to dynamically select the boot
+bank based on FWU metadata.
+
+These changes are designed to be backward compatible while providing
+the necessary infrastructure for the A/B scheme.
+
+The series has been tested on the STM32MP257F-EV1 board.
+
+Additionally, patches 1 to 3 propose some changes with general-purpose
+utility:
+
+ 1/4 fwu: add helper to get image GUID by type and bank index
+ 2/4 cmd: part: support lookup by UUID in 'part number'
+ 3/4 lib: uuid: add partition type GUID for extended bootloader
+
+[1] https://github.com/STMicroelectronics/u-boot/pull/6
 
 
-On 3/25/26 20:00, Tom Rini wrote:
-> All of these platforms enable CONFIG_BOARD_EARLY_INIT_F and then have a
-> do-nothing board_early_init_f function. Change to not enabling the
-> option and so not needing an empty function.
-> 
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Jagan Teki <jagan@amarulasolutions.com>
-> Cc: Matteo Lisi <matteo.lisi@engicam.com>
-> Cc: Dillon Min <dillon.minfei@gmail.com>
-> Cc: uboot-stm32@st-md-mailman.stormreply.com
-> ---
->  arch/arm/mach-stm32mp/stm32mp1/spl.c         | 15 ++++++---------
->  board/engicam/stm32mp1/spl.c                 |  6 ------
->  board/st/stm32h750-art-pi/stm32h750-art-pi.c |  5 -----
->  configs/stm32h750-art-pi_defconfig           |  1 -
->  4 files changed, 6 insertions(+), 21 deletions(-)
-> 
-> diff --git a/arch/arm/mach-stm32mp/stm32mp1/spl.c b/arch/arm/mach-stm32mp/stm32mp1/spl.c
-> index e63bdaaf42fd..d2e41b8e65ff 100644
-> --- a/arch/arm/mach-stm32mp/stm32mp1/spl.c
-> +++ b/arch/arm/mach-stm32mp/stm32mp1/spl.c
-> @@ -90,11 +90,6 @@ void spl_display_print(void)
->  }
->  #endif
->  
-> -__weak int board_early_init_f(void)
-> -{
-> -	return 0;
-> -}
-> -
->  uint32_t stm32mp_get_dram_size(void)
->  {
->  	struct ram_info ram;
-> @@ -204,10 +199,12 @@ void board_init_f(ulong dummy)
->  	/* enable console uart printing */
->  	preloader_console_init();
->  
-> -	ret = board_early_init_f();
-> -	if (ret) {
-> -		log_debug("board_early_init_f() failed: %d\n", ret);
-> -		hang();
-> +	if (IS_ENABLED(CONFIG_BOARD_EARLY_INIT_F)) {
-> +		ret = board_early_init_f();
-> +		if (ret) {
-> +			log_debug("board_early_init_f() failed: %d\n", ret);
-> +			hang();
-> +		}
->  	}
->  
->  	ret = uclass_get_device(UCLASS_RAM, 0, &dev);
-> diff --git a/board/engicam/stm32mp1/spl.c b/board/engicam/stm32mp1/spl.c
-> index bb2bd446aa8c..19e5ab0180f9 100644
-> --- a/board/engicam/stm32mp1/spl.c
-> +++ b/board/engicam/stm32mp1/spl.c
-> @@ -15,9 +15,3 @@ void board_vddcore_init(u32 voltage_mv)
->  	if (IS_ENABLED(CONFIG_PMIC_STPMIC1) && CONFIG_IS_ENABLED(POWER))
->  		opp_voltage_mv = voltage_mv;
->  }
-> -
-> -int board_early_init_f(void)
-> -{
-> -	return 0;
-> -}
-> -
-> diff --git a/board/st/stm32h750-art-pi/stm32h750-art-pi.c b/board/st/stm32h750-art-pi/stm32h750-art-pi.c
-> index 244bb5eefb3a..8b1b23337790 100644
-> --- a/board/st/stm32h750-art-pi/stm32h750-art-pi.c
-> +++ b/board/st/stm32h750-art-pi/stm32h750-art-pi.c
-> @@ -32,11 +32,6 @@ int dram_init_banksize(void)
->  	return 0;
->  }
->  
-> -int board_early_init_f(void)
-> -{
-> -	return 0;
-> -}
-> -
->  int board_late_init(void)
->  {
->  	return 0;
-> diff --git a/configs/stm32h750-art-pi_defconfig b/configs/stm32h750-art-pi_defconfig
-> index 971d5c00d88f..0d0dca2511b7 100644
-> --- a/configs/stm32h750-art-pi_defconfig
-> +++ b/configs/stm32h750-art-pi_defconfig
-> @@ -24,7 +24,6 @@ CONFIG_DEFAULT_FDT_FILE="stm32h750i-art-pi"
->  CONFIG_SYS_CBSIZE=256
->  CONFIG_SYS_PBSIZE=282
->  # CONFIG_DISPLAY_CPUINFO is not set
-> -CONFIG_BOARD_EARLY_INIT_F=y
->  # CONFIG_BOARD_INIT is not set
->  CONFIG_BOARD_LATE_INIT=y
->  CONFIG_SYS_PROMPT="U-Boot > "
+Dario Binacchi (4):
+  lib: uuid: add partition type GUID for extended bootloader
+  cmd: part: support lookup by UUID in 'part number'
+  fwu: add helper to get image GUID by type and bank index
+  board: st: stm32mp25: support dynamic A/B bank bootup
 
-Hi Tom
+ board/st/stm32mp2/stm32mp2.c          | 25 +++++++++++++++++++++++++
+ cmd/part.c                            |  8 ++++++--
+ doc/README.gpt                        |  2 ++
+ include/configs/stm32mp25_st_common.h | 15 +++++++++++++++
+ include/fwu.h                         |  3 +++
+ include/part_efi.h                    |  3 +++
+ lib/fwu_updates/fwu.c                 | 24 ++++++++++++++++++++++++
+ lib/uuid.c                            |  1 +
+ 8 files changed, 79 insertions(+), 2 deletions(-)
 
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+-- 
+2.43.0
 
-Thanks
-Patrice
+base-commit: c704af3c8b0f37929bce8c2a4bba27d6e89919c7
+branch: fwupdate-ab
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

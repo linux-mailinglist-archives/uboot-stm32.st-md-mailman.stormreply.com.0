@@ -2,89 +2,119 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id qh6gHw4w0WlyGQcAu9opvQ
+	id EO5jJaqk02m1jwcAu9opvQ
 	(envelope-from <uboot-stm32-bounces@st-md-mailman.stormreply.com>)
-	for <lists+uboot-stm32@lfdr.de>; Sat, 04 Apr 2026 17:36:46 +0200
+	for <lists+uboot-stm32@lfdr.de>; Mon, 06 Apr 2026 14:18:50 +0200
 X-Original-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 13ED039BA33
-	for <lists+uboot-stm32@lfdr.de>; Sat, 04 Apr 2026 17:36:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 32E343A33DE
+	for <lists+uboot-stm32@lfdr.de>; Mon, 06 Apr 2026 14:18:50 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B3755C87ED5;
-	Sat,  4 Apr 2026 15:27:05 +0000 (UTC)
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com
- [209.85.221.41])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id BF111C87ED4;
+	Mon,  6 Apr 2026 12:18:49 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ (using TLSv1.2 with cipher ADH-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 155C9C87EC3
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CAEA1C36B3C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat,  4 Apr 2026 15:27:05 +0000 (UTC)
-Received: by mail-wr1-f41.google.com with SMTP id
- ffacd0b85a97d-43cf7683a28so1576546f8f.2
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat, 04 Apr 2026 08:27:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1775316424; x=1775921224;
- darn=st-md-mailman.stormreply.com; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=pvGO0HArPxKblfO1hvPOj1oWNQ73LOhu35jHyXZXYrs=;
- b=OeE16iqtHJWWR/jINlR/ToXV7oZ6OuMr2j3z5dPuvQMmza+x/fs08yXj0+Z7kqeuzc
- jJAy7dRsvlxr51JlhLRci+o/MZB0u9amZsOZE19YwYgLFCOS/nVmlMQCTtltJ1XXrh/3
- AgydWplTVJGn1H5vcpisCC6+SstyH78A6vL3o=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775316424; x=1775921224;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=pvGO0HArPxKblfO1hvPOj1oWNQ73LOhu35jHyXZXYrs=;
- b=SZpWCJU2CyM5J0DTXYdvJhyBX+WanWa5K6iZ+Wskq96jCdyQ9kWZuh0ftmECjUag8W
- TERzkl+jQtHqQr19F0q3NHB+hoZ0EAK9lV/vsqbVcIfPJi4v8IiOv6bayiyZ2nQsoE5S
- m1FI+tFikQJa+P7ltp6As/rkjNHSqXN5ZkPetrtDzi18GMbJ9Z6ZaqenaC4j7/S7+tYl
- O3e93F0HryRGeZaZDro4w25Srmpj+UBj2jSWdTj53aUAH5EBB7MsJf4jtlFGTFSVDCZR
- kLvN6OvbDRr3NBWGL4gVyobUIx02Uebtoevzml0rZHTza4qGs+gJ4b7T/aTz6bJz/v1/
- ubVg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWSETyjmeFzDQhzqv6cijYwlmtP6Bus6WYObXEHEQv+9efjobFhU9UjkRMEvcfKkIE40vxyTVMjNU589Q==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0YwchEswj5QNyfFjWTgrLgncEPFr5y1RbQD7H+9TM3pzhqlzkQpr
- HdjFQJ0Cgss+CIYOzMDlhs1EFFWb1J2g249e7QPTCWWDYZ+uXpWFkkHS2n9w1RPqKO37AY/KF6d
- UX8Bw
-X-Gm-Gg: AeBDieuU4Y1KlCRokuy9IrKCkB/04FkXOVSjgTsaQXR2MdvBmXM8CfVoztlwFC0jsRI
- Nvf07DFV8rLYZZ/YEuq3xzfFUP3UkKkN9GVUZpUal56Z9h63rhlAogbfRatKzy6NqY0Mr32qxgg
- NmddprNVmkoh8ZmadG9vFFdn4ipSKJAu83uFhkuEajK2+c0y1vk4VBhx1cN8Zb96GhYe6/no8kx
- BLOoD1JYNuUt7pn5THnehTngxzQGYSXPPiYn+gV1vaGOV8Jh+6HbB1ZEvNvxGTkocdBMVEgK1v4
- 5OjHOk3OSN99fOuCusnAeVBL7deKzaa2peysQA1iO0RS8sEh4WZNWbSbxqXxOANFGF+fjEgfCKb
- Dpu9M75oAEIdg7e27jOHyW++1iDWjTD2dqsNcA0+dpqSQJmYVzy07zZd4cx6Sgty/WDbWzJdfVR
- fw7I0MNuAvBA65TT1TM7iZF+lf5D25mtxnPTCLCoSPSnB0pk3nermnDS4uO5EtNIbxwvX5DXDyI
- MyCHTOKgp257TB447cb3WHWdaa3tFdDr8JqRcc1JytVeCbu89vOj2bGp/7dzkdkdJbJGyGCAx2n
- fv76NK/OTdYk1pbobgY2qsYk
-X-Received: by 2002:adf:ec4c:0:b0:43d:30d1:857c with SMTP id
- ffacd0b85a97d-43d30d1859bmr4013249f8f.7.1775316424542; 
- Sat, 04 Apr 2026 08:27:04 -0700 (PDT)
-Received: from dario-ThinkPad-P14s-Gen-5.homenet.telecomitalia.it
- (host-87-9-100-184.retail.telecomitalia.it. [87.9.100.184])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43d1e4f1a99sm28059462f8f.32.2026.04.04.08.27.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 04 Apr 2026 08:27:04 -0700 (PDT)
-From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-To: u-boot@lists.denx.de
-Date: Sat,  4 Apr 2026 17:23:34 +0200
-Message-ID: <20260404152640.3297713-8-dario.binacchi@amarulasolutions.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260404152640.3297713-1-dario.binacchi@amarulasolutions.com>
-References: <20260404152640.3297713-1-dario.binacchi@amarulasolutions.com>
+ Mon,  6 Apr 2026 12:18:48 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 9E6E8600AC;
+ Mon,  6 Apr 2026 12:18:47 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 074EBC4CEF7;
+ Mon,  6 Apr 2026 12:18:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1775477927;
+ bh=4fzMSwoM0psHeMrlVWfL2XZhNC091UNSM0mAXfoA0O0=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=UZcVqbZlCrihf+d1BCWzH+VbTRSvsPIzjl0SBeMMva7NEe3zJHy1Qi3kw3nGHGmMI
+ z66F8fdVfv5jwqhO5iF5SptjteMtWBWmUgCVt1aXXZSYItYH2BWhNFcgYhdZpEcYWi
+ dJRok01gavINi8tGxMna0eEz/3kxCuHr/sma+zZbIYA9Ra+ZuynMrR+sNFmP2HIwTF
+ 2Tzv/Puxn5zTs1W95lD5ddOeDrJc9iYAt+fwYT+Oe4xBi78doSPlv+KTT4HXybI6B9
+ PVnm2ei1C38oF/IDHntzVxYTVm2snHvnv5JtU8SqbDdM3tzA0Hc4NcBErmgSsLpEJ2
+ g0BxHfaMRhiBw==
+Date: Mon, 6 Apr 2026 17:48:15 +0530
+From: Sumit Garg <sumit.garg@kernel.org>
+To: Casey Connolly <casey.connolly@linaro.org>
+Message-ID: <adOkh0qBBLfVWB87@sumit-xelite>
+References: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
 MIME-Version: 1.0
-Cc: Tom Rini <trini@konsulko.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- uboot-stm32@st-md-mailman.stormreply.com,
+Content-Disposition: inline
+In-Reply-To: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
+Cc: Peng Fan <peng.fan@nxp.com>, Heiko Stuebner <heiko@sntech.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Conor Dooley <conor.dooley@microchip.com>,
+ Finley Xiao <finley.xiao@rock-chips.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>, Lukasz Majewski <lukma@denx.de>,
+ Hal Feng <hal.feng@starfivetech.com>, u-boot-qcom@groups.io,
+ David Lechner <dlechner@baylibre.com>,
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
+ Stephen Boyd <swboyd@chromium.org>, Jens Reidel <adrian@mainlining.org>,
+ Heiko Schocher <hs@nabladev.com>, Aspeed BMC SW team <BMC-SW@aspeedtech.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
+ Padmarao Begari <padmarao.begari@amd.com>,
+ David Wronek <david.wronek@mainlining.org>,
+ Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
+ Alice Guo <alice.guo@nxp.com>, Stefan Roese <stefan.roese@mailbox.org>,
+ Kever Yang <kever.yang@rock-chips.com>, Sean Anderson <seanga2@gmail.com>,
+ u-boot@lists.denx.de, Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>,
+ u-boot-amlogic@groups.io, Sam Shih <sam.shih@mediatek.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Christian Marangi <ansuelsmth@gmail.com>, Joseph Chen <chenjh@rock-chips.com>,
+ Ryan Wanner <Ryan.Wanner@microchip.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Senthil Nathan Thangaraj <senthilnathan.thangaraj@amd.com>,
+ Elaine Zhang <zhangqing@rock-chips.com>,
+ Minda Chen <minda.chen@starfivetech.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ "Markus Schneider-Pargmann \(TI.com\)" <msp@baylibre.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Ryan Chen <ryan_chen@aspeedtech.com>, Greg Malysa <malysagreg@gmail.com>,
+ Simon Glass <sjg@chromium.org>, linux@analog.com,
+ Varadarajan Narayanan <quic_varada@quicinc.com>,
+ Liviu Dudau <liviu.dudau@foss.arm.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, uboot-snps-arc@synopsys.com,
+ Varshini Rajendran <varshini.rajendran@microchip.com>,
+ Luca Weiss <luca.weiss@fairphone.com>,
+ Manikandan Muralidharan <manikandan.m@microchip.com>,
+ Tom Rini <trini@konsulko.com>, Peter Korsgaard <peter@korsgaard.com>,
+ Philip Molloy <philip.molloy@analog.com>, Udit Kumar <u-kumar1@ti.com>,
+ Romain Gantois <romain.gantois@bootlin.com>, Joel Stanley <joel@jms.id.au>,
+ Dai Okamura <okamura.dai@socionext.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Paul Sajna <sajattack@postmarketos.org>, Paul Barker <paul@pbarker.dev>,
+ Raymond Mao <raymondmaoca@gmail.com>, Jonathan Currier <dullfire@yahoo.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Robert Marko <robert.marko@sartura.hr>, Thierry Reding <treding@nvidia.com>,
+ Shmuel Leib Melamud <smelamud@redhat.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Nishanth Menon <nm@ti.com>,
+ Valentin Caron <valentin.caron@foss.st.com>, Yao Zi <me@ziyao.cc>,
+ Sam Day <me@samcday.com>, Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Naman Trivedi <naman.trivedimanojbhai@amd.com>,
+ uboot-stm32@st-md-mailman.stormreply.com, Marek Vasut <marex@denx.de>,
+ Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>,
+ Ryder Lee <ryder.lee@mediatek.com>,
+ Loic Poulain <loic.poulain@oss.qualcomm.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Weijie Gao <weijie.gao@mediatek.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Yannick Fertre <yannick.fertre@foss.st.com>,
+ Stephan Gerhold <stephan.gerhold@linaro.org>, Andrew Davis <afd@ti.com>,
+ Rui Miguel Silva <rui.silva@linaro.org>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- linux-amarula@amarulasolutions.com
-Subject: [Uboot-stm32] [PATCH v2 7/7] board: st: stm32mp25: support dynamic
-	A/B bank bootup
+ Manorit Chawdhry <m-chawdhry@ti.com>
+Subject: Re: [Uboot-stm32] [PATCH RFC 00/40] clk: port full Linux Common
+ Clock Framework to U-Boot
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -100,136 +130,187 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
-X-Spamd-Result: default: False [4.39 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [3.79 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
 	HFILTER_HELO_IP_A(1.00)[stm-ict-prod-mailman-01.stormreply.prv];
-	MID_CONTAINS_FROM(1.00)[];
-	R_DKIM_REJECT(1.00)[amarulasolutions.com:s=google];
+	R_DKIM_REJECT(1.00)[kernel.org:s=k20201202];
+	MID_RHS_NOT_FQDN(0.50)[];
 	HFILTER_HELO_NORES_A_OR_MX(0.30)[stm-ict-prod-mailman-01.stormreply.prv];
-	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+ip4:52.209.6.89];
+	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[amarulasolutions.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
+	FREEMAIL_CC(0.00)[nxp.com,sntech.de,kernel.org,microchip.com,rock-chips.com,bootlin.com,aspeedtech.com,denx.de,starfivetech.com,groups.io,baylibre.com,synopsys.com,chromium.org,mainlining.org,nabladev.com,linaro.org,foss.st.com,amd.com,socionext.com,mailbox.org,gmail.com,lists.denx.de,mediatek.com,amarulasolutions.com,nigauri.org,vrull.eu,altera.com,analog.com,quicinc.com,foss.arm.com,cherry.de,fairphone.com,konsulko.com,korsgaard.com,ti.com,jms.id.au,iopsys.eu,postmarketos.org,pbarker.dev,yahoo.com,andestech.com,sartura.hr,nvidia.com,redhat.com,ziyao.cc,samcday.com,oss.qualcomm.com,st-md-mailman.stormreply.com,kwiboo.se,samsung.com,mentallysanemainliners.org];
 	RCVD_TLS_LAST(0.00)[];
-	GREYLIST(0.00)[pass,meta];
-	FORGED_SENDER(0.00)[dario.binacchi@amarulasolutions.com,uboot-stm32-bounces@st-md-mailman.stormreply.com];
-	TO_DN_SOME(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:u-boot@lists.denx.de,m:trini@konsulko.com,m:marek.vasut+renesas@mailbox.org,m:quentin.schulz@cherry.de,m:uboot-stm32@st-md-mailman.stormreply.com,m:patrick.delaunay@foss.st.com,m:dario.binacchi@amarulasolutions.com,m:linux-amarula@amarulasolutions.com,m:marek.vasut@mailbox.org,s:lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:casey.connolly@linaro.org,m:peng.fan@nxp.com,m:heiko@sntech.de,m:mkorpershoek@kernel.org,m:conor.dooley@microchip.com,m:finley.xiao@rock-chips.com,m:miquel.raynal@bootlin.com,m:chiawei_wang@aspeedtech.com,m:lukma@denx.de,m:hal.feng@starfivetech.com,m:u-boot-qcom@groups.io,m:dlechner@baylibre.com,m:Eugeniy.Paltsev@synopsys.com,m:swboyd@chromium.org,m:adrian@mainlining.org,m:hs@nabladev.com,m:BMC-SW@aspeedtech.com,m:ilias.apalodimas@linaro.org,m:gabriel.fernandez@foss.st.com,m:padmarao.begari@amd.com,m:david.wronek@mainlining.org,m:hayashi.kunihiko@socionext.com,m:alice.guo@nxp.com,m:stefan.roese@mailbox.org,m:kever.yang@rock-chips.com,m:seanga2@gmail.com,m:u-boot@lists.denx.de,m:manivannan.sadhasivam@linaro.org,m:u-boot-amlogic@groups.io,m:sam.shih@mediatek.com,m:michael@amarulasolutions.com,m:ansuelsmth@gmail.com,m:chenjh@rock-chips.com,m:Ryan.Wanner@microchip.com,m:iwamatsu@nigauri.org,m:senthilnathan.thangaraj@amd.com,m:zhangqing@rock-chips.com,m:minda.ch
+ en@starfivetech.com,m:philipp.tomsich@vrull.eu,m:msp@baylibre.com,m:michal.simek@amd.com,m:andrew.goodbody@linaro.org,m:dinesh.maniyam@altera.com,m:neil.armstrong@linaro.org,m:ryan_chen@aspeedtech.com,m:malysagreg@gmail.com,m:sjg@chromium.org,m:linux@analog.com,m:quic_varada@quicinc.com,m:liviu.dudau@foss.arm.com,m:quentin.schulz@cherry.de,m:uboot-snps-arc@synopsys.com,m:varshini.rajendran@microchip.com,m:luca.weiss@fairphone.com,m:manikandan.m@microchip.com,m:trini@konsulko.com,m:peter@korsgaard.com,m:philip.molloy@analog.com,m:u-kumar1@ti.com,m:romain.gantois@bootlin.com,m:joel@jms.id.au,m:okamura.dai@socionext.com,m:mikhail.kshevetskiy@iopsys.eu,m:sajattack@postmarketos.org,m:paul@pbarker.dev,m:raymondmaoca@gmail.com,m:dullfire@yahoo.com,m:ycliang@andestech.com,m:robert.marko@sartura.hr,m:treding@nvidia.com,m:smelamud@redhat.com,m:clamor95@gmail.com,m:nm@ti.com,m:valentin.caron@foss.st.com,m:me@ziyao.cc,m:me@samcday.com,m:aswin.murugan@oss.qualcomm.com,m:naman.trivedimanojbhai@am
+ d.com,m:uboot-stm32@st-md-mailman.stormreply.com,m:marex@denx.de,m:jorge.ramirez@oss.qualcomm.com,m:ryder.lee@mediatek.com,m:loic.poulain@oss.qualcomm.com,m:jonas@kwiboo.se,m:weijie.gao@mediatek.com,m:jh80.chung@samsung.com,m:igor.belwon@mentallysanemainliners.org,m:balaji.selvanathan@oss.qualcomm.com,m:chunfeng.yun@mediatek.com,m:arturs.artamonovs@analog.com,m:venkatesh.abbarapu@amd.com,m:vasileios.bimpikas@analog.com,m:GSS_MTK_Uboot_upstream@mediatek.com,m:yannick.fertre@foss.st.com,m:stephan.gerhold@linaro.org,m:afd@ti.com,m:rui.silva@linaro.org,m:patrick.delaunay@foss.st.com,m:m-chawdhry@ti.com,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[sumit.garg@kernel.org,uboot-stm32-bounces@st-md-mailman.stormreply.com];
 	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
 	FORWARDED(0.00)[uboot-stm32@st-md-mailman.stormreply.com];
+	ARC_NA(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:-];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[amarulasolutions.com:-];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
 	PREVIOUSLY_DELIVERED(0.00)[uboot-stm32@st-md-mailman.stormreply.com];
-	NEURAL_HAM(-0.00)[-0.989];
+	RCPT_COUNT_GT_50(0.00)[99];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[dario.binacchi@amarulasolutions.com,uboot-stm32-bounces@st-md-mailman.stormreply.com];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[sumit.garg@kernel.org,uboot-stm32-bounces@st-md-mailman.stormreply.com];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-0.443];
+	TAGGED_RCPT(0.00)[uboot-stm32];
+	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	TAGGED_RCPT(0.00)[uboot-stm32,renesas];
-	RCPT_COUNT_SEVEN(0.00)[8];
 	ASN(0.00)[asn:16509, ipnet:52.208.0.0/13, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[amarulasolutions.com:email,amarulasolutions.com:mid,stm-ict-prod-mailman-01.stormreply.prv:helo]
-X-Rspamd-Queue-Id: 13ED039BA33
+	FORGED_SENDER_MAILLIST(0.00)[]
+X-Rspamd-Queue-Id: 32E343A33DE
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Enable automatic detection of the active A/B bank by retrieving
-partition GUIDs from FWU metadata.
+On Thu, Mar 19, 2026 at 09:56:22PM +0100, Casey Connolly wrote:
+> This RFC provides a proof of concept for using the full Linux CCF in
+> U-Boot and consequently porting full Linux clock drivers with extremely
+> minimal changes.
+> 
+> == Overview ==
+> 
+> This RFC is pretty long but can be separated into a few chunks. The
+> first patches relate to Linux API compatibility and just contain small
+> self contained changes, these can go upstream regardless of CCF.
+> 
+> The next group of changes prepare for importing CCF from Linux, the
+> standalone fixed clock drivers are moved to clk/basic, the existing
+> U-Boot CCF drivers are moved to clk/uccf, and struct clk_ops is renamed
+> to clk_ops_uboot.
+> 
+> Additionally, clk_set_rate() is changed so that it returns a signed
+> long, since it can return negative values. This is also done to align
+> with CCF but it's a standalone improvement nonetheless.
+> 
+> The next changes import CCF from Linux 6.19 and then adjust it to
+> compile and work with U-Boot. These commits are split up mostly to
+> try and reduce the size. Finally clk-uclass is adjusted for CCF, this
+> definitely will need some additional passes to be a bit cleaner.
+> 
+> With CCF done, sandbox clk-ccf driver gets a CCF_FULL port, the clk_ccf
+> tests are adjusted to pass.
+> 
+> Lastly, a PoC port of Qualcomms Linux clock drivers is done, this
+> only has sm8650 clocks but they serve the desired purpose. The changes
+> necessary to the Linux drivers are mostly to deal with U-Boots driver
+> model, the actual platform specific clock drivers require essentially
+> zero changes!
+> 
+> === Feedback ===
+> 
+> I'd like to get feedback on the overall architecture and ideas, feel
+> free to point out any dead code or printf's I forgot about, but I'll for
+> sure do a more detailed cleanup before the next revision.
+> 
+> I would definitely like to input on how to deal with clk-uclass, since
+> it's now supporting 3 different clock frameworks, but I'm now sure how
+> best to separate the code out without duplicating code.
+> 
+> In terms of overall architecture, CCF is a departure from the uclass
+> model that U-Boot has stuck too for so long. If this is a success then
+> I think it could make a lot of sense to make similar changes for power
+> domains and resets. I think this change offers a lot of additional
+> flexibility which has been sorely missed.
+> 
+> == Motivation ==
+> 
+> There were quite a few motivating factors behind this effort which I
+> think provide useful context for this series:
+> 
+> 1. Existing UCLASS_CLK support in U-Boot (even with U-Boots minimal CCF)
+>    doesn't provide a fully cohesive API nor implement the necessary
+>    functionality to support complex modern platforms without a lot of
+>    additional effort.
+> 
+> 2. While trying to enable display support on Qualcomm, it became clear
+>    that U-Boots clock framework was a severe limiting factor,
+>    particularly for more complicated setups like "bonded" dual-DSI.
+> 
+> 3. The current state of Qualcomm clock drivers in U-Boot is pretty poor,
+>    as the old very basic driver code is being expected to support more
+>    and more complicated usecases. Clock support is generally the most
+>    complicated part of bringing up any new Qualcomm platform, so being
+>    able to properly reuse Linux drivers with the familiar API greatly
+>    reduces the amount of friction when working on U-Boot support for
+>    complicated peripherals like the display.
+> 
+> Consequently, My aim with this effort was primarily to provide API
+> compatibility with Linux as much as possible, minimising the changes
+> that have to be made to clock drivers to port them from Linux, and
+> reducing the chance of introducing U-Boot specific bugs.
+> 
+> === clk_ops/UCLASS_CLK ===
+> 
+> CCF_FULL drivers should NOT use UCLASS_CLK, since CCF uses a totally
+> independent clock API. If the clocks are provided by another device like
+> a phy, they can simply be registered with the clk core the same way they
+> are in Linux. Standalone clock drivers should use UCLASS_NOP.
+> 
+> Clocks must all be registered during driver probe, the CCF will ensure
+> that a given clock provider is probed (via a global ofnode -> device
+> lookup) before checking the of_providers, thus making sure the clocks
+> are registered so that the consumer can use them. There is currently no
+> special handling for cyclical dependencies.
+> 
+> === struct clk ===
+> 
+> It's definitely debatable if it makes sense to have 3 different structs
+> for each clk (clk_hw, clk_core and clk). I do think clk_hw and clk_core
+> are justified, since clk_hw is more tied to the hardware description and
+> typically nested in a clk-specific descriptor while clk_core contains
+> the internal runtime state of the clk which should remain private to
+> CCF core.
+> 
+> It could make sense to merge clk and clk_core, but since struct clk is
+> public in U-Boot, where it's an opaque pointer in Linux this would be
+> a substantial effort. In Linux struct clk objects are allocated inside
+> CCF, but in U-Boot they're allocated by the driver, this would need to
+> be resolved before we investigate combining these structs.
+> 
+> === Memory/perf overhead ===
+> 
+> The memory and size overhead of CCF is undoubtably bigger than uCCF,
+> although I suspect the difference is less than it might seem at
+> first glance. In particular: clk_core is only ~50 bytes larger than
+> struct udevice on ARM64, and an additional 120 bytes is saved for each
+> U_BOOT_DRIVER used by uCCF.
+> 
+> On the other hand, the CPU overhead is probably more significant,
+> but not an unreasonable cost to ensure correctness and propagate rate
+> changes across the clock tree.
+> 
+> Just comparing the binary size of sandbox64_defconfig with uCCF vs
+> CCF_FULL, CCF_FULL results in a 135k size increase in the binary. I
+> haven't done any more detailed analysis here (still haven't got buildman
+> to play nice...).
+> 
+> === SPL ===
+> 
+> This RFC doesn't have any SPL specific support, I think this role is
+> better fulfilled by UCLASS_CLK.
+>
 
-This ensures the system correctly identifies the bootable partitions
-even in multi-bank scenarios, falling back to a standard bootable flag
-scan if the UUIDs are missing.
+SPL support on Qualcomm platforms is coming for real. I see a patch-set
+already posted and more to come. So we really need to see how Linux CCF
+can be reused to support SPL limitations on Qcom SoCs while executing
+from on-chip RAM.
 
-To enable A/B bank bootup on stm32mp25 boards, add the following Kconfig
-options to the stm32mp25_defconfig:
+If it turns out to be separate clock drivers, Linux CCF for U-Boot
+proper and UCLASS_CLK for U-Boot SPL for the same SoC then it's much
+more maintainence overhead as compared to just pulling in clk driver
+from Linux.
 
- CONFIG_FWU_MULTI_BANK_UPDATE=y
- CONFIG_FWU_MDATA=y
- CONFIG_FWU_NUM_BANKS=2
- CONFIG_FWU_NUM_IMAGES_PER_BANK=3
- CONFIG_CMD_FWU_METADATA=y
- CONFIG_FWU_MDATA_V2=y
+It would be better if somehow Linux CCF can be stripped down to meet SPL
+needs too.
 
-Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-
----
-
-Changes in v2:
-- Pass efi_guid_t by pointer in fwu_mdata_get_image_guid() calls.
-
- board/st/stm32mp2/stm32mp2.c          | 25 +++++++++++++++++++++++++
- include/configs/stm32mp25_st_common.h | 15 +++++++++++++++
- 2 files changed, 40 insertions(+)
-
-diff --git a/board/st/stm32mp2/stm32mp2.c b/board/st/stm32mp2/stm32mp2.c
-index 43bc583378e6..cb9a33252212 100644
---- a/board/st/stm32mp2/stm32mp2.c
-+++ b/board/st/stm32mp2/stm32mp2.c
-@@ -208,4 +208,29 @@ void fwu_plat_get_bootidx(uint *boot_idx)
- 	*boot_idx = (readl(TAMP_FWU_BOOT_INFO_REG) >>
- 		    TAMP_FWU_BOOT_IDX_OFFSET) & TAMP_FWU_BOOT_IDX_MASK;
- }
-+
-+int fwu_platform_hook(struct udevice *dev, struct fwu_data *data)
-+{
-+	uint boot_idx;
-+	efi_guid_t boot_uuid, root_uuid;
-+	const efi_guid_t boot_type_guid = PARTITION_XBOOTLDR;
-+	const efi_guid_t root_type_guid =
-+		PARTITION_LINUX_FILE_SYSTEM_DATA_GUID;
-+	char uuidbuf[UUID_STR_LEN + 1];
-+
-+	fwu_plat_get_bootidx(&boot_idx);
-+
-+	if (!fwu_mdata_get_image_guid(&boot_uuid, &boot_type_guid,
-+				      boot_idx) &&
-+	    !fwu_mdata_get_image_guid(&root_uuid, &root_type_guid,
-+				      boot_idx)) {
-+		uuid_bin_to_str(boot_uuid.b, uuidbuf, UUID_STR_FORMAT_GUID);
-+		env_set("boot_partuuid", uuidbuf);
-+
-+		uuid_bin_to_str(root_uuid.b, uuidbuf, UUID_STR_FORMAT_GUID);
-+		env_set("root_partuuid", uuidbuf);
-+	}
-+
-+	return 0;
-+}
- #endif /* CONFIG_FWU_MULTI_BANK_UPDATE */
-diff --git a/include/configs/stm32mp25_st_common.h b/include/configs/stm32mp25_st_common.h
-index cb679eb1be22..0b0267ae99b0 100644
---- a/include/configs/stm32mp25_st_common.h
-+++ b/include/configs/stm32mp25_st_common.h
-@@ -8,7 +8,22 @@
- #ifndef __CONFIG_STM32MP25_ST_COMMON_H__
- #define __CONFIG_STM32MP25_ST_COMMON_H__
- 
-+#ifdef CONFIG_FWU_MULTI_BANK_UPDATE
-+#define SCAN_DEV_FOR_BOOT_PARTS \
-+	"setenv devplist; " \
-+	"env exists boot_partuuid && " \
-+		"part number ${devtype} ${devnum} ${boot_partuuid} devplist; " \
-+	"env exists devplist || " \
-+		"part list ${devtype} ${devnum} -bootable devplist; "
-+
-+#define ST_STM32MP25_FWU_ENV \
-+	"altbootcmd=${bootcmd}\0"
-+#else
-+#define ST_STM32MP25_FWU_ENV
-+#endif
-+
- #define STM32MP_BOARD_EXTRA_ENV \
-+	ST_STM32MP25_FWU_ENV \
- 	"usb_pgood_delay=2000\0" \
- 	"console=ttySTM0\0"
- 
--- 
-2.43.0
-
+-Sumit
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

@@ -2,97 +2,99 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id WL0YNv9f1WkF5gcAu9opvQ
+	id WDNzAcWD2WmvqQgAu9opvQ
 	(envelope-from <uboot-stm32-bounces@st-md-mailman.stormreply.com>)
-	for <lists+uboot-stm32@lfdr.de>; Tue, 07 Apr 2026 21:50:23 +0200
+	for <lists+uboot-stm32@lfdr.de>; Sat, 11 Apr 2026 01:12:05 +0200
 X-Original-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 791BF3B406D
-	for <lists+uboot-stm32@lfdr.de>; Tue, 07 Apr 2026 21:50:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9C2623DD68A
+	for <lists+uboot-stm32@lfdr.de>; Sat, 11 Apr 2026 01:12:04 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D30ECC8F280;
-	Tue,  7 Apr 2026 19:50:22 +0000 (UTC)
-Received: from mail-ot1-f47.google.com (mail-ot1-f47.google.com
- [209.85.210.47])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9A1B7C8F26F;
+	Fri, 10 Apr 2026 23:05:11 +0000 (UTC)
+Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com
+ [209.85.208.51])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id BB47BC3F945
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AE699C87EC2
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  7 Apr 2026 19:50:21 +0000 (UTC)
-Received: by mail-ot1-f47.google.com with SMTP id
- 46e09a7af769-7d4be94eeacso5701532a34.2
+ Fri, 10 Apr 2026 23:05:09 +0000 (UTC)
+Received: by mail-ed1-f51.google.com with SMTP id
+ 4fb4d7f45d1cf-6701c19e7b3so4338629a12.2
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 07 Apr 2026 12:50:21 -0700 (PDT)
+ Fri, 10 Apr 2026 16:05:09 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775862309; cv=none;
+ d=google.com; s=arc-20240605;
+ b=XPKHOHn7SeJ2NC99FwN0uL3G2K09IL44WoZXzR0PrEibGkL5avRZnTYTMfcj7phw3l
+ zXbf+3yStTkJ9u21aGGyj55O7GJ/ADDzdLBkP4Jzy+slZjnPwysaPCy7vYZjsMq3BTXt
+ xOdNQiBDZZ9jMeXzDv1Lk+dijaHoL+wSth1soAQCka07nVgGC0AEL+MOOj3DVCHNZbMQ
+ xM0PC+lcPD49iuvCDYzD6zRZqSH/AfWGQ5eXeMw8iC28FJL9NENe6hx259ikSUQu1oIK
+ YI83ka/XFM6XY7xLl36nz1IyeTYScpRIbw/8uAyIazHL7C5093aQJzyjXuCPJkHqquX2
+ UZQg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=YHWRrZYu1zI4NCLOelP8cJKWsH2qei3q/OjT57VTYcU=;
+ fh=wCNmMJ3cEapUXCnP29DbV6g553WFi+0JU/m7zGMviHQ=;
+ b=VSDM5W2t7n9xA/fLeeHzZsU1HxSyI6kcF+gSmkuWLH8X4pR23kfDzjwwCUurgyw3In
+ lYPk7wVY9iP750t6AQYJjSIh5dCixDGdoljYhekdYblMf6I9yfx9lBXEymmXxxkh1MNj
+ Vy9aqtQy8qc6f4WeJLzMVSfRQtj/LZZOVNfQSZYf3DM5NwveGGdjwvTCxpk7GXYaYhL/
+ PZ3BmRkaIZWPWKyphjFlysmsNfnNFxJJcwnKSq00V4UdRMUGRiRvJNHQ7xdcOzftXRVV
+ hylPn9Fs7WKGWh2jS02mBVINDMDgYMzaMovEFa1DsnX/aumfwLXOwnY5Hm0gK9t9H4Ij
+ 4gjg==; darn=st-md-mailman.stormreply.com
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1775591420; x=1776196220;
+ d=chromium.org; s=google; t=1775862309; x=1776467109;
  darn=st-md-mailman.stormreply.com; 
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=TU9aHqQN9gp/ACGep7Y7VIJ+H+/wIZZzez+PUyLK1gg=;
- b=Pvou6LGguBpPD1NV0unc3sUal4jxymaI4OxO5qPIrGzScFfp8er6KEJ7eT8Z6jUPB0
- KT4R6mK4HvAZiJeTz9jDS8Ib+vg+cs2yuUwChYuJ645dGF61A7OqbhOMlrSywT44dmM/
- w3wFPZZMfr3AG4T9SToUgSiccqQb+HKvDIGKY=
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=YHWRrZYu1zI4NCLOelP8cJKWsH2qei3q/OjT57VTYcU=;
+ b=JWGNBtwZpmlk/Ox9NTs2JtYFnYc+jsMXKDq16D37ln23lGf954v3399aRGnKwSyk1c
+ GbgepzN5bI/dwMocy7I1sjNIi2pMEOk54k+YDwiUZmqe9d5hBdK5LwSAvuIiyQsCgPGP
+ oswBbwaVoskaNteRvPYFocwhAOpwD0flzxtoU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775591420; x=1776196220;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=TU9aHqQN9gp/ACGep7Y7VIJ+H+/wIZZzez+PUyLK1gg=;
- b=cja//KMK3BcqUzHSIaHOZPUXWJ4za2OknYSYnlNgBraDE6JMsC5srBHctl6wi1FXZ8
- uC3cRzAxmt4olg4ADNETPq/kfjfUvyhVd97eiCYMeNP5r24GMqh1KJofkRpDu2UkClsG
- vt0wDBg0VrUKUVUg43oRyeNeEPx/HM9Q58Rhcze+Hluy5nngZXadiRPH0j0GsFIrYHH8
- SpqBksxbMMBsANm93Ol3hmaCV39g/CgkbUqhIU0WLNKrALh51W/iuf3DALfROALfXQdN
- 2aKLJFcGlmqrvuGtLK4lVcbOPtPliqtbDmNxMGe6sUpCFgAf+1IwqIdQVEToIBejflj6
- u/xA==
+ d=1e100.net; s=20251104; t=1775862309; x=1776467109;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=YHWRrZYu1zI4NCLOelP8cJKWsH2qei3q/OjT57VTYcU=;
+ b=jJ24Z0PKSRpcvWq9vsKqwo5z5wqMJt6YpW/jlDB4fKEa5jqZSd+P2gibj6h5lGdmOJ
+ HNJK5WTD5muzR0ceLoBgoRP6A07VsBtV4/JHQ144nIGSOTbHQGiPmXiLVFpNlsy6vEr2
+ IJ+rqQUWIP6rKQRfQqEXiuCehbO6wqe16wtiKRTO76Lc3cvX6SsIa8SBAtX8uNhKRMOs
+ l/y0EbJMVG89Rj+w5el0UBaYP7UnpFmyrHj0E5HipwPG0f9WVbA1Iu/06zQN4hCyj/bq
+ nEZE3ZwnUwE53Enu553KmxVjs00dd/h+Qz44q3NLdTalKrpvxXQT9VkqBG/PpDGRX9Ln
+ dW+Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUyynXcwqmCpqaPNOoLaiK33cyD21lLnkXDTMPrPvIVA3B8f7hVfiLnZFiF324sNw9d2Do/pkuURVs/9Q==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0YxGKvvpjs3wAFazcc7rmdqe7DD4Hf6WAKi4CHqCdVZ6AhsK4Y5s
- +Bzz9xdRyzlvLchRxV+9A7SzCEBXHbwkpVHeNCNbBGlng64Fd4SYJZuHlIQ6Esr3KM4=
-X-Gm-Gg: AeBDieugD+YcRqSTCH5Ls1k4Yyi1OqKMlzM6C2T+z3hYqOmhztfQW8ku+Gx1Owk3/ea
- 6LXOp42NbiBx0cHfaiPdlXzfE+q4RBR3lXLzuC7pLEK0+/XfQNSTbENZC6khWxWFOkdJJ1bLp8x
- KN5TJGOJhy6RFO0dgI4LPoaf2Q7QxnYBYz+jY/9DmBsL9UUQuW9HweHwse3sob/um/mlmAYNLAp
- C81n4AjIZ0jvcttmDRHj0qp0fgxPkC39FYU0hhbuang3HEukF1JXJOplP4qknOvDtWBzXz7Dgis
- RFtFJC9Hb0vglVJRcBwynv2N7rSFYni+ZsvQSkb6u5a42IT+Nl5FSECIMNm/C4XgD2Cf/OAtsUS
- u+xfQFR+JYgvuGYAiSw5A58orf0ju5mTxtqv7+F6dWzJa1d0QmrLtvK8y6LyPlwVSDsbRpzvp2S
- 1DNwki5SxCvkd8xvSKzaJbErgYKGegC7UxVH6WRO6VSBdgZOQKLfIENhW2hTg72LWsEpPg7KXWi
- H1g7lh16ULhqxZmMr8hj2U47tnv3TwFEU+rRozFqVdlrk8=
-X-Received: by 2002:a05:6820:81c4:b0:67d:e836:2e46 with SMTP id
- 006d021491bc7-6822064327emr10582368eaf.45.1775591420434; 
- Tue, 07 Apr 2026 12:50:20 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-97-235.totalplay.net.
- [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-42324017960sm9988782fac.7.2026.04.07.12.50.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Apr 2026 12:50:20 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-In-Reply-To: <20260323225537.896180-1-trini@konsulko.com>
-References: <20260323225537.896180-1-trini@konsulko.com>
-Message-Id: <177559141859.2108693.17265258152616779822.b4-ty@konsulko.com>
-Date: Tue, 07 Apr 2026 13:50:18 -0600
+ AJvYcCUpEORR5hg1hE3h7rFYoa/AfQiL/eAtjo8EU9BncL0Y3aUPsO5xqeigZhYPserFoQiwLaZ680nM7FTgIw==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0YwqfH6ipC7SLbYL/CQqoxR3erzNaVCobdye3+HWHuchM+Qk31ZA
+ wLYwZuU2u/1tMSYsUkJs2RRP1p8VAbi++623eV4HWhZA92/uISHNsvt1dmiE9xQ+rBu5M3iaxa3
+ lGzF1MDRXaFkXR8tKo56PTy7BHM6aMWhMSBE/80vY
+X-Gm-Gg: AeBDievjVdYzeldQVUzM+TBGCl6KE0kZ9LpNKi2pjAoSOmij+SDQnAx+H7pIPs9n8l2
+ dtOFrPIHfzEaSgLpducf+LPho37wnkcTv77nD24RAQgKyA/KisRgh0b43i7bLKZzbLBPEjsZbnZ
+ M5z2Y3zp9nlKQ7hSemFlMw8EbC9oWLF5aoj2+bOPRV5nMidIfQ6xMfZ+c7CHO6PTVR55pQQcao3
+ 6fRD/kasK+Uvs5aT5HenFoyFpJOVLYR3J00eHumq9KtvVZcXwzAIG4LcbMuIFgANiC6ui0+NuPC
+ vjjkDw==
+X-Received: by 2002:a17:907:25cb:b0:b98:695:ec53 with SMTP id
+ a640c23a62f3a-b9d7248ab3bmr284883166b.18.1775862308877; Fri, 10 Apr 2026
+ 16:05:08 -0700 (PDT)
 MIME-Version: 1.0
-X-Mailer: b4 0.14.3
-Cc: Peng Fan <peng.fan@nxp.com>, Casey Connolly <casey.connolly@linaro.org>,
- Stefan Roese <stefan.roese@mailbox.org>,
- Kever Yang <kever.yang@rock-chips.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- uboot-stm32@st-md-mailman.stormreply.com, u-boot-qcom@groups.io,
- Jerome Forissier <jerome.forissier@arm.com>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>, u-boot-amlogic@groups.io,
- Jaehoon Chung <jh80.chung@samsung.com>, Peter Robinson <pbrobinson@gmail.com>,
- Thierry Reding <treding@nvidia.com>,
+References: <20260404152640.3297713-1-dario.binacchi@amarulasolutions.com>
+ <20260404152640.3297713-8-dario.binacchi@amarulasolutions.com>
+In-Reply-To: <20260404152640.3297713-8-dario.binacchi@amarulasolutions.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 10 Apr 2026 17:04:56 -0600
+X-Gm-Features: AQROBzA9zZktph614RgZ4_5ahrCioK5KwO69O-4fAtEnRZv0EzOL68RoHA6Eks0
+Message-ID: <CAFLszTj3SL0qiXsqa31UhAyf+XZEdV_0QBf6Ly0QVhMjNMD5=Q@mail.gmail.com>
+To: dario.binacchi@amarulasolutions.com
+Cc: Tom Rini <trini@konsulko.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Tien Fong Chee <tien.fong.chee@altera.com>,
- =?utf-8?q?=C5=81ukasz_Majewski?= <lukma@nabladev.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Heiko Schocher <hs@nabladev.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Matthias Brugger <mbrugger@suse.com>, Simon Glass <sjg@chromium.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>, linux@analog.com,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Bin Meng <bmeng.cn@gmail.com>,
- Anatolij Gustschin <ag.dev.uboot@gmail.com>
-Subject: Re: [Uboot-stm32] [PATCH] global: Correct duplicate U_BOOT_DRIVER
-	entry names
+ Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de,
+ uboot-stm32@st-md-mailman.stormreply.com,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ linux-amarula@amarulasolutions.com
+Subject: Re: [Uboot-stm32] [PATCH v2 7/7] board: st: stm32mp25: support
+	dynamic A/B bank bootup
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -108,65 +110,89 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
-X-Spamd-Result: default: False [3.39 / 15.00];
+X-Spamd-Result: default: False [4.39 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_REJECT(1.00)[konsulko.com:s=google];
+	R_DKIM_REJECT(1.00)[chromium.org:s=google];
 	HFILTER_HELO_IP_A(1.00)[stm-ict-prod-mailman-01.stormreply.prv];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:google.com:reject}];
 	HFILTER_HELO_NORES_A_OR_MX(0.30)[stm-ict-prod-mailman-01.stormreply.prv];
 	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+ip4:52.209.6.89];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[konsulko.com : SPF not aligned (relaxed),none];
+	DMARC_POLICY_SOFTFAIL(0.10)[chromium.org : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:u-boot@lists.denx.de,m:trini@konsulko.com,m:peng.fan@nxp.com,m:casey.connolly@linaro.org,m:stefan.roese@mailbox.org,m:kever.yang@rock-chips.com,m:kojima.masahisa@socionext.com,m:uboot-stm32@st-md-mailman.stormreply.com,m:u-boot-qcom@groups.io,m:jerome.forissier@arm.com,m:simon.k.r.goldschmidt@gmail.com,m:u-boot-amlogic@groups.io,m:jh80.chung@samsung.com,m:pbrobinson@gmail.com,m:treding@nvidia.com,m:marek.vasut+renesas@mailbox.org,m:tien.fong.chee@altera.com,m:lukma@nabladev.com,m:philipp.tomsich@vrull.eu,m:hs@nabladev.com,m:neil.armstrong@linaro.org,m:mbrugger@suse.com,m:sjg@chromium.org,m:clamor95@gmail.com,m:linux@analog.com,m:patrick.delaunay@foss.st.com,m:bmeng.cn@gmail.com,m:ag.dev.uboot@gmail.com,m:simonkrgoldschmidt@gmail.com,m:marek.vasut@mailbox.org,m:bmengcn@gmail.com,m:agdevuboot@gmail.com,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[trini@konsulko.com,uboot-stm32-bounces@st-md-mailman.stormreply.com];
-	RCPT_COUNT_TWELVE(0.00)[28];
-	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS(0.00)[m:dario.binacchi@amarulasolutions.com,m:trini@konsulko.com,m:marek.vasut+renesas@mailbox.org,m:quentin.schulz@cherry.de,m:u-boot@lists.denx.de,m:uboot-stm32@st-md-mailman.stormreply.com,m:patrick.delaunay@foss.st.com,m:linux-amarula@amarulasolutions.com,m:marek.vasut@mailbox.org,s:lists@lfdr.de];
+	GREYLIST(0.00)[pass,body];
 	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
+	RCVD_COUNT_THREE(0.00)[3];
 	FORWARDED(0.00)[uboot-stm32@st-md-mailman.stormreply.com];
-	FREEMAIL_CC(0.00)[nxp.com,linaro.org,mailbox.org,rock-chips.com,socionext.com,st-md-mailman.stormreply.com,groups.io,arm.com,gmail.com,samsung.com,nvidia.com,altera.com,nabladev.com,vrull.eu,suse.com,chromium.org,analog.com,foss.st.com];
+	FORGED_SENDER(0.00)[sjg@chromium.org,uboot-stm32-bounces@st-md-mailman.stormreply.com];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
 	PREVIOUSLY_DELIVERED(0.00)[uboot-stm32@st-md-mailman.stormreply.com];
-	FROM_NEQ_ENVFROM(0.00)[trini@konsulko.com,uboot-stm32-bounces@st-md-mailman.stormreply.com];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[konsulko.com:-];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[uboot-stm32,renesas];
-	NEURAL_SPAM(0.00)[0.800];
+	NEURAL_HAM(-0.00)[-0.961];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[sjg@chromium.org,uboot-stm32-bounces@st-md-mailman.stormreply.com];
+	DKIM_TRACE(0.00)[chromium.org:-];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	TAGGED_RCPT(0.00)[uboot-stm32,renesas];
+	RCPT_COUNT_SEVEN(0.00)[8];
+	MISSING_XM_UA(0.00)[];
 	ASN(0.00)[asn:16509, ipnet:52.208.0.0/13, country:US];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[stormreply.com:email,stormreply.com:url,stm-ict-prod-mailman-01.stormreply.prv:helo,konsulko.com:mid,st-md-mailman.stormreply.com:rdns]
-X-Rspamd-Queue-Id: 791BF3B406D
+	DBL_BLOCKED_OPENRESOLVER(0.00)[st-md-mailman.stormreply.com:rdns,mail.gmail.com:mid,stm-ict-prod-mailman-01.stormreply.prv:helo,stormreply.com:email,stormreply.com:url,chromium.org:email,amarulasolutions.com:email]
+X-Rspamd-Queue-Id: 9C2623DD68A
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Mon, 23 Mar 2026 16:55:37 -0600, Tom Rini wrote:
+Hi Dario,
 
-> The U_BOOT_DRIVER macro creates a list of drivers used at link time, and
-> all entries here must be unique. This in turn means that all entries in
-> the code should also be unique in order to not lead to build failures
-> later with unexpected build combinations. Typically, the problem we have
-> here is when a driver is obviously based on another driver and didn't
-> update this particular field and so while the name field reflects
-> something unique the linker entry itself is not. In a few places this
-> provides a more suitable string name as well, however.
-> 
-> [...]
+On 2026-04-04T15:23:27, Dario Binacchi
+<dario.binacchi@amarulasolutions.com> wrote:
+> board: st: stm32mp25: support dynamic A/B bank bootup
+>
+> Enable automatic detection of the active A/B bank by retrieving
+> partition GUIDs from FWU metadata.
+>
+> This ensures the system correctly identifies the bootable partitions
+> even in multi-bank scenarios, falling back to a standard bootable flag
+> scan if the UUIDs are missing.
+>
+> To enable A/B bank bootup on stm32mp25 boards, add the following Kconfig
+> options to the stm32mp25_defconfig:
+>
+>  CONFIG_FWU_MULTI_BANK_UPDATE=y
+>  CONFIG_FWU_MDATA=y
+>  CONFIG_FWU_NUM_BANKS=2
+>  CONFIG_FWU_NUM_IMAGES_PER_BANK=3
+>  CONFIG_CMD_FWU_METADATA=y
+>  CONFIG_FWU_MDATA_V2=y
+>
+> Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+>
+> board/st/stm32mp2/stm32mp2.c          | 25 +++++++++++++++++++++++++
+>  include/configs/stm32mp25_st_common.h | 15 +++++++++++++++
+>  2 files changed, 40 insertions(+)
 
-Applied to u-boot/master, thanks!
+> diff --git a/board/st/stm32mp2/stm32mp2.c b/board/st/stm32mp2/stm32mp2.c
+> @@ -208,4 +208,29 @@ void fwu_plat_get_bootidx(uint *boot_idx)
+> +     if (!fwu_mdata_get_image_guid(&boot_uuid, &boot_type_guid,
+> +                                   boot_idx) &&
+> +         !fwu_mdata_get_image_guid(&root_uuid, &root_type_guid,
+> +                                   boot_idx)) {
 
-[1/1] global: Correct duplicate U_BOOT_DRIVER entry names
-      commit: 8c212d6e2e778b4f294d1d9f85eac9680a66d463
--- 
-Tom
+Just to check - if fwu_mdata_get_image_guid() fails for boot_type_guid
+but would have succeeded for root_type_guid, there is no log message
+and the function silently succeeds with no environment variables set.
+Is this the intended fallback behaviour? A log_debug() might help when
+debugging boot issues.
 
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
+Regards,
+Simon
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

@@ -2,101 +2,89 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id SKBwLq3t22mLIwkAu9opvQ
+	id Fiw5OKv822kYKgkAu9opvQ
 	(envelope-from <uboot-stm32-bounces@st-md-mailman.stormreply.com>)
-	for <lists+uboot-stm32@lfdr.de>; Sun, 12 Apr 2026 21:08:29 +0200
+	for <lists+uboot-stm32@lfdr.de>; Sun, 12 Apr 2026 22:12:27 +0200
 X-Original-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4BCCA3E5A7A
-	for <lists+uboot-stm32@lfdr.de>; Sun, 12 Apr 2026 21:08:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 689543E5D39
+	for <lists+uboot-stm32@lfdr.de>; Sun, 12 Apr 2026 22:12:27 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id CA7EBC87ED1;
-	Sun, 12 Apr 2026 19:08:28 +0000 (UTC)
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com
- [209.85.221.48])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9A8BFC87ED1;
+	Sun, 12 Apr 2026 20:12:26 +0000 (UTC)
+Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com
+ [209.85.221.54])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 27BE9C87EC1
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 3EA78C87EBF
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun, 12 Apr 2026 19:08:28 +0000 (UTC)
-Received: by mail-wr1-f48.google.com with SMTP id
- ffacd0b85a97d-43cf8d550bdso3659387f8f.0
+ Sun, 12 Apr 2026 20:12:25 +0000 (UTC)
+Received: by mail-wr1-f54.google.com with SMTP id
+ ffacd0b85a97d-43d01d6b50cso3760939f8f.1
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun, 12 Apr 2026 12:08:28 -0700 (PDT)
+ Sun, 12 Apr 2026 13:12:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1776020907; x=1776625707;
+ d=gmail.com; s=20251104; t=1776024744; x=1776629544;
  darn=st-md-mailman.stormreply.com; 
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=glS/nvvZhUb41hVZDQcgKJHELerAAQ/NlE60k41Bzdw=;
- b=pE6nNrFpP9JsMEP1perfPB2oXbL/XuceWKbJjfPQeDj4Fh8X1RYFmLOUqu3AmrrkUe
- WVBEl07Z+qYA96t9UeXt3nDU1bsdwddOVZD8XrQRvqsjdlwKQ99GpcbSrR9rr2Lh/0y0
- qyb/eg624r0yD2MZ6Yh83ycWiePjWrV/o0WOmEwxn63IGsZeupWjVGvCXcVyscYuc8Ye
- SXW/8EQc0oSoRy2D8jEfgYaRb9zlb/ZZT9jF8roSVFF5M4OsxK5E3+kHm2umuesJTvIb
- DNjYVXeB8jhGmWNjVHwrTSYVrwbe2B/M6kbEZ1KNVPdHsBTAO7z14n1qQguuZ6nuDwUE
- /GcA==
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=D1XB+h1qqYqpT50eRwbAokQi0YxnIdNg27stw8IAQds=;
+ b=TZiVNS5j9Xt3msq1S6Nf5L59RK90Sng4lxBNbC9LPLdCP6AJO3JYSdRuoGohyme3hi
+ DhE6M/dzOPGMloqDHFGUVaAhp2MqMvlU+5rBiWgVblBqSOWqDG6P3ivaDzsCKXrAi+WK
+ aMmljjf8IPP6+yL9+x3GrkIP96qo+/uvMEUmez+uqrcUhrMg38U6H0f/u3xyodkY8Rou
+ 1QisQl+WeMd6fsw3RRHwPQHwVd4uZQVmSnCkvduIbDxj3+6d3Oyqq/hA8ZW97QaR/Bo5
+ SKWy5aLJlBl0EVERyKR29/jABnu1W5zTpI8VgOb1lDVZaEIk1WU5hnpmWqL1Ycb48VKY
+ 5E6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776020907; x=1776625707;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=glS/nvvZhUb41hVZDQcgKJHELerAAQ/NlE60k41Bzdw=;
- b=UkIGljWeR0BAujJn6hyDkf91kiMpTunjuCxPUAoTzSAMYrsBSevkMYLXH3lx6FOaR2
- HvmxI/bnpavhnrp2NKbUP5wIO8xLXdLPblcyzViv4SkaR8LZhQNkQxID66xaJgx+hzwR
- nSnMkG51QmkqKhY6fwRNmSN0kbheKEfKGseTI42TqJf1/8LEmC/dqcOM/ANhHWZAHpap
- Vsu8jvtEDH0T5gtXJGPTDbNo0gvaL/cQlX37mr8gHQrOjozXyr1iX5//a9J8eu5sRUs1
- 3bdXcfpV6POL23ct77ekf3WnvvMmKQx0DDoZphVWMQ+2YoAl98n6t0oPG9lmsRiC/hQ+
- JRxw==
+ d=1e100.net; s=20251104; t=1776024744; x=1776629544;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=D1XB+h1qqYqpT50eRwbAokQi0YxnIdNg27stw8IAQds=;
+ b=guPHCf+82e6xeiCUzMl3RcU7ATLllt/15bjnFC64Bjkrzbmew0bePcJg8RIqH0YOTz
+ JuuRGUoOo2YxyD7wdwgVPucTN52B5S0FnjpHifHaOQJGC3Ru+9h9fmRnsOaWdc/5ysie
+ sb11m39evm3aIWJLEVCthOBIklWgza+fbnf3JXqU77w9WgZ6M84EvMwyv3tKPEyHCwUI
+ JNoRrFIOMgT0Bb7P0onsaLG4ojcDSIu0TafKGYxGlM4hAlLpoIzc4HzpnfF+3JU6Czj4
+ wtPzmUMgbCL59EDnF+9cECeEhDwNVXVHT3LouuNviFdvBUUUb65aeMEA92uayJ8IwtVz
+ bPbA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/4gjjeN+MNyrBcY41/AK/5THxxejD3jp5NyirzcBsxf+Wu4WNYWUXq4NlMPw5K6xaXCj3HW7zMBxAGTw==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0Yx0Fk64eK5D7tuBMNZ3K3b+7YHi9lRyyNQcNfQFEO7A7Cv3AcTI
- v/oqByLO3bqtDhjehXh6GCGT54HRrIfSgRxN0UMSSCn0ataNWzM/Vgec
-X-Gm-Gg: AeBDieut9aPjQAzxegnfp8KVcryTJzWyjTjJ8bI0s5h9qqlpqTjkwvLeyB2ssvPk/me
- OUBT1/rxphez9M3xuClMwwhAfwg5yVTMLwHh2VAoQJlc7sIFyuNsFyjVEfnVkKwOMeNe6xvGHYd
- qYMLvSlMVySPjjjD/cm7GoLDWsJRrIuGotH8LnZ7Cp3PN2L7w0tToJ/GpcgWjA5phOUHynSPXQx
- 4hnhbXwXeILXJEA4LH09yr9f8Yrz72cjUjW9wA0P7Yie2x60GDWzMbzUeBEO/6ol/UmKRztluP6
- 1LnuVDiIrdVIhxVY6BM4/1yv2NK32Kgzf+WAKrN+kdZl/5+nXMayXbR9NdHdbQcn7kfFPAGHR+d
- jLfHcxmskY63ZhFBEOdb63f2qCjDEHBrAwbUZC6A8JCKvQTkn0IaIIuhXesQC//a8B4KH38PXF3
- x71EiwAB+mWAV22X/1W+wqfGdz
-X-Received: by 2002:a5d:5d12:0:b0:43d:613:33de with SMTP id
- ffacd0b85a97d-43d642a63d1mr15188854f8f.20.1776020907254; 
- Sun, 12 Apr 2026 12:08:27 -0700 (PDT)
-Received: from localhost ([2001:861:3385:e20:f99c:d6cf:27e6:2b03])
+ AFNElJ/5Vb1n8z5zBTG5V1Wvth83a+mHV9mtUZRfPgGL1Sfi6mCgnHPbwHe75TRULX2m+k6lS48Q2Is00R2UCA==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0Ywozz6ABkv1gXUohZAOriRLauoKMSAFtAGHmrHFbBzyRxNHIiU/
+ GcGbDhIlUDuSPTZBuPGb91EMZigWxaESoZ05se7G5XEke/zLLoL3xtGd
+X-Gm-Gg: AeBDiev6LdR+aVtTPSPFrLYz/rI5YjkZru9qNq0rZM2oHVyqB1tWoPgg/N1y76uOymj
+ JFf/pTvePvCEDtYZ7cTn6YBMjJfv0WbftEvq9HSkvqciaSdo3YamC8XsCR65WH33MZvBvWB4/7i
+ ON2Fs5ASYV7mtqUe1jGhY8G+33gT6gPd5joPJqX3awUTS8M1yGPwPyXS6nm0cSdXw+mPse5QIvB
+ ee+8lonY4pQdx7/mbFFZE1TQDPOyvuXlPCOUlWDKYfDXRjj8yaMGW7oQevjakYwHOy3vskh2BYE
+ ISnaW41edn3Ms7vlkc6+eK/EoLeWGCtatOYPQcUVOYVzDLbyfhkAzgtfjKRPD+sK392a57xvGen
+ BIPMBJUQF7n3hta3Ud/vG6rNwQUQpqPlf4ePTj1GBE0ZRlnbiW1t29LhmZS0+iw4dd8KTUsKCcb
+ Gj+CCZJ1yV6tuwlXM6l2D4dC3nR+26CXWZ41XHPJMRp6k8d/16JGe81w/fNPs6ANPGAKA+yWU=
+X-Received: by 2002:a05:6000:4285:b0:43c:4810:dc4a with SMTP id
+ ffacd0b85a97d-43d642d3630mr15654266f8f.38.1776024744370; 
+ Sun, 12 Apr 2026 13:12:24 -0700 (PDT)
+Received: from ?IPV6:2001:861:3385:e20:f99c:d6cf:27e6:2b03?
+ ([2001:861:3385:e20:f99c:d6cf:27e6:2b03])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43d73b44b3esm8487333f8f.13.2026.04.12.12.08.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 12 Apr 2026 12:08:26 -0700 (PDT)
-From: Raphael Gallais-Pou <rgallaispou@gmail.com>
-Date: Sun, 12 Apr 2026 21:07:58 +0200
+ ffacd0b85a97d-43d63e50200sm26915884f8f.29.2026.04.12.13.12.22
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 12 Apr 2026 13:12:23 -0700 (PDT)
+Message-ID: <c4b646c5-7038-4fd8-b794-f304502452c0@gmail.com>
+Date: Sun, 12 Apr 2026 22:11:56 +0200
 MIME-Version: 1.0
-Message-Id: <20260412-master-v1-1-d7a8e742233c@gmail.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzMDE0Mj3dzE4pLUIl2LpFQzcwszs1QDSzMloOKCotS0zAqwQdGxEH5xaVJ
- WanIJSLdSbS0AxtE3bmoAAAA=
-X-Change-ID: 20260412-master-8be67866e096
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
+User-Agent: Mozilla Thunderbird
+To: Patrice Chotard <patrice.chotard@foss.st.com>,
  uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1637; i=rgallaispou@gmail.com; 
- h=from:subject:message-id;
- bh=ZF5uHX2CbcTIGuyN0meT8DGgNQWE0Wup3xaGR3i4Afo=; 
- b=owEBbQKS/ZANAwAKAechimjUEsK1AcsmYgBp2+2QjxH0I/73m2jMc0v/H7HU7GhMUPq4ZNSvn
- DnhIxOuSHKJAjMEAAEKAB0WIQQgmXv2E+fvbV/9ui/nIYpo1BLCtQUCadvtkAAKCRDnIYpo1BLC
- tdS8D/9RXbtiX7P1DpeUdA6rn2tUQ1y0k3vAnKB81jFp+qR9j+XeEEzbwNGm25+ptfrYC0GqqoZ
- Mw5kfasxUkSNAuxG/vbxPJruTygg4AhFh5cCAYGmN7RY7bhyJpa3BTihHS+2Z7ChadjrfAxNwe6
- GVU+jsCnxIGoZuxZIzQCx4/hUMPbHO0YCrQFEkOUL/IFVr6dAzzYN9KCbptYp6tpmRRK9xmE9Lm
- +VIZ9F+SxC2xsyMmfRKLbLUB9MtlPBfcJm6H4GRF/ojVfO+X2ePHWqTaUBLM8C8tA9cfg0pE8Xk
- ZtbxKPqmhvRUQBS0xL27xs9B5pOuBgDxH10mlTNgS9/DnqJ8py3g+dJspZ/U2sYz578R7cO/2EE
- gCIYUtUTYMgq5nDutZtt2Sqssl+CWdPjAq9yI4WHlPqo2lp1YPhCsrfNx6UpDVpGcHXdymgIIg0
- 9PJrXTZOz11JJuSc0OlBoPWajSNJbqICAzTklqKSkWpjpFJzeocscp/9DFKLvXV+wnJ3lc74EZq
- 8Reax+PVY21J1fdkZhYBhFuAI7cHezHWZzSllxlu5NwFi8yGzJ717Z8+vxuw8q86w24+9YE8Cbq
- f35onhMLmWtaScen9eKLc0CcTVusV5aswy3p9R3gfWvIRGbr8bIkka5NL7h2vObU76FJuLBkguH
- l98Xhepi5moNF+w==
-X-Developer-Key: i=rgallaispou@gmail.com; a=openpgp;
- fpr=20997BF613E7EF6D5FFDBA2FE7218A68D412C2B5
-Cc: Tom Rini <trini@konsulko.com>, Anatolij Gustschin <ag.dev.uboot@gmail.com>
-Subject: [Uboot-stm32] [PATCH] video: stm32: dsi: fix unchecked return values
+References: <20260401-add_stm32mp23_clock_support-v1-1-ff5fa33d8b67@foss.st.com>
+Content-Language: en-US
+From: =?UTF-8?Q?Rapha=C3=ABl_Gallais-Pou?= <rgallaispou@gmail.com>
+In-Reply-To: <20260401-add_stm32mp23_clock_support-v1-1-ff5fa33d8b67@foss.st.com>
+Cc: Tom Rini <trini@konsulko.com>, Valentin Caron <valentin.caron@foss.st.com>,
+ Lukasz Majewski <lukma@denx.de>,
+ Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
+ Nicolas Le Bayon <nicolas.le.bayon@st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>
+Subject: Re: [Uboot-stm32] [PATCH] clk: stm32: Add STM32MP23 support
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -108,93 +96,66 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
-X-Spamd-Result: default: False [3.39 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [1.99 / 15.00];
 	R_DKIM_REJECT(1.00)[gmail.com:s=20251104];
 	HFILTER_HELO_IP_A(1.00)[stm-ict-prod-mailman-01.stormreply.prv];
 	HFILTER_HELO_NORES_A_OR_MX(0.30)[stm-ict-prod-mailman-01.stormreply.prv];
 	R_SPF_ALLOW(-0.20)[+ip4:52.209.6.89];
 	MAILLIST(-0.20)[mailman];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
+	MIME_BASE64_TEXT(0.10)[];
+	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:patrick.delaunay@foss.st.com,m:patrice.chotard@foss.st.com,m:uboot-stm32@st-md-mailman.stormreply.com,m:u-boot@lists.denx.de,m:trini@konsulko.com,m:ag.dev.uboot@gmail.com,m:agdevuboot@gmail.com,s:lists@lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER(0.00)[rgallaispou@gmail.com,uboot-stm32-bounces@st-md-mailman.stormreply.com];
-	FORWARDED(0.00)[uboot-stm32@st-md-mailman.stormreply.com];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	ARC_NA(0.00)[];
 	FREEMAIL_FROM(0.00)[gmail.com];
-	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:patrice.chotard@foss.st.com,m:uboot-stm32@st-md-mailman.stormreply.com,m:u-boot@lists.denx.de,m:trini@konsulko.com,m:valentin.caron@foss.st.com,m:lukma@denx.de,m:gabriel.fernandez@foss.st.com,m:nicolas.le.bayon@st.com,m:patrick.delaunay@foss.st.com,s:lists@lfdr.de];
 	TO_DN_SOME(0.00)[];
+	FORWARDED(0.00)[uboot-stm32@st-md-mailman.stormreply.com];
+	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[konsulko.com,gmail.com];
-	DKIM_TRACE(0.00)[gmail.com:-];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	PREVIOUSLY_DELIVERED(0.00)[uboot-stm32@st-md-mailman.stormreply.com];
-	NEURAL_HAM(-0.00)[-0.962];
+	NEURAL_HAM(-0.00)[-0.707];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[rgallaispou@gmail.com,uboot-stm32-bounces@st-md-mailman.stormreply.com];
-	RCPT_COUNT_FIVE(0.00)[6];
+	DKIM_TRACE(0.00)[gmail.com:-];
 	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[uboot-stm32];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ASN(0.00)[asn:16509, ipnet:52.208.0.0/13, country:US];
+	RCPT_COUNT_SEVEN(0.00)[9];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[stormreply.com:email,stormreply.com:url,st-md-mailman.stormreply.com:rdns,stm-ict-prod-mailman-01.stormreply.prv:helo]
-X-Rspamd-Queue-Id: 4BCCA3E5A7A
+	TAGGED_RCPT(0.00)[uboot-stm32];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[stm-ict-prod-mailman-01.stormreply.prv:helo]
+X-Rspamd-Queue-Id: 689543E5D39
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Fix the following errors yielded by Coverity Scan:
-
-CID 644836:         Error handling issues  (CHECKED_RETURN)
-Calling device_chld_unbind without checking return value (as is done elsewhere 6 out of 7 times)
-CID 644834:         Error handling issues  (CHECKED_RETURN)
-Calling device_chld_remove without checking return value (as is done elsewhere 4 out of 5 times).
-
-Link: https://lore.kernel.org/r/20260309212331.GF1388590@bill-the-cat/
-Fixes: a6d047c0a86b ("video: stm32: remove all child of DSI bridge when its probe failed")
-
-Signed-off-by: Raphael Gallais-Pou <rgallaispou@gmail.com>
----
- drivers/video/stm32/stm32_dsi.c | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/video/stm32/stm32_dsi.c b/drivers/video/stm32/stm32_dsi.c
-index 65a91f5cff7a..5c4d8d2aab51 100644
---- a/drivers/video/stm32/stm32_dsi.c
-+++ b/drivers/video/stm32/stm32_dsi.c
-@@ -493,8 +493,11 @@ static int stm32_dsi_probe(struct udevice *dev)
- 	    priv->hw_version != HWVER_131) {
- 		dev_err(dev, "DSI version 0x%x not supported\n", priv->hw_version);
- 		dev_dbg(dev, "remove and unbind all DSI child\n");
--		device_chld_remove(dev, NULL, DM_REMOVE_NORMAL);
--		device_chld_unbind(dev, NULL);
-+		ret = device_chld_remove(dev, NULL, DM_REMOVE_NORMAL);
-+		if (!ret)
-+			ret = device_chld_unbind(dev, NULL);
-+		if (ret)
-+			dev_err(dev, "Unbinding from %s failed %d\n", dev->name, ret);
- 		ret = -ENODEV;
- 		goto err_clk;
- 	}
-
----
-base-commit: e2fa3e570f83ab0f9ce667ddaec9dc738bcf05b9
-change-id: 20260412-master-8be67866e096
-
-Best regards,
---  
-Raphael Gallais-Pou <rgallaispou@gmail.com>
-
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+CgpPbiA0LzEvMjYgMTE6MzQsIFBhdHJpY2UgQ2hvdGFyZCB3cm90ZToKPiBBZGQgU1RNMzJNUDIz
+IHN1cHBvcnQuCj4gCj4gU2lnbmVkLW9mZi1ieTogUGF0cmljZSBDaG90YXJkIDxwYXRyaWNlLmNo
+b3RhcmRAZm9zcy5zdC5jb20+CgpIaSBQYXRyaWNlLAo+IC0tLQo+ICAgZHJpdmVycy9jbGsvc3Rt
+MzIvS2NvbmZpZyB8IDIgKy0KPiAgIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBk
+ZWxldGlvbigtKQoKUmV2aWV3ZWQtYnk6IFJhcGhhw6tsIEdhbGxhaXMtUG91IDxyZ2FsbGFpc3Bv
+dUBnbWFpbC5jb20+CgpCZXN0IHJlZ2FyZHMsCgo+IAo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2Ns
+ay9zdG0zMi9LY29uZmlnIGIvZHJpdmVycy9jbGsvc3RtMzIvS2NvbmZpZwo+IGluZGV4IDRlNDg4
+MTM2ZWFjLi5lNjMzODVkMzA1MSAxMDA2NDQKPiAtLS0gYS9kcml2ZXJzL2Nsay9zdG0zMi9LY29u
+ZmlnCj4gKysrIGIvZHJpdmVycy9jbGsvc3RtMzIvS2NvbmZpZwo+IEBAIC00OSw3ICs0OSw3IEBA
+IGNvbmZpZyBDTEtfU1RNMzJNUDIxCj4gICBjb25maWcgQ0xLX1NUTTMyTVAyNQo+ICAgCWJvb2wg
+IkVuYWJsZSBSQ0MgY2xvY2sgZHJpdmVyIGZvciBTVE0zMk1QMjUiCj4gICAJZGVwZW5kcyBvbiBB
+UkNIX1NUTTMyTVAgJiYgQ0xLCj4gLQlkZWZhdWx0IHkgaWYgU1RNMzJNUDI1WAo+ICsJZGVmYXVs
+dCB5IGlmIFNUTTMyTVAyM1ggfHwgU1RNMzJNUDI1WAo+ICAgCXNlbGVjdCBDTEtfU1RNMzJfQ09S
+RQo+ICAgCWhlbHAKPiAgIAkgIEVuYWJsZSB0aGUgU1RNMzIgY2xvY2sgKFJDQykgZHJpdmVyLiBF
+bmFibGUgc3VwcG9ydCBmb3IKPiAKPiAtLS0KPiBiYXNlLWNvbW1pdDogYmE3YmY5MThkYWZjZDA5
+M2FkNzMzYjA3YmE0OTBiYWViMjBjZjVkYQo+IGNoYW5nZS1pZDogMjAyNjA0MDEtYWRkX3N0bTMy
+bXAyM19jbG9ja19zdXBwb3J0LWJiMTQ4MDkxNDgxMQo+IAo+IEJlc3QgcmVnYXJkcywKCl9fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClVib290LXN0bTMyIG1h
+aWxpbmcgbGlzdApVYm9vdC1zdG0zMkBzdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tCmh0dHBz
+Oi8vc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbS9tYWlsbWFuL2xpc3RpbmZvL3Vib290LXN0
+bTMyCg==

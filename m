@@ -2,99 +2,101 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id WDNzAcWD2WmvqQgAu9opvQ
+	id SKBwLq3t22mLIwkAu9opvQ
 	(envelope-from <uboot-stm32-bounces@st-md-mailman.stormreply.com>)
-	for <lists+uboot-stm32@lfdr.de>; Sat, 11 Apr 2026 01:12:05 +0200
+	for <lists+uboot-stm32@lfdr.de>; Sun, 12 Apr 2026 21:08:29 +0200
 X-Original-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9C2623DD68A
-	for <lists+uboot-stm32@lfdr.de>; Sat, 11 Apr 2026 01:12:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4BCCA3E5A7A
+	for <lists+uboot-stm32@lfdr.de>; Sun, 12 Apr 2026 21:08:29 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9A1B7C8F26F;
-	Fri, 10 Apr 2026 23:05:11 +0000 (UTC)
-Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com
- [209.85.208.51])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id CA7EBC87ED1;
+	Sun, 12 Apr 2026 19:08:28 +0000 (UTC)
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com
+ [209.85.221.48])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AE699C87EC2
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 27BE9C87EC1
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 10 Apr 2026 23:05:09 +0000 (UTC)
-Received: by mail-ed1-f51.google.com with SMTP id
- 4fb4d7f45d1cf-6701c19e7b3so4338629a12.2
+ Sun, 12 Apr 2026 19:08:28 +0000 (UTC)
+Received: by mail-wr1-f48.google.com with SMTP id
+ ffacd0b85a97d-43cf8d550bdso3659387f8f.0
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 10 Apr 2026 16:05:09 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775862309; cv=none;
- d=google.com; s=arc-20240605;
- b=XPKHOHn7SeJ2NC99FwN0uL3G2K09IL44WoZXzR0PrEibGkL5avRZnTYTMfcj7phw3l
- zXbf+3yStTkJ9u21aGGyj55O7GJ/ADDzdLBkP4Jzy+slZjnPwysaPCy7vYZjsMq3BTXt
- xOdNQiBDZZ9jMeXzDv1Lk+dijaHoL+wSth1soAQCka07nVgGC0AEL+MOOj3DVCHNZbMQ
- xM0PC+lcPD49iuvCDYzD6zRZqSH/AfWGQ5eXeMw8iC28FJL9NENe6hx259ikSUQu1oIK
- YI83ka/XFM6XY7xLl36nz1IyeTYScpRIbw/8uAyIazHL7C5093aQJzyjXuCPJkHqquX2
- UZQg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=YHWRrZYu1zI4NCLOelP8cJKWsH2qei3q/OjT57VTYcU=;
- fh=wCNmMJ3cEapUXCnP29DbV6g553WFi+0JU/m7zGMviHQ=;
- b=VSDM5W2t7n9xA/fLeeHzZsU1HxSyI6kcF+gSmkuWLH8X4pR23kfDzjwwCUurgyw3In
- lYPk7wVY9iP750t6AQYJjSIh5dCixDGdoljYhekdYblMf6I9yfx9lBXEymmXxxkh1MNj
- Vy9aqtQy8qc6f4WeJLzMVSfRQtj/LZZOVNfQSZYf3DM5NwveGGdjwvTCxpk7GXYaYhL/
- PZ3BmRkaIZWPWKyphjFlysmsNfnNFxJJcwnKSq00V4UdRMUGRiRvJNHQ7xdcOzftXRVV
- hylPn9Fs7WKGWh2jS02mBVINDMDgYMzaMovEFa1DsnX/aumfwLXOwnY5Hm0gK9t9H4Ij
- 4gjg==; darn=st-md-mailman.stormreply.com
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ Sun, 12 Apr 2026 12:08:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775862309; x=1776467109;
+ d=gmail.com; s=20251104; t=1776020907; x=1776625707;
  darn=st-md-mailman.stormreply.com; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=YHWRrZYu1zI4NCLOelP8cJKWsH2qei3q/OjT57VTYcU=;
- b=JWGNBtwZpmlk/Ox9NTs2JtYFnYc+jsMXKDq16D37ln23lGf954v3399aRGnKwSyk1c
- GbgepzN5bI/dwMocy7I1sjNIi2pMEOk54k+YDwiUZmqe9d5hBdK5LwSAvuIiyQsCgPGP
- oswBbwaVoskaNteRvPYFocwhAOpwD0flzxtoU=
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=glS/nvvZhUb41hVZDQcgKJHELerAAQ/NlE60k41Bzdw=;
+ b=pE6nNrFpP9JsMEP1perfPB2oXbL/XuceWKbJjfPQeDj4Fh8X1RYFmLOUqu3AmrrkUe
+ WVBEl07Z+qYA96t9UeXt3nDU1bsdwddOVZD8XrQRvqsjdlwKQ99GpcbSrR9rr2Lh/0y0
+ qyb/eg624r0yD2MZ6Yh83ycWiePjWrV/o0WOmEwxn63IGsZeupWjVGvCXcVyscYuc8Ye
+ SXW/8EQc0oSoRy2D8jEfgYaRb9zlb/ZZT9jF8roSVFF5M4OsxK5E3+kHm2umuesJTvIb
+ DNjYVXeB8jhGmWNjVHwrTSYVrwbe2B/M6kbEZ1KNVPdHsBTAO7z14n1qQguuZ6nuDwUE
+ /GcA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775862309; x=1776467109;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20251104; t=1776020907; x=1776625707;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YHWRrZYu1zI4NCLOelP8cJKWsH2qei3q/OjT57VTYcU=;
- b=jJ24Z0PKSRpcvWq9vsKqwo5z5wqMJt6YpW/jlDB4fKEa5jqZSd+P2gibj6h5lGdmOJ
- HNJK5WTD5muzR0ceLoBgoRP6A07VsBtV4/JHQ144nIGSOTbHQGiPmXiLVFpNlsy6vEr2
- IJ+rqQUWIP6rKQRfQqEXiuCehbO6wqe16wtiKRTO76Lc3cvX6SsIa8SBAtX8uNhKRMOs
- l/y0EbJMVG89Rj+w5el0UBaYP7UnpFmyrHj0E5HipwPG0f9WVbA1Iu/06zQN4hCyj/bq
- nEZE3ZwnUwE53Enu553KmxVjs00dd/h+Qz44q3NLdTalKrpvxXQT9VkqBG/PpDGRX9Ln
- dW+Q==
+ bh=glS/nvvZhUb41hVZDQcgKJHELerAAQ/NlE60k41Bzdw=;
+ b=UkIGljWeR0BAujJn6hyDkf91kiMpTunjuCxPUAoTzSAMYrsBSevkMYLXH3lx6FOaR2
+ HvmxI/bnpavhnrp2NKbUP5wIO8xLXdLPblcyzViv4SkaR8LZhQNkQxID66xaJgx+hzwR
+ nSnMkG51QmkqKhY6fwRNmSN0kbheKEfKGseTI42TqJf1/8LEmC/dqcOM/ANhHWZAHpap
+ Vsu8jvtEDH0T5gtXJGPTDbNo0gvaL/cQlX37mr8gHQrOjozXyr1iX5//a9J8eu5sRUs1
+ 3bdXcfpV6POL23ct77ekf3WnvvMmKQx0DDoZphVWMQ+2YoAl98n6t0oPG9lmsRiC/hQ+
+ JRxw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUpEORR5hg1hE3h7rFYoa/AfQiL/eAtjo8EU9BncL0Y3aUPsO5xqeigZhYPserFoQiwLaZ680nM7FTgIw==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0YwqfH6ipC7SLbYL/CQqoxR3erzNaVCobdye3+HWHuchM+Qk31ZA
- wLYwZuU2u/1tMSYsUkJs2RRP1p8VAbi++623eV4HWhZA92/uISHNsvt1dmiE9xQ+rBu5M3iaxa3
- lGzF1MDRXaFkXR8tKo56PTy7BHM6aMWhMSBE/80vY
-X-Gm-Gg: AeBDievjVdYzeldQVUzM+TBGCl6KE0kZ9LpNKi2pjAoSOmij+SDQnAx+H7pIPs9n8l2
- dtOFrPIHfzEaSgLpducf+LPho37wnkcTv77nD24RAQgKyA/KisRgh0b43i7bLKZzbLBPEjsZbnZ
- M5z2Y3zp9nlKQ7hSemFlMw8EbC9oWLF5aoj2+bOPRV5nMidIfQ6xMfZ+c7CHO6PTVR55pQQcao3
- 6fRD/kasK+Uvs5aT5HenFoyFpJOVLYR3J00eHumq9KtvVZcXwzAIG4LcbMuIFgANiC6ui0+NuPC
- vjjkDw==
-X-Received: by 2002:a17:907:25cb:b0:b98:695:ec53 with SMTP id
- a640c23a62f3a-b9d7248ab3bmr284883166b.18.1775862308877; Fri, 10 Apr 2026
- 16:05:08 -0700 (PDT)
+ AFNElJ/4gjjeN+MNyrBcY41/AK/5THxxejD3jp5NyirzcBsxf+Wu4WNYWUXq4NlMPw5K6xaXCj3HW7zMBxAGTw==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0Yx0Fk64eK5D7tuBMNZ3K3b+7YHi9lRyyNQcNfQFEO7A7Cv3AcTI
+ v/oqByLO3bqtDhjehXh6GCGT54HRrIfSgRxN0UMSSCn0ataNWzM/Vgec
+X-Gm-Gg: AeBDieut9aPjQAzxegnfp8KVcryTJzWyjTjJ8bI0s5h9qqlpqTjkwvLeyB2ssvPk/me
+ OUBT1/rxphez9M3xuClMwwhAfwg5yVTMLwHh2VAoQJlc7sIFyuNsFyjVEfnVkKwOMeNe6xvGHYd
+ qYMLvSlMVySPjjjD/cm7GoLDWsJRrIuGotH8LnZ7Cp3PN2L7w0tToJ/GpcgWjA5phOUHynSPXQx
+ 4hnhbXwXeILXJEA4LH09yr9f8Yrz72cjUjW9wA0P7Yie2x60GDWzMbzUeBEO/6ol/UmKRztluP6
+ 1LnuVDiIrdVIhxVY6BM4/1yv2NK32Kgzf+WAKrN+kdZl/5+nXMayXbR9NdHdbQcn7kfFPAGHR+d
+ jLfHcxmskY63ZhFBEOdb63f2qCjDEHBrAwbUZC6A8JCKvQTkn0IaIIuhXesQC//a8B4KH38PXF3
+ x71EiwAB+mWAV22X/1W+wqfGdz
+X-Received: by 2002:a5d:5d12:0:b0:43d:613:33de with SMTP id
+ ffacd0b85a97d-43d642a63d1mr15188854f8f.20.1776020907254; 
+ Sun, 12 Apr 2026 12:08:27 -0700 (PDT)
+Received: from localhost ([2001:861:3385:e20:f99c:d6cf:27e6:2b03])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-43d73b44b3esm8487333f8f.13.2026.04.12.12.08.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 12 Apr 2026 12:08:26 -0700 (PDT)
+From: Raphael Gallais-Pou <rgallaispou@gmail.com>
+Date: Sun, 12 Apr 2026 21:07:58 +0200
 MIME-Version: 1.0
-References: <20260404152640.3297713-1-dario.binacchi@amarulasolutions.com>
- <20260404152640.3297713-8-dario.binacchi@amarulasolutions.com>
-In-Reply-To: <20260404152640.3297713-8-dario.binacchi@amarulasolutions.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 10 Apr 2026 17:04:56 -0600
-X-Gm-Features: AQROBzA9zZktph614RgZ4_5ahrCioK5KwO69O-4fAtEnRZv0EzOL68RoHA6Eks0
-Message-ID: <CAFLszTj3SL0qiXsqa31UhAyf+XZEdV_0QBf6Ly0QVhMjNMD5=Q@mail.gmail.com>
-To: dario.binacchi@amarulasolutions.com
-Cc: Tom Rini <trini@konsulko.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de,
- uboot-stm32@st-md-mailman.stormreply.com,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- linux-amarula@amarulasolutions.com
-Subject: Re: [Uboot-stm32] [PATCH v2 7/7] board: st: stm32mp25: support
-	dynamic A/B bank bootup
+Message-Id: <20260412-master-v1-1-d7a8e742233c@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDE0Mj3dzE4pLUIl2LpFQzcwszs1QDSzMloOKCotS0zAqwQdGxEH5xaVJ
+ WanIJSLdSbS0AxtE3bmoAAAA=
+X-Change-ID: 20260412-master-8be67866e096
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1637; i=rgallaispou@gmail.com; 
+ h=from:subject:message-id;
+ bh=ZF5uHX2CbcTIGuyN0meT8DGgNQWE0Wup3xaGR3i4Afo=; 
+ b=owEBbQKS/ZANAwAKAechimjUEsK1AcsmYgBp2+2QjxH0I/73m2jMc0v/H7HU7GhMUPq4ZNSvn
+ DnhIxOuSHKJAjMEAAEKAB0WIQQgmXv2E+fvbV/9ui/nIYpo1BLCtQUCadvtkAAKCRDnIYpo1BLC
+ tdS8D/9RXbtiX7P1DpeUdA6rn2tUQ1y0k3vAnKB81jFp+qR9j+XeEEzbwNGm25+ptfrYC0GqqoZ
+ Mw5kfasxUkSNAuxG/vbxPJruTygg4AhFh5cCAYGmN7RY7bhyJpa3BTihHS+2Z7ChadjrfAxNwe6
+ GVU+jsCnxIGoZuxZIzQCx4/hUMPbHO0YCrQFEkOUL/IFVr6dAzzYN9KCbptYp6tpmRRK9xmE9Lm
+ +VIZ9F+SxC2xsyMmfRKLbLUB9MtlPBfcJm6H4GRF/ojVfO+X2ePHWqTaUBLM8C8tA9cfg0pE8Xk
+ ZtbxKPqmhvRUQBS0xL27xs9B5pOuBgDxH10mlTNgS9/DnqJ8py3g+dJspZ/U2sYz578R7cO/2EE
+ gCIYUtUTYMgq5nDutZtt2Sqssl+CWdPjAq9yI4WHlPqo2lp1YPhCsrfNx6UpDVpGcHXdymgIIg0
+ 9PJrXTZOz11JJuSc0OlBoPWajSNJbqICAzTklqKSkWpjpFJzeocscp/9DFKLvXV+wnJ3lc74EZq
+ 8Reax+PVY21J1fdkZhYBhFuAI7cHezHWZzSllxlu5NwFi8yGzJ717Z8+vxuw8q86w24+9YE8Cbq
+ f35onhMLmWtaScen9eKLc0CcTVusV5aswy3p9R3gfWvIRGbr8bIkka5NL7h2vObU76FJuLBkguH
+ l98Xhepi5moNF+w==
+X-Developer-Key: i=rgallaispou@gmail.com; a=openpgp;
+ fpr=20997BF613E7EF6D5FFDBA2FE7218A68D412C2B5
+Cc: Tom Rini <trini@konsulko.com>, Anatolij Gustschin <ag.dev.uboot@gmail.com>
+Subject: [Uboot-stm32] [PATCH] video: stm32: dsi: fix unchecked return values
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -110,89 +112,88 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
-X-Spamd-Result: default: False [4.39 / 15.00];
+X-Spamd-Result: default: False [3.39 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_REJECT(1.00)[chromium.org:s=google];
+	R_DKIM_REJECT(1.00)[gmail.com:s=20251104];
 	HFILTER_HELO_IP_A(1.00)[stm-ict-prod-mailman-01.stormreply.prv];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:google.com:reject}];
 	HFILTER_HELO_NORES_A_OR_MX(0.30)[stm-ict-prod-mailman-01.stormreply.prv];
-	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+ip4:52.209.6.89];
+	MAILLIST(-0.20)[mailman];
+	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[chromium.org : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:dario.binacchi@amarulasolutions.com,m:trini@konsulko.com,m:marek.vasut+renesas@mailbox.org,m:quentin.schulz@cherry.de,m:u-boot@lists.denx.de,m:uboot-stm32@st-md-mailman.stormreply.com,m:patrick.delaunay@foss.st.com,m:linux-amarula@amarulasolutions.com,m:marek.vasut@mailbox.org,s:lists@lfdr.de];
-	GREYLIST(0.00)[pass,body];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_THREE(0.00)[3];
+	FORGED_RECIPIENTS(0.00)[m:patrick.delaunay@foss.st.com,m:patrice.chotard@foss.st.com,m:uboot-stm32@st-md-mailman.stormreply.com,m:u-boot@lists.denx.de,m:trini@konsulko.com,m:ag.dev.uboot@gmail.com,m:agdevuboot@gmail.com,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	FORGED_SENDER(0.00)[rgallaispou@gmail.com,uboot-stm32-bounces@st-md-mailman.stormreply.com];
 	FORWARDED(0.00)[uboot-stm32@st-md-mailman.stormreply.com];
-	FORGED_SENDER(0.00)[sjg@chromium.org,uboot-stm32-bounces@st-md-mailman.stormreply.com];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ARC_NA(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	MIME_TRACE(0.00)[0:+];
 	TO_DN_SOME(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[konsulko.com,gmail.com];
+	DKIM_TRACE(0.00)[gmail.com:-];
 	PREVIOUSLY_DELIVERED(0.00)[uboot-stm32@st-md-mailman.stormreply.com];
-	NEURAL_HAM(-0.00)[-0.961];
+	NEURAL_HAM(-0.00)[-0.962];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[sjg@chromium.org,uboot-stm32-bounces@st-md-mailman.stormreply.com];
-	DKIM_TRACE(0.00)[chromium.org:-];
+	FROM_NEQ_ENVFROM(0.00)[rgallaispou@gmail.com,uboot-stm32-bounces@st-md-mailman.stormreply.com];
+	RCPT_COUNT_FIVE(0.00)[6];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[uboot-stm32];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	TAGGED_RCPT(0.00)[uboot-stm32,renesas];
-	RCPT_COUNT_SEVEN(0.00)[8];
-	MISSING_XM_UA(0.00)[];
 	ASN(0.00)[asn:16509, ipnet:52.208.0.0/13, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[st-md-mailman.stormreply.com:rdns,mail.gmail.com:mid,stm-ict-prod-mailman-01.stormreply.prv:helo,stormreply.com:email,stormreply.com:url,chromium.org:email,amarulasolutions.com:email]
-X-Rspamd-Queue-Id: 9C2623DD68A
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[stormreply.com:email,stormreply.com:url,st-md-mailman.stormreply.com:rdns,stm-ict-prod-mailman-01.stormreply.prv:helo]
+X-Rspamd-Queue-Id: 4BCCA3E5A7A
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Hi Dario,
+Fix the following errors yielded by Coverity Scan:
 
-On 2026-04-04T15:23:27, Dario Binacchi
-<dario.binacchi@amarulasolutions.com> wrote:
-> board: st: stm32mp25: support dynamic A/B bank bootup
->
-> Enable automatic detection of the active A/B bank by retrieving
-> partition GUIDs from FWU metadata.
->
-> This ensures the system correctly identifies the bootable partitions
-> even in multi-bank scenarios, falling back to a standard bootable flag
-> scan if the UUIDs are missing.
->
-> To enable A/B bank bootup on stm32mp25 boards, add the following Kconfig
-> options to the stm32mp25_defconfig:
->
->  CONFIG_FWU_MULTI_BANK_UPDATE=y
->  CONFIG_FWU_MDATA=y
->  CONFIG_FWU_NUM_BANKS=2
->  CONFIG_FWU_NUM_IMAGES_PER_BANK=3
->  CONFIG_CMD_FWU_METADATA=y
->  CONFIG_FWU_MDATA_V2=y
->
-> Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
->
-> board/st/stm32mp2/stm32mp2.c          | 25 +++++++++++++++++++++++++
->  include/configs/stm32mp25_st_common.h | 15 +++++++++++++++
->  2 files changed, 40 insertions(+)
+CID 644836:         Error handling issues  (CHECKED_RETURN)
+Calling device_chld_unbind without checking return value (as is done elsewhere 6 out of 7 times)
+CID 644834:         Error handling issues  (CHECKED_RETURN)
+Calling device_chld_remove without checking return value (as is done elsewhere 4 out of 5 times).
 
-> diff --git a/board/st/stm32mp2/stm32mp2.c b/board/st/stm32mp2/stm32mp2.c
-> @@ -208,4 +208,29 @@ void fwu_plat_get_bootidx(uint *boot_idx)
-> +     if (!fwu_mdata_get_image_guid(&boot_uuid, &boot_type_guid,
-> +                                   boot_idx) &&
-> +         !fwu_mdata_get_image_guid(&root_uuid, &root_type_guid,
-> +                                   boot_idx)) {
+Link: https://lore.kernel.org/r/20260309212331.GF1388590@bill-the-cat/
+Fixes: a6d047c0a86b ("video: stm32: remove all child of DSI bridge when its probe failed")
 
-Just to check - if fwu_mdata_get_image_guid() fails for boot_type_guid
-but would have succeeded for root_type_guid, there is no log message
-and the function silently succeeds with no environment variables set.
-Is this the intended fallback behaviour? A log_debug() might help when
-debugging boot issues.
+Signed-off-by: Raphael Gallais-Pou <rgallaispou@gmail.com>
+---
+ drivers/video/stm32/stm32_dsi.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+diff --git a/drivers/video/stm32/stm32_dsi.c b/drivers/video/stm32/stm32_dsi.c
+index 65a91f5cff7a..5c4d8d2aab51 100644
+--- a/drivers/video/stm32/stm32_dsi.c
++++ b/drivers/video/stm32/stm32_dsi.c
+@@ -493,8 +493,11 @@ static int stm32_dsi_probe(struct udevice *dev)
+ 	    priv->hw_version != HWVER_131) {
+ 		dev_err(dev, "DSI version 0x%x not supported\n", priv->hw_version);
+ 		dev_dbg(dev, "remove and unbind all DSI child\n");
+-		device_chld_remove(dev, NULL, DM_REMOVE_NORMAL);
+-		device_chld_unbind(dev, NULL);
++		ret = device_chld_remove(dev, NULL, DM_REMOVE_NORMAL);
++		if (!ret)
++			ret = device_chld_unbind(dev, NULL);
++		if (ret)
++			dev_err(dev, "Unbinding from %s failed %d\n", dev->name, ret);
+ 		ret = -ENODEV;
+ 		goto err_clk;
+ 	}
 
-Regards,
-Simon
+---
+base-commit: e2fa3e570f83ab0f9ce667ddaec9dc738bcf05b9
+change-id: 20260412-master-8be67866e096
+
+Best regards,
+--  
+Raphael Gallais-Pou <rgallaispou@gmail.com>
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

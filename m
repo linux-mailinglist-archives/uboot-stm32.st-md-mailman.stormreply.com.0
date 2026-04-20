@@ -2,43 +2,43 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id /ex5AbqI72kNCgEAu9opvQ
+	id wIamOrmI72mtCQEAu9opvQ
 	(envelope-from <uboot-stm32-bounces@st-md-mailman.stormreply.com>)
-	for <lists+uboot-stm32@lfdr.de>; Mon, 27 Apr 2026 18:03:06 +0200
+	for <lists+uboot-stm32@lfdr.de>; Mon, 27 Apr 2026 18:03:05 +0200
 X-Original-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 879BE475E8F
+	by mail.lfdr.de (Postfix) with ESMTPS id 852C1475E8D
 	for <lists+uboot-stm32@lfdr.de>; Mon, 27 Apr 2026 18:03:05 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 301D9C7A83B;
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3EC08C7A83D;
 	Mon, 27 Apr 2026 15:56:05 +0000 (UTC)
-Received: from smtp-190d.mail.infomaniak.ch (smtp-190d.mail.infomaniak.ch
- [185.125.25.13])
+Received: from smtp-bc0d.mail.infomaniak.ch (smtp-bc0d.mail.infomaniak.ch
+ [45.157.188.13])
  (using TLSv1.2 with cipher ADH-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id DC226C56612
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CFBFFC56612
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 20 Apr 2026 11:37:05 +0000 (UTC)
-Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
- [10.7.10.107])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4fzk3j4Lgxz1C8S;
- Mon, 20 Apr 2026 13:37:05 +0200 (CEST)
+ Mon, 20 Apr 2026 11:37:17 +0000 (UTC)
+Received: from smtp-4-0000.mail.infomaniak.ch (unknown
+ [IPv6:2001:1600:7:10::a6b])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4fzk3x3vB4z1CVM;
+ Mon, 20 Apr 2026 13:37:17 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1776685024;
- bh=dMDVLAdSvV9BSwqv2zQX+ZmcGWxQsKYHWSsBm0i2RPg=;
+ s=20231125; t=1776685036;
+ bh=xhCNG2uVzJz/KV/kZ8NgnhgK9FozsrveIiXTHtIoS88=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=W27biTspq7QosE2ZYRbsQDaEbr5YSTut6AbhwmU8R/ehWykftAYKGeZMsXvh4ydLu
- A68DwAiIYdZKPU6GHXbJqJ8aaxSAJB+uuwEnk16qTAQd7UghE5JSnVwV5+h01MiAZJ
- 9m2QzNemvtsl0ICVCPP3nsmofbZcO3se/bBQ5gwxPD/0HDVP+laLHb2bpN7Coqs+Bo
- hZ1YIlNNci8VuOrMKwH3ERcl7/9Tc9KyycCbjXRGVRwo3fU9qlCmmPF8rsem5X79Ry
- gfGyAkmZYPCkfhxEToVyPpTLTstQamID/vRwhtZ8tYcZXi6pTGUN/eLVONPft2AJ+D
- bFABRvJY/ClZQ==
+ b=NNH4Ht+N32/PilarT4VGkRd/IN+JS0cbOs6XM5supXTaaN0aqNoDZ3DT+VsoEWwBr
+ hoQiQApA9o3oGW9WF55JUIMfv3xRv+JAid57PvamBAc9jm9AdVccboLHbB3Wnpj6vv
+ Bz12Tm37PaCfRLF1s056nne8B1a4xXRBugg3uG63axnsujDHOYgUVvLzpwJR3/OAd0
+ edLwezhJUHY7tJ8icegDPO4W78SLlxtkO3PGTp2keC7IhVGV+oe6bRtzqU38x2qK0t
+ fDhAxcJe+syEurIGfzSMHyKi8Ofxb0+tEgHtAa7E+sP4tzD7ia9tvE4me4ra5rQIaX
+ c1et2FcLzqKEQ==
 Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4fzk3Y3Tf4zWVl; Mon, 20 Apr 2026 13:36:57 +0200 (CEST)
+ id 4fzk3h2HpSzW4S; Mon, 20 Apr 2026 13:37:04 +0200 (CEST)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Mon, 20 Apr 2026 13:36:11 +0200
+Date: Mon, 20 Apr 2026 13:36:12 +0200
 MIME-Version: 1.0
-Message-Id: <20260420-net-kconfig-v1-5-9900002d8e72@cherry.de>
+Message-Id: <20260420-net-kconfig-v1-6-9900002d8e72@cherry.de>
 References: <20260420-net-kconfig-v1-0-9900002d8e72@cherry.de>
 In-Reply-To: <20260420-net-kconfig-v1-0-9900002d8e72@cherry.de>
 To: u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com, 
@@ -104,8 +104,7 @@ Cc: Peng Fan <peng.fan@nxp.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
  Alexey Charkov <alchark@gmail.com>, Pramod Kumar <pramod.kumar_1@nxp.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Hrushikesh Salunke <h-salunke@ti.com>
-Subject: [Uboot-stm32] [PATCH 5/6] doc: remove mention to non-existing
-	TPL_NET
+Subject: [Uboot-stm32] [PATCH 6/6] boot: remove NO_NET use
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -121,7 +120,7 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
-X-Rspamd-Queue-Id: 879BE475E8F
+X-Rspamd-Queue-Id: 852C1475E8D
 X-Rspamd-Action: add header
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [6.29 / 15.00];
@@ -155,7 +154,7 @@ X-Spamd-Result: default: False [6.29 / 15.00];
 	FROM_HAS_DN(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[foss@0leil.net,uboot-stm32-bounces@st-md-mailman.stormreply.com];
 	FREEMAIL_CC(0.00)[nxp.com,kernel.org,siemens.com,pqrs.dk,arm.com,linaro.org,denx.de,ti.com,baylibre.com,mailbox.org,shantur.com,nabladev.com,gmail.com,amd.com,rock-chips.com,benjarobin.fr,amarulasolutions.com,mediatek.com,dh-electronics.com,microsoft.com,altera.com,ew.tq-group.com,iopsys.eu,andestech.com,phytec.de,google.com,cherry.de,konsulko.com,bootlin.com,gmx.de,kwiboo.se,gateworks.com,sttls.nl,suse.com,toradex.com,sartura.hr,chromium.org,collabora.com,ziyao.cc,codethink.co.uk,oss.qualcomm.com,engicam.com,infi.wang,foss.st.com];
-	NEURAL_HAM(-0.00)[-0.785];
+	NEURAL_HAM(-0.00)[-0.799];
 	TAGGED_RCPT(0.00)[uboot-stm32,renesas];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
@@ -166,28 +165,38 @@ X-Spam: Yes
 
 From: Quentin Schulz <quentin.schulz@cherry.de>
 
-TPL_NET symbol never existed in the first place, so let's remove this
-misleading piece of documentation.
+NO_NET is now a transitional symbol which may eventually be removed. Its
+meaning is the opposite of the new meaning of NET (that is, any
+networking stack).
 
-Fixes: 143c9a7e9d68 ("doc: describe TPL/VPL/SPL boot")
+Update the symbol dependency by using NET instead of !NO_NET.
+
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- doc/usage/spl_boot.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ boot/Kconfig | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/doc/usage/spl_boot.rst b/doc/usage/spl_boot.rst
-index 93419f158af..64b8083e007 100644
---- a/doc/usage/spl_boot.rst
-+++ b/doc/usage/spl_boot.rst
-@@ -253,7 +253,7 @@ Ethernet
-     a TFTP server and binary name. The binary is downloaded via the TFTP
-     protocol. Required configuration settings include:
+diff --git a/boot/Kconfig b/boot/Kconfig
+index be6bb6d4535..ae6f09a6ede 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -431,12 +431,12 @@ config BOOT_DEFAULTS_CMDS
+ 	select CMD_FAT
+ 	select CMD_FS_GENERIC
+ 	select CMD_PART if PARTITIONS
+-	select CMD_DHCP if CMD_NET && !NO_NET
+-	select CMD_PING if CMD_NET && !NO_NET
+-	select CMD_PXE if CMD_NET && !NO_NET
++	select CMD_DHCP if CMD_NET && NET
++	select CMD_PING if CMD_NET && NET
++	select CMD_PXE if CMD_NET && NET
+ 	select CMD_BOOTI if ARM64 && LMB
+ 	select CMD_BOOTZ if ARM && !ARM64 && LMB
+-	imply CMD_MII if CMD_NET && !NO_NET
++	imply CMD_MII if CMD_NET && NET
  
--    * CONFIG_SPL_NET=y or CONFIG_TPL_NET=y
-+    * CONFIG_SPL_NET=y
- 
-     * CONFIG_SPL_ETH_DEVICE=y or CONFIG_DM_USB_GADGET=y
- 
+ config BOOT_DEFAULTS
+ 	bool  # Common defaults for standard boot and distroboot
 
 -- 
 2.53.0

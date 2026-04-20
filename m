@@ -2,90 +2,90 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id OGQ8GBGE5mmFxgEAu9opvQ
+	id CACKGhGE5mmNxgEAu9opvQ
 	(envelope-from <uboot-stm32-bounces@st-md-mailman.stormreply.com>)
 	for <lists+uboot-stm32@lfdr.de>; Mon, 20 Apr 2026 21:52:49 +0200
 X-Original-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id E9D10433769
+	by mail.lfdr.de (Postfix) with ESMTPS id EC7B043376A
 	for <lists+uboot-stm32@lfdr.de>; Mon, 20 Apr 2026 21:52:48 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6B482C57A52;
-	Mon, 20 Apr 2026 19:43:16 +0000 (UTC)
-Received: from mail-ej1-f50.google.com (mail-ej1-f50.google.com
- [209.85.218.50])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 90698C57B72;
+	Mon, 20 Apr 2026 19:43:23 +0000 (UTC)
+Received: from mail-ed1-f50.google.com (mail-ed1-f50.google.com
+ [209.85.208.50])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CAE51C57A51
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 3452EC57B68
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 20 Apr 2026 19:43:14 +0000 (UTC)
-Received: by mail-ej1-f50.google.com with SMTP id
- a640c23a62f3a-b8f97c626aaso544389066b.2
+ Mon, 20 Apr 2026 19:43:22 +0000 (UTC)
+Received: by mail-ed1-f50.google.com with SMTP id
+ 4fb4d7f45d1cf-671ff4b716cso5846825a12.1
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 20 Apr 2026 12:43:14 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776714194; cv=none;
+ Mon, 20 Apr 2026 12:43:22 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776714201; cv=none;
  d=google.com; s=arc-20240605;
- b=R1YiFHgJB6GOPOV9YDWMseOJtAGs0kF60aj9XBUx5deX02B0GOJOsstKZPIGbXo3EO
- Z/dQPr4tRHlbypmPJoYU6f1swWyPMnBBs6YVLhwthA0eC8ZYZTZ+Fd5scXhjUUrCp8VA
- wEIv+9pzukrcsdtRMNNtXpCiUGtD7ZqK2H4bgUctsLwlkmrSO5BxJd+NxkHGtmdJYN0m
- xVG7sPrEoAodIHKpnWAYf1vW7aMxeX6I+IByE/o/dYNlAy76VUD8CEdxCNjQT+E/N4MK
- s6GD/EurT5wEDVQ7Oss5iXaLrOtT+aFa3Sqroca1V199UkkyAbLb87K73KjkeAWOMrbe
- qZ9Q==
+ b=fDXwIDPIXgLlrElu4A668KOJVn8mbQDXmIzvzEOW6PaJVAqGIn9Y5d4wSf1W7cu2pi
+ SICqzRxsnFP8sYFJeF2ZRoUowZ2FIG52uKHNCdKhI8wsJ8ie3BonvHX3WExqEV8HA6kg
+ 8R6aFjzGOUqXmqopbEihrDj8f/AYlI11lzempR9umGPpfP8illUBrfkq4sysxT1AqgFI
+ HABU4WaQpOZrRiysPYET4tL8dmWpJv/QEhPTElYukp6vwZvcEpL+gy0l7gULqEiZYuXb
+ mQzLdJ0hyNV8t8yTxTJjPnUu4XAjM1HDkIDPpcBtZOHfF/ACKQsLw4j5AGzeAllaFaXS
+ g9eQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=MPQTnKrw7KOMiwluDMN4lXZLBDL2F6s/U3vxClxzFiw=;
- fh=lVVeDd0+uzG/yDCfWhdc3TgEvQ8+vxx5PgUiDf4JU70=;
- b=aWbt1Y/sGMNwhIAtUpDuMY4pQ/YmqY0BTi/6yEDGENKR971i2sX8k7ozj/po/Cd7be
- RrI5kH+oap3iVUtyZhBhowTlp64+fmTrhXKj1sSa4PJibvvuG7liCHsTz+kXYXypNVZh
- HBtGfkjumFMV9l9RnuxYOC3H38bHrGeYK/Tgw883z8tUyKiNp1pIXtBbq6nGw07s4wxs
- vQWHlhxVlW0fNMKbX+R0wIOad7zB7xB6F4yQE0qywuelwuSwueeEPug6X6uPss7dsj9R
- +NJJdWugdSYRGmntTL61J9bjIwRBAVzMMnK6oDkYsY8A13AS+Kaiz0vF40EJbw52Gyzr
- nY7w==; darn=st-md-mailman.stormreply.com
+ bh=TvsSZ2iDnrBEthugXTCOcDsVcM/2V40TqAQGMo39+ps=;
+ fh=DgDOfyhUFA7bYtrtXqoIkJ9xcoXQm/QORQTaDBcW4s0=;
+ b=a+Ra/e3WASqqkSlp9v3WLthv2rvD7aijbfm1MhqOUdHOfE7/JkPjaLI+vYpio/cw9h
+ RcwDQL8KqIQvJAYtj0679k35ITel5oz+n/4Wwfnj2TqRR7AUjCtkU81CO/1YEEttfvuY
+ jDXFAXfq+wOWnC5OrGqtVYqREX9pdB1KrD3A8XI2nDTnxgnkkInRevpB/pNWyjNBqTAj
+ IJvpQLlOaOpO1/7fdktHRNkogihLYvVWqJH0zszRqX+rWV9oo0n2TxNaejvCkvj4VweD
+ QQhTv2HVWhMTdMyZQB9qcpfv0zsUGpUrojrzsJIRsR1zQnGX5aI7Gnpl/4vBjN7USWzi
+ 44Hg==; darn=st-md-mailman.stormreply.com
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776714194; x=1777318994;
+ d=chromium.org; s=google; t=1776714201; x=1777319001;
  darn=st-md-mailman.stormreply.com; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=MPQTnKrw7KOMiwluDMN4lXZLBDL2F6s/U3vxClxzFiw=;
- b=jAvAV+ZCAwTzS2rmHtWXhW7MyJwvw2jVUpPfp5MPxpyMerKGdOwcH1t5sMeVa3RESh
- 8TPxkusbufTk7UCHHXbj7Hwdr4sIPNEgB0l10OOGQQOZkoROCMBS/UsPujNyxqkR++DK
- AhjdncqpQHH13R5+0XNF65Ns62nrxbqJn+dqo=
+ bh=TvsSZ2iDnrBEthugXTCOcDsVcM/2V40TqAQGMo39+ps=;
+ b=gEAJxvQbgFLmFDrHsn/Cx6ybxmTndr0sE9KxeDqWzYEu4ckQp1uodRe+1pzixlxbEC
+ MhfRvDw2TrnVbvzLT/++u6j+EiQ8cXKf4D6PElyHE1wwqwFiJ6okln/KXYLUAqZCwsAb
+ HcaVRHPF3c1gBgQKbttKFRG6JXCfJbXbPH+04=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776714194; x=1777318994;
+ d=1e100.net; s=20251104; t=1776714201; x=1777319001;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MPQTnKrw7KOMiwluDMN4lXZLBDL2F6s/U3vxClxzFiw=;
- b=Qn9PB8jXEGebFp1dttb9MDs9e1YG/PKT9O4t3dEFUYTzUiWC88GMVuDPXZLhQGWVfD
- xO+RkuI2iY221TFW0CI0RjWw5cLb6s303zs5LCogbLNEn7p1OzyzUXT5jUZFk0WMzkvC
- NinNWfxZuKEFxyBbThLgtKC1NmhgHJF7I2C22YfCvWBb+uxSR7lW31jl3Xee50GjROKi
- MaHtfj9YWCHgL7SvzW7ULW57gzVCS4vq3E8UdemU41AN7abfxTApCH1xJKOH2mnbdGTb
- yUQD2G0Ae2+ytTt4s/m+9iEmYvKEo9N6V3sgQA71zSdl6plz3ttXAWx8qKZWHwhkC1ZE
- fZ3A==
+ bh=TvsSZ2iDnrBEthugXTCOcDsVcM/2V40TqAQGMo39+ps=;
+ b=FgEmwF5Jf8wJm/75VPVtf5R1uWxLk9mcvIMT5bg1rQpCOzNpMQjaT9pHCT7qkhMhGx
+ iyjNDIv6FHqWy1U//WBybk+kcGhO6w4EnTMrRmQ6W60Z3HjteDnax3EpBChDjD/vSctM
+ iP8k9Lc224TqS+632BjJja8gaS2ZDYWg2ul79vYsmpVmvoBf8dYucYAx/S/3odJPEexT
+ UWGbpejRfJC91LUJ5ypMFqlUMnFh1xRA6PvGP1GZYuBS0/qsVcQS//U66qcN5gkR1+PH
+ pZZ5ZVWkTN2Jzn5sqPBxxdKz9pY1318iVkAvO+KfUjGtbkx4eprYpTKEjoUz7GjBZCUR
+ 7YRw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+0vbiD4czZYGY2uXr2VubP8MJeyEk3qfDodPyWxp5Fx/Y8Cse0lwiEplJ2oZIBg47E5KbTj8/icAf2yQ==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0YxKKn4a/kK6bWD1sNmFXyPDmlw6783vdn9E8ug7RZ2WVgLb3EPL
- U51GHFcFwZG47GV/gAbD95t31JJD2tGVkEVSek1Yxw9XyIrtITAo9OUT/jEMkJmajQ43helLepP
- U2xmGnUBb74oZvqR7xZv2S8P/m+z8HfjtrfydMmsS
-X-Gm-Gg: AeBDies4G6rI5ktQjZDvxun2Aq9V3NIrr6kqr952bvcQaQPnLUKDHAtjcHHlgRG1s3f
- wTq0NWAWe0OSaOvHZzan0rs6s61d99H3nig2AKmRbbTBhfLZCwRF9DI6Fvg/l/iNiLzEjH1anE/
- UD3lArJIlP8LRe5jZP3BUgA8dtS9/IrDHjEaAvLFdity6hTzbYBER9Suu2MsYuSKC9gMxfuqauG
- Mjg68zPIztRllCsh/dthGAR5DIh/bErX6qfHOPj3MZ48obZXnoNRufTrmmDhczwMulsLytkJ488
- WRJx62mpbqLAgGMHa037
-X-Received: by 2002:a17:907:74b:b0:b9c:2a5f:41c4 with SMTP id
- a640c23a62f3a-ba41e4fd92fmr726116566b.40.1776714194058; Mon, 20 Apr 2026
- 12:43:14 -0700 (PDT)
+ AFNElJ8N52p+8AHnp+TQxDtV+DAjKOcyfdAnqF8lzv6XNZtuTFEL9ifwVMie5/+uGZnYca93tEX9BG8txFKy6A==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0Yyu/9WGSTm/gOAA9zymYTBG7SzRU/oQ/pIELjfZrt16oOlpOVXY
+ xUsV1bg7JO4evoVdC7eiTSWqsuOHjruhx9HWpWbmRabsru6+q+JVAImCAVZHOTl5LwzMA6qoSWQ
+ 7drb+dww45nzVHV2b+00KiR7yhYFsQyHwZn+PJc5V
+X-Gm-Gg: AeBDiesjAAlCCAcgg01npNicz84vElMjWrAlTgJ/B9zfpx2t/29HjetyZnaE+CLt5EW
+ 0WPlzXDVz91dMZ6F+6bVQXSizqkdC3n7edjkM6V/OmziIekOf51gKha/xGAlCkoiNoyvSUVR+9c
+ nG+vfa7zcqw5f7G2jWSFPoap+XbbLtx3rYCvo3nRdj/TDB6pa7xsz1Or1R7OeRg/pyTn97XaQHC
+ RY4nzOEIa7yKpSGEHmbms0xVt3V/XSY/RVXODRR1/3AMGLpMmdktRPI8dhkg21sIri2YcsulWp5
+ fh7inM/SWdj2HqouSvJm
+X-Received: by 2002:a17:907:2d92:b0:ba7:52f3:4645 with SMTP id
+ a640c23a62f3a-ba752f34e9dmr303322966b.33.1776714201422; Mon, 20 Apr 2026
+ 12:43:21 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260420-net-kconfig-v1-0-9900002d8e72@cherry.de>
- <20260420-net-kconfig-v1-5-9900002d8e72@cherry.de>
-In-Reply-To: <20260420-net-kconfig-v1-5-9900002d8e72@cherry.de>
+ <20260420-net-kconfig-v1-6-9900002d8e72@cherry.de>
+In-Reply-To: <20260420-net-kconfig-v1-6-9900002d8e72@cherry.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 21 Apr 2026 07:42:58 +1200
-X-Gm-Features: AQROBzDc_c4NOu8SWKf8MZOUlBGOK6J3WKsf0IZekifA_j1uSCNB-AAv0nKd-G0
-Message-ID: <CAFLszTgaU-UpCdnsF5XSZWxiAr5BwT2M6ZgSoFmqv4ExNmoGwQ@mail.gmail.com>
+Date: Tue, 21 Apr 2026 07:43:03 +1200
+X-Gm-Features: AQROBzDRUPTTTr2QItTk6SnoJN7GgO8RiWKG7B5Qfn4quL70I8iLuflwAnbnGfM
+Message-ID: <CAFLszThvRZ-OQyx-JS3jOHBT3k3auB3TgdP=g_eyfj1EXqbcCg@mail.gmail.com>
 To: foss+uboot@0leil.net
 Cc: Peng Fan <peng.fan@nxp.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
  Jan Kiszka <jan.kiszka@siemens.com>,
@@ -145,8 +145,7 @@ Cc: Peng Fan <peng.fan@nxp.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
  Alexey Charkov <alchark@gmail.com>, Pramod Kumar <pramod.kumar_1@nxp.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Hrushikesh Salunke <h-salunke@ti.com>
-Subject: Re: [Uboot-stm32] [PATCH 5/6] doc: remove mention to non-existing
-	TPL_NET
+Subject: Re: [Uboot-stm32] [PATCH 6/6] boot: remove NO_NET use
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -191,28 +190,30 @@ X-Spamd-Result: default: False [4.39 / 15.00];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[sjg@chromium.org,uboot-stm32-bounces@st-md-mailman.stormreply.com];
 	FREEMAIL_CC(0.00)[nxp.com,kernel.org,siemens.com,pqrs.dk,arm.com,linaro.org,denx.de,ti.com,baylibre.com,mailbox.org,shantur.com,nabladev.com,gmail.com,amd.com,rock-chips.com,benjarobin.fr,lists.denx.de,amarulasolutions.com,mediatek.com,dh-electronics.com,microsoft.com,altera.com,ew.tq-group.com,iopsys.eu,andestech.com,phytec.de,google.com,cherry.de,konsulko.com,bootlin.com,gmx.de,kwiboo.se,gateworks.com,sttls.nl,suse.com,toradex.com,sartura.hr,bp.renesas.com,chromium.org,collabora.com,ziyao.cc,st-md-mailman.stormreply.com,codethink.co.uk,oss.qualcomm.com,engicam.com,infi.wang,foss.st.com];
-	NEURAL_HAM(-0.00)[-0.132];
+	NEURAL_HAM(-0.00)[-0.264];
 	TAGGED_RCPT(0.00)[uboot-stm32,uboot,renesas];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	MISSING_XM_UA(0.00)[];
 	ASN(0.00)[asn:16509, ipnet:52.208.0.0/13, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[cherry.de:email,stm-ict-prod-mailman-01.stormreply.prv:helo,mail.gmail.com:mid,chromium.org:email,st-md-mailman.stormreply.com:rdns,stormreply.com:url,stormreply.com:email]
-X-Rspamd-Queue-Id: E9D10433769
+	DBL_BLOCKED_OPENRESOLVER(0.00)[stormreply.com:url,stormreply.com:email,st-md-mailman.stormreply.com:rdns,mail.gmail.com:mid,stm-ict-prod-mailman-01.stormreply.prv:helo,cherry.de:email,chromium.org:email]
+X-Rspamd-Queue-Id: EC7B043376A
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 On 2026-04-20T11:36:06, Quentin Schulz <foss+uboot@0leil.net> wrote:
-> doc: remove mention to non-existing TPL_NET
+> boot: remove NO_NET use
 >
-> TPL_NET symbol never existed in the first place, so let's remove this
-> misleading piece of documentation.
+> NO_NET is now a transitional symbol which may eventually be removed. Its
+> meaning is the opposite of the new meaning of NET (that is, any
+> networking stack).
 >
-> Fixes: 143c9a7e9d68 ("doc: describe TPL/VPL/SPL boot")
+> Update the symbol dependency by using NET instead of !NO_NET.
+>
 > Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 >
-> doc/usage/spl_boot.rst | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> boot/Kconfig | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 _______________________________________________

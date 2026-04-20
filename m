@@ -2,47 +2,45 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id GuubA7qI72kOCgEAu9opvQ
+	id MOeFOrmI72ntCQEAu9opvQ
 	(envelope-from <uboot-stm32-bounces@st-md-mailman.stormreply.com>)
-	for <lists+uboot-stm32@lfdr.de>; Mon, 27 Apr 2026 18:03:06 +0200
+	for <lists+uboot-stm32@lfdr.de>; Mon, 27 Apr 2026 18:03:05 +0200
 X-Original-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 882C3475E90
+	by mail.lfdr.de (Postfix) with ESMTPS id 8605A475E8E
 	for <lists+uboot-stm32@lfdr.de>; Mon, 27 Apr 2026 18:03:05 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C4DB0C7A831;
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D0271C7A833;
 	Mon, 27 Apr 2026 15:56:04 +0000 (UTC)
-Received: from smtp-bc0f.mail.infomaniak.ch (smtp-bc0f.mail.infomaniak.ch
- [45.157.188.15])
+Received: from smtp-8fad.mail.infomaniak.ch (smtp-8fad.mail.infomaniak.ch
+ [83.166.143.173])
  (using TLSv1.2 with cipher ADH-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9A1DEC56612
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9DC0EC56612
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 20 Apr 2026 11:36:30 +0000 (UTC)
-Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
- [10.7.10.107])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4fzk321BcGz19Xp;
- Mon, 20 Apr 2026 13:36:30 +0200 (CEST)
+ Mon, 20 Apr 2026 11:36:37 +0000 (UTC)
+Received: from smtp-4-0000.mail.infomaniak.ch (unknown
+ [IPv6:2001:1600:7:10::a6b])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4fzk392Nhwz1BrZ;
+ Mon, 20 Apr 2026 13:36:37 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1776684988;
- bh=AraFzYJrSTx7CiHhLSPO4a/Nql3YJst3F5wHLmj5ybA=;
- h=From:Subject:Date:To:Cc:From;
- b=dmAQFPRaoiCEs83PvpyuL9kkQEyeMbDoDF13vuztuyBvbnjPUfHyqqRuzIIwSO6Fh
- GoOVlx3rFHh8ZhPU8Xhr7EBltPylUGQjzA6tSCWq20NNXuKg50dKWcvmO23wjcf9iS
- DxCrORkNtzlcP3sItIx/YLBx+U23r+SsThKZyfQqnivQ1IpmXgOyzfyhiSc6JfnHPm
- zdcNLthVMgGkRjCzHNsei/x7QtMCTz+7qag2MvzRjMELPUe6CRV38LcJaaTy1i0fzb
- vh4NLA4AjZMzlHjCN9EdTSNLfR7YtxLmtnwrkpZpcybwmymBIUh4OwqJYneaXyh4ZR
- I57mf+Stt2ong==
+ s=20231125; t=1776684995;
+ bh=XOaq3V2QtWqfkDQYc5Xbo6GALEmFHcPFK3Z8CmBBtNo=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
+ b=XGYICb7QMVw+jzOK8bJaLT9sRyBg7GCxL5LJmz2/QiHBdUv2iy1pXEnMogpZQFmfg
+ YQK5+t2yQuw7ayi2VL4JfHm/R2wNtEZ7bsC7aQBx379vkGPk0yy3YS9RD37gUbujIP
+ 4sdn4Lg/pz16PElLPKNmTfCgqQ0kyyHfOKdmH6V9I1OpPgVHP/cVPRYMOPto+RI0Cr
+ v5mjqp0IXeDKcdKbxfYJ6TcYk7TngAAiv7wA/VcFWS5uCNSw0qDqzGDSa0HOSnL+Ys
+ fq2WymRVyX/8pGCpjEpuVMZKE84V82Ff5wqVAZifLhtEnmyB3YCH1WQmCNjJcARZa8
+ YusPBIxWjCPHw==
 Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4fzk2q2Zt5zTv0; Mon, 20 Apr 2026 13:36:19 +0200 (CEST)
+ id 4fzk310VDczVHb; Mon, 20 Apr 2026 13:36:28 +0200 (CEST)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Mon, 20 Apr 2026 13:36:06 +0200
-Message-Id: <20260420-net-kconfig-v1-0-9900002d8e72@cherry.de>
+Date: Mon, 20 Apr 2026 13:36:07 +0200
 MIME-Version: 1.0
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDI1NDI0Mz3bzUEt3s5Py8tMx0XYM0M+MUy5RUc0OzJCWgjoKi1LTMCrBp0bG
- 1tQDDDeCPXQAAAA==
-X-Change-ID: 20251216-net-kconfig-0f63d9de716b
+Message-Id: <20260420-net-kconfig-v1-1-9900002d8e72@cherry.de>
+References: <20260420-net-kconfig-v1-0-9900002d8e72@cherry.de>
+In-Reply-To: <20260420-net-kconfig-v1-0-9900002d8e72@cherry.de>
 To: u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com, 
  Paul Barker <paul.barker.ct@bp.renesas.com>
 X-Mailer: b4 0.15-dev-47773
@@ -106,8 +104,7 @@ Cc: Peng Fan <peng.fan@nxp.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
  Alexey Charkov <alchark@gmail.com>, Pramod Kumar <pramod.kumar_1@nxp.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Hrushikesh Salunke <h-salunke@ti.com>
-Subject: [Uboot-stm32] [PATCH 0/6] net: migrate NO_NET out of the networking
-	stack choice
+Subject: [Uboot-stm32] [PATCH 1/6] move networking menu in net/Kconfig
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -123,7 +120,7 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
-X-Rspamd-Queue-Id: 882C3475E90
+X-Rspamd-Queue-Id: 8605A475E8E
 X-Rspamd-Action: add header
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [6.29 / 15.00];
@@ -157,237 +154,130 @@ X-Spamd-Result: default: False [6.29 / 15.00];
 	FROM_HAS_DN(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[foss@0leil.net,uboot-stm32-bounces@st-md-mailman.stormreply.com];
 	FREEMAIL_CC(0.00)[nxp.com,kernel.org,siemens.com,pqrs.dk,arm.com,linaro.org,denx.de,ti.com,baylibre.com,mailbox.org,shantur.com,nabladev.com,gmail.com,amd.com,rock-chips.com,benjarobin.fr,amarulasolutions.com,mediatek.com,dh-electronics.com,microsoft.com,altera.com,ew.tq-group.com,iopsys.eu,andestech.com,phytec.de,google.com,cherry.de,konsulko.com,bootlin.com,gmx.de,kwiboo.se,gateworks.com,sttls.nl,suse.com,toradex.com,sartura.hr,chromium.org,collabora.com,ziyao.cc,codethink.co.uk,oss.qualcomm.com,engicam.com,infi.wang,foss.st.com];
-	NEURAL_HAM(-0.00)[-0.804];
+	NEURAL_HAM(-0.00)[-0.828];
 	TAGGED_RCPT(0.00)[uboot-stm32,renesas];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ASN(0.00)[asn:16509, ipnet:52.208.0.0/13, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[stormreply.com:url,stormreply.com:email,stm-ict-prod-mailman-01.stormreply.prv:helo,st-md-mailman.stormreply.com:rdns]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[nongnu.org:url,stormreply.com:url,stormreply.com:email,stm-ict-prod-mailman-01.stormreply.prv:helo,st-md-mailman.stormreply.com:rdns]
 X-Spam: Yes
 
-This migrates the net options away from the main Kconfig to net/Kconfig,
-rename the current NET option to NET_LEGACY to really highlight what it
-is and hopefully encourage more people to use lwIP, add a new NET
-menuconfig (but keep NO_NET as an alias to NET=n for now) which then
-allows us to replace all the "if legacy_stack || lwip_stack" checks with
-"if net_support" which is easier to read and maintain.
+From: Quentin Schulz <quentin.schulz@cherry.de>
 
-The only doubt I have is wrt SYS_RX_ETH_BUFFER which seems to be needed
-for now even when no network is configured? Likely due to
-include/net-common.h with PKTBUFSRX?
+In the main Kconfig, there are only two more menus, General Setup and
+Expert, in addition to the net menu. Since the part in the main Kconfig
+is mostly about selecting the network stack (legacy or lwIP), and that
+we already have a net/Kconfig, let's move those to net/Kconfig to have
+everything in the same place.
 
-No change in behavior is intended. Only change in defconfig including
-other defconfigs where NO_NET=y or NET is not set, in which case NO_NET
-is not set or NET=y should be set in the top defconfig. Similar change
-required for config fragments. See commit log in patch adding NET
-menuconfig for details.
-
-This was tested based on 70fd0c3bb7c2 ("x86: there is no
-CONFIG_UBOOT_ROMSIZE_KB_12288"), from within the GitLab CI container
-trini/u-boot-gitlab-ci-runner:noble-20251013-23Jan2026 and set up
-similarly as in "build all platforms in a single job" GitLab CI job.
-
- #!/usr/bin/env bash
- set -o pipefail
- set -eux
- 
- ARGS="-BvelPEWM --reproducible-builds --step 0"
- ./tools/buildman/buildman -o ${O} --force-build $ARGS -CE $*
- ./tools/buildman/buildman -o ${O} $ARGS -Ssd $*
-
-O=../build/u-boot/ ../u-boot.sh -b master^..b4/net-kconfig |& tee ../log.txt
-
-I can't really decipher the log.txt, but there's no line starting with
-+ which would be an error according to tools/buildman/builder.py help
-text. Additionally, because I started the script with set -e set and
-because buildman has an exit code != 0 when it fails to build a board,
-and I have the summary printed (which is the second buildman call), I
-believe it means all builds passed.
-
-The summary is the following:
-   aarch64: (for 537/537 boards) all +0.0 rodata +0.0
-            uniphier_v8    : all +1 rodata +1
-               u-boot: add: 0/0, grow: 1/0 bytes: 1/0 (1)
-                 function                                   old     new   delta
-                 data_gz                                  10640   10641      +1
-       arm: (for 733/733 boards) all -0.0 rodata -0.0
-            uniphier_v7    : all -1 rodata -1
-               u-boot: add: 0/0, grow: 0/-1 bytes: 0/-1 (-1)
-                 function                                   old     new   delta
-                 data_gz                                  11919   11918      -1
-            opos6uldev     : all -3 rodata -3
-               u-boot: add: 0/0, grow: 0/-1 bytes: 0/-3 (-3)
-                 function                                   old     new   delta
-                 data_gz                                  18778   18775      -3
-            uniphier_ld4_sld8: all -3 rodata -3
-               u-boot: add: 0/0, grow: 0/-1 bytes: 0/-3 (-3)
-                 function                                   old     new   delta
-                 data_gz                                  11276   11273      -3
-            stemmy         : all -20 rodata -20
-               u-boot: add: 0/0, grow: 0/-1 bytes: 0/-20 (-20)
-                 function                                   old     new   delta
-                 data_gz                                  15783   15763     -20
-
-As far as I could tell this data_gz is an automatically generated array
-when CONFIG_CMD_CONFIG is enabled. It is the compressed .config stored
-in binary form. Because I'm changing the name of symbols, replacing a
-menu with a menuconfig, additional text makes it to .config and the
-"# Networking" section in .config disappears.
-
-Here is the diff for the 5 defconfigs listed above, generated with:
-
-for f in build/*-m; do
-	diff --unified=0 $f/.config $(dirname $f)/$(basename -a -s '-m' $f)/.config
-done
-
-(-m is the build directory for master, and without the suffix, it's the
-top commit of this series)
-
-"""
- --- build/opos6uldev-m/.config	2026-04-20 10:53:49.804528526 +0200
- +++ build/opos6uldev/.config	2026-04-20 11:03:37.430242767 +0200
- @@ -970,4 +969,0 @@
- -
- -#
- -# Networking
- -#
- @@ -975,0 +972 @@
- +CONFIG_NET_LEGACY=y
- --- build/stemmy-m/.config	2026-04-20 11:01:33.653698123 +0200
- +++ build/stemmy/.config	2026-04-20 11:04:53.452577311 +0200
- @@ -733,4 +732,0 @@
- -
- -#
- -# Networking
- -#
- @@ -738,2 +733,0 @@
- -# CONFIG_NET is not set
- -# CONFIG_NET_LWIP is not set
- --- build/uniphier_ld4_sld8-m/.config	2026-04-20 11:00:41.605469071 +0200
- +++ build/uniphier_ld4_sld8/.config	2026-04-20 11:04:22.226439899 +0200
- @@ -997,4 +996,0 @@
- -
- -#
- -# Networking
- -#
- @@ -1002,0 +999 @@
- +CONFIG_NET_LEGACY=y
- --- build/uniphier_v7-m/.config	2026-04-20 10:53:04.019307319 +0200
- +++ build/uniphier_v7/.config	2026-04-20 11:03:01.688085486 +0200
- @@ -1004,4 +1003,0 @@
- -
- -#
- -# Networking
- -#
- @@ -1009,0 +1006 @@
- +CONFIG_NET_LEGACY=y
- --- build/uniphier_v8-m/.config	2026-04-20 10:43:05.614441175 +0200
- +++ build/uniphier_v8/.config	2026-04-20 10:41:03.214852130 +0200
- @@ -875,4 +874,0 @@
- -
- -#
- -# Networking
- -#
- @@ -880,0 +877 @@
- +CONFIG_NET_LEGACY=y
-"""
-
-This is fine:
-- Networking menu doesn't exist anymore so "#\n# Networking\n#\n" won't
-  be in .config anymore.
-- opos6uldev, uniphier_ld4_sld8, uniphier_v7 and uniphier_v8 all have
-  (old) CONFIG_NET enabled, (new) CONFIG_NET will still be set but
-  CONFIG_NET_LEGACY also needs to be defined now to reflect the stack
-  choice (even if default),
-- stemmy has CONFIG_NO_NET set, which means CONFIG_NET and
-  CONFIG_NET_LWIP are not reachable anymore hence why they don't need to
-  be part of .config,
-
-GitLab CI was run on this series (well, not exactly, but it's only
-changes to the git logs that were made):
-https://source.denx.de/u-boot/contributors/qschulz/u-boot/-/pipelines/29849
-
-It passes.
+No intended change in behavior.
 
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
-Quentin Schulz (6):
-      move networking menu in net/Kconfig
-      rename NET to NET_LEGACY
-      net: make NET a menuconfig (and downgrade NO_NET to a simple config)
-      simplify NET_LEGACY || NET_LWIP condition with NET condition
-      doc: remove mention to non-existing TPL_NET
-      boot: remove NO_NET use
+ Kconfig     | 34 ----------------------------------
+ net/Kconfig | 34 ++++++++++++++++++++++++++++++++++
+ 2 files changed, 34 insertions(+), 34 deletions(-)
 
- Kconfig                                            | 34 ----------------
- Makefile                                           |  4 +-
- arch/arm/mach-stm32mp/soc.c                        |  2 +-
- board/beacon/imx8mp/imx8mp_beacon.c                |  2 +-
- board/engicam/imx8mp/icore_mx8mp.c                 |  2 +-
- board/gateworks/venice/venice.c                    |  4 +-
- board/nxp/ls1043ardb/Makefile                      |  2 +-
- board/nxp/ls1046afrwy/Makefile                     |  2 +-
- board/nxp/ls1046ardb/Makefile                      |  2 +-
- .../imx8mp_debix_model_a/imx8mp_debix_model_a.c    |  2 +-
- board/siemens/iot2050/board.c                      |  2 +-
- board/sophgo/milkv_duo/Makefile                    |  2 +-
- board/sophgo/milkv_duo/board.c                     |  2 +-
- board/theadorable/theadorable.c                    |  4 +-
- board/ti/am335x/board.c                            |  2 +-
- board/toradex/verdin-imx8mp/verdin-imx8mp.c        |  2 +-
- board/xilinx/common/board.c                        |  3 +-
- boot/Kconfig                                       |  8 ++--
- cmd/Kconfig                                        | 12 +++---
- cmd/Makefile                                       |  2 +-
- cmd/bdinfo.c                                       |  7 ++--
- cmd/fastboot.c                                     |  4 +-
- cmd/ufetch.c                                       |  2 +-
- common/Kconfig                                     |  2 +-
- common/board_r.c                                   |  4 +-
- common/spl/Kconfig                                 |  5 ++-
- configs/am62px_evm_r5_ethboot_defconfig            |  2 +-
- configs/j722s_evm_r5_ethboot_defconfig             |  2 +-
- doc/develop/bootstd/overview.rst                   |  2 +-
- doc/develop/pytest/usage.rst                       |  4 +-
- doc/usage/cmd/bdinfo.rst                           |  7 ++--
- doc/usage/cmd/sntp.rst                             |  2 +-
- doc/usage/cmd/wget.rst                             |  2 +-
- doc/usage/spl_boot.rst                             |  2 +-
- drivers/dfu/Kconfig                                |  2 +-
- drivers/fastboot/Kconfig                           |  4 +-
- drivers/fastboot/fb_common.c                       |  4 +-
- drivers/net/Kconfig                                |  6 +--
- drivers/net/phy/Kconfig                            |  4 +-
- drivers/net/sandbox.c                              |  2 +-
- drivers/usb/gadget/Kconfig                         |  2 +-
- env/flags.c                                        | 10 ++---
- include/configs/stm32mp15_common.h                 |  2 +-
- include/configs/stm32mp23_common.h                 |  2 +-
- include/configs/stm32mp25_common.h                 |  2 +-
- include/env_callback.h                             |  2 +-
- include/env_flags.h                                |  6 +--
- include/net-common.h                               |  4 +-
- include/net-legacy.h                               |  2 +-
- lib/Kconfig                                        |  2 +-
- lib/efi_loader/Kconfig                             |  4 +-
- net/Kconfig                                        | 45 +++++++++++++++++++---
- net/Makefile                                       |  6 +--
- test/cmd/Makefile                                  |  2 +-
- test/cmd/bdinfo.c                                  |  6 +--
- test/dm/eth.c                                      |  6 +--
- test/py/tests/test_efi_fit.py                      |  2 +-
- test/py/tests/test_efi_loader.py                   |  2 +-
- test/py/tests/test_fpga.py                         |  4 +-
- test/py/tests/test_net.py                          |  2 +-
- 60 files changed, 139 insertions(+), 138 deletions(-)
----
-base-commit: 70fd0c3bb7c26d42f24d10145dd5f3168ac92eac
-change-id: 20251216-net-kconfig-0f63d9de716b
+diff --git a/Kconfig b/Kconfig
+index 7f00e76ba78..1fa31a4f5a8 100644
+--- a/Kconfig
++++ b/Kconfig
+@@ -791,42 +791,8 @@ source "dts/Kconfig"
+ 
+ source "env/Kconfig"
+ 
+-menu "Networking"
+-
+-choice
+-	prompt "Networking stack"
+-	default NET
+-
+-config NO_NET
+-	bool "No networking support"
+-	help
+-	  Do not include networking support
+-
+-config NET
+-	bool "Legacy U-Boot networking stack"
+-	select NETDEVICES
+-	help
+-	  Include networking support with U-Boot's internal implementation of
+-	  the TCP/IP protocol stack.
+-
+-config NET_LWIP
+-	bool "Use lwIP for networking stack"
+-	select NETDEVICES
+-	help
+-	  Include networking support based on the lwIP (lightweight IP)
+-	  TCP/IP stack (https://nongnu.org/lwip). This is a replacement for
+-	  the default U-Boot network stack and applications located in net/
+-	  and enabled via CONFIG_NET as well as other pieces of code that
+-	  depend on CONFIG_NET (such as cmd/net.c enabled via CONFIG_CMD_NET).
+-	  Therefore the two symbols CONFIG_NET and CONFIG_NET_LWIP are mutually
+-	  exclusive.
+-
+-endchoice
+-
+ source "net/Kconfig"
+ 
+-endmenu
+-
+ source "drivers/Kconfig"
+ 
+ source "fs/Kconfig"
+diff --git a/net/Kconfig b/net/Kconfig
+index e45ceb25106..249c27c115d 100644
+--- a/net/Kconfig
++++ b/net/Kconfig
+@@ -2,6 +2,38 @@
+ # Network configuration
+ #
+ 
++menu "Networking"
++
++choice
++	prompt "Networking stack"
++	default NET
++
++config NO_NET
++	bool "No networking support"
++	help
++	  Do not include networking support
++
++config NET
++	bool "Legacy U-Boot networking stack"
++	select NETDEVICES
++	help
++	  Include networking support with U-Boot's internal implementation of
++	  the TCP/IP protocol stack.
++
++config NET_LWIP
++	bool "Use lwIP for networking stack"
++	select NETDEVICES
++	help
++	  Include networking support based on the lwIP (lightweight IP)
++	  TCP/IP stack (https://nongnu.org/lwip). This is a replacement for
++	  the default U-Boot network stack and applications located in net/
++	  and enabled via CONFIG_NET as well as other pieces of code that
++	  depend on CONFIG_NET (such as cmd/net.c enabled via CONFIG_CMD_NET).
++	  Therefore the two symbols CONFIG_NET and CONFIG_NET_LWIP are mutually
++	  exclusive.
++
++endchoice
++
+ if NET
+ 
+ config ARP_TIMEOUT
+@@ -254,3 +286,5 @@ config SYS_RX_ETH_BUFFER
+           controllers it is recommended to set this value to 8 or even higher,
+           since all buffers can be full shortly after enabling the interface on
+           high Ethernet traffic.
++
++endmenu
 
-Best regards,
---  
-Quentin Schulz <quentin.schulz@cherry.de>
+-- 
+2.53.0
 
 _______________________________________________
 Uboot-stm32 mailing list

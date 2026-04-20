@@ -2,90 +2,90 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id iF5IJuWC5mkIxgEAu9opvQ
+	id SJ6PGxGE5mmFxgEAu9opvQ
 	(envelope-from <uboot-stm32-bounces@st-md-mailman.stormreply.com>)
-	for <lists+uboot-stm32@lfdr.de>; Mon, 20 Apr 2026 21:47:49 +0200
+	for <lists+uboot-stm32@lfdr.de>; Mon, 20 Apr 2026 21:52:49 +0200
 X-Original-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1947B4336FC
-	for <lists+uboot-stm32@lfdr.de>; Mon, 20 Apr 2026 21:47:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 03C7343376B
+	for <lists+uboot-stm32@lfdr.de>; Mon, 20 Apr 2026 21:52:48 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 443EDC5663A;
-	Mon, 20 Apr 2026 19:42:46 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 55766C57A50;
+	Mon, 20 Apr 2026 19:42:50 +0000 (UTC)
 Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com
  [209.85.218.45])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 184ECC56600
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id ABAF0C56600
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 20 Apr 2026 19:42:43 +0000 (UTC)
+ Mon, 20 Apr 2026 19:42:48 +0000 (UTC)
 Received: by mail-ej1-f45.google.com with SMTP id
- a640c23a62f3a-b9358dd7f79so609492066b.1
+ a640c23a62f3a-ba7fd666666so149828866b.3
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 20 Apr 2026 12:42:43 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776714163; cv=none;
+ Mon, 20 Apr 2026 12:42:48 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776714168; cv=none;
  d=google.com; s=arc-20240605;
- b=jALBd6F4pTeuXM1xnhASBSLE9O5oMXThL2vaJBSs6PeqKGWM3cDPI/S3F4W2n9cnIQ
- BxM8MXymd7DHmese33ZKs2dA+dvryl8iNMX50yY8avZw06IawMvDCetRPGFJZNIcNtbX
- MFCJS2MR9zNVZJIRIix1D3mTgmylBKxNd50u+MGxaQlZA5oQtzT9eNKR0IFiwjEnZHX8
- O0pu26mCDhwMtPSQ9rHGJxL/HJ3du83nQot38vgbJcmq3HBWUdG0HSQwecCaOSk1yq4a
- tuNQ8S034K0if+AZrBjkpd2os8/nBuMfMq8nSNuJ8AOxh6peKpJ9T7FR1XS8kopYtx0F
- j71Q==
+ b=Owe2gLnzfgWSNI007eMOscXUZIt/137ga3r+ggTo/KL5PK7CNVMcS9K0JXogCchzwe
+ ecJuK/LwzyO78tMvGe2M83w+UGz/vkZhl1v4GXm5MlxZpE9Lhf1qEWh37t5TdBjT9oDV
+ 01EK/g5yF174cVanPCOeC94GthCuF1yzXfxUQwCy7RrgrDb/OYhkvqTJqhgdTmXQxMUx
+ 4W21LZn5JWaPcIH3HczyvGZbnF5IlWj3axuYcmqeqKXMdTesZ6HdOIy9yuoUBu2rRomR
+ hachj/FsRSZAU700sgeZwihrkGt2hYzDWcDNnsPUQ1cD4gkoE6LJAPyE4e+VsICnavAL
+ Wv6Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=Ypuw9PF5xi/biZOPZRabWKAPeQ6GuFoWbITRVn4TTmI=;
- fh=vFzYFU09MKsrCHKEtvaDT7ivisQnQz4YLuCWZfWTcqA=;
- b=USO9SaKYy8qazCV5uLFfPiBV4JF1ANiTaBFx3LHD6hQWyO8FfqWXF/WLciQbedkDpf
- SXVWY0tpRekwxv+tzR34rS8aKKRKUe6YpH5YXJwuKV3233/b9G+qeWiNO4fky+mUfAec
- c7AlMHp3gjzGa8Tk39fhG84iMeR8Z0iZdxO9TR9GRkk+wg/yntRanEZBhQn8SmUXxAH7
- /ZSAAlqooo4pmYgTDM/siWAqWk7mOpnnaL9yQb2PtPn1RcRaYK3S06EFTJayYS4NDmLs
- CMr3FXrDMhIC5bY0p8qfPBoaO34IxR12XIB7dz2LpmnFL/9U+dWlPJnSmo3YlSgqr2qU
- ZMbA==; darn=st-md-mailman.stormreply.com
+ bh=Ay8F/BTYwPDSV/SFkypuI/ltVZXRrxcnRaPDPv42+3E=;
+ fh=SH7uRgWLWXVd8nH+HU5f7qG2gPE2tILA4dN+Iv+JB1k=;
+ b=bbaGKpRYdIsm9jMEZc9e4y9H49FqkqPUr3/LWR7A3EMqeqWP/JfKNBN93u7XOAjtqX
+ LZeZMQKw3E6HDyNjJ1dY74Ph/8f26NOnBpFUtlCPZ6zhTu3fJG13sH+Jbt11n/v5BSib
+ mEcN3IFlCeblFfvOrjuU8L3PwMcn3PCLM7M05yXnwjbqhwcbM5w/m47NRIJclUcNBr/A
+ so/eq9KiVMyKf0ZSIqdi3TSToLzhrmoorYYNttDjICC+E49mvjZ/YDWUX9ScA/P5oBg/
+ ZMmNAXF51H0v0o+ZSWqG/AB0pUWJpTbEO9Uo0BLfZY45mL4xy9BzbDyMsdjk1JsazljB
+ tyrw==; darn=st-md-mailman.stormreply.com
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776714163; x=1777318963;
+ d=chromium.org; s=google; t=1776714168; x=1777318968;
  darn=st-md-mailman.stormreply.com; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Ypuw9PF5xi/biZOPZRabWKAPeQ6GuFoWbITRVn4TTmI=;
- b=A8rskwKvSc2z034ivlgFwtd269uUh1ZzwysCucAIogvrmU11XP/e7uULyp3gNxHCJK
- nmTq5LkoB0rZ3ozgvlw6IBmogvNvJ4UxieE1t+1tWWaC/8mOXdfFDpXbWq/4jcg3PK8r
- eNM67oczWu/kxJk+3nIEX579bQkSBVBPXy/bY=
+ bh=Ay8F/BTYwPDSV/SFkypuI/ltVZXRrxcnRaPDPv42+3E=;
+ b=XwU8LMNOSjKlRk3rcYFeb052AUhukVhJmtk1CbQncFqdyPohlFnP6odF4XhaM9GDWy
+ Hi4/dS8t4xqJN83RLPVEWSpIxMEGWhEUclylg4W1856dKyuYlnwqJvJUy9S/Sr6Po6xj
+ REoxCFiqa+xyIuRtEdJDFc6lShGMRVKe1/KGY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776714163; x=1777318963;
+ d=1e100.net; s=20251104; t=1776714168; x=1777318968;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Ypuw9PF5xi/biZOPZRabWKAPeQ6GuFoWbITRVn4TTmI=;
- b=T7RqTw/ShVQOC9VMJHHxS2d0Az7mrbGAoI0LHf8LF+IyA01VapYlPXvL1pS/4C1Lbp
- 1gZJCahlb4TBWudLP5KBIdQ8GWU4NZBCz1hmxK+slmGsSGxXl1j1OzZxKVtfdxqZso57
- 3vvohzK8L5cEG2SRff2bGBqKI3bnS4nX43Hh+3GfIbL9cnWYquj6cJJlwi33BrLN0Cqf
- HJKGuDJuP0YC4QbSKvL0hfGeGHqRBQCk9BbaPDsxA+htRyYcz3VffJXP6OQlTK/lo7lD
- 7QSDfH7Dn7j/zkG13hV0eXvT93gzw9fFLL+hn/GH3pPJLGM57bG6N5DZd1WD80hYdg6e
- RZdw==
+ bh=Ay8F/BTYwPDSV/SFkypuI/ltVZXRrxcnRaPDPv42+3E=;
+ b=j7ionmt+9MryznhoXUqfe454fp32KZHL4Qy02UgYxmkymWa5b/GKlueyQzfeqNZiYw
+ o8eEP6IVtDD4E2sMx6sxif1wwCcoAYZ6Z3cCM4rFFORDp3hklPBBfAc1MsnR3NAjRy0g
+ 5MtTLU+DMTj33aWvamd9yoSnz3f11QDYLJjPlqDvfwMCy3zFG8mgTO6AU2TNNiNT8Og5
+ /8mrJJJLM1WMFItkYu2G5VofWf/arV2Wlg6Ok64eCQIykmL1i4cYFh3AAjuxdbjEHxFz
+ FBEvIDZdeSaTf2Z0CVgwOgRDsf19LbItFCf+mFmWr3uS1hXm3sIEXOXmsjxS9gc1YlI/
+ oWbw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ86fCiMU8BW/TAVRiiYKydVls2LsBu08CFPaj2YSQRdCMHuJfEID5DmlxAKZr30i0iHPMDyW3AXP0mchg==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0YxScHnieXqdKdNHVh7SV9gHDTvRZdYpn62R63TRuk5puoef5deq
- nwg3SMYPaZ7IZkQ+anQKAqdCihMifVkznn+14aV7js6KAztryudM/5ltBhed/MAMrOKMFasS3CO
- V/nBQ46YdnQKx0e0QbCpg/NEIWhyuOHFThA3KDBtO
-X-Gm-Gg: AeBDietagG5ad9XeFsBQlgINevcIegdWK8wTP3P1pT8Ga5AwN1+D8omtuR8yIJph/0f
- cG7otE/YhIyFzwsoJEYnjPnQMzNtJk6sv8+QVxEsTawIb5bL9VeqmNZCPvDNomylqidPq3PVas2
- rvvQ/YXBpycCam0XbaBWlYoQLKjroLE1PGLIyy6HhmwEFFwLd2eZKqEjxg6W13SZgkZMylIjc0V
- dGLS/NYPOBOqz9slXePyw4sI6UOvrugAM81LVCEhkUH5F2OIS9BaETU1HgJGo2DwdG8seOXdkLH
- JagfkoD5zn08jJWlCVnfrEa6nNvpkq8=
-X-Received: by 2002:a17:906:7946:b0:ba2:7010:c535 with SMTP id
- a640c23a62f3a-ba41c0bb9c2mr677898266b.47.1776714163159; Mon, 20 Apr 2026
- 12:42:43 -0700 (PDT)
+ AFNElJ/5crBeh3FU5GnkZofKsT2arabpiOw4etLaDJJgzfuuOsvnqMCCcXU2krHQc/gAnRCeuyL6Jp2/LH1XJA==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0YyLlviSok1b2q5O6Pq3iTMEI5gZRS2ehQB48vg0pD1ozZ5PT8Y4
+ OHG15MclOuUqm7UeZe8U6vJRxRkuDBD9Tkthm6a6eiDsLIGgJEZ+t862rZWsCJoih1SuZxuzSDU
+ twDYy5trvGNRu25Ko3jSJnbv+4iVCzCY66mOOTKG5
+X-Gm-Gg: AeBDiev7xV3JMsEVc6+QVSntxmFrEfFmq3zTF1VLvwwvjQQbBBKe19PKDJzbZIDkwOr
+ lgd2OtXLep/gA5YMNs4HWZVytLKIv+5DI/T+NwZIGExIIL99Hlurf7v4Qw4rMPIDkOg5YfF2UZc
+ LhVLyFFRSR3uP3fHcxjXq6UuBA1uJKEk+MS8VHU8v4JUa0ju3ff2aHIO+wd/lgCe/Jte3pOkgf2
+ 2AlPEVzQn+Qg0SreeSqpCptrR2DdfE1PBaknaSeN7AayM6h/Pbv/rX4JbIwfBbPXeINi1twdmcQ
+ k39XQUfq3VuqZ9JXIWdY
+X-Received: by 2002:a17:907:3f9d:b0:ba5:20b1:c13b with SMTP id
+ a640c23a62f3a-ba520b1c177mr549344266b.28.1776714168006; Mon, 20 Apr 2026
+ 12:42:48 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260420-net-kconfig-v1-0-9900002d8e72@cherry.de>
- <20260420-net-kconfig-v1-2-9900002d8e72@cherry.de>
-In-Reply-To: <20260420-net-kconfig-v1-2-9900002d8e72@cherry.de>
+ <20260420-net-kconfig-v1-3-9900002d8e72@cherry.de>
+In-Reply-To: <20260420-net-kconfig-v1-3-9900002d8e72@cherry.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 21 Apr 2026 07:42:29 +1200
-X-Gm-Features: AQROBzDznf7kDxkVeaGLIG0V-FmjUP2E_ft52nSwIy0O1aD65pjfMq1tnx7ViT8
-Message-ID: <CAFLszTgZC1FGy8965pHiG-u=FhrguftRv41ghQ_Qb_RRXx6tyg@mail.gmail.com>
+Date: Tue, 21 Apr 2026 07:42:33 +1200
+X-Gm-Features: AQROBzBBD6QWXgHXqsAjqUBUSofUJnydf3AlVzyEs0FPNUlgYAhIX3iqwKpVkiY
+Message-ID: <CAFLszTh3hYDBX1LbegMCGqOE4JPyNr2yBTkX87Av_qptXqLLZg@mail.gmail.com>
 To: foss+uboot@0leil.net
 Cc: Peng Fan <peng.fan@nxp.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
  Jan Kiszka <jan.kiszka@siemens.com>,
@@ -145,7 +145,8 @@ Cc: Peng Fan <peng.fan@nxp.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
  Alexey Charkov <alchark@gmail.com>, Pramod Kumar <pramod.kumar_1@nxp.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Hrushikesh Salunke <h-salunke@ti.com>
-Subject: Re: [Uboot-stm32] [PATCH 2/6] rename NET to NET_LEGACY
+Subject: Re: [Uboot-stm32] [PATCH 3/6] net: make NET a menuconfig (and
+ downgrade NO_NET to a simple config)
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -167,7 +168,7 @@ X-Spamd-Result: default: False [4.39 / 15.00];
 	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:google.com:reject}];
 	HFILTER_HELO_IP_A(1.00)[stm-ict-prod-mailman-01.stormreply.prv];
 	HFILTER_HELO_NORES_A_OR_MX(0.30)[stm-ict-prod-mailman-01.stormreply.prv];
-	R_SPF_ALLOW(-0.20)[+ip4:52.209.6.89];
+	R_SPF_ALLOW(-0.20)[+ip4:52.209.6.89:c];
 	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
 	DMARC_POLICY_SOFTFAIL(0.10)[chromium.org : SPF not aligned (relaxed),none];
@@ -194,59 +195,49 @@ X-Spamd-Result: default: False [4.39 / 15.00];
 	ASN(0.00)[asn:16509, ipnet:52.208.0.0/13, country:US];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TAGGED_RCPT(0.00)[uboot-stm32,uboot,renesas];
-	NEURAL_SPAM(0.00)[0.116];
+	NEURAL_SPAM(0.00)[0.041];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[stormreply.com:url,stormreply.com:email,st-md-mailman.stormreply.com:rdns,cherry.de:email,stm-ict-prod-mailman-01.stormreply.prv:helo,mail.gmail.com:mid]
-X-Rspamd-Queue-Id: 1947B4336FC
+	DBL_BLOCKED_OPENRESOLVER(0.00)[stormreply.com:url,stormreply.com:email,st-md-mailman.stormreply.com:rdns,mail.gmail.com:mid,stm-ict-prod-mailman-01.stormreply.prv:helo,cherry.de:email,chromium.org:email]
+X-Rspamd-Queue-Id: 03C7343376B
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Hi Quentin,
-
 On 2026-04-20T11:36:06, Quentin Schulz <foss+uboot@0leil.net> wrote:
-> rename NET to NET_LEGACY
+> net: make NET a menuconfig (and downgrade NO_NET to a simple config)
 >
-> Highlight that NET really is the legacy networking stack by renaming the
-> option to NET_LEGACY.
+> This will allow a bunch of simplifications across the code base.
+> Disabling NET is the equivalent of today's NO_NET choice. This means
+> that if NET is enabled, either the legacy or lwIP stack is necessarily
+> selected, which allows us to simplify if NET_LEGACY || NET_LWIP into
+> if NET in a later commit.
 >
-> This requires us to add an SPL_NET_LEGACY alias to SPL_NET as otherwise
-> CONFIG_IS_ENABLED(NET_LEGACY) will not work for SPL.
+> Config fragments - or defconfigs including other defconfigs - setting
+> the network stack (NET_LEGACY or NET_LWIP) must also set NET (or unset
+> NO_NET) if the config they apply to - or the included defconfigs -
+> unsets NET (or selects NO_NET) as otherwise the NET_LEGACY and NET_LWIP
+> symbols are unreachable. This is the case for the two defconfig modified
+> in this commit.
 >
-> The "depends on !NET_LWIP" for SPL_NET clearly highlights that it is
-> using the legacy networking app so this seems fine to do.
+> NO_NET is now a convenience symbol which hides NET entirely to avoid
+> modifying many defconfigs. If one selected NO_NET to disable the
+> networking stack in the past, this will still work for now. Technically,
+> we should be using the 'transitional' Kconfig attribute but that is only
+> available since Kconfig from Linux kernel v6.18 and we're on 6.1 right
+> now.
 >
-> This also has the benefit of removing potential confusion on NET being a
-> specific networking stack instead of 'any' network stack.
+> Note that this moves CONFIG_SYS_RX_ETH_BUFFER from under the Network
+> menu back into the main menu as it seems like it needs to be defined
+> even when there's no need for NET support at all and menuconfig option
+> doesn't work the same way as a menu.
 >
 > Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+>
+> configs/am62px_evm_r5_ethboot_defconfig |  2 +-
+>  configs/j722s_evm_r5_ethboot_defconfig  |  2 +-
+>  net/Kconfig                             | 23 ++++++++++++-----------
+>  3 files changed, 14 insertions(+), 13 deletions(-)
 
-> diff --git a/doc/develop/bootstd/overview.rst b/doc/develop/bootstd/overview.rst
-> @@ -422,7 +422,7 @@ includes the full set of commands, more error messages when things go wrong and
-> -several filesystem and network features (if CONFIG_NET is enabled) so that
-> +several filesystem and network features (if CONFIG_NET_LEGACY is enabled) so that
-
-Shouldn't this be left alone? Or perhaps restored in patch 4?
-
-BOOTSTD_DEFAULTS selects BOOT_DEFAULTS which enables network commands
-conditionally on !NO_NET, meaning any network stack.
-
-> diff --git a/cmd/ufetch.c b/cmd/ufetch.c
-> @@ -159,7 +159,7 @@ static int do_ufetch(struct cmd_tbl *cmdtp, int flag, int argc,
-> -                     if (IS_ENABLED(CONFIG_NET))
-> +                     if (IS_ENABLED(CONFIG_NET_LEGACY))
->                               printf('Net');
-
-Similar question here.
-
-> diff --git a/board/siemens/iot2050/board.c b/board/siemens/iot2050/board.c
-> @@ -232,7 +232,7 @@ void set_board_info_env(void)
-> -     if (IS_ENABLED(CONFIG_NET)) {
-> +     if (IS_ENABLED(CONFIG_NET_LEGACY)) {
-
-and here
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

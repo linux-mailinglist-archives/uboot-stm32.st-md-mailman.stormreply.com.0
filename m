@@ -2,97 +2,97 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id qAHIC0YI52lV3AEAu9opvQ
+	id WBqjEnQI52lP3AEAu9opvQ
 	(envelope-from <uboot-stm32-bounces@st-md-mailman.stormreply.com>)
-	for <lists+uboot-stm32@lfdr.de>; Tue, 21 Apr 2026 07:16:54 +0200
+	for <lists+uboot-stm32@lfdr.de>; Tue, 21 Apr 2026 07:17:40 +0200
 X-Original-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9229E4365FF
-	for <lists+uboot-stm32@lfdr.de>; Tue, 21 Apr 2026 07:16:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D7C22436633
+	for <lists+uboot-stm32@lfdr.de>; Tue, 21 Apr 2026 07:17:39 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 28C62C56612;
-	Tue, 21 Apr 2026 05:16:53 +0000 (UTC)
-Received: from mail-yx1-f52.google.com (mail-yx1-f52.google.com
- [74.125.224.52])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 429C0C56612;
+	Tue, 21 Apr 2026 05:17:39 +0000 (UTC)
+Received: from mail-yx1-f45.google.com (mail-yx1-f45.google.com
+ [74.125.224.45])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 144BAC36B3C
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 3EFB9C36B3C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 21 Apr 2026 05:16:51 +0000 (UTC)
-Received: by mail-yx1-f52.google.com with SMTP id
- 956f58d0204a3-651b4d09141so5002840d50.1
+ Tue, 21 Apr 2026 05:17:38 +0000 (UTC)
+Received: by mail-yx1-f45.google.com with SMTP id
+ 956f58d0204a3-651b4d09141so5003317d50.1
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 20 Apr 2026 22:16:51 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776748611; cv=none;
+ Mon, 20 Apr 2026 22:17:38 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776748657; cv=none;
  d=google.com; s=arc-20240605;
- b=aXNqLdcRLLwcwg4c4MF7bSCZWaPq1ChYyffMBaqSbZ1V2AKgUkI017OqZlaTtX/CMi
- FvGeMDB/6ALxfa2y1fKDJSvQ+4hpWdh3DNnKaJXThFnu2uCZQbCGI0pKzGBISK5c53Ib
- rQ3RnfPoAWEZkZKC27zGkCCZvCwvDGWur552ObW+/zUUaJ3P9IbUQX7lTqZHmzsagGoo
- Ov9PrRtjnRnvW69agryeA9x1Aj65t9TdXpGe+7djkgTcG2tuNR6+TVF1UkSFnX6tVj7z
- fq6m8RZEEDNeGLHcpTPzptYawLYmtsEEW5FBreInwVhlRO9Wzm8apGnJq2f9U/9FhEkR
- fgew==
+ b=M64t5VKK/2v83J5euoeUJZ+m4OvlcoPC8LMoj6elTCM/3iMm1mJ0EhLuwNnVUuXBgA
+ f1EtSD0m0IhBrL13UrBtN1hVF1ffBGz2gKqwEI9FJDCVBG75ddDZNMpHnaIxcw+EA9lY
+ VBIJIy8uTDM0QGNrpSX4iFVY0S5/Koh20eEP0rxTJbKTBkTjpyTwv2YKrm1QveDvPHli
+ uIK52RcdFwsHHLVEL1tfXfhOKe5yZ9QLE56VjGg5863PLWv1a2bFv95NMilKEJkaOqi9
+ I0OFFaa58OIxuDNCcPzcsAU8sijC6KZLnCGJNAydSFA0NUkjkFyQ629ad9gYWz3tZBMI
+ p67Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=9YM0lSuDcsTuL/p+iqzLwAtpEQpntOG7+xeTv+n7+V0=;
- fh=N6xUTiBa5WpKbzR94jOISfPCGeuA7/RVIohuMiONIVU=;
- b=hpTyE32P8FkHKtBVyfP2tTm4aCZIY9Mkt8nmbarZdCktYda5mAA+Tz+61UsKI/LBjt
- PtWiudYl9cE8+RXdKgnhUGPXF08c6fs9WmHt58DP6IDmdrQ2fLAxq8gwHgFIAXhp9gBv
- +uHXU0AZmwguymbjFtVLGB6+vdgTMuGZbAVeG+Tg8y8BYzXmJzzDLt4J0Z1LqIYGCFAy
- hrBtO+X1pJlVjRqxzKJ6LAGXgdKAiKYJn5Q2j7uCYbzNbpctHUu6cImRKz2IF44MR3oG
- rhna3RwaoFUGsOAuph27BTQJDO6obukxmBk3OiXNUM715uJdO5z5nBdDAdQBjBDjRR1G
- m3+w==; darn=st-md-mailman.stormreply.com
+ bh=Yk5h6Gzf8QWvSKXTZlPvozGVtAG7c+Aw9YYTpIqN23E=;
+ fh=JKiYG/Rv3jmZLj26yIhd6NjdqlCPbFMqewbxe9m6+JQ=;
+ b=KTzLjFkKyylaydV2m9Fa2nNHEoFC2h4j5J5z2bogCMyuhA5aRTD2gAIzxCf/fw1YPK
+ CLtJ3vXuR0BbIqyEPHyVAydrCySxn79/bF7QzVqINjwxLlHsU5ZEBZDkf1nAk7JkzNkH
+ Xg/Ne1RkXjln2usPriWYkN6m43IWsKNDoePh+uGEEPT2EU69PU+jZqqCHpaAhfC22Tbf
+ WzR5iOXDnu6a9DMFbesbBudmxLdFxqDhM2Bm2piYPGcyG9w5vH8+rf+ILv/8WQ/UTOqH
+ zT6Z+A9tY36qjqoYzx5DDFRL3OltEyn7OM53yU1/7Yes71UkjNcmom0E9NKyiOCmKzfl
+ 1neg==; darn=st-md-mailman.stormreply.com
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1776748611; x=1777353411;
+ d=linaro.org; s=google; t=1776748657; x=1777353457;
  darn=st-md-mailman.stormreply.com; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=9YM0lSuDcsTuL/p+iqzLwAtpEQpntOG7+xeTv+n7+V0=;
- b=y9N1zpDtUUjs4a5Q4BOGdX/ILPwTdyB/RatqMUyudNikyfNL6GVksh9RbhM3k3EnSw
- gdxvs31/LpnAbdxZJ4kWwNio65SrbzgMN/CWXK4c6SCtF/QdlH5KpUwQhduLJe5I671g
- pgnaduXpFeu0vc/ia2hUE3hpC63rOa1g3Xfd6+6CaC+8lrQpavlSRbw/x/r3b+lzflZM
- 7Gh0CQ53WbP3W6N+X5KXt5EHktU2Mqiz4vHQFzUUwj47KZp9xDcnADOf3ouAPTaqSYsi
- 0SLrowoW7TTfQ3JHsTXxdnD5nNLVDShfxbDaSBXDTFVcso1pIW3QJNJULaTlBikcJp01
- bJCQ==
+ bh=Yk5h6Gzf8QWvSKXTZlPvozGVtAG7c+Aw9YYTpIqN23E=;
+ b=i0pd+bd2SnUwIiFCZTWGNzuZVHR6v8BKIo6L244O9komxcZJ9mTwBdP1ZfGAinbe2u
+ 2j+7O8n6RusPNCZfvQRIHxHIJ1VCBOCKKN9zuo2aZ3vDm7ChFaGfaI46Lv/Ams+UMIX+
+ I2+NkVTNoom795qdhPCw3BPM5dlmV7c98JNsJ4pTFvluWWC4O2vCwnEdWnmaWCBBqeYh
+ NPBgmNwI1fWCyqGhPEGmdk70uwKSf4dOfdz/ZvhWZdoM1Njk1LK9U/JS87GVSqGZWuzH
+ dXxGoElqClgB8e2eBL5VZiEn+G6hV7Ux6bBycAH2vuNLI9GFV3Dmtx7YUDDUDLbs+Eo9
+ sbCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776748611; x=1777353411;
+ d=1e100.net; s=20251104; t=1776748657; x=1777353457;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9YM0lSuDcsTuL/p+iqzLwAtpEQpntOG7+xeTv+n7+V0=;
- b=I8K7IRlNBa/taKxknaszHN//9wZG4UflmEBh5LjjQL7HkVYgbKyxnAf423LXsDGjMy
- SzL6o4W4x/Um1FnbcuVzUSls/C3xHpKzL5Qq7UHQlv4pNnmAeiY22PxT/XTpkKje7A0o
- do1hBZmv4SqtGoaMMqdL9ZIXBejsJ96hKflzy3fM4TvsytqUsh3ixnn6nNVrwRBSgWGN
- ICEzNgWIxIpKzaGTir3L6TSySKcPDuF7MkWLZcivyStJlMBuiYTvtazP67tX54mjIFhz
- +6wpbVTGaz9WNw+72sSpDTkOWl/fobaxtwuWEhMkTN3GuUIRpKdPaVZmgn5P9nHMj4G2
- qo2g==
+ bh=Yk5h6Gzf8QWvSKXTZlPvozGVtAG7c+Aw9YYTpIqN23E=;
+ b=m9P4XfkdHlmqHZgDwWJy/T9k111kO8YpRm9vbq0+edLTyIfV3wgxhErsFcqLmJGDey
+ cuWM22nICCSI22uaZOu7jythfIA/aRN1V/00h+S/Oh7+3Eo4S8rOSlZIbDanzDjs5kN7
+ hFwouLTS+TBDkpI4yrIFDsnhoqk5G9RUhSh5dzwuYKIVj92G2Nd+eP98lRn2CwuTZzom
+ QYJzWQDWvn1aJGxqbWt/NXUJl6Mha5JnovkdtJtbO43vEa5gY3uLtepwIeECnEwO7cE/
+ mev0mCMotQgCAQpmB052Yqik1DKOQPD1d03eUsGGUbECp8dA1swuN9znwIPRcrBLLYES
+ nTJQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/1XYBzCFDcDq2VV5EpxTo5GgX57y/9lUlTF/1YffbqyXKmUaWuNa+u6oOCSrPP58mGa4jpdIgNPpQAMA==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0YzrnSAUFthg7TJTlsxQZtopveuo8EA7j+PE2yyZD7TJ4rka5YlQ
- 6JSlYKS2ffZxGD4fdqHNqcst1bQ5FDrVMmexwXj48zlsKNxMkzPEAkfwHI20wbuaut8UiiLLbFN
- Wm3I1GRgoIgIeVB11DgvLIqZxhUvQ8v1i+/FNMcxKPw==
-X-Gm-Gg: AeBDiesrRmJ7WQJZQZyHhr2nmLwigb/mcQvBajqkGibVK07VDv7G1UF+HsR0j/fAaOq
- 00z4CIbHLOrGG7p9UtRyf2+cb52eOBpBKdOGbm4jzZw0XAtsln+6K+X72YGRRgcfJmwrvKlTnCH
- JLaYPRgcC+/Cu+18sbpNClFAz+4KbU7QhIAAEDBQvWmgxpzTrAIm+SPXjO0Ow1JKpoDvyrXJ3ds
- VOyjs15Zv62tWVhR2t5Q7Y+5l4+/3UPbFoVR8KlneVLZi1sZv4TV2RBKzaIIZrmpwS6ItCBRKph
- R3fRfDZjoMIcC4HeBuh5iV/9XNkjKtz4bTlCRfgqykd9K5CezPhHujS/43XocjS4fLQXHBrynkM
- wfG8DDKSZc1gbGdYdih3xV6/C2unsCkgcpk8XXJ9A6w412utPMSlEz19VEtkvtP1p1095HVxA5E
- SLxddRY5iZC3K1+TqhvOnUjxUaPzq6n2Bec4tl+orRXO+in2OUYbA0i5/3w567vISl1Qli7wTvZ
- d2xIeJPGVUyx4WigBmgODwGoF2U04V3jUXKlZKEk6ccBggu9SI8szIPVFLSbPI3AtpT+WAlGyKj
- ZSqmgW53IV5CFbIWlnZFbGW+vNjmo4tJIbvUrXPlsaBjSdhUK9rn3Jg=
-X-Received: by 2002:a05:690e:43db:b0:650:77c7:ae81 with SMTP id
- 956f58d0204a3-65311b3180cmr8155989d50.22.1776748610676; Mon, 20 Apr 2026
- 22:16:50 -0700 (PDT)
+ AFNElJ+6zIlXh60GOl5jQ2qiylYywD0Q+JkUdJKmlFi+UKhAo/52H+icq30fvAd1G5VB0fyVkOxNpSl154t7BA==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0Yz/qberagk96Q0f9YJ6GK+GgA59eFnZk6LTViExRddJRitDea27
+ /DTe/nR7cn+VXRnbdP1tzfjjVkhP5cScF1hjpJ+ZZot1qjrlBLK2XuUa1PWysqlKbDpBE0/12FR
+ OFUpWLExlod0vxkKdPE3fGUdAPWoydERwkSydghqDyA==
+X-Gm-Gg: AeBDieuGs1wXVsRaEPMNxc+WdPctOuAvaLv4l90/x+PiLxCPacgM2KJWDxUttRepKwC
+ zHngkq2EDe7TI+jUCN3VRUV09xJV/l2tOIhzTAHVP9HakTvpvQu7V4yKEX3loWQVcmW6IDqlv6t
+ E4GhQjFqRopdYeZlkt8P4Jy4Kpo9zpY11sLDlSWL6JF9LJifd7R+LVKVWpIcrr1RkyYVhBt0QKO
+ LWQhVcq5LylVlQtUPZl5/o0OqrpYmJMr6AvXqeQ9udijkjnknuLejJ8UMtTtF6dJJ9QRjRuctr8
+ RcfxIKFzX/t7gQcHq41jOV4D53IR2GQKr0TQjkFSRa8LekXPkJwx5shDgiJcID2IF6UrrTwaNh2
+ 0C6jiMG8irJoZdt1xCclaKntfIG0lItm4f2iHP+CgSmGVfr3Yk8jglpliYAdSZLwH98W5Zk8QPG
+ PtUEfIpbqgawqqf8aKr6g/O+P2I2JLo6V1Q2f73o3xIkjJS5GuHQRXkcIKLob/BepZ9Fyp5xsDg
+ BxF1om8JwqK9MEIOIMsRUHsRureTlwNNQjbEt4do6AShQek3xm41uBgbtuygJk/DYBvsv20VJiU
+ uFB/i/ZAIAAazcCOuGjujQ+fMB9KFNobiRCf2OBwSjT6YWwfMSwNvQw=
+X-Received: by 2002:a05:690e:1914:b0:651:c41c:80ce with SMTP id
+ 956f58d0204a3-653119894a8mr13072501d50.16.1776748656972; Mon, 20 Apr 2026
+ 22:17:36 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260420-net-kconfig-v1-0-9900002d8e72@cherry.de>
- <20260420-net-kconfig-v1-6-9900002d8e72@cherry.de>
-In-Reply-To: <20260420-net-kconfig-v1-6-9900002d8e72@cherry.de>
+ <20260420-net-kconfig-v1-1-9900002d8e72@cherry.de>
+In-Reply-To: <20260420-net-kconfig-v1-1-9900002d8e72@cherry.de>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 21 Apr 2026 08:16:14 +0300
-X-Gm-Features: AQROBzBFYblociOblAsqbs44QPUtzOksoHvm5GP2Bn_EKJmmo6kbIAU-ZgzJVv4
-Message-ID: <CAC_iWjLYYYHRV=1YfXLUL7Tbkms-EjOkv7UBLexQ-4YNPwowpA@mail.gmail.com>
+Date: Tue, 21 Apr 2026 08:17:00 +0300
+X-Gm-Features: AQROBzD8z4Gz2E8G-xiaDkBkb90xxLB-LL5yMQJ0MwU3EgkDyA26WX0jrIPaW8U
+Message-ID: <CAC_iWjKaVsyxCuKmO8LqR-sS4DN4DsEnfhf1mNEswT2PtVJhHg@mail.gmail.com>
 To: Quentin Schulz <foss+uboot@0leil.net>
 Cc: Peng Fan <peng.fan@nxp.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
  Jan Kiszka <jan.kiszka@siemens.com>,
@@ -150,7 +150,7 @@ Cc: Peng Fan <peng.fan@nxp.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
  Alexey Charkov <alchark@gmail.com>, Pramod Kumar <pramod.kumar_1@nxp.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Hrushikesh Salunke <h-salunke@ti.com>
-Subject: Re: [Uboot-stm32] [PATCH 6/6] boot: remove NO_NET use
+Subject: Re: [Uboot-stm32] [PATCH 1/6] move networking menu in net/Kconfig
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -169,23 +169,23 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Spamd-Result: default: False [4.39 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	R_DKIM_REJECT(1.00)[linaro.org:s=google];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:google.com:reject}];
 	HFILTER_HELO_IP_A(1.00)[stm-ict-prod-mailman-01.stormreply.prv];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:google.com:reject}];
 	HFILTER_HELO_NORES_A_OR_MX(0.30)[stm-ict-prod-mailman-01.stormreply.prv];
-	R_SPF_ALLOW(-0.20)[+ip4:52.209.6.89];
 	MAILLIST(-0.20)[mailman];
-	MIME_GOOD(-0.10)[text/plain];
+	R_SPF_ALLOW(-0.20)[+ip4:52.209.6.89:c];
 	DMARC_POLICY_SOFTFAIL(0.10)[linaro.org : SPF not aligned (relaxed),none];
+	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
 	FORGED_RECIPIENTS(0.00)[m:foss+uboot@0leil.net,m:peng.fan@nxp.com,m:mkorpershoek@kernel.org,m:jan.kiszka@siemens.com,m:alvin@pqrs.dk,m:jerome.forissier@arm.com,m:neil.armstrong@linaro.org,m:lukma@denx.de,m:s-vadapalli@ti.com,m:dlechner@baylibre.com,m:marek.vasut+renesas@mailbox.org,m:ye.li@nxp.com,m:i@shantur.com,m:c-vankar@ti.com,m:semen.protsenko@linaro.org,m:anshuld@ti.com,m:mingkai.hu@nxp.com,m:dannenberg@ti.com,m:hs@nabladev.com,m:gilles.talis@gmail.com,m:padmarao.begari@amd.com,m:bb@ti.com,m:alice.guo@nxp.com,m:kever.yang@rock-chips.com,m:dev@benjarobin.fr,m:lucienzx159@gmail.com,m:u-boot@lists.denx.de,m:paul.liu@linaro.org,m:dario.binacchi@amarulasolutions.com,m:SkyLake.Huang@mediatek.com,m:adrianox@gmail.com,m:ansuelsmth@gmail.com,m:cniedermaier@dh-electronics.com,m:seanedmond@microsoft.com,m:tien.fong.chee@altera.com,m:msp@baylibre.com,m:Max.Merchel@ew.tq-group.com,m:michal.simek@amd.com,m:andrew.goodbody@linaro.org,m:dinesh.maniyam@altera.com,m:mikhail.kshevetskiy@iopsys.e
  u,m:briansune@gmail.com,m:ycliang@andestech.com,m:m.schwan@phytec.de,m:dimorinny@google.com,m:sughosh.ganu@arm.com,m:quentin.schulz@cherry.de,m:sr@denx.de,m:festevam@gmail.com,m:vigneshr@ti.com,m:trini@konsulko.com,m:u-kumar1@ti.com,m:romain.gantois@bootlin.com,m:xypron.glpk@gmx.de,m:le.jin@siemens.com,m:abbaraju.manojsai@amarulasolutions.com,m:jonas@kwiboo.se,m:tharvey@gateworks.com,m:Maarten.Brock@sttls.nl,m:mbrugger@suse.com,m:francesco.dolcini@toradex.com,m:robert.marko@sartura.hr,m:aford173@gmail.com,m:j-choudhary@ti.com,m:vaishnav.a@ti.com,m:paul.barker.ct@bp.renesas.com,m:gchan9527@gmail.com,m:sjg@chromium.org,m:ariel.dalessandro@collabora.com,m:seashell11234455@gmail.com,m:casey.connolly@linaro.org,m:me@ziyao.cc,m:uboot-stm32@st-md-mailman.stormreply.com,m:marex@denx.de,m:weijie.gao@mediatek.com,m:ben.dooks@codethink.co.uk,m:balaji.selvanathan@oss.qualcomm.com,m:pbrobinson@gmail.com,m:B.Hahn@phytec.de,m:matteo.lisi@engicam.com,m:andre.przywara@arm.com,m:root@infi.wang,m:jste
  phan@baylibre.com,m:kory.maincent@bootlin.com,m:martyn.welch@collabora.com,m:afd@ti.com,m:alchark@gmail.com,m:pramod.kumar_1@nxp.com,m:patrick.delaunay@foss.st.com,m:h-salunke@ti.com,m:foss@0leil.net,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[ilias.apalodimas@linaro.org,uboot-stm32-bounces@st-md-mailman.stormreply.com];
-	MIME_TRACE(0.00)[0:+];
 	GREYLIST(0.00)[pass,meta];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_COUNT_THREE(0.00)[3];
 	FORWARDED(0.00)[uboot-stm32@st-md-mailman.stormreply.com];
+	FORGED_SENDER(0.00)[ilias.apalodimas@linaro.org,uboot-stm32-bounces@st-md-mailman.stormreply.com];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	DKIM_TRACE(0.00)[linaro.org:-];
@@ -195,56 +195,134 @@ X-Spamd-Result: default: False [4.39 / 15.00];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[ilias.apalodimas@linaro.org,uboot-stm32-bounces@st-md-mailman.stormreply.com];
 	FREEMAIL_CC(0.00)[nxp.com,kernel.org,siemens.com,pqrs.dk,arm.com,linaro.org,denx.de,ti.com,baylibre.com,mailbox.org,shantur.com,nabladev.com,gmail.com,amd.com,rock-chips.com,benjarobin.fr,lists.denx.de,amarulasolutions.com,mediatek.com,dh-electronics.com,microsoft.com,altera.com,ew.tq-group.com,iopsys.eu,andestech.com,phytec.de,google.com,cherry.de,konsulko.com,bootlin.com,gmx.de,kwiboo.se,gateworks.com,sttls.nl,suse.com,toradex.com,sartura.hr,bp.renesas.com,chromium.org,collabora.com,ziyao.cc,st-md-mailman.stormreply.com,codethink.co.uk,oss.qualcomm.com,engicam.com,infi.wang,foss.st.com];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:16509, ipnet:52.208.0.0/13, country:US];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-0.607];
 	TAGGED_RCPT(0.00)[uboot-stm32,uboot,renesas];
-	NEURAL_SPAM(0.00)[0.108];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,linaro.org:email,stormreply.com:url,stormreply.com:email,stm-ict-prod-mailman-01.stormreply.prv:helo]
-X-Rspamd-Queue-Id: 9229E4365FF
+	ASN(0.00)[asn:16509, ipnet:52.208.0.0/13, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[stormreply.com:url,stormreply.com:email,linaro.org:email,stm-ict-prod-mailman-01.stormreply.prv:helo,mail.gmail.com:mid,cherry.de:email,nongnu.org:url,st-md-mailman.stormreply.com:rdns,0leil.net:email]
+X-Rspamd-Queue-Id: D7C22436633
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Mon, 20 Apr 2026 at 14:37, Quentin Schulz <foss+uboot@0leil.net> wrote:
+On Mon, 20 Apr 2026 at 14:36, Quentin Schulz <foss+uboot@0leil.net> wrote:
 >
 > From: Quentin Schulz <quentin.schulz@cherry.de>
 >
-> NO_NET is now a transitional symbol which may eventually be removed. Its
-> meaning is the opposite of the new meaning of NET (that is, any
-> networking stack).
+> In the main Kconfig, there are only two more menus, General Setup and
+> Expert, in addition to the net menu. Since the part in the main Kconfig
+> is mostly about selecting the network stack (legacy or lwIP), and that
+> we already have a net/Kconfig, let's move those to net/Kconfig to have
+> everything in the same place.
 >
-> Update the symbol dependency by using NET instead of !NO_NET.
+> No intended change in behavior.
 >
 > Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
 > ---
->  boot/Kconfig | 8 ++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
+>  Kconfig     | 34 ----------------------------------
+>  net/Kconfig | 34 ++++++++++++++++++++++++++++++++++
+>  2 files changed, 34 insertions(+), 34 deletions(-)
 >
-> diff --git a/boot/Kconfig b/boot/Kconfig
-> index be6bb6d4535..ae6f09a6ede 100644
-> --- a/boot/Kconfig
-> +++ b/boot/Kconfig
-> @@ -431,12 +431,12 @@ config BOOT_DEFAULTS_CMDS
->         select CMD_FAT
->         select CMD_FS_GENERIC
->         select CMD_PART if PARTITIONS
-> -       select CMD_DHCP if CMD_NET && !NO_NET
-> -       select CMD_PING if CMD_NET && !NO_NET
-> -       select CMD_PXE if CMD_NET && !NO_NET
-> +       select CMD_DHCP if CMD_NET && NET
-> +       select CMD_PING if CMD_NET && NET
-> +       select CMD_PXE if CMD_NET && NET
->         select CMD_BOOTI if ARM64 && LMB
->         select CMD_BOOTZ if ARM && !ARM64 && LMB
-> -       imply CMD_MII if CMD_NET && !NO_NET
-> +       imply CMD_MII if CMD_NET && NET
+> diff --git a/Kconfig b/Kconfig
+> index 7f00e76ba78..1fa31a4f5a8 100644
+> --- a/Kconfig
+> +++ b/Kconfig
+> @@ -791,42 +791,8 @@ source "dts/Kconfig"
 >
->  config BOOT_DEFAULTS
->         bool  # Common defaults for standard boot and distroboot
+>  source "env/Kconfig"
+>
+> -menu "Networking"
+> -
+> -choice
+> -       prompt "Networking stack"
+> -       default NET
+> -
+> -config NO_NET
+> -       bool "No networking support"
+> -       help
+> -         Do not include networking support
+> -
+> -config NET
+> -       bool "Legacy U-Boot networking stack"
+> -       select NETDEVICES
+> -       help
+> -         Include networking support with U-Boot's internal implementation of
+> -         the TCP/IP protocol stack.
+> -
+> -config NET_LWIP
+> -       bool "Use lwIP for networking stack"
+> -       select NETDEVICES
+> -       help
+> -         Include networking support based on the lwIP (lightweight IP)
+> -         TCP/IP stack (https://nongnu.org/lwip). This is a replacement for
+> -         the default U-Boot network stack and applications located in net/
+> -         and enabled via CONFIG_NET as well as other pieces of code that
+> -         depend on CONFIG_NET (such as cmd/net.c enabled via CONFIG_CMD_NET).
+> -         Therefore the two symbols CONFIG_NET and CONFIG_NET_LWIP are mutually
+> -         exclusive.
+> -
+> -endchoice
+> -
+>  source "net/Kconfig"
+>
+> -endmenu
+> -
+>  source "drivers/Kconfig"
+>
+>  source "fs/Kconfig"
+> diff --git a/net/Kconfig b/net/Kconfig
+> index e45ceb25106..249c27c115d 100644
+> --- a/net/Kconfig
+> +++ b/net/Kconfig
+> @@ -2,6 +2,38 @@
+>  # Network configuration
+>  #
+>
+> +menu "Networking"
+> +
+> +choice
+> +       prompt "Networking stack"
+> +       default NET
+> +
+> +config NO_NET
+> +       bool "No networking support"
+> +       help
+> +         Do not include networking support
+> +
+> +config NET
+> +       bool "Legacy U-Boot networking stack"
+> +       select NETDEVICES
+> +       help
+> +         Include networking support with U-Boot's internal implementation of
+> +         the TCP/IP protocol stack.
+> +
+> +config NET_LWIP
+> +       bool "Use lwIP for networking stack"
+> +       select NETDEVICES
+> +       help
+> +         Include networking support based on the lwIP (lightweight IP)
+> +         TCP/IP stack (https://nongnu.org/lwip). This is a replacement for
+> +         the default U-Boot network stack and applications located in net/
+> +         and enabled via CONFIG_NET as well as other pieces of code that
+> +         depend on CONFIG_NET (such as cmd/net.c enabled via CONFIG_CMD_NET).
+> +         Therefore the two symbols CONFIG_NET and CONFIG_NET_LWIP are mutually
+> +         exclusive.
+> +
+> +endchoice
+> +
+>  if NET
+>
+>  config ARP_TIMEOUT
+> @@ -254,3 +286,5 @@ config SYS_RX_ETH_BUFFER
+>            controllers it is recommended to set this value to 8 or even higher,
+>            since all buffers can be full shortly after enabling the interface on
+>            high Ethernet traffic.
+> +
+> +endmenu
 >
 > --
 > 2.53.0

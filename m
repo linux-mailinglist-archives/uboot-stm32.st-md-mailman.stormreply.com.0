@@ -2,88 +2,95 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id GB/rBbUz7mmxrQAAu9opvQ
+	id RiucBJQz7mmxrQAAu9opvQ
 	(envelope-from <uboot-stm32-bounces@st-md-mailman.stormreply.com>)
-	for <lists+uboot-stm32@lfdr.de>; Sun, 26 Apr 2026 17:48:05 +0200
+	for <lists+uboot-stm32@lfdr.de>; Sun, 26 Apr 2026 17:47:32 +0200
 X-Original-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id AE28546A838
-	for <lists+uboot-stm32@lfdr.de>; Sun, 26 Apr 2026 17:48:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9B58646A823
+	for <lists+uboot-stm32@lfdr.de>; Sun, 26 Apr 2026 17:47:31 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id CA660C87EDB;
-	Sun, 26 Apr 2026 15:41:11 +0000 (UTC)
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com
- [209.85.128.52])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 465DFC32EB0;
+	Sun, 26 Apr 2026 15:47:31 +0000 (UTC)
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com
+ [209.85.221.53])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 07913C36B3E
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AADE9C36B3E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun, 26 Apr 2026 15:41:11 +0000 (UTC)
-Received: by mail-wm1-f52.google.com with SMTP id
- 5b1f17b1804b1-488d2079582so110421575e9.2
+ Sun, 26 Apr 2026 15:47:29 +0000 (UTC)
+Received: by mail-wr1-f53.google.com with SMTP id
+ ffacd0b85a97d-43fde5b81a1so7059822f8f.0
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun, 26 Apr 2026 08:41:11 -0700 (PDT)
+ Sun, 26 Apr 2026 08:47:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1777218070; x=1777822870;
+ d=amarulasolutions.com; s=google; t=1777218449; x=1777823249;
  darn=st-md-mailman.stormreply.com; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=pyCTNQQ5HSE9YWFE9QctEWIoRgXv/rGHYVY5OZpmknE=;
- b=gyvQtMXl2e9uu+M0M7G8xJaekgOgiG31hXqNrTvx5WldfIF2l7Ea3/2xqIpe8hkOFe
- bTswxVlDWJEU2WN8ZYy/F2rb+Bz3ztF94ycjnGw0nNr8WCLUG2RPGqv1l6/seMOrD57l
- Sy78ODIWwa0xmp60PmPt5DdJQIwR1Od+6W88U=
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Ay5BWKMwp9o/rxZeYsRX2pfTyaEApr2HS5FZb4AfA/Y=;
+ b=f0lzHp8IgTnVMuZWvv7P3tLrF2iKx12Mm5tI/FgsgJqDKeWq4S361gNtzP+j/5xt97
+ XxqefNCoPoYYpe3eROgQKN6qJFimB8Wk3buABP/dv5UnryR9g7JH+lUtOmmCcRKsYlfe
+ mqrPqiw2cBcf0O1YlctYoj+oQ5NgBeln3OTKQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777218070; x=1777822870;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=pyCTNQQ5HSE9YWFE9QctEWIoRgXv/rGHYVY5OZpmknE=;
- b=RAM/xXM2ata5CdBN1cJKgFRFNUPJ6IDTh9N2KHP5r8udEuXuOzFO3rLbS1lg7nW5JY
- q59l/Un15iiikZ/Bmjm0gnMzZYpUnosItJsHo+xcEuiK2wRmx/tDMgeUJCFT+L1BBFC7
- +ztnwvWOx+9MVBYV4K/ux9hpen+wPVvBuJgePxC76lk6w/6ZNTwuslsnwT1WsjXJdYHO
- uQdXNKNHo5O6pQLgEfb3Mh0fim+2JIR9XqAyZu5MjPoskSpRPGCGVkVUZUoTDOy++WSV
- pllK/XPC3rPse5O+dxvGk/8Es9SumQKiZqPQqV/s++3FCxNvwVzij+nnTHiJM4OYZd5E
- tH6w==
+ d=1e100.net; s=20251104; t=1777218449; x=1777823249;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Ay5BWKMwp9o/rxZeYsRX2pfTyaEApr2HS5FZb4AfA/Y=;
+ b=FIq0BUs+0oUEwZLyRNbIYtg7554v3JADHzrFddZGFe2w2QbepPsoZ45YFcoSnGVC8V
+ stFsmZRL+w4KIak/jc60dfCKYhPSgbymxAfeGLcvwzZ1pvA2d3uyuMY5q2Gal7zNeH9Y
+ eIBvZJpTB0LsYqb2MSDnPSDM1/kJi6cVX7b2cAlu62XTSc1d15uS1ZvWVhZaUJWxpiuY
+ Psg8jdcONBVNc1m/4QrQfOyGJKpEtNs03WKTt+7fVsGUVoRvzCGqux6NfavZ0dv60VmG
+ fFqcdgujG/ENNb37H/Q/GeT+WM4xEetiKhWgSw3POlVCBMjNPadU0xomPj9Ixj7Avuwq
+ +bYw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8w7UCCUFfFp458ilHBh4DkoYyc47jjpLNhlJAlcd9ay0mf+8xT38p3q01C/HJoZY3cNCdzFzeDLfu7CA==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0YybH7nna4m3Rdi/tarWg925Co1N6FvejDDwZ3R/FirTopryc21d
- i4sdkCd7G8v+EIVGlHHffZgtEr/mEjvY0nIydWJheqC9L6xdHVI8XoMYQUnlmCUlalo=
-X-Gm-Gg: AeBDiev1m1sCT4lK+Fb4ENdKmmC2JihpLkN90ijjWrEck3Vbjeq6GTyS4yLHYbSuxgL
- IiGagxlLGYIZdNJ7dvWBgLFrdFxzUFCWCv7ACmbxXGaqX+0q/nW3X38+gk271Sd3Y/ird4rJiSt
- X9MmynJUevhk5esz/rQkEdZG9VDSnEEF+rxzoRBZlpWXKrVogFokpZAZyaDXsBLl6aS3VaySsAP
- 7ZMA2H57S0UxX4EHBEm7TKwg+p8xNaJn0o4VvF/7YLz91ORA86z5b3ohzJ3gnddwkc1t5L3YGR7
- 1ymY94gg5MnK7/18zTyxUnSoByJ18x4M+oH6pVk6xuy13P9GPJkbAJLCa1s1MDUJQuQPW6MXzOs
- M4AUtd97bUi85+9sejDCQ0GNQ16H8v9LUU0tLJfQMWiDTKDqfZpVDfvPveRZITAUETSKzn9dwJQ
- WBAUg9nwkHmGk+gPt756jOdVPNR7LqRVvMpl36bD/2Kcz5ik8zZJ2KYAN525YltMFDGEK0FrVXW
- +F4WUf+1pRvLpOEWHhinPhPx3Sl8fvCSL4OzFOlD3ftMEIO6K6yRL2QB+D1irU7EVnswkMmxCxR
- F23BqtgPv67AL4RBLpPN+nrDlTwwymq9eo6jFmNC
-X-Received: by 2002:a05:600c:1f83:b0:488:8840:e5ae with SMTP id
- 5b1f17b1804b1-488fb787afemr556310845e9.24.1777218070416; 
- Sun, 26 Apr 2026 08:41:10 -0700 (PDT)
+ AFNElJ+FZqVfqU+Hgf0ZoO7yvfugSpzkKAT1QxVqzYL4VjyX16RqaHiRydW6U8U/xnCMGBkbdxcn5BRwfmn0fw==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0Ywst0xbIk0HCl/R3R3EmpptFRrZY2Avrz6hWHS272mRZz2AncE3
+ CVEmp5DNUrApVBu99qVJDVaXNqCg2tBFT2zIB4i7kcshlnPN058bNsnGW+ry3u8802Q=
+X-Gm-Gg: AeBDieuvz/4jTjmz/zC+tI8wo3+igeQbzeR7KVEyJNAjZwwwnGMypOshuEBp8R3U2lg
+ 5G2nAH7BPzRmfIPOuOxmdX9fczlQ+znRWV+0kb8rOwpXxeWdymLe+zZzVA4b4czQ7HRyLtZP/6v
+ EfqLclDZhE9Vh333kmjHwHPPgc+f7AcoMDOFLB6qgg1X7TBtPoNIpzfVGxpeKJDgQIYhiYnCBnJ
+ AaPfSobncv7TJTquow65Y4Sszk+x6ik/AxbgFjsY/U7bAWDfeG+C6/HpW8n2kmt9avwNwM1g9bW
+ G8TNYg+SoF2CKoNaIcfs8/DD5zDri8XRcmjbzlEW3XR2iwXFiso7ewm4EYP8IVcj1rsFT6SrpFu
+ n3lsmfzaeWKnwzNHMvrM/ijxAb5Kq0bQDl4paDC/peh1GHC1GAVII6OksFZXSN9pVL0+bmf7/6F
+ 4gZdoMz8mlBpdOGvJafZibBsulkV2+lxumBBs6yHjl4i+RyavOhUWHRcw2a/PhqC94MiQU6T4dV
+ 5ZcRupMn6uWICq0ftRjM/FXAKeg3BBRht9LVGbZOFkeswFyrXb6k2gMTnkkph9W9z+9Lxhjk0XM
+ Xw5o/gGzIR2qxcSXT7Nuy6nG0seMfQ==
+X-Received: by 2002:a05:6000:25c4:b0:43b:8f56:1e1d with SMTP id
+ ffacd0b85a97d-43fe3dc10demr61510778f8f.13.1777218448919; 
+ Sun, 26 Apr 2026 08:47:28 -0700 (PDT)
 Received: from dario-ThinkPad-P14s-Gen-5.amarulasolutions.com
  (host-82-56-22-134.retail.telecomitalia.it. [82.56.22.134])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4891bb3d121sm802593765e9.14.2026.04.26.08.41.09
+ ffacd0b85a97d-44123d23e0bsm34489985f8f.15.2026.04.26.08.47.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 26 Apr 2026 08:41:10 -0700 (PDT)
+ Sun, 26 Apr 2026 08:47:28 -0700 (PDT)
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: u-boot@lists.denx.de
-Date: Sun, 26 Apr 2026 17:40:40 +0200
-Message-ID: <20260426154054.2040932-9-dario.binacchi@amarulasolutions.com>
+Date: Sun, 26 Apr 2026 17:46:53 +0200
+Message-ID: <20260426154724.2042569-1-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260426154054.2040932-1-dario.binacchi@amarulasolutions.com>
-References: <20260426154054.2040932-1-dario.binacchi@amarulasolutions.com>
 MIME-Version: 1.0
-Cc: Tom Rini <trini@konsulko.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
+Cc: =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
  uboot-stm32@st-md-mailman.stormreply.com,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- linux-amarula@amarulasolutions.com
-Subject: [Uboot-stm32] [PATCH v6 8/8] board: st: stm32mp25: support dynamic
-	A/B bank bootup
+ Tom Rini <trini@konsulko.com>, Jerome Forissier <jerome.forissier@arm.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Javier Martinez Canillas <javierm@redhat.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Rasmus Villemoes <ravi@prevas.dk>, Jonathan GUILLOT <jonathan@joggee.fr>,
+ Michal Simek <michal.simek@amd.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Kory Maincent <kory.maincent@bootlin.com>, Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Padmarao Begari <padmarao.begari@amd.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Bin Meng <bmeng.cn@gmail.com>,
+ linux-amarula@amarulasolutions.com, Sughosh Ganu <sughosh.ganu@arm.com>
+Subject: [Uboot-stm32] [PATCH v7 0/8] Support metadata-driven A/B boot for
+	STM32MP25
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -99,73 +106,82 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
-X-Rspamd-Queue-Id: AE28546A838
+X-Rspamd-Queue-Id: 9B58646A823
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [4.39 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	HFILTER_HELO_IP_A(1.00)[stm-ict-prod-mailman-01.stormreply.prv];
 	MID_CONTAINS_FROM(1.00)[];
 	R_DKIM_REJECT(1.00)[amarulasolutions.com:s=google];
+	HFILTER_HELO_IP_A(1.00)[stm-ict-prod-mailman-01.stormreply.prv];
 	HFILTER_HELO_NORES_A_OR_MX(0.30)[stm-ict-prod-mailman-01.stormreply.prv];
 	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+ip4:52.209.6.89:c];
 	MIME_GOOD(-0.10)[text/plain];
 	DMARC_POLICY_SOFTFAIL(0.10)[amarulasolutions.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:u-boot@lists.denx.de,m:trini@konsulko.com,m:marek.vasut+renesas@mailbox.org,m:quentin.schulz@cherry.de,m:sjg@chromium.org,m:uboot-stm32@st-md-mailman.stormreply.com,m:patrick.delaunay@foss.st.com,m:dario.binacchi@amarulasolutions.com,m:linux-amarula@amarulasolutions.com,m:marek.vasut@mailbox.org,s:lists@lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	GREYLIST(0.00)[pass,meta];
-	ARC_NA(0.00)[];
-	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
-	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:u-boot@lists.denx.de,m:vincent.stehle@arm.com,m:mkorpershoek@kernel.org,m:quentin.schulz@cherry.de,m:uboot-stm32@st-md-mailman.stormreply.com,m:dario.binacchi@amarulasolutions.com,m:trini@konsulko.com,m:jerome.forissier@arm.com,m:xypron.glpk@gmx.de,m:javierm@redhat.com,m:marek.vasut+renesas@mailbox.org,m:ravi@prevas.dk,m:jonathan@joggee.fr,m:michal.simek@amd.com,m:dinesh.maniyam@altera.com,m:kory.maincent@bootlin.com,m:sjg@chromium.org,m:ilias.apalodimas@linaro.org,m:padmarao.begari@amd.com,m:patrick.delaunay@foss.st.com,m:bmeng.cn@gmail.com,m:linux-amarula@amarulasolutions.com,m:sughosh.ganu@arm.com,m:marek.vasut@mailbox.org,m:bmengcn@gmail.com,s:lists@lfdr.de];
+	FREEMAIL_CC(0.00)[arm.com,kernel.org,cherry.de,st-md-mailman.stormreply.com,amarulasolutions.com,konsulko.com,gmx.de,redhat.com,mailbox.org,prevas.dk,joggee.fr,amd.com,altera.com,bootlin.com,chromium.org,linaro.org,foss.st.com,gmail.com];
 	FORGED_SENDER(0.00)[dario.binacchi@amarulasolutions.com,uboot-stm32-bounces@st-md-mailman.stormreply.com];
+	RCPT_COUNT_TWELVE(0.00)[23];
+	GREYLIST(0.00)[pass,meta];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
 	FORWARDED(0.00)[uboot-stm32@st-md-mailman.stormreply.com];
-	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	DKIM_TRACE(0.00)[amarulasolutions.com:-];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[uboot-stm32@st-md-mailman.stormreply.com];
-	NEURAL_HAM(-0.00)[-0.995];
 	FORGED_SENDER_FORWARDING(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[uboot-stm32@st-md-mailman.stormreply.com];
 	FROM_NEQ_ENVFROM(0.00)[dario.binacchi@amarulasolutions.com,uboot-stm32-bounces@st-md-mailman.stormreply.com];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-0.992];
 	TAGGED_RCPT(0.00)[uboot-stm32,renesas];
-	RCPT_COUNT_SEVEN(0.00)[9];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ASN(0.00)[asn:16509, ipnet:52.208.0.0/13, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[st-md-mailman.stormreply.com:rdns,stormreply.com:url,stormreply.com:email,stm-ict-prod-mailman-01.stormreply.prv:helo,amarulasolutions.com:mid,amarulasolutions.com:email,chromium.org:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[stm-ict-prod-mailman-01.stormreply.prv:helo,st-md-mailman.stormreply.com:rdns,stormreply.com:url,stormreply.com:email]
 
-Enable automatic detection of the active A/B bank by retrieving
-partition GUIDs from FWU metadata.
+This series, the mainline version of [1], provides the necessary changes
+in U-Boot to support the metadata-driven A/B update flow for STM32MP25
+boards. It implements the logic required to dynamically select the boot
+bank based on FWU metadata.
 
-This ensures the system correctly identifies the bootable partitions
-even in multi-bank scenarios, falling back to a standard bootable flag
-scan if the UUIDs are missing.
+These changes are designed to be backward compatible while providing
+the necessary infrastructure for the A/B scheme.
 
-To enable A/B bank bootup on stm32mp25 boards, add the following Kconfig
-options to the stm32mp25_defconfig:
+The series has been tested on the STM32MP257F-EV1 board.
 
- CONFIG_FWU_MULTI_BANK_UPDATE=y
- CONFIG_FWU_MDATA=y
- CONFIG_FWU_NUM_BANKS=2
- CONFIG_FWU_NUM_IMAGES_PER_BANK=3
- CONFIG_CMD_FWU_METADATA=y
- CONFIG_FWU_MDATA_V2=y
+Additionally, some patches in the series propose changes with
+general-purpose utility:
 
-Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
+ 1/7 lib: uuid: add partition type GUID for extended bootloader
+ 4/7 cmd: part: support lookup by UUID in 'part number'
+ 6/7 fwu: add helper to get image GUID by type and bank index
 
----
+[1] https://github.com/STMicroelectronics/u-boot/pull/6
 
-(no changes since v5)
+Changes in v7:
+- Add Reviewed-by of Simon Glass for patc 7/8 of "test: dm:
+  fwu_mdata: add test for fwu_mdata_get_image_guid".
+
+Changes in v6:
+- Add Reviewed-by of Simon Glass to patch 3/8 "test: cmd: add unit
+  tests for part command"
 
 Changes in v5:
+- Update doc/usage/cmd/part.rst to reflect the changes related to the
+  part command.
 - Add Acked-by of Ilias Apalodimas to patch 6/8 "fwu: add helper to get
   image GUID by type and bank index"
 
 Changes in v4:
+- Place the part command tests in the cmd suite rather than the dm
+  suite.
+- Order the include files according the U-Boot coding style.
 - Add patch 7/8 test: dm: fwu_mdata: add test for fwu_mdata_get_image_guid
 
 Changes in v3:
@@ -176,7 +192,6 @@ Changes in v3:
 - Add log_warning() messages to fwu_platform_hook() to catch inconsistent
   FWU metadata (boot GUID found but root GUID missing or viceversa), as
   suggested by Simon Glass.
-- Add Reviewed-by tag of Simon Glass.
 
 Changes in v2:
 - Add links to the XBOOTLDR specification in the commit message of patch
@@ -188,83 +203,38 @@ Changes in v2:
    5/7 test: cmd: part: add UUID lookup tests
    3/7 test: cmd: add unit tests for part command
    2/7 test: dm: part: add test for part_get_info_by_uuid
-- Pass efi_guid_t by pointer in fwu_mdata_get_image_guid() calls.
 
- board/st/stm32mp2/stm32mp2.c          | 32 +++++++++++++++++++++++++++
- include/configs/stm32mp25_st_common.h | 15 +++++++++++++
- 2 files changed, 47 insertions(+)
+Dario Binacchi (8):
+  lib: uuid: add partition type GUID for extended bootloader
+  test: dm: part: add test for part_get_info_by_uuid
+  test: cmd: add unit tests for part command
+  cmd: part: support lookup by UUID
+  test: cmd: part: add UUID lookup tests
+  fwu: add helper to get image GUID by type and bank index
+  test: dm: fwu_mdata: add test for fwu_mdata_get_image_guid
+  board: st: stm32mp25: support dynamic A/B bank bootup
 
-diff --git a/board/st/stm32mp2/stm32mp2.c b/board/st/stm32mp2/stm32mp2.c
-index 43bc583378e6..5cbbbc322a3a 100644
---- a/board/st/stm32mp2/stm32mp2.c
-+++ b/board/st/stm32mp2/stm32mp2.c
-@@ -208,4 +208,36 @@ void fwu_plat_get_bootidx(uint *boot_idx)
- 	*boot_idx = (readl(TAMP_FWU_BOOT_INFO_REG) >>
- 		    TAMP_FWU_BOOT_IDX_OFFSET) & TAMP_FWU_BOOT_IDX_MASK;
- }
-+
-+int fwu_platform_hook(struct udevice *dev, struct fwu_data *data)
-+{
-+	uint boot_idx;
-+	efi_guid_t boot_uuid, root_uuid;
-+	const efi_guid_t boot_type_guid = PARTITION_XBOOTLDR;
-+	const efi_guid_t root_type_guid =
-+		PARTITION_LINUX_FILE_SYSTEM_DATA_GUID;
-+	char uuidbuf[UUID_STR_LEN + 1];
-+	int retb, retr;
-+
-+	fwu_plat_get_bootidx(&boot_idx);
-+
-+	retb = fwu_mdata_get_image_guid(&boot_uuid, &boot_type_guid, boot_idx);
-+	retr = fwu_mdata_get_image_guid(&root_uuid, &root_type_guid, boot_idx);
-+
-+	if (!retb && !retr) {
-+		uuid_bin_to_str(boot_uuid.b, uuidbuf, UUID_STR_FORMAT_GUID);
-+		env_set("boot_partuuid", uuidbuf);
-+
-+		uuid_bin_to_str(root_uuid.b, uuidbuf, UUID_STR_FORMAT_GUID);
-+		env_set("root_partuuid", uuidbuf);
-+	} else if (!retb && retr) {
-+		log_warning("%s: found boot GUID but missing root GUID (%d)\n",
-+			    __func__, retr);
-+	} else if (!retr && retb) {
-+		log_warning("%s: found root GUID but missing boot GUID (%d)\n",
-+			    __func__, retb);
-+	}
-+
-+	return 0;
-+}
- #endif /* CONFIG_FWU_MULTI_BANK_UPDATE */
-diff --git a/include/configs/stm32mp25_st_common.h b/include/configs/stm32mp25_st_common.h
-index cb679eb1be22..0b0267ae99b0 100644
---- a/include/configs/stm32mp25_st_common.h
-+++ b/include/configs/stm32mp25_st_common.h
-@@ -8,7 +8,22 @@
- #ifndef __CONFIG_STM32MP25_ST_COMMON_H__
- #define __CONFIG_STM32MP25_ST_COMMON_H__
- 
-+#ifdef CONFIG_FWU_MULTI_BANK_UPDATE
-+#define SCAN_DEV_FOR_BOOT_PARTS \
-+	"setenv devplist; " \
-+	"env exists boot_partuuid && " \
-+		"part number ${devtype} ${devnum} ${boot_partuuid} devplist; " \
-+	"env exists devplist || " \
-+		"part list ${devtype} ${devnum} -bootable devplist; "
-+
-+#define ST_STM32MP25_FWU_ENV \
-+	"altbootcmd=${bootcmd}\0"
-+#else
-+#define ST_STM32MP25_FWU_ENV
-+#endif
-+
- #define STM32MP_BOARD_EXTRA_ENV \
-+	ST_STM32MP25_FWU_ENV \
- 	"usb_pgood_delay=2000\0" \
- 	"console=ttySTM0\0"
- 
+ board/st/stm32mp2/stm32mp2.c          |  32 ++++
+ cmd/part.c                            |  12 +-
+ doc/README.gpt                        |   2 +
+ doc/usage/cmd/part.rst                |   6 +-
+ include/configs/stm32mp25_st_common.h |  15 ++
+ include/fwu.h                         |  11 ++
+ include/part_efi.h                    |   3 +
+ lib/fwu_updates/fwu.c                 |  33 ++++
+ lib/uuid.c                            |   1 +
+ test/cmd/Makefile                     |   1 +
+ test/cmd/part.c                       | 209 ++++++++++++++++++++++++++
+ test/dm/fwu_mdata.c                   |  48 ++++++
+ test/dm/part.c                        |  53 +++++++
+ 13 files changed, 419 insertions(+), 7 deletions(-)
+ create mode 100644 test/cmd/part.c
+
 -- 
 2.43.0
 
+base-commit: 9f61fd5b80a43ae20ba115e3a2933d47d720ab82
+branch: fwupdate-ab
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

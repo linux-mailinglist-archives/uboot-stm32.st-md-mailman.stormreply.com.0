@@ -2,88 +2,139 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id WOtSMp4z7mmxrQAAu9opvQ
+	id gJRiEC+872mLFQEAu9opvQ
 	(envelope-from <uboot-stm32-bounces@st-md-mailman.stormreply.com>)
-	for <lists+uboot-stm32@lfdr.de>; Sun, 26 Apr 2026 17:47:42 +0200
+	for <lists+uboot-stm32@lfdr.de>; Mon, 27 Apr 2026 21:42:39 +0200
 X-Original-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8C8BB46A82A
-	for <lists+uboot-stm32@lfdr.de>; Sun, 26 Apr 2026 17:47:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C97F247970D
+	for <lists+uboot-stm32@lfdr.de>; Mon, 27 Apr 2026 21:42:38 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5795BC32EB0;
-	Sun, 26 Apr 2026 15:47:42 +0000 (UTC)
-Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com
- [209.85.221.46])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0A80CC57A51;
+	Mon, 27 Apr 2026 19:42:38 +0000 (UTC)
+Received: from mail-oo1-f54.google.com (mail-oo1-f54.google.com
+ [209.85.161.54])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A2CF6C36B3E
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 5F997CFAC40
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun, 26 Apr 2026 15:47:40 +0000 (UTC)
-Received: by mail-wr1-f46.google.com with SMTP id
- ffacd0b85a97d-444826c16ffso138470f8f.1
+ Mon, 27 Apr 2026 19:42:37 +0000 (UTC)
+Received: by mail-oo1-f54.google.com with SMTP id
+ 006d021491bc7-688a8e5fe5eso5273629eaf.1
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun, 26 Apr 2026 08:47:40 -0700 (PDT)
+ Mon, 27 Apr 2026 12:42:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1777218460; x=1777823260;
+ d=konsulko.com; s=google; t=1777318956; x=1777923756;
  darn=st-md-mailman.stormreply.com; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pyCTNQQ5HSE9YWFE9QctEWIoRgXv/rGHYVY5OZpmknE=;
- b=kJrevaj+hmpPOpM+QDa0yB1zh5rhKtxGECVCC7igSnX/2dyGQed1L8z6IArVT8g8nL
- +WYaeQL9sgtIqNtmCeQqvXiwCggCyqwtZaqRdYv8VMWLTHTd0Q2NVK9FJg7n/3x1UiWk
- 15l7RZ7jJpSnCV+lQYBtPs3wwrHxGsYcPrho4=
+ bh=tT2hp8+uLmbn2kwycSlwuPUUgNkBNqsvJj4q903zslk=;
+ b=P2nY2JkMFv4AIdFi/NgSgFoJYXjJ7+YB3EdS25FGqwigy5jWuw0nnqxomUgrSQpFbU
+ uUsDEokMY15slFO+3BGiQFOsII8KjllCRuLxkbpsUfjkRMx1IcprC5TROc4zQivr+/Ym
+ e6MxdwWhEt6cP/eZhpP+DBIGdW2c942cfhJdo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777218460; x=1777823260;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ d=1e100.net; s=20251104; t=1777318956; x=1777923756;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=pyCTNQQ5HSE9YWFE9QctEWIoRgXv/rGHYVY5OZpmknE=;
- b=A6B//zd8xPIQcRhl4kpSIXhMjaZZ+Rcc2ivyOq2vZXZ4Nwy2Xuiu3yrI48MQXYDTZa
- 1SyJQjjyPQOjdhrIc9IdFb7qMbMd3568rnjw/hekQmXRdLYLThJgz+ecgHIb6/8vVgZi
- AaXMaEO2RLmQdbLL3qrz1uacvX4fvhhYU+9qGkh0U9R4OlfoJ7tqo1YEOj3lzZpVAIrt
- D/nPj63fN/mUk+niuoo/gPnyo2+xHhlj8Nh85rUgOspAuQNj9FQCL5ZOTdpFKaX8Q6gc
- SBXfhrwk/32iy/RbOvQJrktvNdZYAk920Gd0dkrHaQmPFQbPWRy9dub1KJUVhisiW4Q9
- TJEA==
+ bh=tT2hp8+uLmbn2kwycSlwuPUUgNkBNqsvJj4q903zslk=;
+ b=dLnhHHlON6zexmO8rDskmgetrHTPLYVuMcNBsifyUAtVbVJ4QS/ZeWUTIGb3bcvSNj
+ LqZ3UZEbdqp2U4LGeGBJu9C2nyp39neXl629LGs+2umfXf7YRyf3A280241PaYBuGBOD
+ 5z72NDLRX0zvNMNtAotiVB3/1ecO15W+aJB3F/rYRn7eeAg6gdG7umzKg2aFxibYg2ip
+ EoO/XqIo7fotWgCtSHQYtjnn8nulLfEgUzpxrUOL/oBxvQpoI2DvCED3RN3ScWQhZnjN
+ 8RMY3VDjlE32Zq4k5ophrpR/sS6SFtlorvSTs73iHsfddg/MpL1OZgBebKv4/x+4o90p
+ Ojfw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9IA2JME1e9A9wxLWVpkbCt9LiHQwuLWL30R+f6++rIm5xyUt2plKaHJESA1S5VFaR8vjOtQz2ap8oWhw==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0YzisvXTkXYLplOsbqtfCjFllUmR+6/5LQ2RptqOKa5/TS1WUHNK
- J8mED6LWGlTLlTgJrXIu6/WFZ6xq9fk3VBqihT8YKFdbD+ASN5qqM87M5vJZLDKmj18=
-X-Gm-Gg: AeBDievT14iqac3K8D2wB94a5wiY+hObUBXjg6xURnabbLay4rz9qXjaIOAdrNl8hNV
- t0mjAJNxFQi9I+Oq8sFsBFYVlazn1Jbkn6beFlsugwqD58xRJx1ez0wrGd/xoXvnimlmn+ope8H
- bCzGqp7rrQi0ggfPKz30qHTBTCssQQpMZ/DM12WAYo6ZCzM0Ji0BP0h3BhBhEcSp6RM3LDXEiId
- 89HNMyGKSbMFGli/C1HBqQeyDe5on5OaicVFvmfi/fEnpmsIJE+KunJCmEwWEFemw1rfdCxH9Jm
- kkGznovQgDRJpVXBQd9L95mMlZhDK9/1qmQRBbC1SC2O9avTDBNW+apSo14cg4dPSvzFcVuuBrX
- NJaEQeVAJf4DF84g/7y+jgl1EfgdsCQZg0V1UJqv8gi9Yh0y5oW4TlqUHxSBjaqVBwpEA83kc8k
- U7Hqn22vU4MCABoM0ebhao0DDyHPO3BXhpAjmktZqVClnmXEa08nhzaedZoWUvpM8wZqr8UBD1Z
- I7VduVMN5mMvbGbz28ZuxqshDLi3TC7WK3JWWJ1U2dzuDCk/gOC/d94yEi4W2rm3xpInaYlw8qx
- mPx4QHPadwGVgLIn5SLViKv6GCdVg6xQ37U9m7Ei
-X-Received: by 2002:a05:6000:230c:b0:43d:303f:f358 with SMTP id
- ffacd0b85a97d-43fe3dc5981mr64165640f8f.2.1777218460103; 
- Sun, 26 Apr 2026 08:47:40 -0700 (PDT)
-Received: from dario-ThinkPad-P14s-Gen-5.amarulasolutions.com
- (host-82-56-22-134.retail.telecomitalia.it. [82.56.22.134])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-44123d23e0bsm34489985f8f.15.2026.04.26.08.47.39
+ AFNElJ/26/JejUaBiw1XNS+b61eqp11qEB6TFA+roEvOt8+Jx6XodBBUBpcw69z2J28xJrA4yEVMhWs1dNYNTQ==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0YzoajVEKGmAbgjRB48wW6QMSKTpknu2E0QUk2Ug15RUuTHwdSLX
+ bi3n9B3OjO184Rb6+xZpHZMpXk31rGS+49CZAkAPj2mdBgBFzsO/TAUenw4YPxOF7no=
+X-Gm-Gg: AeBDieuWag3+xzq31N9UIg5iVE9OBTJ27FTh2kC1Fq5OR0OK37EZQV9sCBun/q+/z2l
+ LP1S7XuSyCCJLLLRrNRd6BZL1OMEBmBy6y43rFoEGxjpQcYWutyJE/3UwMO0WNjIlJK0YfOUGk7
+ 7qivym3EEpH4Ksz9iDYvqflBZptzWg56WGtiEP1nEQ2dnstOWM1HTpWP6xIlttsmwT8gFp4QbJB
+ 1fJKuJXAZjmsV6/Rqd42/wx8kusZKY4Ii9V1+tZgVMkljTIDOAVx0B6JS8pJrt0ba2P49wVDTTx
+ 38D7ffob5zI3iMJ+b7QThPNp0dN/DIsseT2S6H7kQk54QIz88k7oPQV9XY9sO1EKJKkOo+Zh839
+ f7wmRCDYYcNu4buw3U19gk4TpLWOOP2StwWjuCjfbb79lcl3GTprK7UYnGAVnI+mYfAGAzFdtLF
+ l2iT0oGQRHcAdNFItHFbBhJBMiARlHoTgwVdNXWzrVslf3Jl+vBTkqpaJssLyRFdpNhdqR34py3
+ wwwY0nzom17UZsIwvsnlHiXO0EO5excjQmSa9W6w5zVlligcjMFVhWsVNsg
+X-Received: by 2002:a05:6820:987:b0:68c:373f:1835 with SMTP id
+ 006d021491bc7-6965b9ed9a7mr244412eaf.36.1777318955890; 
+ Mon, 27 Apr 2026 12:42:35 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-6965b94aa0esm187247eaf.6.2026.04.27.12.42.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 26 Apr 2026 08:47:39 -0700 (PDT)
-From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-To: u-boot@lists.denx.de
-Date: Sun, 26 Apr 2026 17:47:01 +0200
-Message-ID: <20260426154724.2042569-9-dario.binacchi@amarulasolutions.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260426154724.2042569-1-dario.binacchi@amarulasolutions.com>
-References: <20260426154724.2042569-1-dario.binacchi@amarulasolutions.com>
+ Mon, 27 Apr 2026 12:42:35 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com, 
+ Paul Barker <paul.barker.ct@bp.renesas.com>, 
+ Quentin Schulz <foss+uboot@0leil.net>
+In-Reply-To: <20260420-net-kconfig-v1-0-9900002d8e72@cherry.de>
+References: <20260420-net-kconfig-v1-0-9900002d8e72@cherry.de>
+Message-Id: <177731895134.3526444.5826356040065208578.b4-ty@konsulko.com>
+Date: Mon, 27 Apr 2026 13:42:31 -0600
 MIME-Version: 1.0
-Cc: Tom Rini <trini@konsulko.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
- uboot-stm32@st-md-mailman.stormreply.com,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
+X-Mailer: b4 0.14.3
+Cc: Peng Fan <peng.fan@nxp.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Jan Kiszka <jan.kiszka@siemens.com>,
+ =?utf-8?q?Alvin_=C5=A0ipraga?= <alvin@pqrs.dk>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Lukasz Majewski <lukma@denx.de>,
+ Michal Simek <michal.simek@amd.com>, Siddharth Vadapalli <s-vadapalli@ti.com>,
+ David Lechner <dlechner@baylibre.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Ye Li <ye.li@nxp.com>,
+ Shantur Rathore <i@shantur.com>, Chintan Vankar <c-vankar@ti.com>,
+ Anshul Dalal <anshuld@ti.com>, Mingkai Hu <mingkai.hu@nxp.com>,
+ Andreas Dannenberg <dannenberg@ti.com>, Heiko Schocher <hs@nabladev.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Gilles Talis <gilles.talis@gmail.com>,
+ Padmarao Begari <padmarao.begari@amd.com>, Bryan Brattlof <bb@ti.com>,
+ Alice Guo <alice.guo@nxp.com>, Kever Yang <kever.yang@rock-chips.com>,
+ Benjamin ROBIN <dev@benjarobin.fr>, "Lucien.Jheng" <lucienzx159@gmail.com>,
+ "Ying-Chun Liu \(PaulLiu\)" <paul.liu@linaro.org>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- linux-amarula@amarulasolutions.com
-Subject: [Uboot-stm32] [PATCH v7 8/8] board: st: stm32mp25: support dynamic
-	A/B bank bootup
+ Sky Huang <SkyLake.Huang@mediatek.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ Sean Edmond <seanedmond@microsoft.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>,
+ "Markus Schneider-Pargmann \(TI.com\)" <msp@baylibre.com>,
+ Max Merchel <Max.Merchel@ew.tq-group.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Brian Sune <briansune@gmail.com>, Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Martin Schwan <m.schwan@phytec.de>, Dmitrii Merkurev <dimorinny@google.com>,
+ Sughosh Ganu <sughosh.ganu@arm.com>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Stefan Roese <sr@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>, Udit Kumar <u-kumar1@ti.com>,
+ Romain Gantois <romain.gantois@bootlin.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Le Jin <le.jin@siemens.com>,
+ Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Tim Harvey <tharvey@gateworks.com>,
+ Maarten Brock <Maarten.Brock@sttls.nl>, Matthias Brugger <mbrugger@suse.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Robert Marko <robert.marko@sartura.hr>, Adam Ford <aford173@gmail.com>,
+ Jayesh Choudhary <j-choudhary@ti.com>, Vaishnav Achath <vaishnav.a@ti.com>,
+ George Chan <gchan9527@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Ariel D'Alessandro <ariel.dalessandro@collabora.com>,
+ Kongyang Liu <seashell11234455@gmail.com>,
+ Casey Connolly <casey.connolly@linaro.org>, Yao Zi <me@ziyao.cc>,
+ Marek Vasut <marex@denx.de>, Weijie Gao <weijie.gao@mediatek.com>,
+ Ben Dooks <ben.dooks@codethink.co.uk>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Benjamin Hahn <B.Hahn@phytec.de>,
+ Matteo Lisi <matteo.lisi@engicam.com>, Adriano Cordova <adrianox@gmail.com>,
+ Beiyan Yun <root@infi.wang>, Julien Stephan <jstephan@baylibre.com>,
+ Kory Maincent <kory.maincent@bootlin.com>,
+ Martyn Welch <martyn.welch@collabora.com>, Andrew Davis <afd@ti.com>,
+ Alexey Charkov <alchark@gmail.com>, Pramod Kumar <pramod.kumar_1@nxp.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Hrushikesh Salunke <h-salunke@ti.com>
+Subject: Re: [Uboot-stm32] [PATCH 0/6] net: migrate NO_NET out of the
+ networking stack choice
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -99,171 +150,75 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
-X-Rspamd-Queue-Id: 8C8BB46A82A
+X-Rspamd-Queue-Id: C97F247970D
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [4.39 / 15.00];
+X-Spamd-Result: default: False [3.39 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
+	R_DKIM_REJECT(1.00)[konsulko.com:s=google];
 	HFILTER_HELO_IP_A(1.00)[stm-ict-prod-mailman-01.stormreply.prv];
-	MID_CONTAINS_FROM(1.00)[];
-	R_DKIM_REJECT(1.00)[amarulasolutions.com:s=google];
 	HFILTER_HELO_NORES_A_OR_MX(0.30)[stm-ict-prod-mailman-01.stormreply.prv];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+ip4:52.209.6.89:c];
+	R_SPF_ALLOW(-0.20)[+ip4:52.209.6.89];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[amarulasolutions.com : SPF not aligned (relaxed),none];
+	DMARC_POLICY_SOFTFAIL(0.10)[konsulko.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:u-boot@lists.denx.de,m:trini@konsulko.com,m:marek.vasut+renesas@mailbox.org,m:quentin.schulz@cherry.de,m:sjg@chromium.org,m:uboot-stm32@st-md-mailman.stormreply.com,m:patrick.delaunay@foss.st.com,m:dario.binacchi@amarulasolutions.com,m:linux-amarula@amarulasolutions.com,m:marek.vasut@mailbox.org,s:lists@lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	GREYLIST(0.00)[pass,meta];
-	ARC_NA(0.00)[];
-	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
+	FUZZY_RATELIMITED(0.00)[rspamd.com];
+	FORGED_SENDER(0.00)[trini@konsulko.com,uboot-stm32-bounces@st-md-mailman.stormreply.com];
+	TO_DN_SOME(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:u-boot@lists.denx.de,m:uboot-stm32@st-md-mailman.stormreply.com,m:paul.barker.ct@bp.renesas.com,m:foss+uboot@0leil.net,m:peng.fan@nxp.com,m:mkorpershoek@kernel.org,m:jan.kiszka@siemens.com,m:alvin@pqrs.dk,m:jerome.forissier@arm.com,m:neil.armstrong@linaro.org,m:lukma@denx.de,m:michal.simek@amd.com,m:s-vadapalli@ti.com,m:dlechner@baylibre.com,m:marek.vasut+renesas@mailbox.org,m:ye.li@nxp.com,m:i@shantur.com,m:c-vankar@ti.com,m:anshuld@ti.com,m:mingkai.hu@nxp.com,m:dannenberg@ti.com,m:hs@nabladev.com,m:ilias.apalodimas@linaro.org,m:gilles.talis@gmail.com,m:padmarao.begari@amd.com,m:bb@ti.com,m:alice.guo@nxp.com,m:kever.yang@rock-chips.com,m:dev@benjarobin.fr,m:lucienzx159@gmail.com,m:paul.liu@linaro.org,m:dario.binacchi@amarulasolutions.com,m:SkyLake.Huang@mediatek.com,m:andre.przywara@arm.com,m:ansuelsmth@gmail.com,m:cniedermaier@dh-electronics.com,m:seanedmond@microsoft.com,m:tien.fong.chee@altera.com,m:msp@baylibre.com,m:Max.Merchel@ew.tq-group.com,m:semen
+ .protsenko@linaro.org,m:andrew.goodbody@linaro.org,m:dinesh.maniyam@altera.com,m:mikhail.kshevetskiy@iopsys.eu,m:briansune@gmail.com,m:ycliang@andestech.com,m:m.schwan@phytec.de,m:dimorinny@google.com,m:sughosh.ganu@arm.com,m:quentin.schulz@cherry.de,m:sr@denx.de,m:festevam@gmail.com,m:vigneshr@ti.com,m:u-kumar1@ti.com,m:romain.gantois@bootlin.com,m:xypron.glpk@gmx.de,m:le.jin@siemens.com,m:abbaraju.manojsai@amarulasolutions.com,m:jonas@kwiboo.se,m:tharvey@gateworks.com,m:Maarten.Brock@sttls.nl,m:mbrugger@suse.com,m:francesco.dolcini@toradex.com,m:robert.marko@sartura.hr,m:aford173@gmail.com,m:j-choudhary@ti.com,m:vaishnav.a@ti.com,m:gchan9527@gmail.com,m:sjg@chromium.org,m:ariel.dalessandro@collabora.com,m:seashell11234455@gmail.com,m:casey.connolly@linaro.org,m:me@ziyao.cc,m:marex@denx.de,m:weijie.gao@mediatek.com,m:ben.dooks@codethink.co.uk,m:balaji.selvanathan@oss.qualcomm.com,m:pbrobinson@gmail.com,m:B.Hahn@phytec.de,m:matteo.lisi@engicam.com,m:adrianox@gmail.com,m:root@infi.wa
+ ng,m:jstephan@baylibre.com,m:kory.maincent@bootlin.com,m:martyn.welch@collabora.com,m:afd@ti.com,m:alchark@gmail.com,m:pramod.kumar_1@nxp.com,m:patrick.delaunay@foss.st.com,m:h-salunke@ti.com,m:foss@0leil.net,s:lists@lfdr.de];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER(0.00)[dario.binacchi@amarulasolutions.com,uboot-stm32-bounces@st-md-mailman.stormreply.com];
+	ARC_NA(0.00)[];
 	FORWARDED(0.00)[uboot-stm32@st-md-mailman.stormreply.com];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[amarulasolutions.com:-];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[konsulko.com:-];
+	RCPT_COUNT_GT_50(0.00)[90];
+	NEURAL_HAM(-0.00)[-0.826];
 	PREVIOUSLY_DELIVERED(0.00)[uboot-stm32@st-md-mailman.stormreply.com];
-	NEURAL_HAM(-0.00)[-0.992];
+	FROM_NEQ_ENVFROM(0.00)[trini@konsulko.com,uboot-stm32-bounces@st-md-mailman.stormreply.com];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[dario.binacchi@amarulasolutions.com,uboot-stm32-bounces@st-md-mailman.stormreply.com];
+	FREEMAIL_CC(0.00)[nxp.com,kernel.org,siemens.com,pqrs.dk,arm.com,linaro.org,denx.de,amd.com,ti.com,baylibre.com,mailbox.org,shantur.com,nabladev.com,gmail.com,rock-chips.com,benjarobin.fr,amarulasolutions.com,mediatek.com,dh-electronics.com,microsoft.com,altera.com,ew.tq-group.com,iopsys.eu,andestech.com,phytec.de,google.com,cherry.de,bootlin.com,gmx.de,kwiboo.se,gateworks.com,sttls.nl,suse.com,toradex.com,sartura.hr,chromium.org,collabora.com,ziyao.cc,codethink.co.uk,oss.qualcomm.com,engicam.com,infi.wang,foss.st.com];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[uboot-stm32,uboot,renesas];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	TAGGED_RCPT(0.00)[uboot-stm32,renesas];
-	RCPT_COUNT_SEVEN(0.00)[9];
 	ASN(0.00)[asn:16509, ipnet:52.208.0.0/13, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[st-md-mailman.stormreply.com:rdns,stormreply.com:url,stormreply.com:email,stm-ict-prod-mailman-01.stormreply.prv:helo,chromium.org:email,amarulasolutions.com:mid,amarulasolutions.com:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[st-md-mailman.stormreply.com:rdns]
 
-Enable automatic detection of the active A/B bank by retrieving
-partition GUIDs from FWU metadata.
+On Mon, 20 Apr 2026 13:36:06 +0200, Quentin Schulz wrote:
 
-This ensures the system correctly identifies the bootable partitions
-even in multi-bank scenarios, falling back to a standard bootable flag
-scan if the UUIDs are missing.
+> This migrates the net options away from the main Kconfig to net/Kconfig,
+> rename the current NET option to NET_LEGACY to really highlight what it
+> is and hopefully encourage more people to use lwIP, add a new NET
+> menuconfig (but keep NO_NET as an alias to NET=n for now) which then
+> allows us to replace all the "if legacy_stack || lwip_stack" checks with
+> "if net_support" which is easier to read and maintain.
+> 
+> [...]
 
-To enable A/B bank bootup on stm32mp25 boards, add the following Kconfig
-options to the stm32mp25_defconfig:
+Applied to u-boot/master, thanks!
 
- CONFIG_FWU_MULTI_BANK_UPDATE=y
- CONFIG_FWU_MDATA=y
- CONFIG_FWU_NUM_BANKS=2
- CONFIG_FWU_NUM_IMAGES_PER_BANK=3
- CONFIG_CMD_FWU_METADATA=y
- CONFIG_FWU_MDATA_V2=y
-
-Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
-
----
-
-(no changes since v5)
-
-Changes in v5:
-- Add Acked-by of Ilias Apalodimas to patch 6/8 "fwu: add helper to get
-  image GUID by type and bank index"
-
-Changes in v4:
-- Add patch 7/8 test: dm: fwu_mdata: add test for fwu_mdata_get_image_guid
-
-Changes in v3:
-- Wrap lines exceeding 80 columns in test/cmd/part.c file.
-- Combine run_command() and ut_asserteq() -> ut_asserteq(1, run_command(
-- Add kerneldoc comment for fwu_mdata_get_image_guid() above its declaration
-  in fwu.h.
-- Add log_warning() messages to fwu_platform_hook() to catch inconsistent
-  FWU metadata (boot GUID found but root GUID missing or viceversa), as
-  suggested by Simon Glass.
-- Add Reviewed-by tag of Simon Glass.
-
-Changes in v2:
-- Add links to the XBOOTLDR specification in the commit message of patch
-   1/7 lib: uuid: add partition type GUID for extended bootloader.
-- Update help for 'part start', 'part size' to mention UUID.
-- Add kerneldoc comment for fwu_mdata_get_image_guid().
-- Pass efi_guid_t by pointer in fwu_mdata_get_image_guid().
-- Add patches:
-   5/7 test: cmd: part: add UUID lookup tests
-   3/7 test: cmd: add unit tests for part command
-   2/7 test: dm: part: add test for part_get_info_by_uuid
-- Pass efi_guid_t by pointer in fwu_mdata_get_image_guid() calls.
-
- board/st/stm32mp2/stm32mp2.c          | 32 +++++++++++++++++++++++++++
- include/configs/stm32mp25_st_common.h | 15 +++++++++++++
- 2 files changed, 47 insertions(+)
-
-diff --git a/board/st/stm32mp2/stm32mp2.c b/board/st/stm32mp2/stm32mp2.c
-index 43bc583378e6..5cbbbc322a3a 100644
---- a/board/st/stm32mp2/stm32mp2.c
-+++ b/board/st/stm32mp2/stm32mp2.c
-@@ -208,4 +208,36 @@ void fwu_plat_get_bootidx(uint *boot_idx)
- 	*boot_idx = (readl(TAMP_FWU_BOOT_INFO_REG) >>
- 		    TAMP_FWU_BOOT_IDX_OFFSET) & TAMP_FWU_BOOT_IDX_MASK;
- }
-+
-+int fwu_platform_hook(struct udevice *dev, struct fwu_data *data)
-+{
-+	uint boot_idx;
-+	efi_guid_t boot_uuid, root_uuid;
-+	const efi_guid_t boot_type_guid = PARTITION_XBOOTLDR;
-+	const efi_guid_t root_type_guid =
-+		PARTITION_LINUX_FILE_SYSTEM_DATA_GUID;
-+	char uuidbuf[UUID_STR_LEN + 1];
-+	int retb, retr;
-+
-+	fwu_plat_get_bootidx(&boot_idx);
-+
-+	retb = fwu_mdata_get_image_guid(&boot_uuid, &boot_type_guid, boot_idx);
-+	retr = fwu_mdata_get_image_guid(&root_uuid, &root_type_guid, boot_idx);
-+
-+	if (!retb && !retr) {
-+		uuid_bin_to_str(boot_uuid.b, uuidbuf, UUID_STR_FORMAT_GUID);
-+		env_set("boot_partuuid", uuidbuf);
-+
-+		uuid_bin_to_str(root_uuid.b, uuidbuf, UUID_STR_FORMAT_GUID);
-+		env_set("root_partuuid", uuidbuf);
-+	} else if (!retb && retr) {
-+		log_warning("%s: found boot GUID but missing root GUID (%d)\n",
-+			    __func__, retr);
-+	} else if (!retr && retb) {
-+		log_warning("%s: found root GUID but missing boot GUID (%d)\n",
-+			    __func__, retb);
-+	}
-+
-+	return 0;
-+}
- #endif /* CONFIG_FWU_MULTI_BANK_UPDATE */
-diff --git a/include/configs/stm32mp25_st_common.h b/include/configs/stm32mp25_st_common.h
-index cb679eb1be22..0b0267ae99b0 100644
---- a/include/configs/stm32mp25_st_common.h
-+++ b/include/configs/stm32mp25_st_common.h
-@@ -8,7 +8,22 @@
- #ifndef __CONFIG_STM32MP25_ST_COMMON_H__
- #define __CONFIG_STM32MP25_ST_COMMON_H__
- 
-+#ifdef CONFIG_FWU_MULTI_BANK_UPDATE
-+#define SCAN_DEV_FOR_BOOT_PARTS \
-+	"setenv devplist; " \
-+	"env exists boot_partuuid && " \
-+		"part number ${devtype} ${devnum} ${boot_partuuid} devplist; " \
-+	"env exists devplist || " \
-+		"part list ${devtype} ${devnum} -bootable devplist; "
-+
-+#define ST_STM32MP25_FWU_ENV \
-+	"altbootcmd=${bootcmd}\0"
-+#else
-+#define ST_STM32MP25_FWU_ENV
-+#endif
-+
- #define STM32MP_BOARD_EXTRA_ENV \
-+	ST_STM32MP25_FWU_ENV \
- 	"usb_pgood_delay=2000\0" \
- 	"console=ttySTM0\0"
- 
+[1/6] move networking menu in net/Kconfig
+      commit: 8080ab6c2843d3899a8ce941b5f6ae82b05b9e38
+[2/6] rename NET to NET_LEGACY
+      commit: b8cd4442257af4ec754838ea179568e0e7360b8f
+[3/6] net: make NET a menuconfig (and downgrade NO_NET to a simple config)
+      commit: bd275172a84bf32a3f392b852801dee08a94956a
+[4/6] simplify NET_LEGACY || NET_LWIP condition with NET condition
+      commit: 95d66d2eb02a4677c63d04c84ca21750a04c49f1
+[5/6] doc: remove mention to non-existing TPL_NET
+      commit: 0d98f68579b4d32b8593dae35695e8c7f8d7e120
+[6/6] boot: remove NO_NET use
+      commit: b06c5ef4ddf051b0da8276d2a00ee3df037cbf2f
 -- 
-2.43.0
+Tom
+
 
 _______________________________________________
 Uboot-stm32 mailing list

@@ -2,51 +2,51 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id G8iWIT/NOGo7iQcAu9opvQ
+	id r8K5IT/NOGo8iQcAu9opvQ
 	(envelope-from <uboot-stm32-bounces@st-md-mailman.stormreply.com>)
 	for <lists+uboot-stm32@lfdr.de>; Mon, 22 Jun 2026 07:50:55 +0200
 X-Original-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 288606ACD4E
+	by mail.lfdr.de (Postfix) with ESMTPS id 32CE16ACD4F
 	for <lists+uboot-stm32@lfdr.de>; Mon, 22 Jun 2026 07:50:55 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
 	spf=pass (mail.lfdr.de: domain of uboot-stm32-bounces@st-md-mailman.stormreply.com designates 52.209.6.89 as permitted sender) smtp.mailfrom=uboot-stm32-bounces@st-md-mailman.stormreply.com;
 	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=geanix.com (policy=quarantine)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id EA0B1C8F28C;
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id F2CE6C9AE46;
 	Mon, 22 Jun 2026 05:50:54 +0000 (UTC)
-Received: from mail-43172.protonmail.ch (mail-43172.protonmail.ch
- [185.70.43.172])
+Received: from mail-106112.protonmail.ch (mail-106112.protonmail.ch
+ [79.135.106.112])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1E9A0C424DE
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E26FCC2909A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 18 Jun 2026 09:29:12 +0000 (UTC)
+ Thu, 18 Jun 2026 09:29:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=geanix.com;
- s=protonmail3; t=1781774951; x=1782034151;
- bh=6NANZRQunwNRp6/lgPXqgqmJ4xb07SUooP54XuRJ5H4=;
+ s=protonmail3; t=1781774986; x=1782034186;
+ bh=OI6S6Fntp75HDKJ0WilhyzZNSqYTkL5lR0c6zq0ShIg=;
  h=From:To:Cc:Subject:Date:Message-ID:From:To:Cc:Date:Subject:
  Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
- b=nWTwq7a2VHZihh7ageIIJiVoBscwssymErlYdGCYPdAqsmU1CQyk4boJQ1gTV4yDv
- La+UG6+VYi0IyiwYtkR0IIgL/xo7j4P5OvesNwWkfoTZ3cSaOtUFL2NZn05fsA758E
- ento5da652EICdjvW/0CDi55bzJ3ZFI9hpTcqC18vXO7nVfJfBYrmPhPIsC6shml0u
- lRWav4ARD7gAlqKuRWDTHPfhCS5hykhjltO139jnnzP9dLHSoOCOCtnYpVqlR+4cO2
- vozKfk7OR/cxx4wRu+5YvtHqAQAo5KfjMLsG5QIOkdzIH4WF0/Rgj0lDfEaLf2hYQH
- jbYjNcr7/OpBA==
-X-Pm-Submission-Id: 4ggwQt1YNTz1DFT1
+ b=MuvBQpBJdy6QIIkiwe0G+qvkAeaURciqwInJMiwEKukNAdr842l5lXTKgid3geSf5
+ yl/U7Am6WG6XMZu4EfaGL0iTMX/6gjftXRC2WEKu+NHnd4zAandv9vyxc6XXENJ8AY
+ f1PJW8QsqNeJg3uXp8z3JsdrQPXWOBL1Q1z6F/k0p7boKaLtpyqBty1LtBoX9Ofhsm
+ b68PGyCH/RIKpehVwGmOa0b0bal5BlNZVe/Iyy3So0eAJJcoheJu4HxZK0sZ+3TP4Y
+ 5uxMHK8d/MiXgVe1t4gFz7upvAr+mS1RisKqov38qSeWvl7TMT2RfzdxADYzy/sjaN
+ cmLT46trZUVyg==
+X-Pm-Submission-Id: 4ggwRX4F05z2ScXX
 From: Sean Nyekjaer <sean@geanix.com>
 To: Tom Rini <trini@konsulko.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Patrice Chotard <patrice.chotard@foss.st.com>
-Date: Thu, 18 Jun 2026 11:28:48 +0200
-Message-ID: <20260618092855.3702905-1-sean@geanix.com>
+Date: Thu, 18 Jun 2026 11:29:19 +0200
+Message-ID: <20260618092921.3702970-1-sean@geanix.com>
 X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
 X-Mailman-Approved-At: Mon, 22 Jun 2026 05:50:53 +0000
 Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de,
  Sean Nyekjaer <sean@geanix.com>
-Subject: [Uboot-stm32] [PATCH] stm32mp1: spl: support loading U-Boot proper
-	from eMMC hardware partitions
+Subject: [Uboot-stm32] [PATCH] stm32mp1: use debug() for image entry point
+	message
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -95,41 +95,30 @@ X-Spamd-Result: default: False [4.29 / 15.00];
 	TAGGED_RCPT(0.00)[uboot-stm32];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[stormreply.com:url,stormreply.com:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 288606ACD4E
+X-Rspamd-Queue-Id: 32CE16ACD4F
 
-When CONFIG_SUPPORT_EMMC_BOOT is enabled, make spl_mmc_boot_mode()
-return MMCSD_MODE_EMMCBOOT instead of MMCSD_MODE_RAW.
-
-This allows the SPL MMC loader to honor the standard configuration
-options CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION and
-CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR when locating U-Boot proper,
-whether it is stored in a GPT partition or in an eMMC hardware boot
-partition.
-
-As a result, both U-Boot SPL and U-Boot proper can be placed in the
-eMMC hardware boot partitions.
+The stm32mp1 specific code prints the image entry point unconditionally
+before jumping to the next-stage image, unlike the generic SPL
+implementation in common/spl/spl.c.
 
 Signed-off-by: Sean Nyekjaer <sean@geanix.com>
 ---
- arch/arm/mach-stm32mp/stm32mp1/spl.c | 5 -----
- 1 file changed, 5 deletions(-)
+ arch/arm/mach-stm32mp/stm32mp1/cpu.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/arm/mach-stm32mp/stm32mp1/spl.c b/arch/arm/mach-stm32mp/stm32mp1/spl.c
-index d2e41b8e65f..d2af705a5d1 100644
---- a/arch/arm/mach-stm32mp/stm32mp1/spl.c
-+++ b/arch/arm/mach-stm32mp/stm32mp1/spl.c
-@@ -56,11 +56,6 @@ u32 spl_boot_device(void)
- 	return BOOT_DEVICE_MMC1;
- }
+diff --git a/arch/arm/mach-stm32mp/stm32mp1/cpu.c b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
+index 252aef1852e..ea5d8a648df 100644
+--- a/arch/arm/mach-stm32mp/stm32mp1/cpu.c
++++ b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
+@@ -361,7 +361,7 @@ void __noreturn jump_to_image(struct spl_image_info *spl_image)
+ 	image_entry_stm32_t image_entry =
+ 		(image_entry_stm32_t)spl_image->entry_point;
  
--u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
--{
--	return MMCSD_MODE_RAW;
--}
--
- #ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
- int spl_mmc_boot_partition(const u32 boot_device)
- {
+-	printf("image entry point: 0x%lx\n", spl_image->entry_point);
++	debug("image entry point: 0x%lx\n", spl_image->entry_point);
+ 	image_entry(romapi);
+ }
+ #endif
 -- 
 2.52.0
 

@@ -2,51 +2,47 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id r8K5IT/NOGo8iQcAu9opvQ
+	id 3arZG+d9OGpKcwcAu9opvQ
 	(envelope-from <uboot-stm32-bounces@st-md-mailman.stormreply.com>)
-	for <lists+uboot-stm32@lfdr.de>; Mon, 22 Jun 2026 07:50:55 +0200
+	for <lists+uboot-stm32@lfdr.de>; Mon, 22 Jun 2026 02:12:23 +0200
 X-Original-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 32CE16ACD4F
-	for <lists+uboot-stm32@lfdr.de>; Mon, 22 Jun 2026 07:50:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 019326ABD87
+	for <lists+uboot-stm32@lfdr.de>; Mon, 22 Jun 2026 02:12:22 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
+	dkim=fail ("body hash did not verify") header.d=nabladev.com header.s=dkim header.b=djZevJXy;
 	spf=pass (mail.lfdr.de: domain of uboot-stm32-bounces@st-md-mailman.stormreply.com designates 52.209.6.89 as permitted sender) smtp.mailfrom=uboot-stm32-bounces@st-md-mailman.stormreply.com;
-	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=geanix.com (policy=quarantine)
+	dmarc=fail reason="SPF not aligned (relaxed)" header.from=nabladev.com (policy=reject)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id F2CE6C9AE46;
-	Mon, 22 Jun 2026 05:50:54 +0000 (UTC)
-Received: from mail-106112.protonmail.ch (mail-106112.protonmail.ch
- [79.135.106.112])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8BA9FC8F28C;
+	Mon, 22 Jun 2026 00:05:41 +0000 (UTC)
+Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
+ (using TLSv1.2 with cipher ADH-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E26FCC2909A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AD37AC5A4DF
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 18 Jun 2026 09:29:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=geanix.com;
- s=protonmail3; t=1781774986; x=1782034186;
- bh=OI6S6Fntp75HDKJ0WilhyzZNSqYTkL5lR0c6zq0ShIg=;
- h=From:To:Cc:Subject:Date:Message-ID:From:To:Cc:Date:Subject:
- Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
- b=MuvBQpBJdy6QIIkiwe0G+qvkAeaURciqwInJMiwEKukNAdr842l5lXTKgid3geSf5
- yl/U7Am6WG6XMZu4EfaGL0iTMX/6gjftXRC2WEKu+NHnd4zAandv9vyxc6XXENJ8AY
- f1PJW8QsqNeJg3uXp8z3JsdrQPXWOBL1Q1z6F/k0p7boKaLtpyqBty1LtBoX9Ofhsm
- b68PGyCH/RIKpehVwGmOa0b0bal5BlNZVe/Iyy3So0eAJJcoheJu4HxZK0sZ+3TP4Y
- 5uxMHK8d/MiXgVe1t4gFz7upvAr+mS1RisKqov38qSeWvl7TMT2RfzdxADYzy/sjaN
- cmLT46trZUVyg==
-X-Pm-Submission-Id: 4ggwRX4F05z2ScXX
-From: Sean Nyekjaer <sean@geanix.com>
-To: Tom Rini <trini@konsulko.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>
-Date: Thu, 18 Jun 2026 11:29:19 +0200
-Message-ID: <20260618092921.3702970-1-sean@geanix.com>
-X-Mailer: git-send-email 2.52.0
+ Mon, 22 Jun 2026 00:05:40 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 7F781116C96; Mon, 22 Jun 2026 02:05:37 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1782086738; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=zHCjd4f1wTw6D73Cjj8T7Z5FkN1UrWRWKSH6X7t31RA=;
+ b=djZevJXyp/ES+zFsKkxWpvP8AU5G9za/QKZM347JEIvlydiyZRB6+sO5bkEBs/tYRrYf0w
+ BGHi2oZX4uLH95/ks8K735yVNEZ3zHTla4xlAAlH6MXzEPlmJ+dDdIjjYG27WuEk9od4cj
+ jo7hEY/cqNQW/GVucC0QEJfbH8d1rsElYe3BHStrSUgM9Z+d/vboLSyGXFwgQMDeycYQrv
+ V6xnUhHoRddqX5japKI4GeW9V3WxNllgLzgwNFB5FVFgtK+f58ZQfvWh1frm8fqqAzrn0X
+ nQZuCbSpGmqoOLQHWRJes2LOin8VCdH3LuRR5p/W1HREbsT4/eciVKddfnQThw==
+From: Marek Vasut <marex@nabladev.com>
+To: u-boot@lists.denx.de
+Date: Mon, 22 Jun 2026 02:05:10 +0200
+Message-ID: <20260622000535.226234-1-marex@nabladev.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-X-Mailman-Approved-At: Mon, 22 Jun 2026 05:50:53 +0000
-Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de,
- Sean Nyekjaer <sean@geanix.com>
-Subject: [Uboot-stm32] [PATCH] stm32mp1: use debug() for image entry point
-	message
+X-Last-TLS-Session-Version: TLSv1.3
+Cc: Marek Vasut <marex@nabladev.com>, u-boot@dh-electronics.com,
+ Tom Rini <trini@konsulko.com>, uboot-stm32@st-md-mailman.stormreply.com,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>
+Subject: [Uboot-stm32] [PATCH] treewide: Fix STMicroelectronics spelling
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -63,64 +59,86 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [4.29 / 15.00];
-	DMARC_POLICY_QUARANTINE(1.50)[geanix.com : SPF not aligned (relaxed), No valid DKIM,quarantine];
+X-Spamd-Result: default: False [4.79 / 15.00];
+	DMARC_POLICY_REJECT(2.00)[nabladev.com : SPF not aligned (relaxed),reject];
 	HFILTER_HELO_IP_A(1.00)[stm-ict-prod-mailman-01.stormreply.prv];
-	DATE_IN_PAST(1.00)[92];
 	MID_CONTAINS_FROM(1.00)[];
+	R_DKIM_REJECT(1.00)[nabladev.com:s=dkim];
 	HFILTER_HELO_NORES_A_OR_MX(0.30)[stm-ict-prod-mailman-01.stormreply.prv];
+	R_SPF_ALLOW(-0.20)[+ip4:52.209.6.89];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+ip4:52.209.6.89:c];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	ARC_NA(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
 	FORWARDED(0.00)[uboot-stm32@st-md-mailman.stormreply.com];
-	TO_DN_SOME(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_SENDER(0.00)[sean@geanix.com,uboot-stm32-bounces@st-md-mailman.stormreply.com];
-	FORGED_RECIPIENTS(0.00)[m:trini@konsulko.com,m:patrick.delaunay@foss.st.com,m:patrice.chotard@foss.st.com,m:uboot-stm32@st-md-mailman.stormreply.com,m:u-boot@lists.denx.de,m:sean@geanix.com,s:lists@lfdr.de];
+	TO_DN_SOME(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:u-boot@lists.denx.de,m:marex@nabladev.com,m:u-boot@dh-electronics.com,m:trini@konsulko.com,m:uboot-stm32@st-md-mailman.stormreply.com,m:patrick.delaunay@foss.st.com,s:lists@lfdr.de];
+	GREYLIST(0.00)[pass,body];
+	RCVD_COUNT_THREE(0.00)[3];
+	ARC_NA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	GREYLIST(0.00)[pass,meta];
+	FORGED_SENDER(0.00)[marex@nabladev.com,uboot-stm32-bounces@st-md-mailman.stormreply.com];
+	DKIM_TRACE(0.00)[nabladev.com:-];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[uboot-stm32@st-md-mailman.stormreply.com];
+	FROM_NEQ_ENVFROM(0.00)[marex@nabladev.com,uboot-stm32-bounces@st-md-mailman.stormreply.com];
 	FROM_HAS_DN(0.00)[];
 	RCPT_COUNT_FIVE(0.00)[6];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_NEQ_ENVFROM(0.00)[sean@geanix.com,uboot-stm32-bounces@st-md-mailman.stormreply.com];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[uboot-stm32@st-md-mailman.stormreply.com];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	ASN(0.00)[asn:16509, ipnet:52.208.0.0/13, country:US];
 	TAGGED_RCPT(0.00)[uboot-stm32];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[stormreply.com:url,stormreply.com:email]
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:16509, ipnet:52.208.0.0/13, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[st-md-mailman.stormreply.com:rdns,st-md-mailman.stormreply.com:from_smtp,st.com:email,nabladev.com:email,nabladev.com:mid,nabladev.com:from_mime,dh-electronics.com:email,denx.de:email,konsulko.com:email,stm-ict-prod-mailman-01.stormreply.prv:helo]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 32CE16ACD4F
+X-Rspamd-Queue-Id: 019326ABD87
 
-The stm32mp1 specific code prints the image entry point unconditionally
-before jumping to the next-stage image, unlike the generic SPL
-implementation in common/spl/spl.c.
+Fix STMicroelectronics spelling in comments.
 
-Signed-off-by: Sean Nyekjaer <sean@geanix.com>
+Signed-off-by: Marek Vasut <marex@nabladev.com>
 ---
- arch/arm/mach-stm32mp/stm32mp1/cpu.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@dh-electronics.com
+Cc: u-boot@lists.denx.de
+Cc: uboot-stm32@st-md-mailman.stormreply.com
+---
+ include/configs/stm32mp21_st_common.h | 2 +-
+ include/configs/stm32mp23_st_common.h | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/mach-stm32mp/stm32mp1/cpu.c b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
-index 252aef1852e..ea5d8a648df 100644
---- a/arch/arm/mach-stm32mp/stm32mp1/cpu.c
-+++ b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
-@@ -361,7 +361,7 @@ void __noreturn jump_to_image(struct spl_image_info *spl_image)
- 	image_entry_stm32_t image_entry =
- 		(image_entry_stm32_t)spl_image->entry_point;
+diff --git a/include/configs/stm32mp21_st_common.h b/include/configs/stm32mp21_st_common.h
+index c601f2d7fb6..bca4c4b5337 100644
+--- a/include/configs/stm32mp21_st_common.h
++++ b/include/configs/stm32mp21_st_common.h
+@@ -2,7 +2,7 @@
+ /*
+  * Copyright (C) 2026, STMicroelectronics - All Rights Reserved
+  *
+- * Configuration settings for the STMicroelectonics STM32MP21x boards
++ * Configuration settings for the STMicroelectronics STM32MP21x boards
+  */
  
--	printf("image entry point: 0x%lx\n", spl_image->entry_point);
-+	debug("image entry point: 0x%lx\n", spl_image->entry_point);
- 	image_entry(romapi);
- }
- #endif
+ #ifndef __CONFIG_STM32MP21_ST_COMMON_H__
+diff --git a/include/configs/stm32mp23_st_common.h b/include/configs/stm32mp23_st_common.h
+index 0c5c2fbef87..547c230ae90 100644
+--- a/include/configs/stm32mp23_st_common.h
++++ b/include/configs/stm32mp23_st_common.h
+@@ -2,7 +2,7 @@
+ /*
+  * Copyright (C) 2025, STMicroelectronics - All Rights Reserved
+  *
+- * Configuration settings for the STMicroelectonics STM32MP23x boards
++ * Configuration settings for the STMicroelectronics STM32MP23x boards
+  */
+ 
+ #ifndef __CONFIG_STM32MP23_ST_COMMON_H__
 -- 
-2.52.0
+2.53.0
 
 _______________________________________________
 Uboot-stm32 mailing list
